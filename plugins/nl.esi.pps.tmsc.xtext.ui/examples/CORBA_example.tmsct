@@ -1,0 +1,685 @@
+executor "Switch S (Lamp-client)" as S
+executor "Bulb A (Lamp-server/Logger-client)" as A
+executor "Bulb B (Lamp-server/Logger-client)" as B
+executor "Logger L (Logger-server)" as L
+
+////////////////////
+// Metric instance 0
+////////////////////
+// Switch behavior
+S Switch > flip_switch {metricInstanceFromID: 0}
+S Switch > req_turnOn !DDRQB01
+S ORB > write !RQB01 !MCRQB01(message: RQB01)
+S ORB < write
+S Switch < req_turnOn
+S Switch > call_turnOn !DDRQA01
+S ORB > write !RQA01 !MCRQA01(message: RQA01)
+S ORB < write
+S ORB > receive
+S ORB > read ?RPRQA01
+S ORB < read
+S ORB < receive
+S Switch < call_turnOn ?DDRPRQA01
+S Switch > wait_turnOn
+S ORB > receive
+S ORB > read ?RPRQB01
+S ORB < read
+S ORB < receive
+S Switch < wait_turnOn ?DDRPRQB01
+S Switch > call_lib
+S Switch < call_lib
+S Switch < flip_switch {metricInstanceToID: 0}
+
+// Bulb A behavior
+A ORB > event_loop ?MCRQA01
+A ORB > handle_event
+A ORB > read ?RQA01
+A ORB < read
+A Bulb > handle_turnOn ?DDRQA01
+A Bulb > trigger_log !DDRQL02
+A ORB > write !RQL02 !MCRQL02(message: RQL02)
+A ORB < write
+A Bulb < trigger_log
+A Bulb < handle_turnOn !DDRPRQA01
+A ORB > write !RPRQA01(request: RQA01)
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+// Bulb B behavior
+B ORB > event_loop ?MCRQB01
+B ORB > handle_event
+B ORB > read ?RQB01
+B ORB < read
+B Bulb > handle_turnOn ?DDRQB01
+B Bulb > call_conf !DDRQL01
+B ORB > write !RQL01 !MCRQL01(message: RQL01)
+B ORB < write
+B ORB > receive
+B ORB > read ?RPRQL01
+B ORB < read
+B ORB < receive
+B Bulb < call_conf ?DDRPRQL01
+B Bulb > trigger_log !DDRQL03
+B ORB > write !RQL03 !MCRQL03(message: RQL03, time-bound: 200e-3)
+B ORB < write
+B Bulb < trigger_log
+B Bulb < handle_turnOn !DDRPRQB01
+B ORB > write !RPRQB01(request: RQA01)
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+// Logger behavior
+L ORB > event_loop ?MCRQL01
+L ORB > handle_event
+L ORB > read ?RQL01
+L ORB < read
+L Logger > handle_conf ?DDRQL01
+L Logger < handle_conf !DDRPRQL01
+L ORB > write !RPRQL01(request: RQL01)
+L ORB < write
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL02
+L ORB > handle_event
+L ORB > read ?RQL02
+L ORB < read
+L Logger > handle_log ?DDRQL02
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL03
+L ORB > handle_event
+L ORB > read ?RQL03
+L ORB < read
+L Logger > handle_log ?DDRQL03
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+
+////////////////////
+// Metric instance 1
+////////////////////
+// Switch behavior
+S Switch > flip_switch {metricInstanceFromID: 1}
+S Switch > req_turnOn !DDRQB11
+S ORB > write !RQB11 !MCRQB11(message: RQB11)
+S ORB < write
+S Switch < req_turnOn
+S Switch > call_turnOn !DDRQA11
+S ORB > write !RQA11 !MCRQA11(message: RQA11)
+S ORB < write
+S ORB > receive
+S ORB > read ?RPRQA11
+S ORB < read
+S ORB < receive
+S Switch < call_turnOn ?DDRPRQA11
+S Switch > wait_turnOn
+S ORB > receive
+S ORB > read ?RPRQB11
+S ORB < read
+S ORB < receive
+S Switch < wait_turnOn ?DDRPRQB11
+S Switch > call_lib
+S Switch < call_lib
+S Switch < flip_switch {metricInstanceToID: 1}
+
+// Bulb A behavior
+A ORB > event_loop ?MCRQA11
+A ORB > handle_event
+A ORB > read ?RQA11
+A ORB < read
+A Bulb > handle_turnOn ?DDRQA11
+A Bulb > trigger_log !DDRQL12
+A ORB > write !RQL12 !MCRQL12(message: RQL12)
+A ORB < write
+A Bulb < trigger_log
+A Bulb < handle_turnOn !DDRPRQA11
+A ORB > write !RPRQA11(request: RQA11)
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+// Bulb B behavior
+B ORB > event_loop
+B ORB > handle_event
+B ORB > read
+B ORB < read
+B Bulb > handle_turnOff
+B Bulb < handle_turnOff
+B ORB > write
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+B ORB > event_loop ?MCRQB11
+B ORB > handle_event
+B ORB > read ?RQB11
+B ORB < read
+B Bulb > handle_turnOn ?DDRQB11
+B Bulb > call_conf !DDRQL11
+B ORB > write !RQL11 !MCRQL11(message: RQL11)
+B ORB < write
+B ORB > receive
+B ORB > read ?RPRQL11
+B ORB < read
+B ORB < receive
+B Bulb < call_conf ?DDRPRQL11
+B Bulb > trigger_log !DDRQL13
+B ORB > write !RQL13 !MCRQL13(message: RQL13)
+B ORB < write
+B Bulb < trigger_log
+B Bulb < handle_turnOn !DDRPRQB11
+B ORB > write !RPRQB11(request: RQA11)
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+// Logger behavior
+L ORB > event_loop ?MCRQL12
+L ORB > handle_event
+L ORB > read ?RQL12
+L ORB < read
+L Logger > handle_log ?DDRQL12
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL11
+L ORB > handle_event
+L ORB > read ?RQL11
+L ORB < read
+L Logger > handle_conf ?DDRQL11
+L Logger < handle_conf !DDRPRQL11
+L ORB > write !RPRQL11(request: RQL11)
+L ORB < write
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL13
+L ORB > handle_event
+L ORB > read ?RQL13
+L ORB < read
+L Logger > handle_log ?DDRQL13
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+
+////////////////////
+// Metric instance 2
+////////////////////
+// Switch behavior
+S Switch > flip_switch {metricInstanceFromID: 2}
+S Switch > req_turnOn !DDRQB21
+S ORB > write !RQB21 !MCRQB21(message: RQB21)
+S ORB < write
+S Switch < req_turnOn
+S Switch > call_turnOn !DDRQA21
+S ORB > write !RQA21 !MCRQA21(message: RQA21)
+S ORB < write
+S ORB > receive
+S ORB > read ?RPRQA21
+S ORB < read
+S ORB < receive
+S Switch < call_turnOn ?DDRPRQA21
+S Switch > wait_turnOn
+S ORB > receive
+S ORB > read ?RPRQB21
+S ORB < read
+S ORB < receive
+S Switch < wait_turnOn ?DDRPRQB21
+S Switch > call_lib
+S Switch < call_lib
+S Switch < flip_switch {metricInstanceToID: 2}
+
+// Bulb A behavior
++555e-3 A ORB > event_loop
+A ORB > handle_event
+A ORB > read
+A ORB < read
+A Bulb > handle_turnOff
+A Bulb < handle_turnOff
+A ORB > write
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+A ORB > event_loop ?MCRQA21
+A ORB > handle_event
+A ORB > read ?RQA21
+A ORB < read
+A Bulb > handle_turnOn ?DDRQA21
+A Bulb > trigger_log !DDRQL22
+A ORB > write !RQL22 !MCRQL22(message: RQL22)
+A ORB < write
+A Bulb < trigger_log
+A Bulb < handle_turnOn !DDRPRQA21
+A ORB > write !RPRQA21(request: RQA21)
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+// Bulb B behavior
+B ORB > event_loop ?MCRQB21
+B ORB > handle_event
+B ORB > read ?RQB21
+B ORB < read
+B Bulb > handle_turnOn ?DDRQB21
+B Bulb > call_conf !DDRQL21
+B ORB > write !RQL21 !MCRQL21(message: RQL21)
+B ORB < write
+B ORB > receive
+B ORB > read ?RPRQL21
+B ORB < read
+B ORB < receive
+B Bulb < call_conf ?DDRPRQL21
+B Bulb > trigger_log !DDRQL23
+B ORB > write !RQL23 !MCRQL23(message: RQL23)
+B ORB < write
+B Bulb < trigger_log
+B Bulb < handle_turnOn !DDRPRQB21
+B ORB > write !RPRQB21(request: RQA21)
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+// Logger behavior
+L ORB > event_loop ?MCRQL21
+L ORB > handle_event
+L ORB > read ?RQL21
+L ORB < read
+L Logger > handle_conf ?DDRQL21
+L Logger < handle_conf !DDRPRQL21
+L ORB > write !RPRQL21(request: RQL21)
+L ORB < write
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL23 ?MCRQL22
+L ORB > handle_event
+L ORB > read ?RQL23
+L ORB < read
+L Logger > handle_log ?DDRQL23
+L Logger < handle_log
+L ORB < handle_event
+L ORB > handle_event
+L ORB > read ?RQL22
+L ORB < read
+L Logger > handle_log ?DDRQL22
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+
+////////////////////
+// Metric instance 3
+////////////////////
+// Switch behavior
+S Switch > flip_switch {metricInstanceFromID: 3}
+S Switch > req_turnOn !DDRQB31
+S ORB > write !RQB31 !MCRQB31(message: RQB31)
+S ORB < write
+S Switch < req_turnOn
+S Switch > call_turnOn !DDRQA31
+S ORB > write !RQA31 !MCRQA31(message: RQA31)
+S ORB < write
+S ORB > receive
+S ORB > read ?RPRQA31
+S ORB < read
+S ORB < receive
+S Switch < call_turnOn ?DDRPRQA31
+S Switch > wait_turnOn
+S ORB > receive
+S ORB > read ?RPRQB31
+S ORB < read
+S ORB < receive
+S Switch < wait_turnOn ?DDRPRQB31
+S Switch > call_lib
+S Switch < call_lib
+S Switch < flip_switch {metricInstanceToID: 3}
+
+// Bulb A behavior
+A ORB > event_loop ?MCRQA31
+A ORB > handle_event
+A ORB > read ?RQA31
+A ORB < read
+A Bulb > handle_turnOn ?DDRQA31
++300e-3 A Bulb > trigger_log !DDRQL32
+A ORB > write !RQL32 !MCRQL32(message: RQL32)
+A ORB < write
+A Bulb < trigger_log
+A Bulb < handle_turnOn !DDRPRQA31
+A ORB > write !RPRQA31(request: RQA31)
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+// Bulb B behavior
+B ORB > event_loop ?MCRQB31
+B ORB > handle_event
+B ORB > read ?RQB31
+B ORB < read
+B Bulb > handle_turnOn ?DDRQB31
+B Bulb > call_conf !DDRQL31
+B ORB > write !RQL31 !MCRQL31(message: RQL31)
+B ORB < write
+B ORB > receive
+B ORB > read ?RPRQL31
+B ORB < read
+B ORB < receive
+B Bulb < call_conf ?DDRPRQL31
+B Bulb > trigger_log !DDRQL33
+B ORB > write !RQL33 !MCRQL33(message: RQL33)
+B ORB < write
+B Bulb < trigger_log
+B Bulb < handle_turnOn !DDRPRQB31
+B ORB > write !RPRQB31(request: RQA31)
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+// Logger behavior
+L ORB > event_loop ?MCRQL31
+L ORB > handle_event
+L ORB > read ?RQL31
+L ORB < read
+L Logger > handle_conf ?DDRQL31
+L Logger < handle_conf !DDRPRQL31
+L ORB > write !RPRQL31(request: RQL31)
+L ORB < write
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL33
+L ORB > handle_event
+L ORB > read ?RQL33
+L ORB < read
+L Logger > handle_log ?DDRQL33
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL32
+L ORB > handle_event
+L ORB > read ?RQL32
+L ORB < read
+L Logger > handle_log ?DDRQL32
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+
+////////////////////
+// Metric instance 4
+////////////////////
+// Switch behavior
+S Switch > flip_switch {metricInstanceFromID: 4}
+S Switch > req_turnOn !DDRQA41
+S ORB > write !RQA41 !MCRQA41(message: RQA41)
+S ORB < write
+S Switch < req_turnOn
+S Switch > call_turnOn !DDRQB41
+S ORB > write !RQB41 !MCRQB41(message: RQB41)
+S ORB < write
+S ORB > receive
+S ORB > read ?RPRQB41
+S ORB < read
+S ORB < receive
+S Switch < call_turnOn ?DDRPRQB41
+S Switch > wait_turnOn
+S ORB > receive
+S ORB > read ?RPRQA41
+S ORB < read
+S ORB < receive
+S Switch < wait_turnOn ?DDRPRQA41
+S Switch > call_lib
+S Switch < call_lib
+S Switch < flip_switch {metricInstanceToID: 4}
+
+// Bulb A behavior
+A ORB > event_loop ?MCRQA41
+A ORB > handle_event
+A ORB > read ?RQA41
+A ORB < read
+A Bulb > handle_turnOn ?DDRQA41
+A Bulb > call_conf !DDRQL41
+A ORB > write !RQL41 !MCRQL41(message: RQL41)
+A ORB < write
+A ORB > receive
+A ORB > read ?RPRQL41
+A ORB < read
+A ORB < receive
+A Bulb < call_conf ?DDRPRQL41
+A Bulb > trigger_log !DDRQL42
+A ORB > write !RQL42 !MCRQL42(message: RQL42)
+A ORB < write
+A Bulb < trigger_log
+A Bulb < handle_turnOn !DDRPRQA41
+A ORB > write !RPRQA41(request: RQA41)
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+// Bulb B behavior
+B ORB > event_loop ?MCRQB41
+B ORB > handle_event
+B ORB > read ?RQB41
+B ORB < read
+B Bulb > handle_turnOn ?DDRQB41
+B Bulb > trigger_log !DDRQL43
+B ORB > write !RQL43 !MCRQL43(message: RQL43)
+B ORB < write
+B Bulb < trigger_log
+B Bulb < handle_turnOn !DDRPRQB41
+B ORB > write !RPRQB41(request: RQA41)
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+// Logger behavior
+L ORB > event_loop ?MCRQL41
+L ORB > handle_event
+L ORB > read ?RQL41
+L ORB < read
+L Logger > handle_conf ?DDRQL41
+L Logger < handle_conf !DDRPRQL41
+L ORB > write !RPRQL41(request: RQL41)
+L ORB < write
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL43
+L ORB > handle_event
+L ORB > read ?RQL43
+L ORB < read
+L Logger > handle_log ?DDRQL43
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL42
+L ORB > handle_event
+L ORB > read ?RQL42
+L ORB < read
+L Logger > handle_log ?DDRQL42
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+
+////////////////////
+// Metric instance 5
+////////////////////
+// Switch behavior
+S Switch > flip_switch {metricInstanceFromID: 5}
+S Switch > req_turnOn !DDRQB51
+S ORB > write !RQB51 !MCRQB51(message: RQB51)
+S ORB < write
+S Switch < req_turnOn
+S Switch > call_turnOn !DDRQA51
+S ORB > write !RQA51 !MCRQA51(message: RQA51)
+S ORB < write
+S ORB > receive
+S ORB > read ?RPRQA51
+S ORB < read
+S ORB < receive
+S Switch < call_turnOn ?DDRPRQA51
+S Switch > wait_turnOn
+S ORB > receive
+S ORB > read ?RPRQB51
+S ORB < read
+S ORB < receive
+S Switch < wait_turnOn ?DDRPRQB51
+S Switch > call_lib
+S Switch < call_lib
+S Switch < flip_switch {metricInstanceToID: 5}
+
+// Bulb A behavior
+A ORB > event_loop ?MCRQA51
+A ORB > handle_event
+A ORB > read ?RQA51
+A ORB < read
+A Bulb > handle_turnOn ?DDRQA51
+A Bulb > trigger_log !DDRQL52
+A ORB > write !RQL52 !MCRQL52(message: RQL52)
+A ORB < write
+A Bulb < trigger_log
+A Bulb < handle_turnOn !DDRPRQA51
+A ORB > write !RPRQA51(request: RQA51)
+A ORB < write
+A ORB < handle_event
+A ORB < event_loop
+
+// Bulb B behavior
+B ORB > event_loop ?MCRQB51
+B ORB > handle_event
+B ORB > read ?RQB51
+B ORB < read
+B Bulb > handle_turnOn ?DDRQB51
+B Bulb > trigger_log !DDRQL53
+B ORB > write !RQL53 !MCRQL53(message: RQL53)
+B ORB < write
+B Bulb < trigger_log
+B Bulb < handle_turnOn !DDRPRQB51
+B ORB > write !RPRQB51(request: RQA51)
+B ORB < write
+B ORB < handle_event
+B ORB < event_loop
+
+// Logger behavior
+L ORB > event_loop ?MCRQL53
+L ORB > handle_event
+L ORB > read ?RQL53
+L ORB < read
+L Logger > handle_log ?DDRQL53
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+L ORB > event_loop ?MCRQL52
+L ORB > handle_event
+L ORB > read ?RQL52
+L ORB < read
+L Logger > handle_log ?DDRQL52
+L Logger < handle_log
+L ORB < handle_event
+L ORB < event_loop
+
+
+////////////////
+// Architecture
+////////////////
+interface Lamp {
+	operation turnOn
+	operation turnOff
+}
+
+interface Logging {
+	operation configure
+	operation log
+}
+
+component Switch requires Lamp
+function "Flip switch" as flip_switch
+function "Call library" as call_lib {
+	time-bound: 60e-3
+}
+ipc-client function "Call turnOn" as call_turnOn implements Lamp.turnOn
+ipc-client function "Request turnOn" as req_turnOn implements Lamp.turnOn
+ipc-client function "Await turnOn" as wait_turnOn implements Lamp.turnOn
+
+component Bulb provides Lamp requires Logging
+ipc-server function "Handle turnOn" as handle_turnOn implements Lamp.turnOn
+ipc-server function "Handle turnOff" as handle_turnOff implements Lamp.turnOff {
+	time-bound: 225e-3
+}
+ipc-client function "Call configure" as call_conf implements Logging.configure
+ipc-client function "Trigger log" as trigger_log implements Logging.log
+
+component Logger provides Logging
+ipc-server function "Handle configure" as handle_conf implements Logging.configure
+ipc-server function "Handle log" as handle_log implements Logging.log {
+	time-bound: 30e-3
+}
+
+component ORB
+function "Event loop" as event_loop {
+	paint: LIGHT_BLUE
+	scheduled: true
+}
+function "Handle event" as handle_event {
+	paint: BLUE
+}
+function "Write" as write {
+	time-bound: 20e-3
+	paint: PINK
+}
+function "Read" as read {
+	time-bound: 20e-3
+	paint: SAND
+}
+function "Receive from server" as receive {
+	paint: LIGHT_GREEN
+}
+
+///////////
+// Settings
+///////////
+tmsc settings {
+	architecture: external
+	renderingStrategyID: "nl.esi.pps.tmsc.editor.properties_rendering_strategy"
+	metricBudget: 750e-3
+}
+lifeline-segment settings {
+	time-bound: 15e-3
+	hidden: true
+	paint: "#88888888"
+}
+message-control settings {
+	time-bound: 50e-3
+	scheduled: true
+	prefix: MC
+	paint: DARK_GRAY
+	stroke: DOUBLE_DOT_DASH
+}
+request settings {
+	prefix: RQ
+	paint: DARK_GRAY
+	stroke: SOLID
+}
+reply settings {
+	time-bound: 50e-3
+	prefix: RP
+	paint: DARK_GRAY
+	stroke: DASHED
+}
+domain-dependency settings {
+	prefix: DD
+	paint: "#007700"
+	stroke: LONG_DASHED
+}

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<plugin>
+   <extension-point id="browser" name="Eclipse Web Browser" schema="schema/browser.exsd"/>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="toolbar:org.eclipse.ui.main.toolbar">
+         <toolbar
+               id="nl.esi.pps.common.ide.ui.toolbar">
+            <command
+                  commandId="org.eclipse.ui.window.splitEditor"
+                  icon="icons/split_horizontal.png"
+                  style="push">
+               <parameter
+                     name="Splitter.isHorizontal"
+                     value="true">
+               </parameter>
+               <visibleWhen
+                     checkEnabled="true">
+                  <reference
+                        definitionId="nl.esi.pps.common.ide.ui.isEditorActive">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.ui.window.splitEditor"
+                  icon="icons/split_vertical.png"
+                  style="push">
+               <parameter
+                     name="Splitter.isHorizontal"
+                     value="false">
+               </parameter>
+               <visibleWhen
+                     checkEnabled="true">
+                  <reference
+                        definitionId="nl.esi.pps.common.ide.ui.isEditorActive">
+                  </reference>
+               </visibleWhen>
+            </command>
+            <command
+                  commandId="org.eclipse.ui.window.newEditor"
+                  icon="icons/new.png"
+                  label="Clone Editor"
+                  style="push"
+                  tooltip="Clone Editor">
+               <visibleWhen
+                     checkEnabled="true">
+                  <reference
+                        definitionId="nl.esi.pps.common.ide.ui.isEditorActive">
+                  </reference>
+               </visibleWhen>
+            </command>
+         </toolbar>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="nl.esi.pps.common.ide.ui.browser.EclipseWebBrowserEditor"
+            default="true"
+            extensions="htm, html"
+            icon="icons/internal_browser.png"
+            id="nl.esi.pps.common.ide.ui.browser.editor"
+            name="PPS Web Browser">
+      </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            allowMultiple="true"
+            category="org.eclipse.ui"
+            class="nl.esi.pps.common.ide.ui.views.dataanalysis.DataAnalysisView"
+            icon="icons/data-analysis.png"
+            id="nl.esi.pps.common.view.data-analysis"
+            name="Data Analysis"
+            restorable="true">
+      </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.propertiesView">
+      <excludeSources
+            id="nl.esi.pps.common.view.data-analysis">
+      </excludeSources>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension
+            targetID="org.eclipse.ui.resourcePerspective">
+         <viewShortcut
+               id="nl.esi.pps.common.view.data-analysis">
+         </viewShortcut>
+      </perspectiveExtension>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="nl.esi.pps.common.ide.ui.oneContainerSelected">
+         <with
+               variable="selection">
+            <count
+                  value="1">
+            </count>
+            <iterate
+                  ifEmpty="false">
+               <adapt type="org.eclipse.core.resources.IContainer">
+               </adapt>
+            </iterate>
+         </with>
+      </definition>
+      <definition
+            id="nl.esi.pps.common.ide.ui.isEditorActive">
+         <with
+               variable="activePart">
+            <instanceof
+                  value="org.eclipse.ui.IEditorPart">
+            </instanceof>
+         </with>
+      </definition>
+   </extension>
+
+</plugin>

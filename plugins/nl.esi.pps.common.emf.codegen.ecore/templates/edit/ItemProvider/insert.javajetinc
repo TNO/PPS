@@ -1,0 +1,11 @@
+<%if (genClass.getProviderBaseClassName() == null) {%>
+	/**
+	 * Returns the group name of properties to use when the property category is not set in the generator model.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected String getDefaultDescriptorCategory(Object object) {
+		return null;
+	}
+<%}%>

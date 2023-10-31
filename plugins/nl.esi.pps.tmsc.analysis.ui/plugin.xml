@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="nl.esi.pps.tmsc.analysis.ui.fragment"
+         point="org.eclipse.e4.workbench.model">
+      <fragment
+            apply="initial"
+            uri="fragment.e4xmi">
+      </fragment>
+   </extension>
+   <extension
+         point="nl.esi.pps.tmsc.editor.rendering_strategy">
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.analysis.ui.rendering.CriticalPathRenderingStrategy"
+            description="Shows all critical path(s), as calculated by Ciritcal Path Analysis"
+            icon="icons/time_warning.png"
+            id="nl.esi.pps.tmsc.analysis.ui.rendering.critical_path"
+            name="Critical Path">
+      </rendering_strategy>
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.analysis.ui.rendering.SlackRenderingStrategy"
+            description="Shows the minimum slack per event (if any), as calculated by Slack Analysis"
+            icon="icons/time_pin.gif"
+            id="nl.esi.pps.tmsc.analysis.ui.rendering.slack"
+            name="Slack">
+      </rendering_strategy>
+   </extension>
+   <extension
+         point="nl.esi.pps.tmsc.edit.dataAnalysis">
+      <DataAnalysis
+            content_provider="nl.esi.pps.tmsc.analysis.ui.dataanalysis.TimeBoundOutlierDataAnalysisItemContentProvider"
+            eclass_uri="http://www.esi.nl/pps/tmsc#Dependency"
+            id="nl.esi.pps.tmsc.analysis.ui.dataanalysis.TimeBoundOutlierDataAnalysisItemContentProvider">
+      </DataAnalysis>
+   </extension>
+
+</plugin>

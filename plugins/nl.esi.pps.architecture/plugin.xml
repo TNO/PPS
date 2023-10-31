@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/pps/architecture"
+            class="nl.esi.pps.architecture.ArchitecturePackage"
+            genModel="model/architecture.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated architecture -->
+      <parser
+            type="arch"
+            class="nl.esi.pps.architecture.util.ArchitectureResourceFactoryImpl"/>
+      <parser
+            type="archz"
+            class="nl.esi.pps.architecture.util.ArchitectureResourceFactoryImpl"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/pps/architecture/specification"
+            class="nl.esi.pps.architecture.specified.SpecifiedPackage"
+            genModel="model/architecture.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/pps/architecture/implementation"
+            class="nl.esi.pps.architecture.implemented.ImplementedPackage"
+            genModel="model/architecture.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/pps/architecture/runtime"
+            class="nl.esi.pps.architecture.instantiated.InstantiatedPackage"
+            genModel="model/architecture.genmodel"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <file-association
+            content-type="org.eclipse.emf.ecore.xmi"
+            file-extensions="arch,archz">
+      </file-association>
+   </extension>
+</plugin>

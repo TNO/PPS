@@ -1,0 +1,26 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PPS Common IDE UI
+Bundle-SymbolicName: nl.esi.pps.common.ide.ui;singleton:=true
+Bundle-Version: 0.20.0.qualifier
+Bundle-Vendor: ESI (TNO)
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ nl.esi.pps.common.core.runtime;visibility:=reexport,
+ org.eclipse.ui.browser,
+ org.eclipse.core.expressions,
+ org.eclipse.jface,
+ org.eclipse.equinox.registry
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: nl.esi.pps.common.ide.ui,
+ nl.esi.pps.common.ide.ui.action,
+ nl.esi.pps.common.ide.ui.browser,
+ nl.esi.pps.common.ide.ui.jobs,
+ nl.esi.pps.common.ide.ui.part,
+ nl.esi.pps.common.ide.ui.status,
+ nl.esi.pps.common.ide.ui.viewers,
+ nl.esi.pps.common.ide.ui.views.dataanalysis
+Automatic-Module-Name: nl.esi.pps.common.ide.ui
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: nl.esi.pps.common.ide.ui.Activator

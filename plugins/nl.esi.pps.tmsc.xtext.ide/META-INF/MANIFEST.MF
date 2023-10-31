@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: nl.esi.pps.tmsc.xtext.ide
+Bundle-ManifestVersion: 2
+Bundle-Name: Timed Message Sequence Chart Xtext IDE
+Bundle-Vendor: ESI (TNO)
+Bundle-Version: 0.20.0.qualifier
+Bundle-SymbolicName: nl.esi.pps.tmsc.xtext.ide; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: nl.esi.pps.tmsc.xtext,
+ org.eclipse.xtext.ide,
+ org.eclipse.xtext.xbase.ide,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: nl.esi.pps.tmsc.xtext.ide;x-internal:=true,
+ nl.esi.pps.tmsc.xtext.ide.contentassist.antlr,
+ nl.esi.pps.tmsc.xtext.ide.contentassist.antlr.internal

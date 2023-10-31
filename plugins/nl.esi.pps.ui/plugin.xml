@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            class="nl.esi.pps.ui.preferences.PPSPreferencePage"
+            id="nl.esi.pps.ui.preferences"
+            name="PPS IDE">
+      </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="nl.esi.pps.ui.perspective.PPSPerspectiveFactory"
+            icon="icons/pps16.png"
+            id="nl.esi.pps.ui.perspective"
+            name="PPS">
+      </perspective>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <commonFilter
+            activeByDefault="true"
+            class="nl.esi.pps.ui.navigator.EmptyFileFilter"
+            description="Hides files with a content length of 0"
+            id="nl.esi.pps.ui.navigator.EmptyFileFilter"
+            name="Empty files"
+            visibleInUI="true">
+      </commonFilter>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerContentBinding
+            viewerId="org.eclipse.ui.navigator.ProjectExplorer">
+         <includes>
+            <contentExtension
+                  pattern="nl.esi.pps.ui.navigator.*">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+
+</plugin>

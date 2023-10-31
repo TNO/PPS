@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="properties" nsURI="http://www.esi.nl/properties" nsPrefix="properties">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/Ecore">
+    <details key="conversionDelegates" value="bundle:/nl.esi.emf.properties/nl.esi.emf.properties.util.EPropertyValueConversionDelegate$Factory"/>
+  </eAnnotations>
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="[[properties-ecore-diagram]]&#xD;&#xA;.Diagram of the properties meta-model&#xD;&#xA;image::{metamodelsdir}/properties.png[]&#xD;&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertiesContainer" abstract="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="The PropertiesContainer facilitates the seamless extension of specific modeling elements with additional attributes, that are required for specific type of analysis. Though this allows rapid prototyping or customer specific annotations, for every property that is added to the model the question should be raised if this property is a primary citizen of the meta-model. If so, the property should be promoted as attribute or reference in the meta-model."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//PropertyMapEntry" containment="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PropertyMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="key" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//EPropertyValue"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EPropertyValue" instanceClassName="java.io.Serializable">
+    <eAnnotations source="bundle:/nl.esi.emf.properties/nl.esi.emf.properties.util.EPropertyValueConversionDelegate$Factory"/>
+  </eClassifiers>
+</ecore:EPackage>

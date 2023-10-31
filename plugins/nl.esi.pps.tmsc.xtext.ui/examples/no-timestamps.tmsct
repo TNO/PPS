@@ -1,0 +1,17 @@
+// The time-stamps of the events are calculated from the time-bounds as defined on the dependencies
+lifeline-segment settings {
+	time-bound: 0.5
+}
+message settings {
+	time-bound: 1
+}
+
+// Trace
+E1 CA > FA !M1
+E2 CB > FA ?M1
+E2 CB < FA !M2
+E1 CA < FA ?M2
+"My implicit executor" "My implicit component" > "My implicit function"
+"My implicit executor" "My implicit component" > "My implicit sub-function"
+"My implicit executor" "My implicit component" < "My implicit sub-function"
+"My implicit executor" "My implicit component" < "My implicit function"

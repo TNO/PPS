@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_E5WEQEt3EeyYwKYr4vJjKQ" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_HM1w4Et3EeyYwKYr4vJjKQ" elementId="nl.esi.pps.tmsc.metric.ui.menucontribution.popup" positionInParent="after=additions" parentId="popup">
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_Nn0QQEt3EeyYwKYr4vJjKQ" elementId="nl.esi.pps.tmsc.metric.ui.directmenuitem.MetricWizard.IFile" label="Analyze metrics..." iconURI="platform:/plugin/nl.esi.pps.tmsc.metric.ui/icons/MetricAnalysis.gif" tooltip="Starts Metric analysis for the selected file" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.MetricWizardIFileHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_UBo5EEt3EeyYwKYr4vJjKQ" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.MetricWizardIFileHandler"/>
+      </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_sQhuoEwqEey6eIMpvc3c3g" elementId="nl.esi.pps.tmsc.metric.ui.directmenuitem.MetricWizard.EditingDomain" label="Analyze metrics..." iconURI="platform:/plugin/nl.esi.pps.tmsc.metric.ui/icons/MetricAnalysis.gif" tooltip="Starts Metric analysis for the selected TMSC" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.MetricWizardCommandHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_02EoIEwqEey6eIMpvc3c3g" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.MetricWizardCommandHandler"/>
+      </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_jKjFAC6cEe2Jk5A_Sg5l7A" elementId="nl.esi.pps.tmsc.metric.ui.directmenuitem.convertToMetric" label="Convert to metric..." iconURI="platform:/plugin/nl.esi.pps.tmsc.metric.ui/icons/MetricAnalysis.gif" tooltip="Converts a measurement to a metric" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.ConvertToMetricHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_vfjS0C6cEe2Jk5A_Sg5l7A" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.ConvertToMetricHandler"/>
+      </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_JZBG4E0fEey6eIMpvc3c3g" elementId="nl.esi.pps.tmsc.metric.ui.directmenuitem.addMetricAnnotation" label="Add metric annotations to TMSC" iconURI="platform:/plugin/nl.esi.pps.tmsc.metric.ui/icons/AddAnnotation.gif" tooltip="Adds an annotation for each Metric instance to the TMSC viewer" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.AddMetricAnnotationHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_1nBGkE0fEey6eIMpvc3c3g" contributionURI="bundleclass://nl.esi.pps.tmsc.metric.ui/nl.esi.pps.tmsc.metric.ui.handlers.AddMetricAnnotationHandler"/>
+      </children>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

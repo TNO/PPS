@@ -1,0 +1,7 @@
+a#pps-developerguide img {
+    background-image: url(../../intro/css/book_open2.png);
+}
+
+a#pps-developerguide:hover img {
+    background-image: url(../../intro/css/book_open2.png);
+}

@@ -1,0 +1,16 @@
+// Trace
+1 "My implicit executor" "My implicit component" > "My implicit function"
+2 "My implicit executor" "My implicit component" > "My implicit sub-function"
+3 "My implicit executor" "My implicit component" < "My implicit sub-function"
+4 "My implicit executor" "My implicit component" < "My implicit function"
+5 E1 CA > FA !M1
+6 E2 CA > FB ?M1
+7 E2 CA < FB !M2
+8 E1 CA < FA ?M2
+
+// Optional: aliases
+executor "Executor 1" as E1
+executor "Executor 2" as E2
+component "Component A" as CA
+function "Function A" as FA
+function "Function B" as FB

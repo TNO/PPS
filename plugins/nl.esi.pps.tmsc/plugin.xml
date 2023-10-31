@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/tmsc"
+            class="nl.esi.pps.tmsc.TmscPackage"
+            genModel="model/tmsc.genmodel"/>
+   </extension>
+
+   <extension point="org.eclipse.emf.ecore.extension_parser">
+      <!-- @generated tmsc -->
+      <parser
+            type="tmsc"
+            class="nl.esi.pps.tmsc.util.TmscResourceFactoryImpl"/>
+      <parser
+            type="tmscz"
+            class="nl.esi.pps.tmsc.util.TmscResourceFactoryImpl"/>
+   </extension>
+   <extension
+         point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="nl.esi.pps.tmsc.IFile">
+         <adapt
+               type="org.eclipse.core.resources.IFile">
+            <or>
+               <test
+                     property="org.eclipse.core.resources.name"
+                     value="*.tmsc">
+               </test>
+               <test
+                     property="org.eclipse.core.resources.name"
+                     value="*.tmscz">
+               </test>
+            </or>
+         </adapt>
+      </definition>
+      <definition
+            id="nl.esi.pps.tmsc.SingleIFileSelection">
+         <with
+               variable="selection">
+            <iterate>
+               <reference
+                     definitionId="nl.esi.pps.tmsc.IFile">
+               </reference>
+            </iterate>
+            <count
+                  value="1">
+            </count>
+         </with>
+      </definition>
+   </extension>
+
+</plugin>

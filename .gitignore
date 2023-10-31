@@ -1,0 +1,12 @@
+/.classpath
+/.metadata/
+/.settings/
+/workspace
+/**/.JETEmitters
+/**/bin/
+/**/target/
+/**/xtend-gen/**/*.xtendbin
+/**/xtend-gen/**/*._trace
+/**/plugin.xml_gen
+/**/*.orig
+/**/.asciidoctor/

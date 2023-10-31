@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension-point id="rendering_strategy" name="Rendering Strategy" schema="schema/rendering_strategy.exsd"/>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated tmsc -->
+      <editor
+            id="nl.esi.pps.tmsc.presentation.TmscEditorID"
+            name="%_UI_TmscEditor_label"
+            icon="icons/full/obj16/TmscModelFile.gif"
+            extensions="tmsc,tmscz"
+            class="nl.esi.pps.tmsc.presentation.TmscEditor"
+            contributorClass="nl.esi.pps.tmsc.presentation.TmscActionBarContributor">
+      </editor>
+   </extension>
+   <extension
+         point="nl.esi.pps.tmsc.editor.rendering_strategy">
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.rendering.plot.FullRenderingStrategy"
+            description="Shows the full TMSC including all dependencies"
+            icon="icons/rendering_full.png"
+            id="nl.esi.pps.tmsc.editor.full_rendering_strategy"
+            name="Full TMSC">
+      </rendering_strategy>
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.rendering.plot.DefaultRenderingStrategy"
+            id="nl.esi.pps.tmsc.editor.default_rendering_strategy"
+            name="Default">
+      </rendering_strategy>
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.rendering.plot.PropertiesRenderingStrategy"
+            description="Renders executions and dependencies based on rendering properties in the model"
+            icon="icons/rendering_properties.png"
+            id="nl.esi.pps.tmsc.editor.properties_rendering_strategy"
+            name="Based on properties">
+      </rendering_strategy>
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.rendering.plot.ScopesRenderingStrategy"
+            description="Colors dependencies and executions based on the scopes they are included in"
+            icon="icons/rendering_scopes.gif"
+            id="nl.esi.pps.tmsc.editor.scopes_rendering_strategy"
+            name="Color by scope">
+      </rendering_strategy>
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.rendering.plot.ActivityRenderingStrategy"
+            description="Highlight all activity dependencies"
+            icon="icons/Activity.gif"
+            id="nl.esi.pps.tmsc.editor.activity_rendering_strategy"
+            name="Activity">
+      </rendering_strategy>
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.rendering.plot.ComponentRenderingStrategy"
+            description="Colors executions based on their component"
+            icon="icons/Component.gif"
+            id="nl.esi.pps.tmsc.editor.component_rendering_strategy"
+            name="Color by component">
+      </rendering_strategy>
+   </extension>
+   <extension
+         point="org.eclipse.emf.edit.propertyEditorFactories">
+      <factory
+            class="nl.esi.pps.tmsc.provider.ui.EDurationPropertyEditorFactory"
+            uri="editor://nl.esi.pps.tmsc.text.EDurationFormat/">
+      </factory>
+      <factory
+            class="nl.esi.pps.tmsc.provider.ui.ETimestampFormatPropertyEditorFactory"
+            uri="editor://nl.esi.pps.tmsc.text.ETimestampFormat/">
+      </factory>
+   </extension>
+   <extension
+         id="bookmark"
+         name="TMSC Bookmark"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="nl.esi.pps.common.emf.jfree.bookmark">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+      <attribute
+            name="renderingStrategyID">
+      </attribute>
+   </extension>
+
+</plugin>

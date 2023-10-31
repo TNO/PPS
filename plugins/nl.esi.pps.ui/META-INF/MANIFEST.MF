@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PPS UI
+Bundle-SymbolicName: nl.esi.pps.ui;singleton:=true
+Bundle-Version: 0.20.0.qualifier
+Bundle-Vendor: ESI (TNO)
+Automatic-Module-Name: nl.esi.pps.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.swt,
+ org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.apache.commons.lang,
+ org.eclipse.emf.edit;visibility:=reexport,
+ nl.esi.pps.common.ide.ui,
+ nl.esi.pps;visibility:=reexport,
+ org.eclipse.emf.common;visibility:=reexport,
+ org.eclipse.ui.navigator,
+ org.eclipse.core.filesystem
+Export-Package: nl.esi.pps.ui.commands,
+ nl.esi.pps.ui.handlers,
+ nl.esi.pps.ui.navigator;x-internal:=true,
+ nl.esi.pps.ui.perspective;x-internal:=true,
+ nl.esi.pps.ui.preferences

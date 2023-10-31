@@ -1,0 +1,15 @@
+a#pps-userguide img {
+    background-image: url(../../intro/css/book_open2.png);
+}
+
+a#pps-userguide:hover img {
+    background-image: url(../../intro/css/book_open2.png);
+}
+
+a#pps-release-notes img {
+    background-image: url(../../intro/css/pps32.png);
+}
+
+a#pps-release-notes:hover img {
+    background-image: url(../../intro/css/pps32.png);
+}

@@ -1,0 +1,27 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TMSC Compare UI
+Bundle-SymbolicName: nl.esi.pps.tmsc.compare.ui;singleton:=true
+Bundle-Version: 0.20.0.qualifier
+Bundle-Activator: nl.esi.pps.tmsc.compare.ui.Activator
+Bundle-Vendor: ESI (TNO)
+Require-Bundle: javax.inject,
+ org.eclipse.osgi,
+ org.eclipse.jface,
+ org.eclipse.e4.ui.services,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.e4.core.di,
+ nl.esi.pps.common.ide.ui,
+ org.eclipse.lsat.common.queries,
+ nl.esi.pps.common.emf.ecore,
+ nl.esi.pps.ui,
+ nl.esi.pps.tmsc.editor,
+ nl.esi.pps.tmsc.compare
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: nl.esi.pps.tmsc.compare.ui
+Import-Package: javax.annotation;version="1.2.0",
+ javax.inject;version="1.0.0",
+ org.slf4j;version="1.7.30"
+Bundle-ActivationPolicy: lazy
+Export-Package: nl.esi.pps.tmsc.compare.ui;x-internal:=true,
+ nl.esi.pps.tmsc.compare.ui.handlers;x-internal:=true

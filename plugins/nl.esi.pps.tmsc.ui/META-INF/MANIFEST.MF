@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Timed Message Sequence Chart UI
+Bundle-SymbolicName: nl.esi.pps.tmsc.ui;singleton:=true
+Bundle-Version: 0.20.0.qualifier
+Bundle-Vendor: ESI (TNO)
+Require-Bundle: javax.inject,
+ org.eclipse.osgi,
+ org.eclipse.jface,
+ org.eclipse.e4.ui.services,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.e4.core.di,
+ nl.esi.pps.common.ide.ui,
+ nl.esi.pps.ui,
+ nl.esi.pps.tmsc.editor
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Import-Package: javax.annotation;version="1.2.0",
+ javax.inject;version="1.0.0"
+Automatic-Module-Name: nl.esi.pps.tmsc.ui
+Export-Package: nl.esi.pps.tmsc.ui.commands;x-internal:=true,
+ nl.esi.pps.tmsc.ui.handlers;x-internal:=true

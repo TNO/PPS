@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PPS Common Core Runtime
+Bundle-SymbolicName: nl.esi.pps.common.core.runtime
+Bundle-Version: 0.20.0.qualifier
+Bundle-Vendor: ESI (TNO)
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: nl.esi.pps.common.core.runtime,
+ nl.esi.pps.common.core.runtime.jobs,
+ nl.esi.pps.common.core.runtime.progress,
+ nl.esi.pps.common.text
+Require-Bundle: org.eclipse.core.runtime;visibility:=reexport,
+ org.eclipse.core.resources;visibility:=reexport,
+ org.apache.commons.lang,
+ org.apache.commons.io,
+ org.eclipse.jdt.annotation;bundle-version=2;visibility:=reexport;resolution:=optional
+Import-Package: org.slf4j;version="1.7.2",
+ org.slf4j.helpers;version="1.7.2"
+Automatic-Module-Name: nl.esi.pps.common.core.runtime

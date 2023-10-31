@@ -1,0 +1,18 @@
+// You can use ISO8601 formatted time-stamps to create a TMSC with epoch-time set to true
+
+// Trace
+2021-06-16T14:00:00.100+02:00 "My implicit executor" "My implicit component" > "My implicit function"
+2021-06-16T14:00:00.200+02:00 "My implicit executor" "My implicit component" > "My implicit sub-function"
+2021-06-16T14:00:00.300+02:00 "My implicit executor" "My implicit component" < "My implicit sub-function"
+2021-06-16T14:00:00.400+02:00 "My implicit executor" "My implicit component" < "My implicit function"
+2021-06-16T14:00:00.500+02:00 E1 CA > FA !M1
+2021-06-16T14:00:00.600+02:00 E2 CA > FB ?M1
+2021-06-16T14:00:00.700+02:00 E2 CA < FB !M2
+2021-06-16T14:00:00.800+02:00 E1 CA < FA ?M2
+
+// Optional: aliases
+executor "Executor 1" as E1
+executor "Executor 2" as E2
+component "Component A" as CA
+function "Function A" as FA
+function "Function B" as FB

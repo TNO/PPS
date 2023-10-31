@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<site>
+   <feature id="nl.esi.pps.tmsc.feature">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.tmsc.feature.source">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.tmsc.ui.feature">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.tmsc.ui.feature.source">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.common.emf.feature">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.common.emf.feature.source">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.common.ui.feature">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.common.ui.feature.source">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <bundle id="nl.esi.pps.common.emf.codegen.ecore">
+      <category name="nl.esi.pps"/>
+   </bundle>
+   <category-def name="nl.esi.pps" label="PPS">
+      <description>
+         The Platform Performance Suite, by ESI (TNO)
+      </description>
+   </category-def>
+</site>

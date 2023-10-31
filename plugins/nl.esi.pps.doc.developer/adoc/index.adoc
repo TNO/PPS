@@ -1,0 +1,60 @@
+include::_initCommon.adoc[]
+
+// Enable custom style in _main-docinfo.html
+:docinfo:
+
+= PPS Developer Guide
+
+ifdef::output-site[]
+ifdef::output-html[]
+TIP: The developer guide is also available in the Eclipse Help (via menu menu:Help[Help Contents] and it can be link:pps-developer-guide.pdf[downloaded as a PDF].
+endif::output-html[]
+endif::output-site[]
+
+This developer guide describes how to tailor and extend the Platform Performance Suite (PPS) for a specific domain.
+
+CAUTION: Reading this developer guide requires intermediate to advanced knowledge about programming for the Eclipse Modeling Framework (EMF).
+A good book to read as reference is https://www.google.com/search?q=ISBN+13%3A+9780321331885[EMF: Eclipse Modeling Framework].
+
+image::{imgsdir}/under_construction.png[width=5464,height=704] 
+
+<<<
+
+== Start developing for PPS
+
+So, you got a binary distribution of PPS and you want to tailor it for your own domain specific use?
+This section describes how to convert your PPS to an Eclipse PDE to customize PPS.
+
+. First extract the PPS distribution, choose a PPS version (i.e., windows or linux), extract it and start it, e.g. `pps.exe`.
+. Now use the menu:Help[Install New Software...] menu to install the `Eclipse Plugin Development Tools` from the Eclipse 2021-12 (i.e., 4.22) update site: https://download.eclipse.org/eclipse/updates/4.22/[] +
++
+image::{imgsdir}/install-pde.png[width=869,height=705]
+
+. Continue the wizard using the btn:[Next] button and finally the btn:[Finish] button. 
+  When asked, choose to restart the Eclipse IDE.
+. (The next steps are optional, yet advised) Install the PPS sources by again using the menu:Help[Install New Software...] menu.
+  Now choose to add an update site by clicking the btn:[Add..] button. 
+. In the `Add Repository` dialog, choose to add an archived update site by clicking the btn:[Archive...] button.
+  Navigate to the directory where the PPS distribution is extracted and select the `nl.esi.pps.product-__<version>__.zip` archive.
+  Finally click the btn:[Add] button in the dialog to add the repository.
+. Now select the `PPS` category in the wizard and continue the wizard using the btn:[Next] button and finally the btn:[Finish] button.
+  When asked, choose to restart the Eclipse IDE.
+  
+Your environment is now ready for extending PPS, e.g., <<tmsc-reconstructor, adding a custom TMSC reconstructor>> or <<data-analysis, extending its data analysis>>.
+
+TIP: To start a PPS including your extensions, simply select one of your projects in the project/package explorer view and use its context menu (i.e., right mouse click) to menu:Run As[Eclipse Application].
+A new Eclipse instance will be executed containing all PPS features including your own features.
+
+<<<
+
+include::_section_reconstructor.adoc[]
+
+<<<
+
+include::_section_data_analysis.adoc[]
+
+<<<
+
+
+include::{gendocdir}/ecore-documentation.adoc[leveloffset=1]
+

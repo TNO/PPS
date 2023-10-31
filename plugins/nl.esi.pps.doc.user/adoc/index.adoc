@@ -1,0 +1,34 @@
+include::_initCommon.adoc[]
+
+// Enable custom style in _main-docinfo.html
+:docinfo:
+
+= PPS User Guide
+
+ifdef::output-site[]
+ifdef::output-html[]
+TIP: The user guide is also available in the Eclipse Help (via menu menu:Help[Help Contents] and it can be link:pps-user-guide.pdf[downloaded as a PDF].
+endif::output-html[]
+endif::output-site[]
+
+This user guide describes how to use the Platform Performance Suite (PPS).
+
+image::{imgsdir}/under_construction.png[width=5464,height=704] 
+
+<<<
+
+include::_section_workbench.adoc[]
+
+<<<
+
+include::_section_tmsct_editor.adoc[]
+
+<<<
+
+include::_section_tmsc_editor.adoc[]
+<<<
+
+include::_section_common_viewer.adoc[]
+<<<
+
+include::_section_release-notes.adoc[]

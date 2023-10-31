@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<introContent>
+  <extensionContent id="nl.esi.pps.doc.whatsnew" name="pps-whatsnew" alt-style="css/pps.properties" style="css/pps.css" path="whatsnew/@">
+   <link url="http://org.eclipse.ui.intro/showHelpTopic?id=/nl.esi.pps.doc.user/target/eclipse-help/index.html%23release-notes" 
+          label="Read the PPS Release Notes" id="pps-release-notes" style-id="content-link">
+      <text>Find out about the major new features in this release of the Platform Performance Suite</text>
+    </link>
+  </extensionContent>
+</introContent>

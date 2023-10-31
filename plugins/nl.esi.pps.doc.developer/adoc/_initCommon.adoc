@@ -1,0 +1,24 @@
+// attributes to be overwritten by Maven
+ifndef::pluginsdir[:pluginsdir: ../../]
+ifndef::imgsdir[:imgsdir: ../images]
+ifndef::gendocdir[:gendocdir: ../target/adoc-gen]
+ifndef::metamodelsdir[:metamodelsdir: ../target/meta-models]
+
+:idprefix:
+:idseparator: -
+
+:listing-caption: Listing
+
+:source-highlighter: coderay
+
+// Enable experimental features, for 'kbd' macro.
+:experimental:
+
+// Enable Science, Technology, Engineering and Math (STEM) expressions in the browser
+:stem:
+
+// non-breaking hyphen
+:nbh: &#8209;
+
+:eclipse-help-location: https://help.eclipse.org/2021-12/topic
+:pps-user-guide: {eclipse-help-location}/nl.esi.pps.doc.user/target/eclipse-help/index.html

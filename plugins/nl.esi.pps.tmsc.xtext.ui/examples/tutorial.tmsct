@@ -1,0 +1,274 @@
+/*
+ * The basic trace notation is:
+ * time-stamp executor [component] entry(>)|exit(<) function send(!)* receive(?)*
+ * 
+ * TIP: Time-stamp supports both BigDecimal format (for relative time-stamps)
+ *      as ISO8601 (for absolute time-stamps; see trace_ISO8601.tmsct)
+ * 
+ * TIP: The use of components is optional in the syntax. If a component is not set, 
+ *      (i.e. lines 3-4) it is assumed that the executor also acts as a component, 
+ *      hence a Component is created for the executor.
+ */
+1 Sender ComponentS > Send !Message1
+2 Sender ComponentS < Send
+// TIP: You can also use strings for the names
+3 "Receiver" > "Receive" ?"Message1"
+4 "Receiver" < "Receive"
+
+
+
+/*
+ * You can also explicitly declare executors, components and functions to:
+ * - use shorter aliases
+ * - use complex names, i.e. including non-word characters
+ * - control the order of the executors in the TMSC
+ */
+component "Component 2" as C
+executor "Receiver 2" as R
+executor "Sender 2" as S
+function "Receive 2" as fr
+function Send_2 as fs
+
+1 S C > fs !m2
+2 S C < fs
+3 R C > fr ?m2
+4 R C < fr
+
+
+
+/*
+ * A TMSC consists out of different types of dependencies:
+ * - message (default; see above): represents a message passing in software
+ * - request/reply: a special case of message where the requested may send 
+ *                  zero-or-more replies back to the requester of a request 
+ * - domain-dependency: expresses an order-dependency between two events
+ * - lifeline-segment: typically used for dependencies between events on the same executor
+ * 
+ * Optionally settings can be specified for each dependency type: 
+ */
+request settings {
+	// The default time-bound to apply on i.e. request
+	time-bound: 1
+	// The name prefix to infer the i.e. request type from a dependency name
+	prefix: RQ
+}
+lifeline-segment settings {
+	// The default time-bound to apply on i.e. dependency
+	time-bound: 0.5
+	// See section 'Rendering'
+	hidden: true
+}
+
+/*
+ * If default time-bounds are set, the time-stamps of the events can also be calculated.
+ */
+// NOTE: The RQ prefix is specified in the settings, hence RQ1 is a request
+  S3 > FS3 !RQ3
+  S3 < FS3
+  R3 > FR3 ?RQ3
+// TIP: If a time-stamp is set, it is used as-is
+4 R3 < FR3
+
+
+
+// Overriding default time-bounds
+executor "Sender 4" as S4 {
+	// Time-bound to use for 'dependency' on i.e. executor S4 
+	time-bound: 200e-3
+}
+executor "Receiver 4" as R4 {
+	// Time-bound to use for 'dependency' on i.e. executor R4 
+	time-bound: 600e-3
+}
+function "Send 4" as fs4 {
+	// Time-bound to use for 'dependency' from entry of i.e. function fs4 
+	// CAUTION: You should only use this for 'leaf' executions
+	time-bound: 400e-3
+}
+// Specifying a time-bound on send for a i.e. 'request' (verbose)
+S4 > fs4 !RQ4a(time-bound: 0.8)
+S4 < fs4
+R4 > fr4 ?RQ4a
+R4 < fr4
+// Specifying a time-bound on send for a i.e. 'request' (short-notation)
+S4 > fs4 !RQ4b(2.0)
+S4 < fs4
+/*
+ * Using the verbose notation allows to add multiple settings to the dependency
+ */
+     R4 > fr4 ?RQ4b !lifeline-segment CD1(time-bound: 1.7, other: setting)
+     R4 < fr4 ?CD1
+/*
+ * Specifying a time-bound on a lifeline-segment (short-notation)
+ * If the 'time-stamp' of an event starts with a '+' sign, it is processed
+ * as an offset (i.e. time-bound) to the previous event on the executor, hence 
+ * this time is set as the time-bound on the lifeline-segment between these events.
+ */
+     R4 > fr4
++1.7 R4 < fr4
+
+
+
+/*
+ * Request/Reply
+ * A request can result in zero (i.e. trigger) to many (i.e. event) replies.
+ * From the reply, you can refer to the request it belongs to. 
+ */
+S5 > fs5 !RQ5
+R5 > fr5 ?RQ5
+R5 < fr5 !reply RP5(request: RQ5)
+S5 < fs5 ?RP5
+
+
+
+/*
+ * Properties, properties, properties...
+ * Properties can be put on several model elements:
+ */
+tmsc settings {
+	/*
+	 * These properties are applied to the TMSC 
+	 * 
+	 * Four types of property values can be used:
+	 * string, number (i.e. BigDecimal), boolean or a sequence of these values
+	 *
+     * TIP: For string values Use Ctrl+Space to list the previously used values
+	 */
+	someStringProperty: "Hello World"
+	anotherStringProperty: Hi
+	someNumberProperty: 1.0
+	anotherNumberProperty: 100e-3
+	someBooleanProperty: true
+	anotherBooleanProperty: false
+	someSequenceProperty: [ 1, true, "three", four ]
+}
+
+/*
+ * Rendering
+ * This special property on TMSC allows to define the default rendering strategy to use for the plot.
+ * The value below activates the 'Based on properties' rendering strategy that allows to 
+ * customize visualization options by means of properties as described in the next section.
+ *
+ * TIP: Using Ctrl+Space lists all rendering strategies that are currently installed in PPS.
+ *
+ * TIP: Noticed the 'Based on properties' text in gray? This is Eclipse code mining in action, 
+        providing a more explanatory name for the rendering strategy ID.
+ */
+tmsc settings {
+	renderingStrategyID: "nl.esi.pps.tmsc.editor.properties_rendering_strategy"
+}
+/*
+ * These properties are recognized by the 'Based on properties' rendering strategy of the TMSC viewer:
+ * - paint (24-bits or 32-bits hexadecimal color code, prefixed with #, e.g. #FF0000 or nl.esi.pps.tmsc.rendering.RenderingPaint name):
+ *   Applies to dependency, function, component and executor. Specifies the paint to use for the element, 
+ *   respectively the dependency, the execution of a function, the execution by a component or the swimlane of an executor.
+ * - stroke (nl.esi.pps.tmsc.rendering.RenderingStroke name, i.e. [FAT_|VERY_FAT_](SOLID|DASHED|DOT_DASH|LONG_DASHED)):
+ *   Applies to dependency. Specifies the stroke to use for the dependency.
+ * - hidden (true|false): 
+ *   Applies to dependencies. If true, hides the dependency from the plot.
+ *
+ * TIP: Use Ctrl+Space to list the predefined values for these rendering properties
+ */
+message settings {
+	// These properties are applied on all 'message' dependencies
+	hidden: false
+	paint: DARK_GRAY
+	stroke: DOT_DASH
+}
+function "Send 6" as fs6 {
+	// These properties are applied on all executions of i.e. function fs6
+	paint: "#FB9A99"
+}
+component "Component 6" as C6 {
+	// These properties are applied on all executions of i.e. component C6.
+	// Please note that the paint property of a function has precedence over this property.
+	paint: GOLD
+}
+executor "Sender 6" as S6 {
+	// The paint is used as background paint for the swimlane of this executor,
+	// indicating that this component is 'special'
+	paint: BLUE
+}
+
+/*
+ * Setting some properties on i.e. RQ6
+ * 
+ * CAUTION: this cannot be used together with short-notation of time-bound, 
+ *          the verbose notation is required instead.
+ */  
+S6 C6 > fs6 !RQ6(critical: true, outlier: false, paint: RED, stroke: FAT_DASHED)
+// Setting a property on i.e. exit event of function fs6 on component S6
+S6 C6 < fs6 {
+	note: "Interesting"
+}
+R6 C6 > fr6 ?RQ6
+R6 C6 < fr6
+
+/*
+ * Runtime Architecture
+ * 
+ * Earlier, architectural concepts like component, function and executor where introduced.
+ * Additionally some concepts are available to briefly describe phases of the runtime architecture
+ * backing a TMSC, where:
+ * - interface: describes an interface between components, containing operations for its syntax.
+ * - operation: defines the syntactical contract between components.
+ * - component: defines behavior and optionally communicates via interfaces with other components.
+ *              A component may either provide an interface, realizing its operations or 
+ *              require an interface, invoking its operations.
+ * - function: as defined in software, optionally related to an operation. In IDL, skeletons are 
+ *             generated from IDL interface operations. These skeletons are either located in the 
+ *             client-stub (i.e. ipc-client keyword; invoking an operation) or
+ *             server-stub (i.e. ipc-server keyword; realizing an operation).
+ * - executor: represents a non-preemptive resource, capable of processing component behavior.
+ */
+// Specification phase
+interface "IDL interface" as if7 {
+	operation "IDL operation" as op7
+}
+component "Sender 7" as s7 requires if7
+component "Receiver 7" as r7 provides if7
+
+// Implementation phase
+ipc-client function "Client stub function" as cf7 implements if7.op7
+ipc-server function "Server stub function" as sf7 implements if7.op7
+
+// Runtime phase
+executor "Executor 7 (snd)" as e7s
+executor "Executor 7 (rec)" as e7r
+
+// Stimulated phase
+e7s s7 > cf7 !RQ7
+e7r r7 > sf7 ?RQ7
+e7r r7 < sf7 !reply RP7(request: RQ7, time-bound: 0.5)
+e7s s7 < cf7 ?RP7
+
+/*
+ * Metrics
+ * 
+ * Metric define a budget between two events in a trace. A metric is considered
+ * to be well-defined if there is a always causal relation between those events.
+ * Typically metrics are defined by means of an Eclipse extension point, see the
+ * PPS developer guide for more information. By using metric analysis, metric
+ * instances will be resolved for and added to a TMSC.
+ * 
+ * To prototype and test analysis on these metric instances (e.g. root cause
+ * analysis), three metric properties have been added to the syntax.
+ * The metric budget can be specified as a property on the TMSC and the instances
+ * can be defined by setting a property on the from and to events of the metric
+ * instance. The property value specifies the ID of the metric instance. 
+ */
+tmsc settings {
+	metricBudget: 2
+}
+
+s8 > cf8 !RQ8a {metricInstanceFromID: "8a"}
+r8 > sf8 ?RQ8a
+r8 < sf8 !reply RP8a(request: RQ8a)
+s8 < cf8 ?RP8a {metricInstanceToID: "8a"}
+
+s8 > cf8 !RQ8b {metricInstanceFromID: "8b"}
+r8 > sf8 ?RQ8b
+r8 > sfx
+r8 < sfx
+r8 < sf8 !reply RP8b(request: RQ8b)
+s8 < cf8 ?RP8b {metricInstanceToID: "8b"}

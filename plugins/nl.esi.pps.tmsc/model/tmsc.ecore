@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tmsc" nsURI="http://www.esi.nl/pps/tmsc" nsPrefix="tmsc">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="&#xD;&#xA;&#xD;&#xA;[[tmsc-ecore-diagram]]&#xD;&#xA;.Diagram of the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/tmsc.png[]&#xD;&#xA;&#xD;&#xA;[[callstack-ecore-diagram]]&#xD;&#xA;.Diagram of call-stacks in the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/callstack.png[]&#xD;&#xA;&#xD;&#xA;[[measurment-ecore-diagram]]&#xD;&#xA;.Diagram of measurments in the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/measurement.png[]&#xD;&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="FullScopeTMSC" eSuperTypes="#//TMSC">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="FullScopeTMSC contains all events (via Lifeline) and dependencies of the TMSC model. &#xD;&#xA;It has the startTime and endTime attributes which are timestamps derived from the TMSC model, denoting the start and end time of the considered trace."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="measurements" upperBound="-1"
+        eType="#//Measurement" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifelines" upperBound="-1"
+        eType="#//Lifeline" containment="true" resolveProxies="false" eOpposite="#//Lifeline/tmsc"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Dependency" containment="true" resolveProxies="false" eOpposite="#//Dependency/tmsc"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="architectures" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//ArchitectureModel">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="References all model roots (i.e. ArchitectureModels) that own the architectural elements that are referenced by the model elements of this FullScopeTMSC."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="epochTime" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="false"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" lowerBound="1"
+        eType="#//ETimestamp"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" lowerBound="1"
+        eType="#//ETimestamp"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer">
+    <eOperations name="getExecution" eType="#//Execution"/>
+    <eOperations name="setExecution">
+      <eParameters name="Execution" eType="#//Execution"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" lowerBound="1"
+        eType="#//Lifeline" eOpposite="#//Lifeline/events"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//FunctionArgumentMapEntry" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fullScopeIncomingDependencies"
+        upperBound="-1" eType="#//Dependency" resolveProxies="false" eOpposite="#//Dependency/target"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fullScopeOutgoingDependencies"
+        upperBound="-1" eType="#//Dependency" resolveProxies="false" eOpposite="#//Dependency/source"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" ordered="false"
+        upperBound="-1" eType="#//ScopedTMSC" changeable="false" volatile="true" transient="true"
+        derived="true" resolveProxies="false">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//implemented/Function"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" lowerBound="1"
+        eType="#//ETimestamp"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="traced" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Execution" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer #//ITimeRange">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Execution should be considered final and should not be overridden. &#xD;&#xA;Executions are added by means of a refinement transformation, see {@link nl.esi.pps.tmsc.transform.TmscRefinements#refineWithCallStacks(FullScopeTMSC)}"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" lowerBound="1"
+        eType="#//Lifeline" transient="true" resolveProxies="false" eOpposite="#//Lifeline/executions"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="entry" lowerBound="1" eType="#//EntryEvent"
+        resolveProxies="false" eOpposite="#//EntryEvent/execution"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="children" upperBound="-1"
+        eType="#//Execution" resolveProxies="false" eOpposite="#//Execution/parent"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exit" lowerBound="1" eType="#//ExitEvent"
+        resolveProxies="false" eOpposite="#//ExitEvent/execution"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parent" eType="#//Execution"
+        transient="true" resolveProxies="false" eOpposite="#//Execution/children">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Definition 2.3.5"/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="root" lowerBound="1" eType="#//Execution"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" lowerBound="1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//implemented/Function"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="segments" upperBound="-1"
+        eType="#//LifelineSegment" changeable="false" volatile="true" transient="true"
+        derived="true" resolveProxies="false" eOpposite="#//LifelineSegment/activeExecution">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Returns the LifeLineSegments for which this Execution is the active execution on its LifeLine.&#xA;&#xA;Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" lowerBound="1"
+        eType="#//ETimestamp" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" lowerBound="1"
+        eType="#//ETimestamp" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" lowerBound="1"
+        eType="#//EDuration" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Dependency" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer #//ITimeRange">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
+        eOpposite="#//FullScopeTMSC/dependencies"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
+        eType="#//Event" transient="true" resolveProxies="false" eOpposite="#//Event/fullScopeOutgoingDependencies"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="target" lowerBound="1"
+        eType="#//Event" transient="true" resolveProxies="false" eOpposite="#//Event/fullScopeIncomingDependencies"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" ordered="false"
+        upperBound="-1" eType="#//ScopedTMSC" transient="true" resolveProxies="false"
+        eOpposite="#//ScopedTMSC/dependencies">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="All dependencies of a child-scope ScopedTMSC should be contained by its parent-scope TMSC.&#xA;&#xA;Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" lowerBound="1"
+        eType="#//ETimestamp" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" lowerBound="1"
+        eType="#//ETimestamp" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" lowerBound="1"
+        eType="#//EDuration" changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="#//EDuration">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The time-bound specifies the lowerbound for the duration of this dependency. This analysis attribute is used in e.g. critical-path and slack analysis."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If true,  this dependency was induced by the (software) platform as result of scheduling. &#xD;&#xA;If false, this dependency reflects a control or data dependency as programmed in code.&#xD;&#xA;By default Executions and LifelineSegments-without-activeExecution are considered to be scheduled dependencies, see TmscRefinements#refineWithCallStacks(Lifeline)."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="projection" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="If true, this dependency was not originally part of the TMSC, but is an effect of projection, see nl.esi.pps.tmsc.util.TmscProjection class.&#xD;&#xA;Projections should typically not be visible to the user, unless they provide additional information."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Message" eSuperTypes="#//Dependency">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="controlDependencies" upperBound="-1"
+        eType="#//MessageControl" resolveProxies="false" eOpposite="#//MessageControl/message"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Request" eSuperTypes="#//Message">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="replies" upperBound="-1"
+        eType="#//Reply" resolveProxies="false" eOpposite="#//Reply/request"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Reply" eSuperTypes="#//Message">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request" eType="#//Request"
+        transient="true" resolveProxies="false" eOpposite="#//Request/replies"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TMSC" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer #//ITMSC">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="TMSC is a directed acyclic graph with events and dependencies, and some additional structural properties. &#xD;&#xA;A TMSC should at least contain all events that are referred to by its dependencies.&#xD;&#xA;Two specializations are considered the FullScopeTMSC and ScopedTMSC.&#xD;&#xA;&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="childScopes" upperBound="-1"
+        eType="#//ScopedTMSC" containment="true" resolveProxies="false" eOpposite="#//ScopedTMSC/parentScope"
+        eKeys="#//ScopedTMSC/name">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="All dependencies of a child scope should also be contained by its parent scope."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fullScope" lowerBound="1"
+        eType="#//FullScopeTMSC" changeable="false" volatile="true" transient="true"
+        derived="true" resolveProxies="false"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ScopedTMSC" eSuperTypes="#//TMSC">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="ScopedTMSC is a sub-graph of the whole TMSC model and defined for facilitating fragmentation of the TMSC model to sub-graphs (e.g. indication of a path), i.e. events and dependencies that hold specific properties, activities, etc. &#xD;&#xA;Each ScopedTMSC can be considered as a part of its parent scope TMSC and allows application of analysis techniques, i.e., critical path analysis, locally in a sub-graph. &#xD;&#xA;The dependencies of a child scope are contained by its parent scope."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentScope" lowerBound="1"
+        eType="#//TMSC" eOpposite="#//TMSC/childScopes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencies" upperBound="-1"
+        eType="#//Dependency" resolveProxies="false" eOpposite="#//Dependency/scopes"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="origin" upperBound="-1"
+        eType="#//Event">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Typically a ScopedTMSC represents an analysis result that is created from a certain event or events, this is called the origin of the scope.&#xD;&#xA;Setting this attribute is optional, but may help successor analyses."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="fqn" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="#//EID"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="ETimestamp" instanceClassName="java.lang.Long">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.eclipse.org/emf/2002/Ecore#ELong"/>
+      <details key="minInclusive" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents a time stamp in nanoseconds. &#xD;&#xA;The timestamp can be either relative (i.e. relative to 0) or absolute (i.e. relative to the epoch). &#xD;&#xA;Please note that {@link FullScopeTMSC#setEpochTime(boolean)} should be set accordingly."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EDuration" instanceClassName="java.lang.Long">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.eclipse.org/emf/2002/Ecore#ELong"/>
+      <details key="minInclusive" value="0"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Represents a duration in nanoseconds."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EDataType" name="EID" instanceClassName="java.lang.String">
+    <eAnnotations source="http:///org/eclipse/emf/ecore/util/ExtendedMetaData">
+      <details key="baseType" value="http://www.eclipse.org/emf/2002/Ecore#EString"/>
+      <details key="pattern" value="[a-zA-Z_0-9]+"/>
+    </eAnnotations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DomainDependency" eSuperTypes="#//Dependency"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Lifeline" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="Lifeline is the modeling element as defined in the UML Message Sequence Chart formalism and it is equivalent only to the instantiated nature (viewpoint) of the Component modeling element as defined in the abstract TMSC meta-model. &#xD;&#xA;A lifeline contains the behavior of an Executor, in the form of a sequence of events, over a specific time span."/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
+        eOpposite="#//FullScopeTMSC/lifelines"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Event" containment="true" resolveProxies="false" eOpposite="#//Event/lifeline"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executions" upperBound="-1"
+        eType="#//Execution" containment="true" resolveProxies="false" eOpposite="#//Execution/lifeline"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rootExecutions" upperBound="-1"
+        eType="#//Execution" changeable="false" volatile="true" transient="true" derived="true"
+        resolveProxies="false"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="segments" upperBound="-1"
+        eType="#//LifelineSegment" changeable="false" volatile="true" transient="true"
+        derived="true" resolveProxies="false" eOpposite="#//LifelineSegment/lifeline">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executor" lowerBound="1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//instantiated/Executor"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="traced" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean" changeable="false"
+        volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LifelineSegment" eSuperTypes="#//Dependency">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" lowerBound="1"
+        eType="#//Lifeline" changeable="false" volatile="true" transient="true" derived="true"
+        resolveProxies="false" eOpposite="#//Lifeline/segments"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="activeExecution" eType="#//Execution"
+        changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"
+        eOpposite="#//Execution/segments"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MessageControl" eSuperTypes="#//Dependency">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" lowerBound="1"
+        eType="#//Message" transient="true" resolveProxies="false" eOpposite="#//Message/controlDependencies"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FunctionArgumentMapEntry" instanceClassName="java.util.Map$Entry">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="key" lowerBound="1" eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//implemented/FunctionParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="For now we have chosen to persist function arguments as a String to avoid the introduction of a complex type system. "/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Interval" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer #//ITimeRange">
+    <eOperations name="getName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Event"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
+        changeable="false" volatile="true" transient="true" derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scopes" upperBound="-1"
+        eType="#//ScopedTMSC">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="Typically analysis stores its result as a ScopedTMSC. This relation can be used to avoid duplicate analysis results in the model."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="startTime" lowerBound="1"
+        eType="#//ETimestamp" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" lowerBound="1"
+        eType="#//ETimestamp" changeable="false" volatile="true" transient="true"
+        derived="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" lowerBound="1"
+        eType="#//EDuration" changeable="false" volatile="true" transient="true" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Measurement" eSuperTypes="#//Interval">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="&#xD;&#xA;&#xD;&#xA;[[measurement-ecore-diagram]]&#xD;&#xA;.Diagram of measurements in the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/measurement.png[]&#xD;&#xA;"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ITMSC" instanceClassName="nl.esi.pps.tmsc.ITMSC"
+      abstract="true" interface="true">
+    <eOperations name="getEvents" upperBound="-1" eType="#//Event"/>
+    <eOperations name="getDependencies" upperBound="-1" eType="#//Dependency"/>
+    <eOperations name="getIncomingDependencies" upperBound="-1" eType="#//Dependency">
+      <eParameters name="event" lowerBound="1" eType="#//Event"/>
+    </eOperations>
+    <eOperations name="getOutgoingDependencies" upperBound="-1" eType="#//Dependency">
+      <eParameters name="event" lowerBound="1" eType="#//Event"/>
+    </eOperations>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EntryEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="execution" eType="#//Execution"
+        transient="true" resolveProxies="false" eOpposite="#//Execution/entry"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExitEvent" eSuperTypes="#//Event">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="execution" eType="#//Execution"
+        transient="true" resolveProxies="false" eOpposite="#//Execution/exit"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ITimeRange" instanceClassName="nl.esi.pps.tmsc.ITimeRange"
+      abstract="true" interface="true">
+    <eOperations name="getStartTime" eType="#//ETimestamp"/>
+    <eOperations name="getEndTime" eType="#//ETimestamp"/>
+    <eOperations name="getDuration" eType="#//EDuration"/>
+    <eOperations name="getTmsc" eType="#//FullScopeTMSC"/>
+  </eClassifiers>
+</ecore:EPackage>

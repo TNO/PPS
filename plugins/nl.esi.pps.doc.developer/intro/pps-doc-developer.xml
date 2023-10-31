@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<introContent>
+  <extensionContent id="nl.esi.pps.doc.developer" name="pps-developerguide" alt-style="css/pps.properties" style="css/pps.css" path="tutorials/@">
+    <group label="Platform Performance Suite" id="pps" style-id="content-group">
+      <link url="http://org.eclipse.ui.intro/showHelpTopic?id=/nl.esi.pps.doc.developer/target/eclipse-help/index.html" 
+            label="Read the PPS Developer Guide" id="pps-developerguide" style-id="content-link">
+        <text>Learn about developing new features for the Platform Performance Suite</text>
+      </link>
+    </group>
+  </extensionContent>
+</introContent>

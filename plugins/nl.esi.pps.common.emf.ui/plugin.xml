@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="nl.esi.pps.common.ide.ui.browser">
+      <link_processor
+            class="nl.esi.pps.common.emf.ui.link.PlatformResourceProcessor">
+      </link_processor>
+      <link_processor
+            class="nl.esi.pps.common.emf.ui.link.HelpTopicLinkProcessor">
+      </link_processor>
+   </extension>
+   <extension
+         id="nl.esi.pps.common.emf.bookmark"
+         name="EMF Bookmark"
+         point="org.eclipse.core.resources.markers">
+      <super
+            type="org.eclipse.core.resources.bookmark">
+      </super>
+      <persistent
+            value="true">
+      </persistent>
+      <attribute
+            name="pageIndex">
+      </attribute>
+      <attribute
+            name="viewerInput">
+      </attribute>
+      <attribute
+            name="selection">
+      </attribute>
+   </extension>
+
+</plugin>

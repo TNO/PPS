@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PPS Architecture Model PlantUML
+Bundle-SymbolicName: nl.esi.pps.architecture.example.plantuml;singleton:=true
+Bundle-Version: 0.20.0.qualifier
+Bundle-Vendor: ESI (TNO)
+Automatic-Module-Name: nl.esi.pps.architecture.example.plantuml
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.eclipse.jface,
+ org.eclipse.ui.workbench,
+ net.sourceforge.plantuml.eclipse,
+ org.eclipse.lsat.common.xtend,
+ nl.esi.pps.architecture.example
+Export-Package: nl.esi.pps.architecture.plantuml;x-internal:=true

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="architecture" nsURI="http://www.esi.nl/pps/architecture" nsPrefix="architecture">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="documentation" value="The architecture meta-model defines the minimal set of concepts that are required to define the xref:tmsc[TMSC] meta-model.&#xD;&#xA;The architecture package contains sub-packages that represent the lifecycle stages of an architecture as inspired by Koziolek et al.footnote:[H. Koziolek, &quot;Performance Evaluation of Component-based Software Systems: A Survey&quot;, Elsevier, 2010.], where the author presents a view on the software component lifecycle. &#xD;&#xA;This study considers 4 levels of lifecycle stages: the xref:specified[specification], xref:implemented[implementation], deployment and runtime level.&#xD;&#xA;This architecture considers an additional distinction in the runtime level, which is divided in the (runtime) xref:instantiated[instantiated] and (runtime) stimulated stage.&#xD;&#xA;The xref:tmsc[TMSC] meta-model defines concepts that belong to the stimulated stage.&#xD;&#xA;&#xD;&#xA;[[architecture-ecore-diagram]]&#xD;&#xA;.Diagram of the architecture meta-model&#xD;&#xA;image::{metamodelsdir}/architecture.png[]&#xD;&#xA;&#xD;&#xA;&#xD;&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedArchitectureElement" abstract="true"
+      eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArchitectureModel" abstract="true" interface="true">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="ArchitectureModel is a marker interface for root containers that contain architecture elements. Is is not required for an architecture to implement the interface, but it may speed up certain analyses."/>
+    </eAnnotations>
+  </eClassifiers>
+  <eSubpackages name="specified" nsURI="http://www.esi.nl/pps/architecture/specified"
+      nsPrefix="architecture_specified">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="In this lifecycle stage, the specification of the software components takes place. &#xD;&#xA;Provided and required interfaces describe the contracts between the software components and encode the service specification. &#xD;&#xA;At this stage, the software interfaces are also specified by bundling operations that each of those implements.&#xD;&#xA;&#xD;&#xA;[[specified-ecore-diagram]]&#xD;&#xA;.Diagram of the specified lyfecycle stage in the architecture meta-model&#xD;&#xA;image::{metamodelsdir}/specified.png[]&#xD;&#xA;"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Component" eSuperTypes="#//NamedArchitectureElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="requiredInterfaces" upperBound="-1"
+          eType="#//specified/Interface" eOpposite="#//specified/Interface/requiredBy"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="providedInterfaces" upperBound="-1"
+          eType="#//specified/Interface" eOpposite="#//specified/Interface/providedBy"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Interface" eSuperTypes="#//NamedArchitectureElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="requiredBy" upperBound="-1"
+          eType="#//specified/Component" eOpposite="#//specified/Component/requiredInterfaces"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="providedBy" upperBound="-1"
+          eType="#//specified/Component" eOpposite="#//specified/Component/providedInterfaces"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+          eType="#//specified/Operation" containment="true" resolveProxies="false"
+          eOpposite="#//specified/Operation/interface"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="Operation" eSuperTypes="#//NamedArchitectureElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="interface" lowerBound="1"
+          eType="#//specified/Interface" eOpposite="#//specified/Interface/operations"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="implemented" nsURI="http://www.esi.nl/pps/architecture/implemented"
+      nsPrefix="architecture_implemented">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="In the Implementation lifecycle stage, the specified software components and interfaces are implemented. &#xD;&#xA;Depending on the software architecture, as well as the execution platform, a component may have more than one implementation, which may be related to a specific execution platform (i.e., programming language, type of processing unit, etc.) or other factors (i.e., quality of service, etc.)&#xD;&#xA;&#xD;&#xA;[[implemented-ecore-diagram]]&#xD;&#xA;.Diagram of the implemented lyfecycle stage in the architecture meta-model&#xD;&#xA;image::{metamodelsdir}/implemented.png[]&#xD;&#xA;"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Function" eSuperTypes="#//NamedArchitectureElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//specified/Operation"/>
+      <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+          eType="#//implemented/FunctionParameter" containment="true" resolveProxies="false"
+          eOpposite="#//implemented/FunctionParameter/function"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IPCFunction" abstract="true" eSuperTypes="#//implemented/Function">
+      <eOperations name="getOperation" lowerBound="1" eType="#//specified/Operation"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IPCClientFunction" eSuperTypes="#//implemented/IPCFunction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Component that executes (see TMSC) IPCClientFunction X' referring to Operation X, requires the Interface containing Operation X."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="IPCServerFunction" eSuperTypes="#//implemented/IPCFunction">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="A Component that executes (see TMSC) IPCServerFunction Y' referring to Operation Y, provides the Interface containing Operation Y."/>
+      </eAnnotations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="FunctionParameter" eSuperTypes="#//NamedArchitectureElement">
+      <eStructuralFeatures xsi:type="ecore:EReference" name="function" lowerBound="1"
+          eType="#//implemented/Function" resolveProxies="false" eOpposite="#//implemented/Function/parameters"/>
+      <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" lowerBound="1"
+          eType="#//implemented/FunctionParameterKind"/>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EEnum" name="FunctionParameterKind">
+      <eLiterals name="IN" literal="in"/>
+      <eLiterals name="OUT" value="1" literal="out"/>
+      <eLiterals name="IN_OUT" value="2" literal="inout"/>
+      <eLiterals name="RETURN" value="3" literal="return"/>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="instantiated" nsURI="http://www.esi.nl/pps/architecture/instantiated"
+      nsPrefix="architecture_instantiated">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="At instantiated stage the system is started, and the components are instantiated and start living in memory. &#xD;&#xA;Here, the runtime component takes form and is mapped on OS execution entities, i.e., on a specific thread which is mapped on specific process, etc. &#xD;&#xA;Communication ports are created and instantiated enabling communication among the runtime components. &#xD;&#xA;The OS execution entities, i.e., processes and threads are mapped on specific processing unit, with specific scheduling policies, priorities, etc.&#xD;&#xA;&#xD;&#xA;[[instantiated-ecore-diagram]]&#xD;&#xA;.Diagram of the instantiated lyfecycle stage in the architecture meta-model&#xD;&#xA;image::{metamodelsdir}/instantiated.png[]&#xD;&#xA;"/>
+    </eAnnotations>
+    <eClassifiers xsi:type="ecore:EClass" name="Executor" eSuperTypes="#//NamedArchitectureElement"/>
+  </eSubpackages>
+</ecore:EPackage>

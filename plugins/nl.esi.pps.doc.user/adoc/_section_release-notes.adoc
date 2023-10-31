@@ -1,0 +1,29 @@
+include::_initCommon.adoc[]
+
+[[release-notes]]
+== Release Notes
+
+The release notes of the Platform Performance Suite (PPS) are listed below, in reverse chronological order.
+
+=== pass:normal[PPS v0.20]
+
+This release prepares PPS to be open sourced.
+*T.B.D.*
+
+=== pass:normal[PPS v0.0.3]
+
+The highlights of this release are:
+
+* Upgrade from Eclipse 2020-06 to Eclipse 2021-12, see https://www.eclipse.org/eclipse/news/4.22/[New and Noteworthy^] for more information.
+* Reuse common libraries from https://projects.eclipse.org/projects/technology.trace4cps[Eclipse TRACE4CPS(TM)] and https://projects.eclipse.org/projects/technology.lsat[Eclipse LSAT(TM)]
+* PPS RCP now packages a JavaSE-11 JRE
+* This release also includes many bug fixes and improvements.
+
+=== pass:normal[PPS v0.0.2]
+
+This release of PPS adds the feature of defining, resolving and analyzing metric instances in a TMSC.
+When a metric instance exceeds its budget, a detailed root cause analysis can be performed to diagnose which task(s) caused this.
+
+=== pass:normal[PPS v0.0.1]
+
+This first release of PPS includes a <<tmsc-editor>> that is supported by a <<tmsct-editor, textual syntax>>.

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.pde.ui.RuntimeWorkbench">
+    <setAttribute key="additional_plugins"/>
+    <booleanAttribute key="append.args" value="true"/>
+    <booleanAttribute key="askclear" value="true"/>
+    <booleanAttribute key="automaticAdd" value="true"/>
+    <booleanAttribute key="automaticValidate" value="false"/>
+    <stringAttribute key="bootstrap" value=""/>
+    <stringAttribute key="checked" value="[NONE]"/>
+    <booleanAttribute key="clearConfig" value="false"/>
+    <booleanAttribute key="clearws" value="false"/>
+    <booleanAttribute key="clearwslog" value="false"/>
+    <stringAttribute key="configLocation" value="${workspace_loc}/.metadata/.plugins/org.eclipse.pde.core/PPS Product"/>
+    <booleanAttribute key="default" value="true"/>
+    <setAttribute key="deselected_workspace_bundles"/>
+    <stringAttribute key="featureDefaultLocation" value="workspace"/>
+    <stringAttribute key="featurePluginResolution" value="workspace"/>
+    <booleanAttribute key="includeOptional" value="true"/>
+    <stringAttribute key="location" value="${workspace_loc}/../pps_product_workspace"/>
+    <listAttribute key="org.eclipse.debug.ui.favoriteGroups">
+        <listEntry value="org.eclipse.debug.ui.launchGroup.debug"/>
+        <listEntry value="org.eclipse.debug.ui.launchGroup.run"/>
+    </listAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.JRE_CONTAINER" value="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-11"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="-os ${target.os} -ws ${target.ws} -arch ${target.arch} -nl ${target.nl} -consoleLog -clearPersistedStateX"/>
+    <stringAttribute key="org.eclipse.jdt.launching.SOURCE_PATH_PROVIDER" value="org.eclipse.pde.ui.workbenchClasspathProvider"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-Declipse.p2.unsignedPolicy=allow -XX:+UseG1GC -Xmx8g"/>
+    <booleanAttribute key="pde.generated.config" value="false"/>
+    <stringAttribute key="pde.version" value="3.3"/>
+    <stringAttribute key="product" value="nl.esi.pps.product.branding.product"/>
+    <stringAttribute key="productFile" value="\nl.esi.pps.product\eclipse.product"/>
+    <setAttribute key="selected_features">
+        <setEntry value="net.sourceforge.plantuml.feature:default"/>
+        <setEntry value="net.sourceforge.plantuml.lib.feature:default"/>
+        <setEntry value="nl.esi.pps.product.feature:default"/>
+        <setEntry value="nl.esi.pps.tmsc.feature:default"/>
+        <setEntry value="nl.esi.pps.tmsc.ui.feature:default"/>
+        <setEntry value="org.eclipse.e4.rcp:default"/>
+        <setEntry value="org.eclipse.ecf.core.feature:default"/>
+        <setEntry value="org.eclipse.ecf.core.ssl.feature:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer.feature:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer.httpclient45.feature:default"/>
+        <setEntry value="org.eclipse.ecf.filetransfer.ssl.feature:default"/>
+        <setEntry value="org.eclipse.emf.common:default"/>
+        <setEntry value="org.eclipse.emf.ecore:default"/>
+        <setEntry value="org.eclipse.equinox.p2.core.feature:default"/>
+        <setEntry value="org.eclipse.equinox.p2.extras.feature:default"/>
+        <setEntry value="org.eclipse.equinox.p2.rcp.feature:default"/>
+        <setEntry value="org.eclipse.equinox.p2.user.ui:default"/>
+        <setEntry value="org.eclipse.help:default"/>
+        <setEntry value="org.eclipse.platform:default"/>
+        <setEntry value="org.eclipse.rcp:default"/>
+    </setAttribute>
+    <setAttribute key="selected_target_bundles"/>
+    <setAttribute key="selected_workspace_bundles">
+        <setEntry value="nl.esi.emf.properties.edit@default:default"/>
+        <setEntry value="nl.esi.emf.properties@default:default"/>
+        <setEntry value="nl.esi.pps.architecture.edit@default:default"/>
+        <setEntry value="nl.esi.pps.architecture.example.edit@default:default"/>
+        <setEntry value="nl.esi.pps.architecture.example.plantuml@default:default"/>
+        <setEntry value="nl.esi.pps.architecture.example@default:default"/>
+        <setEntry value="nl.esi.pps.architecture@default:default"/>
+        <setEntry value="nl.esi.pps.common.core.runtime.tests@default:default"/>
+        <setEntry value="nl.esi.pps.common.core.runtime@default:default"/>
+        <setEntry value="nl.esi.pps.common.emf.codegen.ecore@default:default"/>
+        <setEntry value="nl.esi.pps.common.emf.ecore@default:default"/>
+        <setEntry value="nl.esi.pps.common.emf.edit@default:default"/>
+        <setEntry value="nl.esi.pps.common.emf.synchronizedtiming.ui@default:default"/>
+        <setEntry value="nl.esi.pps.common.emf.ui@default:default"/>
+        <setEntry value="nl.esi.pps.common.ide.ui@default:default"/>
+        <setEntry value="nl.esi.pps.common.jfreechart.ui@default:default"/>
+        <setEntry value="nl.esi.pps.common.jfreechart@default:default"/>
+        <setEntry value="nl.esi.pps.doc.developer@default:default"/>
+        <setEntry value="nl.esi.pps.doc.user@default:default"/>
+        <setEntry value="nl.esi.pps.product.branding@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.analysis.prototypes.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.analysis.prototypes@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.analysis.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.analysis@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.compare.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.compare@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.edit@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.editor@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.metric.edit@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.metric.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.metric@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.reconstruct.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.reconstruct@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.xtext.ide@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.xtext.ui@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc.xtext@default:default"/>
+        <setEntry value="nl.esi.pps.tmsc@default:default"/>
+        <setEntry value="nl.esi.pps.ui@default:default"/>
+        <setEntry value="nl.esi.pps@default:default"/>
+    </setAttribute>
+    <booleanAttribute key="show_selected_only" value="false"/>
+    <booleanAttribute key="tracing" value="false"/>
+    <booleanAttribute key="useCustomFeatures" value="false"/>
+    <booleanAttribute key="useDefaultConfig" value="true"/>
+    <booleanAttribute key="useDefaultConfigArea" value="true"/>
+    <booleanAttribute key="useProduct" value="true"/>
+    <booleanAttribute key="usefeatures" value="false"/>
+</launchConfiguration>

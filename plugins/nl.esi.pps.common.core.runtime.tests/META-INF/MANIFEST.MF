@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PPS Common Core Runtime Test
+Bundle-SymbolicName: nl.esi.pps.common.core.runtime.tests
+Bundle-Version: 0.20.0.qualifier
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Require-Bundle: org.junit;bundle-version="4.0.0",
+ nl.esi.pps.common.core.runtime,
+ org.apache.commons.io,
+ org.apache.commons.lang
+Automatic-Module-Name: nl.esi.pps.common.core.runtime.tests
+Bundle-Vendor: ESI (TNO)
+Export-Package: nl.esi.pps.common.core.runtime.progress;x-internal:=true

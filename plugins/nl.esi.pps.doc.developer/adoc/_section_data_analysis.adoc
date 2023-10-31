@@ -1,0 +1,52 @@
+include::_initCommon.adoc[]
+
+[[data-analysis]]
+== Extending Data Analysis
+
+The link:{pps-user-guide}#tmsc-data-analysis-view[Data Analysis view for the TMSC graphical viewer] shows either a time series or a histogram of the _'duration'_ for all _'siblings'_ of the selected element.
+The _'duration'_ of an element can be any time-related aspect of an element, e.g. its absolute (observed) duration or its time-bound.
+The _'siblings'_ of an element are all occurrences in the model for which their  _'duration'_ is comparable, in other words, it makes sense to compare them.
+This already sounds very abstract and besides that, it is not known which elements are added to the TMSC model by means of extensions (e.g. analysis or customer specific model extensions).
+For this reason an extensible approach is designed to provide the input for data analysis. 
+
+This design is implemented by means of reusing the EMF Edit ItemProvider adapter factories extension point in combination with our own `nl.esi.pps.tmsc.edit.dataAnalysis` extension point.
+EMF adapters are a very powerful technique and EMF Edit's ItemProviders are designed to automatically add UI adapters to an EMF model instance.
+For more information on adapters and adapter factories, see https://eclipsesource.com/blogs/2013/01/29/emf-itemprovider-magic/[] or the book https://www.google.com/search?q=ISBN+13%3A+9780321331885[EMF: Eclipse Modeling Framework].
+
+The `nl.esi.pps.tmsc.edit.dataAnalysis` extension point adds a flexible approach on top, that allows to register an <<nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider>> per `EClass`.
+This item provider needs to be registered to the EMF framework in order to be found by the data analysis view.
+For this, an `nl.esi.pps.tmsc.provider.dataanalysis.internal.DataAnalysisItemContentProvider` is registered as EMF Edit ItemProvider via the `nl.esi.pps.tmsc.provider.dataanalysis.DataAnalysisItemContentProviderAdapterFactory`, see the <<plugin-xml-nl.esi.pps.tmsc.edit>>.
+We only register the `nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider` as `supportedTypes` and implement the default create method to returning an instance of the `nl.esi.pps.tmsc.provider.dataanalysis.internal.DataAnalysisItemContentProvider`.
+We can use a single instance as our implementation is stateless.
+This instance is disposed when the adapter factory is disposed.
+
+NOTE: Registering an EMF Edit ItemProvider only needs to be done once per language that wants to support data analysis!
+
+The <<nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider>> interface defines the API to populate the data analysis views.
+The API is explained in the JavaDoc of the interface.
+All methods take an `Object` as argument, this is the model element for which the data is requested.
+First the `Set<String> getConfigurations(Object)` will be invoked.
+This method should return all supported data analysis configurations for the model element.
+An example of supporting different configurations is implemented in `nl.esi.pps.tmsc.provider.ext.ExecutionExtItemProvider` where _'siblings'_ can either be executions on the same `Lifeline` or executions executed by the same `Component`. 
+The configurations will appear as tabs in the data analysis view.
+In all other methods, both the model element as the user selected configuration at least will be provided.
+
+TIP: Within Eclipse, use kbd:[Ctrl+Shift+T] to open a type based on its name.
+
+[[nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider]]
+.nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider
+[source,java]
+----
+include::{pluginsdir}/nl.esi.pps.tmsc.edit/src/nl/esi/pps/tmsc/provider/dataanalysis/IDataAnalysisItemContentProvider.java[tag=developer-guide]
+----
+
+The only thing left to do is to register the data analysis item content provider to the EMF framework, which is done by means of the `nl.esi.pps.tmsc.edit.dataAnalysis` extension point in the <<plugin-xml-nl.esi.pps.tmsc.edit, plugin.xml>>.
+
+[[plugin-xml-nl.esi.pps.tmsc.edit]]
+.plugin.xml of nl.esi.pps.tmsc.edit
+[source,xml]
+----
+include::{pluginsdir}/nl.esi.pps.tmsc.edit/plugin.xml[tag=developer-guide]
+----
+<1> An additional EMF-edit item provider adapter factory is registered for the `http://www.esi.nl/pps/tmsc` language to bind the `nl.esi.pps.tmsc.edit.dataAnalysis` extension point, see the `nl.esi.pps.tmsc.provider.dataanalysis.DataAnalysisItemContentProviderAdapterFactory` code for more information.
+<2> The `nl.esi.pps.tmsc.provider.dataanalysis.ExecutionDataAnalysisItemContentProvider` is registered for the `http://www.esi.nl/pps/tmsc#//Execution` EClass

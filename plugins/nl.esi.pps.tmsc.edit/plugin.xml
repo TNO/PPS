@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.0"?>
+
+<!--
+This source file is also used in the developer guide.
+The tags allow asciidoc to only include this file partially and should not be removed!
+-->
+
+<plugin>
+   <extension-point id="dataAnalysis" name="Data Analysis" schema="schema/dataAnalysis.exsd"/>
+
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated tmsc -->
+      <factory
+            uri="http://www.esi.nl/pps/tmsc"
+            class="nl.esi.pps.tmsc.provider.TmscItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+   <!-- tag::developer-guide[] -->
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories"> <!--1-->
+      <factory
+            uri="http://www.esi.nl/pps/tmsc"
+            class="nl.esi.pps.tmsc.provider.dataanalysis.DataAnalysisItemContentProviderAdapterFactory"
+            supportedTypes= "nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider"/>
+   <!-- end::developer-guide[] -->
+      <factory
+            class="nl.esi.pps.tmsc.provider.dataanalysis.DataAnalysisItemContentProviderAdapterFactory"
+            supportedTypes="nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider"
+            uri="http://www.esi.nl/pps/architecture/implemented"/>
+   <!-- tag::developer-guide[] -->
+   </extension>
+   <extension point="nl.esi.pps.tmsc.edit.dataAnalysis"> <!--2-->
+      <DataAnalysis
+            content_provider="nl.esi.pps.tmsc.provider.dataanalysis.ExecutionDataAnalysisItemContentProvider"
+            eclass_uri="http://www.esi.nl/pps/tmsc#Execution"
+            id="nl.esi.pps.tmsc.provider.dataanalysis.ExecutionDataAnalysisItemContentProvider">
+      </DataAnalysis>
+   <!-- end::developer-guide[] -->
+      <DataAnalysis
+            content_provider="nl.esi.pps.tmsc.provider.dataanalysis.IntervalDataAnalysisItemContentProvider"
+            eclass_uri="http://www.esi.nl/pps/tmsc#Interval"
+            id="nl.esi.pps.tmsc.provider.dataanalysis.IntervalDataAnalysisItemContentProvider">
+      </DataAnalysis>
+      <DataAnalysis
+            content_provider="nl.esi.pps.tmsc.provider.dataanalysis.MessageDataAnalysisItemContentProvider"
+            eclass_uri="http://www.esi.nl/pps/tmsc#Message"
+            id="nl.esi.pps.tmsc.provider.dataanalysis.MessageDataAnalysisItemContentProvider">
+      </DataAnalysis>
+      <DataAnalysis
+            content_provider="nl.esi.pps.tmsc.provider.dataanalysis.FunctionDataAnalysisItemContentProvider"
+            eclass_uri="http://www.esi.nl/pps/architecture/implemented#Function"
+            id="nl.esi.pps.tmsc.provider.dataanalysis.FunctionDataAnalysisItemContentProvider">
+      </DataAnalysis>
+   <!-- tag::developer-guide[] -->
+   </extension>
+   <!-- end::developer-guide[] -->
+</plugin>

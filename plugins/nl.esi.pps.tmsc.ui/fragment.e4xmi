@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="ASCII"?>
+<fragment:ModelFragments xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:fragment="http://www.eclipse.org/ui/2010/UIModel/fragment" xmlns:menu="http://www.eclipse.org/ui/2010/UIModel/application/ui/menu" xmlns:ui="http://www.eclipse.org/ui/2010/UIModel/application/ui" xmi:id="_BxaXACerEeWxCPrV0pAZQQ">
+  <fragments xsi:type="fragment:StringModelFragment" xmi:id="_pVgfIIrOEeW7h_qdP9N9fw" featurename="menuContributions" parentElementId="org.eclipse.e4.legacy.ide.application">
+    <elements xsi:type="menu:MenuContribution" xmi:id="_BducUIrPEeW7h_qdP9N9fw" elementId="nl.esi.pps.tmsc.ui.menucontribution.popup" positionInParent="after=additions" parentId="popup">
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_EdVscC5-Ee2VDa40Pi6kKw" elementId="nl.esi.pps.tmsc.ui.directmenuitem.addmeasurement" label="Add to model" iconURI="platform:/plugin/nl.esi.pps.tmsc.ui/icons/AddMeasurement.png" tooltip="Adds the measurement to the model" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.AddMeasurementHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_RbpV8C5-Ee2VDa40Pi6kKw" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.AddMeasurementHandler"/>
+      </children>
+    </elements>
+  </fragments>
+</fragment:ModelFragments>

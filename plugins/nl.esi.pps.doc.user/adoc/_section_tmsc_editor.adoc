@@ -1,0 +1,210 @@
+include::_initCommon.adoc[]
+
+[[tmsc-editor]]
+== TMSC graphical viewer
+
+[[tmsc-view-tab, TMSC view tab]]
+=== Timed message sequence chart view tab
+
+The runtime behavior and timing of software applications can be visualized using Timed Message Sequence Charts (TMSC).
+In a TMSC, the life-line of an executor is shown on as a horizontal swimming lane, and (real) time is shown along the horizontal axis.
+The executor labels are shown on the vertical axis.
+The function calls that are executed by an executor are shown as bars within the swimming lane.
+The bars are labeled with their execution name.
+Nested function call executions are drawn as stacked bars, resulting in a call stack.
+Arrows between the bars denote the data and/or control flow dependencies.
+The arrows indicate where executors are communicating with each other, and where executor local events are raised and handled.
+Section <<tmsc-relations-uml-sdl>> compares TMSCs to similar representations.
+
+Due to <<outline-dynamic-inclusion-filtering>> some executors might not be shown; however, the visible executors might communicate with this hidden executors.
+Communication text balloons are shown in this case, depending on the <<tmsc-dependencies-visibility, selected dependencies visibility>>.
+The arrow from/to the balloon indicates the data flow of the communication and the text in the balloon describes the other side.
+
+image::{imgsdir}/tmsc-view-tab.png[width=1515,height=1030]
+
+It is possible to select executions or dependencies by clicking on them, also see section <<chart-selection>>.
+Selected elements are shown with a thicker yellow border.
+Once selected, the details of the execution can be seen in the _Properties_ view and in the <<tmsc-data-analysis-view>>.
+
+TIP: By default, the _Properties_ view displays normal properties.
+To view expert properties click the image:{imgsdir}/icons/filter_ps.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Show Advanced Properties] button to reveal them.
+ 
+The _Timed message sequence chart_ view tab supports some common functions to support analysis of its data, like:
+
+* Dynamic filtering based on the _Outline_ view selection, see Section <<outline-dynamic-inclusion-filtering>>.
+* Select executions and dependencies by clicking on them, see section <<chart-selection>>.
+  Once selected, details can be seen in the _Properties_ view and in the <<tmsc-data-analysis-view>>.
+* Measuring the time between executions, see Section <<time-measurement>>.
+* Synchronize the current visible time window with all other supported editors, see Section <<synchronized-timing>>.
+* Place a link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/cbookmrk.htm[bookmark] at a specific area within a file. 
+* Saving a snapshot of the chart, see Section <<chart-export-png>>.
+* Panning and zooming, see Section <<panning-and-zooming>>.
+
+On top of these common functions, the _TMSC_ tab has the following additional action bar buttons.
+
+[[tmsc-view-tab-actions]]
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+[[tmsc-rendering-strategy-selection]]
+|image:{imgsdir}/icons/rendering_default.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+|btn:[Select Rendering Strategy]
+|Changes the appearance of the TMSC depending on the analysis that is applied to the TMSC.
+Please read section <<tmsc-rendering-strategies>> for more information. +
+Please note that the icon depends on the current selection and therefore might be different than illustrated here.
+
+[[tmsc-dependencies-visibility]]
+|image:{imgsdir}/icons/DependenciesVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+|btn:[Select Dependencies Visibility]
+|image:{imgsdir}/icons/DependenciesVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Show all dependencies. +
+image:{imgsdir}/icons/DependenciesVisibilityHIDE_ANNOTATIONS.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide communication text balloons on dependencies. +
+image:{imgsdir}/icons/DependenciesVisibilityHIDE_CROSSING.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Also hide dependencies that cross the current visible area of the chart. In other words, dependencies that do not start or end within the visible area. +
+image:{imgsdir}/icons/DependenciesVisibilityNONE.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide all dependencies.
+
+[[tmsc-executions-visibility]]
+|image:{imgsdir}/icons/ExecutionsVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+|btn:[Select Executions Visibility]
+|image:{imgsdir}/icons/ExecutionsVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Show all executions. +
+image:{imgsdir}/icons/ExecutionsVisibilityHIDE_ANNOTATIONS.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide communication text balloons on executions. +
+image:{imgsdir}/icons/ExecutionsVisibilityNONE.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide all executions.
+
+|===
+
+[[tmsc-rendering-strategies]]
+==== Rendering strategies
+
+[[tmsc-relations-uml-sdl]]
+==== Relations to (Message) Sequence Charts and Flame Graphs
+
+To give some more intuition about Timed Message Sequence Charts, they are compared to similar representations.
+
+Timed Message Sequence Charts are similar to UML Sequence Diagrams and SDL Message Sequence Charts.
+The main differences are:
+
+* The horizontal axis and vertical axis are swapped such that life-lines are positioned horizontally, and the vertical axis shows the life-line labels.
+* The life-lines represent autonomous execution entries, similar as in SDL.
+* Life-lines are shown as swim-lanes.
+* Arrows represent asynchronous messages, i.e. the sending executor continues execution directly.
+* Overlapping executions are drawn as stacked boxes, instead of overlapping boxes.
+* Labels are shown inside the executions, instead of on the arrows.
+* The horizontal axis shows the (real) time, such that the length of an execution represents the actual duration of that execution, and the distance between the start and the end of an arrow represent the latency of message passing. 
+* Fragments, such as loops, alternatives and references, are not allowed in Timed Message Sequence Charts.
+
+ifdef::output-html[]
+These differences are illustrated with the animation below.
+
+image::{imgsdir}/tmsc_animation.gif[width=450,height=400,pdfwidth=3.75in,pdfheight=3.33in]
+endif::output-html[]
+ifndef::output-html[]
+These differences are illustrated with the picture below.
+
+image::{imgsdir}/tmsc_static.png[width=724,height=695,pdfwidth=6.03in,pdfheight=5.79in]
+endif::output-html[]
+
+Timed Message Sequence Charts are also similar to Call Charts or Flame Charts.
+It can be argued that Timed Message Sequence Charts have a Flame Chart for each executor.
+These Flame Chart are connected by arrows to show inter-executor relations.
+Note that, Flame Charts should not be confused with Flame Graphs, 
+Flame Graphs put the alphabet on the horizontal axis instead of the time, http://www.brendangregg.com/flamegraphs.html#Variations[see Brendan Gregg's pages^].
+
+=== Selection view tab
+
+The _Selection_ view tab is similar to the _Outline_ view.
+It shows the model in a tree view.
+Clicking an element in the tree selects the element and shows the details of that element in the _Properties_ view.
+
+This view supports dynamic filtering based on the _Outline_ view selection (see section <<outline-dynamic-inclusion-filtering>>) to filter elements of interest.
+
+[[tmsc-project-explorer-view]]
+=== Project Explorer view
+
+The `tmsc` and `tmscz` file extensions are associated with the TMSC graphical viewer.
+These files support the following contextual actions:
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/MetricAnalysis.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Analyze metrics...]
+|TODO
+
+|image:{imgsdir}/icons/normalize_timing.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Normalize timing]
+|TODO
+
+|===
+
+[[tmsc-outline-view]]
+=== Outline view
+
+[TIP]
+====
+The _Outline_ view supports dynamic filtering of its elements, by means of entering a <<outline-dynamic-inclusion-filtering, search pattern>> in its filter text box.
+
+image::{imgsdir}/outline-filter.png[width=184,height=54,pdfwidth=1.53in,pdfheight=0.45in]
+====
+
+The _Outline_ view shows the model in a tree view.
+Clicking an element in the tree selects the element and shows the details of that element in the _Properties_ view.
+
+By selecting elements in the tree both the resource and time context of an editor view can be reduced, see also Section <<outline-dynamic-inclusion-filtering>>.
+With reduction of the resource context is meant that the editor area will show only content which is related to the selected _Outline_ elements.
+For example, when a life-line is selected, the <<tmsc-view-tab>> view will only show this life-line and the life-lines that it directly communicates with.
+This feature is active if the image:{imgsdir}/icons/push_context.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Push Context] toggle bottom is selected.
+
+When the image:{imgsdir}/icons/push_time.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Push Time Range] toggle button is selected, the editor area will automatically show the time range which includes the time context for the selected _Outline_ elements.
+
+The model elements in the content outline tree support the following contextual actions:
+
+[cols="20,^10,30,40",options="header"]
+|===
+|Elements |Icon |Action |Description
+
+|TMSC
+|image:{imgsdir}/icons/MetricAnalysis.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Analyze metrics...]
+|TODO
+
+|TMSC
+ Scoped{nbh}TMSC
+|image:{imgsdir}/icons/time_pin.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Analyze slack]
+|TODO
+
+|Scoped{nbh}TMSC
+|image:{imgsdir}/icons/saveas.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Save as TMSC]
+|TODO
+
+|Metric +
+ Metric{nbh}Instance
+|image:{imgsdir}/icons/AddAnnotation.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Add metric annotations to model]
+|TODO
+
+|Measurement +
+ Metric{nbh}Instance
+|image:{imgsdir}/icons/time_warning.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Analyze critical path]
+|TODO
+
+|Metric{nbh}Instance (_exceeding budget_)
+|image:{imgsdir}/icons/time_warning.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Analyze root cause]
+|TODO
+
+|===
+
+[[tmsc-plantuml-view]]
+=== PlantUML view
+
+[[tmsc-data-analysis-view]]
+=== Data Analysis view
+
+[[tmsc-time-series-viewer]]
+==== Time series viewer
+
+[[tmsc-histogram-viewer]]
+==== Histogram viewer

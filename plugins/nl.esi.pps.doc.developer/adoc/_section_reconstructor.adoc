@@ -1,0 +1,44 @@
+include::_initCommon.adoc[]
+
+[[tmsc-reconstructor]]
+== Creating a custom TMSC reconstructor
+
+The TMSC textual syntax allows you to create small example traces, to explore the PPS features.
+The textual syntax is not developed for large traces as it will suffer from scalability issues.
+Besides that, it is assumed that when using PPS in another domain, traces in another format are already available.
+In both cases it is advised to write your own _reconstructor_ that converts these trace directly into a <<tmsc, TMSM meta-model>> instance.
+This section gives an example on how to create such a custom reconstructor.
+
+The custom TMSC reconstructor example is included in the PPS distribution, in the `examples` directory.
+The example can be easily imported into your development environment by using the menu:File[Import...] menu and then choose to import menu:General[Existing Projects into Workspace] from the tree.
+Now continue the wizard and select all the projects from the `examples` directory to be imported. 
+
+TIP: For more information on creating custom EMF resources or using extension points, please read the Eclipse and EMF documentation.
+
+First choose a syntax for your trace (e.g., `tmsctrace` in our example) and register it by means of the `org.eclipse.emf.ecore.extension_parser` extension point in the <<plugin-xml-nl.esi.pps.tmsc.reconstruct, plugin-xml>> of your plugin.
+
+[[plugin-xml-nl.esi.pps.tmsc.reconstruct]]
+.plugin.xml of nl.esi.pps.tmsc.reconstruct
+[source,xml]
+----
+include::{pluginsdir}/nl.esi.pps.tmsc.reconstruct/plugin.xml[]
+----
+
+The registered `nl.esi.pps.tmsc.reconstruct.TmscTraceResourceFactory` extends `org.eclipse.emf.ecore.resource.Resource.Factory` and creates an <<nl.esi.pps.tmsc.reconstruct.TmscTraceResource>> upon request.
+In our example, this resource defines an interface `nl.esi.pps.tmsc.reconstruct.TmscTraceEvent` between the parser and the reconstructor to separate the concerns of parsing and model forming.
+The call-outs after the example provide some more information.
+
+[[nl.esi.pps.tmsc.reconstruct.TmscTraceResource]]
+.nl.esi.pps.tmsc.reconstruct.TmscTraceResource
+[source,java]
+----
+include::{pluginsdir}/nl.esi.pps.tmsc.reconstruct/src/nl/esi/pps/tmsc/reconstruct/TmscTraceResource.java[]
+----
+<1> Extending `org.eclipse.emf.ecore.resource.impl.ResourceImpl` allows you to implement the `doLoad(InputStrweam, Map)` method.
+If you also need to be able to save a TMSC model instance to your trace format, please implement the `doSave(OutputStream, Map)` method.
+<2> At the beginning of the load, the `TmscReconstructor` is initialized by calling its `preReconstruct()` method.
+This will prepare the <<architecture>> and <<tmsc>>.
+<3> For every line in the trace, a `TmscTraceEvent` is created by the `TmscTraceParser` and this event is fed to the `TmscReconstructor` by calling its `reconstruct(TmscTraceEvent)` method.
+<4> The TMSC model instance is _well-formed_ by calling the `postReconstruct()` method on the `TmscReconstructor`.
+    As part of the postReconstruct, some generic `nl.esi.pps.tmsc.util.TmscRefinements` are called, please see the `TmscReconstructor` implementation.
+    Finally, the reconstructed TMSC and architecture are added to the resource contents.

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/nl.esi.pps.architecture/src-gen" creationIcons="false"
+    editDirectory="/nl.esi.pps.architecture.edit/src-gen" editorDirectory="" modelPluginID="nl.esi.pps.architecture"
+    templateDirectory="platform:/resource/nl.esi.pps.common.emf.codegen.ecore/templates" dynamicTemplates="true"
+    modelName="Architecture" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    copyrightFields="false" usedGenPackages="../../nl.esi.emf.properties/model/properties.genmodel#//properties"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>architecture.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="Architecture" basePackage="nl.esi.pps" resource="XMI" disposableProviderFactory="true"
+      fileExtensions="arch,archz" ecorePackage="architecture.ecore#/">
+    <genClasses ecoreClass="architecture.ecore#//NamedArchitectureElement">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute architecture.ecore#//NamedArchitectureElement/name"/>
+    </genClasses>
+    <genClasses image="false" ecoreClass="architecture.ecore#//ArchitectureModel"/>
+    <nestedGenPackages prefix="Specified" basePackage="nl.esi.pps.architecture" disposableProviderFactory="true"
+        ecorePackage="architecture.ecore#//specified">
+      <genClasses ecoreClass="architecture.ecore#//specified/Component">
+        <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//specified/Component/requiredInterfaces"/>
+        <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//specified/Component/providedInterfaces"/>
+      </genClasses>
+      <genClasses ecoreClass="architecture.ecore#//specified/Interface">
+        <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//specified/Interface/requiredBy"/>
+        <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//specified/Interface/providedBy"/>
+        <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference architecture.ecore#//specified/Interface/operations"/>
+      </genClasses>
+      <genClasses ecoreClass="architecture.ecore#//specified/Operation">
+        <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference architecture.ecore#//specified/Operation/interface"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Implemented" basePackage="nl.esi.pps.architecture"
+        disposableProviderFactory="true" ecorePackage="architecture.ecore#//implemented">
+      <genEnums typeSafeEnumCompatible="false" ecoreEnum="architecture.ecore#//implemented/FunctionParameterKind">
+        <genEnumLiterals ecoreEnumLiteral="architecture.ecore#//implemented/FunctionParameterKind/IN"/>
+        <genEnumLiterals ecoreEnumLiteral="architecture.ecore#//implemented/FunctionParameterKind/OUT"/>
+        <genEnumLiterals ecoreEnumLiteral="architecture.ecore#//implemented/FunctionParameterKind/IN_OUT"/>
+        <genEnumLiterals ecoreEnumLiteral="architecture.ecore#//implemented/FunctionParameterKind/RETURN"/>
+      </genEnums>
+      <genClasses ecoreClass="architecture.ecore#//implemented/Function">
+        <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//implemented/Function/operation"/>
+        <genFeatures property="None" children="true" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//implemented/Function/parameters"/>
+      </genClasses>
+      <genClasses ecoreClass="architecture.ecore#//implemented/IPCFunction">
+        <genOperations ecoreOperation="architecture.ecore#//implemented/IPCFunction/getOperation"/>
+      </genClasses>
+      <genClasses ecoreClass="architecture.ecore#//implemented/IPCClientFunction"/>
+      <genClasses ecoreClass="architecture.ecore#//implemented/IPCServerFunction"/>
+      <genClasses ecoreClass="architecture.ecore#//implemented/FunctionParameter">
+        <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
+            ecoreFeature="ecore:EReference architecture.ecore#//implemented/FunctionParameter/function"/>
+        <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute architecture.ecore#//implemented/FunctionParameter/kind"/>
+      </genClasses>
+    </nestedGenPackages>
+    <nestedGenPackages prefix="Instantiated" basePackage="nl.esi.pps.architecture"
+        disposableProviderFactory="true" ecorePackage="architecture.ecore#//instantiated">
+      <genClasses ecoreClass="architecture.ecore#//instantiated/Executor"/>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

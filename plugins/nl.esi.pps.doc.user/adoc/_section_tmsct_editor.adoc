@@ -1,0 +1,8 @@
+include::_initCommon.adoc[]
+
+[[tmsct-editor]]
+== TMSC textual editor
+
+=== Project Explorer view
+
+The `tmsct` file extension is associated with the TMSC textual editor.

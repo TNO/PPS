@@ -1,0 +1,89 @@
+include::_initCommon.adoc[]
+
+== PPS Workbench
+
+PPS is an Integrated Development Environment (IDE) based on http://eclipse.org[Eclipse^].
+For common information about the Eclipse Workbench, please read the link:{eclipse-help-location}/org.eclipse.platform.doc.user/gettingStarted/qs-01.htm[Eclipse user guide].
+The figure below shows <<fig-workbench>> with the most important editors and views for PPS.
+The remainder of this section explain these views.
+
+[[fig-workbench, a screenshot of the PPS IDE]]
+.A screenshot of the PPS IDE
+image::{imgsdir}/workbench.png[width=1787,height=841]
+
+[[wb-project-explorer-view, Project Explorer]]
+Project Explorer view::
+ Within Eclipse, the files to work with are part of a project.
+ The available projects are shown in the link:{eclipse-help-location}/org.eclipse.platform.doc.user/reference/ref-27.htm[Project Explorer view].
+ Each project is simply a directory on the hard disk, and can be expanded to show the files and directories it contains.
+ By double clicking a file, it is opened in the <<wb-editor-area>> by the default editor that is associated with that file. +
+ The files in the Project Explorer view support contextual actions by means of the <<wb-context-menu>>.
+ The supported actions for a file are explained in more detail in the section of the editor that is associated with that file.
+
+[[wb-editor-area, editor area]]
+Editor area::
+ The editor area is marked as a red rectangle in <<fig-workbench>>.
+ In the screenshot, the editor area contains two editors side-by-side.
+ By default editors will be opened stacked, but editors can be moved by means of dragging the tab of an editor to another location. +
+ The left editor shows the <<tmsct-editor>> and the right editor shows the <<tmsc-editor>>, that both are explained in more detail in their corresponding sections. +
++
+TIP: Opening a textual editor and graphical viewer side-by-side is useful as the changes in the textual editor will be reflected in the graphical viewer upon save.
+ 
+[[wb-bookmarks-view, Bookmarks view]]
+Bookmarks view::
+ Bookmarks are a simple way to navigate to resources that are used frequently.
+ The link:{eclipse-help-location}/org.eclipse.platform.doc.user/gettingStarted/qs-37-3b.htm[Bookmarks view] displays all bookmarks in the Workbench. 
+ 
+[[wb-outline-view, Outline view]]
+Outline view::
+ The link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/coutline.htm[Outline view] displays an outline of a structured file that is currently open in the <<wb-editor-area>>, and lists structural elements. 
+ The contents of the Outline view are editor specific and therefore explained in more detail in the section of its editor.
+ 
+[[wb-properties-view, Properties view]]
+Properties view::
+ The link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/cpropview.htm[Properties view] displays property names and values for a selected item such as a `Message` in <<fig-workbench>>.
+ The contents of the Properties view are editor specific and therefore explained in more detail in the section of its editor. +
++
+NOTE: By default the Properties view is stacked behind the link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/ctskview.htm[Tasks view].
+
+[[wb-problems-view, Problems view]]
+Problems view::
+ As you work with resources in the workbench, various builders may automatically log problems, errors, or warnings in the link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/cprbview.htm[Problems view]. 
+ For example, when you save a <<tmsct-editor, textual TMSC>> file that contains syntax errors, those will be logged in the Problems view. 
+ When you double-click the icon for a problem, error, or warning, the editor for the associated resource automatically opens to the relevant place. + 
++
+NOTE: By default the Problems view is stacked behind the link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/ctskview.htm[Tasks view].
+
+[[wb-plantuml-view, PlantUML view]]
+PlantUML view::
+ The plantuml library implements a DSL and renderer for many UML diagrams (class, sequence, objects, states, activities, ...). 
+ See http://plantuml.com for more info about the DSL and renderer.
+ The https://plantuml.com/eclipse[PlantUML view] integrates plantuml's functionality into Eclipse and displays contextual UML diagrams for a selected item such as an `Architecture` in <<fig-workbench>>.
+ The contents of the PlantUML view are editor specific and therefore explained in more detail in the section of its editor.
+
+[[wb-data-analysis-view, Data Analysis view]]
+Data Analysis view::
+ The Data Analysis view displays statistical information for a selected item such as a <<tmsc-time-series-viewer>> for a `metric instance` in <<fig-workbench>>.
+ The contents of the Data Analysis view are editor specific and therefore explained in more detail in the section of its editor. +
++
+NOTE: By default the Data Analysis view is stacked behind the <<wb-plantuml-view>>.
+
+[[wb-context-menu, Context menu]]
+Context menu::
+ Many views in the PSS IDE support <<chart-selection, selection>> and with that, contextual actions based on the selection.
+ The context menu can be visualized by right-clicking the mouse in any part of the view that has the selection.
+ The context menu shows all available actions for both the view and its selection. +
++
+image::{imgsdir}/context-menu.png[width=352,height=250,pdfwidth=2.93in,pdfheight=2.08in]
+ 
+=== Preferences
+
+Use the command link:{eclipse-help-location}/org.eclipse.platform.doc.user/reference/ref-72.htm[Preferences] dialog pages to set how you want Eclipse to operate. 
+The menu path is menu:Window[Preferences] on Windows and Linux - on macOS the Preferences can be found in the menu:App[] menu. 
+The filter input at the left top can be used to easily navigate to the PPS settings.
+
+CAUTION: The _'Show advanced features'_ option enables experimental features in PPS.
+These features may be unstable, undocumented and might produce unexpected results.
+All editors should be closed and re-openend after changing this setting for the changes to take effect. 
+
+image::{imgsdir}/preferences.png[width=507,height=201,pdfwidth=4.23in,pdfheight=1.68in]

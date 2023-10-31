@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel"
+    modelDirectory="/nl.esi.pps.tmsc.metric/src-gen" creationCommands="false"
+    creationIcons="false" editDirectory="/nl.esi.pps.tmsc.metric.edit/src-gen" editorDirectory=""
+    modelPluginID="nl.esi.pps.tmsc.metric" templateDirectory="platform:/resource/nl.esi.pps.common.emf.codegen.ecore/templates"
+    dynamicTemplates="true" modelName="Metric" modelPluginClass="nl.esi.pps.tmsc.metric.MetricPlugin"
+    rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container" codeFormatting="true"
+    importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0" copyrightFields="false"
+    colorProviders="true" usedGenPackages="../../nl.esi.pps.architecture/model/architecture.genmodel#//architecture ../../nl.esi.emf.properties/model/properties.genmodel#//properties ../../nl.esi.pps.tmsc/model/tmsc.genmodel#//tmsc"
+    operationReflection="true" importOrganizing="true">
+  <foreignModel>metric.ecore</foreignModel>
+  <testsDirectory xsi:nil="true"/>
+  <genPackages prefix="Metric" basePackage="nl.esi.pps.tmsc" disposableProviderFactory="true"
+      generateModelWizard="false" ecorePackage="metric.ecore#/">
+    <genClasses ecoreClass="metric.ecore#//MetricModel">
+      <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference metric.ecore#//MetricModel/metrics"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference metric.ecore#//MetricModel/categories"/>
+    </genClasses>
+    <genClasses ecoreClass="metric.ecore#//MetricCategory">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//MetricCategory/name"/>
+      <genFeatures property="None" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference metric.ecore#//MetricCategory/metrics"/>
+    </genClasses>
+    <genClasses ecoreClass="metric.ecore#//Metric">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//Metric/id">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//Metric/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//Metric/budget"
+          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.EDurationFormat/"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference metric.ecore#//Metric/category">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="None" children="true" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference metric.ecore#//Metric/instances"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference metric.ecore#//Metric/tmscs">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+    <genClasses provider="Stateful" ecoreClass="metric.ecore#//MetricInstance">
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//MetricInstance/id">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//MetricInstance/name"
+          get="return MetricImplQueries.getNameImpl(this);"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//MetricInstance/exceedsBudget"
+          get="return MetricImplQueries.isExceedsBudgetImpl(this);"/>
+      <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference metric.ecore#//MetricInstance/metric">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

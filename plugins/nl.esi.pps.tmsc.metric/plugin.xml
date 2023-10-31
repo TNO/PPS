@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+   <extension-point id="processors" name="Metric Processors" schema="schema/metric_processors.exsd"/>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/tmsc/metric"
+            class="nl.esi.pps.tmsc.metric.MetricPackage"
+            genModel="model/metric.genmodel"/>
+   </extension>
+     <extension
+       point="nl.esi.pps.tmsc.metric.processors">
+    <MetricProcessor
+          id="based_on_properties"
+          name="%metricBasedOnProperties"
+          processor="nl.esi.pps.tmsc.metric.PropertiesMetricProcessor">
+    </MetricProcessor>
+     </extension>
+</plugin>

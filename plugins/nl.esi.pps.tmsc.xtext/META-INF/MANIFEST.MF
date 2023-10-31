@@ -1,0 +1,39 @@
+Manifest-Version: 1.0
+Automatic-Module-Name: nl.esi.pps.tmsc.xtext
+Bundle-ManifestVersion: 2
+Bundle-Name: Timed Message Sequence Chart Xtext
+Bundle-Vendor: ESI (TNO)
+Bundle-Version: 0.20.0.qualifier
+Bundle-SymbolicName: nl.esi.pps.tmsc.xtext; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.xbase,
+ org.eclipse.equinox.common;bundle-version="3.5.0",
+ org.eclipse.emf.ecore,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.common,
+ org.antlr.runtime;bundle-version="[3.2.0,3.2.1)",
+ nl.esi.pps.tmsc,
+ nl.esi.pps.tmsc.metric,
+ nl.esi.pps.tmsc.analysis,
+ nl.esi.pps.architecture.example,
+ nl.esi.pps.tmsc.edit,
+ org.eclipse.lsat.common.xtend,
+ org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
+ org.eclipse.xtend.lib;bundle-version="2.14.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Export-Package: nl.esi.pps.tmsc.xtext,
+ nl.esi.pps.tmsc.xtext.conversion,
+ nl.esi.pps.tmsc.xtext.formatting,
+ nl.esi.pps.tmsc.xtext.generator,
+ nl.esi.pps.tmsc.xtext.linking,
+ nl.esi.pps.tmsc.xtext.parser.antlr,
+ nl.esi.pps.tmsc.xtext.parser.antlr.internal,
+ nl.esi.pps.tmsc.xtext.scoping,
+ nl.esi.pps.tmsc.xtext.serializer,
+ nl.esi.pps.tmsc.xtext.services,
+ nl.esi.pps.tmsc.xtext.tmscXtext,
+ nl.esi.pps.tmsc.xtext.tmscXtext.impl,
+ nl.esi.pps.tmsc.xtext.tmscXtext.util,
+ nl.esi.pps.tmsc.xtext.validation
+Import-Package: org.apache.log4j

@@ -1,0 +1,248 @@
+include::_initCommon.adoc[]
+
+== Common Viewer Functionality
+
+This chapter describes functionality that is commonly available for viewers in PPS.
+
+[[panning-and-zooming]]
+=== Panning and Zooming
+
+The chart viewers supports zooming and panning, as follows:
+
+.Zooming, using the mouse
+* To zoom in, click in the chart area and drag towards the right and downwards.
+  A rectangle shows the selected area.
+  Once the mouse is released, the chart is zoomed in, only showing the selected area.
+** Hold the kbd:[Ctrl] key while clicking and dragging to zoom horizontally only.
+** Hold the kbd:[Ctrl + Shift] keys while clicking and dragging to zoom vertically only.
+* To zoom out, click in the chart area and drag to the left.
+  Release the mouse to zoom all the way out, to show the entire chart.
+** Hold the kbd:[Ctrl] key while clicking and dragging to zoom out horizontally only.
+** Hold the kbd:[Ctrl + Shift] keys while clicking and dragging to zoom out vertically only.
+
+.Zooming, using the mouse wheel
+Scroll up to zoom in and scroll down to zoom out.
+The location of the mouse will be used as focus area, meaning that the chart will be zoomed in or out around that point.
+
+* Hold the kbd:[Ctrl] key while scrolling with mouse wheel to zoom horizontally.
+* Hold the kbd:[Ctrl + Shift] keys while scrolling with mouse wheel to zoom vertically.
+
+.Zooming, using the keyboard
+First click somewhere in the chart to activate keyboard focus.
+While holding the kbd:[Ctrl] key, the arrow keys can be used to zoom the chart in or out.
+Both the normal arrow keys as well as the arrow keys on the numpad can be used.
+
+* Use the kbd:[→] or kbd:[←] key to zoom in or out horizontally.
+* Use the kbd:[↑] or kbd:[↓] key to zoom in or out vertically.
+
+In addition to the arrow keys, also 'browser style' zooming is supported. +
+While holding the kbd:[Ctrl] key:
+
+* Use the kbd:[+] key to zoom in both horizontally as vertically.
+* Use the kbd:[-] key to zoom out both horizontally as vertically.
+* Use the kbd:[0] key to zoom all the way out, showing the entire chart.
+
+.Panning, using the scroll bars
+* Use the vertical scroll bar or mouse wheel to scroll vertically.
+* Use the horizontal scroll bar to scroll horizontally.
+
+.Panning, using the mouse
+Hold the kbd:[Alt] key while clicking and dragging the chart in the direction to pan.
+
+.Panning, using the keyboard
+First click somewhere in the chart to activate keyboard focus.
+The arrow keys can be used to pan the chart in the desired direction.
+Both the normal arrow keys as well as the arrow keys on the numpad can be used.
+
+Right click on the chart to show a menu with even more options.
+
+Furthermore, the action bar for time based views show additional buttons to zoom.
+
+[[panning-and-zooming-actions]]
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/dataset-view.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to fit all the data in the data set]
+a|Zoom out to show all the data in the current view.
+
+NOTE: This action can take much time as PPS typically works with large data sets.
+
+|image:{imgsdir}/icons/zoom-view.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to fit all content]
+|Zoom out to show as much content as possible (considering performance) in the current view.
+
+|image:{imgsdir}/icons/zoom-out-horizontal.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to fit all content horizontally]
+|Zoom out to horizontally show as much content as possible (considering performance) in the current view.
+
+|image:{imgsdir}/icons/zoom-out-vertical.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to fit all content vertically]
+|Zoom out to vertically show as much content as possible (considering performance) in the current view.
+
+|image:{imgsdir}/icons/zoom_out.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom out]
+|Zoom out a bit.
+
+|image:{imgsdir}/icons/zoom_in.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom in]
+|Zoom in a bit.
+
+|image:{imgsdir}/icons/zoom-selection.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to current selection]
+a|This will zoom the view to show the active selection only.
+
+NOTE: Only available if <<chart-selection>> is available for this viewer.
+
+|image:{imgsdir}/icons/zoom-selection-x.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to fit the time of the current selection]
+a|This will zoom the view to show the time range for the active selection.
+
+NOTE: Only available if <<chart-selection>> is available for this viewer.
+
+|image:{imgsdir}/icons/zoom-selection-y.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Zoom to fit the height of the current selection]
+a|This will zoom the view to show the height for the active selection.
+
+NOTE: Only available if <<chart-selection>> is available for this viewer.
+
+|image:{imgsdir}/icons/backward_nav.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Back]
+a|This will navigate back to the previous visible area in the navigation history.
+
+NOTE: The navigation history will be automatically cleared when new input is set to the chart.
+
+|image:{imgsdir}/icons/forward_nav.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Forward]
+a|This will navigate forward to the next visible area in the navigation history.
+
+NOTE: The navigation history will be automatically cleared when new input is set to the chart.
+
+|===
+
+[[chart-selection]]
+=== Selection in Chart
+
+It is possible to select some of the items in a chart by clicking on them.
+If an item supports selection and is selected, it is shown with a thicker yellow border.
+Once selected, the details of the item can be seen in the _Properties_ view.
+
+TIP: By default, the _Properties_ view displays normal properties. 
+To view expert properties click the image:{imgsdir}/icons/filter_ps.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Show Advanced Properties] button to reveal them. 
+
+A context menu is available to select the current chart selection in the _Outline_ view.
+This might be helpful for views that support <<outline-dynamic-inclusion-filtering>>.
+
+image::{imgsdir}/selection-in-chart.png[width=1304,height=588]
+
+[[time-measurement]]
+=== Measure Time
+
+It is possible to measure the time between for instance the start of one task, and the termination of another task in a chart.
+While hovering over a task, a gray vertical support line is shown.
+While hovering over the first half of the task, it is shown at the creation of the task.
+While hovering over the second half of the task, it is shown at the termination of the task.
+Hold down the kbd:[Alt] key while such a support line is shown, and left click it, to keep the support line fixed at that moment in time.
+Then hover to move the support line to another end point of a task and again left click while holding the kbd:[Alt] key.
+An annotation is then shown that visually and textually shows the time between the two support lines.
+The measurement is also added to the model and as shown image:{imgsdir}/icons/Measurement.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] in the _Outline_ view and the dirty (*) state of the editor.
+The user can choose to save image:{imgsdir}/icons/save_edit.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] the measurement or to undo the operation by using the menu:Edit[Undo] menu.
+
+TIP: To change the text of the measurement annotation, please <<chart-selection, select>> the annotation and edit the _Name_ in the _Properties View_.
+
+image::{imgsdir}/measure-time.png[width=1212,height=559]
+
+[[chart-export-png]]
+=== Export chart to PNG file
+
+It is possible to save a snapshot of a chart by clicking the btn:[Export As Image] image:{imgsdir}/icons/export-image.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] from the view menu (small triangle button image:{imgsdir}/icons/view_menu.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] at the right top of the view).
+The action will open a save dialog which allows you to select the location and the name of the exported PNG file.
+
+NOTE: The PNG is saved with the same resolution and size as currently displayed.
+
+[[synchronized-timing]]
+=== Synchronize Timing
+
+The time range in open viewers can be synchronized, so that multiple aspects on a time range as shown in the different viewers, can be analyzed simultaneously.
+When one editor is zoomed or scrolled, the other editors remain synchronized.
+This is especially helpful when editors are positioned above or 'on top of' each other.
+As in that case, the margins to the left and right of the time range will be synchronized as well, such that the time ranges have the same width in the viewers.
+The data for corresponding points in time are then vertically aligned, making it easy to correlate the data from the different viewers.
+
+CAUTION: Time range synchronization only works if the ranges of two viewers overlap.
+If the current visible range of a viewer is outside the range of another editor, time range synchronization behavior is unpredictable. 
+
+image::{imgsdir}/compare-tmscs.png[width=1212,height=819]
+
+Only PPS viewers that have a time range (typically the x-axis) support time range and margin width (the width taken by the margin labels, margin ticks, etc) synchronization.
+If a viewer supports time range and margin width synchronization, some buttons will be present in the toolbar of the viewer.
+
+[[synchronized-timing-actions]]
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/time-synchronization-button-time-sync.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Synchronize Time Range]
+|If pushed, the current time range of the editor/view is explicitly synchronized to all other supported editors/views that have time range synchronization enabled.
+
+|image:{imgsdir}/icons/time-synchronization-button-time-sync-enabled.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Enable Time Range Synchronization]
+|If checked, the editor/view will participate in time range synchronization.
+If not checked, changes to the time range of the editor/view will not be automatically synchronized to any other editors/views, and the editor/view will not be synchronized to time range changes of other editors/views.
+
+|image:{imgsdir}/icons/time-synchronization-button-margin-sync.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Synchronize Margin Width]
+|If pushed, the current margin width of the editor/view is explicitly synchronized to all other supported editors/views that have margin width synchronization enabled.
+
+|image:{imgsdir}/icons/time-synchronization-button-margin-sync-enabled.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Enable Margin Width Synchronization]
+|If checked, the editor/view will participate in margin width synchronization.
+If not checked, changes to the margin width of the editor/view will not be automatically synchronized to any other editors/views, and the editor/view will not be synchronized to margin width changes of other editors/views.
+|===
+
+Currently, PPS viewers do not support manually changing the margin width.
+As such, the margin width is only synchronized by explicit request, using the btn:[Synchronize Margin Width] toolbar button (image:{imgsdir}/icons/time-synchronization-button-margin-sync.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]).
+To reset the margin width of an editor/view, click the btn:[Refresh] toolbar button (image:{imgsdir}/icons/time-synchronization-button-refresh.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]).
+
+Disabling time range and margin width synchronization can be useful when dealing with large traces.
+Zooming in to a specific part of a trace while having time range synchronization enabled may lead to performance issues.
+To mitigate this, disable time range synchronization on a view, zoom in to the time range of interest within that view, re-enable time range synchronization for the view, and press the btn:[Synchronize Time Range] toolbar button (image:{imgsdir}/icons/time-synchronization-button-time-sync.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]) to explicitly synchronize the new time range to the other views.
+That way, the other views are only updated once.
+
+Time range and margin width synchronization are performed per workbench window.
+If you open a second workbench window, the editors/views within each workbench window are synchronized.
+Editors/views across different workbench windows are not synchronized.
+This is helpful when looking at different traces in separate workbench windows.
+
+[[outline-dynamic-inclusion-filtering, dynamic inclusion filtering]]
+=== Dynamic Inclusion Filtering
+
+Typically PPS works with large data sets.
+This complicates focussing on relevant data and the following functions therefore have been added to the _Outline_ view.
+
+[cols="^30,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/outline-filter.png[width=184,height=54,pdfwidth=1.53in,pdfheight=0.45in]
+|btn:[type filter text]
+|Dynamic filtering of its elements, by means of entering a search pattern in its filter text box.
+
++++The pattern may contain '*' for 0 and many characters and '?' for exactly one character. Literal '*' and '?' characters must be escaped in the pattern e.g., '\*' means literal '*', etc. Escaping any other character (including the escape character itself), just results in that character in the pattern. e.g., '\a' means 'a' and '\\' means '\'+++
+
+|image:{imgsdir}/icons/push_context.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Push Context]
+|If checked and one or more elements are selected, the selected elements are set as input for the active editor.
+The editor will threat this input as it context and show the most relevant information accordingly.
+
+|image:{imgsdir}/icons/push_selection.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Push Selection]
+|If checked and one or more elements are selected, the selected elements are also highlighted in the active editor.
+
+|image:{imgsdir}/icons/push_time.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Push Time Range]
+|If checked and one or more elements are selected, the time range to show these elements is calculated and is set to the active editor.
+
+|===

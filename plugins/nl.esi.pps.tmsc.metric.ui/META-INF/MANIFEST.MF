@@ -1,0 +1,30 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Timed Message Sequence Chart Metric UI
+Bundle-SymbolicName: nl.esi.pps.tmsc.metric.ui;singleton:=true
+Bundle-Version: 0.20.0.qualifier
+Bundle-Activator: nl.esi.pps.tmsc.metric.ui.Activator
+Bundle-Vendor: ESI (TNO)
+Export-Package: nl.esi.pps.tmsc.metric.ui;x-internal:=true,
+ nl.esi.pps.tmsc.metric.ui.commands;x-internal:=true,
+ nl.esi.pps.tmsc.metric.ui.handlers;x-internal:=true,
+ nl.esi.pps.tmsc.metric.ui.wizard
+Require-Bundle: javax.inject,
+ org.eclipse.osgi,
+ org.eclipse.jface,
+ org.eclipse.e4.ui.services,
+ org.eclipse.e4.core.di.annotations,
+ org.eclipse.core.runtime,
+ nl.esi.pps.tmsc.metric;visibility:=reexport,
+ org.eclipse.core.resources,
+ org.eclipse.ui.workbench,
+ nl.esi.pps.common.emf.ui,
+ org.eclipse.e4.core.di,
+ nl.esi.pps.tmsc.editor,
+ org.eclipse.lsat.common.queries,
+ nl.esi.pps.ui
+Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-ActivationPolicy: lazy
+Import-Package: javax.annotation;version="1.2.0",
+ javax.inject;version="1.0.0"
+Automatic-Module-Name: nl.esi.pps.tmsc.metric.ui

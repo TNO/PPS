@@ -1,0 +1,171 @@
+grammar nl.esi.pps.tmsc.xtext.TmscXtext hidden(WS, ML_COMMENT, SL_COMMENT)
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+generate tmscXtext "http://www.esi.nl/pps/tmsc/xtext/TmscXtext"
+
+TmscXtextModel:
+    {TmscXtextModel}
+    (('tmsc' 'settings' '{'
+        ('architecture' ':' architectureKind=XArchitectureKind
+        |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |properties+=XProperty)*
+    '}')
+    | dependencySettings+=XDependencySettings
+    | interfaces+=XInterface
+    | components+=XComponent
+    | functions+=XFunction
+    | executors+=XExecutor
+    | events+=XEvent)*;
+    
+
+enum XArchitectureKind:
+    INTERNAL='internal' | EXTERNAL='external';
+
+XNamedArchitectureElement:
+    XInterface | XOperation | XComponent | XFunction | XExecutor;
+
+XInterface:
+    'interface' (description=IDString 'as')? name=ID 
+    ('{'
+        (properties+=XProperty
+        |operations+=XOperation)*
+    '}')?;
+
+XOperation:
+    'operation' (description=IDString 'as')? name=ID 
+    ('{'
+        (properties+=XProperty)*
+    '}')?;
+
+XComponent:
+    'component' (description=IDString 'as')? name=ID
+        ('provides' provides+=[XInterface|ID] (',' provides+=[XInterface|ID])*)?
+        ('requires' requires+=[XInterface|ID] (',' requires+=[XInterface|ID])*)?
+    ('{'
+        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |properties+=XProperty)*
+    '}')?;
+
+XFunction:
+    (ipcClient?='ipc-client' | ipcServer?='ipc-server')? 'function' (description=IDString 'as')? name=ID 
+        ('(' parameters+=XFunctionParameter (',' parameters+=XFunctionParameter)* ')')? 
+        ('implements' operation=[XOperation|FQN])? 
+    ('{'
+        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        | properties+=XProperty)*
+    '}')?;
+
+XFunctionParameter:
+    kind=XFunctionParameterKind name=ID ('(' properties+=XProperty (',' properties+=XProperty)* ')')?;
+
+enum XFunctionParameterKind:
+    IN='in' | OUT='out' | IN_OUT='inout' | RETURN='return';
+
+XExecutor:
+    (untraced?='untraced')? 'executor' (description=IDString 'as')? name=ID 
+    ('{'
+        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |properties+=XProperty)*
+    '}')?;
+
+XEvent:
+    (timestamp=(ISO8601|ABS_EBIGDECIMAL))?
+    (timeBound=POS_EBIGDECIMAL)?
+    executor=[XExecutor|IDString]
+    // Component is optional: we assume the executor to also be the component by default
+    (component=[XComponent|IDString])?
+    type=XEventType
+    function=[XFunction|IDString] ('(' arguments+=XEventArgument (',' arguments+=XEventArgument)* ')')?
+    ('!' outgoingDependencies+=XDependency
+    | '?' incomingDependencies+=[XDependency|IDString])*
+    ('{'
+        ('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |properties+=XProperty)*
+    '}')?;
+
+enum XEventType:
+    ENTRY='>' | EXIT='<';
+    
+XEventArgument:
+    parameter=[XFunctionParameter|ID] ':' value=IDString;
+
+XDependency:
+    (typeObject=XDependencyTypeObject)? name=IDString (
+        ('(' timeBound=ABS_EBIGDECIMAL ')')
+        | ('('
+            ( 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+            |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+            | 'request' ':' request=[XDependency|IDString]
+            | 'message' ':' message=[XDependency|IDString]
+            | properties+=XProperty)
+            
+            (',' ( 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+            |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+            | 'request' ':' request=[XDependency|IDString]
+            | 'message' ':' message=[XDependency|IDString]
+            | properties+=XProperty))*
+        ')')
+    )?;
+
+// Wrapping the XDependencyType enum in an EObject to be able to detect if is has been explicitly set in the syntax
+XDependencyTypeObject:
+    value=XDependencyType;
+
+enum XDependencyType:
+    MESSAGE='message' | REQUEST='request' | REPLY='reply' | DOMAIN='domain-dependency' | LIFELINE_SEGMENT='lifeline-segment' | MESSAGE_CONTROL='message-control';
+
+XDependencySettings:
+    type=XDependencyType 'settings' '{'
+        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |'prefix' ':' prefix=IDString
+        |properties+=XProperty)*
+    '}';
+
+XProperty:
+    name=IDString ':' value=XPropertyValue;
+    
+XPropertyValue:
+    {XPropertyStringValue} => value=IDString
+    | {XPropertyNumberValue} => value=EBIGDECIMAL
+    | {XPropertyBooleanValue} => value=EBOOLEAN_OBJECT
+    | {XPropertyMutliValue} => '[' values+=XPropertyValue (',' values+=XPropertyValue)* ']';
+
+IDString returns ecore::EString:
+    ID | STRING;
+
+FQN returns ecore::EString:
+    ID ('.' ID)*;
+    
+EBOOLEAN_OBJECT returns ecore::EBooleanObject:
+    'true' | 'false';
+
+EBIGDECIMAL returns ecore::EBigDecimal:
+    ABS_EBIGDECIMAL | POS_EBIGDECIMAL | NEG_EBIGDECIMAL;
+
+terminal POS_EBIGDECIMAL returns ecore::EBigDecimal:
+    '+' ('0'..'9')+ ('.' ('0'..'9')+)? ('e' ('+'|'-') ('0'..'9')+)?;
+    
+terminal NEG_EBIGDECIMAL returns ecore::EBigDecimal:
+    '-' ('0'..'9')+ ('.' ('0'..'9')+)? ('e' ('+'|'-') ('0'..'9')+)?;
+
+terminal ABS_EBIGDECIMAL returns ecore::EBigDecimal:
+    ('0'..'9')+ ('.' ('0'..'9')+)? ('e' ('+'|'-') ('0'..'9')+)?;
+
+terminal ISO8601 returns ecore::EBigDecimal:
+    ('0'..'9')('0'..'9')('0'..'9')('0'..'9') '-'? ('0'..'9')('0'..'9') '-'? ('0'..'9')('0'..'9') 'T' ('0'..'9')('0'..'9') ':'? ('0'..'9')('0'..'9') ':'? ('0'..'9')('0'..'9') ('.' ('0'..'9')+)? ('Z' | (('+'|'-') ('0'..'9')('0'..'9') ':'? ('0'..'9')('0'..'9')));
+
+// From org.eclipse.xtext.common.Terminals
+terminal ID: '^'?('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+terminal STRING:
+            '"' ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|'"') )* '"' |
+            "'" ( '\\' . /* 'b'|'t'|'n'|'f'|'r'|'u'|'"'|"'"|'\\' */ | !('\\'|"'") )* "'"
+        ;
+terminal ML_COMMENT : '/*' -> '*/';
+terminal SL_COMMENT : '//' !('\n'|'\r')* ('\r'? '\n')?;
+
+terminal WS         : (' '|'\t'|'\r'|'\n')+;

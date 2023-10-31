@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?pde version="3.5"?>
+
+<product name="PPS" uid="nl.esi.pps.ide" id="nl.esi.pps.product.branding.product" application="org.eclipse.ui.ide.workbench" version="0.20.0.qualifier" useFeatures="true" includeLaunchers="true">
+
+   <aboutInfo>
+      <image path="/nl.esi.pps.product.branding/images/pps_about.png"/>
+      <text>
+         Platform Performance Suite
+      </text>
+   </aboutInfo>
+
+   <configIni use="">
+   </configIni>
+
+   <launcherArgs>
+      <programArgs>--launcher.defaultAction openFile --launcher.appendVmargs
+      </programArgs>
+      <vmArgs>-Dosgi.requiredJavaVersion=11
+-Declipse.p2.unsignedPolicy=allow 
+-Djava.net.preferIPv4Stack=true
+-Dfile.encoding=UTF-8
+-Xmx8g
+-XX:+UseG1GC
+-XX:+UseStringDeduplication	
+--add-modules=ALL-SYSTEM
+      </vmArgs>
+   </launcherArgs>
+
+   <windowImages i16="/nl.esi.pps.product.branding/images/pps16.png" i32="/nl.esi.pps.product.branding/images/pps32.png" i48="/nl.esi.pps.product.branding/images/pps48.png" i64="/nl.esi.pps.product.branding/images/pps64.png" i128="/nl.esi.pps.product.branding/images/pps128.png" i256="/nl.esi.pps.product.branding/images/pps256.png"/>
+
+   <splash
+      location="nl.esi.pps.product.branding"
+      startupProgressRect="146,113,262,10"
+      startupMessageRect="146,93,262,20"
+      startupForegroundColor="9C9696" />
+   <launcher name="pps">
+      <win useIco="true">
+         <ico path="/nl.esi.pps.product.branding/images/pps.ico"/>
+         <bmp/>
+      </win>
+   </launcher>
+
+   <vm>
+   </vm>
+
+   <license>
+        <text>
+   TNO-ESI
+All Rights Reserved.
+This work is protected by copyright laws and international treaties.
+         </text>
+   </license>
+
+   <plugins>
+   </plugins>
+
+   <features>
+      <feature id="nl.esi.pps.product.feature"/>
+   </features>
+
+   <configurations>
+      <plugin id="org.apache.felix.scr" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.core.runtime" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.common" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.event" autoStart="true" startLevel="2" />
+      <plugin id="org.eclipse.equinox.p2.reconciler.dropins" autoStart="true" startLevel="4" />
+      <plugin id="org.eclipse.equinox.simpleconfigurator" autoStart="true" startLevel="1" />
+   </configurations>
+
+   <preferencesInfo>
+      <targetfile overwrite="false"/>
+   </preferencesInfo>
+
+   <cssInfo>
+   </cssInfo>
+
+</product>

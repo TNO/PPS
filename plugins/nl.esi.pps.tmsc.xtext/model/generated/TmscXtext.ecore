@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="tmscXtext" nsURI="http://www.esi.nl/pps/tmsc/xtext/TmscXtext"
+    nsPrefix="tmscXtext">
+  <eClassifiers xsi:type="ecore:EClass" name="TmscXtextModel">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="architectureKind" eType="#//XArchitectureKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//XProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="dependencySettings" upperBound="-1"
+        eType="#//XDependencySettings" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
+        eType="#//XInterface" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="#//XComponent" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//XFunction" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executors" upperBound="-1"
+        eType="#//XExecutor" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//XEvent" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="XArchitectureKind">
+    <eLiterals name="INTERNAL" literal="internal"/>
+    <eLiterals name="EXTERNAL" value="1" literal="external"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XNamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//XProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XInterface" eSuperTypes="#//XNamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operations" upperBound="-1"
+        eType="#//XOperation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XOperation" eSuperTypes="#//XNamedArchitectureElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XComponent" eSuperTypes="#//XNamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="provides" unique="false"
+        upperBound="-1" eType="#//XInterface"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requires" unique="false"
+        upperBound="-1" eType="#//XInterface"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XFunction" eSuperTypes="#//XNamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ipcClient" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="ipcServer" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameters" upperBound="-1"
+        eType="#//XFunctionParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//XOperation"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XFunctionParameter">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="kind" eType="#//XFunctionParameterKind"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//XProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="XFunctionParameterKind">
+    <eLiterals name="IN" literal="in"/>
+    <eLiterals name="OUT" value="1" literal="out"/>
+    <eLiterals name="IN_OUT" value="2" literal="inout"/>
+    <eLiterals name="RETURN" value="3" literal="return"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XExecutor" eSuperTypes="#//XNamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="untraced" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XEvent">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timestamp" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executor" eType="#//XExecutor"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="component" eType="#//XComponent"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//XEventType"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="function" eType="#//XFunction"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
+        eType="#//XEventArgument" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outgoingDependencies" upperBound="-1"
+        eType="#//XDependency" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="incomingDependencies" unique="false"
+        upperBound="-1" eType="#//XDependency"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//XProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="XEventType">
+    <eLiterals name="ENTRY" literal=">"/>
+    <eLiterals name="EXIT" value="1" literal="&lt;"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XEventArgument">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parameter" eType="#//XFunctionParameter"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XDependency">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typeObject" eType="#//XDependencyTypeObject"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="request" eType="#//XDependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="message" eType="#//XDependency"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//XProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XDependencyTypeObject">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="#//XDependencyType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="XDependencyType">
+    <eLiterals name="MESSAGE" literal="message"/>
+    <eLiterals name="REQUEST" value="1" literal="request"/>
+    <eLiterals name="REPLY" value="2" literal="reply"/>
+    <eLiterals name="DOMAIN" value="3" literal="domain-dependency"/>
+    <eLiterals name="LIFELINE_SEGMENT" value="4" literal="lifeline-segment"/>
+    <eLiterals name="MESSAGE_CONTROL" value="5" literal="message-control"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XDependencySettings">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//XDependencyType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="timeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="prefix" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
+        eType="#//XProperty" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XProperty">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="value" eType="#//XPropertyValue"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XPropertyValue"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XPropertyStringValue" eSuperTypes="#//XPropertyValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XPropertyNumberValue" eSuperTypes="#//XPropertyValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XPropertyBooleanValue" eSuperTypes="#//XPropertyValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XPropertyMutliValue" eSuperTypes="#//XPropertyValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//XPropertyValue" containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

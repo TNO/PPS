@@ -1,0 +1,107 @@
+// Metric instance 1
+X > A {metricInstanceFromID: 1}
+X > B
+X < B
+X > C !RQC1
+X < C
+X > D !RQD1
+X < D ?RPD1
+X < A {metricInstanceToID: 1}
+
+
+Y > D ? RQD1
+Y < D !RPD1
+
+Z > C ?RQC1
+Z > E !RQE1
+Z < E
+Z < C
+
+Y > E ?RQE1
+Y < E
+
+// Metric instance 2
+X > A {metricInstanceFromID: 2}
+X > B
+X < B
+X > C !RQC2
+X < C
++2 X > D !RQD2
+X < D ?RPD2
+X < A {metricInstanceToID: 2}
+
+
+Z > C ?RQC2
+Z > E !RQE2
+Z < E
+Z < C
+
+Y > E ?RQE2
+Y < E
+
+Y > D ? RQD2
+Y < D !RPD2
+
+// Metric instance 3
+X > A {metricInstanceFromID: 3}
+X > B
+X < B
+X > C !RQC3
+X < C
+X > D !RQD3
+X < D ?RPD3
+X < A {metricInstanceToID: 3}
+
++2 Y > F
++6 Y < F
+
+Y > D ? RQD3
+Y < D !RPD3
+
+Z > C ?RQC3
+Z > E !RQE3
+Z < E
+Z < C
+
+Y > E ?RQE3
+Y < E
+
+// Metric instance 4
+X > A {metricInstanceFromID: 4}
+X > B
+X < B
+X > C !RQC4
+X < C
++2 X > D !RQD4
+X < D ?RPD4
+X < A {metricInstanceToID: 4}
+
+Z > C ?RQC4
+Z > E !RQE4
+Z < E
+Z < C
+
+Y > E ?RQE4
+Y > G
+Y < G
+Y < E
+
+Y > D ? RQD4
+Y < D !RPD4
+
+
+// Defaults
+tmsc settings {
+	metricBudget: 8
+}
+lifeline-segment settings {
+	time-bound: 0.5
+}
+request settings {
+	time-bound: 1
+	prefix: RQ
+}
+reply settings {
+	time-bound: 1
+	prefix: RP
+}
