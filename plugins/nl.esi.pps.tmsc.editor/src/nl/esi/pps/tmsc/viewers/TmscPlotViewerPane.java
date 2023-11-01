@@ -10,7 +10,10 @@
 
 package nl.esi.pps.tmsc.viewers;
 
+import static org.eclipse.lsat.common.queries.QueryableIterable.from;
+
 import java.text.ParseException;
+import java.util.LinkedList;
 
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.jface.action.Action;
@@ -27,10 +30,14 @@ import org.jfree.chart.event.ChartChangeListener;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.data.Range;
 
+import nl.esi.pps.architecture.instantiated.Executor;
+import nl.esi.pps.common.emf.synchronizedtiming.range.TimeRange;
 import nl.esi.pps.common.emf.synchronizedtiming.ui.SynchronizedTimingViewerPane;
 import nl.esi.pps.common.ide.ui.action.DropDownMenuAction;
 import nl.esi.pps.common.ide.ui.action.DropDownMenuAction.DropDownAction;
 import nl.esi.pps.common.jfreechart.chart.axis.NanoTimeAxis;
+import nl.esi.pps.preferences.PPSPreferences;
+import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.presentation.TmscEditorPlugin;
 import nl.esi.pps.tmsc.rendering.plot.IRenderingStrategy;
 import nl.esi.pps.tmsc.text.ETimestampFormat;
@@ -42,6 +49,7 @@ public class TmscPlotViewerPane extends SynchronizedTimingViewerPane {
 	protected static final String GROUP_TMSC = "tmsc";
 	
 	private final GotoTimeAction gotoTimeAction = new GotoTimeAction();
+	private final OptimizeLifelineOrderAction optimizeLifelineOrderAction = new OptimizeLifelineOrderAction();
 
 	public TmscPlotViewerPane(IWorkbenchPage page, IWorkbenchPart part) {
 		super(page, part);
@@ -86,6 +94,10 @@ public class TmscPlotViewerPane extends SynchronizedTimingViewerPane {
 				new SelectExecutionsVisibilityAction(ExecutionsVisibility.HIDE_ANNOTATIONS, getViewer()),
 				new SelectExecutionsVisibilityAction(ExecutionsVisibility.NONE, getViewer())));
 		
+		if (PPSPreferences.isAdvancedFeaturesEnabled()) {
+			getToolBarManager().appendToGroup(GROUP_TMSC, optimizeLifelineOrderAction);
+		}
+
 		getMenuManager().appendToGroup(GROUP_SYNCHRONIZED_TIMING, gotoTimeAction);
 
 		updateActionBars();
@@ -242,6 +254,31 @@ public class TmscPlotViewerPane extends SynchronizedTimingViewerPane {
 						ETimestampFormat.eINSTANCE.format(range.getUpperBound())), -1);
 			}
 			return nanoTime;
+		}
+	}
+
+	/**
+	 * "Optimize" the row order of the TMSC plot viewer. This groups the life-lines
+	 * by minimizing the distance in the graph of messages for a given time range.
+	 * The button moves the rows only when pressed. When the time range is moved,
+	 * the optimization action can be re-applied.	 
+	 */
+	protected class OptimizeLifelineOrderAction extends Action {
+		public OptimizeLifelineOrderAction() {
+			super("Optimize");
+			setImageDescriptor(ResourceLocator.imageDescriptorFromBundle(
+					TmscEditorPlugin.getPlugin().getSymbolicName(), "icons/Optimization.png").orElse(null));
+		}
+
+		@Override
+		public void run() {
+			Lifeline[] lifelines = getViewer().getVisibleLifelines();
+			TimeRange timeRange = getViewer().getTimeSyncSupport().getTimeRange();
+			// If an executor is set, the content provider will not search for connections,
+			// but just show that executor only
+			LinkedList<Executor> executors = from(LifelineOrderOptimizer.optimizeOrder(timeRange, lifelines))
+					.collectOne(Lifeline::getExecutor).asList();
+			getViewer().setInput(executors);
 		}
 	}
 }
