@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerComparator;
 
 import nl.esi.pps.architecture.ArchitectureModel;
+import nl.esi.pps.architecture.deployed.Host;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.instantiated.Executor;
 import nl.esi.pps.architecture.specified.Component;
@@ -39,6 +40,7 @@ public class TmscContentOutlineComparator extends ViewerComparator {
 		Operation.class,
 		Function.class,
 		Component.class,
+		Host.class,
 		Executor.class,
 		// Default, put at the end
 		Object.class

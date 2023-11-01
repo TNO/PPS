@@ -12,6 +12,7 @@ package nl.esi.pps.tmsc.viewers.dataanalysis;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
 
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
@@ -42,6 +43,7 @@ import nl.esi.pps.common.ide.ui.views.dataanalysis.DataAnalysisView;
 import nl.esi.pps.tmsc.presentation.TmscEditor;
 import nl.esi.pps.tmsc.presentation.TmscEditorPlugin;
 import nl.esi.pps.tmsc.provider.ext.ui.AdapterFactoryDataAnalysisContentProvider;
+import nl.esi.pps.tmsc.provider.ext.ui.IDataAnalysisInput;
 
 public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 		implements IEditingDomainProvider, ISelectionProvider {
@@ -108,8 +110,8 @@ public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 
 	@Override
 	protected void inputChanged(Object[] oldInput, Object[] newInput) {
-		Object singleInput = newInput == null || newInput.length != 1 ? null : newInput[0];
-		Collection<String> configurations = contentProvider.getConfigurations(singleInput);
+		IDataAnalysisInput dataAnalysisInput = contentProvider.getDataAnalysisInput(newInput);
+		Collection<String> configurations = dataAnalysisInput == null ? Collections.emptyList() : dataAnalysisInput.getConfigurations();
 		if (shouldUpdateTabs(configurations)) {
 			String activeConfiguration = getActivePageText();
 			removeAllPages();
@@ -186,9 +188,9 @@ public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 					configuration);
 			break;
 		}
-		dataAnalysisViewer.setLabelProvider(new AdapterFactoryLabelProvider(getEditingDomain().getAdapterFactory()));
 		dataAnalysisViewer.setContentProvider(
 				new AdapterFactoryDataAnalysisContentProvider(getEditingDomain().getAdapterFactory()));
+		dataAnalysisViewer.setLabelProvider(new AdapterFactoryLabelProvider(getEditingDomain().getAdapterFactory()));
 		addViewer(dataAnalysisViewer, configuration);
 	}
 

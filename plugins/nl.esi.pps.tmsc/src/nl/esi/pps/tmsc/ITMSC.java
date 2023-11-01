@@ -20,6 +20,10 @@ import java.util.Objects;
 public interface ITMSC {
 	Collection<Dependency> getDependencies();
 	
+	default boolean isEmpty() {
+		return getDependencies().isEmpty();
+	}
+	
 	default Collection<Dependency> getIncomingDependencies(Event event) {
 		LinkedList<Dependency> incomingDependencies = new LinkedList<>();
         for (Dependency dependency : getDependencies()) {

@@ -82,7 +82,7 @@ public class CreateMetricActivityIsomorphismReportHandler {
 			return false;
 		}
 		return from((Iterable<?>) selection)
-				.forAll(f -> f instanceof IFile && TmscPlugin.isTmscFileExtension(((IFile) f).getFileExtension()));
+				.forAll(f -> f instanceof IFile && TmscPlugin.isTmscFile((IFile) f));
 	}
 
 	@Execute

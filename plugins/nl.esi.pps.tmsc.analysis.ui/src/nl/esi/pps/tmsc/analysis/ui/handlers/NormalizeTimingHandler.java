@@ -14,6 +14,7 @@ import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVER
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
 import static nl.esi.pps.ui.handlers.AbstractCommandHandler.DEFAULT_DIALOG_SEVERITIES;
 import static org.eclipse.core.runtime.IStatus.ERROR;
+import static org.eclipse.lsat.common.queries.QueryableIterable.from;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -36,17 +37,17 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.lsat.common.emf.common.util.URIHelper;
+import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
+import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
+import org.eclipse.lsat.common.queries.QueryableIterable;
 
 import nl.esi.pps.common.core.runtime.ErrorStatusException;
 import nl.esi.pps.common.core.runtime.FailOnErrorStatus;
 import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.core.runtime.jobs.JobUtils;
-import org.eclipse.lsat.common.emf.common.util.URIHelper;
-import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
-import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
-import org.eclipse.lsat.common.queries.QueryableIterable;
-
+import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.TmscPlugin;
 import nl.esi.pps.tmsc.analysis.NormalizeTiming;
@@ -55,12 +56,10 @@ public class NormalizeTimingHandler {
 	@Evaluate
 	@CanExecute
 	public boolean canExecute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional IStructuredSelection selection) {
-		if (selection == null || selection.size() != 1) {
+		if (selection == null || selection.size() != 1 || !PPSPreferences.isAdvancedFeaturesEnabled()) {
 			return false;
 		}
-		Object selectedElement = selection.getFirstElement();
-		return selectedElement instanceof IFile
-				&& TmscPlugin.isTmscFileExtension(((IFile) selectedElement).getFileExtension());
+		return from((Iterable<?>) selection).forAll(e -> e instanceof IFile && TmscPlugin.isTmscFile((IFile) e));
 	}
 
 	@Execute

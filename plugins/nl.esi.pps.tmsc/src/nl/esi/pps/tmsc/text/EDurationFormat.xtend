@@ -72,7 +72,7 @@ class EDurationFormat extends NumberFormat {
 
         for (var unit = maximumTimeUnit; unit > minimumTimeUnit; unit = TimeUnit::values.get(unit.ordinal - 1)) {
             val divisor = minimumTimeUnit.convert(1, unit)
-            if (value >= divisor) {
+            if (Math.abs(value) >= divisor) {
                 if (value % divisor == 0) {
                     return toAppendTo.append(value / divisor).append(unit.postfix)
                 } else {

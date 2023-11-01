@@ -31,6 +31,8 @@
           propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//FullScopeTMSC/endTime"
           propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//FullScopeTMSC/duration"
+          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.EDurationFormat/"/>
     </genClasses>
     <genClasses ecoreClass="tmsc.ecore#//Event">
       <genFeatures property="Readonly" createChild="false" propertySortChoices="true"
@@ -45,7 +47,7 @@
       <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference tmsc.ecore#//Event/tmsc"
           get="return TmscImplQueries.getTmscImpl(this);"/>
       <genFeatures property="Readonly" notify="false" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference tmsc.ecore#//Event/scopes" get="return DerivedUtil.derivedEReference(this, TmscPackage.EVENT__SCOPES, TmscImplQueries::getScopesImpl);">
+          ecoreFeature="ecore:EReference tmsc.ecore#//Event/scopes" get="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.EVENT__SCOPES, TmscImplQueries::getScopesImpl);">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genFeatures property="Readonly" createChild="false" propertySortChoices="true"
@@ -65,11 +67,15 @@
           ecoreFeature="ecore:EReference tmsc.ecore#//Execution/lifeline">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
-      <genFeatures property="None" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference tmsc.ecore#//Execution/entry"/>
+      <genFeatures property="Readonly" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference tmsc.ecore#//Execution/entry">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference tmsc.ecore#//Execution/children"/>
-      <genFeatures property="None" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference tmsc.ecore#//Execution/exit"/>
+      <genFeatures property="Readonly" createChild="false" propertySortChoices="true"
+          ecoreFeature="ecore:EReference tmsc.ecore#//Execution/exit">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EReference tmsc.ecore#//Execution/parent">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
@@ -80,15 +86,16 @@
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EReference tmsc.ecore#//Execution/function"
           get="return TmscImplQueries.getFunctionImpl(this);"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference tmsc.ecore#//Execution/segments" get="return DerivedUtil.derivedEReference(this, TmscPackage.EXECUTION__SEGMENTS, TmscImplQueries::getSegmentsImpl);"/>
+          ecoreFeature="ecore:EReference tmsc.ecore#//Execution/segments" get="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.EXECUTION__SEGMENTS, TmscImplQueries::getSegmentsImpl);"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Execution/startTime"
-          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+          get="return TmscImplQueries.getStartTimeImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Execution/endTime"
-          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+          get="return TmscImplQueries.getEndTimeImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Execution/duration"
           propertyEditorFactory="editor://nl.esi.pps.tmsc.text.EDurationFormat/"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference tmsc.ecore#//Execution/tmsc" get="return TmscImplQueries.getTmscImpl(this);"/>
+      <genOperations ecoreOperation="tmsc.ecore#//Execution/isEpochTime" body="return getTmsc().isEpochTime();"/>
     </genClasses>
     <genClasses ecoreClass="tmsc.ecore#//Dependency">
       <genFeatures property="None" createChild="false" ecoreFeature="ecore:EReference tmsc.ecore#//Dependency/tmsc"/>
@@ -102,9 +109,9 @@
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Dependency/startTime"
-          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+          get="return TmscImplQueries.getStartTimeImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Dependency/endTime"
-          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+          get="return TmscImplQueries.getEndTimeImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Dependency/duration"
           propertyEditorFactory="editor://nl.esi.pps.tmsc.text.EDurationFormat/"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Dependency/timeBound"
@@ -117,6 +124,7 @@
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Dependency/projection">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+      <genOperations ecoreOperation="tmsc.ecore#//Dependency/isEpochTime" body="return getTmsc().isEpochTime();"/>
     </genClasses>
     <genClasses ecoreClass="tmsc.ecore#//Message">
       <genFeatures property="Readonly" createChild="false" propertySortChoices="true"
@@ -164,9 +172,9 @@
           ecoreFeature="ecore:EReference tmsc.ecore#//Lifeline/executions"/>
       <genFeatures documentation="Returns the executions that are at the highest level of the call-stack, i.e., that do not have any parent execution.&#xD;&#xA;&#xD;&#xA;Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage."
           property="None" notify="false" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference tmsc.ecore#//Lifeline/rootExecutions" get="return DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__ROOT_EXECUTIONS, TmscImplQueries.getRootExecutionsImpl(this));"/>
+          ecoreFeature="ecore:EReference tmsc.ecore#//Lifeline/rootExecutions" get="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__ROOT_EXECUTIONS, TmscImplQueries.getRootExecutionsImpl(this));"/>
       <genFeatures property="None" notify="false" createChild="false" propertySortChoices="true"
-          ecoreFeature="ecore:EReference tmsc.ecore#//Lifeline/segments" get="return DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__SEGMENTS, TmscImplQueries::getSegmentsImpl);"/>
+          ecoreFeature="ecore:EReference tmsc.ecore#//Lifeline/segments" get="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__SEGMENTS, TmscImplQueries::getSegmentsImpl);"/>
       <genFeatures property="Readonly" createChild="false" propertySortChoices="true"
           ecoreFeature="ecore:EReference tmsc.ecore#//Lifeline/executor"/>
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Lifeline/traced"
@@ -204,23 +212,24 @@
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Interval/startTime"
-          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+          get="return TmscImplQueries.getStartTimeImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Interval/endTime"
-          propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
+          get="return TmscImplQueries.getEndTimeImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.ETimestampFormat/"/>
       <genFeatures property="Readonly" notify="false" createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Interval/duration"
           get="return TmscImplQueries.getDurationImpl(this);" propertyEditorFactory="editor://nl.esi.pps.tmsc.text.EDurationFormat/"/>
       <genOperations ecoreOperation="tmsc.ecore#//Interval/getName"/>
+      <genOperations ecoreOperation="tmsc.ecore#//Interval/isEpochTime" body="return getTmsc().isEpochTime();"/>
     </genClasses>
     <genClasses ecoreClass="tmsc.ecore#//Measurement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute tmsc.ecore#//Measurement/name"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tmsc.ecore#//ITMSC">
-      <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getEvents" body="return DerivedUtil.derivedEOperation(TmscImplQueries.getEventsImpl(this));"/>
+      <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getEvents" body="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEOperation(TmscImplQueries.getEventsImpl(this));"/>
       <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getDependencies" body="// Subclasses RootTMSC and ScopedTMSC override this method&#xA;throw new UnsupportedOperationException();"/>
-      <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getIncomingDependencies" body="return DerivedUtil.derivedEOperation(TmscImplQueries.getIncomingDependenciesImpl(this, event));">
+      <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getIncomingDependencies" body="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEOperation(TmscImplQueries.getIncomingDependenciesImpl(this, event));">
         <genParameters ecoreParameter="tmsc.ecore#//ITMSC/getIncomingDependencies/event"/>
       </genOperations>
-      <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getOutgoingDependencies" body="return DerivedUtil.derivedEOperation(TmscImplQueries.getOutgoingDependenciesImpl(this, event));">
+      <genOperations ecoreOperation="tmsc.ecore#//ITMSC/getOutgoingDependencies" body="return nl.esi.pps.common.emf.util.DerivedUtil.derivedEOperation(TmscImplQueries.getOutgoingDependenciesImpl(this, event));">
         <genParameters ecoreParameter="tmsc.ecore#//ITMSC/getOutgoingDependencies/event"/>
       </genOperations>
     </genClasses>
@@ -233,10 +242,10 @@
           ecoreFeature="ecore:EReference tmsc.ecore#//ExitEvent/execution"/>
     </genClasses>
     <genClasses image="false" ecoreClass="tmsc.ecore#//ITimeRange">
-      <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/getStartTime" body="return TmscImplQueries.getStartTimeImpl(this);"/>
-      <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/getEndTime" body="return TmscImplQueries.getEndTimeImpl(this);"/>
+      <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/getStartTime"/>
+      <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/getEndTime"/>
       <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/getDuration" body="final Long startTime = getStartTime();&#xD;&#xA;if (startTime == null) {&#xD;&#xA;&#x9;return null;&#xD;&#xA;}&#xD;&#xA;final Long endTime = getEndTime();&#xD;&#xA;if (endTime == null) {&#xD;&#xA;&#x9;return null;&#xD;&#xA;}&#xD;&#xA;return endTime - startTime;"/>
-      <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/getTmsc"/>
+      <genOperations ecoreOperation="tmsc.ecore#//ITimeRange/isEpochTime"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

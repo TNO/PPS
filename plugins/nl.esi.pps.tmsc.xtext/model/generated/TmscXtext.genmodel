@@ -37,6 +37,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/interfaces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/components"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/functions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/hosts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/executors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/events"/>
     </genClasses>
@@ -67,6 +68,12 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XFunctionParameter/kind"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XFunctionParameter/name"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//XFunctionParameter/properties"/>
+    </genClasses>
+    <genClasses ecoreClass="TmscXtext.ecore#//XHost">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XHost/untraced"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XHost/timeBound"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XHost/scheduled"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//XHost/executors"/>
     </genClasses>
     <genClasses ecoreClass="TmscXtext.ecore#//XExecutor">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XExecutor/untraced"/>

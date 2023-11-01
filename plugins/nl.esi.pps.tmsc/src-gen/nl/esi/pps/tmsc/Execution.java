@@ -253,4 +253,12 @@ public interface Execution extends PropertiesContainer, ITimeRange {
 	 */
 	FullScopeTMSC getTmsc();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isEpochTime();
+
 } // Execution

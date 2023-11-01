@@ -272,13 +272,22 @@ public interface TmscPackage extends EPackage {
 	int FULL_SCOPE_TMSC__END_TIME = TMSC_FEATURE_COUNT + 6;
 
 	/**
+	 * The feature id for the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FULL_SCOPE_TMSC__DURATION = TMSC_FEATURE_COUNT + 7;
+
+	/**
 	 * The number of structural features of the '<em>Full Scope TMSC</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FULL_SCOPE_TMSC_FEATURE_COUNT = TMSC_FEATURE_COUNT + 7;
+	int FULL_SCOPE_TMSC_FEATURE_COUNT = TMSC_FEATURE_COUNT + 8;
 
 	/**
 	 * The operation id for the '<em>Get Events</em>' operation.
@@ -317,13 +326,49 @@ public interface TmscPackage extends EPackage {
 	int FULL_SCOPE_TMSC___GET_OUTGOING_DEPENDENCIES__EVENT = TMSC___GET_OUTGOING_DEPENDENCIES__EVENT;
 
 	/**
+	 * The operation id for the '<em>Get Start Time</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FULL_SCOPE_TMSC___GET_START_TIME = TMSC_OPERATION_COUNT + 0;
+
+	/**
+	 * The operation id for the '<em>Get End Time</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FULL_SCOPE_TMSC___GET_END_TIME = TMSC_OPERATION_COUNT + 1;
+
+	/**
+	 * The operation id for the '<em>Get Duration</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FULL_SCOPE_TMSC___GET_DURATION = TMSC_OPERATION_COUNT + 2;
+
+	/**
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int FULL_SCOPE_TMSC___IS_EPOCH_TIME = TMSC_OPERATION_COUNT + 3;
+
+	/**
 	 * The number of operations of the '<em>Full Scope TMSC</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FULL_SCOPE_TMSC_OPERATION_COUNT = TMSC_OPERATION_COUNT + 0;
+	int FULL_SCOPE_TMSC_OPERATION_COUNT = TMSC_OPERATION_COUNT + 4;
 
 	/**
 	 * The meta object id for the '{@link nl.esi.pps.tmsc.impl.EventImpl <em>Event</em>}' class.
@@ -647,13 +692,13 @@ public interface TmscPackage extends EPackage {
 	int EXECUTION___GET_DURATION = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION___GET_TMSC = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 3;
+	int EXECUTION___IS_EPOCH_TIME = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Execution</em>' class.
@@ -662,7 +707,7 @@ public interface TmscPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTION_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 4;
+	int EXECUTION_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link nl.esi.pps.tmsc.impl.DependencyImpl <em>Dependency</em>}' class.
@@ -812,13 +857,13 @@ public interface TmscPackage extends EPackage {
 	int DEPENDENCY___GET_DURATION = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY___GET_TMSC = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 3;
+	int DEPENDENCY___IS_EPOCH_TIME = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 4;
 
 	/**
 	 * The number of operations of the '<em>Dependency</em>' class.
@@ -827,7 +872,7 @@ public interface TmscPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DEPENDENCY_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 4;
+	int DEPENDENCY_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 5;
 
 	/**
 	 * The meta object id for the '{@link nl.esi.pps.tmsc.impl.MessageImpl <em>Message</em>}' class.
@@ -986,13 +1031,13 @@ public interface TmscPackage extends EPackage {
 	int MESSAGE___GET_DURATION = DEPENDENCY___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE___GET_TMSC = DEPENDENCY___GET_TMSC;
+	int MESSAGE___IS_EPOCH_TIME = DEPENDENCY___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Message</em>' class.
@@ -1169,13 +1214,13 @@ public interface TmscPackage extends EPackage {
 	int REQUEST___GET_DURATION = MESSAGE___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REQUEST___GET_TMSC = MESSAGE___GET_TMSC;
+	int REQUEST___IS_EPOCH_TIME = MESSAGE___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Request</em>' class.
@@ -1352,13 +1397,13 @@ public interface TmscPackage extends EPackage {
 	int REPLY___GET_DURATION = MESSAGE___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REPLY___GET_TMSC = MESSAGE___GET_TMSC;
+	int REPLY___IS_EPOCH_TIME = MESSAGE___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Reply</em>' class.
@@ -1655,13 +1700,13 @@ public interface TmscPackage extends EPackage {
 	int DOMAIN_DEPENDENCY___GET_DURATION = DEPENDENCY___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DOMAIN_DEPENDENCY___GET_TMSC = DEPENDENCY___GET_TMSC;
+	int DOMAIN_DEPENDENCY___IS_EPOCH_TIME = DEPENDENCY___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Domain Dependency</em>' class.
@@ -1940,13 +1985,13 @@ public interface TmscPackage extends EPackage {
 	int LIFELINE_SEGMENT___GET_DURATION = DEPENDENCY___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LIFELINE_SEGMENT___GET_TMSC = DEPENDENCY___GET_TMSC;
+	int LIFELINE_SEGMENT___IS_EPOCH_TIME = DEPENDENCY___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Lifeline Segment</em>' class.
@@ -2114,13 +2159,13 @@ public interface TmscPackage extends EPackage {
 	int MESSAGE_CONTROL___GET_DURATION = DEPENDENCY___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MESSAGE_CONTROL___GET_TMSC = DEPENDENCY___GET_TMSC;
+	int MESSAGE_CONTROL___IS_EPOCH_TIME = DEPENDENCY___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Message Control</em>' class.
@@ -2298,15 +2343,6 @@ public interface TmscPackage extends EPackage {
 	int INTERVAL___GET_DURATION = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 2;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int INTERVAL___GET_TMSC = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 3;
-
-	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2316,13 +2352,22 @@ public interface TmscPackage extends EPackage {
 	int INTERVAL___GET_NAME = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 4;
 
 	/**
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INTERVAL___IS_EPOCH_TIME = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 5;
+
+	/**
 	 * The number of operations of the '<em>Interval</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int INTERVAL_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 5;
+	int INTERVAL_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 6;
 
 	/**
 	 * The meta object id for the '{@link nl.esi.pps.tmsc.impl.MeasurementImpl <em>Measurement</em>}' class.
@@ -2454,15 +2499,6 @@ public interface TmscPackage extends EPackage {
 	int MEASUREMENT___GET_DURATION = INTERVAL___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int MEASUREMENT___GET_TMSC = INTERVAL___GET_TMSC;
-
-	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2470,6 +2506,15 @@ public interface TmscPackage extends EPackage {
 	 * @ordered
 	 */
 	int MEASUREMENT___GET_NAME = INTERVAL___GET_NAME;
+
+	/**
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int MEASUREMENT___IS_EPOCH_TIME = INTERVAL___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Measurement</em>' class.
@@ -2903,13 +2948,13 @@ public interface TmscPackage extends EPackage {
 	int ITIME_RANGE___GET_DURATION = 2;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ITIME_RANGE___GET_TMSC = 3;
+	int ITIME_RANGE___IS_EPOCH_TIME = 3;
 
 	/**
 	 * The number of operations of the '<em>ITime Range</em>' class.
@@ -3036,6 +3081,17 @@ public interface TmscPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getFullScopeTMSC_EndTime();
+
+	/**
+	 * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.FullScopeTMSC#getDuration <em>Duration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Duration</em>'.
+	 * @see nl.esi.pps.tmsc.FullScopeTMSC#getDuration()
+	 * @see #getFullScopeTMSC()
+	 * @generated
+	 */
+	EAttribute getFullScopeTMSC_Duration();
 
 	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.tmsc.Event <em>Event</em>}'.
@@ -3331,6 +3387,16 @@ public interface TmscPackage extends EPackage {
 	EReference getExecution_Tmsc();
 
 	/**
+	 * Returns the meta object for the '{@link nl.esi.pps.tmsc.Execution#isEpochTime() <em>Is Epoch Time</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Epoch Time</em>' operation.
+	 * @see nl.esi.pps.tmsc.Execution#isEpochTime()
+	 * @generated
+	 */
+	EOperation getExecution__IsEpochTime();
+
+	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.tmsc.Dependency <em>Dependency</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -3449,6 +3515,16 @@ public interface TmscPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getDependency_Projection();
+
+	/**
+	 * Returns the meta object for the '{@link nl.esi.pps.tmsc.Dependency#isEpochTime() <em>Is Epoch Time</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Epoch Time</em>' operation.
+	 * @see nl.esi.pps.tmsc.Dependency#isEpochTime()
+	 * @generated
+	 */
+	EOperation getDependency__IsEpochTime();
 
 	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.tmsc.Message <em>Message</em>}'.
@@ -3892,6 +3968,16 @@ public interface TmscPackage extends EPackage {
 	EOperation getInterval__GetName();
 
 	/**
+	 * Returns the meta object for the '{@link nl.esi.pps.tmsc.Interval#isEpochTime() <em>Is Epoch Time</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Is Epoch Time</em>' operation.
+	 * @see nl.esi.pps.tmsc.Interval#isEpochTime()
+	 * @generated
+	 */
+	EOperation getInterval__IsEpochTime();
+
+	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.tmsc.Measurement <em>Measurement</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -4047,14 +4133,14 @@ public interface TmscPackage extends EPackage {
 	EOperation getITimeRange__GetDuration();
 
 	/**
-	 * Returns the meta object for the '{@link nl.esi.pps.tmsc.ITimeRange#getTmsc() <em>Get Tmsc</em>}' operation.
+	 * Returns the meta object for the '{@link nl.esi.pps.tmsc.ITimeRange#isEpochTime() <em>Is Epoch Time</em>}' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the '<em>Get Tmsc</em>' operation.
-	 * @see nl.esi.pps.tmsc.ITimeRange#getTmsc()
+	 * @return the meta object for the '<em>Is Epoch Time</em>' operation.
+	 * @see nl.esi.pps.tmsc.ITimeRange#isEpochTime()
 	 * @generated
 	 */
-	EOperation getITimeRange__GetTmsc();
+	EOperation getITimeRange__IsEpochTime();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Long <em>ETimestamp</em>}'.
@@ -4188,6 +4274,14 @@ public interface TmscPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute FULL_SCOPE_TMSC__END_TIME = eINSTANCE.getFullScopeTMSC_EndTime();
+
+		/**
+		 * The meta object literal for the '<em><b>Duration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute FULL_SCOPE_TMSC__DURATION = eINSTANCE.getFullScopeTMSC_Duration();
 
 		/**
 		 * The meta object literal for the '{@link nl.esi.pps.tmsc.impl.EventImpl <em>Event</em>}' class.
@@ -4410,6 +4504,14 @@ public interface TmscPackage extends EPackage {
 		EReference EXECUTION__TMSC = eINSTANCE.getExecution_Tmsc();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Epoch Time</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EXECUTION___IS_EPOCH_TIME = eINSTANCE.getExecution__IsEpochTime();
+
+		/**
 		 * The meta object literal for the '{@link nl.esi.pps.tmsc.impl.DependencyImpl <em>Dependency</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4498,6 +4600,14 @@ public interface TmscPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute DEPENDENCY__PROJECTION = eINSTANCE.getDependency_Projection();
+
+		/**
+		 * The meta object literal for the '<em><b>Is Epoch Time</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation DEPENDENCY___IS_EPOCH_TIME = eINSTANCE.getDependency__IsEpochTime();
 
 		/**
 		 * The meta object literal for the '{@link nl.esi.pps.tmsc.impl.MessageImpl <em>Message</em>}' class.
@@ -4850,6 +4960,14 @@ public interface TmscPackage extends EPackage {
 		EOperation INTERVAL___GET_NAME = eINSTANCE.getInterval__GetName();
 
 		/**
+		 * The meta object literal for the '<em><b>Is Epoch Time</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation INTERVAL___IS_EPOCH_TIME = eINSTANCE.getInterval__IsEpochTime();
+
+		/**
 		 * The meta object literal for the '{@link nl.esi.pps.tmsc.impl.MeasurementImpl <em>Measurement</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -4980,12 +5098,12 @@ public interface TmscPackage extends EPackage {
 		EOperation ITIME_RANGE___GET_DURATION = eINSTANCE.getITimeRange__GetDuration();
 
 		/**
-		 * The meta object literal for the '<em><b>Get Tmsc</b></em>' operation.
+		 * The meta object literal for the '<em><b>Is Epoch Time</b></em>' operation.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EOperation ITIME_RANGE___GET_TMSC = eINSTANCE.getITimeRange__GetTmsc();
+		EOperation ITIME_RANGE___IS_EPOCH_TIME = eINSTANCE.getITimeRange__IsEpochTime();
 
 		/**
 		 * The meta object literal for the '<em>ETimestamp</em>' data type.

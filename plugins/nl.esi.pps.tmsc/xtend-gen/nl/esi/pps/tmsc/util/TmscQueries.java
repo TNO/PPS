@@ -448,24 +448,10 @@ public final class TmscQueries {
    * of outgoing dependencies of 'from' and the transitive closure of incoming
    * dependencies of 'to'.
    * 
-   * @see #findCausalDependenciesBetween(ITMSC, Iterable, Iterable, Function1)
+   * @see #findCausalDependenciesBetween(ITMSC, Iterable, Iterable)
    */
   public static Set<Dependency> findCausalDependenciesBetween(final ITMSC tmsc, final Event from, final Event to) {
-    final Function1<Dependency, Boolean> _function = (Dependency it) -> {
-      return Boolean.valueOf(true);
-    };
-    return TmscQueries.findCausalDependenciesBetween(tmsc, Collections.<Event>singleton(from), Collections.<Event>singleton(to), _function);
-  }
-  
-  /**
-   * Causal dependencies are defined as the intersection of the transitive closure
-   * of outgoing dependencies of 'from' and the transitive closure of incoming
-   * dependencies of 'to'.
-   * 
-   * @see #findCausalDependenciesBetween(ITMSC, Iterable, Iterable, Function1)
-   */
-  public static Set<Dependency> findCausalDependenciesBetween(final ITMSC tmsc, final Event from, final Event to, final Function1<? super Dependency, ? extends Boolean> predicate) {
-    return TmscQueries.findCausalDependenciesBetween(tmsc, Collections.<Event>singleton(from), Collections.<Event>singleton(to), predicate);
+    return TmscQueries.findCausalDependenciesBetween(tmsc, Collections.<Event>singleton(from), Collections.<Event>singleton(to));
   }
   
   /**
@@ -479,7 +465,7 @@ public final class TmscQueries {
    * which should return a single entry in case of a fully connected path.
    * </p>
    */
-  public static Set<Dependency> findCausalDependenciesBetween(@Extension final ITMSC tmsc, final Iterable<Event> froms, final Iterable<Event> tos, final Function1<? super Dependency, ? extends Boolean> predicate) {
+  public static Set<Dependency> findCausalDependenciesBetween(@Extension final ITMSC tmsc, final Iterable<Event> froms, final Iterable<Event> tos) {
     final Function1<Event, Long> _function = (Event it) -> {
       return it.getTimestamp();
     };
@@ -508,26 +494,18 @@ public final class TmscQueries {
       Long _endTime = it.getEndTime();
       return Boolean.valueOf((_endTime.compareTo(maxTimeStamp) > 0));
     };
-    final Function1<Dependency, Boolean> _function_5 = (Dependency d) -> {
-      Boolean _apply = predicate.apply(d);
-      return Boolean.valueOf((!(_apply).booleanValue()));
-    };
-    final BranchIterable<Dependency> effect = Queries.<Dependency>until(Queries.<Dependency>until(Queries.<Dependency>closure(IterableExtensions.<Event, Dependency>flatMap(froms, _function_2), true, _function_3), _function_4), _function_5);
-    final Function1<Event, Collection<Dependency>> _function_6 = (Event it) -> {
+    final BranchIterable<Dependency> effect = Queries.<Dependency>until(Queries.<Dependency>closure(IterableExtensions.<Event, Dependency>flatMap(froms, _function_2), true, _function_3), _function_4);
+    final Function1<Event, Collection<Dependency>> _function_5 = (Event it) -> {
       return tmsc.getIncomingDependencies(it);
     };
-    final Function1<Dependency, Iterable<? extends Dependency>> _function_7 = (Dependency it) -> {
+    final Function1<Dependency, Iterable<? extends Dependency>> _function_6 = (Dependency it) -> {
       return tmsc.getIncomingDependencies(it.getSource());
     };
-    final Function1<Dependency, Boolean> _function_8 = (Dependency it) -> {
+    final Function1<Dependency, Boolean> _function_7 = (Dependency it) -> {
       Long _startTime = it.getStartTime();
       return Boolean.valueOf((_startTime.compareTo(minTimeStamp) < 0));
     };
-    final Function1<Dependency, Boolean> _function_9 = (Dependency d) -> {
-      Boolean _apply = predicate.apply(d);
-      return Boolean.valueOf((!(_apply).booleanValue()));
-    };
-    final BranchIterable<Dependency> cause = Queries.<Dependency>until(Queries.<Dependency>until(Queries.<Dependency>closure(IterableExtensions.<Event, Dependency>flatMap(tos, _function_6), true, _function_7), _function_8), _function_9);
+    final BranchIterable<Dependency> cause = Queries.<Dependency>until(Queries.<Dependency>closure(IterableExtensions.<Event, Dependency>flatMap(tos, _function_5), true, _function_6), _function_7);
     final Set<Dependency> causalDependencies = IterableExtensions.<Dependency>toSet(effect);
     causalDependencies.retainAll(IterableExtensions.<Dependency>toSet(cause));
     return causalDependencies;
@@ -955,7 +933,11 @@ public final class TmscQueries {
       Collection<Dependency> _dependencies = tmsc.getDependencies();
       Iterables.<Dependency>addAll(_dependencies, dependenciesToAdd);
       if ((tmsc instanceof ScopedTMSC)) {
-        TmscQueries.<T>addDependencies(((ScopedTMSC)tmsc).getParentScope(), dependenciesToAdd);
+        TMSC _parentScope = ((ScopedTMSC)tmsc).getParentScope();
+        boolean _tripleNotEquals = (_parentScope != null);
+        if (_tripleNotEquals) {
+          TmscQueries.<T>addDependencies(((ScopedTMSC)tmsc).getParentScope(), dependenciesToAdd);
+        }
       }
     }
     return dependenciesToAdd;

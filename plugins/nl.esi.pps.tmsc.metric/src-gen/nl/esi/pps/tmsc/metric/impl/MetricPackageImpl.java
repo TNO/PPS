@@ -262,6 +262,16 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getMetric_Configuration() {
+		return (EAttribute) metricEClass.getEStructuralFeatures().get(6);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMetricInstance() {
 		return metricInstanceEClass;
 	}
@@ -351,6 +361,7 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 		createEReference(metricEClass, METRIC__CATEGORY);
 		createEReference(metricEClass, METRIC__INSTANCES);
 		createEReference(metricEClass, METRIC__TMSCS);
+		createEAttribute(metricEClass, METRIC__CONFIGURATION);
 
 		metricInstanceEClass = createEClass(METRIC_INSTANCE);
 		createEAttribute(metricInstanceEClass, METRIC_INSTANCE__ID);
@@ -430,6 +441,8 @@ public class MetricPackageImpl extends EPackageImpl implements MetricPackage {
 		initEReference(getMetric_Tmscs(), theTmscPackage.getFullScopeTMSC(), null, "tmscs", null, 0, -1, Metric.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getMetric_Configuration(), ecorePackage.getEString(), "configuration", null, 0, 1, Metric.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(metricInstanceEClass, MetricInstance.class, "MetricInstance", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);

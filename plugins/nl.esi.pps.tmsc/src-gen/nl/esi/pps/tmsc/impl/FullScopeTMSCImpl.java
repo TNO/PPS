@@ -42,6 +42,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link nl.esi.pps.tmsc.impl.FullScopeTMSCImpl#isEpochTime <em>Epoch Time</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.impl.FullScopeTMSCImpl#getStartTime <em>Start Time</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.impl.FullScopeTMSCImpl#getEndTime <em>End Time</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.impl.FullScopeTMSCImpl#getDuration <em>Duration</em>}</li>
  * </ul>
  *
  * @generated
@@ -146,6 +147,16 @@ public class FullScopeTMSCImpl extends TMSCImpl implements FullScopeTMSC {
 	 * @ordered
 	 */
 	protected Long endTime = END_TIME_EDEFAULT;
+
+	/**
+	 * The default value of the '{@link #getDuration() <em>Duration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getDuration()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final Long DURATION_EDEFAULT = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -299,6 +310,24 @@ public class FullScopeTMSCImpl extends TMSCImpl implements FullScopeTMSC {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public Long getDuration() {
+		final Long startTime = getStartTime();
+		if (startTime == null) {
+			return null;
+		}
+		final Long endTime = getEndTime();
+		if (endTime == null) {
+			return null;
+		}
+		return endTime - startTime;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -351,6 +380,8 @@ public class FullScopeTMSCImpl extends TMSCImpl implements FullScopeTMSC {
 			return getStartTime();
 		case TmscPackage.FULL_SCOPE_TMSC__END_TIME:
 			return getEndTime();
+		case TmscPackage.FULL_SCOPE_TMSC__DURATION:
+			return getDuration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -448,6 +479,8 @@ public class FullScopeTMSCImpl extends TMSCImpl implements FullScopeTMSC {
 			return START_TIME_EDEFAULT == null ? startTime != null : !START_TIME_EDEFAULT.equals(startTime);
 		case TmscPackage.FULL_SCOPE_TMSC__END_TIME:
 			return END_TIME_EDEFAULT == null ? endTime != null : !END_TIME_EDEFAULT.equals(endTime);
+		case TmscPackage.FULL_SCOPE_TMSC__DURATION:
+			return DURATION_EDEFAULT == null ? getDuration() != null : !DURATION_EDEFAULT.equals(getDuration());
 		}
 		return super.eIsSet(featureID);
 	}

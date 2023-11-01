@@ -35,16 +35,15 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.lsat.common.emf.common.util.URIHelper;
+import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
+import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
 
 import nl.esi.pps.common.core.runtime.ErrorStatusException;
 import nl.esi.pps.common.core.runtime.FailOnErrorStatus;
 import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.core.runtime.jobs.JobUtils;
-import org.eclipse.lsat.common.emf.common.util.URIHelper;
-import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
-import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
-
 import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.ScopedTMSC;
@@ -68,7 +67,7 @@ public class CreateIPCScopeHandler extends CreateScopedTMSCCommandHandler {
 		if (selectedElement instanceof TMSC) {
 			return AdapterFactoryEditingDomain.getEditingDomainFor(selectedElement) != null;
 		} else if (selectedElement instanceof IFile) {
-			return TmscPlugin.isTmscFileExtension(((IFile) selectedElement).getFileExtension());
+			return TmscPlugin.isTmscFile((IFile) selectedElement);
 		}
 		return false;
 	}

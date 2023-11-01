@@ -141,13 +141,22 @@ public interface TmscXtextPackage extends EPackage
   int TMSC_XTEXT_MODEL__FUNCTIONS = 7;
 
   /**
+   * The feature id for the '<em><b>Hosts</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TMSC_XTEXT_MODEL__HOSTS = 8;
+
+  /**
    * The feature id for the '<em><b>Executors</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__EXECUTORS = 8;
+  int TMSC_XTEXT_MODEL__EXECUTORS = 9;
 
   /**
    * The feature id for the '<em><b>Events</b></em>' containment reference list.
@@ -156,7 +165,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__EVENTS = 9;
+  int TMSC_XTEXT_MODEL__EVENTS = 10;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -165,7 +174,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL_FEATURE_COUNT = 10;
+  int TMSC_XTEXT_MODEL_FEATURE_COUNT = 11;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XNamedArchitectureElementImpl <em>XNamed Architecture Element</em>}' class.
@@ -543,6 +552,88 @@ public interface TmscXtextPackage extends EPackage
   int XFUNCTION_PARAMETER_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XHostImpl <em>XHost</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.XHostImpl
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXHost()
+   * @generated
+   */
+  int XHOST = 7;
+
+  /**
+   * The feature id for the '<em><b>Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__DESCRIPTION = XNAMED_ARCHITECTURE_ELEMENT__DESCRIPTION;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__NAME = XNAMED_ARCHITECTURE_ELEMENT__NAME;
+
+  /**
+   * The feature id for the '<em><b>Properties</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__PROPERTIES = XNAMED_ARCHITECTURE_ELEMENT__PROPERTIES;
+
+  /**
+   * The feature id for the '<em><b>Untraced</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__UNTRACED = XNAMED_ARCHITECTURE_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Time Bound</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__TIME_BOUND = XNAMED_ARCHITECTURE_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Scheduled</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__SCHEDULED = XNAMED_ARCHITECTURE_ELEMENT_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Executors</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST__EXECUTORS = XNAMED_ARCHITECTURE_ELEMENT_FEATURE_COUNT + 3;
+
+  /**
+   * The number of structural features of the '<em>XHost</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XHOST_FEATURE_COUNT = XNAMED_ARCHITECTURE_ELEMENT_FEATURE_COUNT + 4;
+
+  /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XExecutorImpl <em>XExecutor</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -550,7 +641,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXExecutor()
    * @generated
    */
-  int XEXECUTOR = 7;
+  int XEXECUTOR = 8;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -623,7 +714,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXEvent()
    * @generated
    */
-  int XEVENT = 8;
+  int XEVENT = 9;
 
   /**
    * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -741,7 +832,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXEventArgument()
    * @generated
    */
-  int XEVENT_ARGUMENT = 9;
+  int XEVENT_ARGUMENT = 10;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -778,7 +869,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependency()
    * @generated
    */
-  int XDEPENDENCY = 10;
+  int XDEPENDENCY = 11;
 
   /**
    * The feature id for the '<em><b>Type Object</b></em>' containment reference.
@@ -860,7 +951,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependencyTypeObject()
    * @generated
    */
-  int XDEPENDENCY_TYPE_OBJECT = 11;
+  int XDEPENDENCY_TYPE_OBJECT = 12;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -888,7 +979,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependencySettings()
    * @generated
    */
-  int XDEPENDENCY_SETTINGS = 12;
+  int XDEPENDENCY_SETTINGS = 13;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -952,7 +1043,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXProperty()
    * @generated
    */
-  int XPROPERTY = 13;
+  int XPROPERTY = 14;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -989,7 +1080,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyValue()
    * @generated
    */
-  int XPROPERTY_VALUE = 14;
+  int XPROPERTY_VALUE = 15;
 
   /**
    * The number of structural features of the '<em>XProperty Value</em>' class.
@@ -1008,7 +1099,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyStringValue()
    * @generated
    */
-  int XPROPERTY_STRING_VALUE = 15;
+  int XPROPERTY_STRING_VALUE = 16;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1036,7 +1127,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyNumberValue()
    * @generated
    */
-  int XPROPERTY_NUMBER_VALUE = 16;
+  int XPROPERTY_NUMBER_VALUE = 17;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1064,7 +1155,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyBooleanValue()
    * @generated
    */
-  int XPROPERTY_BOOLEAN_VALUE = 17;
+  int XPROPERTY_BOOLEAN_VALUE = 18;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1092,7 +1183,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyMutliValue()
    * @generated
    */
-  int XPROPERTY_MUTLI_VALUE = 18;
+  int XPROPERTY_MUTLI_VALUE = 19;
 
   /**
    * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1120,7 +1211,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXArchitectureKind()
    * @generated
    */
-  int XARCHITECTURE_KIND = 19;
+  int XARCHITECTURE_KIND = 20;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameterKind <em>XFunction Parameter Kind</em>}' enum.
@@ -1130,7 +1221,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXFunctionParameterKind()
    * @generated
    */
-  int XFUNCTION_PARAMETER_KIND = 20;
+  int XFUNCTION_PARAMETER_KIND = 21;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XEventType <em>XEvent Type</em>}' enum.
@@ -1140,7 +1231,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXEventType()
    * @generated
    */
-  int XEVENT_TYPE = 21;
+  int XEVENT_TYPE = 22;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XDependencyType <em>XDependency Type</em>}' enum.
@@ -1150,7 +1241,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependencyType()
    * @generated
    */
-  int XDEPENDENCY_TYPE = 22;
+  int XDEPENDENCY_TYPE = 23;
 
 
   /**
@@ -1250,6 +1341,17 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    */
   EReference getTmscXtextModel_Functions();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getHosts <em>Hosts</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Hosts</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getHosts()
+   * @see #getTmscXtextModel()
+   * @generated
+   */
+  EReference getTmscXtextModel_Hosts();
 
   /**
    * Returns the meta object for the containment reference list '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getExecutors <em>Executors</em>}'.
@@ -1519,6 +1621,60 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    */
   EReference getXFunctionParameter_Properties();
+
+  /**
+   * Returns the meta object for class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost <em>XHost</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>XHost</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XHost
+   * @generated
+   */
+  EClass getXHost();
+
+  /**
+   * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost#isUntraced <em>Untraced</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Untraced</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XHost#isUntraced()
+   * @see #getXHost()
+   * @generated
+   */
+  EAttribute getXHost_Untraced();
+
+  /**
+   * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost#getTimeBound <em>Time Bound</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Time Bound</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XHost#getTimeBound()
+   * @see #getXHost()
+   * @generated
+   */
+  EAttribute getXHost_TimeBound();
+
+  /**
+   * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost#getScheduled <em>Scheduled</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Scheduled</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XHost#getScheduled()
+   * @see #getXHost()
+   * @generated
+   */
+  EAttribute getXHost_Scheduled();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost#getExecutors <em>Executors</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Executors</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XHost#getExecutors()
+   * @see #getXHost()
+   * @generated
+   */
+  EReference getXHost_Executors();
 
   /**
    * Returns the meta object for class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XExecutor <em>XExecutor</em>}'.
@@ -2163,6 +2319,14 @@ public interface TmscXtextPackage extends EPackage
     EReference TMSC_XTEXT_MODEL__FUNCTIONS = eINSTANCE.getTmscXtextModel_Functions();
 
     /**
+     * The meta object literal for the '<em><b>Hosts</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TMSC_XTEXT_MODEL__HOSTS = eINSTANCE.getTmscXtextModel_Hosts();
+
+    /**
      * The meta object literal for the '<em><b>Executors</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2373,6 +2537,48 @@ public interface TmscXtextPackage extends EPackage
      * @generated
      */
     EReference XFUNCTION_PARAMETER__PROPERTIES = eINSTANCE.getXFunctionParameter_Properties();
+
+    /**
+     * The meta object literal for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XHostImpl <em>XHost</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.XHostImpl
+     * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXHost()
+     * @generated
+     */
+    EClass XHOST = eINSTANCE.getXHost();
+
+    /**
+     * The meta object literal for the '<em><b>Untraced</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute XHOST__UNTRACED = eINSTANCE.getXHost_Untraced();
+
+    /**
+     * The meta object literal for the '<em><b>Time Bound</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute XHOST__TIME_BOUND = eINSTANCE.getXHost_TimeBound();
+
+    /**
+     * The meta object literal for the '<em><b>Scheduled</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute XHOST__SCHEDULED = eINSTANCE.getXHost_Scheduled();
+
+    /**
+     * The meta object literal for the '<em><b>Executors</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference XHOST__EXECUTORS = eINSTANCE.getXHost_Executors();
 
     /**
      * The meta object literal for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XExecutorImpl <em>XExecutor</em>}' class.

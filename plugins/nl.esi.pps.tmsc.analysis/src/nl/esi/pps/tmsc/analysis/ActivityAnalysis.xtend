@@ -17,10 +17,11 @@ import java.util.Set
 import nl.esi.emf.properties.xtend.PersistedProperty
 import nl.esi.pps.tmsc.Dependency
 import nl.esi.pps.tmsc.Event
-import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.Interval
 import nl.esi.pps.tmsc.ScopedTMSC
 import nl.esi.pps.tmsc.TmscFactory
+import nl.esi.pps.tmsc.metric.MetricInstance
+import nl.esi.pps.tmsc.metric.MetricPlugin
 import nl.esi.pps.tmsc.util.DependencyFeatureProjection
 import nl.esi.pps.tmsc.util.TmscProjection
 
@@ -41,14 +42,14 @@ final class ActivityAnalysis {
     private new() {
         // Empty for utility classes
     }
-
+    
     static def ScopedTMSC createActivityTMSC(Interval interval) {
-        val activityDependencies = interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to)[isActivity]
-        return activityDependencies.createScopedTMSC('''«interval.name» activity''',interval.from, interval.to)
+        return findActivityDependencies(interval).createScopedTMSC(
+            '''«interval.name» activity''', interval.from, interval.to)
     }
     
     static def ScopedTMSC createCausalTMSC(Interval interval) {
-        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)[notExecution]
+        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)
         return causalDependencies.createScopedTMSC('''«interval.name» causal''', interval.from, interval.to)
     }
     
@@ -56,10 +57,10 @@ final class ActivityAnalysis {
         // Step 1: Finding all causality between from and to
         // Executions can be part of the causality, but we are not interested in them
         // as the result also includes their life-line-segments
-        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)[notExecution]
+        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)
         
         // Step 2: Determine the activity part of the causality and already add them to the result
-        val causalActivityDependencies = interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to)[isActivity]
+        val causalActivityDependencies = findActivityDependencies(interval)
         causalActivityDependencies.retainAll(causalDependencies)
 
         return causalActivityDependencies.createScopedTMSC('''«interval.name» causal activity''', interval.from, interval.to)
@@ -69,13 +70,13 @@ final class ActivityAnalysis {
         // Step 1: Finding all causality between from and to
         // Executions can be part of the causality, but we are not interested in them
         // as the result also includes their life-line-segments
-        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)[notExecution]
+        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)
         // Add epoch dependencies, that represent the life-line release times, to the causality
         val epochDependencies = interval.from.createEpochDependencies(causalDependencies)
         causalDependencies += epochDependencies
         
         // Step 2: Determine the activity part of the causality and already add them to the result
-        val causalActivityDependencies = interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to)[isActivity]
+        val causalActivityDependencies = findActivityDependencies(interval)
         causalActivityDependencies.retainAll(causalDependencies)
         val csaTmsc = causalActivityDependencies.createScopedTMSC('''«interval.name» causal scheduled activity''', interval.from, interval.to)
         
@@ -95,13 +96,13 @@ final class ActivityAnalysis {
     
     static def ScopedTMSC createScheduledActivityTMSC(Interval interval) {
         // Step 1: Determine the activity within the interval
-        val activityDependencies = interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to)[isActivity]
+        val activityDependencies = findActivityDependencies(interval)
         val saTmsc = activityDependencies.createScopedTMSC('''«interval.name» scheduled activity''', interval.from, interval.to)
         
         // Step 2: Finding all causality within the activity
         // Executions can be part of the causality, but we are not interested in them
         // as the result also includes their life-line-segments
-        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(saTmsc.initialEvents, saTmsc.finalEvents)[notExecution]
+        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(saTmsc.initialEvents, saTmsc.finalEvents)
         if (!causalDependencies.containsAll(activityDependencies)) {
             throw new IllegalStateException('Programming error, please contact PPS support!')
         }
@@ -165,14 +166,22 @@ final class ActivityAnalysis {
         return epochDependencies
     }
     
+    static def Set<Dependency> findActivityDependencies(Interval interval) {
+        if (interval instanceof MetricInstance) {
+            val metricProcessor = MetricPlugin.plugin.getRegisteredMetricProcessors(interval.tmsc).get(interval.metric.id)
+            if (metricProcessor !== null) {
+                return interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to) [ d |
+                    d.isActivity && !metricProcessor.isActivityCutOff(d, interval)
+                ]
+            }
+        }
+        return interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to)[isActivity]
+    }
+
     static def boolean isActivity(Dependency dependency) {
         return dependency.scheduled == Boolean.FALSE
     }
     
-    private static def boolean notExecution(Dependency dependency) {
-        return !(dependency instanceof Execution)
-    }
-
     private static class DependencyEpochProjection implements DependencyFeatureProjection<Boolean> {
         override calculateProjectedValue(Event projectionSource, Map<Dependency, Boolean> projectionValues) {
             // The query below returns true for all incoming paths that originate from an epoch,

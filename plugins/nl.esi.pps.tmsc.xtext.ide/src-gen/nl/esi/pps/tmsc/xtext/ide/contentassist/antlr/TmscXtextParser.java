@@ -38,6 +38,7 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXComponentAccess().getAlternatives_5_1(), "rule__XComponent__Alternatives_5_1");
 			builder.put(grammarAccess.getXFunctionAccess().getAlternatives_0(), "rule__XFunction__Alternatives_0");
 			builder.put(grammarAccess.getXFunctionAccess().getAlternatives_6_1(), "rule__XFunction__Alternatives_6_1");
+			builder.put(grammarAccess.getXHostAccess().getAlternatives_4_1(), "rule__XHost__Alternatives_4_1");
 			builder.put(grammarAccess.getXExecutorAccess().getAlternatives_4_1(), "rule__XExecutor__Alternatives_4_1");
 			builder.put(grammarAccess.getXEventAccess().getTimestampAlternatives_0_0(), "rule__XEvent__TimestampAlternatives_0_0");
 			builder.put(grammarAccess.getXEventAccess().getAlternatives_7(), "rule__XEvent__Alternatives_7");
@@ -47,6 +48,7 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXDependencyAccess().getAlternatives_2_1_2_1(), "rule__XDependency__Alternatives_2_1_2_1");
 			builder.put(grammarAccess.getXDependencySettingsAccess().getAlternatives_3(), "rule__XDependencySettings__Alternatives_3");
 			builder.put(grammarAccess.getXPropertyValueAccess().getAlternatives(), "rule__XPropertyValue__Alternatives");
+			builder.put(grammarAccess.getFQNStringAccess().getAlternatives(), "rule__FQNString__Alternatives");
 			builder.put(grammarAccess.getIDStringAccess().getAlternatives(), "rule__IDString__Alternatives");
 			builder.put(grammarAccess.getEBOOLEAN_OBJECTAccess().getAlternatives(), "rule__EBOOLEAN_OBJECT__Alternatives");
 			builder.put(grammarAccess.getEBIGDECIMALAccess().getAlternatives(), "rule__EBIGDECIMAL__Alternatives");
@@ -85,6 +87,11 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXFunctionParameterAccess().getGroup(), "rule__XFunctionParameter__Group__0");
 			builder.put(grammarAccess.getXFunctionParameterAccess().getGroup_2(), "rule__XFunctionParameter__Group_2__0");
 			builder.put(grammarAccess.getXFunctionParameterAccess().getGroup_2_2(), "rule__XFunctionParameter__Group_2_2__0");
+			builder.put(grammarAccess.getXHostAccess().getGroup(), "rule__XHost__Group__0");
+			builder.put(grammarAccess.getXHostAccess().getGroup_2(), "rule__XHost__Group_2__0");
+			builder.put(grammarAccess.getXHostAccess().getGroup_4(), "rule__XHost__Group_4__0");
+			builder.put(grammarAccess.getXHostAccess().getGroup_4_1_0(), "rule__XHost__Group_4_1_0__0");
+			builder.put(grammarAccess.getXHostAccess().getGroup_4_1_1(), "rule__XHost__Group_4_1_1__0");
 			builder.put(grammarAccess.getXExecutorAccess().getGroup(), "rule__XExecutor__Group__0");
 			builder.put(grammarAccess.getXExecutorAccess().getGroup_2(), "rule__XExecutor__Group_2__0");
 			builder.put(grammarAccess.getXExecutorAccess().getGroup_4(), "rule__XExecutor__Group_4__0");
@@ -130,8 +137,9 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTmscXtextModelAccess().getInterfacesAssignment_1_2(), "rule__TmscXtextModel__InterfacesAssignment_1_2");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getComponentsAssignment_1_3(), "rule__TmscXtextModel__ComponentsAssignment_1_3");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getFunctionsAssignment_1_4(), "rule__TmscXtextModel__FunctionsAssignment_1_4");
-			builder.put(grammarAccess.getTmscXtextModelAccess().getExecutorsAssignment_1_5(), "rule__TmscXtextModel__ExecutorsAssignment_1_5");
-			builder.put(grammarAccess.getTmscXtextModelAccess().getEventsAssignment_1_6(), "rule__TmscXtextModel__EventsAssignment_1_6");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getHostsAssignment_1_5(), "rule__TmscXtextModel__HostsAssignment_1_5");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getExecutorsAssignment_1_6(), "rule__TmscXtextModel__ExecutorsAssignment_1_6");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getEventsAssignment_1_7(), "rule__TmscXtextModel__EventsAssignment_1_7");
 			builder.put(grammarAccess.getXInterfaceAccess().getDescriptionAssignment_1_0(), "rule__XInterface__DescriptionAssignment_1_0");
 			builder.put(grammarAccess.getXInterfaceAccess().getNameAssignment_2(), "rule__XInterface__NameAssignment_2");
 			builder.put(grammarAccess.getXInterfaceAccess().getPropertiesAssignment_3_1_0(), "rule__XInterface__PropertiesAssignment_3_1_0");
@@ -162,6 +170,13 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXFunctionParameterAccess().getNameAssignment_1(), "rule__XFunctionParameter__NameAssignment_1");
 			builder.put(grammarAccess.getXFunctionParameterAccess().getPropertiesAssignment_2_1(), "rule__XFunctionParameter__PropertiesAssignment_2_1");
 			builder.put(grammarAccess.getXFunctionParameterAccess().getPropertiesAssignment_2_2_1(), "rule__XFunctionParameter__PropertiesAssignment_2_2_1");
+			builder.put(grammarAccess.getXHostAccess().getUntracedAssignment_0(), "rule__XHost__UntracedAssignment_0");
+			builder.put(grammarAccess.getXHostAccess().getDescriptionAssignment_2_0(), "rule__XHost__DescriptionAssignment_2_0");
+			builder.put(grammarAccess.getXHostAccess().getNameAssignment_3(), "rule__XHost__NameAssignment_3");
+			builder.put(grammarAccess.getXHostAccess().getTimeBoundAssignment_4_1_0_2(), "rule__XHost__TimeBoundAssignment_4_1_0_2");
+			builder.put(grammarAccess.getXHostAccess().getScheduledAssignment_4_1_1_2(), "rule__XHost__ScheduledAssignment_4_1_1_2");
+			builder.put(grammarAccess.getXHostAccess().getPropertiesAssignment_4_1_2(), "rule__XHost__PropertiesAssignment_4_1_2");
+			builder.put(grammarAccess.getXHostAccess().getExecutorsAssignment_4_1_3(), "rule__XHost__ExecutorsAssignment_4_1_3");
 			builder.put(grammarAccess.getXExecutorAccess().getUntracedAssignment_0(), "rule__XExecutor__UntracedAssignment_0");
 			builder.put(grammarAccess.getXExecutorAccess().getDescriptionAssignment_2_0(), "rule__XExecutor__DescriptionAssignment_2_0");
 			builder.put(grammarAccess.getXExecutorAccess().getNameAssignment_3(), "rule__XExecutor__NameAssignment_3");

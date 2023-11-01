@@ -10,8 +10,8 @@
 
 package nl.esi.pps.tmsc.provider.ext.ui;
 
+import java.lang.reflect.Array;
 import java.util.Collection;
-import java.util.Collections;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
@@ -23,49 +23,35 @@ public class AdapterFactoryDataAnalysisContentProvider extends AdapterFactoryCon
 	public AdapterFactoryDataAnalysisContentProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
-
+	
 	@Override
-	public Collection<String> getConfigurations(Object object) {
-		Object adapter = adapterFactory.adapt(object, IDataAnalysisItemContentProvider.class);
-		if (adapter instanceof IDataAnalysisItemContentProvider) {
-			return ((IDataAnalysisItemContentProvider) adapter).getConfigurations(object);
+	public IDataAnalysisInput getDataAnalysisInput(Object inputElement) {
+		Object singleInput = getSingleInput(inputElement);
+		if (singleInput == null) {
+			return null;
 		}
-		return Collections.emptyList();
-	}
-
-	@Override
-	public String getTitle(Object object, String configuration) {
-		Object adapter = adapterFactory.adapt(object, IDataAnalysisItemContentProvider.class);
+		Object adapter = adapterFactory.adapt(singleInput, IDataAnalysisItemContentProvider.class);
 		if (adapter instanceof IDataAnalysisItemContentProvider) {
-			return ((IDataAnalysisItemContentProvider) adapter).getTitle(object, configuration);
-		}
-		return "Data analysis is not supported for current selection.";
-	}
-
-	@Override
-	public Long getBudget(Object object, String configuration) {
-		Object adapter = adapterFactory.adapt(object, IDataAnalysisItemContentProvider.class);
-		if (adapter instanceof IDataAnalysisItemContentProvider) {
-			return ((IDataAnalysisItemContentProvider) adapter).getBudget(object, configuration);
+			return new DataAnalysisInput(singleInput, (IDataAnalysisItemContentProvider) adapter);
 		}
 		return null;
 	}
 
-	@Override
-	public Iterable<?> getSiblings(Object object, String configuration) {
-		Object adapter = adapterFactory.adapt(object, IDataAnalysisItemContentProvider.class);
-		if (adapter instanceof IDataAnalysisItemContentProvider) {
-			return ((IDataAnalysisItemContentProvider) adapter).getSiblings(object, configuration);
+	/**
+	 * Returns the input if and only if {@code inputElement} is a single object or an
+	 * array or collection containing a single object.
+	 */
+	protected Object getSingleInput(Object inputElement) {
+		Object input = inputElement;
+		if (input == null) {
+			return null;
+		} else if (input.getClass().isArray()) {
+			return Array.getLength(input) == 1 ? Array.get(input, 0) : null;
+		} else if (input instanceof Collection) {
+			Collection<?> collection = (Collection<?>) input;
+			return collection.size() == 1 ? collection.iterator().next() : null;
+		} else {
+			return input;
 		}
-		return Collections.emptyList();
-	}
-
-	@Override
-	public Long getDuration(Object object, Object sibling, String configuration) {
-		Object adapter = adapterFactory.adapt(object, IDataAnalysisItemContentProvider.class);
-		if (adapter instanceof IDataAnalysisItemContentProvider) {
-			return ((IDataAnalysisItemContentProvider) adapter).getDuration(object, sibling, configuration);
-		}
-		return null;
 	}
 }

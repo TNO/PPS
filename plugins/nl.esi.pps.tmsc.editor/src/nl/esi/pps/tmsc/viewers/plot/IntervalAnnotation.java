@@ -22,12 +22,15 @@ import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.trace4cps.common.jfreechart.ui.viewers.BackReferenceProvider;
 import org.jfree.chart.annotations.XYAnnotation;
+import org.jfree.chart.annotations.XYAnnotationBoundsInfo;
 import org.jfree.chart.annotations.XYMeasurementAnnotation;
+import org.jfree.data.Range;
 
 import nl.esi.pps.tmsc.Interval;
 import nl.esi.pps.tmsc.viewers.TmscPlotViewer;
 
-public class IntervalAnnotation<T extends Interval> extends XYMeasurementAnnotation implements BackReferenceProvider<T> {
+public class IntervalAnnotation<T extends Interval> extends XYMeasurementAnnotation
+		implements BackReferenceProvider<T>, XYAnnotationBoundsInfo {
 	private static final long serialVersionUID = -5117927951630224029L;
 
 	private transient T interval;
@@ -66,6 +69,31 @@ public class IntervalAnnotation<T extends Interval> extends XYMeasurementAnnotat
 	public T getBackReference() {
 		return interval;
 	}
+	
+    @Override
+    public Range getXRange() {
+        if (getX() > getX2()) {
+            return new Range(getX2(), getX());
+        } else {
+            return new Range(getX(), getX2());
+        }
+    }
+
+    @Override
+    public Range getYRange() {
+        if (getY() > getY2()) {
+            return new Range(getY2(), getY());
+        } else {
+            return new Range(getY(), getY2());
+        }
+    }
+
+    @Override
+    public boolean getIncludeInDataBounds() {
+        // Represents a measurement between existing points in a data set,
+        // hence already included in the data bounds.
+        return false;
+    }
 	
 	public class LabelAdapter extends AdapterImpl {
 		private final ILabelProvider labelProvider;

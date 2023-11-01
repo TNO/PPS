@@ -10,17 +10,22 @@
 
 package nl.esi.pps.tmsc.analysis.rootcause
 
+import nl.esi.pps.common.emf.ecore.validation.EValidatorBase
+import nl.esi.pps.common.emf.ecore.validation.ValidationReporter
 import nl.esi.pps.tmsc.Dependency
 import nl.esi.pps.tmsc.analysis.RootCauseClassification
+import nl.esi.pps.tmsc.analysis.TmscAnalysisPlugin
 import nl.esi.pps.tmsc.compare.ArchitectureLifecycleStage
-import nl.esi.pps.tmsc.validation.TmscValidatorBase
-import nl.esi.pps.tmsc.validation.ValidationReporter
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 
 import static extension nl.esi.pps.tmsc.analysis.RootCauseAnalysis.*
 
-class RootCauseValidator extends TmscValidatorBase {
+class RootCauseValidator extends EValidatorBase {
+    new() {
+        super(TmscAnalysisPlugin::PLUGIN_ID)
+    }
+    
     extension val RootCauseClassification rootCauseClassification = new RootCauseClassification(
         ArchitectureLifecycleStage::INSTANTIATED)
 

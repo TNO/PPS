@@ -10,8 +10,11 @@
 
 package nl.esi.pps.tmsc.validation
 
+import nl.esi.pps.common.emf.ecore.validation.EValidatorBase
+import nl.esi.pps.common.emf.ecore.validation.ValidationReporter
 import nl.esi.pps.tmsc.Event
 import nl.esi.pps.tmsc.TMSC
+import nl.esi.pps.tmsc.TmscPlugin
 import nl.esi.pps.tmsc.text.EDurationFormat
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
@@ -20,7 +23,11 @@ import org.eclipse.emf.ecore.EObject
  * An TMSC is urgent if and only if the timestamp of each event is as soon as possible, 
  * considering the source timestamp and time-bound of the events' incoming dependencies. 
  */
-class UrgentTmscValidator extends TmscValidatorBase {
+class UrgentTmscValidator extends EValidatorBase {
+    new() {
+        super(TmscPlugin::PLUGIN_ID)
+    }
+    
     override validate(EClass eClass, EObject eObject, ValidationReporter reporter) {
         if (eObject instanceof TMSC) {
             validateTMSC(eObject, reporter)

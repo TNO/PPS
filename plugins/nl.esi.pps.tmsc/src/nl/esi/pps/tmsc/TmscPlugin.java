@@ -10,6 +10,7 @@
 
 package nl.esi.pps.tmsc;
 
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.lsat.common.emf.validation.EValidatorUtil;
 import org.osgi.framework.BundleContext;
@@ -51,6 +52,11 @@ public class TmscPlugin extends Plugin {
 		return plugin;
 	}
 	
+	public static boolean isTmscFile(IFile file) {
+		return isTmscXmiFileExtension(file.getFileExtension())
+				|| isTmscBinaryCompressedFileExtension(file.getFileExtension());
+	}
+
 	public static boolean isTmscFileExtension(String extension) {
 		return isTmscXmiFileExtension(extension) || isTmscBinaryCompressedFileExtension(extension);
 	}

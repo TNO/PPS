@@ -17,6 +17,7 @@ import java.util.List
 import nl.esi.emf.properties.PropertiesContainer
 import nl.esi.pps.architecture.NamedArchitectureElement
 import nl.esi.pps.architecture.example.ExampleFactory
+import nl.esi.pps.architecture.example.ExampleHost
 import nl.esi.pps.architecture.implemented.Function
 import nl.esi.pps.architecture.implemented.FunctionParameter
 import nl.esi.pps.architecture.implemented.FunctionParameterKind
@@ -46,6 +47,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XEventType
 import nl.esi.pps.tmsc.xtext.tmscXtext.XExecutor
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunction
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameter
+import nl.esi.pps.tmsc.xtext.tmscXtext.XHost
 import nl.esi.pps.tmsc.xtext.tmscXtext.XInterface
 import nl.esi.pps.tmsc.xtext.tmscXtext.XNamedArchitectureElement
 import nl.esi.pps.tmsc.xtext.tmscXtext.XOperation
@@ -61,6 +63,7 @@ import static extension nl.esi.pps.tmsc.sort.TmscTopologicalOrder.*
 import static extension nl.esi.pps.tmsc.util.TmscRefinements.*
 import static extension nl.esi.pps.tmsc.xtext.TmscXtextQueries.*
 import static extension org.eclipse.lsat.common.xtend.Queries.*
+import static extension org.eclipse.xtext.EcoreUtil2.*
 
 class TmscXtextToTmscTransformation {
     static extension val TmscFactory m_tmsc = TmscFactory.eINSTANCE
@@ -75,6 +78,7 @@ class TmscXtextToTmscTransformation {
             interfaces += tmscXtext.interfaces.map[xInterface2Interface]
             components += tmscXtext.components.map[xComponent2Component]
             functions += tmscXtext.functions.map[xFunction2Function]
+            hosts += tmscXtext.hosts.map[xHost2Host]
             executors += tmscXtext.executors.map[xExecutor2Executor]
         ]
         val tmsc = tmscXtext.tmscXtextModel2FullScopeTMSC
@@ -88,7 +92,7 @@ class TmscXtextToTmscTransformation {
     
     @Resolvable
     private def FullScopeTMSC create createFullScopeTMSC tmscXtextModel2FullScopeTMSC(TmscXtextModel tmscXtext) {
-        lifelines += tmscXtext.executors.map[xExecutor2Lifeline]
+        lifelines += tmscXtext.hosts.flatMap[executors].union(tmscXtext.executors).map[xExecutor2Lifeline]
         dependencies += events.flatMap[fullScopeIncomingDependencies + fullScopeOutgoingDependencies]
         
         // refineWithCompleteOrder may add LifelineSegments for which we also want to apply the dependency defaults,
@@ -174,6 +178,11 @@ class TmscXtextToTmscTransformation {
         addPropertiesIfAbsent(xFunctionParameter.properties)
     }
 
+    private def ExampleHost create createExampleHost xHost2Host(XHost xHost) {
+        handleXNamedArchitectureElement(xHost)
+        executors += xHost.executors.map[xExecutor2Executor]
+    }
+
     @Resolvable
     private def Executor create createExecutor xExecutor2Executor(XExecutor xExecutor) {
         handleXNamedArchitectureElement(xExecutor)
@@ -192,7 +201,7 @@ class TmscXtextToTmscTransformation {
     @Resolvable
     private def Lifeline create createLifeline xExecutor2Lifeline(XExecutor xExecutor) {
         executor = xExecutor.resolveOne(Executor)
-        events += (xExecutor.eContainer as TmscXtextModel).events.filter[executor == xExecutor].map[xEvent2Event]
+        events += xExecutor.getContainerOfType(TmscXtextModel).events.filter[executor == xExecutor].map[xEvent2Event]
         if (xExecutor.isUntraced) {
             events.forEach[traced = false]
         }
@@ -284,14 +293,14 @@ class TmscXtextToTmscTransformation {
                     // The time-bound can be set on (ordered by priority) the target event, 
                     // the function, the component, the executor, as dependency default or as tmsc default
                     dependency.target.invResolveOne(XEvent)?.timeBound
-                    ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.timeBound
-                    ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.timeBound
-                    ?: dependency.source.lifeline.invResolveOne(XExecutor).timeBound
-                    ?: dependencySettings?.timeBound
-                    ?: tmscSettings.timeBound
+                        ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.timeBound
+                        ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.timeBound
+                        ?: dependency.source.lifeline.invResolveOne(XExecutor).timeBound
+                        ?: dependency.source.lifeline.invResolveOne(XExecutor).getContainerOfType(XHost)?.timeBound
+                        ?: dependencySettings?.timeBound
+                        ?: tmscSettings.timeBound
             } else {
-                dependencySettings?.timeBound
-                ?: tmscSettings.timeBound
+                dependencySettings?.timeBound ?: tmscSettings.timeBound
             }
             dependency.timeBound = timeBound.toNanos
         }
@@ -302,14 +311,14 @@ class TmscXtextToTmscTransformation {
                     // The scheduled can be set on (ordered by priority) the target event, 
                     // the function, the component, the executor, as dependency default or as tmsc default
                     dependency.target.invResolveOne(XEvent)?.scheduled
-                    ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.scheduled
-                    ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.scheduled
-                    ?: dependency.source.lifeline.invResolveOne(XExecutor).scheduled
-                    ?: dependencySettings?.scheduled
-                    ?: tmscSettings.scheduled
+                        ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.scheduled
+                        ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.scheduled
+                        ?: dependency.source.lifeline.invResolveOne(XExecutor).scheduled
+                        ?: dependency.source.lifeline.invResolveOne(XExecutor).getContainerOfType(XHost)?.scheduled
+                        ?: dependencySettings?.scheduled
+                        ?: tmscSettings.scheduled
             } else {
-                dependencySettings?.scheduled
-                ?: tmscSettings.scheduled
+                dependencySettings?.scheduled ?: tmscSettings.scheduled
             }
         }
         // Setting default properties

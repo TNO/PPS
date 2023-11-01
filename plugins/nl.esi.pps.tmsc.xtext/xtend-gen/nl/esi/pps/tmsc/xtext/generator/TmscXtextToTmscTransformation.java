@@ -27,6 +27,7 @@ import nl.esi.pps.architecture.ArchitectureModel;
 import nl.esi.pps.architecture.NamedArchitectureElement;
 import nl.esi.pps.architecture.example.ExampleArchitecture;
 import nl.esi.pps.architecture.example.ExampleFactory;
+import nl.esi.pps.architecture.example.ExampleHost;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.implemented.FunctionParameter;
 import nl.esi.pps.architecture.implemented.FunctionParameterKind;
@@ -64,6 +65,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XExecutor;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunction;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameter;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameterKind;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XHost;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XInterface;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XNamedArchitectureElement;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XOperation;
@@ -74,10 +76,10 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyNumberValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyStringValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyValue;
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsat.common.xtend.Queries;
 import org.eclipse.lsat.common.xtend.annotations.Resolvable;
 import org.eclipse.lsat.common.xtend.annotations.Transform;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.xbase.lib.CollectionLiterals;
 import org.eclipse.xtext.xbase.lib.Extension;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
@@ -125,12 +127,18 @@ public class TmscXtextToTmscTransformation {
       };
       List<Function> _map_2 = ListExtensions.<XFunction, Function>map(tmscXtext.getFunctions(), _function_3);
       Iterables.<Function>addAll(_functions, _map_2);
+      EList<ExampleHost> _hosts = it.getHosts();
+      final Function1<XHost, ExampleHost> _function_4 = (XHost it_1) -> {
+        return this.xHost2Host(it_1);
+      };
+      List<ExampleHost> _map_3 = ListExtensions.<XHost, ExampleHost>map(tmscXtext.getHosts(), _function_4);
+      Iterables.<ExampleHost>addAll(_hosts, _map_3);
       EList<Executor> _executors = it.getExecutors();
-      final Function1<XExecutor, Executor> _function_4 = (XExecutor it_1) -> {
+      final Function1<XExecutor, Executor> _function_5 = (XExecutor it_1) -> {
         return this.xExecutor2Executor(it_1);
       };
-      List<Executor> _map_3 = ListExtensions.<XExecutor, Executor>map(tmscXtext.getExecutors(), _function_4);
-      Iterables.<Executor>addAll(_executors, _map_3);
+      List<Executor> _map_4 = ListExtensions.<XExecutor, Executor>map(tmscXtext.getExecutors(), _function_5);
+      Iterables.<Executor>addAll(_executors, _map_4);
     };
     final ExampleArchitecture architecture = ObjectExtensions.<ExampleArchitecture>operator_doubleArrow(_createExampleArchitecture, _function);
     final FullScopeTMSC tmsc = this.tmscXtextModel2FullScopeTMSC(tmscXtext);
@@ -165,44 +173,47 @@ public class TmscXtextToTmscTransformation {
   
   private void _init_tmscXtextModel2FullScopeTMSC(final FullScopeTMSC it, final TmscXtextModel tmscXtext) {
     EList<Lifeline> _lifelines = it.getLifelines();
-    final Function1<XExecutor, Lifeline> _function = (XExecutor it_1) -> {
+    final Function1<XHost, EList<XExecutor>> _function = (XHost it_1) -> {
+      return it_1.getExecutors();
+    };
+    final Function1<XExecutor, Lifeline> _function_1 = (XExecutor it_1) -> {
       return this.xExecutor2Lifeline(it_1);
     };
-    List<Lifeline> _map = ListExtensions.<XExecutor, Lifeline>map(tmscXtext.getExecutors(), _function);
+    Iterable<Lifeline> _map = IterableExtensions.<XExecutor, Lifeline>map(Queries.<XExecutor>union(IterableExtensions.<XHost, XExecutor>flatMap(tmscXtext.getHosts(), _function), tmscXtext.getExecutors()), _function_1);
     Iterables.<Lifeline>addAll(_lifelines, _map);
     EList<Dependency> _dependencies = it.getDependencies();
-    final Function1<Event, Iterable<Dependency>> _function_1 = (Event it_1) -> {
+    final Function1<Event, Iterable<Dependency>> _function_2 = (Event it_1) -> {
       EList<Dependency> _fullScopeIncomingDependencies = it_1.getFullScopeIncomingDependencies();
       EList<Dependency> _fullScopeOutgoingDependencies = it_1.getFullScopeOutgoingDependencies();
       return Iterables.<Dependency>concat(_fullScopeIncomingDependencies, _fullScopeOutgoingDependencies);
     };
-    Iterable<Dependency> _flatMap = IterableExtensions.<Event, Dependency>flatMap(it.getEvents(), _function_1);
+    Iterable<Dependency> _flatMap = IterableExtensions.<Event, Dependency>flatMap(it.getEvents(), _function_2);
     Iterables.<Dependency>addAll(_dependencies, _flatMap);
     TmscRefinements.refineWithCompleteOrder(it);
     EList<Dependency> _dependencies_1 = it.getDependencies();
     final ArrayList<Dependency> specifiedDependencies = new ArrayList<Dependency>(_dependencies_1);
     TmscRefinements.refineWithCallStacks(it);
-    final Consumer<Dependency> _function_2 = (Dependency it_1) -> {
+    final Consumer<Dependency> _function_3 = (Dependency it_1) -> {
       this.addDependencyDefaults(it_1);
     };
-    specifiedDependencies.forEach(_function_2);
-    final Function1<Lifeline, EList<Execution>> _function_3 = (Lifeline it_1) -> {
+    specifiedDependencies.forEach(_function_3);
+    final Function1<Lifeline, EList<Execution>> _function_4 = (Lifeline it_1) -> {
       return it_1.getExecutions();
     };
-    final Consumer<Execution> _function_4 = (Execution it_1) -> {
+    final Consumer<Execution> _function_5 = (Execution it_1) -> {
       this.addExecutionDefaults(it_1);
     };
-    IterableExtensions.<Lifeline, Execution>flatMap(it.getLifelines(), _function_3).forEach(_function_4);
-    final Function1<Event, Boolean> _function_5 = (Event it_1) -> {
+    IterableExtensions.<Lifeline, Execution>flatMap(it.getLifelines(), _function_4).forEach(_function_5);
+    final Function1<Event, Boolean> _function_6 = (Event it_1) -> {
       Long _timestamp = it_1.getTimestamp();
       return Boolean.valueOf((_timestamp == null));
     };
-    final Function1<Event, Boolean> _function_6 = (Event it_1) -> {
+    final Function1<Event, Boolean> _function_7 = (Event it_1) -> {
       XEvent _invResolveOne = this.<XEvent>invResolveOne(it_1, XEvent.class);
       return Boolean.valueOf((_invResolveOne == null));
     };
-    final Consumer<Event> _function_7 = (Event it_1) -> {
-      final Function1<Dependency, Boolean> _function_8 = (Dependency it_2) -> {
+    final Consumer<Event> _function_8 = (Event it_1) -> {
+      final Function1<Dependency, Boolean> _function_9 = (Dependency it_2) -> {
         Event _source = it_2.getSource();
         Long _timestamp = null;
         if (_source!=null) {
@@ -210,7 +221,7 @@ public class TmscXtextToTmscTransformation {
         }
         return Boolean.valueOf((_timestamp == null));
       };
-      final Function1<Dependency, Long> _function_9 = (Dependency it_2) -> {
+      final Function1<Dependency, Long> _function_10 = (Dependency it_2) -> {
         Long _timestamp = it_2.getSource().getTimestamp();
         Long _elvis = null;
         Long _timeBound = it_2.getTimeBound();
@@ -221,24 +232,24 @@ public class TmscXtextToTmscTransformation {
         }
         return Long.valueOf(((_timestamp).longValue() + (_elvis).longValue()));
       };
-      it_1.setTimestamp(Queries.<Long>max(IterableExtensions.<Dependency, Long>map(IterableExtensions.<Dependency>reject(it_1.getFullScopeIncomingDependencies(), _function_8), _function_9), Long.valueOf(0L)));
+      it_1.setTimestamp(Queries.<Long>max(IterableExtensions.<Dependency, Long>map(IterableExtensions.<Dependency>reject(it_1.getFullScopeIncomingDependencies(), _function_9), _function_10), Long.valueOf(0L)));
     };
-    IterableExtensions.<Event>reject(IterableExtensions.<Event>filter(TmscTopologicalOrder.getEventsInTopologicalOrder(it), _function_5), _function_6).forEach(_function_7);
-    final Function1<Event, Long> _function_8 = (Event it_1) -> {
+    IterableExtensions.<Event>reject(IterableExtensions.<Event>filter(TmscTopologicalOrder.getEventsInTopologicalOrder(it), _function_6), _function_7).forEach(_function_8);
+    final Function1<Event, Long> _function_9 = (Event it_1) -> {
       return it_1.getTimestamp();
     };
-    final List<Long> timestamps = IterableExtensions.<Long>toList(IterableExtensions.<Long>filterNull(IterableExtensions.<Event, Long>map(it.getEvents(), _function_8)));
+    final List<Long> timestamps = IterableExtensions.<Long>toList(IterableExtensions.<Long>filterNull(IterableExtensions.<Event, Long>map(it.getEvents(), _function_9)));
     boolean _isEmpty = timestamps.isEmpty();
     boolean _not = (!_isEmpty);
     if (_not) {
       it.setStartTime(IterableExtensions.<Long>min(timestamps));
       it.setEndTime(IterableExtensions.<Long>max(timestamps));
     }
-    final Function1<Event, Boolean> _function_9 = (Event it_1) -> {
+    final Function1<Event, Boolean> _function_10 = (Event it_1) -> {
       Long _timestamp = it_1.getTimestamp();
       return Boolean.valueOf((_timestamp == null));
     };
-    final Consumer<Event> _function_10 = (Event e) -> {
+    final Consumer<Event> _function_11 = (Event e) -> {
       Long _xifexpression = null;
       if ((e instanceof EntryEvent)) {
         _xifexpression = it.getStartTime();
@@ -247,7 +258,7 @@ public class TmscXtextToTmscTransformation {
       }
       e.setTimestamp(_xifexpression);
     };
-    IterableExtensions.<Event>filter(it.getEvents(), _function_9).forEach(_function_10);
+    IterableExtensions.<Event>filter(it.getEvents(), _function_10).forEach(_function_11);
     this.addPropertiesIfAbsent(it, tmscXtext.getProperties());
   }
   
@@ -434,6 +445,33 @@ public class TmscXtextToTmscTransformation {
     this.addPropertiesIfAbsent(it, xFunctionParameter.getProperties());
   }
   
+  private ExampleHost xHost2Host(final XHost xHost) {
+    final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xHost);
+    final ExampleHost _result;
+    synchronized (_createCache_xHost2Host) {
+      if (_createCache_xHost2Host.containsKey(_cacheKey)) {
+        return _createCache_xHost2Host.get(_cacheKey);
+      }
+      ExampleHost _createExampleHost = TmscXtextToTmscTransformation.m_arch_example.createExampleHost();
+      _result = _createExampleHost;
+      _createCache_xHost2Host.put(_cacheKey, _result);
+    }
+    _init_xHost2Host(_result, xHost);
+    return _result;
+  }
+  
+  private final HashMap<ArrayList<?>, ExampleHost> _createCache_xHost2Host = CollectionLiterals.newHashMap();
+  
+  private void _init_xHost2Host(final ExampleHost it, final XHost xHost) {
+    this.handleXNamedArchitectureElement(it, xHost);
+    EList<Executor> _executors = it.getExecutors();
+    final Function1<XExecutor, Executor> _function = (XExecutor it_1) -> {
+      return this.xExecutor2Executor(it_1);
+    };
+    List<Executor> _map = ListExtensions.<XExecutor, Executor>map(xHost.getExecutors(), _function);
+    Iterables.<Executor>addAll(_executors, _map);
+  }
+  
   @Resolvable
   private Executor xExecutor2Executor(final XExecutor xExecutor) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xExecutor);
@@ -489,7 +527,6 @@ public class TmscXtextToTmscTransformation {
   private void _init_xExecutor2Lifeline(final Lifeline it, final XExecutor xExecutor) {
     it.setExecutor(this.<Executor>resolveOne(xExecutor, Executor.class));
     EList<Event> _events = it.getEvents();
-    EObject _eContainer = xExecutor.eContainer();
     final Function1<XEvent, Boolean> _function = (XEvent it_1) -> {
       XExecutor _executor = it_1.getExecutor();
       return Boolean.valueOf(Objects.equal(_executor, xExecutor));
@@ -497,7 +534,7 @@ public class TmscXtextToTmscTransformation {
     final Function1<XEvent, Event> _function_1 = (XEvent it_1) -> {
       return this.xEvent2Event(it_1);
     };
-    Iterable<Event> _map = IterableExtensions.<XEvent, Event>map(IterableExtensions.<XEvent>filter(((TmscXtextModel) _eContainer).getEvents(), _function), _function_1);
+    Iterable<Event> _map = IterableExtensions.<XEvent, Event>map(IterableExtensions.<XEvent>filter(EcoreUtil2.<TmscXtextModel>getContainerOfType(xExecutor, TmscXtextModel.class).getEvents(), _function), _function_1);
     Iterables.<Event>addAll(_events, _map);
     boolean _isUntraced = xExecutor.isUntraced();
     if (_isUntraced) {
@@ -718,13 +755,14 @@ public class TmscXtextToTmscTransformation {
         BigDecimal _elvis_3 = null;
         BigDecimal _elvis_4 = null;
         BigDecimal _elvis_5 = null;
+        BigDecimal _elvis_6 = null;
         XEvent _invResolveOne_1 = this.<XEvent>invResolveOne(((LifelineSegment)dependency).getTarget(), XEvent.class);
         BigDecimal _timeBound_1 = null;
         if (_invResolveOne_1!=null) {
           _timeBound_1=_invResolveOne_1.getTimeBound();
         }
         if (_timeBound_1 != null) {
-          _elvis_5 = _timeBound_1;
+          _elvis_6 = _timeBound_1;
         } else {
           Execution _activeExecution = ((LifelineSegment)dependency).getActiveExecution();
           Function _function_1 = null;
@@ -739,10 +777,10 @@ public class TmscXtextToTmscTransformation {
           if (_invResolveOne_2!=null) {
             _timeBound_2=_invResolveOne_2.getTimeBound();
           }
-          _elvis_5 = _timeBound_2;
+          _elvis_6 = _timeBound_2;
         }
-        if (_elvis_5 != null) {
-          _elvis_4 = _elvis_5;
+        if (_elvis_6 != null) {
+          _elvis_5 = _elvis_6;
         } else {
           Execution _activeExecution_1 = ((LifelineSegment)dependency).getActiveExecution();
           Component _component = null;
@@ -757,43 +795,53 @@ public class TmscXtextToTmscTransformation {
           if (_invResolveOne_3!=null) {
             _timeBound_3=_invResolveOne_3.getTimeBound();
           }
-          _elvis_4 = _timeBound_3;
+          _elvis_5 = _timeBound_3;
+        }
+        if (_elvis_5 != null) {
+          _elvis_4 = _elvis_5;
+        } else {
+          BigDecimal _timeBound_4 = this.<XExecutor>invResolveOne(((LifelineSegment)dependency).getSource().getLifeline(), XExecutor.class).getTimeBound();
+          _elvis_4 = _timeBound_4;
         }
         if (_elvis_4 != null) {
           _elvis_3 = _elvis_4;
         } else {
-          BigDecimal _timeBound_4 = this.<XExecutor>invResolveOne(((LifelineSegment)dependency).getSource().getLifeline(), XExecutor.class).getTimeBound();
-          _elvis_3 = _timeBound_4;
+          XHost _containerOfType = EcoreUtil2.<XHost>getContainerOfType(this.<XExecutor>invResolveOne(((LifelineSegment)dependency).getSource().getLifeline(), XExecutor.class), XHost.class);
+          BigDecimal _timeBound_5 = null;
+          if (_containerOfType!=null) {
+            _timeBound_5=_containerOfType.getTimeBound();
+          }
+          _elvis_3 = _timeBound_5;
         }
         if (_elvis_3 != null) {
           _elvis_2 = _elvis_3;
         } else {
-          BigDecimal _timeBound_5 = null;
+          BigDecimal _timeBound_6 = null;
           if (dependencySettings!=null) {
-            _timeBound_5=dependencySettings.getTimeBound();
+            _timeBound_6=dependencySettings.getTimeBound();
           }
-          _elvis_2 = _timeBound_5;
+          _elvis_2 = _timeBound_6;
         }
         if (_elvis_2 != null) {
           _elvis_1 = _elvis_2;
         } else {
-          BigDecimal _timeBound_6 = tmscSettings.getTimeBound();
-          _elvis_1 = _timeBound_6;
+          BigDecimal _timeBound_7 = tmscSettings.getTimeBound();
+          _elvis_1 = _timeBound_7;
         }
         _xifexpression = _elvis_1;
       } else {
-        BigDecimal _elvis_6 = null;
-        BigDecimal _timeBound_7 = null;
+        BigDecimal _elvis_7 = null;
+        BigDecimal _timeBound_8 = null;
         if (dependencySettings!=null) {
-          _timeBound_7=dependencySettings.getTimeBound();
+          _timeBound_8=dependencySettings.getTimeBound();
         }
-        if (_timeBound_7 != null) {
-          _elvis_6 = _timeBound_7;
+        if (_timeBound_8 != null) {
+          _elvis_7 = _timeBound_8;
         } else {
-          BigDecimal _timeBound_8 = tmscSettings.getTimeBound();
-          _elvis_6 = _timeBound_8;
+          BigDecimal _timeBound_9 = tmscSettings.getTimeBound();
+          _elvis_7 = _timeBound_9;
         }
-        _xifexpression = _elvis_6;
+        _xifexpression = _elvis_7;
       }
       final BigDecimal timeBound = _xifexpression;
       dependency.setTimeBound(TmscXtextToTmscTransformation.toNanos(timeBound));
@@ -803,18 +851,19 @@ public class TmscXtextToTmscTransformation {
     if (_tripleEquals_1) {
       Boolean _xifexpression_1 = null;
       if ((dependency instanceof LifelineSegment)) {
-        Boolean _elvis_7 = null;
         Boolean _elvis_8 = null;
         Boolean _elvis_9 = null;
         Boolean _elvis_10 = null;
         Boolean _elvis_11 = null;
+        Boolean _elvis_12 = null;
+        Boolean _elvis_13 = null;
         XEvent _invResolveOne_4 = this.<XEvent>invResolveOne(((LifelineSegment)dependency).getTarget(), XEvent.class);
         Boolean _scheduled_1 = null;
         if (_invResolveOne_4!=null) {
           _scheduled_1=_invResolveOne_4.getScheduled();
         }
         if (_scheduled_1 != null) {
-          _elvis_11 = _scheduled_1;
+          _elvis_13 = _scheduled_1;
         } else {
           Execution _activeExecution_2 = ((LifelineSegment)dependency).getActiveExecution();
           Function _function_2 = null;
@@ -829,10 +878,10 @@ public class TmscXtextToTmscTransformation {
           if (_invResolveOne_5!=null) {
             _scheduled_2=_invResolveOne_5.getScheduled();
           }
-          _elvis_11 = _scheduled_2;
+          _elvis_13 = _scheduled_2;
         }
-        if (_elvis_11 != null) {
-          _elvis_10 = _elvis_11;
+        if (_elvis_13 != null) {
+          _elvis_12 = _elvis_13;
         } else {
           Execution _activeExecution_3 = ((LifelineSegment)dependency).getActiveExecution();
           Component _component_1 = null;
@@ -847,43 +896,53 @@ public class TmscXtextToTmscTransformation {
           if (_invResolveOne_6!=null) {
             _scheduled_3=_invResolveOne_6.getScheduled();
           }
-          _elvis_10 = _scheduled_3;
+          _elvis_12 = _scheduled_3;
+        }
+        if (_elvis_12 != null) {
+          _elvis_11 = _elvis_12;
+        } else {
+          Boolean _scheduled_4 = this.<XExecutor>invResolveOne(((LifelineSegment)dependency).getSource().getLifeline(), XExecutor.class).getScheduled();
+          _elvis_11 = _scheduled_4;
+        }
+        if (_elvis_11 != null) {
+          _elvis_10 = _elvis_11;
+        } else {
+          XHost _containerOfType_1 = EcoreUtil2.<XHost>getContainerOfType(this.<XExecutor>invResolveOne(((LifelineSegment)dependency).getSource().getLifeline(), XExecutor.class), XHost.class);
+          Boolean _scheduled_5 = null;
+          if (_containerOfType_1!=null) {
+            _scheduled_5=_containerOfType_1.getScheduled();
+          }
+          _elvis_10 = _scheduled_5;
         }
         if (_elvis_10 != null) {
           _elvis_9 = _elvis_10;
         } else {
-          Boolean _scheduled_4 = this.<XExecutor>invResolveOne(((LifelineSegment)dependency).getSource().getLifeline(), XExecutor.class).getScheduled();
-          _elvis_9 = _scheduled_4;
+          Boolean _scheduled_6 = null;
+          if (dependencySettings!=null) {
+            _scheduled_6=dependencySettings.getScheduled();
+          }
+          _elvis_9 = _scheduled_6;
         }
         if (_elvis_9 != null) {
           _elvis_8 = _elvis_9;
         } else {
-          Boolean _scheduled_5 = null;
-          if (dependencySettings!=null) {
-            _scheduled_5=dependencySettings.getScheduled();
-          }
-          _elvis_8 = _scheduled_5;
+          Boolean _scheduled_7 = tmscSettings.getScheduled();
+          _elvis_8 = _scheduled_7;
         }
-        if (_elvis_8 != null) {
-          _elvis_7 = _elvis_8;
-        } else {
-          Boolean _scheduled_6 = tmscSettings.getScheduled();
-          _elvis_7 = _scheduled_6;
-        }
-        _xifexpression_1 = _elvis_7;
+        _xifexpression_1 = _elvis_8;
       } else {
-        Boolean _elvis_12 = null;
-        Boolean _scheduled_7 = null;
+        Boolean _elvis_14 = null;
+        Boolean _scheduled_8 = null;
         if (dependencySettings!=null) {
-          _scheduled_7=dependencySettings.getScheduled();
+          _scheduled_8=dependencySettings.getScheduled();
         }
-        if (_scheduled_7 != null) {
-          _elvis_12 = _scheduled_7;
+        if (_scheduled_8 != null) {
+          _elvis_14 = _scheduled_8;
         } else {
-          Boolean _scheduled_8 = tmscSettings.getScheduled();
-          _elvis_12 = _scheduled_8;
+          Boolean _scheduled_9 = tmscSettings.getScheduled();
+          _elvis_14 = _scheduled_9;
         }
-        _xifexpression_1 = _elvis_12;
+        _xifexpression_1 = _elvis_14;
       }
       dependency.setScheduled(_xifexpression_1);
     }

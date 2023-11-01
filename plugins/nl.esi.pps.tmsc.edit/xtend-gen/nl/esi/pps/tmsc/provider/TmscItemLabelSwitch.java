@@ -14,6 +14,8 @@ import com.google.common.base.Objects;
 import java.util.Arrays;
 import nl.esi.emf.edit.provider.EMFEditUtil;
 import nl.esi.pps.architecture.ArchitecturePackage;
+import nl.esi.pps.architecture.deployed.DeployedPackage;
+import nl.esi.pps.architecture.deployed.Host;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
 import nl.esi.pps.architecture.instantiated.Executor;
@@ -38,7 +40,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
-import org.eclipse.xtext.xbase.lib.StringExtensions;
 
 @SuppressWarnings("all")
 public class TmscItemLabelSwitch {
@@ -62,6 +63,11 @@ public class TmscItemLabelSwitch {
       }
       if (!_matched) {
         if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
+        if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
@@ -108,6 +114,11 @@ public class TmscItemLabelSwitch {
         }
       }
       if (!_matched) {
+        if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
+          _matched=true;
+        }
+      }
+      if (!_matched) {
         if (Objects.equal(_ePackage, InstantiatedPackage.eINSTANCE)) {
           _matched=true;
         }
@@ -144,12 +155,22 @@ public class TmscItemLabelSwitch {
   }
   
   protected String _getText(final Lifeline lifeline) {
-    Executor _executor = lifeline.getExecutor();
-    String _text = null;
-    if (_executor!=null) {
-      _text=this.getText(_executor);
+    final Executor executor = lifeline.getExecutor();
+    if ((executor == null)) {
+      return null;
     }
-    return _text;
+    final Host host = executor.getHost();
+    StringConcatenation _builder = new StringConcatenation();
+    {
+      if ((host != null)) {
+        String _text = this.getText(host);
+        _builder.append(_text);
+        _builder.append(":");
+      }
+    }
+    String _text_1 = this.getText(executor);
+    _builder.append(_text_1);
+    return _builder.toString();
   }
   
   protected String _getText(final EntryEvent event) {
@@ -170,14 +191,30 @@ public class TmscItemLabelSwitch {
   
   protected String _getText(final MessageControl messageControl) {
     StringConcatenation _builder = new StringConcatenation();
-    _builder.append("Control ");
     Message _message = messageControl.getMessage();
-    String _text = null;
+    EClass _eClass = null;
     if (_message!=null) {
-      _text=this.getText(_message);
+      _eClass=_message.eClass();
     }
-    String _firstLower = StringExtensions.toFirstLower(_text);
-    _builder.append(_firstLower);
+    String _text = null;
+    if (_eClass!=null) {
+      _text=this.getText(_eClass);
+    }
+    _builder.append(_text);
+    _builder.append(" control from ");
+    Event _source = messageControl.getSource();
+    String _reference = null;
+    if (_source!=null) {
+      _reference=this.getReference(_source);
+    }
+    _builder.append(_reference);
+    _builder.append(" to ");
+    Event _target = messageControl.getTarget();
+    String _reference_1 = null;
+    if (_target!=null) {
+      _reference_1=this.getReference(_target);
+    }
+    _builder.append(_reference_1);
     return _builder.toString();
   }
   

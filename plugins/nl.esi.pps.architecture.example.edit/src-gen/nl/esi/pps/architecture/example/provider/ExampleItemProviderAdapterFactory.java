@@ -96,6 +96,29 @@ public class ExampleItemProviderAdapterFactory extends ExampleAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link nl.esi.pps.architecture.example.ExampleHost} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExampleHostItemProvider exampleHostItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link nl.esi.pps.architecture.example.ExampleHost}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExampleHostAdapter() {
+		if (exampleHostItemProvider == null) {
+			exampleHostItemProvider = new ExampleHostItemProvider(this);
+		}
+
+		return exampleHostItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -202,6 +225,8 @@ public class ExampleItemProviderAdapterFactory extends ExampleAdapterFactory
 	public void dispose() {
 		if (exampleArchitectureItemProvider != null)
 			exampleArchitectureItemProvider.dispose();
+		if (exampleHostItemProvider != null)
+			exampleHostItemProvider.dispose();
 	}
 
 }

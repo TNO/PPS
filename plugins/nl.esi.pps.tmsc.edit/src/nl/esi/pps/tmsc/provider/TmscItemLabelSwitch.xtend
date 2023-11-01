@@ -30,6 +30,7 @@ import nl.esi.pps.tmsc.TmscPackage
 import nl.esi.pps.tmsc.text.ETimestampFormat
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
+import nl.esi.pps.architecture.deployed.DeployedPackage
 
 class TmscItemLabelSwitch {
     public static val eINSTANCE = new TmscItemLabelSwitch
@@ -43,6 +44,7 @@ class TmscItemLabelSwitch {
             case TmscPackage::eINSTANCE: eObject.eClass.text
             case SpecifiedPackage::eINSTANCE,
             case ImplementedPackage::eINSTANCE,
+            case DeployedPackage::eINSTANCE,
             case InstantiatedPackage::eINSTANCE,
             case ArchitecturePackage::eINSTANCE: ArchitectureItemLabelSwitch::eINSTANCE.getText(eObject)
             default: EMFEditUtil::getText(eObject)
@@ -54,6 +56,7 @@ class TmscItemLabelSwitch {
             case TmscPackage::eINSTANCE: TmscEditPlugin.INSTANCE.getString('''_UI_«eClass.name»_type''')
             case SpecifiedPackage::eINSTANCE,
             case ImplementedPackage::eINSTANCE,
+            case DeployedPackage::eINSTANCE,
             case InstantiatedPackage::eINSTANCE,
             case ArchitecturePackage::eINSTANCE: ArchitectureItemLabelSwitch::eINSTANCE.getText(eClass)
             default: null
@@ -70,7 +73,12 @@ class TmscItemLabelSwitch {
     }
 
     dispatch def String getText(Lifeline lifeline) {
-        return lifeline.executor?.text
+        val executor = lifeline.executor
+        if (executor === null) {
+            return null
+        }
+        val host = executor.host
+        return '''«IF host !== null»«host.text»:«ENDIF»«executor.text»'''
     }
 
     dispatch def String getText(EntryEvent event) {
@@ -82,7 +90,7 @@ class TmscItemLabelSwitch {
     }
 
     dispatch def String getText(MessageControl messageControl) {
-        return '''Control «messageControl.message?.text.toFirstLower»'''
+        return '''«messageControl.message?.eClass?.text» control from «messageControl.source?.reference» to «messageControl.target?.reference»'''
     }
     
     private dispatch def String getReference(EntryEvent event) {

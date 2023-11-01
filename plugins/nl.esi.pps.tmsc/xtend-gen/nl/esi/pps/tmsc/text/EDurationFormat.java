@@ -88,7 +88,9 @@ public class EDurationFormat extends NumberFormat {
     for (TimeUnit unit = this.maximumTimeUnit; (unit.compareTo(this.minimumTimeUnit) > 0); unit = TimeUnit.values()[(unit.ordinal() - 1)]) {
       {
         final long divisor = this.minimumTimeUnit.convert(1, unit);
-        if ((value >= divisor)) {
+        long _abs = Math.abs(value);
+        boolean _greaterEqualsThan = (_abs >= divisor);
+        if (_greaterEqualsThan) {
           if (((value % divisor) == 0)) {
             return toAppendTo.append((value / divisor)).append(this.getPostfix(unit));
           } else {

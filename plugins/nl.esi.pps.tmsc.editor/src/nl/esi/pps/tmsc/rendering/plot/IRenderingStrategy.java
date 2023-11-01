@@ -18,7 +18,6 @@ import org.jfree.data.xy.XYIntervalSeriesCollection;
 
 import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.Dependency;
-import nl.esi.pps.tmsc.Execution;
 import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.LifelineSegment;
 import nl.esi.pps.tmsc.viewers.plot.DependenciesRenderer;
@@ -57,7 +56,7 @@ public interface IRenderingStrategy extends IViewerFilter {
 		if (element instanceof LifelineSegment) {
 			return false;
 		} else if (element instanceof Dependency) {
-			return element instanceof Execution || !((Dependency) element).isProjection();
+			return !((Dependency) element).isProjection();
 		} else {
 			return true;
 		}

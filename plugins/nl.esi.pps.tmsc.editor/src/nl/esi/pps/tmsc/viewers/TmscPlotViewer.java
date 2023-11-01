@@ -59,6 +59,8 @@ import org.jfree.chart.ChartFactory;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.annotations.XYAnnotation;
 import org.jfree.chart.annotations.XYMeasurementAnnotation;
+import org.jfree.chart.event.ChartChangeEventType;
+import org.jfree.chart.event.PlotChangeEvent;
 import org.jfree.chart.labels.ItemLabelAnchor;
 import org.jfree.chart.labels.ItemLabelClip;
 import org.jfree.chart.labels.ItemLabelPosition;
@@ -94,8 +96,6 @@ import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.Interval;
 import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.Measurement;
-import nl.esi.pps.tmsc.MessageControl;
-import nl.esi.pps.tmsc.Reply;
 import nl.esi.pps.tmsc.presentation.TmscEditorPlugin;
 import nl.esi.pps.tmsc.rendering.RenderingProperties;
 import nl.esi.pps.tmsc.rendering.plot.DefaultRenderingStrategy;
@@ -263,6 +263,7 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 			}
 		};
 		measureWithAnnotations.addToChartPanel(getChartPanel());
+		getChartPanelSelectionHandler().setZoomToSelectionMargin(0.05);
 
 		XYPlot plot = new XYPlot();
 		plot.setSeriesRenderingOrder(SeriesRenderingOrder.FORWARD);
@@ -339,6 +340,13 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 			return;
 		}
 		super.inputChanged(input, oldInput);
+
+		// Events are turned off during refresh and a general event is fired
+		// when enabling it again, but the ChartPanelCompositeHistory requires
+		// a DATASET_UPDATED event to clear its history.
+        PlotChangeEvent event = new PlotChangeEvent(getXYPlot());
+        event.setType(ChartChangeEventType.DATASET_UPDATED);
+		getXYPlot().notifyListeners(event);
 	}
 
 	@Override
@@ -469,7 +477,6 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 						dependenciesDataset, dependenciesRenderer);
 			} else if (sourceLocation != null) {
 				DependencyOutgoingAnnotation annotation = new DependencyOutgoingAnnotation(sourceLocation, dependency);
-				annotation.setAngle(Math.PI * (isReply(dependency) ? 0.25 : -0.25));
 				if (dependency.getTarget() != null) {
 					annotation.setText(getLabelProvider().getText(dependency.getTarget().getLifeline()));
 					annotation.setToolTipText(getLabelProvider().getText(dependency.getTarget()));
@@ -477,7 +484,6 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 				renderingStrategy.add(annotation, dependenciesDataset, dependenciesRenderer);
 			} else if (targetLocation != null) {
 				DependencyIncomingAnnotation annotation = new DependencyIncomingAnnotation(targetLocation, dependency);
-				annotation.setAngle(Math.PI * (isReply(dependency) ? -0.75 : 0.75));
 				if (dependency.getSource() != null) {
 					annotation.setText(getLabelProvider().getText(dependency.getSource().getLifeline()));
 					annotation.setToolTipText(getLabelProvider().getText(dependency.getSource()));
@@ -603,11 +609,6 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 		return renderingStrategy;
 	}
 
-	private boolean isReply(Dependency dependency) {
-		return (dependency instanceof MessageControl && ((MessageControl) dependency).getMessage() instanceof Reply)
-				|| dependency instanceof Reply;
-	}
-
 	public Point2D getEventLocation(Event event) {
 		Double eventX = getEventX(event);
 		Double eventY = getEventY(event);
@@ -640,11 +641,10 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 			return null;
 		}
 		Range eventYRange = lifelineRanges.get(event.getLifeline());
-		if (eventYRange == null) {
-			return null;
+		if (eventYRange != null && event.getExecution() != null) {
+			eventYRange = getExecutionRange(event.getExecution(), eventYRange);
 		}
-		return event.getExecution() == null ? eventYRange.getCentralValue()
-				: getExecutionRange(event.getExecution(), eventYRange).getCentralValue();
+		return eventYRange == null ? null : eventYRange.getCentralValue();
 	}
 
 	/**
@@ -654,7 +654,7 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 	 * @see #getExecutionRange(Execution, Range)
 	 */
 	private double getLifelineLength(Iterable<Execution> componentExecutions) {
-		QueryableIterable<Integer> callStackLevels = from(componentExecutions).collectOne(this::getCallStackLevel);
+		QueryableIterable<Integer> callStackLevels = from(componentExecutions).xcollectOne(this::getCallStackLevel);
 		int maxStackLevel = IterableUtil.max(callStackLevels, 0);
 		// Add 1 to lift zero based stack level and 0.2 for resource padding
 		return maxStackLevel + 1.2;
@@ -664,20 +664,27 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 	 * @see #getLifelineLength(Iterable)
 	 */
 	private Range getExecutionRange(Execution execution, Range componentRange) {
-		if (execution == null) {
-			return componentRange;
+		Integer callStackLevel = getCallStackLevel(execution);
+		if (callStackLevel == null) {
+			// Execution is not visible
+			return null;
 		}
 		// Add 0.1 for resource padding
-		double executionLower = componentRange.getLowerBound() + getCallStackLevel(execution) + 0.1;
+		double executionLower = componentRange.getLowerBound() + callStackLevel + 0.1;
 		return new Range(executionLower, executionLower + 1);
 	}
 
-	private int getCallStackLevel(Execution execution) {
-		QueryableIterable<Execution> parents = from(execution).climbTree(Execution::getParent);
+	private Integer getCallStackLevel(Execution execution) {
+		QueryableIterable<Execution> stackTrace = from(execution).climbTree(true, Execution::getParent);
 		if (hasFilters()) {
-			return filter(parents.toArray()).length;
+			Object[] filteredStackTrace = filter(stackTrace.toArray());
+			if (filteredStackTrace.length == 0 || filteredStackTrace[0] != execution) {
+				// Execution is filtered out
+				return null;
+			}
+			return filteredStackTrace.length - 1;
 		} else {
-			return parents.size();
+			return stackTrace.size() - 1;
 		}
 	}
 

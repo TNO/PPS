@@ -44,6 +44,7 @@ public class FullScopeTMSCItemProvider extends TMSCItemProvider {
 		addEpochTimePropertyDescriptor(object);
 		addStartTimePropertyDescriptor(object);
 		addEndTimePropertyDescriptor(object);
+		addDurationPropertyDescriptor(object);
 	}
 
 	/**
@@ -95,6 +96,23 @@ public class FullScopeTMSCItemProvider extends TMSCItemProvider {
 						TmscPackage.Literals.FULL_SCOPE_TMSC__END_TIME, false, false, false,
 						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, getDefaultDescriptorCategory(object), null,
 						URI.createURI("editor://nl.esi.pps.tmsc.text.ETimestampFormat/")));
+	}
+
+	/**
+	 * This adds a property descriptor for the Duration feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addDurationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_FullScopeTMSC_duration_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_FullScopeTMSC_duration_feature",
+								"_UI_FullScopeTMSC_type"),
+						TmscPackage.Literals.FULL_SCOPE_TMSC__DURATION, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, getDefaultDescriptorCategory(object), null,
+						URI.createURI("editor://nl.esi.pps.tmsc.text.EDurationFormat/")));
 	}
 
 	/**
@@ -194,6 +212,7 @@ public class FullScopeTMSCItemProvider extends TMSCItemProvider {
 		case TmscPackage.FULL_SCOPE_TMSC__EPOCH_TIME:
 		case TmscPackage.FULL_SCOPE_TMSC__START_TIME:
 		case TmscPackage.FULL_SCOPE_TMSC__END_TIME:
+		case TmscPackage.FULL_SCOPE_TMSC__DURATION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case TmscPackage.FULL_SCOPE_TMSC__MEASUREMENTS:

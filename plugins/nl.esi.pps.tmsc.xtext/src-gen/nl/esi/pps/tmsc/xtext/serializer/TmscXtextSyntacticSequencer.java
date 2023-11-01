@@ -27,6 +27,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_XEvent___LeftCurlyBracketKeyword_8_0_RightCurlyBracketKeyword_8_2__q;
 	protected AbstractElementAlias match_XExecutor___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
 	protected AbstractElementAlias match_XFunction___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q;
+	protected AbstractElementAlias match_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
 	protected AbstractElementAlias match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
 	protected AbstractElementAlias match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
 	
@@ -39,6 +40,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_XEvent___LeftCurlyBracketKeyword_8_0_RightCurlyBracketKeyword_8_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXEventAccess().getLeftCurlyBracketKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getXEventAccess().getRightCurlyBracketKeyword_8_2()));
 		match_XExecutor___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXExecutorAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXExecutorAccess().getRightCurlyBracketKeyword_4_2()));
 		match_XFunction___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXFunctionAccess().getLeftCurlyBracketKeyword_6_0()), new TokenAlias(false, false, grammarAccess.getXFunctionAccess().getRightCurlyBracketKeyword_6_2()));
+		match_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXHostAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXHostAccess().getRightCurlyBracketKeyword_4_2()));
 		match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXInterfaceAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXInterfaceAccess().getRightCurlyBracketKeyword_3_2()));
 		match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXOperationAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXOperationAccess().getRightCurlyBracketKeyword_3_2()));
 	}
@@ -67,6 +69,8 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_XExecutor___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XFunction___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q.equals(syntax))
 				emit_XFunction___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q.equals(syntax))
+				emit_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
 				emit_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
@@ -108,6 +112,10 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
 	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
@@ -140,6 +148,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) events+=XEvent
 	 *     (rule start) (ambiguity) executors+=XExecutor
 	 *     (rule start) (ambiguity) functions+=XFunction
+	 *     (rule start) (ambiguity) hosts+=XHost
 	 *     (rule start) (ambiguity) interfaces+=XInterface
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) (rule end)
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) components+=XComponent
@@ -147,6 +156,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) events+=XEvent
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) executors+=XExecutor
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) functions+=XFunction
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) hosts+=XHost
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) interfaces+=XInterface
 	 *     components+=XComponent (ambiguity) (rule end)
 	 *     components+=XComponent (ambiguity) components+=XComponent
@@ -154,6 +164,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     components+=XComponent (ambiguity) events+=XEvent
 	 *     components+=XComponent (ambiguity) executors+=XExecutor
 	 *     components+=XComponent (ambiguity) functions+=XFunction
+	 *     components+=XComponent (ambiguity) hosts+=XHost
 	 *     components+=XComponent (ambiguity) interfaces+=XInterface
 	 *     dependencySettings+=XDependencySettings (ambiguity) (rule end)
 	 *     dependencySettings+=XDependencySettings (ambiguity) components+=XComponent
@@ -161,6 +172,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     dependencySettings+=XDependencySettings (ambiguity) events+=XEvent
 	 *     dependencySettings+=XDependencySettings (ambiguity) executors+=XExecutor
 	 *     dependencySettings+=XDependencySettings (ambiguity) functions+=XFunction
+	 *     dependencySettings+=XDependencySettings (ambiguity) hosts+=XHost
 	 *     dependencySettings+=XDependencySettings (ambiguity) interfaces+=XInterface
 	 *     events+=XEvent (ambiguity) (rule end)
 	 *     events+=XEvent (ambiguity) components+=XComponent
@@ -168,6 +180,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     events+=XEvent (ambiguity) events+=XEvent
 	 *     events+=XEvent (ambiguity) executors+=XExecutor
 	 *     events+=XEvent (ambiguity) functions+=XFunction
+	 *     events+=XEvent (ambiguity) hosts+=XHost
 	 *     events+=XEvent (ambiguity) interfaces+=XInterface
 	 *     executors+=XExecutor (ambiguity) (rule end)
 	 *     executors+=XExecutor (ambiguity) components+=XComponent
@@ -175,6 +188,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     executors+=XExecutor (ambiguity) events+=XEvent
 	 *     executors+=XExecutor (ambiguity) executors+=XExecutor
 	 *     executors+=XExecutor (ambiguity) functions+=XFunction
+	 *     executors+=XExecutor (ambiguity) hosts+=XHost
 	 *     executors+=XExecutor (ambiguity) interfaces+=XInterface
 	 *     functions+=XFunction (ambiguity) (rule end)
 	 *     functions+=XFunction (ambiguity) components+=XComponent
@@ -182,13 +196,23 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     functions+=XFunction (ambiguity) events+=XEvent
 	 *     functions+=XFunction (ambiguity) executors+=XExecutor
 	 *     functions+=XFunction (ambiguity) functions+=XFunction
+	 *     functions+=XFunction (ambiguity) hosts+=XHost
 	 *     functions+=XFunction (ambiguity) interfaces+=XInterface
+	 *     hosts+=XHost (ambiguity) (rule end)
+	 *     hosts+=XHost (ambiguity) components+=XComponent
+	 *     hosts+=XHost (ambiguity) dependencySettings+=XDependencySettings
+	 *     hosts+=XHost (ambiguity) events+=XEvent
+	 *     hosts+=XHost (ambiguity) executors+=XExecutor
+	 *     hosts+=XHost (ambiguity) functions+=XFunction
+	 *     hosts+=XHost (ambiguity) hosts+=XHost
+	 *     hosts+=XHost (ambiguity) interfaces+=XInterface
 	 *     interfaces+=XInterface (ambiguity) (rule end)
 	 *     interfaces+=XInterface (ambiguity) components+=XComponent
 	 *     interfaces+=XInterface (ambiguity) dependencySettings+=XDependencySettings
 	 *     interfaces+=XInterface (ambiguity) events+=XEvent
 	 *     interfaces+=XInterface (ambiguity) executors+=XExecutor
 	 *     interfaces+=XInterface (ambiguity) functions+=XFunction
+	 *     interfaces+=XInterface (ambiguity) hosts+=XHost
 	 *     interfaces+=XInterface (ambiguity) interfaces+=XInterface
 	 *     properties+=XProperty '}' (ambiguity) (rule end)
 	 *     properties+=XProperty '}' (ambiguity) components+=XComponent
@@ -196,6 +220,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     properties+=XProperty '}' (ambiguity) events+=XEvent
 	 *     properties+=XProperty '}' (ambiguity) executors+=XExecutor
 	 *     properties+=XProperty '}' (ambiguity) functions+=XFunction
+	 *     properties+=XProperty '}' (ambiguity) hosts+=XHost
 	 *     properties+=XProperty '}' (ambiguity) interfaces+=XInterface
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) (rule end)
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) components+=XComponent
@@ -203,6 +228,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) events+=XEvent
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) executors+=XExecutor
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) functions+=XFunction
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) hosts+=XHost
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) interfaces+=XInterface
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) (rule end)
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) components+=XComponent
@@ -210,6 +236,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) events+=XEvent
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) executors+=XExecutor
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) functions+=XFunction
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) hosts+=XHost
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) interfaces+=XInterface
 	 */
 	protected void emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
@@ -264,6 +291,17 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     parameters+=XFunctionParameter ')' (ambiguity) (rule end)
 	 */
 	protected void emit_XFunction___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     name=ID (ambiguity) (rule end)
+	 */
+	protected void emit_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

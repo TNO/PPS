@@ -8,7 +8,14 @@ The release notes of the Platform Performance Suite (PPS) are listed below, in r
 === pass:normal[PPS v0.20]
 
 This release prepares PPS to be open sourced.
-*T.B.D.*
+
+The highlights of this release are:
+
+* TMSC meta-model changes, see developer guide for more information:
+** Added `Host` concept to the deployed architecture life-cycle phase.
+** `Executions` are not `Dependencies` anymore.
+** Added `ITimeRange` interface to support time-based selections.
+* This release also includes many bug fixes and improvements.
 
 === pass:normal[PPS v0.0.3]
 

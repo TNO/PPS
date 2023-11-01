@@ -24,9 +24,10 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
- *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponents <em>Components</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponents <em>Components</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getHosts <em>Hosts</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getExecutors <em>Executors</em>}</li>
  * </ul>
  *
@@ -35,18 +36,6 @@ import org.eclipse.emf.common.util.EList;
  * @generated
  */
 public interface ExampleArchitecture extends PropertiesContainer, ArchitectureModel {
-	/**
-	 * Returns the value of the '<em><b>Components</b></em>' containment reference list.
-	 * The list contents are of type {@link nl.esi.pps.architecture.specified.Component}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Components</em>' containment reference list.
-	 * @see nl.esi.pps.architecture.example.ExamplePackage#getExampleArchitecture_Components()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<Component> getComponents();
-
 	/**
 	 * Returns the value of the '<em><b>Interfaces</b></em>' containment reference list.
 	 * The list contents are of type {@link nl.esi.pps.architecture.specified.Interface}.
@@ -70,6 +59,30 @@ public interface ExampleArchitecture extends PropertiesContainer, ArchitectureMo
 	 * @generated
 	 */
 	EList<Function> getFunctions();
+
+	/**
+	 * Returns the value of the '<em><b>Components</b></em>' containment reference list.
+	 * The list contents are of type {@link nl.esi.pps.architecture.specified.Component}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Components</em>' containment reference list.
+	 * @see nl.esi.pps.architecture.example.ExamplePackage#getExampleArchitecture_Components()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<Component> getComponents();
+
+	/**
+	 * Returns the value of the '<em><b>Hosts</b></em>' containment reference list.
+	 * The list contents are of type {@link nl.esi.pps.architecture.example.ExampleHost}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Hosts</em>' containment reference list.
+	 * @see nl.esi.pps.architecture.example.ExamplePackage#getExampleArchitecture_Hosts()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExampleHost> getHosts();
 
 	/**
 	 * Returns the value of the '<em><b>Executors</b></em>' containment reference list.

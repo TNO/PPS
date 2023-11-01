@@ -4,6 +4,8 @@ package nl.esi.pps.architecture.example;
 
 import nl.esi.emf.properties.PropertiesPackage;
 
+import nl.esi.pps.architecture.deployed.DeployedPackage;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
@@ -79,22 +81,13 @@ public interface ExamplePackage extends EPackage {
 	int EXAMPLE_ARCHITECTURE__PROPERTIES = PropertiesPackage.PROPERTIES_CONTAINER__PROPERTIES;
 
 	/**
-	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int EXAMPLE_ARCHITECTURE__COMPONENTS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 0;
-
-	/**
 	 * The feature id for the '<em><b>Interfaces</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_ARCHITECTURE__INTERFACES = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 1;
+	int EXAMPLE_ARCHITECTURE__INTERFACES = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
@@ -103,7 +96,25 @@ public interface ExamplePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_ARCHITECTURE__FUNCTIONS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 2;
+	int EXAMPLE_ARCHITECTURE__FUNCTIONS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Components</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE_ARCHITECTURE__COMPONENTS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 2;
+
+	/**
+	 * The feature id for the '<em><b>Hosts</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE_ARCHITECTURE__HOSTS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Executors</b></em>' containment reference list.
@@ -112,7 +123,7 @@ public interface ExamplePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_ARCHITECTURE__EXECUTORS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 3;
+	int EXAMPLE_ARCHITECTURE__EXECUTORS = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 4;
 
 	/**
 	 * The number of structural features of the '<em>Architecture</em>' class.
@@ -121,7 +132,7 @@ public interface ExamplePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXAMPLE_ARCHITECTURE_FEATURE_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 4;
+	int EXAMPLE_ARCHITECTURE_FEATURE_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_FEATURE_COUNT + 5;
 
 	/**
 	 * The number of operations of the '<em>Architecture</em>' class.
@@ -133,6 +144,63 @@ public interface ExamplePackage extends EPackage {
 	int EXAMPLE_ARCHITECTURE_OPERATION_COUNT = PropertiesPackage.PROPERTIES_CONTAINER_OPERATION_COUNT + 0;
 
 	/**
+	 * The meta object id for the '{@link nl.esi.pps.architecture.example.impl.ExampleHostImpl <em>Host</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see nl.esi.pps.architecture.example.impl.ExampleHostImpl
+	 * @see nl.esi.pps.architecture.example.impl.ExamplePackageImpl#getExampleHost()
+	 * @generated
+	 */
+	int EXAMPLE_HOST = 1;
+
+	/**
+	 * The feature id for the '<em><b>Properties</b></em>' map.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @deprecated
+	 * @generated
+	 * @ordered
+	 */
+	@Deprecated
+	int EXAMPLE_HOST__PROPERTIES = DeployedPackage.HOST__PROPERTIES;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE_HOST__NAME = DeployedPackage.HOST__NAME;
+
+	/**
+	 * The feature id for the '<em><b>Executors</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE_HOST__EXECUTORS = DeployedPackage.HOST_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Host</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE_HOST_FEATURE_COUNT = DeployedPackage.HOST_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of operations of the '<em>Host</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXAMPLE_HOST_OPERATION_COUNT = DeployedPackage.HOST_OPERATION_COUNT + 0;
+
+	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.architecture.example.ExampleArchitecture <em>Architecture</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -141,17 +209,6 @@ public interface ExamplePackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExampleArchitecture();
-
-	/**
-	 * Returns the meta object for the containment reference list '{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponents <em>Components</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Components</em>'.
-	 * @see nl.esi.pps.architecture.example.ExampleArchitecture#getComponents()
-	 * @see #getExampleArchitecture()
-	 * @generated
-	 */
-	EReference getExampleArchitecture_Components();
 
 	/**
 	 * Returns the meta object for the containment reference list '{@link nl.esi.pps.architecture.example.ExampleArchitecture#getInterfaces <em>Interfaces</em>}'.
@@ -176,6 +233,28 @@ public interface ExamplePackage extends EPackage {
 	EReference getExampleArchitecture_Functions();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponents <em>Components</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Components</em>'.
+	 * @see nl.esi.pps.architecture.example.ExampleArchitecture#getComponents()
+	 * @see #getExampleArchitecture()
+	 * @generated
+	 */
+	EReference getExampleArchitecture_Components();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link nl.esi.pps.architecture.example.ExampleArchitecture#getHosts <em>Hosts</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Hosts</em>'.
+	 * @see nl.esi.pps.architecture.example.ExampleArchitecture#getHosts()
+	 * @see #getExampleArchitecture()
+	 * @generated
+	 */
+	EReference getExampleArchitecture_Hosts();
+
+	/**
 	 * Returns the meta object for the containment reference list '{@link nl.esi.pps.architecture.example.ExampleArchitecture#getExecutors <em>Executors</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -185,6 +264,27 @@ public interface ExamplePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getExampleArchitecture_Executors();
+
+	/**
+	 * Returns the meta object for class '{@link nl.esi.pps.architecture.example.ExampleHost <em>Host</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Host</em>'.
+	 * @see nl.esi.pps.architecture.example.ExampleHost
+	 * @generated
+	 */
+	EClass getExampleHost();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link nl.esi.pps.architecture.example.ExampleHost#getExecutors <em>Executors</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Executors</em>'.
+	 * @see nl.esi.pps.architecture.example.ExampleHost#getExecutors()
+	 * @see #getExampleHost()
+	 * @generated
+	 */
+	EReference getExampleHost_Executors();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -220,14 +320,6 @@ public interface ExamplePackage extends EPackage {
 		EClass EXAMPLE_ARCHITECTURE = eINSTANCE.getExampleArchitecture();
 
 		/**
-		 * The meta object literal for the '<em><b>Components</b></em>' containment reference list feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference EXAMPLE_ARCHITECTURE__COMPONENTS = eINSTANCE.getExampleArchitecture_Components();
-
-		/**
 		 * The meta object literal for the '<em><b>Interfaces</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -244,12 +336,46 @@ public interface ExamplePackage extends EPackage {
 		EReference EXAMPLE_ARCHITECTURE__FUNCTIONS = eINSTANCE.getExampleArchitecture_Functions();
 
 		/**
+		 * The meta object literal for the '<em><b>Components</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXAMPLE_ARCHITECTURE__COMPONENTS = eINSTANCE.getExampleArchitecture_Components();
+
+		/**
+		 * The meta object literal for the '<em><b>Hosts</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXAMPLE_ARCHITECTURE__HOSTS = eINSTANCE.getExampleArchitecture_Hosts();
+
+		/**
 		 * The meta object literal for the '<em><b>Executors</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EReference EXAMPLE_ARCHITECTURE__EXECUTORS = eINSTANCE.getExampleArchitecture_Executors();
+
+		/**
+		 * The meta object literal for the '{@link nl.esi.pps.architecture.example.impl.ExampleHostImpl <em>Host</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see nl.esi.pps.architecture.example.impl.ExampleHostImpl
+		 * @see nl.esi.pps.architecture.example.impl.ExamplePackageImpl#getExampleHost()
+		 * @generated
+		 */
+		EClass EXAMPLE_HOST = eINSTANCE.getExampleHost();
+
+		/**
+		 * The meta object literal for the '<em><b>Executors</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference EXAMPLE_HOST__EXECUTORS = eINSTANCE.getExampleHost_Executors();
 
 	}
 

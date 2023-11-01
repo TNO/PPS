@@ -9,6 +9,9 @@ Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
 Export-Package: nl.esi.pps.architecture,
+ nl.esi.pps.architecture.deployed,
+ nl.esi.pps.architecture.deployed.impl,
+ nl.esi.pps.architecture.deployed.util,
  nl.esi.pps.architecture.impl,
  nl.esi.pps.architecture.implemented,
  nl.esi.pps.architecture.implemented.impl,

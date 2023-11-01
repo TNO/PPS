@@ -221,13 +221,22 @@ public interface MetricPackage extends EPackage {
 	int METRIC__TMSCS = 5;
 
 	/**
+	 * The feature id for the '<em><b>Configuration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC__CONFIGURATION = 6;
+
+	/**
 	 * The number of structural features of the '<em>Metric</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int METRIC_FEATURE_COUNT = 6;
+	int METRIC_FEATURE_COUNT = 7;
 
 	/**
 	 * The number of operations of the '<em>Metric</em>' class.
@@ -395,15 +404,6 @@ public interface MetricPackage extends EPackage {
 	int METRIC_INSTANCE___GET_DURATION = TmscPackage.INTERVAL___GET_DURATION;
 
 	/**
-	 * The operation id for the '<em>Get Tmsc</em>' operation.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int METRIC_INSTANCE___GET_TMSC = TmscPackage.INTERVAL___GET_TMSC;
-
-	/**
 	 * The operation id for the '<em>Get Name</em>' operation.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -411,6 +411,15 @@ public interface MetricPackage extends EPackage {
 	 * @ordered
 	 */
 	int METRIC_INSTANCE___GET_NAME = TmscPackage.INTERVAL___GET_NAME;
+
+	/**
+	 * The operation id for the '<em>Is Epoch Time</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int METRIC_INSTANCE___IS_EPOCH_TIME = TmscPackage.INTERVAL___IS_EPOCH_TIME;
 
 	/**
 	 * The number of operations of the '<em>Instance</em>' class.
@@ -560,6 +569,17 @@ public interface MetricPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getMetric_Tmscs();
+
+	/**
+	 * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.metric.Metric#getConfiguration <em>Configuration</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Configuration</em>'.
+	 * @see nl.esi.pps.tmsc.metric.Metric#getConfiguration()
+	 * @see #getMetric()
+	 * @generated
+	 */
+	EAttribute getMetric_Configuration();
 
 	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.tmsc.metric.MetricInstance <em>Instance</em>}'.
@@ -747,6 +767,14 @@ public interface MetricPackage extends EPackage {
 		 * @generated
 		 */
 		EReference METRIC__TMSCS = eINSTANCE.getMetric_Tmscs();
+
+		/**
+		 * The meta object literal for the '<em><b>Configuration</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute METRIC__CONFIGURATION = eINSTANCE.getMetric_Configuration();
 
 		/**
 		 * The meta object literal for the '{@link nl.esi.pps.tmsc.metric.impl.MetricInstanceImpl <em>Instance</em>}' class.

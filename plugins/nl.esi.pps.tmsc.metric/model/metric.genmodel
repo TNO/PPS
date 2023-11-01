@@ -39,6 +39,9 @@
           ecoreFeature="ecore:EReference metric.ecore#//Metric/tmscs">
         <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
       </genFeatures>
+      <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//Metric/configuration">
+        <propertyFilterFlags>org.eclipse.ui.views.properties.expert</propertyFilterFlags>
+      </genFeatures>
     </genClasses>
     <genClasses provider="Stateful" ecoreClass="metric.ecore#//MetricInstance">
       <genFeatures property="Readonly" createChild="false" ecoreFeature="ecore:EAttribute metric.ecore#//MetricInstance/id">

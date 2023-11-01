@@ -102,6 +102,24 @@ public class RenderingProperties {
 		return false;
 	}
 
+	public static void setHidden(Execution execution, String value) {
+		setHidden(execution, Boolean.parseBoolean(value));
+	}
+
+	public static void setHidden(Execution execution, boolean value) {
+		setProperty(execution, PROPERTY_HIDDEN, value);
+	}
+
+	public static boolean isHidden(Execution execution) {
+		final Serializable hiddenValue = getProperty(execution, PROPERTY_HIDDEN);
+		if (hiddenValue instanceof Boolean) {
+			return (Boolean) hiddenValue;
+		} else if (hiddenValue instanceof String) {
+			return Boolean.parseBoolean((String) hiddenValue);
+		}
+		return false;
+	}
+
 	public static void setPaint(Dependency dependency, RenderingPaint value) {
 		setProperty(dependency, PROPERTY_PAINT, value.name());
 	}

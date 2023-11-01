@@ -10,14 +10,15 @@
 
 package nl.esi.pps.tmsc.viewers
 
-import nl.esi.pps.common.emf.ui.ContextAwareAdapterFactoryContentProvider
 import java.util.Collections
 import java.util.Set
+import nl.esi.pps.architecture.deployed.Host
 import nl.esi.pps.architecture.implemented.Function
 import nl.esi.pps.architecture.instantiated.Executor
 import nl.esi.pps.architecture.specified.Component
 import nl.esi.pps.architecture.specified.Interface
 import nl.esi.pps.architecture.specified.Operation
+import nl.esi.pps.common.emf.ui.ContextAwareAdapterFactoryContentProvider
 import nl.esi.pps.tmsc.Dependency
 import nl.esi.pps.tmsc.Event
 import nl.esi.pps.tmsc.Execution
@@ -32,8 +33,9 @@ import org.eclipse.emf.common.notify.AdapterFactory
 import org.eclipse.emf.ecore.EObject
 import org.eclipse.emf.ecore.resource.ResourceSet
 
-import static extension org.eclipse.lsat.common.xtend.Queries.*
 import static extension nl.esi.pps.tmsc.util.TmscQueries.*
+import static extension org.eclipse.lsat.common.xtend.Queries.*
+import nl.esi.pps.architecture.instantiated.ExecutorGroup
 
 /** 
  * Content provider that queries the applicable {@link Lifeline lifelines} for
@@ -45,7 +47,7 @@ class LifelineContentProvider extends ContextAwareAdapterFactoryContentProvider<
             // TMSC contexts 
             FullScopeTMSC, ScopedTMSC, Lifeline, Execution, Event, Dependency, Interval, 
             // Architecture contexts
-            Executor, Component, Function, Operation, Interface,
+            ExecutorGroup, Executor, Host, Component, Function, Operation, Interface,
             // Metric contexts
             Metric, MetricInstance,
             // Performance optimization
@@ -91,8 +93,18 @@ class LifelineContentProvider extends ContextAwareAdapterFactoryContentProvider<
                 content += context.to?.lifeline
             }
             // Architecture contexts
+            ExecutorGroup: {
+                val executors = context.executors
+                content += context.findLifelines.filter[executors.contains(executor)]
+            }
             Executor: {
+                // IMPORTANT: Selecting an Executor should only view its life-line and not query its connected 
+                // life-lines like it is done for Lifeline itself. This behavior is used by the life-line order 
+                // optimizer and (in the future) the offline activity debugger
                 content += context.findLifelines.filter[executor == context]
+            }
+            Host: {
+                content += context.findLifelines.filter[executor.host == context]
             }
             Component: {
                 content += context.findLifelines.filter[events.exists[component == context]]

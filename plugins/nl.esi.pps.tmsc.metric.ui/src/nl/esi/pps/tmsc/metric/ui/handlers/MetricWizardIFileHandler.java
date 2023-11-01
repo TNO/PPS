@@ -38,7 +38,7 @@ public class MetricWizardIFileHandler {
 			return false;
 		}
 		return QueryableIterable.from(selection)
-				.forAll(e -> e instanceof IFile && TmscPlugin.isTmscFileExtension(((IFile) e).getFileExtension()));
+				.forAll(e -> e instanceof IFile  && TmscPlugin.isTmscFile((IFile) e));
 	}
 
 	@Execute

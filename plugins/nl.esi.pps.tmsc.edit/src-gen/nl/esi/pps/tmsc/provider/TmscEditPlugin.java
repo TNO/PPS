@@ -2,9 +2,11 @@
  */
 package nl.esi.pps.tmsc.provider;
 
+import java.util.Collection;
 import java.util.Map;
 
 import org.eclipse.emf.common.EMFPlugin;
+import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.ResourceLocator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -16,6 +18,7 @@ import org.osgi.framework.BundleContext;
 
 import nl.esi.emf.properties.provider.PropertiesEditPlugin;
 import nl.esi.emf.properties.provider.PropertiesItemProviderAdapterFactory;
+import nl.esi.pps.architecture.deployed.provider.DeployedItemProviderAdapterFactory;
 import nl.esi.pps.architecture.implemented.provider.ImplementedItemProviderAdapterFactory;
 import nl.esi.pps.architecture.instantiated.provider.InstantiatedItemProviderAdapterFactory;
 import nl.esi.pps.architecture.provider.ArchitectureEditPlugin;
@@ -82,25 +85,40 @@ public final class TmscEditPlugin extends EMFPlugin {
 	}
 
 	/**
-	 * Creates a {@link ResourceSet} with edit support, i.e.,
-	 * {@link ReflectiveItemProviderAdapterFactory}.
+	 * Creates a {@link ResourceSet} with edit support.
+	 * 
+	 * @see #createItemProviderAdapterFactory()
+	 * @see ResourceSet#getAdapterFactories()
 	 */
 	public static ResourceSet createResourceSet() {
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
+		resourceSet.getAdapterFactories().add(createItemProviderAdapterFactory());
+		return resourceSet;
+	}
 
+	/**
+	 * Creates a {@link ComposedAdapterFactory} for all dependent languages, incl. reflective support.
+	 */
+	public static ComposedAdapterFactory createItemProviderAdapterFactory() {
 		ComposedAdapterFactory adapterFactory = new ComposedAdapterFactory(
-				ComposedAdapterFactory.Descriptor.Registry.INSTANCE);
+				ComposedAdapterFactory.Descriptor.Registry.INSTANCE) {
+			// Avoiding multi-threading issues by making this method synchronized
+			@Override
+			public synchronized AdapterFactory getFactoryForTypes(Collection<?> types) {
+				return super.getFactoryForTypes(types);
+			}
+		};
 		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new TmscItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ArchitectureItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new SpecifiedItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ImplementedItemProviderAdapterFactory());
+		adapterFactory.addAdapterFactory(new DeployedItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new InstantiatedItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new PropertiesItemProviderAdapterFactory());
 		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
-		resourceSet.getAdapterFactories().add(adapterFactory);
 
-		return resourceSet;
+		return adapterFactory;
 	}
 
 	/**
@@ -110,8 +128,7 @@ public final class TmscEditPlugin extends EMFPlugin {
 	 * @generated NOT
 	 */
 	public static class Implementation extends PngEclipsePlugin {
-		private final DataAnalysisItemContentProviderRegistryReader dataAnalysisRegistryReader = new DataAnalysisItemContentProviderRegistryReader(
-				this);
+		private DataAnalysisItemContentProviderRegistryReader dataAnalysisRegistryReader = null;
 
 		/**
 		 * Creates an instance.
@@ -130,13 +147,14 @@ public final class TmscEditPlugin extends EMFPlugin {
 		@Override
 		public void start(BundleContext context) throws Exception {
 			super.start(context);
-			dataAnalysisRegistryReader.readRegistry();
 		}
 
 		@Override
 		public void stop(BundleContext context) throws Exception {
 			super.stop(context);
-			dataAnalysisRegistryReader.dispose();
+			if (dataAnalysisRegistryReader != null) {
+				dataAnalysisRegistryReader.dispose();
+			}
 		}
 
 		/**
@@ -150,6 +168,10 @@ public final class TmscEditPlugin extends EMFPlugin {
 		 *         providers, mapped by their configuration.
 		 */
 		public Iterable<IDataAnalysisItemContentProvider> getRegisteredDataAnalysisItemContentProviders(EClass eClass) {
+			if (dataAnalysisRegistryReader == null) {
+				dataAnalysisRegistryReader = new DataAnalysisItemContentProviderRegistryReader(this);
+				dataAnalysisRegistryReader.readRegistry();
+			}
 			return dataAnalysisRegistryReader.getDataAnalysisItemContentProviders(eClass);
 		}
 	}

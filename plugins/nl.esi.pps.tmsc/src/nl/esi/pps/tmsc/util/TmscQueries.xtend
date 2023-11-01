@@ -165,21 +165,10 @@ final class TmscQueries {
      * of outgoing dependencies of 'from' and the transitive closure of incoming
      * dependencies of 'to'.
      * 
-     * @see #findCausalDependenciesBetween(ITMSC, Iterable, Iterable, Function1)
+     * @see #findCausalDependenciesBetween(ITMSC, Iterable, Iterable)
      */
     static def Set<Dependency> findCausalDependenciesBetween(ITMSC tmsc, Event from, Event to) {
-        return findCausalDependenciesBetween(tmsc, Collections::singleton(from), Collections::singleton(to), [true])
-    }
-
-    /**
-     * Causal dependencies are defined as the intersection of the transitive closure
-     * of outgoing dependencies of 'from' and the transitive closure of incoming
-     * dependencies of 'to'.
-     * 
-     * @see #findCausalDependenciesBetween(ITMSC, Iterable, Iterable, Function1)
-     */
-    static def Set<Dependency> findCausalDependenciesBetween(ITMSC tmsc, Event from, Event to, (Dependency)=>boolean predicate) {
-        return findCausalDependenciesBetween(tmsc, Collections::singleton(from), Collections::singleton(to), predicate)
+        return findCausalDependenciesBetween(tmsc, Collections::singleton(from), Collections::singleton(to))
     }
 
     /**
@@ -193,16 +182,16 @@ final class TmscQueries {
      * which should return a single entry in case of a fully connected path.
      * </p>
      */
-    static def Set<Dependency> findCausalDependenciesBetween(extension ITMSC tmsc, Iterable<Event> froms, Iterable<Event> tos, (Dependency)=>boolean predicate) {
+    static def Set<Dependency> findCausalDependenciesBetween(extension ITMSC tmsc, Iterable<Event> froms, Iterable<Event> tos) {
         val minTimeStamp = froms.map[timestamp].min
         val maxTimeStamp = tos.map[timestamp].max
         if (minTimeStamp > maxTimeStamp) {
             throw new IllegalArgumentException('''From nanos («minTimeStamp») should be before to nanos («maxTimeStamp»)''')
         }
         val effect = froms.flatMap[outgoingDependencies].closure(true)[target.outgoingDependencies]
-            .until[endTime > maxTimeStamp].until[d | !predicate.apply(d)]
+            .until[endTime > maxTimeStamp]
         val cause = tos.flatMap[incomingDependencies].closure(true)[source.incomingDependencies]
-            .until[startTime < minTimeStamp].until[d | !predicate.apply(d)]
+            .until[startTime < minTimeStamp]
         
         val causalDependencies = effect.toSet
         causalDependencies.retainAll(cause.toSet)
@@ -504,7 +493,9 @@ final class TmscQueries {
         if (!dependenciesToAdd.isEmpty) {
             tmsc.dependencies += dependenciesToAdd
             if (tmsc instanceof ScopedTMSC) {
-                tmsc.parentScope.addDependencies(dependenciesToAdd)
+                if (tmsc.parentScope !== null) {
+                    tmsc.parentScope.addDependencies(dependenciesToAdd)
+                }
             }
         }
         return dependenciesToAdd

@@ -3,11 +3,10 @@
 package nl.esi.pps.architecture.example.provider;
 
 import java.util.Collection;
-import java.util.List;
-
 import nl.esi.emf.properties.provider.PropertiesContainerItemProvider;
 
 import nl.esi.pps.architecture.example.ExampleArchitecture;
+import nl.esi.pps.architecture.example.ExampleFactory;
 import nl.esi.pps.architecture.example.ExamplePackage;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -16,8 +15,6 @@ import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.ResourceLocator;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-
-import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
 /**
@@ -61,9 +58,10 @@ public class ExampleArchitectureItemProvider extends PropertiesContainerItemProv
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__COMPONENTS);
 			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__INTERFACES);
 			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__FUNCTIONS);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__COMPONENTS);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__HOSTS);
 			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__EXECUTORS);
 		}
 		return childrenFeatures;
@@ -126,9 +124,10 @@ public class ExampleArchitectureItemProvider extends PropertiesContainerItemProv
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExampleArchitecture.class)) {
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -146,6 +145,9 @@ public class ExampleArchitectureItemProvider extends PropertiesContainerItemProv
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add(createChildParameter(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__HOSTS,
+				ExampleFactory.eINSTANCE.createExampleHost()));
 	}
 
 	/**

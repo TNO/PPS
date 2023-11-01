@@ -30,6 +30,7 @@
         <details key="documentation" value="The TMSCs that were analyzed to resolve the Metric instances that are contained by this Metric."/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="configuration" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="MetricInstance" eSuperTypes="../../nl.esi.pps.tmsc/model/tmsc.ecore#//Interval">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="id" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

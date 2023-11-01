@@ -9,6 +9,10 @@ import nl.esi.pps.architecture.ArchitectureModel;
 import nl.esi.pps.architecture.ArchitecturePackage;
 import nl.esi.pps.architecture.NamedArchitectureElement;
 
+import nl.esi.pps.architecture.deployed.DeployedPackage;
+
+import nl.esi.pps.architecture.deployed.impl.DeployedPackageImpl;
+
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
 
 import nl.esi.pps.architecture.implemented.impl.ImplementedPackageImpl;
@@ -114,18 +118,24 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 		InstantiatedPackageImpl theInstantiatedPackage = (InstantiatedPackageImpl) (registeredPackage instanceof InstantiatedPackageImpl
 				? registeredPackage
 				: InstantiatedPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DeployedPackage.eNS_URI);
+		DeployedPackageImpl theDeployedPackage = (DeployedPackageImpl) (registeredPackage instanceof DeployedPackageImpl
+				? registeredPackage
+				: DeployedPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theArchitecturePackage.createPackageContents();
 		theSpecifiedPackage.createPackageContents();
 		theImplementedPackage.createPackageContents();
 		theInstantiatedPackage.createPackageContents();
+		theDeployedPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theArchitecturePackage.initializePackageContents();
 		theSpecifiedPackage.initializePackageContents();
 		theImplementedPackage.initializePackageContents();
 		theInstantiatedPackage.initializePackageContents();
+		theDeployedPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theArchitecturePackage.freeze();
@@ -232,6 +242,8 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 				.getEPackage(ImplementedPackage.eNS_URI);
 		InstantiatedPackage theInstantiatedPackage = (InstantiatedPackage) EPackage.Registry.INSTANCE
 				.getEPackage(InstantiatedPackage.eNS_URI);
+		DeployedPackage theDeployedPackage = (DeployedPackage) EPackage.Registry.INSTANCE
+				.getEPackage(DeployedPackage.eNS_URI);
 		PropertiesPackage thePropertiesPackage = (PropertiesPackage) EPackage.Registry.INSTANCE
 				.getEPackage(PropertiesPackage.eNS_URI);
 
@@ -239,6 +251,7 @@ public class ArchitecturePackageImpl extends EPackageImpl implements Architectur
 		getESubpackages().add(theSpecifiedPackage);
 		getESubpackages().add(theImplementedPackage);
 		getESubpackages().add(theInstantiatedPackage);
+		getESubpackages().add(theDeployedPackage);
 
 		// Create type parameters
 

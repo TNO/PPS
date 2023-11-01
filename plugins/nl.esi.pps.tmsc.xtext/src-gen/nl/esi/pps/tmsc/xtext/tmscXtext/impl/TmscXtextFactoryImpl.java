@@ -73,6 +73,7 @@ public class TmscXtextFactoryImpl extends EFactoryImpl implements TmscXtextFacto
       case TmscXtextPackage.XCOMPONENT: return createXComponent();
       case TmscXtextPackage.XFUNCTION: return createXFunction();
       case TmscXtextPackage.XFUNCTION_PARAMETER: return createXFunctionParameter();
+      case TmscXtextPackage.XHOST: return createXHost();
       case TmscXtextPackage.XEXECUTOR: return createXExecutor();
       case TmscXtextPackage.XEVENT: return createXEvent();
       case TmscXtextPackage.XEVENT_ARGUMENT: return createXEventArgument();
@@ -218,6 +219,18 @@ public class TmscXtextFactoryImpl extends EFactoryImpl implements TmscXtextFacto
   {
     XFunctionParameterImpl xFunctionParameter = new XFunctionParameterImpl();
     return xFunctionParameter;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public XHost createXHost()
+  {
+    XHostImpl xHost = new XHostImpl();
+    return xHost;
   }
 
   /**

@@ -10,15 +10,26 @@
 
 package nl.esi.pps.tmsc.xtext.conversion
 
+import com.google.inject.Inject
+import java.math.BigDecimal
 import org.eclipse.xtext.common.services.DefaultTerminalConverters
 import org.eclipse.xtext.conversion.IValueConverter
 import org.eclipse.xtext.conversion.ValueConverter
-import java.math.BigDecimal
+import org.eclipse.xtext.conversion.impl.QualifiedNameValueConverter
 
 class TmscXtextValueConverterService extends DefaultTerminalConverters {
+    @Inject
+    var QualifiedNameValueConverter qualifiedNameValueConverter;
+    
+    
     @ValueConverter(rule = "IDString")
     def IValueConverter<String> getIDStringConverter() {
-        return new IDStringValueConverter(ID, STRING);
+        return new StringFallbackValueConverter(ID, STRING);
+    }
+
+    @ValueConverter(rule = "FQNString")
+    def IValueConverter<String> getFQNStringConverter() {
+        return new StringFallbackValueConverter(qualifiedNameValueConverter, STRING);
     }
 
     @ValueConverter(rule = "ISO8601")

@@ -78,6 +78,8 @@ public class TmscSwitch<T> extends Switch<T> {
 			if (result == null)
 				result = caseTMSC(fullScopeTMSC);
 			if (result == null)
+				result = caseITimeRange(fullScopeTMSC);
+			if (result == null)
 				result = casePropertiesContainer(fullScopeTMSC);
 			if (result == null)
 				result = caseITMSC(fullScopeTMSC);

@@ -2,6 +2,8 @@
  */
 package nl.esi.pps.tmsc.impl;
 
+import java.lang.reflect.InvocationTargetException;
+
 import java.util.Collection;
 
 import nl.esi.emf.properties.impl.PropertiesContainerImpl;
@@ -9,6 +11,7 @@ import nl.esi.emf.properties.impl.PropertiesContainerImpl;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.FullScopeTMSC;
+import nl.esi.pps.tmsc.ITimeRange;
 import nl.esi.pps.tmsc.ScopedTMSC;
 import nl.esi.pps.tmsc.TmscPackage;
 
@@ -467,6 +470,16 @@ public abstract class DependencyImpl extends PropertiesContainerImpl implements 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public boolean isEpochTime() {
+		return getTmsc().isEpochTime();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -656,6 +669,44 @@ public abstract class DependencyImpl extends PropertiesContainerImpl implements 
 			return projection != PROJECTION_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ITimeRange.class) {
+			switch (baseOperationID) {
+			case TmscPackage.ITIME_RANGE___GET_START_TIME:
+				return TmscPackage.DEPENDENCY___GET_START_TIME;
+			case TmscPackage.ITIME_RANGE___GET_END_TIME:
+				return TmscPackage.DEPENDENCY___GET_END_TIME;
+			case TmscPackage.ITIME_RANGE___GET_DURATION:
+				return TmscPackage.DEPENDENCY___GET_DURATION;
+			case TmscPackage.ITIME_RANGE___IS_EPOCH_TIME:
+				return TmscPackage.DEPENDENCY___IS_EPOCH_TIME;
+			default:
+				return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+		case TmscPackage.DEPENDENCY___IS_EPOCH_TIME:
+			return isEpochTime();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 	/**

@@ -111,6 +111,11 @@ public class TmscXtextAdapterFactory extends AdapterFactoryImpl
         return createXFunctionParameterAdapter();
       }
       @Override
+      public Adapter caseXHost(XHost object)
+      {
+        return createXHostAdapter();
+      }
+      @Override
       public Adapter caseXExecutor(XExecutor object)
       {
         return createXExecutorAdapter();
@@ -293,6 +298,21 @@ public class TmscXtextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createXFunctionParameterAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost <em>XHost</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XHost
+   * @generated
+   */
+  public Adapter createXHostAdapter()
   {
     return null;
   }

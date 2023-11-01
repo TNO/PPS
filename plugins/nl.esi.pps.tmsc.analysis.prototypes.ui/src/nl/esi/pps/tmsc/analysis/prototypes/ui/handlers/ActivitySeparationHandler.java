@@ -61,8 +61,7 @@ public class ActivitySeparationHandler {
 			return false;
 		}
 		Object selectedElement = selection.getFirstElement();
-		return selectedElement instanceof IFile
-				&& TmscPlugin.isTmscFileExtension(((IFile) selectedElement).getFileExtension());
+		return selectedElement instanceof IFile && TmscPlugin.isTmscFile((IFile) selectedElement);
 	}
 
 	@Execute

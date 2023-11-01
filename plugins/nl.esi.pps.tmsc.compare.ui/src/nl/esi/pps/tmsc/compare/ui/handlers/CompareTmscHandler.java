@@ -91,7 +91,7 @@ public class CompareTmscHandler {
 		}
 		boolean allScopedTMSC = from((Iterable<?>) selection).forAll(e -> e instanceof ScopedTMSC);
 		boolean allIFile = from((Iterable<?>) selection)
-				.forAll(e -> e instanceof IFile && TmscPlugin.isTmscFileExtension(((IFile) e).getFileExtension()));
+				.forAll(e -> e instanceof IFile && TmscPlugin.isTmscFile((IFile) e));
 		return allScopedTMSC || allIFile;
 	}
 
@@ -148,7 +148,7 @@ public class CompareTmscHandler {
 			Map<Object, Object> loadOptions = new HashMap<>();
 			loadOptions.put(IProgressMonitor.class, monitor);
 			FullScopeTMSC fullScopeTMSC = persistor.loadOne(tmscURI, loadOptions);
-			if (fullScopeTMSC.getLifelines().isEmpty()) {
+			if (fullScopeTMSC.isEmpty()) {
 				throw new IOException("TMSC is empty");
 			}
 			

@@ -19,6 +19,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XExecutor;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunction;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameter;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameterKind;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XHost;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XInterface;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XNamedArchitectureElement;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XOperation;
@@ -93,6 +94,13 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   private EClass xFunctionParameterEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass xHostEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -374,7 +382,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Executors()
+  public EReference getTmscXtextModel_Hosts()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(8);
   }
@@ -385,9 +393,20 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Events()
+  public EReference getTmscXtextModel_Executors()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(9);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getTmscXtextModel_Events()
+  {
+    return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(10);
   }
 
   /**
@@ -641,6 +660,61 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
   public EReference getXFunctionParameter_Properties()
   {
     return (EReference)xFunctionParameterEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getXHost()
+  {
+    return xHostEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getXHost_Untraced()
+  {
+    return (EAttribute)xHostEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getXHost_TimeBound()
+  {
+    return (EAttribute)xHostEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getXHost_Scheduled()
+  {
+    return (EAttribute)xHostEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getXHost_Executors()
+  {
+    return (EReference)xHostEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -1244,6 +1318,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__INTERFACES);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__COMPONENTS);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__FUNCTIONS);
+    createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__HOSTS);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__EXECUTORS);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__EVENTS);
 
@@ -1275,6 +1350,12 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     createEAttribute(xFunctionParameterEClass, XFUNCTION_PARAMETER__KIND);
     createEAttribute(xFunctionParameterEClass, XFUNCTION_PARAMETER__NAME);
     createEReference(xFunctionParameterEClass, XFUNCTION_PARAMETER__PROPERTIES);
+
+    xHostEClass = createEClass(XHOST);
+    createEAttribute(xHostEClass, XHOST__UNTRACED);
+    createEAttribute(xHostEClass, XHOST__TIME_BOUND);
+    createEAttribute(xHostEClass, XHOST__SCHEDULED);
+    createEReference(xHostEClass, XHOST__EXECUTORS);
 
     xExecutorEClass = createEClass(XEXECUTOR);
     createEAttribute(xExecutorEClass, XEXECUTOR__UNTRACED);
@@ -1375,6 +1456,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     xOperationEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xComponentEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xFunctionEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
+    xHostEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xExecutorEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xPropertyStringValueEClass.getESuperTypes().add(this.getXPropertyValue());
     xPropertyNumberValueEClass.getESuperTypes().add(this.getXPropertyValue());
@@ -1391,6 +1473,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     initEReference(getTmscXtextModel_Interfaces(), this.getXInterface(), null, "interfaces", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Components(), this.getXComponent(), null, "components", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Functions(), this.getXFunction(), null, "functions", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTmscXtextModel_Hosts(), this.getXHost(), null, "hosts", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Executors(), this.getXExecutor(), null, "executors", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Events(), this.getXEvent(), null, "events", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
@@ -1422,6 +1505,12 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     initEAttribute(getXFunctionParameter_Kind(), this.getXFunctionParameterKind(), "kind", null, 0, 1, XFunctionParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getXFunctionParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, XFunctionParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXFunctionParameter_Properties(), this.getXProperty(), null, "properties", null, 0, -1, XFunctionParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(xHostEClass, XHost.class, "XHost", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getXHost_Untraced(), ecorePackage.getEBoolean(), "untraced", null, 0, 1, XHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getXHost_TimeBound(), ecorePackage.getEBigDecimal(), "timeBound", null, 0, 1, XHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getXHost_Scheduled(), ecorePackage.getEBooleanObject(), "scheduled", null, 0, 1, XHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getXHost_Executors(), this.getXExecutor(), null, "executors", null, 0, -1, XHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(xExecutorEClass, XExecutor.class, "XExecutor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getXExecutor_Untraced(), ecorePackage.getEBoolean(), "untraced", null, 0, 1, XExecutor.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
