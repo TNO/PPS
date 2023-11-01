@@ -5,6 +5,9 @@
       <children xsi:type="menu:DirectMenuItem" xmi:id="_EdVscC5-Ee2VDa40Pi6kKw" elementId="nl.esi.pps.tmsc.ui.directmenuitem.addmeasurement" label="Add to model" iconURI="platform:/plugin/nl.esi.pps.tmsc.ui/icons/AddMeasurement.png" tooltip="Adds the measurement to the model" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.AddMeasurementHandler">
         <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_RbpV8C5-Ee2VDa40Pi6kKw" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.AddMeasurementHandler"/>
       </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_Oz4OwBvZEe6Sb8y4EOogQg" elementId="nl.esi.pps.tmsc.ui.directmenuitem.timeshift" label="Time-shift..." iconURI="platform:/plugin/nl.esi.pps.tmsc.ui/icons/timeshift.png" tooltip="Adjusts all times by applying an offset" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.TimeShiftHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_cjcWEBvZEe6Sb8y4EOogQg" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.TimeShiftHandler"/>
+      </children>
     </elements>
   </fragments>
 </fragment:ModelFragments>

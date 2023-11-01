@@ -130,8 +130,8 @@ These files support the following contextual actions:
 |btn:[Analyze metrics...]
 |TODO
 
-|image:{imgsdir}/icons/normalize_timing.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
-|btn:[Normalize timing]
+|image:{imgsdir}/icons/timeshift.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Time-shift...]
 |TODO
 
 |===
@@ -181,7 +181,7 @@ The model elements in the content outline tree support the following contextual 
 |Metric +
  Metric{nbh}Instance
 |image:{imgsdir}/icons/AddAnnotation.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
-|btn:[Add metric annotations to model]
+|btn:[Add metric annotations to TMSC]
 |TODO
 
 |Measurement +
