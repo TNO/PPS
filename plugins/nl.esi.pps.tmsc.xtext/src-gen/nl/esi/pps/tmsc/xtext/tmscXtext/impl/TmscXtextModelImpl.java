@@ -15,6 +15,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XDependencySettings;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XEvent;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XExecutor;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunction;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XHost;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XInterface;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XProperty;
 
@@ -48,6 +49,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getComponents <em>Components</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getHosts <em>Hosts</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getExecutors <em>Executors</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getEvents <em>Events</em>}</li>
  * </ul>
@@ -165,6 +167,16 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected EList<XFunction> functions;
+
+  /**
+   * The cached value of the '{@link #getHosts() <em>Hosts</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getHosts()
+   * @generated
+   * @ordered
+   */
+  protected EList<XHost> hosts;
 
   /**
    * The cached value of the '{@link #getExecutors() <em>Executors</em>}' containment reference list.
@@ -363,6 +375,21 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
+  public EList<XHost> getHosts()
+  {
+    if (hosts == null)
+    {
+      hosts = new EObjectContainmentEList<XHost>(XHost.class, this, TmscXtextPackage.TMSC_XTEXT_MODEL__HOSTS);
+    }
+    return hosts;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<XExecutor> getExecutors()
   {
     if (executors == null)
@@ -407,6 +434,8 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return ((InternalEList<?>)getComponents()).basicRemove(otherEnd, msgs);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__FUNCTIONS:
         return ((InternalEList<?>)getFunctions()).basicRemove(otherEnd, msgs);
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__HOSTS:
+        return ((InternalEList<?>)getHosts()).basicRemove(otherEnd, msgs);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EXECUTORS:
         return ((InternalEList<?>)getExecutors()).basicRemove(otherEnd, msgs);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EVENTS:
@@ -441,6 +470,8 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return getComponents();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__FUNCTIONS:
         return getFunctions();
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__HOSTS:
+        return getHosts();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EXECUTORS:
         return getExecutors();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EVENTS:
@@ -489,6 +520,10 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         getFunctions().clear();
         getFunctions().addAll((Collection<? extends XFunction>)newValue);
         return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__HOSTS:
+        getHosts().clear();
+        getHosts().addAll((Collection<? extends XHost>)newValue);
+        return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EXECUTORS:
         getExecutors().clear();
         getExecutors().addAll((Collection<? extends XExecutor>)newValue);
@@ -535,6 +570,9 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
       case TmscXtextPackage.TMSC_XTEXT_MODEL__FUNCTIONS:
         getFunctions().clear();
         return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__HOSTS:
+        getHosts().clear();
+        return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EXECUTORS:
         getExecutors().clear();
         return;
@@ -571,6 +609,8 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return components != null && !components.isEmpty();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__FUNCTIONS:
         return functions != null && !functions.isEmpty();
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__HOSTS:
+        return hosts != null && !hosts.isEmpty();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EXECUTORS:
         return executors != null && !executors.isEmpty();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__EVENTS:

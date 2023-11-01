@@ -87,6 +87,15 @@ public interface TmscXtextFactory extends EFactory
   XFunctionParameter createXFunctionParameter();
 
   /**
+   * Returns a new object of class '<em>XHost</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>XHost</em>'.
+   * @generated
+   */
+  XHost createXHost();
+
+  /**
    * Returns a new object of class '<em>XExecutor</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

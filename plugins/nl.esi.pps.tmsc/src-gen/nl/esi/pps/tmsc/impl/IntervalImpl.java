@@ -10,6 +10,7 @@ import nl.esi.emf.properties.impl.PropertiesContainerImpl;
 
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.FullScopeTMSC;
+import nl.esi.pps.tmsc.ITimeRange;
 import nl.esi.pps.tmsc.Interval;
 import nl.esi.pps.tmsc.ScopedTMSC;
 import nl.esi.pps.tmsc.TmscPackage;
@@ -294,6 +295,16 @@ public abstract class IntervalImpl extends PropertiesContainerImpl implements In
 	 * @generated
 	 */
 	@Override
+	public boolean isEpochTime() {
+		return getTmsc().isEpochTime();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
 		case TmscPackage.INTERVAL__FROM:
@@ -396,10 +407,36 @@ public abstract class IntervalImpl extends PropertiesContainerImpl implements In
 	 * @generated
 	 */
 	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ITimeRange.class) {
+			switch (baseOperationID) {
+			case TmscPackage.ITIME_RANGE___GET_START_TIME:
+				return TmscPackage.INTERVAL___GET_START_TIME;
+			case TmscPackage.ITIME_RANGE___GET_END_TIME:
+				return TmscPackage.INTERVAL___GET_END_TIME;
+			case TmscPackage.ITIME_RANGE___GET_DURATION:
+				return TmscPackage.INTERVAL___GET_DURATION;
+			case TmscPackage.ITIME_RANGE___IS_EPOCH_TIME:
+				return TmscPackage.INTERVAL___IS_EPOCH_TIME;
+			default:
+				return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
 		switch (operationID) {
 		case TmscPackage.INTERVAL___GET_NAME:
 			return getName();
+		case TmscPackage.INTERVAL___IS_EPOCH_TIME:
+			return isEpochTime();
 		}
 		return super.eInvoke(operationID, arguments);
 	}

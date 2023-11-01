@@ -2,6 +2,8 @@
  */
 package nl.esi.pps.tmsc.impl;
 
+import java.lang.reflect.InvocationTargetException;
+
 import java.util.Collection;
 
 import nl.esi.emf.properties.impl.PropertiesContainerImpl;
@@ -14,6 +16,7 @@ import nl.esi.pps.tmsc.EntryEvent;
 import nl.esi.pps.tmsc.Execution;
 import nl.esi.pps.tmsc.ExitEvent;
 import nl.esi.pps.tmsc.FullScopeTMSC;
+import nl.esi.pps.tmsc.ITimeRange;
 import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.LifelineSegment;
 import nl.esi.pps.tmsc.TmscPackage;
@@ -398,7 +401,8 @@ public class ExecutionImpl extends PropertiesContainerImpl implements Execution 
 	 */
 	@Override
 	public EList<LifelineSegment> getSegments() {
-		return DerivedUtil.derivedEReference(this, TmscPackage.EXECUTION__SEGMENTS, TmscImplQueries::getSegmentsImpl);
+		return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.EXECUTION__SEGMENTS,
+				TmscImplQueries::getSegmentsImpl);
 	}
 
 	/**
@@ -447,6 +451,16 @@ public class ExecutionImpl extends PropertiesContainerImpl implements Execution 
 	@Override
 	public FullScopeTMSC getTmsc() {
 		return TmscImplQueries.getTmscImpl(this);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public boolean isEpochTime() {
+		return getTmsc().isEpochTime();
 	}
 
 	/**
@@ -649,6 +663,44 @@ public class ExecutionImpl extends PropertiesContainerImpl implements Execution 
 			return getTmsc() != null;
 		}
 		return super.eIsSet(featureID);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedOperationID(int baseOperationID, Class<?> baseClass) {
+		if (baseClass == ITimeRange.class) {
+			switch (baseOperationID) {
+			case TmscPackage.ITIME_RANGE___GET_START_TIME:
+				return TmscPackage.EXECUTION___GET_START_TIME;
+			case TmscPackage.ITIME_RANGE___GET_END_TIME:
+				return TmscPackage.EXECUTION___GET_END_TIME;
+			case TmscPackage.ITIME_RANGE___GET_DURATION:
+				return TmscPackage.EXECUTION___GET_DURATION;
+			case TmscPackage.ITIME_RANGE___IS_EPOCH_TIME:
+				return TmscPackage.EXECUTION___IS_EPOCH_TIME;
+			default:
+				return -1;
+			}
+		}
+		return super.eDerivedOperationID(baseOperationID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Object eInvoke(int operationID, EList<?> arguments) throws InvocationTargetException {
+		switch (operationID) {
+		case TmscPackage.EXECUTION___IS_EPOCH_TIME:
+			return isEpochTime();
+		}
+		return super.eInvoke(operationID, arguments);
 	}
 
 } //ExecutionImpl

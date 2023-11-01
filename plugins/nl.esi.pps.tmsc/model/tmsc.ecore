@@ -4,7 +4,7 @@
   <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
     <details key="documentation" value="&#xD;&#xA;&#xD;&#xA;[[tmsc-ecore-diagram]]&#xD;&#xA;.Diagram of the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/tmsc.png[]&#xD;&#xA;&#xD;&#xA;[[callstack-ecore-diagram]]&#xD;&#xA;.Diagram of call-stacks in the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/callstack.png[]&#xD;&#xA;&#xD;&#xA;[[measurment-ecore-diagram]]&#xD;&#xA;.Diagram of measurments in the TMSC meta-model&#xD;&#xA;image::{metamodelsdir}/measurement.png[]&#xD;&#xA;"/>
   </eAnnotations>
-  <eClassifiers xsi:type="ecore:EClass" name="FullScopeTMSC" eSuperTypes="#//TMSC">
+  <eClassifiers xsi:type="ecore:EClass" name="FullScopeTMSC" eSuperTypes="#//TMSC #//ITimeRange">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="FullScopeTMSC contains all events (via Lifeline) and dependencies of the TMSC model. &#xD;&#xA;It has the startTime and endTime attributes which are timestamps derived from the TMSC model, denoting the start and end time of the considered trace."/>
     </eAnnotations>
@@ -26,6 +26,8 @@
         eType="#//ETimestamp"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="endTime" lowerBound="1"
         eType="#//ETimestamp"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="duration" lowerBound="1"
+        eType="#//EDuration" changeable="false" volatile="true" transient="true" derived="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Event" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer">
     <eOperations name="getExecution" eType="#//Execution"/>
@@ -62,6 +64,7 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="Execution should be considered final and should not be overridden. &#xD;&#xA;Executions are added by means of a refinement transformation, see {@link nl.esi.pps.tmsc.transform.TmscRefinements#refineWithCallStacks(FullScopeTMSC)}"/>
     </eAnnotations>
+    <eOperations name="isEpochTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="lifeline" lowerBound="1"
         eType="#//Lifeline" transient="true" resolveProxies="false" eOpposite="#//Lifeline/executions"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="entry" lowerBound="1" eType="#//EntryEvent"
@@ -103,6 +106,7 @@
         changeable="false" volatile="true" transient="true" derived="true" resolveProxies="false"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Dependency" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer #//ITimeRange">
+    <eOperations name="isEpochTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
         eOpposite="#//FullScopeTMSC/dependencies"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="source" lowerBound="1"
@@ -258,6 +262,7 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Interval" abstract="true" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer #//ITimeRange">
     <eOperations name="getName" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eOperations name="isEpochTime" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Event"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="tmsc" lowerBound="1" eType="#//FullScopeTMSC"
@@ -304,9 +309,9 @@
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ITimeRange" instanceClassName="nl.esi.pps.tmsc.ITimeRange"
       abstract="true" interface="true">
-    <eOperations name="getStartTime" eType="#//ETimestamp"/>
-    <eOperations name="getEndTime" eType="#//ETimestamp"/>
-    <eOperations name="getDuration" eType="#//EDuration"/>
-    <eOperations name="getTmsc" eType="#//FullScopeTMSC"/>
+    <eOperations name="getStartTime" lowerBound="1" eType="#//ETimestamp"/>
+    <eOperations name="getEndTime" lowerBound="1" eType="#//ETimestamp"/>
+    <eOperations name="getDuration" lowerBound="1" eType="#//EDuration"/>
+    <eOperations name="isEpochTime" lowerBound="1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
 </ecore:EPackage>

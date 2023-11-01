@@ -14,6 +14,7 @@ import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collection;
 import java.util.Map;
+import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.metric.Metric;
 import nl.esi.pps.tmsc.metric.MetricCategory;
@@ -84,10 +85,10 @@ public class MetricProcessor {
   }
   
   /**
-   * @see IMetricProcessor#isComponentRequiredToResolveInstances(String)
+   * @see IMetricProcessor#isRequiredToResolveInstances(String, String)
    */
-  public boolean isComponentRequiredToResolveInstances(final String componentName) {
-    return this.metricProcessor.isComponentRequiredToResolveInstances(componentName);
+  public boolean isRequiredToResolveInstances(final String hostName, final String componentName) {
+    return this.metricProcessor.isRequiredToResolveInstances(hostName, componentName);
   }
   
   /**
@@ -115,6 +116,7 @@ public class MetricProcessor {
     }
     final Metric metric = MetricProcessor.createMetric(this, metricModel);
     metric.setBudget(metricBudget);
+    metric.setConfiguration(metricConfiguration);
     EList<FullScopeTMSC> _tmscs = metric.getTmscs();
     _tmscs.add(tmsc);
     EList<MetricInstance> _instances = metric.getInstances();
@@ -177,6 +179,13 @@ public class MetricProcessor {
    */
   public Pair<Long, Long> getAnalysisTimeWindow(final MetricInstance metricInstance) {
     return this.metricProcessor.getAnalysisTimeWindow(metricInstance);
+  }
+  
+  /**
+   * @see IMetricProcessor#isActivityCutOff(Dependency, MetricInstance)
+   */
+  public boolean isActivityCutOff(final Dependency dependency, final MetricInstance metricInstance) {
+    return this.metricProcessor.isActivityCutOff(dependency, metricInstance);
   }
   
   @Override

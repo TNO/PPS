@@ -6,8 +6,11 @@ import nl.esi.emf.properties.PropertiesPackage;
 
 import nl.esi.pps.architecture.ArchitecturePackage;
 
+import nl.esi.pps.architecture.deployed.DeployedPackage;
+
 import nl.esi.pps.architecture.example.ExampleArchitecture;
 import nl.esi.pps.architecture.example.ExampleFactory;
+import nl.esi.pps.architecture.example.ExampleHost;
 import nl.esi.pps.architecture.example.ExamplePackage;
 
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
@@ -35,6 +38,13 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 * @generated
 	 */
 	private EClass exampleArchitectureEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exampleHostEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -120,7 +130,7 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getExampleArchitecture_Components() {
+	public EReference getExampleArchitecture_Interfaces() {
 		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -130,7 +140,7 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getExampleArchitecture_Interfaces() {
+	public EReference getExampleArchitecture_Functions() {
 		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -140,7 +150,7 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getExampleArchitecture_Functions() {
+	public EReference getExampleArchitecture_Components() {
 		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(2);
 	}
 
@@ -150,8 +160,38 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 * @generated
 	 */
 	@Override
-	public EReference getExampleArchitecture_Executors() {
+	public EReference getExampleArchitecture_Hosts() {
 		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(3);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleArchitecture_Executors() {
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExampleHost() {
+		return exampleHostEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleHost_Executors() {
+		return (EReference) exampleHostEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -185,10 +225,14 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 
 		// Create classes and their features
 		exampleArchitectureEClass = createEClass(EXAMPLE_ARCHITECTURE);
-		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__COMPONENTS);
 		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__INTERFACES);
 		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__FUNCTIONS);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__COMPONENTS);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__HOSTS);
 		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__EXECUTORS);
+
+		exampleHostEClass = createEClass(EXAMPLE_HOST);
+		createEReference(exampleHostEClass, EXAMPLE_HOST__EXECUTORS);
 	}
 
 	/**
@@ -226,6 +270,8 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 				.getEPackage(ImplementedPackage.eNS_URI);
 		InstantiatedPackage theInstantiatedPackage = (InstantiatedPackage) EPackage.Registry.INSTANCE
 				.getEPackage(InstantiatedPackage.eNS_URI);
+		DeployedPackage theDeployedPackage = (DeployedPackage) EPackage.Registry.INSTANCE
+				.getEPackage(DeployedPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -234,22 +280,32 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 		// Add supertypes to classes
 		exampleArchitectureEClass.getESuperTypes().add(thePropertiesPackage.getPropertiesContainer());
 		exampleArchitectureEClass.getESuperTypes().add(theArchitecturePackage.getArchitectureModel());
+		exampleHostEClass.getESuperTypes().add(theDeployedPackage.getHost());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(exampleArchitectureEClass, ExampleArchitecture.class, "ExampleArchitecture", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getExampleArchitecture_Components(), theSpecifiedPackage.getComponent(), null, "components",
-				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExampleArchitecture_Interfaces(), theSpecifiedPackage.getInterface(), null, "interfaces",
 				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExampleArchitecture_Functions(), theImplementedPackage.getFunction(), null, "functions", null,
 				0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleArchitecture_Components(), theSpecifiedPackage.getComponent(), null, "components",
+				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleArchitecture_Hosts(), this.getExampleHost(), null, "hosts", null, 0, -1,
+				ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExampleArchitecture_Executors(), theInstantiatedPackage.getExecutor(), null, "executors",
 				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(exampleHostEClass, ExampleHost.class, "ExampleHost", !IS_ABSTRACT, !IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExampleHost_Executors(), theInstantiatedPackage.getExecutor(), null, "executors", null, 0, -1,
+				ExampleHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
+				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

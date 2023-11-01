@@ -130,6 +130,8 @@ public class ExecutionItemProvider extends PropertiesContainerItemProvider {
 		super.addPropertyDescriptors(object);
 
 		addLifelinePropertyDescriptor(object);
+		addEntryPropertyDescriptor(object);
+		addExitPropertyDescriptor(object);
 		addParentPropertyDescriptor(object);
 		addComponentPropertyDescriptor(object);
 		addFunctionPropertyDescriptor(object);
@@ -167,6 +169,40 @@ public class ExecutionItemProvider extends PropertiesContainerItemProvider {
 						getString("_UI_PropertyDescriptor_description", "_UI_Execution_lifeline_feature",
 								"_UI_Execution_type"),
 						TmscPackage.Literals.EXECUTION__LIFELINE, false, false, true, null,
+						getDefaultDescriptorCategory(object),
+						new String[] { "org.eclipse.ui.views.properties.expert" }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Entry feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addEntryPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Execution_entry_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Execution_entry_feature",
+								"_UI_Execution_type"),
+						TmscPackage.Literals.EXECUTION__ENTRY, false, false, true, null,
+						getDefaultDescriptorCategory(object),
+						new String[] { "org.eclipse.ui.views.properties.expert" }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Exit feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addExitPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Execution_exit_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Execution_exit_feature",
+								"_UI_Execution_type"),
+						TmscPackage.Literals.EXECUTION__EXIT, false, false, true, null,
 						getDefaultDescriptorCategory(object),
 						new String[] { "org.eclipse.ui.views.properties.expert" }));
 	}

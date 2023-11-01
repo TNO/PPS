@@ -3,15 +3,22 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="example" nsURI="http://www.esi.nl/pps/architecture/example"
     nsPrefix="architecture_example">
   <eClassifiers xsi:type="ecore:EClass" name="ExampleArchitecture" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer ../../nl.esi.pps.architecture/model/architecture.ecore#//ArchitectureModel">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"
-        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Interface"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//implemented/Function"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" upperBound="-1"
+        eType="#//ExampleHost" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="executors" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//instantiated/Executor"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExampleHost" eSuperTypes="../../nl.esi.pps.architecture/model/architecture.ecore#//deployed/Host">
     <eStructuralFeatures xsi:type="ecore:EReference" name="executors" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//instantiated/Executor"
         containment="true"/>

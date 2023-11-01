@@ -6,6 +6,10 @@ import nl.esi.emf.properties.PropertiesPackage;
 
 import nl.esi.pps.architecture.ArchitecturePackage;
 
+import nl.esi.pps.architecture.deployed.DeployedPackage;
+
+import nl.esi.pps.architecture.deployed.impl.DeployedPackageImpl;
+
 import nl.esi.pps.architecture.impl.ArchitecturePackageImpl;
 
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
@@ -13,6 +17,7 @@ import nl.esi.pps.architecture.implemented.ImplementedPackage;
 import nl.esi.pps.architecture.implemented.impl.ImplementedPackageImpl;
 
 import nl.esi.pps.architecture.instantiated.Executor;
+import nl.esi.pps.architecture.instantiated.ExecutorGroup;
 import nl.esi.pps.architecture.instantiated.InstantiatedFactory;
 import nl.esi.pps.architecture.instantiated.InstantiatedPackage;
 
@@ -21,6 +26,7 @@ import nl.esi.pps.architecture.specified.SpecifiedPackage;
 import nl.esi.pps.architecture.specified.impl.SpecifiedPackageImpl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
@@ -38,6 +44,13 @@ public class InstantiatedPackageImpl extends EPackageImpl implements Instantiate
 	 * @generated
 	 */
 	private EClass executorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass executorGroupEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -105,18 +118,24 @@ public class InstantiatedPackageImpl extends EPackageImpl implements Instantiate
 		ImplementedPackageImpl theImplementedPackage = (ImplementedPackageImpl) (registeredPackage instanceof ImplementedPackageImpl
 				? registeredPackage
 				: ImplementedPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DeployedPackage.eNS_URI);
+		DeployedPackageImpl theDeployedPackage = (DeployedPackageImpl) (registeredPackage instanceof DeployedPackageImpl
+				? registeredPackage
+				: DeployedPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theInstantiatedPackage.createPackageContents();
 		theArchitecturePackage.createPackageContents();
 		theSpecifiedPackage.createPackageContents();
 		theImplementedPackage.createPackageContents();
+		theDeployedPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theInstantiatedPackage.initializePackageContents();
 		theArchitecturePackage.initializePackageContents();
 		theSpecifiedPackage.initializePackageContents();
 		theImplementedPackage.initializePackageContents();
+		theDeployedPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theInstantiatedPackage.freeze();
@@ -134,6 +153,36 @@ public class InstantiatedPackageImpl extends EPackageImpl implements Instantiate
 	@Override
 	public EClass getExecutor() {
 		return executorEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getExecutor__GetHost() {
+		return executorEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExecutorGroup() {
+		return executorGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getExecutorGroup__GetExecutors() {
+		return executorGroupEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -167,6 +216,10 @@ public class InstantiatedPackageImpl extends EPackageImpl implements Instantiate
 
 		// Create classes and their features
 		executorEClass = createEClass(EXECUTOR);
+		createEOperation(executorEClass, EXECUTOR___GET_HOST);
+
+		executorGroupEClass = createEClass(EXECUTOR_GROUP);
+		createEOperation(executorGroupEClass, EXECUTOR_GROUP___GET_EXECUTORS);
 	}
 
 	/**
@@ -196,6 +249,8 @@ public class InstantiatedPackageImpl extends EPackageImpl implements Instantiate
 		// Obtain other dependent packages
 		ArchitecturePackage theArchitecturePackage = (ArchitecturePackage) EPackage.Registry.INSTANCE
 				.getEPackage(ArchitecturePackage.eNS_URI);
+		DeployedPackage theDeployedPackage = (DeployedPackage) EPackage.Registry.INSTANCE
+				.getEPackage(DeployedPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -207,6 +262,14 @@ public class InstantiatedPackageImpl extends EPackageImpl implements Instantiate
 		// Initialize classes, features, and operations; add parameters
 		initEClass(executorEClass, Executor.class, "Executor", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getExecutor__GetHost(), theDeployedPackage.getHost(), "getHost", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(executorGroupEClass, ExecutorGroup.class, "ExecutorGroup", IS_ABSTRACT, IS_INTERFACE,
+				IS_GENERATED_INSTANCE_CLASS);
+
+		initEOperation(getExecutorGroup__GetExecutors(), this.getExecutor(), "getExecutors", 0, -1, IS_UNIQUE,
+				IS_ORDERED);
 	}
 
 } //InstantiatedPackageImpl

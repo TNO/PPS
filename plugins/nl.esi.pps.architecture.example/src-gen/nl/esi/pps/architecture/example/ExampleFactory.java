@@ -31,6 +31,15 @@ public interface ExampleFactory extends EFactory {
 	ExampleArchitecture createExampleArchitecture();
 
 	/**
+	 * Returns a new object of class '<em>Host</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Host</em>'.
+	 * @generated
+	 */
+	ExampleHost createExampleHost();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

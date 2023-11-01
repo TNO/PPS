@@ -15,8 +15,10 @@ import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import nl.esi.pps.architecture.deployed.Host;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.instantiated.Executor;
+import nl.esi.pps.architecture.instantiated.ExecutorGroup;
 import nl.esi.pps.architecture.specified.Component;
 import nl.esi.pps.architecture.specified.Interface;
 import nl.esi.pps.architecture.specified.Operation;
@@ -51,7 +53,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
   public LifelineContentProvider(final AdapterFactory adapterFactory) {
     super(adapterFactory, Lifeline.class, 
       FullScopeTMSC.class, ScopedTMSC.class, Lifeline.class, Execution.class, Event.class, Dependency.class, Interval.class, 
-      Executor.class, Component.class, Function.class, Operation.class, Interface.class, 
+      ExecutorGroup.class, Executor.class, Host.class, Component.class, Function.class, Operation.class, Interface.class, 
       Metric.class, MetricInstance.class, 
       ResourceSet.class);
   }
@@ -152,11 +154,33 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
       }
     }
     if (!_matched) {
+      if (context instanceof ExecutorGroup) {
+        _matched=true;
+        final EList<Executor> executors = ((ExecutorGroup)context).getExecutors();
+        final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
+          return Boolean.valueOf(executors.contains(it.getExecutor()));
+        };
+        Iterable<Lifeline> _filter = IterableExtensions.<Lifeline>filter(this.findLifelines(((EObject)context)), _function);
+        Iterables.<Lifeline>addAll(content, _filter);
+      }
+    }
+    if (!_matched) {
       if (context instanceof Executor) {
         _matched=true;
         final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
           Executor _executor = it.getExecutor();
           return Boolean.valueOf(Objects.equal(_executor, context));
+        };
+        Iterable<Lifeline> _filter = IterableExtensions.<Lifeline>filter(this.findLifelines(((EObject)context)), _function);
+        Iterables.<Lifeline>addAll(content, _filter);
+      }
+    }
+    if (!_matched) {
+      if (context instanceof Host) {
+        _matched=true;
+        final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
+          Host _host = it.getExecutor().getHost();
+          return Boolean.valueOf(Objects.equal(_host, context));
         };
         Iterable<Lifeline> _filter = IterableExtensions.<Lifeline>filter(this.findLifelines(((EObject)context)), _function);
         Iterables.<Lifeline>addAll(content, _filter);

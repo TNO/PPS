@@ -5,6 +5,7 @@ package nl.esi.pps.architecture.instantiated;
 import nl.esi.pps.architecture.ArchitecturePackage;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 
 /**
@@ -107,13 +108,59 @@ public interface InstantiatedPackage extends EPackage {
 	int EXECUTOR_FEATURE_COUNT = ArchitecturePackage.NAMED_ARCHITECTURE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
+	 * The operation id for the '<em>Get Host</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTOR___GET_HOST = ArchitecturePackage.NAMED_ARCHITECTURE_ELEMENT_OPERATION_COUNT + 0;
+
+	/**
 	 * The number of operations of the '<em>Executor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTOR_OPERATION_COUNT = ArchitecturePackage.NAMED_ARCHITECTURE_ELEMENT_OPERATION_COUNT + 0;
+	int EXECUTOR_OPERATION_COUNT = ArchitecturePackage.NAMED_ARCHITECTURE_ELEMENT_OPERATION_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link nl.esi.pps.architecture.instantiated.ExecutorGroup <em>Executor Group</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see nl.esi.pps.architecture.instantiated.ExecutorGroup
+	 * @see nl.esi.pps.architecture.instantiated.impl.InstantiatedPackageImpl#getExecutorGroup()
+	 * @generated
+	 */
+	int EXECUTOR_GROUP = 1;
+
+	/**
+	 * The number of structural features of the '<em>Executor Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTOR_GROUP_FEATURE_COUNT = 0;
+
+	/**
+	 * The operation id for the '<em>Get Executors</em>' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTOR_GROUP___GET_EXECUTORS = 0;
+
+	/**
+	 * The number of operations of the '<em>Executor Group</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int EXECUTOR_GROUP_OPERATION_COUNT = 1;
 
 	/**
 	 * Returns the meta object for class '{@link nl.esi.pps.architecture.instantiated.Executor <em>Executor</em>}'.
@@ -124,6 +171,36 @@ public interface InstantiatedPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getExecutor();
+
+	/**
+	 * Returns the meta object for the '{@link nl.esi.pps.architecture.instantiated.Executor#getHost() <em>Get Host</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Host</em>' operation.
+	 * @see nl.esi.pps.architecture.instantiated.Executor#getHost()
+	 * @generated
+	 */
+	EOperation getExecutor__GetHost();
+
+	/**
+	 * Returns the meta object for class '{@link nl.esi.pps.architecture.instantiated.ExecutorGroup <em>Executor Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Executor Group</em>'.
+	 * @see nl.esi.pps.architecture.instantiated.ExecutorGroup
+	 * @generated
+	 */
+	EClass getExecutorGroup();
+
+	/**
+	 * Returns the meta object for the '{@link nl.esi.pps.architecture.instantiated.ExecutorGroup#getExecutors() <em>Get Executors</em>}' operation.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the '<em>Get Executors</em>' operation.
+	 * @see nl.esi.pps.architecture.instantiated.ExecutorGroup#getExecutors()
+	 * @generated
+	 */
+	EOperation getExecutorGroup__GetExecutors();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -157,6 +234,32 @@ public interface InstantiatedPackage extends EPackage {
 		 * @generated
 		 */
 		EClass EXECUTOR = eINSTANCE.getExecutor();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Host</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EXECUTOR___GET_HOST = eINSTANCE.getExecutor__GetHost();
+
+		/**
+		 * The meta object literal for the '{@link nl.esi.pps.architecture.instantiated.ExecutorGroup <em>Executor Group</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see nl.esi.pps.architecture.instantiated.ExecutorGroup
+		 * @see nl.esi.pps.architecture.instantiated.impl.InstantiatedPackageImpl#getExecutorGroup()
+		 * @generated
+		 */
+		EClass EXECUTOR_GROUP = eINSTANCE.getExecutorGroup();
+
+		/**
+		 * The meta object literal for the '<em><b>Get Executors</b></em>' operation.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EOperation EXECUTOR_GROUP___GET_EXECUTORS = eINSTANCE.getExecutorGroup__GetExecutors();
 
 	}
 

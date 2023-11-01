@@ -70,6 +70,7 @@ public class MetricItemProvider extends ItemProviderAdapter
 		addBudgetPropertyDescriptor(object);
 		addCategoryPropertyDescriptor(object);
 		addTmscsPropertyDescriptor(object);
+		addConfigurationPropertyDescriptor(object);
 	}
 
 	/**
@@ -148,6 +149,23 @@ public class MetricItemProvider extends ItemProviderAdapter
 				getString("_UI_PropertyDescriptor_description", "_UI_Metric_tmscs_feature", "_UI_Metric_type"),
 				MetricPackage.Literals.METRIC__TMSCS, false, false, true, null, getDefaultDescriptorCategory(object),
 				new String[] { "org.eclipse.ui.views.properties.expert" }));
+	}
+
+	/**
+	 * This adds a property descriptor for the Configuration feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addConfigurationPropertyDescriptor(Object object) {
+		itemPropertyDescriptors
+				.add(createItemPropertyDescriptor(((ComposeableAdapterFactory) adapterFactory).getRootAdapterFactory(),
+						getResourceLocator(), getString("_UI_Metric_configuration_feature"),
+						getString("_UI_PropertyDescriptor_description", "_UI_Metric_configuration_feature",
+								"_UI_Metric_type"),
+						MetricPackage.Literals.METRIC__CONFIGURATION, false, false, false,
+						ItemPropertyDescriptor.GENERIC_VALUE_IMAGE, getDefaultDescriptorCategory(object),
+						new String[] { "org.eclipse.ui.views.properties.expert" }));
 	}
 
 	@Override
@@ -237,6 +255,7 @@ public class MetricItemProvider extends ItemProviderAdapter
 		case MetricPackage.METRIC__ID:
 		case MetricPackage.METRIC__NAME:
 		case MetricPackage.METRIC__BUDGET:
+		case MetricPackage.METRIC__CONFIGURATION:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 			return;
 		case MetricPackage.METRIC__INSTANCES:

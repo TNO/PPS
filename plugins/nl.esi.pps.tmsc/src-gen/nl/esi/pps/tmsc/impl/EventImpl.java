@@ -276,7 +276,8 @@ public abstract class EventImpl extends PropertiesContainerImpl implements Event
 	 */
 	@Override
 	public EList<ScopedTMSC> getScopes() {
-		return DerivedUtil.derivedEReference(this, TmscPackage.EVENT__SCOPES, TmscImplQueries::getScopesImpl);
+		return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.EVENT__SCOPES,
+				TmscImplQueries::getScopesImpl);
 	}
 
 	/**

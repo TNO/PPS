@@ -58,6 +58,8 @@ public class ExampleFactoryImpl extends EFactoryImpl implements ExampleFactory {
 		switch (eClass.getClassifierID()) {
 		case ExamplePackage.EXAMPLE_ARCHITECTURE:
 			return createExampleArchitecture();
+		case ExamplePackage.EXAMPLE_HOST:
+			return createExampleHost();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -72,6 +74,17 @@ public class ExampleFactoryImpl extends EFactoryImpl implements ExampleFactory {
 	public ExampleArchitecture createExampleArchitecture() {
 		ExampleArchitectureImpl exampleArchitecture = new ExampleArchitectureImpl();
 		return exampleArchitecture;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExampleHost createExampleHost() {
+		ExampleHostImpl exampleHost = new ExampleHostImpl();
+		return exampleHost;
 	}
 
 	/**

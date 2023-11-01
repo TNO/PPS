@@ -61,10 +61,12 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final RuleCall cComponentsXComponentParserRuleCall_1_3_0 = (RuleCall)cComponentsAssignment_1_3.eContents().get(0);
 		private final Assignment cFunctionsAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
 		private final RuleCall cFunctionsXFunctionParserRuleCall_1_4_0 = (RuleCall)cFunctionsAssignment_1_4.eContents().get(0);
-		private final Assignment cExecutorsAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
-		private final RuleCall cExecutorsXExecutorParserRuleCall_1_5_0 = (RuleCall)cExecutorsAssignment_1_5.eContents().get(0);
-		private final Assignment cEventsAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
-		private final RuleCall cEventsXEventParserRuleCall_1_6_0 = (RuleCall)cEventsAssignment_1_6.eContents().get(0);
+		private final Assignment cHostsAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
+		private final RuleCall cHostsXHostParserRuleCall_1_5_0 = (RuleCall)cHostsAssignment_1_5.eContents().get(0);
+		private final Assignment cExecutorsAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
+		private final RuleCall cExecutorsXExecutorParserRuleCall_1_6_0 = (RuleCall)cExecutorsAssignment_1_6.eContents().get(0);
+		private final Assignment cEventsAssignment_1_7 = (Assignment)cAlternatives_1.eContents().get(7);
+		private final RuleCall cEventsXEventParserRuleCall_1_7_0 = (RuleCall)cEventsAssignment_1_7.eContents().get(0);
 		
 		//TmscXtextModel:
 		//    {TmscXtextModel}
@@ -78,6 +80,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//    | interfaces+=XInterface
 		//    | components+=XComponent
 		//    | functions+=XFunction
+		//    | hosts+=XHost
 		//    | executors+=XExecutor
 		//    | events+=XEvent)*;
 		@Override public ParserRule getRule() { return rule; }
@@ -93,6 +96,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//| interfaces+=XInterface
 		//| components+=XComponent
 		//| functions+=XFunction
+		//| hosts+=XHost
 		//| executors+=XExecutor
 		//| events+=XEvent)*
 		public Group getGroup() { return cGroup; }
@@ -110,6 +114,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//| interfaces+=XInterface
 		//| components+=XComponent
 		//| functions+=XFunction
+		//| hosts+=XHost
 		//| executors+=XExecutor
 		//| events+=XEvent)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
@@ -215,17 +220,23 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XFunction
 		public RuleCall getFunctionsXFunctionParserRuleCall_1_4_0() { return cFunctionsXFunctionParserRuleCall_1_4_0; }
 		
+		//hosts+=XHost
+		public Assignment getHostsAssignment_1_5() { return cHostsAssignment_1_5; }
+		
+		//XHost
+		public RuleCall getHostsXHostParserRuleCall_1_5_0() { return cHostsXHostParserRuleCall_1_5_0; }
+		
 		//executors+=XExecutor
-		public Assignment getExecutorsAssignment_1_5() { return cExecutorsAssignment_1_5; }
+		public Assignment getExecutorsAssignment_1_6() { return cExecutorsAssignment_1_6; }
 		
 		//XExecutor
-		public RuleCall getExecutorsXExecutorParserRuleCall_1_5_0() { return cExecutorsXExecutorParserRuleCall_1_5_0; }
+		public RuleCall getExecutorsXExecutorParserRuleCall_1_6_0() { return cExecutorsXExecutorParserRuleCall_1_6_0; }
 		
 		//events+=XEvent
-		public Assignment getEventsAssignment_1_6() { return cEventsAssignment_1_6; }
+		public Assignment getEventsAssignment_1_7() { return cEventsAssignment_1_7; }
 		
 		//XEvent
-		public RuleCall getEventsXEventParserRuleCall_1_6_0() { return cEventsXEventParserRuleCall_1_6_0; }
+		public RuleCall getEventsXEventParserRuleCall_1_7_0() { return cEventsXEventParserRuleCall_1_7_0; }
 	}
 	public class XNamedArchitectureElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XNamedArchitectureElement");
@@ -234,13 +245,14 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final RuleCall cXOperationParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		private final RuleCall cXComponentParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cXFunctionParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
-		private final RuleCall cXExecutorParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cXHostParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cXExecutorParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//XNamedArchitectureElement:
-		//    XInterface | XOperation | XComponent | XFunction | XExecutor;
+		//    XInterface | XOperation | XComponent | XFunction | XHost | XExecutor;
 		@Override public ParserRule getRule() { return rule; }
 		
-		//XInterface | XOperation | XComponent | XFunction | XExecutor
+		//XInterface | XOperation | XComponent | XFunction | XHost | XExecutor
 		public Alternatives getAlternatives() { return cAlternatives; }
 		
 		//XInterface
@@ -255,8 +267,11 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XFunction
 		public RuleCall getXFunctionParserRuleCall_3() { return cXFunctionParserRuleCall_3; }
 		
+		//XHost
+		public RuleCall getXHostParserRuleCall_4() { return cXHostParserRuleCall_4; }
+		
 		//XExecutor
-		public RuleCall getXExecutorParserRuleCall_4() { return cXExecutorParserRuleCall_4; }
+		public RuleCall getXExecutorParserRuleCall_5() { return cXExecutorParserRuleCall_5; }
 	}
 	public class XInterfaceElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XInterface");
@@ -873,6 +888,145 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//')'
 		public Keyword getRightParenthesisKeyword_2_3() { return cRightParenthesisKeyword_2_3; }
 	}
+	public class XHostElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XHost");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cUntracedAssignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final Keyword cUntracedUntracedKeyword_0_0 = (Keyword)cUntracedAssignment_0.eContents().get(0);
+		private final Keyword cHostKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cDescriptionAssignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cDescriptionIDStringParserRuleCall_2_0_0 = (RuleCall)cDescriptionAssignment_2_0.eContents().get(0);
+		private final Keyword cAsKeyword_2_1 = (Keyword)cGroup_2.eContents().get(1);
+		private final Assignment cNameAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cNameIDTerminalRuleCall_3_0 = (RuleCall)cNameAssignment_3.eContents().get(0);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cLeftCurlyBracketKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Alternatives cAlternatives_4_1 = (Alternatives)cGroup_4.eContents().get(1);
+		private final Group cGroup_4_1_0 = (Group)cAlternatives_4_1.eContents().get(0);
+		private final Keyword cTimeBoundKeyword_4_1_0_0 = (Keyword)cGroup_4_1_0.eContents().get(0);
+		private final Keyword cColonKeyword_4_1_0_1 = (Keyword)cGroup_4_1_0.eContents().get(1);
+		private final Assignment cTimeBoundAssignment_4_1_0_2 = (Assignment)cGroup_4_1_0.eContents().get(2);
+		private final RuleCall cTimeBoundABS_EBIGDECIMALTerminalRuleCall_4_1_0_2_0 = (RuleCall)cTimeBoundAssignment_4_1_0_2.eContents().get(0);
+		private final Group cGroup_4_1_1 = (Group)cAlternatives_4_1.eContents().get(1);
+		private final Keyword cScheduledKeyword_4_1_1_0 = (Keyword)cGroup_4_1_1.eContents().get(0);
+		private final Keyword cColonKeyword_4_1_1_1 = (Keyword)cGroup_4_1_1.eContents().get(1);
+		private final Assignment cScheduledAssignment_4_1_1_2 = (Assignment)cGroup_4_1_1.eContents().get(2);
+		private final RuleCall cScheduledEBOOLEAN_OBJECTParserRuleCall_4_1_1_2_0 = (RuleCall)cScheduledAssignment_4_1_1_2.eContents().get(0);
+		private final Assignment cPropertiesAssignment_4_1_2 = (Assignment)cAlternatives_4_1.eContents().get(2);
+		private final RuleCall cPropertiesXPropertyParserRuleCall_4_1_2_0 = (RuleCall)cPropertiesAssignment_4_1_2.eContents().get(0);
+		private final Assignment cExecutorsAssignment_4_1_3 = (Assignment)cAlternatives_4_1.eContents().get(3);
+		private final RuleCall cExecutorsXExecutorParserRuleCall_4_1_3_0 = (RuleCall)cExecutorsAssignment_4_1_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_4_2 = (Keyword)cGroup_4.eContents().get(2);
+		
+		//XHost:
+		//    (untraced?='untraced')? 'host' (description=IDString 'as')? name=ID
+		//    ('{'
+		//        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//        |properties+=XProperty
+		//        |executors+=XExecutor)*
+		//    '}')?;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//(untraced?='untraced')? 'host' (description=IDString 'as')? name=ID
+		//('{'
+		//    ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//    |properties+=XProperty
+		//    |executors+=XExecutor)*
+		//'}')?
+		public Group getGroup() { return cGroup; }
+		
+		//(untraced?='untraced')?
+		public Assignment getUntracedAssignment_0() { return cUntracedAssignment_0; }
+		
+		//'untraced'
+		public Keyword getUntracedUntracedKeyword_0_0() { return cUntracedUntracedKeyword_0_0; }
+		
+		//'host'
+		public Keyword getHostKeyword_1() { return cHostKeyword_1; }
+		
+		//(description=IDString 'as')?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//description=IDString
+		public Assignment getDescriptionAssignment_2_0() { return cDescriptionAssignment_2_0; }
+		
+		//IDString
+		public RuleCall getDescriptionIDStringParserRuleCall_2_0_0() { return cDescriptionIDStringParserRuleCall_2_0_0; }
+		
+		//'as'
+		public Keyword getAsKeyword_2_1() { return cAsKeyword_2_1; }
+		
+		//name=ID
+		public Assignment getNameAssignment_3() { return cNameAssignment_3; }
+		
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
+		
+		//('{'
+		//    ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//    |properties+=XProperty
+		//    |executors+=XExecutor)*
+		//'}')?
+		public Group getGroup_4() { return cGroup_4; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_4_0() { return cLeftCurlyBracketKeyword_4_0; }
+		
+		//('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//|'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//|properties+=XProperty
+		//|executors+=XExecutor)*
+		public Alternatives getAlternatives_4_1() { return cAlternatives_4_1; }
+		
+		//'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		public Group getGroup_4_1_0() { return cGroup_4_1_0; }
+		
+		//'time-bound'
+		public Keyword getTimeBoundKeyword_4_1_0_0() { return cTimeBoundKeyword_4_1_0_0; }
+		
+		//':'
+		public Keyword getColonKeyword_4_1_0_1() { return cColonKeyword_4_1_0_1; }
+		
+		//timeBound=ABS_EBIGDECIMAL
+		public Assignment getTimeBoundAssignment_4_1_0_2() { return cTimeBoundAssignment_4_1_0_2; }
+		
+		//ABS_EBIGDECIMAL
+		public RuleCall getTimeBoundABS_EBIGDECIMALTerminalRuleCall_4_1_0_2_0() { return cTimeBoundABS_EBIGDECIMALTerminalRuleCall_4_1_0_2_0; }
+		
+		//'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		public Group getGroup_4_1_1() { return cGroup_4_1_1; }
+		
+		//'scheduled'
+		public Keyword getScheduledKeyword_4_1_1_0() { return cScheduledKeyword_4_1_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_4_1_1_1() { return cColonKeyword_4_1_1_1; }
+		
+		//scheduled=EBOOLEAN_OBJECT
+		public Assignment getScheduledAssignment_4_1_1_2() { return cScheduledAssignment_4_1_1_2; }
+		
+		//EBOOLEAN_OBJECT
+		public RuleCall getScheduledEBOOLEAN_OBJECTParserRuleCall_4_1_1_2_0() { return cScheduledEBOOLEAN_OBJECTParserRuleCall_4_1_1_2_0; }
+		
+		//properties+=XProperty
+		public Assignment getPropertiesAssignment_4_1_2() { return cPropertiesAssignment_4_1_2; }
+		
+		//XProperty
+		public RuleCall getPropertiesXPropertyParserRuleCall_4_1_2_0() { return cPropertiesXPropertyParserRuleCall_4_1_2_0; }
+		
+		//executors+=XExecutor
+		public Assignment getExecutorsAssignment_4_1_3() { return cExecutorsAssignment_4_1_3; }
+		
+		//XExecutor
+		public RuleCall getExecutorsXExecutorParserRuleCall_4_1_3_0() { return cExecutorsXExecutorParserRuleCall_4_1_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_4_2() { return cRightCurlyBracketKeyword_4_2; }
+	}
 	public class XExecutorElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XExecutor");
 		private final Group cGroup = (Group)rule.eContents().get(1);
@@ -1011,7 +1165,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final RuleCall cTimeBoundPOS_EBIGDECIMALTerminalRuleCall_1_0 = (RuleCall)cTimeBoundAssignment_1.eContents().get(0);
 		private final Assignment cExecutorAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final CrossReference cExecutorXExecutorCrossReference_2_0 = (CrossReference)cExecutorAssignment_2.eContents().get(0);
-		private final RuleCall cExecutorXExecutorIDStringParserRuleCall_2_0_1 = (RuleCall)cExecutorXExecutorCrossReference_2_0.eContents().get(1);
+		private final RuleCall cExecutorXExecutorFQNStringParserRuleCall_2_0_1 = (RuleCall)cExecutorXExecutorCrossReference_2_0.eContents().get(1);
 		private final Assignment cComponentAssignment_3 = (Assignment)cGroup.eContents().get(3);
 		private final CrossReference cComponentXComponentCrossReference_3_0 = (CrossReference)cComponentAssignment_3.eContents().get(0);
 		private final RuleCall cComponentXComponentIDStringParserRuleCall_3_0_1 = (RuleCall)cComponentXComponentCrossReference_3_0.eContents().get(1);
@@ -1054,7 +1208,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//XEvent:
 		//    (timestamp=(ISO8601|ABS_EBIGDECIMAL))?
 		//    (timeBound=POS_EBIGDECIMAL)?
-		//    executor=[XExecutor|IDString]
+		//    executor=[XExecutor|FQNString]
 		//    // Component is optional: we assume the executor to also be the component by default
 		//    (component=[XComponent|IDString])?
 		//    type=XEventType
@@ -1069,7 +1223,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		
 		//(timestamp=(ISO8601|ABS_EBIGDECIMAL))?
 		//(timeBound=POS_EBIGDECIMAL)?
-		//executor=[XExecutor|IDString]
+		//executor=[XExecutor|FQNString]
 		//// Component is optional: we assume the executor to also be the component by default
 		//(component=[XComponent|IDString])?
 		//type=XEventType
@@ -1100,14 +1254,14 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//POS_EBIGDECIMAL
 		public RuleCall getTimeBoundPOS_EBIGDECIMALTerminalRuleCall_1_0() { return cTimeBoundPOS_EBIGDECIMALTerminalRuleCall_1_0; }
 		
-		//executor=[XExecutor|IDString]
+		//executor=[XExecutor|FQNString]
 		public Assignment getExecutorAssignment_2() { return cExecutorAssignment_2; }
 		
-		//[XExecutor|IDString]
+		//[XExecutor|FQNString]
 		public CrossReference getExecutorXExecutorCrossReference_2_0() { return cExecutorXExecutorCrossReference_2_0; }
 		
-		//IDString
-		public RuleCall getExecutorXExecutorIDStringParserRuleCall_2_0_1() { return cExecutorXExecutorIDStringParserRuleCall_2_0_1; }
+		//FQNString
+		public RuleCall getExecutorXExecutorFQNStringParserRuleCall_2_0_1() { return cExecutorXExecutorFQNStringParserRuleCall_2_0_1; }
 		
 		//// Component is optional: we assume the executor to also be the component by default
 		//(component=[XComponent|IDString])?
@@ -1868,6 +2022,25 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//']'
 		public Keyword getRightSquareBracketKeyword_3_4() { return cRightSquareBracketKeyword_3_4; }
 	}
+	public class FQNStringElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.FQNString");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cFQNParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cSTRINGTerminalRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		
+		//FQNString returns ecore::EString:
+		//    FQN | STRING;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//FQN | STRING
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
+		//FQN
+		public RuleCall getFQNParserRuleCall_0() { return cFQNParserRuleCall_0; }
+		
+		//STRING
+		public RuleCall getSTRINGTerminalRuleCall_1() { return cSTRINGTerminalRuleCall_1; }
+	}
 	public class IDStringElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.IDString");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
@@ -2123,6 +2296,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	private final XFunctionElements pXFunction;
 	private final XFunctionParameterElements pXFunctionParameter;
 	private final XFunctionParameterKindElements eXFunctionParameterKind;
+	private final XHostElements pXHost;
 	private final XExecutorElements pXExecutor;
 	private final XEventElements pXEvent;
 	private final XEventTypeElements eXEventType;
@@ -2133,6 +2307,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	private final XDependencySettingsElements pXDependencySettings;
 	private final XPropertyElements pXProperty;
 	private final XPropertyValueElements pXPropertyValue;
+	private final FQNStringElements pFQNString;
 	private final IDStringElements pIDString;
 	private final FQNElements pFQN;
 	private final EBOOLEAN_OBJECTElements pEBOOLEAN_OBJECT;
@@ -2161,6 +2336,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		this.pXFunction = new XFunctionElements();
 		this.pXFunctionParameter = new XFunctionParameterElements();
 		this.eXFunctionParameterKind = new XFunctionParameterKindElements();
+		this.pXHost = new XHostElements();
 		this.pXExecutor = new XExecutorElements();
 		this.pXEvent = new XEventElements();
 		this.eXEventType = new XEventTypeElements();
@@ -2171,6 +2347,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		this.pXDependencySettings = new XDependencySettingsElements();
 		this.pXProperty = new XPropertyElements();
 		this.pXPropertyValue = new XPropertyValueElements();
+		this.pFQNString = new FQNStringElements();
 		this.pIDString = new IDStringElements();
 		this.pFQN = new FQNElements();
 		this.pEBOOLEAN_OBJECT = new EBOOLEAN_OBJECTElements();
@@ -2221,6 +2398,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//    | interfaces+=XInterface
 	//    | components+=XComponent
 	//    | functions+=XFunction
+	//    | hosts+=XHost
 	//    | executors+=XExecutor
 	//    | events+=XEvent)*;
 	public TmscXtextModelElements getTmscXtextModelAccess() {
@@ -2242,7 +2420,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XNamedArchitectureElement:
-	//    XInterface | XOperation | XComponent | XFunction | XExecutor;
+	//    XInterface | XOperation | XComponent | XFunction | XHost | XExecutor;
 	public XNamedArchitectureElementElements getXNamedArchitectureElementAccess() {
 		return pXNamedArchitectureElement;
 	}
@@ -2332,6 +2510,22 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		return getXFunctionParameterKindAccess().getRule();
 	}
 	
+	//XHost:
+	//    (untraced?='untraced')? 'host' (description=IDString 'as')? name=ID
+	//    ('{'
+	//        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	//        |properties+=XProperty
+	//        |executors+=XExecutor)*
+	//    '}')?;
+	public XHostElements getXHostAccess() {
+		return pXHost;
+	}
+	
+	public ParserRule getXHostRule() {
+		return getXHostAccess().getRule();
+	}
+	
 	//XExecutor:
 	//    (untraced?='untraced')? 'executor' (description=IDString 'as')? name=ID
 	//    ('{'
@@ -2350,7 +2544,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//XEvent:
 	//    (timestamp=(ISO8601|ABS_EBIGDECIMAL))?
 	//    (timeBound=POS_EBIGDECIMAL)?
-	//    executor=[XExecutor|IDString]
+	//    executor=[XExecutor|FQNString]
 	//    // Component is optional: we assume the executor to also be the component by default
 	//    (component=[XComponent|IDString])?
 	//    type=XEventType
@@ -2470,6 +2664,16 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	public ParserRule getXPropertyValueRule() {
 		return getXPropertyValueAccess().getRule();
+	}
+	
+	//FQNString returns ecore::EString:
+	//    FQN | STRING;
+	public FQNStringElements getFQNStringAccess() {
+		return pFQNString;
+	}
+	
+	public ParserRule getFQNStringRule() {
+		return getFQNStringAccess().getRule();
 	}
 	
 	//IDString returns ecore::EString:

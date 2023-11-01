@@ -189,7 +189,7 @@ public class LifelineImpl extends PropertiesContainerImpl implements Lifeline {
 	 */
 	@Override
 	public EList<Execution> getRootExecutions() {
-		return DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__ROOT_EXECUTIONS,
+		return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__ROOT_EXECUTIONS,
 				TmscImplQueries.getRootExecutionsImpl(this));
 	}
 
@@ -200,7 +200,8 @@ public class LifelineImpl extends PropertiesContainerImpl implements Lifeline {
 	 */
 	@Override
 	public EList<LifelineSegment> getSegments() {
-		return DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__SEGMENTS, TmscImplQueries::getSegmentsImpl);
+		return nl.esi.pps.common.emf.util.DerivedUtil.derivedEReference(this, TmscPackage.LIFELINE__SEGMENTS,
+				TmscImplQueries::getSegmentsImpl);
 	}
 
 	/**

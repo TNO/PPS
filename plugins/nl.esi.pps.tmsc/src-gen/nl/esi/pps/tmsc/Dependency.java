@@ -234,4 +234,12 @@ public interface Dependency extends PropertiesContainer, ITimeRange {
 	 */
 	void setProjection(boolean value);
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isEpochTime();
+
 } // Dependency

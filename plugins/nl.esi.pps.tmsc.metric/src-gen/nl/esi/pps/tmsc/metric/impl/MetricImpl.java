@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link nl.esi.pps.tmsc.metric.impl.MetricImpl#getCategory <em>Category</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.metric.impl.MetricImpl#getInstances <em>Instances</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.metric.impl.MetricImpl#getTmscs <em>Tmscs</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.metric.impl.MetricImpl#getConfiguration <em>Configuration</em>}</li>
  * </ul>
  *
  * @generated
@@ -134,6 +135,26 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 	 * @ordered
 	 */
 	protected EList<FullScopeTMSC> tmscs;
+
+	/**
+	 * The default value of the '{@link #getConfiguration() <em>Configuration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConfiguration()
+	 * @generated
+	 * @ordered
+	 */
+	protected static final String CONFIGURATION_EDEFAULT = null;
+
+	/**
+	 * The cached value of the '{@link #getConfiguration() <em>Configuration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getConfiguration()
+	 * @generated
+	 * @ordered
+	 */
+	protected String configuration = CONFIGURATION_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -325,6 +346,30 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@Override
+	public String getConfiguration() {
+		return configuration;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public void setConfiguration(String newConfiguration) {
+		String oldConfiguration = configuration;
+		configuration = newConfiguration;
+		if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, MetricPackage.METRIC__CONFIGURATION, oldConfiguration,
+					configuration));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	@SuppressWarnings("unchecked")
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
@@ -378,6 +423,8 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 			return getInstances();
 		case MetricPackage.METRIC__TMSCS:
 			return getTmscs();
+		case MetricPackage.METRIC__CONFIGURATION:
+			return getConfiguration();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -411,6 +458,9 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 			getTmscs().clear();
 			getTmscs().addAll((Collection<? extends FullScopeTMSC>) newValue);
 			return;
+		case MetricPackage.METRIC__CONFIGURATION:
+			setConfiguration((String) newValue);
+			return;
 		}
 		super.eSet(featureID, newValue);
 	}
@@ -441,6 +491,9 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 		case MetricPackage.METRIC__TMSCS:
 			getTmscs().clear();
 			return;
+		case MetricPackage.METRIC__CONFIGURATION:
+			setConfiguration(CONFIGURATION_EDEFAULT);
+			return;
 		}
 		super.eUnset(featureID);
 	}
@@ -465,6 +518,9 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 			return instances != null && !instances.isEmpty();
 		case MetricPackage.METRIC__TMSCS:
 			return tmscs != null && !tmscs.isEmpty();
+		case MetricPackage.METRIC__CONFIGURATION:
+			return CONFIGURATION_EDEFAULT == null ? configuration != null
+					: !CONFIGURATION_EDEFAULT.equals(configuration);
 		}
 		return super.eIsSet(featureID);
 	}
@@ -486,6 +542,8 @@ public class MetricImpl extends MinimalEObjectImpl.Container implements Metric {
 		result.append(name);
 		result.append(", budget: ");
 		result.append(budget);
+		result.append(", configuration: ");
+		result.append(configuration);
 		result.append(')');
 		return result.toString();
 	}

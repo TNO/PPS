@@ -58,8 +58,6 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.emf.edit.domain.IEditingDomainProvider;
 import org.eclipse.emf.edit.provider.AdapterFactoryItemDelegator;
 import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.emf.edit.ui.action.EditingDomainActionBarContributor;
 import org.eclipse.emf.edit.ui.celleditor.AdapterFactoryTreeEditor;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryContentProvider;
@@ -116,11 +114,6 @@ import org.eclipse.ui.views.properties.PropertySheet;
 import org.eclipse.ui.views.properties.PropertySheetPage;
 import org.jfree.chart.plot.XYPlot;
 
-import nl.esi.emf.properties.provider.PropertiesItemProviderAdapterFactory;
-import nl.esi.pps.architecture.implemented.provider.ImplementedItemProviderAdapterFactory;
-import nl.esi.pps.architecture.instantiated.provider.InstantiatedItemProviderAdapterFactory;
-import nl.esi.pps.architecture.provider.ArchitectureItemProviderAdapterFactory;
-import nl.esi.pps.architecture.specified.provider.SpecifiedItemProviderAdapterFactory;
 import nl.esi.pps.common.emf.synchronizedtiming.TimeSyncSupport;
 import nl.esi.pps.common.emf.synchronizedtiming.TimeSyncSupportProvider;
 import nl.esi.pps.common.emf.synchronizedtiming.range.TimeRange;
@@ -132,7 +125,7 @@ import nl.esi.pps.common.ide.ui.views.dataanalysis.DataAnalysisView;
 import nl.esi.pps.common.ide.ui.views.dataanalysis.IDataAnalysisPage;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.Interval;
-import nl.esi.pps.tmsc.provider.TmscItemProviderAdapterFactory;
+import nl.esi.pps.tmsc.provider.TmscEditPlugin;
 import nl.esi.pps.tmsc.rendering.plot.FullRenderingStrategy;
 import nl.esi.pps.tmsc.viewers.LifelineContentProvider;
 import nl.esi.pps.tmsc.viewers.TmscPlotViewer;
@@ -636,22 +629,7 @@ public class TmscEditor extends MultiPageEditorPart implements IEditingDomainPro
 	 */
 	protected void initializeEditingDomain() {
 		// Create an adapter factory that yields item providers.
-		adapterFactory = new ComposedAdapterFactory(ComposedAdapterFactory.Descriptor.Registry.INSTANCE) {
-			// Avoiding multi-threading issues by making this method synchronized
-			@Override
-			public synchronized AdapterFactory getFactoryForTypes(Collection<?> types) {
-				return super.getFactoryForTypes(types);
-			}
-		};
-
-		adapterFactory.addAdapterFactory(new ResourceItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new TmscItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ArchitectureItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new SpecifiedItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ImplementedItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new InstantiatedItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new PropertiesItemProviderAdapterFactory());
-		adapterFactory.addAdapterFactory(new ReflectiveItemProviderAdapterFactory());
+		adapterFactory = TmscEditPlugin.createItemProviderAdapterFactory();
 
 		// Create the command stack that will notify this editor as commands are executed.
 		//

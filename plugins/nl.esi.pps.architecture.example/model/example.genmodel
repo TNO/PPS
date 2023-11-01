@@ -13,10 +13,14 @@
   <genPackages prefix="Example" basePackage="nl.esi.pps.architecture" disposableProviderFactory="true"
       ecorePackage="example.ecore#/">
     <genClasses ecoreClass="example.ecore#//ExampleArchitecture">
-      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/components"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/interfaces"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/functions"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/components"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/hosts"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/executors"/>
+    </genClasses>
+    <genClasses ecoreClass="example.ecore#//ExampleHost">
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleHost/executors"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

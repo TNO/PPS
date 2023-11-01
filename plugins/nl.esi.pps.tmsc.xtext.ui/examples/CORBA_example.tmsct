@@ -627,7 +627,9 @@ ipc-server function "Handle log" as handle_log implements Logging.log {
 	time-bound: 30e-3
 }
 
-component ORB
+component ORB {
+	hidden: false
+}
 function "Event loop" as event_loop {
 	paint: LIGHT_BLUE
 	scheduled: true

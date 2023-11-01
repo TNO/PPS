@@ -14,7 +14,6 @@ import nl.esi.pps.common.emf.synchronizedtiming.range.EpochNanoTimeRange
 import nl.esi.pps.common.emf.synchronizedtiming.range.RelativeNanoTimeRange
 import nl.esi.pps.common.emf.synchronizedtiming.range.TimeRange
 import nl.esi.pps.tmsc.Event
-import nl.esi.pps.tmsc.FullScopeTMSC
 import nl.esi.pps.tmsc.ITimeRange
 import nl.esi.pps.tmsc.Lifeline
 import nl.esi.pps.tmsc.ScopedTMSC
@@ -33,6 +32,12 @@ class TmscTimeRangeProvider {
         val boolean epoch
         val long start
         val long end
+        
+        new(boolean epoch ,long start, long end) {
+            this.epoch = epoch
+            this.start = Math.min(start, end)
+            this.end = Math.max(start, end)
+        }
         
         def toTimeRange() {
             // Add a margin of 5% or minimal 5ns
@@ -70,20 +75,14 @@ class TmscTimeRangeProvider {
     }
 
     private static dispatch def NanoTimeRange doGetTimeRange(ITimeRange timeRange) {
-        return if (timeRange.duration !== null && timeRange.tmsc !== null) {
-            new NanoTimeRange(timeRange.tmsc.epochTime, timeRange.startTime, timeRange.endTime)
+        return if (timeRange.duration !== null) {
+            new NanoTimeRange(timeRange.epochTime, timeRange.startTime, timeRange.endTime)
         }
     }
 
     private static dispatch def NanoTimeRange doGetTimeRange(Event event) {
         return if (event.timestamp !== null) {
             new NanoTimeRange(event.tmsc.epochTime, event.timestamp, event.timestamp)
-        }
-    }
-
-    private static dispatch def NanoTimeRange doGetTimeRange(FullScopeTMSC tmsc) {
-        return if (tmsc.startTime !== null && tmsc.endTime !== null) {
-            new NanoTimeRange(tmsc.epochTime, tmsc.startTime, tmsc.endTime)
         }
     }
 

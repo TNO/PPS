@@ -5,6 +5,9 @@ package nl.esi.pps.architecture.example.util;
 import nl.esi.emf.properties.PropertiesContainer;
 
 import nl.esi.pps.architecture.ArchitectureModel;
+import nl.esi.pps.architecture.NamedArchitectureElement;
+
+import nl.esi.pps.architecture.deployed.Host;
 
 import nl.esi.pps.architecture.example.*;
 
@@ -81,6 +84,19 @@ public class ExampleSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case ExamplePackage.EXAMPLE_HOST: {
+			ExampleHost exampleHost = (ExampleHost) theEObject;
+			T result = caseExampleHost(exampleHost);
+			if (result == null)
+				result = caseHost(exampleHost);
+			if (result == null)
+				result = caseNamedArchitectureElement(exampleHost);
+			if (result == null)
+				result = casePropertiesContainer(exampleHost);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -98,6 +114,21 @@ public class ExampleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExampleArchitecture(ExampleArchitecture object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Host</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Host</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExampleHost(ExampleHost object) {
 		return null;
 	}
 
@@ -128,6 +159,36 @@ public class ExampleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseArchitectureModel(ArchitectureModel object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Named Architecture Element</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Named Architecture Element</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseNamedArchitectureElement(NamedArchitectureElement object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Host</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Host</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseHost(Host object) {
 		return null;
 	}
 

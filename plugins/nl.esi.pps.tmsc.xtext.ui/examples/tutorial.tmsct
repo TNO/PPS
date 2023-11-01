@@ -22,15 +22,19 @@
  * - use shorter aliases
  * - use complex names, i.e. including non-word characters
  * - control the order of the executors in the TMSC
+ * 
+ * TIP: Optionally you can group executors by hosts that they are running on
  */
 component "Component 2" as C
+host Host1 as H1 {
+	executor "Sender 2" as S
+}
 executor "Receiver 2" as R
-executor "Sender 2" as S
 function "Receive 2" as fr
 function Send_2 as fs
 
-1 S C > fs !m2
-2 S C < fs
+1 H1.S C > fs !m2
+2 H1.S C < fs
 3 R C > fr ?m2
 4 R C < fr
 

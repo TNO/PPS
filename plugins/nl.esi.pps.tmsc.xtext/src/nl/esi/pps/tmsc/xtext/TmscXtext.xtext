@@ -15,6 +15,7 @@ TmscXtextModel:
     | interfaces+=XInterface
     | components+=XComponent
     | functions+=XFunction
+    | hosts+=XHost
     | executors+=XExecutor
     | events+=XEvent)*;
     
@@ -23,7 +24,7 @@ enum XArchitectureKind:
     INTERNAL='internal' | EXTERNAL='external';
 
 XNamedArchitectureElement:
-    XInterface | XOperation | XComponent | XFunction | XExecutor;
+    XInterface | XOperation | XComponent | XFunction | XHost | XExecutor;
 
 XInterface:
     'interface' (description=IDString 'as')? name=ID 
@@ -64,6 +65,15 @@ XFunctionParameter:
 enum XFunctionParameterKind:
     IN='in' | OUT='out' | IN_OUT='inout' | RETURN='return';
 
+XHost:
+    (untraced?='untraced')? 'host' (description=IDString 'as')? name=ID 
+    ('{'
+        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |properties+=XProperty
+        |executors+=XExecutor)*
+    '}')?;
+
 XExecutor:
     (untraced?='untraced')? 'executor' (description=IDString 'as')? name=ID 
     ('{'
@@ -75,7 +85,7 @@ XExecutor:
 XEvent:
     (timestamp=(ISO8601|ABS_EBIGDECIMAL))?
     (timeBound=POS_EBIGDECIMAL)?
-    executor=[XExecutor|IDString]
+    executor=[XExecutor|FQNString]
     // Component is optional: we assume the executor to also be the component by default
     (component=[XComponent|IDString])?
     type=XEventType
@@ -134,6 +144,9 @@ XPropertyValue:
     | {XPropertyNumberValue} => value=EBIGDECIMAL
     | {XPropertyBooleanValue} => value=EBOOLEAN_OBJECT
     | {XPropertyMutliValue} => '[' values+=XPropertyValue (',' values+=XPropertyValue)* ']';
+
+FQNString returns ecore::EString:
+    FQN | STRING;
 
 IDString returns ecore::EString:
     ID | STRING;

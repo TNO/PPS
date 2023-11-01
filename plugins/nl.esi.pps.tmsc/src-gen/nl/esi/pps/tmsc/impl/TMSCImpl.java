@@ -101,7 +101,7 @@ public abstract class TMSCImpl extends PropertiesContainerImpl implements TMSC {
 	 */
 	@Override
 	public EList<Event> getEvents() {
-		return DerivedUtil.derivedEOperation(TmscImplQueries.getEventsImpl(this));
+		return nl.esi.pps.common.emf.util.DerivedUtil.derivedEOperation(TmscImplQueries.getEventsImpl(this));
 	}
 
 	/**
@@ -122,7 +122,8 @@ public abstract class TMSCImpl extends PropertiesContainerImpl implements TMSC {
 	 */
 	@Override
 	public EList<Dependency> getIncomingDependencies(final Event event) {
-		return DerivedUtil.derivedEOperation(TmscImplQueries.getIncomingDependenciesImpl(this, event));
+		return nl.esi.pps.common.emf.util.DerivedUtil
+				.derivedEOperation(TmscImplQueries.getIncomingDependenciesImpl(this, event));
 	}
 
 	/**
@@ -132,7 +133,8 @@ public abstract class TMSCImpl extends PropertiesContainerImpl implements TMSC {
 	 */
 	@Override
 	public EList<Dependency> getOutgoingDependencies(final Event event) {
-		return DerivedUtil.derivedEOperation(TmscImplQueries.getOutgoingDependenciesImpl(this, event));
+		return nl.esi.pps.common.emf.util.DerivedUtil
+				.derivedEOperation(TmscImplQueries.getOutgoingDependenciesImpl(this, event));
 	}
 
 	/**

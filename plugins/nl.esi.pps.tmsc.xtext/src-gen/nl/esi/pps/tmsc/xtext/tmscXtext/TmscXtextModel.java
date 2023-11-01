@@ -26,6 +26,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getComponents <em>Components</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getFunctions <em>Functions</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getHosts <em>Hosts</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getExecutors <em>Executors</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getEvents <em>Events</em>}</li>
  * </ul>
@@ -164,6 +165,18 @@ public interface TmscXtextModel extends EObject
    * @generated
    */
   EList<XFunction> getFunctions();
+
+  /**
+   * Returns the value of the '<em><b>Hosts</b></em>' containment reference list.
+   * The list contents are of type {@link nl.esi.pps.tmsc.xtext.tmscXtext.XHost}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Hosts</em>' containment reference list.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextPackage#getTmscXtextModel_Hosts()
+   * @model containment="true"
+   * @generated
+   */
+  EList<XHost> getHosts();
 
   /**
    * Returns the value of the '<em><b>Executors</b></em>' containment reference list.

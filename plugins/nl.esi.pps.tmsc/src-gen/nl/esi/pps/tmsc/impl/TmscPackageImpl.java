@@ -376,6 +376,16 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 	 * @generated
 	 */
 	@Override
+	public EAttribute getFullScopeTMSC_Duration() {
+		return (EAttribute) fullScopeTMSCEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getEvent() {
 		return eventEClass;
 	}
@@ -646,6 +656,16 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getExecution__IsEpochTime() {
+		return executionEClass.getEOperations().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getDependency() {
 		return dependencyEClass;
 	}
@@ -748,6 +768,16 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 	@Override
 	public EAttribute getDependency_Projection() {
 		return (EAttribute) dependencyEClass.getEStructuralFeatures().get(9);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EOperation getDependency__IsEpochTime() {
+		return dependencyEClass.getEOperations().get(0);
 	}
 
 	/**
@@ -1166,6 +1196,16 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 	 * @generated
 	 */
 	@Override
+	public EOperation getInterval__IsEpochTime() {
+		return intervalEClass.getEOperations().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public EClass getMeasurement() {
 		return measurementEClass;
 	}
@@ -1316,7 +1356,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 	 * @generated
 	 */
 	@Override
-	public EOperation getITimeRange__GetTmsc() {
+	public EOperation getITimeRange__IsEpochTime() {
 		return iTimeRangeEClass.getEOperations().get(3);
 	}
 
@@ -1388,6 +1428,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		createEAttribute(fullScopeTMSCEClass, FULL_SCOPE_TMSC__EPOCH_TIME);
 		createEAttribute(fullScopeTMSCEClass, FULL_SCOPE_TMSC__START_TIME);
 		createEAttribute(fullScopeTMSCEClass, FULL_SCOPE_TMSC__END_TIME);
+		createEAttribute(fullScopeTMSCEClass, FULL_SCOPE_TMSC__DURATION);
 
 		eventEClass = createEClass(EVENT);
 		createEReference(eventEClass, EVENT__LIFELINE);
@@ -1417,6 +1458,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		createEAttribute(executionEClass, EXECUTION__END_TIME);
 		createEAttribute(executionEClass, EXECUTION__DURATION);
 		createEReference(executionEClass, EXECUTION__TMSC);
+		createEOperation(executionEClass, EXECUTION___IS_EPOCH_TIME);
 
 		dependencyEClass = createEClass(DEPENDENCY);
 		createEReference(dependencyEClass, DEPENDENCY__TMSC);
@@ -1429,6 +1471,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		createEAttribute(dependencyEClass, DEPENDENCY__TIME_BOUND);
 		createEAttribute(dependencyEClass, DEPENDENCY__SCHEDULED);
 		createEAttribute(dependencyEClass, DEPENDENCY__PROJECTION);
+		createEOperation(dependencyEClass, DEPENDENCY___IS_EPOCH_TIME);
 
 		messageEClass = createEClass(MESSAGE);
 		createEReference(messageEClass, MESSAGE__CONTROL_DEPENDENCIES);
@@ -1481,6 +1524,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		createEAttribute(intervalEClass, INTERVAL__END_TIME);
 		createEAttribute(intervalEClass, INTERVAL__DURATION);
 		createEOperation(intervalEClass, INTERVAL___GET_NAME);
+		createEOperation(intervalEClass, INTERVAL___IS_EPOCH_TIME);
 
 		measurementEClass = createEClass(MEASUREMENT);
 		createEAttribute(measurementEClass, MEASUREMENT__NAME);
@@ -1501,7 +1545,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		createEOperation(iTimeRangeEClass, ITIME_RANGE___GET_START_TIME);
 		createEOperation(iTimeRangeEClass, ITIME_RANGE___GET_END_TIME);
 		createEOperation(iTimeRangeEClass, ITIME_RANGE___GET_DURATION);
-		createEOperation(iTimeRangeEClass, ITIME_RANGE___GET_TMSC);
+		createEOperation(iTimeRangeEClass, ITIME_RANGE___IS_EPOCH_TIME);
 
 		// Create data types
 		eTimestampEDataType = createEDataType(ETIMESTAMP);
@@ -1551,6 +1595,7 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 
 		// Add supertypes to classes
 		fullScopeTMSCEClass.getESuperTypes().add(this.getTMSC());
+		fullScopeTMSCEClass.getESuperTypes().add(this.getITimeRange());
 		eventEClass.getESuperTypes().add(thePropertiesPackage.getPropertiesContainer());
 		executionEClass.getESuperTypes().add(thePropertiesPackage.getPropertiesContainer());
 		executionEClass.getESuperTypes().add(this.getITimeRange());
@@ -1594,6 +1639,8 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFullScopeTMSC_EndTime(), this.getETimestamp(), "endTime", null, 1, 1, FullScopeTMSC.class,
 				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getFullScopeTMSC_Duration(), this.getEDuration(), "duration", null, 1, 1, FullScopeTMSC.class,
+				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
 		initEClass(eventEClass, Event.class, "Event", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getEvent_Lifeline(), this.getLifeline(), this.getLifeline_Events(), "lifeline", null, 1, 1,
@@ -1670,6 +1717,9 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 				IS_TRANSIENT, IS_VOLATILE, !IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
 				IS_UNIQUE, IS_DERIVED, IS_ORDERED);
 
+		initEOperation(getExecution__IsEpochTime(), ecorePackage.getEBoolean(), "isEpochTime", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		initEClass(dependencyEClass, Dependency.class, "Dependency", IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getDependency_Tmsc(), this.getFullScopeTMSC(), this.getFullScopeTMSC_Dependencies(), "tmsc",
@@ -1698,6 +1748,9 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		initEAttribute(getDependency_Projection(), ecorePackage.getEBoolean(), "projection", null, 0, 1,
 				Dependency.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE,
 				!IS_DERIVED, IS_ORDERED);
+
+		initEOperation(getDependency__IsEpochTime(), ecorePackage.getEBoolean(), "isEpochTime", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		initEClass(messageEClass, Message.class, "Message", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMessage_ControlDependencies(), this.getMessageControl(), this.getMessageControl_Message(),
@@ -1812,6 +1865,9 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 
 		initEOperation(getInterval__GetName(), ecorePackage.getEString(), "getName", 1, 1, IS_UNIQUE, IS_ORDERED);
 
+		initEOperation(getInterval__IsEpochTime(), ecorePackage.getEBoolean(), "isEpochTime", 0, 1, IS_UNIQUE,
+				IS_ORDERED);
+
 		initEClass(measurementEClass, Measurement.class, "Measurement", !IS_ABSTRACT, !IS_INTERFACE,
 				IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getMeasurement_Name(), ecorePackage.getEString(), "name", null, 1, 1, Measurement.class,
@@ -1848,14 +1904,15 @@ public class TmscPackageImpl extends EPackageImpl implements TmscPackage {
 		initEClass(iTimeRangeEClass, ITimeRange.class, "ITimeRange", IS_ABSTRACT, IS_INTERFACE,
 				!IS_GENERATED_INSTANCE_CLASS);
 
-		initEOperation(getITimeRange__GetStartTime(), this.getETimestamp(), "getStartTime", 0, 1, IS_UNIQUE,
+		initEOperation(getITimeRange__GetStartTime(), this.getETimestamp(), "getStartTime", 1, 1, IS_UNIQUE,
 				IS_ORDERED);
 
-		initEOperation(getITimeRange__GetEndTime(), this.getETimestamp(), "getEndTime", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getITimeRange__GetEndTime(), this.getETimestamp(), "getEndTime", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getITimeRange__GetDuration(), this.getEDuration(), "getDuration", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getITimeRange__GetDuration(), this.getEDuration(), "getDuration", 1, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEOperation(getITimeRange__GetTmsc(), this.getFullScopeTMSC(), "getTmsc", 0, 1, IS_UNIQUE, IS_ORDERED);
+		initEOperation(getITimeRange__IsEpochTime(), ecorePackage.getEBoolean(), "isEpochTime", 1, 1, IS_UNIQUE,
+				IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(eTimestampEDataType, Long.class, "ETimestamp", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

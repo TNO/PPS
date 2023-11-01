@@ -9,7 +9,8 @@ Bundle-Activator: nl.esi.pps.architecture.provider.ArchitectureEditPlugin$Implem
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-11
-Export-Package: nl.esi.pps.architecture.implemented.provider,
+Export-Package: nl.esi.pps.architecture.deployed.provider,
+ nl.esi.pps.architecture.implemented.provider,
  nl.esi.pps.architecture.instantiated.provider,
  nl.esi.pps.architecture.provider,
  nl.esi.pps.architecture.specified.provider

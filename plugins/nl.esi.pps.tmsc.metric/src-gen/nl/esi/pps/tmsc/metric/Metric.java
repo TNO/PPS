@@ -23,6 +23,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link nl.esi.pps.tmsc.metric.Metric#getCategory <em>Category</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.metric.Metric#getInstances <em>Instances</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.metric.Metric#getTmscs <em>Tmscs</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.metric.Metric#getConfiguration <em>Configuration</em>}</li>
  * </ul>
  *
  * @see nl.esi.pps.tmsc.metric.MetricPackage#getMetric()
@@ -148,5 +149,27 @@ public interface Metric extends EObject {
 	 * @generated
 	 */
 	EList<FullScopeTMSC> getTmscs();
+
+	/**
+	 * Returns the value of the '<em><b>Configuration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Configuration</em>' attribute.
+	 * @see #setConfiguration(String)
+	 * @see nl.esi.pps.tmsc.metric.MetricPackage#getMetric_Configuration()
+	 * @model
+	 * @generated
+	 */
+	String getConfiguration();
+
+	/**
+	 * Sets the value of the '{@link nl.esi.pps.tmsc.metric.Metric#getConfiguration <em>Configuration</em>}' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Configuration</em>' attribute.
+	 * @see #getConfiguration()
+	 * @generated
+	 */
+	void setConfiguration(String value);
 
 } // Metric

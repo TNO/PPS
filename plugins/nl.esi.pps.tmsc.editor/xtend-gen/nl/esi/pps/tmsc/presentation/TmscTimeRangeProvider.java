@@ -18,7 +18,6 @@ import nl.esi.pps.common.emf.synchronizedtiming.range.EpochNanoTimeRange;
 import nl.esi.pps.common.emf.synchronizedtiming.range.RelativeNanoTimeRange;
 import nl.esi.pps.common.emf.synchronizedtiming.range.TimeRange;
 import nl.esi.pps.tmsc.Event;
-import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.ITimeRange;
 import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.ScopedTMSC;
@@ -42,6 +41,12 @@ public class TmscTimeRangeProvider {
     
     private final long end;
     
+    public NanoTimeRange(final boolean epoch, final long start, final long end) {
+      this.epoch = epoch;
+      this.start = Math.min(start, end);
+      this.end = Math.max(start, end);
+    }
+    
     public AbstractTimeRange toTimeRange() {
       final long margin = Math.max(Math.round(((this.end - this.start) * 0.05)), 5);
       final long mStart = Math.max((this.start - margin), 0);
@@ -53,13 +58,6 @@ public class TmscTimeRangeProvider {
         _xifexpression = new RelativeNanoTimeRange(mStart, mEnd);
       }
       return _xifexpression;
-    }
-    
-    public NanoTimeRange(final boolean epoch, final long start, final long end) {
-      super();
-      this.epoch = epoch;
-      this.start = start;
-      this.end = end;
     }
     
     @Override
@@ -177,8 +175,10 @@ public class TmscTimeRangeProvider {
   
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final ITimeRange timeRange) {
     TmscTimeRangeProvider.NanoTimeRange _xifexpression = null;
-    if (((timeRange.getDuration() != null) && (timeRange.getTmsc() != null))) {
-      boolean _isEpochTime = timeRange.getTmsc().isEpochTime();
+    Long _duration = timeRange.getDuration();
+    boolean _tripleNotEquals = (_duration != null);
+    if (_tripleNotEquals) {
+      boolean _isEpochTime = timeRange.isEpochTime();
       Long _startTime = timeRange.getStartTime();
       Long _endTime = timeRange.getEndTime();
       _xifexpression = new TmscTimeRangeProvider.NanoTimeRange(_isEpochTime, (_startTime).longValue(), (_endTime).longValue());
@@ -195,17 +195,6 @@ public class TmscTimeRangeProvider {
       Long _timestamp_1 = event.getTimestamp();
       Long _timestamp_2 = event.getTimestamp();
       _xifexpression = new TmscTimeRangeProvider.NanoTimeRange(_isEpochTime, (_timestamp_1).longValue(), (_timestamp_2).longValue());
-    }
-    return _xifexpression;
-  }
-  
-  private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final FullScopeTMSC tmsc) {
-    TmscTimeRangeProvider.NanoTimeRange _xifexpression = null;
-    if (((tmsc.getStartTime() != null) && (tmsc.getEndTime() != null))) {
-      boolean _isEpochTime = tmsc.isEpochTime();
-      Long _startTime = tmsc.getStartTime();
-      Long _endTime = tmsc.getEndTime();
-      _xifexpression = new TmscTimeRangeProvider.NanoTimeRange(_isEpochTime, (_startTime).longValue(), (_endTime).longValue());
     }
     return _xifexpression;
   }
@@ -253,9 +242,7 @@ public class TmscTimeRangeProvider {
   }
   
   private static TmscTimeRangeProvider.NanoTimeRange doGetTimeRange(final Object tmsc) {
-    if (tmsc instanceof FullScopeTMSC) {
-      return _doGetTimeRange((FullScopeTMSC)tmsc);
-    } else if (tmsc instanceof ScopedTMSC) {
+    if (tmsc instanceof ScopedTMSC) {
       return _doGetTimeRange((ScopedTMSC)tmsc);
     } else if (tmsc instanceof Event) {
       return _doGetTimeRange((Event)tmsc);

@@ -11,6 +11,7 @@
 package nl.esi.pps.tmsc.metric.^extension
 
 import java.util.Map
+import nl.esi.pps.tmsc.Dependency
 import nl.esi.pps.tmsc.FullScopeTMSC
 import nl.esi.pps.tmsc.metric.Metric
 import nl.esi.pps.tmsc.metric.MetricFactory
@@ -68,10 +69,10 @@ class MetricProcessor {
     }
     
     /**
-     * @see IMetricProcessor#isComponentRequiredToResolveInstances(String)
+     * @see IMetricProcessor#isRequiredToResolveInstances(String, String)
      */
-    def boolean isComponentRequiredToResolveInstances(String componentName) {
-        return metricProcessor.isComponentRequiredToResolveInstances(componentName);
+    def boolean isRequiredToResolveInstances(String hostName, String componentName) {
+        return metricProcessor.isRequiredToResolveInstances(hostName, componentName);
     }
 
     /**
@@ -98,6 +99,7 @@ class MetricProcessor {
         }
         val metric = createMetric(metricModel)
         metric.budget = metricBudget
+        metric.configuration = metricConfiguration
         metric.tmscs += tmsc
         metric.instances += metricInstances
         return metric
@@ -147,6 +149,13 @@ class MetricProcessor {
      */
     def Pair<Long, Long> getAnalysisTimeWindow(MetricInstance metricInstance) {
         return metricProcessor.getAnalysisTimeWindow(metricInstance)
+    }
+
+    /**
+     * @see IMetricProcessor#isActivityCutOff(Dependency, MetricInstance)
+     */
+    def boolean isActivityCutOff(Dependency dependency, MetricInstance metricInstance) {
+        return metricProcessor.isActivityCutOff(dependency, metricInstance)
     }
 
     override toString() {

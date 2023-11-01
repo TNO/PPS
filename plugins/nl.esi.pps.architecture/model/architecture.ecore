@@ -80,6 +80,26 @@
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
       <details key="documentation" value="At instantiated stage the system is started, and the components are instantiated and start living in memory. &#xD;&#xA;Here, the runtime component takes form and is mapped on OS execution entities, i.e., on a specific thread which is mapped on specific process, etc. &#xD;&#xA;Communication ports are created and instantiated enabling communication among the runtime components. &#xD;&#xA;The OS execution entities, i.e., processes and threads are mapped on specific processing unit, with specific scheduling policies, priorities, etc.&#xD;&#xA;&#xD;&#xA;[[instantiated-ecore-diagram]]&#xD;&#xA;.Diagram of the instantiated lyfecycle stage in the architecture meta-model&#xD;&#xA;image::{metamodelsdir}/instantiated.png[]&#xD;&#xA;"/>
     </eAnnotations>
-    <eClassifiers xsi:type="ecore:EClass" name="Executor" eSuperTypes="#//NamedArchitectureElement"/>
+    <eClassifiers xsi:type="ecore:EClass" name="Executor" eSuperTypes="#//NamedArchitectureElement">
+      <eOperations name="getHost" eType="#//deployed/Host">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Typically an executor is deployed onto a host, but PPS doesn't make any assumptions on the kind of relation, hence this relation is merely implemented as an operation and it is up to the architecture implementer to define the relation.&#xD;&#xA;The default implementation of this method returns the container of type Host in the hierarchy of this Executor."/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+    <eClassifiers xsi:type="ecore:EClass" name="ExecutorGroup" abstract="true" interface="true">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="The ExecutorGroup allows to create logical groups of Executors that have a relation. When selecting an ExecutorGroup in the Outline view of the TMSC viewer, all its Executors will be visualized."/>
+      </eAnnotations>
+      <eOperations name="getExecutors" upperBound="-1" eType="#//instantiated/Executor">
+        <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+          <details key="documentation" value="Typically an ExecutorGroup contains Executors, but PPS doesn't make any assumptions on the kind of relation, hence this relation is merely implemented as an operation and it is up to the architecture implementer to define the relation.&#xD;&#xA;The default implementation of this method returns all first-level descendants of this ExecutorGroup that are of kind Executor, meaning if an Executor contains another Executor, the latter will not be included in the result."/>
+        </eAnnotations>
+      </eOperations>
+    </eClassifiers>
+  </eSubpackages>
+  <eSubpackages name="deployed" nsURI="http://www.esi.nl/pps/architecture/deployed"
+      nsPrefix="architecture_deployed">
+    <eClassifiers xsi:type="ecore:EClass" name="Host" eSuperTypes="#//NamedArchitectureElement"/>
   </eSubpackages>
 </ecore:EPackage>

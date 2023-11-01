@@ -54,6 +54,14 @@
             class="nl.esi.pps.architecture.instantiated.InstantiatedPackage"
             genModel="model/architecture.genmodel"/>
    </extension>
+
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.esi.nl/pps/architecture/deployed"
+            class="nl.esi.pps.architecture.deployed.DeployedPackage"
+            genModel="model/architecture.genmodel"/>
+   </extension>
+
    <extension
          point="org.eclipse.core.contenttype.contentTypes">
       <file-association

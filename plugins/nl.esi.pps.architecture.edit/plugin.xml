@@ -69,4 +69,17 @@
                org.eclipse.emf.edit.provider.IItemPropertySource"/>
    </extension>
 
+   <extension point="org.eclipse.emf.edit.itemProviderAdapterFactories">
+      <!-- @generated architecture -->
+      <factory
+            uri="http://www.esi.nl/pps/architecture/deployed"
+            class="nl.esi.pps.architecture.deployed.provider.DeployedItemProviderAdapterFactory"
+            supportedTypes=
+              "org.eclipse.emf.edit.provider.IEditingDomainItemProvider
+               org.eclipse.emf.edit.provider.IStructuredItemContentProvider
+               org.eclipse.emf.edit.provider.ITreeItemContentProvider
+               org.eclipse.emf.edit.provider.IItemLabelProvider
+               org.eclipse.emf.edit.provider.IItemPropertySource"/>
+   </extension>
+
 </plugin>

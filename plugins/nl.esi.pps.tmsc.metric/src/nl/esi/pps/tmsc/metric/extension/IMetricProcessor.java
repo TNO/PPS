@@ -14,7 +14,9 @@ import java.util.Collection;
 
 import org.eclipse.xtext.xbase.lib.Pair;
 
+import nl.esi.pps.architecture.deployed.Host;
 import nl.esi.pps.architecture.specified.Component;
+import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.metric.Metric;
 import nl.esi.pps.tmsc.metric.MetricInstance;
@@ -35,13 +37,23 @@ public interface IMetricProcessor {
 
 	/**
 	 * Returns <code>true</code> if the {@link Component} with
-	 * <code>componentName</code> is required to resolve the instances for this
-	 * Metric. Limiting the number of required components allows this Metric to be
-	 * validated against a longer trace period.
+	 * <code>componentName</code> that is traced on a {@link Host} with
+	 * <code>hostName</code> is required to resolve the instances for this Metric.
+	 * Limiting the number of required components allows this Metric to be validated
+	 * against a longer trace period.
+	 * <p>
+	 * Please note that a <code>null</code> value for <code>componentName</code>
+	 * should be considered a wild-card, hence this method should also return
+	 * <code>true</code> when a component running on that host is required.
+	 * </p>
+	 * <p>
+	 * <b>NOTE:</b> Currently only a single host is supported to resolve instances.
+	 * In other words: Automatic creation of multi-host TMSCs is not supported yet.
+	 * </p>
 	 * 
 	 * @see IMetricProcessor#resolveInstances(FullScopeTMSC)
 	 */
-	default boolean isComponentRequiredToResolveInstances(String componentName) {
+	default boolean isRequiredToResolveInstances(String hostName, String componentName) {
 		return true;
 	}
 
@@ -91,5 +103,13 @@ public interface IMetricProcessor {
 		// Make sure that the parent executions of the KPI instance are reconstructed
 		return Pair.of(metricInstance.getFrom().getExecution().getRoot().getStartTime(),
 				metricInstance.getTo().getExecution().getRoot().getEndTime());
+	}
+
+	/**
+	 * Subclasses may override this method to limit the scope of the activity TMSC
+	 * that is used for analyzing an instance of this metric.
+	 */
+	default boolean isActivityCutOff(Dependency dependency, MetricInstance metricInstance) {
+		return false;
 	}
 }

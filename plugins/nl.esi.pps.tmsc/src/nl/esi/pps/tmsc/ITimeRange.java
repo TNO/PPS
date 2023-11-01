@@ -11,7 +11,7 @@
 package nl.esi.pps.tmsc;
 
 public interface ITimeRange {
-	FullScopeTMSC getTmsc();
+	boolean isEpochTime();
 	
 	Long getStartTime();
 

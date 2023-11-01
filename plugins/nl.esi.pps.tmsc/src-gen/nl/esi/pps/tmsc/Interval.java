@@ -140,4 +140,12 @@ public interface Interval extends PropertiesContainer, ITimeRange {
 	 */
 	String getName();
 
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @model kind="operation"
+	 * @generated
+	 */
+	boolean isEpochTime();
+
 } // Interval

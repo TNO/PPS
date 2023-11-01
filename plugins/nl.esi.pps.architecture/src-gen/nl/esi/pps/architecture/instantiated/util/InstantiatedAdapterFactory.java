@@ -76,6 +76,11 @@ public class InstantiatedAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseExecutorGroup(ExecutorGroup object) {
+			return createExecutorGroupAdapter();
+		}
+
+		@Override
 		public Adapter casePropertiesContainer(PropertiesContainer object) {
 			return createPropertiesContainerAdapter();
 		}
@@ -115,6 +120,20 @@ public class InstantiatedAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExecutorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.instantiated.ExecutorGroup <em>Executor Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.instantiated.ExecutorGroup
+	 * @generated
+	 */
+	public Adapter createExecutorGroupAdapter() {
 		return null;
 	}
 

@@ -17,6 +17,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XEventArgument;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XExecutor;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunction;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameter;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XHost;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XInterface;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XOperation;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XProperty;
@@ -78,6 +79,9 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 			case TmscXtextPackage.XFUNCTION_PARAMETER:
 				sequence_XFunctionParameter(context, (XFunctionParameter) semanticObject); 
 				return; 
+			case TmscXtextPackage.XHOST:
+				sequence_XHost(context, (XHost) semanticObject); 
+				return; 
 			case TmscXtextPackage.XINTERFACE:
 				sequence_XInterface(context, (XInterface) semanticObject); 
 				return; 
@@ -118,6 +122,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         interfaces+=XInterface | 
 	 *         components+=XComponent | 
 	 *         functions+=XFunction | 
+	 *         hosts+=XHost | 
 	 *         executors+=XExecutor | 
 	 *         events+=XEvent
 	 *     )*
@@ -231,7 +236,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     (
 	 *         (timestamp=ISO8601 | timestamp=ABS_EBIGDECIMAL)? 
 	 *         timeBound=POS_EBIGDECIMAL? 
-	 *         executor=[XExecutor|IDString] 
+	 *         executor=[XExecutor|FQNString] 
 	 *         component=[XComponent|IDString]? 
 	 *         type=XEventType 
 	 *         function=[XFunction|IDString] 
@@ -287,6 +292,24 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *     )
 	 */
 	protected void sequence_XFunction(ISerializationContext context, XFunction semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * Contexts:
+	 *     XNamedArchitectureElement returns XHost
+	 *     XHost returns XHost
+	 *
+	 * Constraint:
+	 *     (
+	 *         untraced?='untraced'? 
+	 *         description=IDString? 
+	 *         name=ID 
+	 *         (timeBound=ABS_EBIGDECIMAL | scheduled=EBOOLEAN_OBJECT | properties+=XProperty | executors+=XExecutor)*
+	 *     )
+	 */
+	protected void sequence_XHost(ISerializationContext context, XHost semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

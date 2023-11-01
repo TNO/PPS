@@ -5,6 +5,9 @@ package nl.esi.pps.architecture.example.util;
 import nl.esi.emf.properties.PropertiesContainer;
 
 import nl.esi.pps.architecture.ArchitectureModel;
+import nl.esi.pps.architecture.NamedArchitectureElement;
+
+import nl.esi.pps.architecture.deployed.Host;
 
 import nl.esi.pps.architecture.example.*;
 
@@ -76,6 +79,11 @@ public class ExampleAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseExampleHost(ExampleHost object) {
+			return createExampleHostAdapter();
+		}
+
+		@Override
 		public Adapter casePropertiesContainer(PropertiesContainer object) {
 			return createPropertiesContainerAdapter();
 		}
@@ -83,6 +91,16 @@ public class ExampleAdapterFactory extends AdapterFactoryImpl {
 		@Override
 		public Adapter caseArchitectureModel(ArchitectureModel object) {
 			return createArchitectureModelAdapter();
+		}
+
+		@Override
+		public Adapter caseNamedArchitectureElement(NamedArchitectureElement object) {
+			return createNamedArchitectureElementAdapter();
+		}
+
+		@Override
+		public Adapter caseHost(Host object) {
+			return createHostAdapter();
 		}
 
 		@Override
@@ -119,6 +137,20 @@ public class ExampleAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.example.ExampleHost <em>Host</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.example.ExampleHost
+	 * @generated
+	 */
+	public Adapter createExampleHostAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link nl.esi.emf.properties.PropertiesContainer <em>Container</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -143,6 +175,34 @@ public class ExampleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createArchitectureModelAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.NamedArchitectureElement <em>Named Architecture Element</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.NamedArchitectureElement
+	 * @generated
+	 */
+	public Adapter createNamedArchitectureElementAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.deployed.Host <em>Host</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.deployed.Host
+	 * @generated
+	 */
+	public Adapter createHostAdapter() {
 		return null;
 	}
 

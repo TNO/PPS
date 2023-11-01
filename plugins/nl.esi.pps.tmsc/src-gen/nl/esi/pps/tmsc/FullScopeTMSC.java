@@ -27,13 +27,14 @@ import org.eclipse.emf.common.util.EList;
  *   <li>{@link nl.esi.pps.tmsc.FullScopeTMSC#isEpochTime <em>Epoch Time</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.FullScopeTMSC#getStartTime <em>Start Time</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.FullScopeTMSC#getEndTime <em>End Time</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.FullScopeTMSC#getDuration <em>Duration</em>}</li>
  * </ul>
  *
  * @see nl.esi.pps.tmsc.TmscPackage#getFullScopeTMSC()
- * @model
+ * @model superTypes="nl.esi.pps.tmsc.TMSC nl.esi.pps.tmsc.ITimeRange"
  * @generated
  */
-public interface FullScopeTMSC extends TMSC {
+public interface FullScopeTMSC extends TMSC, ITimeRange {
 	/**
 	 * Returns the value of the '<em><b>Measurements</b></em>' containment reference list.
 	 * The list contents are of type {@link nl.esi.pps.tmsc.Measurement}.
@@ -155,5 +156,16 @@ public interface FullScopeTMSC extends TMSC {
 	 * @generated
 	 */
 	void setEndTime(Long value);
+
+	/**
+	 * Returns the value of the '<em><b>Duration</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Duration</em>' attribute.
+	 * @see nl.esi.pps.tmsc.TmscPackage#getFullScopeTMSC_Duration()
+	 * @model dataType="nl.esi.pps.tmsc.EDuration" required="true" transient="true" changeable="false" volatile="true" derived="true"
+	 * @generated
+	 */
+	Long getDuration();
 
 } // FullScopeTMSC

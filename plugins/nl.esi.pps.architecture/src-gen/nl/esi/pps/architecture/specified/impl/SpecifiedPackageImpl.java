@@ -6,6 +6,10 @@ import nl.esi.emf.properties.PropertiesPackage;
 
 import nl.esi.pps.architecture.ArchitecturePackage;
 
+import nl.esi.pps.architecture.deployed.DeployedPackage;
+
+import nl.esi.pps.architecture.deployed.impl.DeployedPackageImpl;
+
 import nl.esi.pps.architecture.impl.ArchitecturePackageImpl;
 
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
@@ -122,18 +126,24 @@ public class SpecifiedPackageImpl extends EPackageImpl implements SpecifiedPacka
 		InstantiatedPackageImpl theInstantiatedPackage = (InstantiatedPackageImpl) (registeredPackage instanceof InstantiatedPackageImpl
 				? registeredPackage
 				: InstantiatedPackage.eINSTANCE);
+		registeredPackage = EPackage.Registry.INSTANCE.getEPackage(DeployedPackage.eNS_URI);
+		DeployedPackageImpl theDeployedPackage = (DeployedPackageImpl) (registeredPackage instanceof DeployedPackageImpl
+				? registeredPackage
+				: DeployedPackage.eINSTANCE);
 
 		// Create package meta-data objects
 		theSpecifiedPackage.createPackageContents();
 		theArchitecturePackage.createPackageContents();
 		theImplementedPackage.createPackageContents();
 		theInstantiatedPackage.createPackageContents();
+		theDeployedPackage.createPackageContents();
 
 		// Initialize created meta-data
 		theSpecifiedPackage.initializePackageContents();
 		theArchitecturePackage.initializePackageContents();
 		theImplementedPackage.initializePackageContents();
 		theInstantiatedPackage.initializePackageContents();
+		theDeployedPackage.initializePackageContents();
 
 		// Mark meta-data to indicate it can't be changed
 		theSpecifiedPackage.freeze();

@@ -19,6 +19,7 @@ import nl.esi.pps.architecture.implemented.ImplementedPackage
 import nl.esi.pps.architecture.specified.SpecifiedPackage
 import nl.esi.pps.architecture.instantiated.InstantiatedPackage
 import nl.esi.pps.architecture.implemented.FunctionParameter
+import nl.esi.pps.architecture.deployed.DeployedPackage
 
 class ArchitectureItemLabelSwitch {
     public static val eINSTANCE = new ArchitectureItemLabelSwitch
@@ -31,6 +32,7 @@ class ArchitectureItemLabelSwitch {
         return switch (eObject.eClass.EPackage) {
             case SpecifiedPackage::eINSTANCE,
             case ImplementedPackage::eINSTANCE,
+            case DeployedPackage::eINSTANCE,
             case InstantiatedPackage::eINSTANCE,
             case ArchitecturePackage::eINSTANCE: eObject.eClass.text
             default: EMFEditUtil::getText(eObject)
@@ -41,6 +43,7 @@ class ArchitectureItemLabelSwitch {
         val name = switch (eClass.EPackage) {
             case SpecifiedPackage::eINSTANCE,
             case ImplementedPackage::eINSTANCE,
+            case DeployedPackage::eINSTANCE,
             case InstantiatedPackage::eINSTANCE,
             case ArchitecturePackage::eINSTANCE: ArchitectureEditPlugin.INSTANCE.getString('''_UI_«eClass.name»_type''')
             default: null

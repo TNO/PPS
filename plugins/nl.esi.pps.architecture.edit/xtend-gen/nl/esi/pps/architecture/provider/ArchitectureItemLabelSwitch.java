@@ -15,6 +15,7 @@ import java.util.Arrays;
 import nl.esi.emf.edit.provider.EMFEditUtil;
 import nl.esi.pps.architecture.ArchitecturePackage;
 import nl.esi.pps.architecture.NamedArchitectureElement;
+import nl.esi.pps.architecture.deployed.DeployedPackage;
 import nl.esi.pps.architecture.implemented.FunctionParameter;
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
 import nl.esi.pps.architecture.instantiated.InstantiatedPackage;
@@ -41,6 +42,11 @@ public class ArchitectureItemLabelSwitch {
     }
     if (!_matched) {
       if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+        _matched=true;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
@@ -72,6 +78,11 @@ public class ArchitectureItemLabelSwitch {
     }
     if (!_matched) {
       if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+        _matched=true;
+      }
+    }
+    if (!_matched) {
+      if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
