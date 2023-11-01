@@ -11,10 +11,13 @@ Require-Bundle: org.eclipse.core.resources;visibility:=reexport,
  org.eclipse.core.filesystem,
  org.eclipse.jdt.annotation;bundle-version=2;resolution:=optional;visibility:=reexport,
  org.apache.commons.io,
- org.eclipse.lsat.common.emf.ecore;visibility:=reexport
+ org.eclipse.lsat.common.emf.ecore;visibility:=reexport,
+ org.eclipse.lsat.common.queries
 Export-Package: nl.esi.pps.common.emf.common.notify,
  nl.esi.pps.common.emf.ecore.resource,
- nl.esi.pps.common.emf.ecore.xmi
+ nl.esi.pps.common.emf.ecore.validation,
+ nl.esi.pps.common.emf.ecore.xmi,
+ nl.esi.pps.common.emf.util
 Import-Package: org.eclipse.emf.ecore.xmi.impl,
  org.slf4j;version="1.7.2"
 Automatic-Module-Name: nl.esi.pps.common.emf.ecore

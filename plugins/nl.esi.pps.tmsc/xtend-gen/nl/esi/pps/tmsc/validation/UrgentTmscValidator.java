@@ -12,9 +12,12 @@ package nl.esi.pps.tmsc.validation;
 
 import java.util.List;
 import java.util.function.Consumer;
+import nl.esi.pps.common.emf.ecore.validation.EValidatorBase;
+import nl.esi.pps.common.emf.ecore.validation.ValidationReporter;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.TMSC;
+import nl.esi.pps.tmsc.TmscPlugin;
 import nl.esi.pps.tmsc.text.EDurationFormat;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -29,7 +32,11 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
  * considering the source timestamp and time-bound of the events' incoming dependencies.
  */
 @SuppressWarnings("all")
-public class UrgentTmscValidator extends TmscValidatorBase {
+public class UrgentTmscValidator extends EValidatorBase {
+  public UrgentTmscValidator() {
+    super(TmscPlugin.PLUGIN_ID);
+  }
+  
   @Override
   public void validate(final EClass eClass, final EObject eObject, final ValidationReporter reporter) {
     if ((eObject instanceof TMSC)) {

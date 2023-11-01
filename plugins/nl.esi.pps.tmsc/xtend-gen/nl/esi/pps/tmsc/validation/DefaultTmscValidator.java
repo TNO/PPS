@@ -13,6 +13,8 @@ package nl.esi.pps.tmsc.validation;
 import com.google.common.base.Objects;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.specified.Component;
+import nl.esi.pps.common.emf.ecore.validation.EValidatorBase;
+import nl.esi.pps.common.emf.ecore.validation.ValidationReporter;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.EntryEvent;
 import nl.esi.pps.tmsc.Event;
@@ -22,12 +24,17 @@ import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.LifelineSegment;
 import nl.esi.pps.tmsc.ScopedTMSC;
 import nl.esi.pps.tmsc.TMSC;
+import nl.esi.pps.tmsc.TmscPlugin;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
-public class DefaultTmscValidator extends TmscValidatorBase {
+public class DefaultTmscValidator extends EValidatorBase {
+  public DefaultTmscValidator() {
+    super(TmscPlugin.PLUGIN_ID);
+  }
+  
   @Override
   public void validate(final EClass eClass, final EObject eObject, final ValidationReporter reporter) {
     if ((eObject instanceof Dependency)) {

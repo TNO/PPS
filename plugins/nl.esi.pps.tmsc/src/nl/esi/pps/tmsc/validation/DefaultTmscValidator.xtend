@@ -10,14 +10,21 @@
 
 package nl.esi.pps.tmsc.validation
 
+import nl.esi.pps.common.emf.ecore.validation.EValidatorBase
+import nl.esi.pps.common.emf.ecore.validation.ValidationReporter
 import nl.esi.pps.tmsc.Dependency
 import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.LifelineSegment
 import nl.esi.pps.tmsc.ScopedTMSC
+import nl.esi.pps.tmsc.TmscPlugin
 import org.eclipse.emf.ecore.EClass
 import org.eclipse.emf.ecore.EObject
 
-class DefaultTmscValidator extends TmscValidatorBase {
+class DefaultTmscValidator extends EValidatorBase {
+    new() {
+        super(TmscPlugin::PLUGIN_ID)
+    }
+    
     override validate(EClass eClass, EObject eObject, ValidationReporter reporter) {
         if (eObject instanceof Dependency) {
             validateDependency(eObject, reporter)
