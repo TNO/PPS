@@ -4,6 +4,9 @@ Bundle-Name: Timed Message Sequence Chart UI
 Bundle-SymbolicName: nl.esi.pps.tmsc.ui;singleton:=true
 Bundle-Version: 0.20.0.qualifier
 Bundle-Vendor: ESI (TNO)
+Export-Package: nl.esi.pps.tmsc.ui;x-internal:=true,
+ nl.esi.pps.tmsc.ui.commands;x-internal:=true,
+ nl.esi.pps.tmsc.ui.handlers;x-internal:=true
 Require-Bundle: javax.inject,
  org.eclipse.osgi,
  org.eclipse.jface,
@@ -12,10 +15,11 @@ Require-Bundle: javax.inject,
  org.eclipse.e4.core.di,
  nl.esi.pps.common.ide.ui,
  nl.esi.pps.ui,
- nl.esi.pps.tmsc.editor
+ nl.esi.pps.tmsc.editor,
+ org.eclipse.lsat.common.queries
 Bundle-RequiredExecutionEnvironment: JavaSE-11
+Automatic-Module-Name: nl.esi.pps.tmsc.ui
 Import-Package: javax.annotation;version="1.2.0",
  javax.inject;version="1.0.0"
-Automatic-Module-Name: nl.esi.pps.tmsc.ui
-Export-Package: nl.esi.pps.tmsc.ui.commands;x-internal:=true,
- nl.esi.pps.tmsc.ui.handlers;x-internal:=true
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: nl.esi.pps.tmsc.ui.Activator

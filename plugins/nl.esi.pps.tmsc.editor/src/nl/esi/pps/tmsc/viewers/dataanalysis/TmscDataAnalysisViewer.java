@@ -10,9 +10,7 @@
 
 package nl.esi.pps.tmsc.viewers.dataanalysis;
 
-import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
@@ -33,6 +31,7 @@ import org.jfree.chart.title.Title;
 import org.jfree.data.statistics.Statistics;
 
 import nl.esi.pps.tmsc.provider.ext.ui.IDataAnalysisContentProvider;
+import nl.esi.pps.tmsc.provider.ext.ui.IDataAnalysisInput;
 import nl.esi.pps.tmsc.text.EDurationFormat;
 
 abstract class TmscDataAnalysisViewer extends ChartPanelContentViewer {
@@ -85,7 +84,7 @@ abstract class TmscDataAnalysisViewer extends ChartPanelContentViewer {
 	public IDataAnalysisContentProvider getContentProvider() {
 		return (IDataAnalysisContentProvider) super.getContentProvider();
 	}
-
+	
 	@Override
 	protected void configureChartPanel() {
 		super.configureChartPanel();
@@ -120,43 +119,24 @@ abstract class TmscDataAnalysisViewer extends ChartPanelContentViewer {
 		getChartPanelComposite().getChartPanel().restoreAutoBounds();
 	}
 
-	/**
-	 * Returns the input if and only if {@link #getInput()} is a single object or an
-	 * array or collection containing a single object.
-	 */
-	protected Object getSingleInput() {
-		Object input = getInput();
+	protected List<Pair<?, Long>> getSiblingsWithDuration(IDataAnalysisInput input) {
 		if (input == null) {
-			return null;
-		} else if (input.getClass().isArray()) {
-			return Array.getLength(input) == 1 ? Array.get(input, 0) : null;
-		} else if (input instanceof Collection && ((Collection<?>) input).size() == 1) {
-			Collection<?> collection = (Collection<?>) input;
-			return collection.size() == 1 ? collection.iterator().next() : null;
-		} else {
-			return input;
-		}
-	}
-
-	protected List<Pair<?, Long>> getSiblingsWithDuration(Object singleInput) {
-		if (singleInput == null) {
 			return Collections.emptyList();
 		}
 		LinkedList<Pair<?, Long>> siblingsWithDuration = new LinkedList<Pair<?, Long>>();
-		Iterable<?> siblings = getContentProvider().getSiblings(singleInput, configuration);
+		Iterable<?> siblings = input.getSiblings(configuration);
 		if (siblings != null) {
-			for (Object sibling : siblings) {
-				Long duration = getContentProvider().getDuration(singleInput, sibling, configuration);
+			for (Object sibling: siblings) {
+				Long duration = input.getDuration(sibling, configuration);
 				if (duration != null) {
 					siblingsWithDuration.add(Pair.of(sibling, duration));
 				}
 			}
 		}
+		if (!siblingsWithDuration.isEmpty()) {
+			durationFilter.filter(siblingsWithDuration);
+		}
 		return siblingsWithDuration;
-	}
-
-	protected void filterSiblings(List<Pair<?, Long>> siblings) {
-		durationFilter.filter(siblings);
 	}
 
 	protected String calculateStatistics(Number[] values) {

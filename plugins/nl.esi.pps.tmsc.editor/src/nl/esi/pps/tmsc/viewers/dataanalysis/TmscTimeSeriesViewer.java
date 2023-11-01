@@ -32,6 +32,7 @@ import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
 
 import nl.esi.pps.common.jfreechart.rendering.RenderingPaint;
+import nl.esi.pps.tmsc.provider.ext.ui.IDataAnalysisInput;
 import nl.esi.pps.tmsc.text.EDurationFormat;
 
 public class TmscTimeSeriesViewer extends TmscDataAnalysisViewer {
@@ -66,13 +67,15 @@ public class TmscTimeSeriesViewer extends TmscDataAnalysisViewer {
 		renderer.setSeriesOutlinePaint(0, RenderingPaint.BLUE.getOutlinePaint());
 		renderer.setSeriesPaint(1, RenderingPaint.RED.getPaint());
 		renderer.setSeriesOutlinePaint(1, RenderingPaint.RED.getOutlinePaint());
+		
+		ChartFactory.getChartTheme().apply(getChart());
 	}
 
 	@Override
 	protected void inputChanged(Object input, Object oldInput) {
 		super.inputChanged(input, oldInput);
-		Object singleInput = getSingleInput();
-		setSelection(singleInput == null ? StructuredSelection.EMPTY : new StructuredSelection(singleInput));
+		IDataAnalysisInput dataAnalysisInput = getContentProvider().getDataAnalysisInput(input);
+		setSelection(dataAnalysisInput == null ? StructuredSelection.EMPTY : new StructuredSelection(dataAnalysisInput.getInput()));
 	}
 
 	@Override
@@ -81,13 +84,12 @@ public class TmscTimeSeriesViewer extends TmscDataAnalysisViewer {
 		final XYSeries series0_Duration = new XYSeries("Duration");
 		final XYSeries series1_ExceedsBudget = new XYSeries("Exceeds budget");
 
-		Object singleInput = getSingleInput();
-		List<Pair<?, Long>> siblings = getSiblingsWithDuration(singleInput);
-		if (siblings.isEmpty()) {
+		IDataAnalysisInput input = getContentProvider().getDataAnalysisInput(getInput());
+		if (input == null) {
 			chart.setTitle("Data analysis is not available for current selection.");
 		} else {
-			filterSiblings(siblings);
-			Long budget = getContentProvider().getBudget(singleInput, getConfiguration());
+			List<Pair<?, Long>> siblings = getSiblingsWithDuration(input);
+			Long budget = input.getBudget(getConfiguration());
 			Integer index = 1;
 			for (Pair<?, Long> sibling : siblings) {
 				XYDataItem dataItem;
@@ -102,7 +104,7 @@ public class TmscTimeSeriesViewer extends TmscDataAnalysisViewer {
 					series0_Duration.add(dataItem, false);
 				}
 			}
-			chart.setTitle(getContentProvider().getTitle(singleInput, getConfiguration()));
+			chart.setTitle(input.getTitle(getConfiguration()));
 		}
 
 		XYSeriesCollection xyCollection = new XYSeriesCollection();
@@ -113,7 +115,5 @@ public class TmscTimeSeriesViewer extends TmscDataAnalysisViewer {
 		Number[] yValues = from(XYDataItemResolver.DEFAULT.resolveAllDataItems(xyCollection))
 				.objectsOfKind(XYDataItem.class).collectOne(XYDataItem::getY).toArray(Number.class);
 		subTitle.setText(calculateStatistics(yValues));
-
-		ChartFactory.getChartTheme().apply(chart);
 	}
 }

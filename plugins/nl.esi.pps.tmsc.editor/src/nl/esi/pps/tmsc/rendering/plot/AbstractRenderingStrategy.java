@@ -21,10 +21,16 @@ import org.jfree.data.xy.XYIntervalSeriesCollection;
 
 import nl.esi.pps.common.jfreechart.rendering.RenderingPaint;
 import nl.esi.pps.common.jfreechart.rendering.RenderingStroke;
+import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Lifeline;
+import nl.esi.pps.tmsc.Message;
+import nl.esi.pps.tmsc.MessageControl;
+import nl.esi.pps.tmsc.Reply;
 import nl.esi.pps.tmsc.viewers.plot.DependenciesRenderer;
 import nl.esi.pps.tmsc.viewers.plot.DependencyAnnotation;
 import nl.esi.pps.tmsc.viewers.plot.DependencyDataItem;
+import nl.esi.pps.tmsc.viewers.plot.DependencyIncomingAnnotation;
+import nl.esi.pps.tmsc.viewers.plot.DependencyOutgoingAnnotation;
 import nl.esi.pps.tmsc.viewers.plot.ExecutionDataItem;
 import nl.esi.pps.tmsc.viewers.plot.ExecutionsRenderer;
 
@@ -137,6 +143,7 @@ public abstract class AbstractRenderingStrategy implements IRenderingStrategy, I
 
 	protected void configureDependencyAnnotation(DependencyAnnotation dependencyAnnotation,
 			DependenciesRenderer dependenciesRenderer, int series) {
+		dependencyAnnotation.setAngle(getDependencyAnnotationAngle(dependencyAnnotation, dependenciesRenderer, series));
 		dependencyAnnotation.setArrowPaint(dependenciesRenderer.lookupSeriesPaint(series));
 		dependencyAnnotation.setArrowStroke(dependenciesRenderer.lookupSeriesStroke(series));
 		dependencyAnnotation.setOutlinePaint(dependenciesRenderer.lookupSeriesOutlinePaint(series));
@@ -149,6 +156,39 @@ public abstract class AbstractRenderingStrategy implements IRenderingStrategy, I
 		} else {
 			dependencyAnnotation.setPaint(dependenciesRenderer.getItemLabelPaint(series, -1));
 		}
+	}
+	
+	protected double getDependencyAnnotationAngle(DependencyAnnotation dependencyAnnotation,
+			DependenciesRenderer dependenciesRenderer, int series) {
+		Dependency dependency = dependencyAnnotation.getBackReference();
+		if (dependencyAnnotation instanceof DependencyOutgoingAnnotation) {
+			if (dependency instanceof MessageControl) {
+				Message message = ((MessageControl) dependency).getMessage();
+				if (message instanceof Reply) {
+					return Math.PI * 0.125;
+				} else {
+					return Math.PI * -0.125;
+				}
+			} else if (dependencyAnnotation.getBackReference() instanceof Reply) {
+				return Math.PI * 0.25;
+			} else {
+				return Math.PI * -0.25;
+			}
+		} else if (dependencyAnnotation instanceof DependencyIncomingAnnotation) {
+			if (dependency instanceof MessageControl) {
+				Message message = ((MessageControl) dependency).getMessage();
+				if (message instanceof Reply) {
+					return Math.PI * -0.625;
+				} else {
+					return Math.PI * 0.625;
+				}
+			} else if (dependencyAnnotation.getBackReference() instanceof Reply) {
+				return Math.PI * -0.75;
+			} else {
+				return Math.PI * 0.75;
+			}
+		}
+		return 0;
 	}
 
 	@Override

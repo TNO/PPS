@@ -47,6 +47,7 @@ import org.jfree.data.xy.XYSeriesCollection;
 
 import nl.esi.pps.common.jfreechart.rendering.RenderingPaint;
 import nl.esi.pps.common.jfreechart.rendering.RenderingStroke;
+import nl.esi.pps.tmsc.provider.ext.ui.IDataAnalysisInput;
 import nl.esi.pps.tmsc.text.EDurationFormat;
 
 public class TmscHistogramViewer extends TmscDataAnalysisViewer {
@@ -142,29 +143,28 @@ public class TmscHistogramViewer extends TmscDataAnalysisViewer {
 		durationMarker.setLabel(null);
 		budgetMarker.setStartValue(Double.NaN);
 		budgetMarker.setLabel(null);
-		
-		Object singleInput = getSingleInput();
-		List<Pair<?,Long>> siblings = getSiblingsWithDuration(singleInput);
+
+		IDataAnalysisInput input = getContentProvider().getDataAnalysisInput(getInput());
+		List<Pair<?,Long>> siblings = getSiblingsWithDuration(input);
 		if (siblings.isEmpty()) {
 			chart.setTitle("Data analysis is not available for current selection.");
 		} else {
-			filterSiblings(siblings);
 			Iterable<Long> siblingsDuration = from(siblings).collectOne(Pair::getValue);
 			CollectionUtil.addAll(yValues, siblingsDuration);
 
-			Long inputDuration = getContentProvider().getDuration(singleInput, singleInput, getConfiguration());
+			Long inputDuration = input.getDuration(input.getInput(), getConfiguration());
 			if (inputDuration != null) {
 				durationMarker.setValue(inputDuration);
 				durationMarker.setLabel(EDurationFormat.eINSTANCE.format(inputDuration));
 			}
 			
-			Long inputBudget = getContentProvider().getBudget(singleInput, getConfiguration());
+			Long inputBudget = input.getBudget(getConfiguration());
 			if (inputBudget != null) {
 				budgetMarker.setStartValue(inputBudget);
 				budgetMarker.setLabel(EDurationFormat.eINSTANCE.format(inputBudget));
 			}
 
-			chart.setTitle(getContentProvider().getTitle(singleInput, getConfiguration()));
+			chart.setTitle(input.getTitle(getConfiguration()));
 		}
 
 		subTitle.setText(calculateStatistics(yValues.toArray(new Number[yValues.size()])));

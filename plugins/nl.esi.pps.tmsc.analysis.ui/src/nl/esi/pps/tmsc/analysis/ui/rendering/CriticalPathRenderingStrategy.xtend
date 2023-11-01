@@ -60,7 +60,7 @@ class CriticalPathRenderingStrategy extends EnumRenderingStrategy<VoidRenderingK
     override select(Viewer viewer, Object parentElement, Object element) {
         // Behave like highlight, always show dependencies on the critical path
         if (element instanceof Dependency) {
-            if (element instanceof Execution || element.critical || element.rootCause) {
+            if (element.critical || element.rootCause) {
                 return true
             }
         }

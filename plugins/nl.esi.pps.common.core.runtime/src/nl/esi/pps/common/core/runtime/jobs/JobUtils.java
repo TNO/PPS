@@ -194,6 +194,18 @@ public class JobUtils {
 		};
 	}
 
+
+	/**
+	 * Returns the base name of {@code iFile}, i.e., the name of the file without
+	 * its file extension.
+	 * 
+	 * @param iFile the file
+	 * @return the base name of {@code iFile}
+	 */
+	public static String getBaseName(IFile iFile) {
+		return iFile.getFullPath().removeFileExtension().lastSegment();
+	}
+
 	/**
 	 * Returns the sibling file with the same name, but with the specified file
 	 * extension.

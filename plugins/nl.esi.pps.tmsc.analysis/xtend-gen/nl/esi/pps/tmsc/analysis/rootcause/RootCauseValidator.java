@@ -10,18 +10,23 @@
 
 package nl.esi.pps.tmsc.analysis.rootcause;
 
+import nl.esi.pps.common.emf.ecore.validation.EValidatorBase;
+import nl.esi.pps.common.emf.ecore.validation.ValidationReporter;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.analysis.RootCauseAnalysis;
 import nl.esi.pps.tmsc.analysis.RootCauseClassification;
+import nl.esi.pps.tmsc.analysis.TmscAnalysisPlugin;
 import nl.esi.pps.tmsc.compare.ArchitectureLifecycleStage;
-import nl.esi.pps.tmsc.validation.TmscValidatorBase;
-import nl.esi.pps.tmsc.validation.ValidationReporter;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.xbase.lib.Extension;
 
 @SuppressWarnings("all")
-public class RootCauseValidator extends TmscValidatorBase {
+public class RootCauseValidator extends EValidatorBase {
+  public RootCauseValidator() {
+    super(TmscAnalysisPlugin.PLUGIN_ID);
+  }
+  
   @Extension
   private final RootCauseClassification rootCauseClassification = new RootCauseClassification(
     ArchitectureLifecycleStage.INSTANTIATED);

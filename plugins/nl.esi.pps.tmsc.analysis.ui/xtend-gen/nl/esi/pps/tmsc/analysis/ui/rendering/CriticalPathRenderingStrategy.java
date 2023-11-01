@@ -93,7 +93,7 @@ public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRen
     boolean _xblockexpression = false;
     {
       if ((element instanceof Dependency)) {
-        if ((((element instanceof Execution) || CriticalPathAnalysis.isCritical(((Dependency)element))) || RootCauseAnalysis.isRootCause(((Dependency)element)))) {
+        if ((CriticalPathAnalysis.isCritical(((Dependency)element)) || RootCauseAnalysis.isRootCause(((Dependency)element)))) {
           return true;
         }
       }

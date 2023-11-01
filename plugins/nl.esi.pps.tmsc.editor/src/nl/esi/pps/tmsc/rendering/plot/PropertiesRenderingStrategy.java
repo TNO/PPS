@@ -57,9 +57,12 @@ public class PropertiesRenderingStrategy extends AbstractRenderingStrategy {
 
 	@Override
 	public boolean select(Viewer viewer, Object parentElement, Object element) {
-		if (element instanceof Dependency && !(element instanceof Execution)) {
+		if (element instanceof Dependency) {
 			Dependency dependency = (Dependency) element;
 			return !dependency.isProjection() && !RenderingProperties.isHidden(dependency);
+		}
+		if (element instanceof Execution) {
+			return !RenderingProperties.isHidden((Execution) element);
 		}
 		return true;
 	}

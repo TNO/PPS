@@ -10,38 +10,8 @@
 
 package nl.esi.pps.tmsc.provider.ext.ui;
 
-import java.util.Collection;
-
 import org.eclipse.jface.viewers.IContentProvider;
 
-import nl.esi.pps.tmsc.provider.dataanalysis.IDataAnalysisItemContentProvider;
-
-/**
- * @see IDataAnalysisItemContentProvider
- */
 public interface IDataAnalysisContentProvider extends IContentProvider {
-	/**
-	 * @see IDataAnalysisItemContentProvider#getConfigurations(Object)
-	 */
-	Collection<String> getConfigurations(Object object);
-
-	/**
-	 * @see IDataAnalysisItemContentProvider#getTitle(Object, String)
-	 */
-	String getTitle(Object object, String configuration);
-
-	/**
-	 * @see IDataAnalysisItemContentProvider#getBudget(Object, String)
-	 */
-	Long getBudget(Object object, String configuration);
-
-	/**
-	 * @see IDataAnalysisItemContentProvider#getSiblings(Object, String)
-	 */
-	Iterable<?> getSiblings(Object object, String configuration);
-
-	/**
-	 * @see IDataAnalysisItemContentProvider#getDuration(Object, Object, String)
-	 */
-	Long getDuration(Object object, Object sibling, String configuration);
+	IDataAnalysisInput getDataAnalysisInput(Object inputElement);
 }
