@@ -22,6 +22,8 @@ import nl.esi.pps.tmsc.LifelineSegment
 import nl.esi.pps.tmsc.TmscFactory
 import org.eclipse.lsat.common.util.PairwiseIterable
 
+import static extension nl.esi.pps.tmsc.util.TmscQueries.*
+
 final class TmscRefinements {
     static extension val TmscFactory m_tmsc = TmscFactory.eINSTANCE
 
@@ -122,7 +124,7 @@ final class TmscRefinements {
                             lifeline.events.add(0, execution.entry)
                         }
                         case currentExecution.function != event.function: {
-                            throw new IllegalStateException('''Expected function «event.function», but was «currentExecution.function». This could be caused by dropped events or to incorrect ordering of events.''')
+                            throw new IllegalStateException('''Expected exit event for execution «currentExecution.toDebugString», but got event «event.function.toDebugString»«event.toDebugString». This may be caused by dropped events.''')
                         }
                         default: {
                             currentExecution.exit = event

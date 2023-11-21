@@ -93,7 +93,8 @@ XEvent:
     ('!' outgoingDependencies+=XDependency
     | '?' incomingDependencies+=[XDependency|IDString])*
     ('{'
-        ('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
         |properties+=XProperty)*
     '}')?;
 

@@ -172,13 +172,15 @@ public final class TmscRefinements {
             if (_notEquals) {
               _matched_1=true;
               StringConcatenation _builder = new StringConcatenation();
-              _builder.append("Expected function ");
-              Function _function_3 = ((ExitEvent)event).getFunction();
-              _builder.append(_function_3);
-              _builder.append(", but was ");
-              Function _function_4 = currentExecution.getFunction();
-              _builder.append(_function_4);
-              _builder.append(". This could be caused by dropped events or to incorrect ordering of events.");
+              _builder.append("Expected exit event for execution ");
+              String _debugString = TmscQueries.toDebugString(currentExecution);
+              _builder.append(_debugString);
+              _builder.append(", but got event ");
+              String _debugString_1 = TmscQueries.toDebugString(((ExitEvent)event).getFunction());
+              _builder.append(_debugString_1);
+              String _debugString_2 = TmscQueries.toDebugString(event);
+              _builder.append(_debugString_2);
+              _builder.append(". This may be caused by dropped events.");
               throw new IllegalStateException(_builder.toString());
             }
           }

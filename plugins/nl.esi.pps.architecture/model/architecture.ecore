@@ -100,6 +100,9 @@
   </eSubpackages>
   <eSubpackages name="deployed" nsURI="http://www.esi.nl/pps/architecture/deployed"
       nsPrefix="architecture_deployed">
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="In the Deployed lifecycle stage, the implemented software components are built and bundled into binaries. &#xD;&#xA;At this stage, the binaries are placed into a filesystem from where they can be installed to the different hosts.&#xD;&#xA;The installation takes place during the transition from Deployed to Instantiated stage.&#xD;&#xA;During this transition the binaries are mapped (installed) to specific hosts.&#xD;&#xA;We consider for the sake of simplicity that the deployment of binaries onto hosts is static and performed before the system is initiated/started.&#xD;&#xA;&#xD;&#xA;[[deployed-ecore-diagram]]&#xD;&#xA;.Diagram of the deployed lyfecycle stage in the architecture meta-model&#xD;&#xA;image::{metamodelsdir}/deployed.png[]&#xD;&#xA;"/>
+    </eAnnotations>
     <eClassifiers xsi:type="ecore:EClass" name="Host" eSuperTypes="#//NamedArchitectureElement"/>
   </eSubpackages>
 </ecore:EPackage>

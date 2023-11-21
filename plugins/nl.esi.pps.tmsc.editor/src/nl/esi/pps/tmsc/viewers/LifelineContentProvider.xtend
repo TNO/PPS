@@ -134,9 +134,9 @@ class LifelineContentProvider extends ContextAwareAdapterFactoryContentProvider<
     }
     
     def protected getConnectedLifelines(Event event) {
-        val adjecantEvents = event.fullScopeOutgoingDependencies.reject(LifelineSegment).xcollectOne[target]
+        val adjacentEvents = event.fullScopeOutgoingDependencies.reject(LifelineSegment).xcollectOne[target]
                 .union(event.fullScopeIncomingDependencies.reject(LifelineSegment).xcollectOne[source])
-        return adjecantEvents.map[lifeline]
+        return adjacentEvents.map[lifeline]
     }
     
     def protected findLifelines(EObject eObject) {

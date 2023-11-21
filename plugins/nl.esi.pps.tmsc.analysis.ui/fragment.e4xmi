@@ -35,6 +35,9 @@
       <children xsi:type="menu:DirectMenuItem" xmi:id="_PBvCsEhxEe2CkfZPxojTpA" elementId="nl.esi.pps.tmsc.analysis.ui.directmenuitem.CreateMetricActivityIsomorphismReport" label="Create isomorphism report" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.CreateMetricActivityIsomorphismReportHandler">
         <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_WQiywEhxEe2CkfZPxojTpA" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.CreateMetricActivityIsomorphismReportHandler"/>
       </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_5wf48FRqEe647uV_5_xVgw" elementId="nl.esi.pps.tmsc.analysis.ui.directmenuitem.TimeBoundAnalysis" label="Analyze time-bounds..." tooltip="Prepares the TMSC for time-bound based analyses, e,g., critical path analysis" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.TimeBoundAnalysisHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_KWzj4FRrEe647uV_5_xVgw" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.TimeBoundAnalysisHandler"/>
+      </children>
     </elements>
   </fragments>
 </fragment:ModelFragments>

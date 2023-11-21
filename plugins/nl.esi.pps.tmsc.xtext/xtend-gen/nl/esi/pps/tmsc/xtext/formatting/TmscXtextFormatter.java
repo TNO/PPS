@@ -69,7 +69,8 @@ public class TmscXtextFormatter extends AbstractDeclarativeFormatter {
     it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXExecutorAccess().getTimeBoundAssignment_4_1_0_2());
     it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXExecutorAccess().getScheduledAssignment_4_1_1_2());
     it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXEventRule());
-    it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXEventAccess().getScheduledAssignment_8_1_0_2());
+    it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXEventAccess().getTimeBoundAssignment_8_1_0_2());
+    it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXEventAccess().getScheduledAssignment_8_1_1_2());
     it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXDependencySettingsRule());
     it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXDependencySettingsAccess().getTimeBoundAssignment_3_0_2());
     it.setLinewrap(1, 1, 2).after(this.tmscXtextGrammarAccess.getXDependencySettingsAccess().getScheduledAssignment_3_1_2());

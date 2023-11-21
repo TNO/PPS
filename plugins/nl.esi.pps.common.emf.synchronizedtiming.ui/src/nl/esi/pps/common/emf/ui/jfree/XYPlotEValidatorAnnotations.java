@@ -10,6 +10,7 @@
 
 package nl.esi.pps.common.emf.ui.jfree;
 
+import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -63,6 +64,10 @@ public class XYPlotEValidatorAnnotations {
 		INFO_IMAGE = infoImage;
 		WARNING_IMAGE = warningImage;
 		ERROR_IMAGE = errorImage;
+	}
+	
+	private XYPlotEValidatorAnnotations() {
+		// Empty for utility classes
 	}
 
 	public static void addAnnotations(XYPlot xyPlot) {
@@ -118,7 +123,8 @@ public class XYPlotEValidatorAnnotations {
 								image = WARNING_IMAGE;
 							}
 							
-							XYImageAnnotation annotation = new XYImageAnnotation(point.getX(), point.getY(), image);
+							EValidatorAnnotation annotation = new EValidatorAnnotation(point.getX(), point.getY(),
+									image, eObject);
 							String tooltip = marker.getAttribute(IMarker.MESSAGE, null);
 							if (tooltip != null) {
 								annotation.setToolTipText(tooltip);
@@ -132,5 +138,21 @@ public class XYPlotEValidatorAnnotations {
 			}
 		}
 		LOGGER.debug("addEValidatorAnnotations <--");
+	}
+	
+	private static class EValidatorAnnotation extends XYImageAnnotation implements BackReferenceProvider<EObject> {
+		private static final long serialVersionUID = -7106357805427006000L;
+
+		private final transient EObject backReference;
+		
+		public EValidatorAnnotation(double x, double y, Image image, EObject backReference) {
+			super(x, y, image);
+			this.backReference = backReference;
+		}
+		
+		@Override
+		public EObject getBackReference() {
+			return backReference;
+		}
 	}
 }

@@ -67,7 +67,8 @@ class TmscXtextFormatter extends AbstractDeclarativeFormatter {
         setLinewrap(1,1,2).after(XExecutorAccess.scheduledAssignment_4_1_1_2)
         
         setLinewrap(1,1,2).after(XEventRule)
-        setLinewrap(1,1,2).after(XEventAccess.scheduledAssignment_8_1_0_2)
+        setLinewrap(1,1,2).after(XEventAccess.timeBoundAssignment_8_1_0_2)
+        setLinewrap(1,1,2).after(XEventAccess.scheduledAssignment_8_1_1_2)
 
         setLinewrap(1,1,2).after(XDependencySettingsRule)
         setLinewrap(1,1,2).after(XDependencySettingsAccess.timeBoundAssignment_3_0_2)

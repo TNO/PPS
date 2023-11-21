@@ -290,11 +290,11 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
     final Function1<Dependency, Event> _function_1 = (Dependency it) -> {
       return it.getSource();
     };
-    final Iterable<Event> adjecantEvents = Queries.<Event>union(Queries.<Dependency, Event>xcollectOne(IterableExtensions.<Dependency>reject(event.getFullScopeOutgoingDependencies(), LifelineSegment.class), _function), Queries.<Dependency, Event>xcollectOne(IterableExtensions.<Dependency>reject(event.getFullScopeIncomingDependencies(), LifelineSegment.class), _function_1));
+    final Iterable<Event> adjacentEvents = Queries.<Event>union(Queries.<Dependency, Event>xcollectOne(IterableExtensions.<Dependency>reject(event.getFullScopeOutgoingDependencies(), LifelineSegment.class), _function), Queries.<Dependency, Event>xcollectOne(IterableExtensions.<Dependency>reject(event.getFullScopeIncomingDependencies(), LifelineSegment.class), _function_1));
     final Function1<Event, Lifeline> _function_2 = (Event it) -> {
       return it.getLifeline();
     };
-    return IterableExtensions.<Event, Lifeline>map(adjecantEvents, _function_2);
+    return IterableExtensions.<Event, Lifeline>map(adjacentEvents, _function_2);
   }
   
   protected Iterable<Lifeline> findLifelines(final EObject eObject) {

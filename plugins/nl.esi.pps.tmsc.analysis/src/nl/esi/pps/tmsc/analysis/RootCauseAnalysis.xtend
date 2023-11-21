@@ -66,6 +66,10 @@ class RootCauseAnalysis {
     }
     
     def Map<MetricInstance, ScopedTMSC> analyseRootCause(Collection<MetricInstance> metricInstances, Metric _metric, IProgressMonitor monitor) {
+        if (metricInstances === null || metricInstances.isEmpty) {
+            error('Programming error, no metric instances provided for metric {}.', _metric.name)
+            return Collections.emptyMap
+        }
         if (metricInstances.exists[metric != _metric]) {
             error('Programming error, only expected metric instances for metric {}.', _metric.name)
             return Collections.emptyMap
@@ -74,20 +78,13 @@ class RootCauseAnalysis {
             info('Skipped root-cause analysis as budget is not set for metric {}.', _metric.name)
             return Collections.emptyMap
         }
-        
-        val instancesToAnalyse = if (metricInstances === null || metricInstances.isEmpty) {
-                _metric.instances.filter[isExceedsBudget].toList
-            } else if (!metricInstances.forall[it.metric == _metric]) {
-                throw new IllegalArgumentException
-            } else {
-                metricInstances.reject[exceedsBudget].forEach [
-                    info('Skipped root-cause analysis for metric instance {} as budget is already met.', name)
-                ]
-                metricInstances.filter[exceedsBudget].toList
-            }
+
+        metricInstances.reject[exceedsBudget].forEach [
+            info('Skipped root-cause analysis for metric instance {} as budget is already met.', name)
+        ]
+        val instancesToAnalyse = metricInstances.filter[exceedsBudget].toList
             
         if (instancesToAnalyse.isEmpty) {
-            info('Skipped root-cause analysis as no metric instance exceeds its budget.')
             return Collections.emptyMap
         }
         
@@ -186,7 +183,7 @@ class RootCauseAnalysis {
         ]
 
         analysisCausalScheduledActivities.forEach [ miLeft, csaLeft |
-            val activityLeft = miLeft.tmsc.findAdjecantDependenciesBetween(miLeft.from, miLeft.to)[isActivity]
+            val activityLeft = miLeft.findActivityDependencies
                     .createCachedQueryTMSC('''«miLeft.name» - activity''', miLeft.from, miLeft.to)
             compareActivities.forEach[miRight, activityRight |
                 val eventMatches = TmscIsomorphismMatcher.intervalEventMatches(miLeft, miRight, stage)

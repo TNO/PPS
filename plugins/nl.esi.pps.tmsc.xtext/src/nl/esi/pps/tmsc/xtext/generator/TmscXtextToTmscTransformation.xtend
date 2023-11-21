@@ -290,35 +290,37 @@ class TmscXtextToTmscTransformation {
         // Setting default time-bound
         if (dependency.timeBound === null) {
             val timeBound = if (dependency instanceof LifelineSegment) {
-                    // The time-bound can be set on (ordered by priority) the target event, 
-                    // the function, the component, the executor, as dependency default or as tmsc default
-                    dependency.target.invResolveOne(XEvent)?.timeBound
-                        ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.timeBound
-                        ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.timeBound
-                        ?: dependency.source.lifeline.invResolveOne(XExecutor).timeBound
-                        ?: dependency.source.lifeline.invResolveOne(XExecutor).getContainerOfType(XHost)?.timeBound
-                        ?: dependencySettings?.timeBound
-                        ?: tmscSettings.timeBound
+                // The time-bound can be set on (ordered by priority) the target event, 
+                // the function, the component, the executor, the host, as dependency default or as tmsc default
+                dependency.target.invResolveOne(XEvent)?.timeBound
+                    ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.timeBound
+                    ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.timeBound
+                    ?: dependency.source.lifeline.invResolveOne(XExecutor).timeBound
+                    ?: dependency.source.lifeline.invResolveOne(XExecutor).getContainerOfType(XHost)?.timeBound
+                    ?: dependencySettings?.timeBound
+                    ?: tmscSettings.timeBound
             } else {
-                dependencySettings?.timeBound ?: tmscSettings.timeBound
+                dependencySettings?.timeBound
+                    ?: tmscSettings.timeBound
             }
             dependency.timeBound = timeBound.toNanos
         }
-
+        
         // Setting default scheduled
         if (dependency.scheduled === null) {
             dependency.scheduled = if (dependency instanceof LifelineSegment) {
-                    // The scheduled can be set on (ordered by priority) the target event, 
-                    // the function, the component, the executor, as dependency default or as tmsc default
-                    dependency.target.invResolveOne(XEvent)?.scheduled
-                        ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.scheduled
-                        ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.scheduled
-                        ?: dependency.source.lifeline.invResolveOne(XExecutor).scheduled
-                        ?: dependency.source.lifeline.invResolveOne(XExecutor).getContainerOfType(XHost)?.scheduled
-                        ?: dependencySettings?.scheduled
-                        ?: tmscSettings.scheduled
+                // The scheduled can be set on (ordered by priority) the target event, 
+                // the function, the component, the executor, the host, as dependency default or as tmsc default
+                dependency.target.invResolveOne(XEvent)?.scheduled
+                    ?: dependency.activeExecution?.function?.invResolveOne(XFunction)?.scheduled
+                    ?: dependency.activeExecution?.component?.invResolveOne(XComponent)?.scheduled
+                    ?: dependency.source.lifeline.invResolveOne(XExecutor).scheduled
+                    ?: dependency.source.lifeline.invResolveOne(XExecutor).getContainerOfType(XHost)?.scheduled
+                    ?: dependencySettings?.scheduled
+                    ?: tmscSettings.scheduled
             } else {
-                dependencySettings?.scheduled ?: tmscSettings.scheduled
+                dependencySettings?.scheduled
+                    ?: tmscSettings.scheduled
             }
         }
         // Setting default properties
@@ -361,7 +363,7 @@ class TmscXtextToTmscTransformation {
         return result
     }
     
-    private static def Long toNanos(BigDecimal seconds) {
+    package static def Long toNanos(BigDecimal seconds) {
         return seconds === null ? null : seconds.movePointRight(9).longValueExact
     }
 }

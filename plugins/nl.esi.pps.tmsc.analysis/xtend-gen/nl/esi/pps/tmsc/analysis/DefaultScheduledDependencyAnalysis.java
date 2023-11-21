@@ -60,7 +60,6 @@ public class DefaultScheduledDependencyAnalysis {
   
   /**
    * Partial traced life-line segments (i.e. start and end of trace effect) should not be analyzed as we don't know.
-   * Executions are not analyzed as they are a derivative from the TMSC.
    */
   protected boolean shouldBeAnalyzed(final Dependency dependency) {
     boolean _switchResult = false;
@@ -68,12 +67,6 @@ public class DefaultScheduledDependencyAnalysis {
     if (dependency instanceof LifelineSegment) {
       _matched=true;
       _switchResult = TmscQueries.isFullyTraced(dependency);
-    }
-    if (!_matched) {
-      if (dependency instanceof Execution) {
-        _matched=true;
-        _switchResult = false;
-      }
     }
     if (!_matched) {
       _switchResult = true;

@@ -135,7 +135,7 @@ public class EDurationFormat extends NumberFormat {
   }
   
   @Override
-  public Number parse(final String source) throws ParseException {
+  public Long parse(final String source) throws ParseException {
     final ParsePosition parsePosition = new ParsePosition(0);
     final Number number = NumberFormat.getNumberInstance().parse(source, parsePosition);
     int _errorIndex = parsePosition.getErrorIndex();
@@ -157,7 +157,7 @@ public class EDurationFormat extends NumberFormat {
   }
   
   @Override
-  public Number parse(final String source, final ParsePosition parsePosition) {
+  public Long parse(final String source, final ParsePosition parsePosition) {
     final Number number = NumberFormat.getNumberInstance().parse(source, parsePosition);
     if ((number == null)) {
       return null;

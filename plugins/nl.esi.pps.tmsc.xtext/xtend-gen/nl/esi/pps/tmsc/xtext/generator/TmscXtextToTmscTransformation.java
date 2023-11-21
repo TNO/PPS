@@ -1014,7 +1014,7 @@ public class TmscXtextToTmscTransformation {
     return result;
   }
   
-  private static Long toNanos(final BigDecimal seconds) {
+  static Long toNanos(final BigDecimal seconds) {
     Long _xifexpression = null;
     if ((seconds == null)) {
       _xifexpression = null;

@@ -176,10 +176,17 @@ public class TmscProjection {
     
     @Override
     public void apply(final Dependency projection, final Boolean projectedValue) {
-      if (((projection.getScheduled() != null) && (!Objects.equal(projection.getScheduled(), projectedValue)))) {
+      Boolean _scheduled = projection.getScheduled();
+      boolean _equals = Objects.equal(_scheduled, Boolean.FALSE);
+      if (_equals) {
+        return;
+      }
+      if (((projection.isProjection() && Objects.equal(projection.getScheduled(), Boolean.TRUE)) && Objects.equal(projectedValue, Boolean.FALSE))) {
         throw new IllegalArgumentException("Programming error, please contact PPS support!");
       }
-      projection.setScheduled(projectedValue);
+      if ((projectedValue != null)) {
+        projection.setScheduled(projectedValue);
+      }
     }
   }
   

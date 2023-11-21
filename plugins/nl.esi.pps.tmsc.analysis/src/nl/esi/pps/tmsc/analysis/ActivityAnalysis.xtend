@@ -72,7 +72,7 @@ final class ActivityAnalysis {
         // as the result also includes their life-line-segments
         val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)
         // Add epoch dependencies, that represent the life-line release times, to the causality
-        val epochDependencies = interval.from.createEpochDependencies(causalDependencies)
+        val epochDependencies = interval.createEpochDependencies(causalDependencies)
         causalDependencies += epochDependencies
         
         // Step 2: Determine the activity part of the causality and already add them to the result
@@ -90,35 +90,40 @@ final class ActivityAnalysis {
         // as they may have been projected into other dependencies. Hence do not persist these intermediate results.
         epochDependencies.removeAll(causalProjections)
         epochDependencies.disposeTemp
-        
+
         return csaTmsc
     }
     
     static def ScopedTMSC createScheduledActivityTMSC(Interval interval) {
-        // Step 1: Determine the activity within the interval
-        val activityDependencies = findActivityDependencies(interval)
+        // Step 1: Determine the activity for the interval and
+        // ensure that we will not use any dependencies before the interval start as
+        // creating epoch dependencies will then fail. Also dependencies before the interval start
+        // indicate a non-sound metric definition and should be solved by defining activity cut-offs
+        // for the metric.
+        val activityDependencies = findActivityDependencies(interval).reject[startTime < interval.startTime].toSet
         val saTmsc = activityDependencies.createScopedTMSC('''«interval.name» scheduled activity''', interval.from, interval.to)
         
-        // Step 2: Finding all causality within the activity
-        // Executions can be part of the causality, but we are not interested in them
-        // as the result also includes their life-line-segments
-        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(saTmsc.initialEvents, saTmsc.finalEvents)
-        if (!causalDependencies.containsAll(activityDependencies)) {
+        // Step 2a: Finding all causality within the activity
+        val activityCausalDependencies = interval.tmsc.findCausalDependenciesBetween(saTmsc.initialEvents, saTmsc.finalEvents)
+        if (!activityCausalDependencies.containsAll(activityDependencies)) {
             throw new IllegalStateException('Programming error, please contact PPS support!')
         }
-        // Add epoch dependencies, that represent the life-line release times, to the causality
-        val epochDependencies = interval.from.createEpochDependencies(causalDependencies)
-        causalDependencies += epochDependencies
+        // Step 2b: Add epoch dependencies, that represent the life-line release times, to the causality.
+        // Ensure that we will not use any dependencies outside the interval causality as
+        // creating epoch dependencies will then fail. These dependencies indicate a non-sound metric definition 
+        // and should be solved by defining activity cut-offs for the metric.
+        val epochDependencies = interval.createEpochDependencies()
+        activityCausalDependencies += epochDependencies
 
         // Step 3: For all non-activity causal paths, create projections and add them to the result
         // We create projections to abstract from the specific behavior between the activity.
         // Projection ensures that we can run other analysis (e.g. critical path) on the resulting TMSC.
-        causalDependencies.removeAll(activityDependencies)
-        val causalProjections = causalDependencies.projectToScope(saTmsc)
+        activityCausalDependencies.removeAll(activityDependencies)
+        val activityCausalProjections = activityCausalDependencies.projectToScope(saTmsc)
 
         // The scheduled activity TMSC may not contain all epoch dependencies created at step 1,
         // as they may have been projected into other dependencies. Hence do not persist these intermediate results.
-        epochDependencies.removeAll(causalProjections)
+        epochDependencies.removeAll(activityCausalProjections)
         epochDependencies.disposeTemp
         
         return saTmsc
@@ -129,8 +134,14 @@ final class ActivityAnalysis {
         return tmscProjection.projectToScope(dependencies)
     }
     
-    private static def List<? extends Dependency> createEpochDependencies(Event epochEvent,
+    private static def List<? extends Dependency> createEpochDependencies(Interval interval) {
+        val causalDependencies = interval.tmsc.findCausalDependenciesBetween(interval.from, interval.to)
+        return interval.createEpochDependencies(causalDependencies)
+    }
+    
+    private static def List<? extends Dependency> createEpochDependencies(Interval interval,
         Set<Dependency> causalDependencies) {
+        val epochEvent = interval.from
         val epochDependencies = newArrayList
         
         // Do not add an dependency to the epoch itself, hence mark it life-line as already processed
@@ -170,12 +181,12 @@ final class ActivityAnalysis {
         if (interval instanceof MetricInstance) {
             val metricProcessor = MetricPlugin.plugin.getRegisteredMetricProcessors(interval.tmsc).get(interval.metric.id)
             if (metricProcessor !== null) {
-                return interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to) [ d |
+                return interval.tmsc.findAdjacentDependenciesBetween(interval.from, interval.to) [ d |
                     d.isActivity && !metricProcessor.isActivityCutOff(d, interval)
                 ]
             }
         }
-        return interval.tmsc.findAdjecantDependenciesBetween(interval.from, interval.to)[isActivity]
+        return interval.tmsc.findAdjacentDependenciesBetween(interval.from, interval.to)[isActivity]
     }
 
     static def boolean isActivity(Dependency dependency) {

@@ -242,8 +242,8 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         function=[XFunction|IDString] 
 	 *         (arguments+=XEventArgument arguments+=XEventArgument*)? 
 	 *         (outgoingDependencies+=XDependency | incomingDependencies+=[XDependency|IDString])* 
-	 *         scheduled=EBOOLEAN_OBJECT? 
-	 *         (properties+=XProperty? scheduled=EBOOLEAN_OBJECT?)*
+	 *         timeBound=ABS_EBIGDECIMAL? 
+	 *         ((scheduled=EBOOLEAN_OBJECT | properties+=XProperty)? timeBound=ABS_EBIGDECIMAL?)*
 	 *     )
 	 */
 	protected void sequence_XEvent(ISerializationContext context, XEvent semanticObject) {

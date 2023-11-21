@@ -163,9 +163,9 @@ public class TmscXtextGenerator extends AbstractGenerator {
     final Iterable<EObject> eventGrammarElements = IterableExtensions.<INode, EObject>map(IterableExtensions.<ICompositeNode, INode>flatMap(ListExtensions.<XEvent, ICompositeNode>map(tmscXtext.getEvents(), _function), _function_1), _function_2);
     final boolean containsISO8601 = IterableExtensions.contains(eventGrammarElements, this.tmscXtextGrammarAccess.getXEventAccess().getTimestampISO8601TerminalRuleCall_0_0_0());
     FullScopeTMSC _transform = new TmscXtextToTmscTransformation().transform(tmscXtext);
-    final Procedure1<FullScopeTMSC> _function_3 = (FullScopeTMSC it) -> {
-      it.setEpochTime(containsISO8601);
-      new DefaultScheduledDependencyAnalysis().analyzeScheduledDependencies(it, false);
+    final Procedure1<FullScopeTMSC> _function_3 = (FullScopeTMSC tmsc) -> {
+      tmsc.setEpochTime(containsISO8601);
+      new DefaultScheduledDependencyAnalysis().analyzeScheduledDependencies(tmsc, false);
     };
     return ObjectExtensions.<FullScopeTMSC>operator_doubleArrow(_transform, _function_3);
   }

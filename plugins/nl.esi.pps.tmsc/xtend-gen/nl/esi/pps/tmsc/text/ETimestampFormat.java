@@ -122,7 +122,7 @@ public class ETimestampFormat extends NumberFormat {
   }
   
   @Override
-  public Number parse(final String source, final ParsePosition parsePosition) {
+  public Long parse(final String source, final ParsePosition parsePosition) {
     final int orgIndex = parsePosition.getIndex();
     int oldIndex = parsePosition.getIndex();
     final Date date = this.dateFormat.parse(source, parsePosition);

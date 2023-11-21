@@ -96,7 +96,7 @@ class EDurationFormat extends NumberFormat {
         }
     }
     
-    override parse(String source) throws ParseException {
+    override Long parse(String source) throws ParseException {
         val parsePosition = new ParsePosition(0)
         val number = NumberFormat.numberInstance.parse(source, parsePosition)
         if (parsePosition.errorIndex >= 0) {
@@ -111,7 +111,7 @@ class EDurationFormat extends NumberFormat {
         return Math::round(number.doubleValue * multiplier)
     }
 
-    override Number parse(String source, ParsePosition parsePosition) {
+    override Long parse(String source, ParsePosition parsePosition) {
         val number = NumberFormat.numberInstance.parse(source, parsePosition)
         if (number === null) {
             return null

@@ -12,7 +12,6 @@ package nl.esi.pps.common.emf.edit.ui.provider;
 
 import java.text.Format;
 import java.text.ParseException;
-import java.text.ParsePosition;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -54,22 +53,22 @@ public abstract class FormatPropertyEditorFactory extends EMFEditUIPropertyEdito
 	}
 
 	public static class FormatTextCellEditor extends TextCellEditor {
-		private final Format format;
+		private final FormatInputValidator formatValidator;
 
 		public FormatTextCellEditor(Format format, Composite parent) {
 			super(parent);
-			this.format = format;
+			this.formatValidator = new FormatInputValidator(format);
 		}
 
 		@Override
 		protected void doSetValue(Object value) {
-			super.doSetValue(format.format(value));
+			super.doSetValue(formatValidator.getFormat().format(value));
 		}
 
 		@Override
 		protected Object doGetValue() {
 			try {
-				return format.parseObject((String) super.doGetValue());
+				return formatValidator.getFormat().parseObject((String) super.doGetValue());
 			} catch (ParseException e) {
 				return null;
 			}
@@ -78,17 +77,9 @@ public abstract class FormatPropertyEditorFactory extends EMFEditUIPropertyEdito
 		@Override
 		protected boolean isCorrect(Object value) {
 			if (value instanceof String) {
-				String toBeValidated = ((String) value).trim();
-				ParsePosition position = new ParsePosition(0);
-				format.parseObject(toBeValidated, position);
-				if (position.getErrorIndex() >= 0) {
-					setErrorMessage("Invalid input: \"" + value + "\"");
-					return false;
-				} else if (position.getIndex() != toBeValidated.length()) {
-					setErrorMessage("Invalid input near the end: \""
-							+ toBeValidated.substring(position.getIndex()).trim() + "\"");
-					return false;
-				}
+				String errorMessage = formatValidator.isValid((String) value);
+				setErrorMessage(errorMessage);
+				return errorMessage == null;
 			}
 			setErrorMessage(null);
 			return true;

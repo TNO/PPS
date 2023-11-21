@@ -94,11 +94,11 @@ class TmscXtextGenerator extends AbstractGenerator {
 	    val eventGrammarElements = tmscXtext.events.map[adapt(ICompositeNode)].flatMap[children].map[grammarElement]
 	    val containsISO8601 = eventGrammarElements.contains(tmscXtextGrammarAccess.XEventAccess.timestampISO8601TerminalRuleCall_0_0_0)
 	    
-	    return new TmscXtextToTmscTransformation().transform(tmscXtext) => [
-	        epochTime = containsISO8601
+	    return new TmscXtextToTmscTransformation().transform(tmscXtext) => [ tmsc |
+	        tmsc.epochTime = containsISO8601
         
             // Use false to allow the end-user to override the default scheduled value
-            new DefaultScheduledDependencyAnalysis().analyzeScheduledDependencies(it, false)
+            new DefaultScheduledDependencyAnalysis().analyzeScheduledDependencies(tmsc, false)
 	    ]
 	}
 	

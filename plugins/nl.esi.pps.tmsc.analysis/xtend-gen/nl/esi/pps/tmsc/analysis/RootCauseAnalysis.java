@@ -83,6 +83,10 @@ public class RootCauseAnalysis {
   }
   
   public Map<MetricInstance, ScopedTMSC> analyseRootCause(final Collection<MetricInstance> metricInstances, final Metric _metric, final IProgressMonitor monitor) {
+    if (((metricInstances == null) || metricInstances.isEmpty())) {
+      this.logger.error("Programming error, no metric instances provided for metric {}.", _metric.getName());
+      return Collections.<MetricInstance, ScopedTMSC>emptyMap();
+    }
     final Function1<MetricInstance, Boolean> _function = (MetricInstance it) -> {
       Metric _metric_1 = it.getMetric();
       return Boolean.valueOf((!Objects.equal(_metric_1, _metric)));
@@ -98,58 +102,32 @@ public class RootCauseAnalysis {
       this.logger.info("Skipped root-cause analysis as budget is not set for metric {}.", _metric.getName());
       return Collections.<MetricInstance, ScopedTMSC>emptyMap();
     }
-    List<MetricInstance> _xifexpression = null;
-    if (((metricInstances == null) || metricInstances.isEmpty())) {
-      final Function1<MetricInstance, Boolean> _function_1 = (MetricInstance it) -> {
-        return Boolean.valueOf(it.isExceedsBudget());
-      };
-      _xifexpression = IterableExtensions.<MetricInstance>toList(IterableExtensions.<MetricInstance>filter(_metric.getInstances(), _function_1));
-    } else {
-      List<MetricInstance> _xifexpression_1 = null;
-      final Function1<MetricInstance, Boolean> _function_2 = (MetricInstance it) -> {
-        Metric _metric_1 = it.getMetric();
-        return Boolean.valueOf(Objects.equal(_metric_1, _metric));
-      };
-      boolean _forall = IterableExtensions.<MetricInstance>forall(metricInstances, _function_2);
-      boolean _not = (!_forall);
-      if (_not) {
-        throw new IllegalArgumentException();
-      } else {
-        List<MetricInstance> _xblockexpression = null;
-        {
-          final Function1<MetricInstance, Boolean> _function_3 = (MetricInstance it) -> {
-            return Boolean.valueOf(it.isExceedsBudget());
-          };
-          final Consumer<MetricInstance> _function_4 = (MetricInstance it) -> {
-            this.logger.info("Skipped root-cause analysis for metric instance {} as budget is already met.", it.getName());
-          };
-          IterableExtensions.<MetricInstance>reject(metricInstances, _function_3).forEach(_function_4);
-          final Function1<MetricInstance, Boolean> _function_5 = (MetricInstance it) -> {
-            return Boolean.valueOf(it.isExceedsBudget());
-          };
-          _xblockexpression = IterableExtensions.<MetricInstance>toList(IterableExtensions.<MetricInstance>filter(metricInstances, _function_5));
-        }
-        _xifexpression_1 = _xblockexpression;
-      }
-      _xifexpression = _xifexpression_1;
-    }
-    final List<MetricInstance> instancesToAnalyse = _xifexpression;
+    final Function1<MetricInstance, Boolean> _function_1 = (MetricInstance it) -> {
+      return Boolean.valueOf(it.isExceedsBudget());
+    };
+    final Consumer<MetricInstance> _function_2 = (MetricInstance it) -> {
+      this.logger.info("Skipped root-cause analysis for metric instance {} as budget is already met.", it.getName());
+    };
+    IterableExtensions.<MetricInstance>reject(metricInstances, _function_1).forEach(_function_2);
+    final Function1<MetricInstance, Boolean> _function_3 = (MetricInstance it) -> {
+      return Boolean.valueOf(it.isExceedsBudget());
+    };
+    final List<MetricInstance> instancesToAnalyse = IterableExtensions.<MetricInstance>toList(IterableExtensions.<MetricInstance>filter(metricInstances, _function_3));
     boolean _isEmpty = instancesToAnalyse.isEmpty();
     if (_isEmpty) {
-      this.logger.info("Skipped root-cause analysis as no metric instance exceeds its budget.");
       return Collections.<MetricInstance, ScopedTMSC>emptyMap();
     }
     final LinkedHashMap<MetricInstance, ScopedTMSC> analysisResult = CollectionLiterals.<MetricInstance, ScopedTMSC>newLinkedHashMap();
     final LinkedHashMap<MetricInstance, ScopedTMSC> analysisCausalScheduledActivities = CollectionLiterals.<MetricInstance, ScopedTMSC>newLinkedHashMap();
     for (final MetricInstance mi : instancesToAnalyse) {
       {
-        final Function1<ScopedTMSC, Boolean> _function_3 = (ScopedTMSC it) -> {
+        final Function1<ScopedTMSC, Boolean> _function_4 = (ScopedTMSC it) -> {
           return Boolean.valueOf(RootCauseAnalysis.isRootCauseAnalysisResult(it));
         };
-        ScopedTMSC causalScheduledActivity = IterableExtensions.<ScopedTMSC>findFirst(mi.getScopes(), _function_3);
+        ScopedTMSC causalScheduledActivity = IterableExtensions.<ScopedTMSC>findFirst(mi.getScopes(), _function_4);
         if ((causalScheduledActivity == null)) {
           ScopedTMSC _createCausalScheduledActivityTMSC = ActivityAnalysis.createCausalScheduledActivityTMSC(mi);
-          final Procedure1<ScopedTMSC> _function_4 = (ScopedTMSC it) -> {
+          final Procedure1<ScopedTMSC> _function_5 = (ScopedTMSC it) -> {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Root cause for ");
             String _firstLower = StringExtensions.toFirstLower(mi.getName());
@@ -157,7 +135,7 @@ public class RootCauseAnalysis {
             it.setName(TmscQueries.toEID(_builder));
             RootCauseAnalysis.setRootCauseAnalysisResult(it, true);
           };
-          ScopedTMSC _doubleArrow = ObjectExtensions.<ScopedTMSC>operator_doubleArrow(_createCausalScheduledActivityTMSC, _function_4);
+          ScopedTMSC _doubleArrow = ObjectExtensions.<ScopedTMSC>operator_doubleArrow(_createCausalScheduledActivityTMSC, _function_5);
           causalScheduledActivity = _doubleArrow;
           EList<ScopedTMSC> _scopes = mi.getScopes();
           _scopes.add(causalScheduledActivity);
@@ -167,10 +145,10 @@ public class RootCauseAnalysis {
       }
     }
     boolean _isEmpty_1 = analysisCausalScheduledActivities.isEmpty();
-    boolean _not_1 = (!_isEmpty_1);
-    if (_not_1) {
+    boolean _not = (!_isEmpty_1);
+    if (_not) {
       this.collectTimeBoundSamples(_metric, analysisCausalScheduledActivities);
-      final BiConsumer<MetricInstance, ScopedTMSC> _function_3 = (MetricInstance mi_1, ScopedTMSC tmsc) -> {
+      final BiConsumer<MetricInstance, ScopedTMSC> _function_4 = (MetricInstance mi_1, ScopedTMSC tmsc) -> {
         this.logger.startSection("Analyzed root cause for: {}", mi_1.getName());
         try {
           this.analyseRootCause(mi_1, tmsc);
@@ -178,7 +156,7 @@ public class RootCauseAnalysis {
           this.logger.endSection();
         }
       };
-      analysisCausalScheduledActivities.forEach(_function_3);
+      analysisCausalScheduledActivities.forEach(_function_4);
     }
     return analysisResult;
   }
@@ -265,16 +243,13 @@ public class RootCauseAnalysis {
     };
     compareScheduledActivities.forEach(_function);
     final BiConsumer<MetricInstance, ITMSC> _function_1 = (MetricInstance miLeft, ITMSC csaLeft) -> {
-      final Function1<Dependency, Boolean> _function_2 = (Dependency it) -> {
-        return Boolean.valueOf(ActivityAnalysis.isActivity(it));
-      };
-      Set<Dependency> _findAdjecantDependenciesBetween = TmscQueries.findAdjecantDependenciesBetween(miLeft.getTmsc(), miLeft.getFrom(), miLeft.getTo(), _function_2);
+      Set<Dependency> _findActivityDependencies = ActivityAnalysis.findActivityDependencies(miLeft);
       StringConcatenation _builder = new StringConcatenation();
       String _name = miLeft.getName();
       _builder.append(_name);
       _builder.append(" - activity");
-      final TmscQueries.CachedQueryTMSC activityLeft = TmscQueries.createCachedQueryTMSC(_findAdjecantDependenciesBetween, _builder, miLeft.getFrom(), miLeft.getTo());
-      final BiConsumer<MetricInstance, TmscQueries.CachedQueryTMSC> _function_3 = (MetricInstance miRight, TmscQueries.CachedQueryTMSC activityRight) -> {
+      final TmscQueries.CachedQueryTMSC activityLeft = TmscQueries.createCachedQueryTMSC(_findActivityDependencies, _builder, miLeft.getFrom(), miLeft.getTo());
+      final BiConsumer<MetricInstance, TmscQueries.CachedQueryTMSC> _function_2 = (MetricInstance miRight, TmscQueries.CachedQueryTMSC activityRight) -> {
         final BiMap<Event, Event> eventMatches = TmscIsomorphismMatcher.intervalEventMatches(miLeft, miRight, this.stage);
         final ITmscMatchResult activityMatch = TmscIsomorphismMatcher.match(activityLeft, activityRight, eventMatches, false, this.stage);
         boolean _isFullMatch = activityMatch.isFullMatch();
@@ -283,7 +258,7 @@ public class RootCauseAnalysis {
           this.collectTimeBoundSamples(csaLeft, saRight, activityMatch);
         }
       };
-      compareActivities.forEach(_function_3);
+      compareActivities.forEach(_function_2);
     };
     analysisCausalScheduledActivities.forEach(_function_1);
   }

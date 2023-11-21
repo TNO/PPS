@@ -28,6 +28,7 @@ import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.FullScopeTMSC
 import nl.esi.pps.tmsc.ITMSC
 import nl.esi.pps.tmsc.Interval
+import nl.esi.pps.tmsc.Lifeline
 import nl.esi.pps.tmsc.LifelineSegment
 import nl.esi.pps.tmsc.ScopedTMSC
 import nl.esi.pps.tmsc.TMSC
@@ -39,15 +40,45 @@ import org.eclipse.lsat.common.util.UniqueQueue
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension org.eclipse.lsat.common.xtend.Queries.*
+import nl.esi.pps.architecture.implemented.Function
+import nl.esi.pps.tmsc.EntryEvent
 
 final class TmscQueries {
     private new() {
         // Empty for utility classes
     }
-    
-    static def String toDebugString(Dependency dependency) '''«dependency.source.toDebugString» -«dependency.eClass.name»-> «dependency.target.toDebugString»'''
-    
-    static def String toDebugString(Event event) '''«event.lifeline.executor.name»@«ETimestampFormat::eINSTANCE.format(event.timestamp)»'''
+
+    static def String toDebugString(Function function) '''«function?.eClass?.name»[«function?.name»]'''
+
+    static def String toDebugString(Execution execution) '''«execution?.function?.toDebugString»«execution?.entry?.toDebugString»«execution?.exit?.toDebugString»'''
+
+    static def String toDebugString(Dependency dependency) '''«dependency?.source?.toDebugString» -«dependency?.eClass?.name»-> «dependency?.target?.toDebugString»'''
+
+    static def String toDebugString(Event event) '''«IF event instanceof EntryEvent»↑«ELSE»↓«ENDIF»«event?.lifeline?.executor?.name»@«ETimestampFormat::eINSTANCE.format(event?.timestamp)»'''
+
+    static def BranchIterable<Execution> getCallStack(Execution execution) {
+         Collections::singletonList(execution).walkTree(true)[children]
+    }
+
+    static def Iterable<Event> getCallStackEvents(Execution execution) {
+         return switch it: execution {
+            case entry !== null && exit !== null: {
+                execution.getCallStackLifelineSegments.map[source].union(execution.exit)
+                
+            }
+            case entry !== null: Collections::singletonList(entry)
+            case exit !== null: Collections::singletonList(exit)
+            default: Collections::emptyList
+        }
+    }
+
+    static def Iterable<LifelineSegment> getCallStackLifelineSegments(Execution execution) {
+        if (execution.entry === null || execution.exit === null) {
+            return Collections::emptyList
+        }
+        return Collections::singleton(execution.entry.outgoingLifelineSegment)
+            .climbTree(true)[target?.outgoingLifelineSegment].upToAndIncluding[target == execution.exit]
+    }
 
     /**
      * Returns a list, containing the {@link Dependency#getSource() source event}
@@ -56,13 +87,13 @@ final class TmscQueries {
      */
     static def List<Event> getEvents(Dependency dependency) {
         return switch it: dependency {
-        	case source !== null && target !== null: Arrays::asList(source, target)
+            case source !== null && target !== null: Arrays::asList(source, target)
             case source !== null: Collections::singletonList(source)
             case target !== null: Collections::singletonList(target)
-        	default: Collections::emptyList
+            default: Collections::emptyList
         }
     }
-
+    
     /**
      * Returns a list, containing the {@link Execution#getEntry() entry event}
      * and/or {@link Execution#getExit() exit event}. The list only contains an
@@ -147,7 +178,7 @@ final class TmscQueries {
     static def Execution getCommonAncestor(Execution execution1, Execution execution2) {
         val ancestors1 = Collections::singleton(execution1).climbTree(true)[parent].toSet
         val ancestors2 = Collections::singleton(execution2).climbTree(true)[parent]
-        return ancestors2.findFirst[e | ancestors1.contains(e)]
+        return ancestors2.findFirst[e|ancestors1.contains(e)]
     }
 
     /**
@@ -157,9 +188,9 @@ final class TmscQueries {
      * character.
      */
     static def String toEID(CharSequence text) {
-        return if (text !== null) text.toString.replaceAll("\\W+", "_");
+        return if(text !== null) text.toString.replaceAll("\\W+", "_");
     }
-    
+
     /**
      * Causal dependencies are defined as the intersection of the transitive closure
      * of outgoing dependencies of 'from' and the transitive closure of incoming
@@ -192,23 +223,23 @@ final class TmscQueries {
             .until[endTime > maxTimeStamp]
         val cause = tos.flatMap[incomingDependencies].closure(true)[source.incomingDependencies]
             .until[startTime < minTimeStamp]
-        
+
         val causalDependencies = effect.toSet
         causalDependencies.retainAll(cause.toSet)
         return causalDependencies
     }
 
     /**
-     * Finds the transitive closure of adjecant (a.k.a. in any direction) dependencies 
-     * that match the {@code predicate} and are not earlier than from.timestamp on the from.lifeline and 
-     * not later than to.timestamp on the to.lifeline.
+     * Finds the transitive closure of adjacent (a.k.a. in any direction) dependencies 
+     * that match the {@code predicate} and are not before from.timestamp on the from.lifeline and 
+     * not after to.timestamp on the to.lifeline.
      */
-    static def Set<Dependency> findAdjecantDependenciesBetween(extension ITMSC tmsc, Event from, Event to, (Dependency)=>boolean predicate) {
+    static def Set<Dependency> findAdjacentDependenciesBetween(extension ITMSC tmsc, Event from, Event to, (Dependency)=>boolean predicate) {
         if (from.timestamp > to.timestamp) {
             throw new IllegalArgumentException('''From nanos («from.timestamp») should be before to nanos («to.timestamp»)''')
         }
 
-        val adjecantDependencies = newLinkedHashSet
+        val adjacentDependencies = newLinkedHashSet
 
         // Do not process the from and to normally, as for the from we only want to 
         // consider its outgoing edges and for the to only its incoming edges
@@ -217,12 +248,12 @@ final class TmscQueries {
         // Only add TMSC dependencies between from and to both in control as well as in time
         // Find the outgoing dependencies of 'from', add them to the TMSC and mark their target as 'event-to-process'
         from.outgoingDependencies.reject[target.isAfter(to)].filter(predicate).forEach [ d |
-            adjecantDependencies += d
+            adjacentDependencies += d
             eventsToProcess += d.target
         ]
         // Find the incoming dependencies of 'to', add them to the TMSC and mark their source as 'event-to-process'
         to.incomingDependencies.reject[source.isBefore(from)].filter(predicate).forEach [ d |
-            adjecantDependencies += d
+            adjacentDependencies += d
             eventsToProcess += d.source
         ]
 
@@ -232,41 +263,48 @@ final class TmscQueries {
             val event = eventsToProcess.remove
             if (event !== null) {
                 event.outgoingDependencies.reject[target.isBefore(from)].reject[target.isAfter(to)].filter(predicate).forEach [ d |
-                    adjecantDependencies += d
-                    eventsToProcess += d.target
-                ]
+                        adjacentDependencies += d
+                        eventsToProcess += d.target
+                    ]
                 event.incomingDependencies.reject[source.isBefore(from)].reject[source.isAfter(to)].filter(predicate).forEach [ d |
-                    adjecantDependencies += d
-                    eventsToProcess += d.source
-                ]
+                        adjacentDependencies += d
+                        eventsToProcess += d.source
+                    ]
             }
         }
-        
-        return adjecantDependencies;
+
+        return adjacentDependencies;
     }
-    
+
     private static def boolean isBefore(Event event, Event anchor) {
         // Index checking is expensive so use time-stamp if available
         return switch (event) {
-        	case (event.lifeline !== anchor.lifeline): false
-        	case (event.timestamp == anchor.timestamp): event.lifelineIndex < anchor.lifelineIndex
-        	default: event.timestamp < anchor.timestamp
+            case (event.lifeline !== anchor.lifeline): false
+            case (event.timestamp == anchor.timestamp): event.indexOnLifeline < anchor.indexOnLifeline
+            default: event.timestamp < anchor.timestamp
         }
     }
-    
+
     private static def boolean isAfter(Event event, Event anchor) {
         // Index checking is expensive so use time-stamp if available
         return switch (event) {
             case (event.lifeline !== anchor.lifeline): false
-            case (event.timestamp == anchor.timestamp): event.lifelineIndex > anchor.lifelineIndex
+            case (event.timestamp == anchor.timestamp): event.indexOnLifeline > anchor.indexOnLifeline
             default: event.timestamp > anchor.timestamp
         }
     }
-    
-    private static def int getLifelineIndex(Event event) {
+
+    /**
+     * Returns the {@link List#indexOf(Object) index of} {@code event} within its
+     * life-line.
+     * 
+     * @see Event#getLifeline()
+     * @see Lifeline#getEvents()
+     */
+    private static def int indexOnLifeline(Event event) {
         return event.lifeline.events.indexOf(event)
     }
-    
+
     /** 
      * Group dependencies to disjunct TMSCs (as groups of dependencies): <ol>
      * <li>When source and target of a dependency do not belong to an TMSC, assign the dependency to a new TMSC</li>
@@ -276,7 +314,7 @@ final class TmscQueries {
      */
     static def List<List<Dependency>> findDisjunctTMSCs(Iterable<? extends Dependency> dependencies) {
         val Map<Event, List<Dependency>> event2tmsc = newLinkedHashMap
-        
+
         for (dependency : dependencies) {
             val sourceTmsc = event2tmsc.get(dependency.source)
             val targetTmsc = event2tmsc.get(dependency.target)
@@ -289,13 +327,13 @@ final class TmscQueries {
                     targetTmsc += sourceTmsc
                     targetTmsc += dependency
                     // Now update the administration for all events pointing to the old list
-                    sourceTmsc.map[source].union(sourceTmsc.map[target]).forEach[e | event2tmsc.put(e, targetTmsc)]
-                } else /* if (sourceTmsc.size >= targetTmsc.size) */{
+                    sourceTmsc.map[source].union(sourceTmsc.map[target]).forEach[e|event2tmsc.put(e, targetTmsc)]
+                } else /* if (sourceTmsc.size >= targetTmsc.size) */ {
                     // Compare size and choose to copy the smaller to the other
                     sourceTmsc += targetTmsc
                     sourceTmsc += dependency
                     // Now update the administration for all events pointing to the old list
-                    targetTmsc.map[source].union(targetTmsc.map[target]).forEach[e | event2tmsc.put(e, sourceTmsc)]
+                    targetTmsc.map[source].union(targetTmsc.map[target]).forEach[e|event2tmsc.put(e, sourceTmsc)]
                 }
             } else if (sourceTmsc !== null) {
                 // Just add the dependency to the existing TMSC
@@ -312,11 +350,11 @@ final class TmscQueries {
                 event2tmsc.put(dependency.target, tmsc)
             }
         }
-        
+
         // Return the unique TMSCs (use unique as many keys map to the same list value)
         return event2tmsc.values.unique(false).toList
     }
-    
+
     /** 
      * Group dependencies to disjunct TMSCs (as groups of dependencies): <ol>
      * <li>When source and target of a dependency do not belong to an TMSC, assign the dependency to a new TMSC</li>
@@ -328,13 +366,13 @@ final class TmscQueries {
     static def List<List<Dependency>> findDisjunctTMSCs(Iterable<? extends Dependency> dependencies, Predicate<? super Event> predicate) {
         val Map<Event, List<Dependency>> sourceEvent2tmsc = newLinkedHashMap
         val Map<Event, List<Dependency>> targetEvent2tmsc = newLinkedHashMap
-        
+
         for (dependency : dependencies) {
             val sourceTmsc = sourceEvent2tmsc.get(dependency.source)
             val targetTmsc = targetEvent2tmsc.get(dependency.target)
             val sourceInitial = predicate.test(dependency.source)
             val targetFinal = predicate.test(dependency.target)
-            
+
             if (sourceTmsc !== null && targetTmsc !== null) {
                 if (sourceTmsc === targetTmsc) {
                     // Both events map to the same tmsc, so just add the dependency to that tmsc 
@@ -377,7 +415,7 @@ final class TmscQueries {
                 }
             }
         }
-        
+
         // Return the unique TMSCs (use unique as many keys map to the same list value)
         return sourceEvent2tmsc.values.union(targetEvent2tmsc.values).unique(false).toList
     }
@@ -398,7 +436,7 @@ final class TmscQueries {
         trimmedDependencies.removeAll(trailingDependencies)
         return trimmedDependencies
     }
-    
+
     /**
      * Returns all dependencies (including <code>dependency</code>) of the same type (i.e.
      * same {@link EObject#eClass() eClass}) between the source lifeline and target
@@ -409,7 +447,7 @@ final class TmscQueries {
             it.eClass == dependency.eClass && it.target.lifeline == dependency.target.lifeline
         ] as Iterable<T>
     }
-    
+
     /**
      * Returns all executions with the same {@link Execution#getFunction() function}
      * for the same {@link Execution#getComponent() component}
@@ -429,7 +467,7 @@ final class TmscQueries {
             it.function == execution.function
         ]
     }
-    
+
     /**
      * Convenience method for creating {@link ITMSC} instances that are required by some queries.
      */
@@ -438,7 +476,7 @@ final class TmscQueries {
             cache.origin += cacheOrigin
         ]
     }
-    
+
     /**
      * Convenience method for creating {@link ITMSC} instances that are required by some queries.
      */
@@ -448,7 +486,7 @@ final class TmscQueries {
             cache.origin += cacheOrigin
         ]
     }
-    
+
     /**
      * Convenience method for creating a {@link ScopedTMSC} instance, that does two things:
      * <ol>
@@ -461,7 +499,7 @@ final class TmscQueries {
         return TmscFactory::eINSTANCE.createScopedTMSC => [
             name = scopeName.toEID
             origin += scopeOrigin
-            
+
             if (scopeDependencies instanceof Collection) {
                 dependencies.addAll(scopeDependencies);
             } else {
@@ -472,7 +510,7 @@ final class TmscQueries {
             }
         ]
     }
-    
+
     /**
      * Adding a {@code child} scope might require to add (new) dependencies
      * to the {@code parent} TMSC and its ancestors.
@@ -482,7 +520,7 @@ final class TmscQueries {
         parent.childScopes += child
         return parent.addDependencies(child.dependencies)
     }
-    
+
     /**
      * Adds dependencies to a TMSC and its ancestors, only if they are not yet added. 
      * Only the added dependencies are returned.
@@ -507,7 +545,7 @@ final class TmscQueries {
     static def boolean isInScope(Event event, ScopedTMSC tmsc) {
         return event.fullScopeIncomingDependencies.union(event.fullScopeOutgoingDependencies).exists[scopes.contains(tmsc)]
     }
-    
+
     static def void disposeTemp(ScopedTMSC tmsc, boolean disposeTempDependencies) {
         if (tmsc.eContainer !== null) {
             throw new IllegalArgumentException(
@@ -520,29 +558,42 @@ final class TmscQueries {
         Collections::singleton(tmsc).closure(true)[childScopes].forEach[dependencies.clear]
         tempDependencies.forEach[disposeTemp]
     }
-    
+
     static def void disposeTemp(Iterable<? extends Dependency> dependencies) {
         val tempDependencies = dependencies.filter[eContainer === null].toList
         // The order below is faster than just disposing all temp dependencies first
-        val tempDependenciesPerScope = tempDependencies.collect[d | d.scopes.map[s | s -> d]].groupBy([key], [value])
-        tempDependenciesPerScope.forEach[s, d | s.dependencies.removeAll(d)]
+        val tempDependenciesPerScope = tempDependencies.collect[d|d.scopes.map[s|s -> d]].groupBy([key], [value])
+        tempDependenciesPerScope.forEach[s, d|s.dependencies.removeAll(d)]
         tempDependencies.forEach[disposeTemp]
     }
-    
+
     static def void disposeTemp(Dependency dependency) {
         if (dependency.eContainer !== null) {
             throw new IllegalArgumentException(
                 'This method is only intended for temporary dependencies that are not added to the model yet')
         }
-        dependency.eClass.EAllStructuralFeatures.filter[changeable].forEach[f | dependency.eUnset(f)]
+        dependency.eClass.EAllStructuralFeatures.filter[changeable].forEach[f|dependency.eUnset(f)]
     }
     
+    /**
+     * Returns the dependencies whose events include {@code event}.
+     * 
+     * <p>
+     * This is equal to the union of {@link Event#getFullScopeIncomingDependencies()
+     * incoming } and {@link Event#getFullScopeOutgoingDependencies() outgoing }
+     * dependencies.
+     * </p>
+     */
+    static def Iterable<Dependency> getFullScopeDependencies(Event event) {
+        return event.fullScopeIncomingDependencies.union(event.fullScopeOutgoingDependencies)
+    }
+
     static def BranchIterable<Event> getPreviousEventsOnLifeline(Event event) {
         return Collections::singleton(event).climbTree[incomingLifelineSegment?.source]
     }
 
     static def LifelineSegment getIncomingLifelineSegment(Event event) {
-        return event.fullScopeIncomingDependencies.filter(LifelineSegment).atMostOne
+        return event.fullScopeIncomingDependencies.filter(LifelineSegment).reject[projection].atMostOne
     }
 
     static def BranchIterable<Event> getNextEventsOnLifeline(Event event) {
@@ -550,7 +601,7 @@ final class TmscQueries {
     }
 
     static def LifelineSegment getOutgoingLifelineSegment(Event event) {
-       return event.fullScopeOutgoingDependencies.filter(LifelineSegment).atMostOne
+        return event.fullScopeOutgoingDependencies.filter(LifelineSegment).reject[projection].atMostOne
     }
 
     static def <T> T getAtMostOne(Iterable<T> source) {
@@ -565,26 +616,26 @@ final class TmscQueries {
             return null
         }
     }
-    
+
     static def void shiftTime(FullScopeTMSC tmsc, long delta) {
         tmsc.events.reject[timestamp === null].forEach[timestamp = timestamp + delta]
         tmsc.startTime = tmsc.startTime + delta
         tmsc.endTime = tmsc.endTime + delta
     }
-    
+
     static class CachedQueryTMSC implements ITMSC {
         @Accessors
         val List<Event> origin = new ArrayList(2)
-        
+
         @Accessors
         val List<Dependency> dependencies
-        
+
         val Map<Event, List<Dependency>> incomingDependencies
         val Map<Event, List<Dependency>> outgoingDependencies
-        
+
         @Accessors
         var String name
-        
+
         new(Iterable<? extends Dependency> dependencies) {
             if (dependencies instanceof Collection) {
                 this.dependencies = new ArrayList(dependencies.size)
@@ -601,35 +652,35 @@ final class TmscQueries {
                 this.outgoingDependencies.computeIfAbsent(dependency.source)[new ArrayList()] += dependency
             }
         }
-        
+
         override List<Dependency> getIncomingDependencies(Event event) {
             return incomingDependencies.getOrDefault(event, Collections::emptyList)
         }
-        
+
         override List<Dependency> getOutgoingDependencies(Event event) {
             return outgoingDependencies.getOrDefault(event, Collections::emptyList)
         }
-        
+
         override getInitialEvents() {
             val initialEvents = new LinkedHashSet(outgoingDependencies.keySet)
             initialEvents.removeAll(incomingDependencies.keySet)
             return initialEvents
         }
-        
+
         override isInitialEvent(Event event) {
             return !incomingDependencies.containsKey(event)
         }
-        
+
         override getFinalEvents() {
             val finalEvents = new LinkedHashSet(incomingDependencies.keySet)
             finalEvents.removeAll(outgoingDependencies.keySet)
             return finalEvents
         }
-        
+
         override isFinalEvent(Event event) {
             return !outgoingDependencies.containsKey(event)
         }
-        
+
         def createScopedTMSC() {
             return dependencies.createScopedTMSC(name) => [ scope |
                 scope.origin += this.origin
