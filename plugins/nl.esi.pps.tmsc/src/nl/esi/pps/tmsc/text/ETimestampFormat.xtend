@@ -105,7 +105,7 @@ class ETimestampFormat extends NumberFormat {
         return toAppendTo
     }
 
-    override Number parse(String source, ParsePosition parsePosition) {
+    override Long parse(String source, ParsePosition parsePosition) {
         val orgIndex = parsePosition.index
 
         var oldIndex = parsePosition.index

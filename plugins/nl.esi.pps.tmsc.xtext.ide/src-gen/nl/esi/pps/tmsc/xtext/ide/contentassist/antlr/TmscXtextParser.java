@@ -104,6 +104,7 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXEventAccess().getGroup_7_1(), "rule__XEvent__Group_7_1__0");
 			builder.put(grammarAccess.getXEventAccess().getGroup_8(), "rule__XEvent__Group_8__0");
 			builder.put(grammarAccess.getXEventAccess().getGroup_8_1_0(), "rule__XEvent__Group_8_1_0__0");
+			builder.put(grammarAccess.getXEventAccess().getGroup_8_1_1(), "rule__XEvent__Group_8_1_1__0");
 			builder.put(grammarAccess.getXEventArgumentAccess().getGroup(), "rule__XEventArgument__Group__0");
 			builder.put(grammarAccess.getXDependencyAccess().getGroup(), "rule__XDependency__Group__0");
 			builder.put(grammarAccess.getXDependencyAccess().getGroup_2_0(), "rule__XDependency__Group_2_0__0");
@@ -193,8 +194,9 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXEventAccess().getArgumentsAssignment_6_2_1(), "rule__XEvent__ArgumentsAssignment_6_2_1");
 			builder.put(grammarAccess.getXEventAccess().getOutgoingDependenciesAssignment_7_0_1(), "rule__XEvent__OutgoingDependenciesAssignment_7_0_1");
 			builder.put(grammarAccess.getXEventAccess().getIncomingDependenciesAssignment_7_1_1(), "rule__XEvent__IncomingDependenciesAssignment_7_1_1");
-			builder.put(grammarAccess.getXEventAccess().getScheduledAssignment_8_1_0_2(), "rule__XEvent__ScheduledAssignment_8_1_0_2");
-			builder.put(grammarAccess.getXEventAccess().getPropertiesAssignment_8_1_1(), "rule__XEvent__PropertiesAssignment_8_1_1");
+			builder.put(grammarAccess.getXEventAccess().getTimeBoundAssignment_8_1_0_2(), "rule__XEvent__TimeBoundAssignment_8_1_0_2");
+			builder.put(grammarAccess.getXEventAccess().getScheduledAssignment_8_1_1_2(), "rule__XEvent__ScheduledAssignment_8_1_1_2");
+			builder.put(grammarAccess.getXEventAccess().getPropertiesAssignment_8_1_2(), "rule__XEvent__PropertiesAssignment_8_1_2");
 			builder.put(grammarAccess.getXEventArgumentAccess().getParameterAssignment_0(), "rule__XEventArgument__ParameterAssignment_0");
 			builder.put(grammarAccess.getXEventArgumentAccess().getValueAssignment_2(), "rule__XEventArgument__ValueAssignment_2");
 			builder.put(grammarAccess.getXDependencyAccess().getTypeObjectAssignment_0(), "rule__XDependency__TypeObjectAssignment_0");

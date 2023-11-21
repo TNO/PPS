@@ -1781,9 +1781,9 @@ ruleXEvent returns [EObject current=null]
 			}
 			(
 				(
-					otherlv_16='scheduled'
+					otherlv_16='time-bound'
 					{
-						newLeafNode(otherlv_16, grammarAccess.getXEventAccess().getScheduledKeyword_8_1_0_0());
+						newLeafNode(otherlv_16, grammarAccess.getXEventAccess().getTimeBoundKeyword_8_1_0_0());
 					}
 					otherlv_17=':'
 					{
@@ -1791,10 +1791,39 @@ ruleXEvent returns [EObject current=null]
 					}
 					(
 						(
+							lv_timeBound_18_0=RULE_ABS_EBIGDECIMAL
 							{
-								newCompositeNode(grammarAccess.getXEventAccess().getScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_0_2_0());
+								newLeafNode(lv_timeBound_18_0, grammarAccess.getXEventAccess().getTimeBoundABS_EBIGDECIMALTerminalRuleCall_8_1_0_2_0());
 							}
-							lv_scheduled_18_0=ruleEBOOLEAN_OBJECT
+							{
+								if ($current==null) {
+									$current = createModelElement(grammarAccess.getXEventRule());
+								}
+								setWithLastConsumed(
+									$current,
+									"timeBound",
+									lv_timeBound_18_0,
+									"nl.esi.pps.tmsc.xtext.TmscXtext.ABS_EBIGDECIMAL");
+							}
+						)
+					)
+				)
+				    |
+				(
+					otherlv_19='scheduled'
+					{
+						newLeafNode(otherlv_19, grammarAccess.getXEventAccess().getScheduledKeyword_8_1_1_0());
+					}
+					otherlv_20=':'
+					{
+						newLeafNode(otherlv_20, grammarAccess.getXEventAccess().getColonKeyword_8_1_1_1());
+					}
+					(
+						(
+							{
+								newCompositeNode(grammarAccess.getXEventAccess().getScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_1_2_0());
+							}
+							lv_scheduled_21_0=ruleEBOOLEAN_OBJECT
 							{
 								if ($current==null) {
 									$current = createModelElementForParent(grammarAccess.getXEventRule());
@@ -1802,7 +1831,7 @@ ruleXEvent returns [EObject current=null]
 								set(
 									$current,
 									"scheduled",
-									lv_scheduled_18_0,
+									lv_scheduled_21_0,
 									"nl.esi.pps.tmsc.xtext.TmscXtext.EBOOLEAN_OBJECT");
 								afterParserOrEnumRuleCall();
 							}
@@ -1813,9 +1842,9 @@ ruleXEvent returns [EObject current=null]
 				(
 					(
 						{
-							newCompositeNode(grammarAccess.getXEventAccess().getPropertiesXPropertyParserRuleCall_8_1_1_0());
+							newCompositeNode(grammarAccess.getXEventAccess().getPropertiesXPropertyParserRuleCall_8_1_2_0());
 						}
-						lv_properties_19_0=ruleXProperty
+						lv_properties_22_0=ruleXProperty
 						{
 							if ($current==null) {
 								$current = createModelElementForParent(grammarAccess.getXEventRule());
@@ -1823,16 +1852,16 @@ ruleXEvent returns [EObject current=null]
 							add(
 								$current,
 								"properties",
-								lv_properties_19_0,
+								lv_properties_22_0,
 								"nl.esi.pps.tmsc.xtext.TmscXtext.XProperty");
 							afterParserOrEnumRuleCall();
 						}
 					)
 				)
 			)*
-			otherlv_20='}'
+			otherlv_23='}'
 			{
-				newLeafNode(otherlv_20, grammarAccess.getXEventAccess().getRightCurlyBracketKeyword_8_2());
+				newLeafNode(otherlv_23, grammarAccess.getXEventAccess().getRightCurlyBracketKeyword_8_2());
 			}
 		)?
 	)

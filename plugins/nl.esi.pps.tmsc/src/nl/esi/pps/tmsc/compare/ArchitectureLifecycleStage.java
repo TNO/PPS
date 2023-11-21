@@ -10,14 +10,19 @@
 
 package nl.esi.pps.tmsc.compare;
 
-import static nl.esi.emf.edit.provider.EMFEditUtil.getText;
-
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import java.util.function.BiPredicate;
 import java.util.function.Function;
 
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.lsat.common.queries.IterableQueries;
+import org.eclipse.lsat.common.util.CollectionUtil;
 import org.eclipse.xtext.xbase.lib.StringExtensions;
 
+import nl.esi.emf.edit.provider.EMFEditUtil;
 import nl.esi.pps.architecture.ArchitectureModel;
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
 import nl.esi.pps.architecture.instantiated.Executor;
@@ -31,15 +36,14 @@ import nl.esi.pps.tmsc.EventType;
 public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 	/**
 	 * Within the specified phase, an event is considered to be equal when its
-	 * {@link EventType}, {@link Component} and {@link Operation} are equal.
+	 * {@link Component} and {@link Operation} are equal.
 	 * 
 	 * @see SpecifiedPackage
 	 */
-	SPECIFIED(
-			equals(Event::eClass).and(equals(Event::getComponent)).and(equals(e -> e.getFunction().getOperation()))) {
+	SPECIFIED(Event::getComponent, e -> e.getFunction().getOperation()) {
 		@Override
 		public String describeTask(Event event, boolean full) {
-			final String operation = getText(event.getFunction().getOperation());
+			String operation = getText(event.getFunction().getOperation());
 			if (operation == null) {
 				return null;
 			}
@@ -54,10 +58,6 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 		@Override
 		public String describeResource(Event event, boolean full) {
 			String component = getText(event.getComponent());
-			if (component == null) {
-				throw new IllegalArgumentException("Failed to describe component, please contact PPS support. "
-						+ "Hint: Make sure to load EMF edit libraries in resource set.");
-			}
 			StringBuilder description = new StringBuilder();
 			if (full) {
 				description.append("by ");
@@ -72,14 +72,10 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 	 * 
 	 * @see ImplementedPackage
 	 */
-	IMPLEMENTED(equals(Event::getFunction).and(SPECIFIED)) {
+	IMPLEMENTED(SPECIFIED, Event::getFunction) {
 		@Override
 		public String describeTask(Event event, boolean full) {
 			String function = getText(event.getFunction());
-			if (function == null) {
-				throw new IllegalArgumentException("Failed to describe function, please contact PPS support. "
-						+ "Hint: Make sure to load EMF edit libraries in resource set.");
-			}
 			StringBuilder description = new StringBuilder();
 			if (full) {
 				description.append("of ");
@@ -105,7 +101,7 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 	 * 
 	 * @see InstantiatedPackage
 	 */
-	INSTANTIATED(equals((Event e) -> e.getLifeline().getExecutor()).and(IMPLEMENTED)) {
+	INSTANTIATED(IMPLEMENTED, e -> e.getLifeline().getExecutor()) {
 		@Override
 		public String describeTask(Event event, boolean full) {
 			return IMPLEMENTED.describeTask(event, full);
@@ -114,10 +110,6 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 		@Override
 		public String describeResource(Event event, boolean full) {
 			String executor = getText(event.getLifeline().getExecutor());
-			if (executor == null) {
-				throw new IllegalArgumentException("Failed to describe executor, please contact PPS support. "
-						+ "Hint: Make sure to load EMF edit libraries in resource set.");
-			}
 			StringBuilder description = new StringBuilder();
 			if (full) {
 				description.append(IMPLEMENTED.describeResource(event, full)).append(" on ");
@@ -127,15 +119,24 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 		}
 	};
 
-	private final BiPredicate<? super Event, ? super Event> equivalence;
+	private final List<Function<? super Event, ? extends EObject>> references;
 
-	private ArchitectureLifecycleStage(BiPredicate<? super Event, ? super Event> equivalence) {
-		this.equivalence = equivalence;
+	@SafeVarargs
+	private ArchitectureLifecycleStage(Function<? super Event, ? extends EObject>... equivalences) {
+		this.references = Arrays.asList(equivalences);
 	}
 
+	@SafeVarargs
+	private ArchitectureLifecycleStage(ArchitectureLifecycleStage base, Function<? super Event, ? extends EObject>... equivalences) {
+		this.references = new ArrayList<>(base.references.size() + equivalences.length);
+		this.references.addAll(base.references);
+		CollectionUtil.addAll(this.references, equivalences);
+	}
+	
 	@Override
 	public boolean test(Event left, Event right) {
-		return equivalence.test(left, right);
+		return Objects.equals(left.eClass(), right.eClass())
+				&& IterableQueries.forAll(references, r -> Objects.equals(r.apply(left), r.apply(right)));
 	}
 
 	/**
@@ -144,17 +145,18 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 	 * based instead of object based.
 	 */
 	public boolean testDescription(Event left, Event right) {
-		return Objects.equals(describe(left), describe(right));
+		return Objects.equals(left.eClass(), right.eClass()) 
+				&& IterableQueries.forAll(references, r -> Objects.equals(getText(r.apply(left)), getText(r.apply(right))));
 	}
-
+	
 	public String describe(Event event) {
 		return describe(event, true);
 	}
 
 	public String describe(Event event, boolean full) {
 		final String type = EventType.valueOf(event).name().toLowerCase();
-		final String task = describeTask(event, true);
-		final String resource = describeResource(event, true);
+		final String task = describeTask(event, full);
+		final String resource = describeResource(event, full);
 
 		StringBuilder description = new StringBuilder(type);
 		if (task != null) {
@@ -172,11 +174,15 @@ public enum ArchitectureLifecycleStage implements BiPredicate<Event, Event> {
 		return StringExtensions.toFirstUpper(name().toLowerCase().replace('_', ' '));
 	}
 
-	private static <T, R> BiPredicate<T, T> equals(Function<? super T, R> function) {
-		return (T left, T right) -> {
-			R leftValue = function.apply(left);
-			R rightValue = function.apply(right);
-			return Objects.equals(leftValue, rightValue);
-		};
+	private static String getText(EObject eObject) {
+		if (eObject == null) {
+			return null;
+		}
+		String text = EMFEditUtil.getText(eObject);
+		if (text == null) {
+			throw new IllegalArgumentException("Failed to describe " + eObject.eClass().getName()
+					+ ", please contact PPS support. Hint: Make sure to load EMF edit libraries in resource set.");
+		}
+		return text;
 	}
 }

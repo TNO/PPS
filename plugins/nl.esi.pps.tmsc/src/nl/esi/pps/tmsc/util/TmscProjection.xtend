@@ -209,11 +209,21 @@ class TmscProjection {
         }
          
         override apply(Dependency projection, Boolean projectedValue) {
-            if (projection.scheduled !== null && projection.scheduled != projectedValue) {
-                // Expected the same scheduled to be calculated if projection is reused
+            if (projection.scheduled == Boolean.FALSE) {
+                // If a path exists that is not scheduled the result should be not scheduled.
+                // The projection itself should be considered a path as well in the comment above
+                return
+            }
+            
+            if (projection.isProjection && projection.scheduled == Boolean.TRUE && projectedValue == Boolean.FALSE) {
+                // Expecting the same scheduled value to be calculated if projection is reused
+                // Otherwise this could lead to side effects in subsequent analyzes
                 throw new IllegalArgumentException('Programming error, please contact PPS support!')
             }
-            projection.scheduled = projectedValue
+            
+            if (projectedValue !== null) {
+                projection.scheduled = projectedValue
+            }
         }
     }
 }

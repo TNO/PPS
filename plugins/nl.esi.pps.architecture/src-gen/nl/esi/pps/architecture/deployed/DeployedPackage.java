@@ -19,6 +19,18 @@ import org.eclipse.emf.ecore.EPackage;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
+ * <!-- begin-model-doc -->
+ * In the Deployed lifecycle stage, the implemented software components are built and bundled into binaries. 
+ * At this stage, the binaries are placed into a filesystem from where they can be installed to the different hosts.
+ * The installation takes place during the transition from Deployed to Instantiated stage.
+ * During this transition the binaries are mapped (installed) to specific hosts.
+ * We consider for the sake of simplicity that the deployment of binaries onto hosts is static and performed before the system is initiated/started.
+ * 
+ * [[deployed-ecore-diagram]]
+ * .Diagram of the deployed lyfecycle stage in the architecture meta-model
+ * image::{metamodelsdir}/deployed.png[]
+ * 
+ * <!-- end-model-doc -->
  * @see nl.esi.pps.architecture.deployed.DeployedFactory
  * @model kind="package"
  * @generated

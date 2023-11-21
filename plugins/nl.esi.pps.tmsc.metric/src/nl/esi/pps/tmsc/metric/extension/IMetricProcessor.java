@@ -17,6 +17,7 @@ import org.eclipse.xtext.xbase.lib.Pair;
 import nl.esi.pps.architecture.deployed.Host;
 import nl.esi.pps.architecture.specified.Component;
 import nl.esi.pps.tmsc.Dependency;
+import nl.esi.pps.tmsc.Execution;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.metric.Metric;
 import nl.esi.pps.tmsc.metric.MetricInstance;
@@ -100,9 +101,11 @@ public interface IMetricProcessor {
 	 * when detailed analysis are performed for this Metric.
 	 */
 	default Pair<Long, Long> getAnalysisTimeWindow(MetricInstance metricInstance) {
-		// Make sure that the parent executions of the KPI instance are reconstructed
-		return Pair.of(metricInstance.getFrom().getExecution().getRoot().getStartTime(),
-				metricInstance.getTo().getExecution().getRoot().getEndTime());
+		// Make sure that all parent executions of the KPI instance are reconstructed
+		Execution fromExecRoot = metricInstance.getFrom().getExecution().getRoot();
+		Execution toExecRoot = metricInstance.getTo().getExecution().getRoot();
+		return Pair.of(Long.min(fromExecRoot.getStartTime(), toExecRoot.getStartTime()),
+				Long.max(fromExecRoot.getEndTime(), toExecRoot.getEndTime()));
 	}
 
 	/**

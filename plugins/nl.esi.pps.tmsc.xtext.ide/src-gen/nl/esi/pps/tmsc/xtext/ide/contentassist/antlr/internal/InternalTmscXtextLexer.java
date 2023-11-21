@@ -1040,11 +1040,11 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_POS_EBIGDECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8885:22: ( '+' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )? )
-            // InternalTmscXtext.g:8885:24: '+' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8987:22: ( '+' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )? )
+            // InternalTmscXtext.g:8987:24: '+' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
             {
             match('+'); 
-            // InternalTmscXtext.g:8885:28: ( '0' .. '9' )+
+            // InternalTmscXtext.g:8987:28: ( '0' .. '9' )+
             int cnt1=0;
             loop1:
             do {
@@ -1058,7 +1058,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                 switch (alt1) {
             	case 1 :
-            	    // InternalTmscXtext.g:8885:29: '0' .. '9'
+            	    // InternalTmscXtext.g:8987:29: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1074,7 +1074,7 @@ public class InternalTmscXtextLexer extends Lexer {
                 cnt1++;
             } while (true);
 
-            // InternalTmscXtext.g:8885:40: ( '.' ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8987:40: ( '.' ( '0' .. '9' )+ )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -1083,10 +1083,10 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt3) {
                 case 1 :
-                    // InternalTmscXtext.g:8885:41: '.' ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8987:41: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // InternalTmscXtext.g:8885:45: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8987:45: ( '0' .. '9' )+
                     int cnt2=0;
                     loop2:
                     do {
@@ -1100,7 +1100,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt2) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8885:46: '0' .. '9'
+                    	    // InternalTmscXtext.g:8987:46: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1122,7 +1122,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             }
 
-            // InternalTmscXtext.g:8885:59: ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8987:59: ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -1131,7 +1131,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt5) {
                 case 1 :
-                    // InternalTmscXtext.g:8885:60: 'e' ( '+' | '-' ) ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8987:60: 'e' ( '+' | '-' ) ( '0' .. '9' )+
                     {
                     match('e'); 
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1143,7 +1143,7 @@ public class InternalTmscXtextLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalTmscXtext.g:8885:74: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8987:74: ( '0' .. '9' )+
                     int cnt4=0;
                     loop4:
                     do {
@@ -1157,7 +1157,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8885:75: '0' .. '9'
+                    	    // InternalTmscXtext.g:8987:75: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1195,11 +1195,11 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_NEG_EBIGDECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8887:22: ( '-' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )? )
-            // InternalTmscXtext.g:8887:24: '-' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8989:22: ( '-' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )? )
+            // InternalTmscXtext.g:8989:24: '-' ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
             {
             match('-'); 
-            // InternalTmscXtext.g:8887:28: ( '0' .. '9' )+
+            // InternalTmscXtext.g:8989:28: ( '0' .. '9' )+
             int cnt6=0;
             loop6:
             do {
@@ -1213,7 +1213,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                 switch (alt6) {
             	case 1 :
-            	    // InternalTmscXtext.g:8887:29: '0' .. '9'
+            	    // InternalTmscXtext.g:8989:29: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1229,7 +1229,7 @@ public class InternalTmscXtextLexer extends Lexer {
                 cnt6++;
             } while (true);
 
-            // InternalTmscXtext.g:8887:40: ( '.' ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8989:40: ( '.' ( '0' .. '9' )+ )?
             int alt8=2;
             int LA8_0 = input.LA(1);
 
@@ -1238,10 +1238,10 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt8) {
                 case 1 :
-                    // InternalTmscXtext.g:8887:41: '.' ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8989:41: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // InternalTmscXtext.g:8887:45: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8989:45: ( '0' .. '9' )+
                     int cnt7=0;
                     loop7:
                     do {
@@ -1255,7 +1255,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt7) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8887:46: '0' .. '9'
+                    	    // InternalTmscXtext.g:8989:46: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1277,7 +1277,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             }
 
-            // InternalTmscXtext.g:8887:59: ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8989:59: ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1286,7 +1286,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // InternalTmscXtext.g:8887:60: 'e' ( '+' | '-' ) ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8989:60: 'e' ( '+' | '-' ) ( '0' .. '9' )+
                     {
                     match('e'); 
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1298,7 +1298,7 @@ public class InternalTmscXtextLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalTmscXtext.g:8887:74: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8989:74: ( '0' .. '9' )+
                     int cnt9=0;
                     loop9:
                     do {
@@ -1312,7 +1312,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt9) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8887:75: '0' .. '9'
+                    	    // InternalTmscXtext.g:8989:75: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1350,10 +1350,10 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_ABS_EBIGDECIMAL;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8889:22: ( ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )? )
-            // InternalTmscXtext.g:8889:24: ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8991:22: ( ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )? )
+            // InternalTmscXtext.g:8991:24: ( '0' .. '9' )+ ( '.' ( '0' .. '9' )+ )? ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
             {
-            // InternalTmscXtext.g:8889:24: ( '0' .. '9' )+
+            // InternalTmscXtext.g:8991:24: ( '0' .. '9' )+
             int cnt11=0;
             loop11:
             do {
@@ -1367,7 +1367,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                 switch (alt11) {
             	case 1 :
-            	    // InternalTmscXtext.g:8889:25: '0' .. '9'
+            	    // InternalTmscXtext.g:8991:25: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -1383,7 +1383,7 @@ public class InternalTmscXtextLexer extends Lexer {
                 cnt11++;
             } while (true);
 
-            // InternalTmscXtext.g:8889:36: ( '.' ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8991:36: ( '.' ( '0' .. '9' )+ )?
             int alt13=2;
             int LA13_0 = input.LA(1);
 
@@ -1392,10 +1392,10 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt13) {
                 case 1 :
-                    // InternalTmscXtext.g:8889:37: '.' ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8991:37: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // InternalTmscXtext.g:8889:41: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8991:41: ( '0' .. '9' )+
                     int cnt12=0;
                     loop12:
                     do {
@@ -1409,7 +1409,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt12) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8889:42: '0' .. '9'
+                    	    // InternalTmscXtext.g:8991:42: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1431,7 +1431,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             }
 
-            // InternalTmscXtext.g:8889:55: ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8991:55: ( 'e' ( '+' | '-' ) ( '0' .. '9' )+ )?
             int alt15=2;
             int LA15_0 = input.LA(1);
 
@@ -1440,7 +1440,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt15) {
                 case 1 :
-                    // InternalTmscXtext.g:8889:56: 'e' ( '+' | '-' ) ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8991:56: 'e' ( '+' | '-' ) ( '0' .. '9' )+
                     {
                     match('e'); 
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
@@ -1452,7 +1452,7 @@ public class InternalTmscXtextLexer extends Lexer {
                         recover(mse);
                         throw mse;}
 
-                    // InternalTmscXtext.g:8889:70: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8991:70: ( '0' .. '9' )+
                     int cnt14=0;
                     loop14:
                     do {
@@ -1466,7 +1466,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt14) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8889:71: '0' .. '9'
+                    	    // InternalTmscXtext.g:8991:71: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1504,14 +1504,14 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_ISO8601;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8891:14: ( '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( '.' ( '0' .. '9' )+ )? ( 'Z' | ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ) )
-            // InternalTmscXtext.g:8891:16: '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( '.' ( '0' .. '9' )+ )? ( 'Z' | ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' )
+            // InternalTmscXtext.g:8993:14: ( '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( '.' ( '0' .. '9' )+ )? ( 'Z' | ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ) )
+            // InternalTmscXtext.g:8993:16: '0' .. '9' '0' .. '9' '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' ( '-' )? '0' .. '9' '0' .. '9' 'T' '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' ( '.' ( '0' .. '9' )+ )? ( 'Z' | ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' )
             {
             matchRange('0','9'); 
             matchRange('0','9'); 
             matchRange('0','9'); 
             matchRange('0','9'); 
-            // InternalTmscXtext.g:8891:52: ( '-' )?
+            // InternalTmscXtext.g:8993:52: ( '-' )?
             int alt16=2;
             int LA16_0 = input.LA(1);
 
@@ -1520,7 +1520,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt16) {
                 case 1 :
-                    // InternalTmscXtext.g:8891:52: '-'
+                    // InternalTmscXtext.g:8993:52: '-'
                     {
                     match('-'); 
 
@@ -1531,7 +1531,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             matchRange('0','9'); 
             matchRange('0','9'); 
-            // InternalTmscXtext.g:8891:75: ( '-' )?
+            // InternalTmscXtext.g:8993:75: ( '-' )?
             int alt17=2;
             int LA17_0 = input.LA(1);
 
@@ -1540,7 +1540,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt17) {
                 case 1 :
-                    // InternalTmscXtext.g:8891:75: '-'
+                    // InternalTmscXtext.g:8993:75: '-'
                     {
                     match('-'); 
 
@@ -1554,7 +1554,7 @@ public class InternalTmscXtextLexer extends Lexer {
             match('T'); 
             matchRange('0','9'); 
             matchRange('0','9'); 
-            // InternalTmscXtext.g:8891:120: ( ':' )?
+            // InternalTmscXtext.g:8993:120: ( ':' )?
             int alt18=2;
             int LA18_0 = input.LA(1);
 
@@ -1563,7 +1563,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt18) {
                 case 1 :
-                    // InternalTmscXtext.g:8891:120: ':'
+                    // InternalTmscXtext.g:8993:120: ':'
                     {
                     match(':'); 
 
@@ -1574,7 +1574,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             matchRange('0','9'); 
             matchRange('0','9'); 
-            // InternalTmscXtext.g:8891:143: ( ':' )?
+            // InternalTmscXtext.g:8993:143: ( ':' )?
             int alt19=2;
             int LA19_0 = input.LA(1);
 
@@ -1583,7 +1583,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt19) {
                 case 1 :
-                    // InternalTmscXtext.g:8891:143: ':'
+                    // InternalTmscXtext.g:8993:143: ':'
                     {
                     match(':'); 
 
@@ -1594,7 +1594,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             matchRange('0','9'); 
             matchRange('0','9'); 
-            // InternalTmscXtext.g:8891:166: ( '.' ( '0' .. '9' )+ )?
+            // InternalTmscXtext.g:8993:166: ( '.' ( '0' .. '9' )+ )?
             int alt21=2;
             int LA21_0 = input.LA(1);
 
@@ -1603,10 +1603,10 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt21) {
                 case 1 :
-                    // InternalTmscXtext.g:8891:167: '.' ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8993:167: '.' ( '0' .. '9' )+
                     {
                     match('.'); 
-                    // InternalTmscXtext.g:8891:171: ( '0' .. '9' )+
+                    // InternalTmscXtext.g:8993:171: ( '0' .. '9' )+
                     int cnt20=0;
                     loop20:
                     do {
@@ -1620,7 +1620,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt20) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8891:172: '0' .. '9'
+                    	    // InternalTmscXtext.g:8993:172: '0' .. '9'
                     	    {
                     	    matchRange('0','9'); 
 
@@ -1642,7 +1642,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
             }
 
-            // InternalTmscXtext.g:8891:185: ( 'Z' | ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' )
+            // InternalTmscXtext.g:8993:185: ( 'Z' | ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9' )
             int alt23=2;
             int LA23_0 = input.LA(1);
 
@@ -1660,14 +1660,14 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt23) {
                 case 1 :
-                    // InternalTmscXtext.g:8891:186: 'Z'
+                    // InternalTmscXtext.g:8993:186: 'Z'
                     {
                     match('Z'); 
 
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:8891:190: ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9'
+                    // InternalTmscXtext.g:8993:190: ( '+' | '-' ) '0' .. '9' '0' .. '9' ( ':' )? '0' .. '9' '0' .. '9'
                     {
                     if ( input.LA(1)=='+'||input.LA(1)=='-' ) {
                         input.consume();
@@ -1680,7 +1680,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                     matchRange('0','9'); 
                     matchRange('0','9'); 
-                    // InternalTmscXtext.g:8891:218: ( ':' )?
+                    // InternalTmscXtext.g:8993:218: ( ':' )?
                     int alt22=2;
                     int LA22_0 = input.LA(1);
 
@@ -1689,7 +1689,7 @@ public class InternalTmscXtextLexer extends Lexer {
                     }
                     switch (alt22) {
                         case 1 :
-                            // InternalTmscXtext.g:8891:218: ':'
+                            // InternalTmscXtext.g:8993:218: ':'
                             {
                             match(':'); 
 
@@ -1722,10 +1722,10 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_ID;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8893:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // InternalTmscXtext.g:8893:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTmscXtext.g:8995:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // InternalTmscXtext.g:8995:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // InternalTmscXtext.g:8893:11: ( '^' )?
+            // InternalTmscXtext.g:8995:11: ( '^' )?
             int alt24=2;
             int LA24_0 = input.LA(1);
 
@@ -1734,7 +1734,7 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt24) {
                 case 1 :
-                    // InternalTmscXtext.g:8893:11: '^'
+                    // InternalTmscXtext.g:8995:11: '^'
                     {
                     match('^'); 
 
@@ -1752,7 +1752,7 @@ public class InternalTmscXtextLexer extends Lexer {
                 recover(mse);
                 throw mse;}
 
-            // InternalTmscXtext.g:8893:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // InternalTmscXtext.g:8995:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop25:
             do {
                 int alt25=2;
@@ -1801,10 +1801,10 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_STRING;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8895:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // InternalTmscXtext.g:8895:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTmscXtext.g:8997:13: ( ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // InternalTmscXtext.g:8997:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // InternalTmscXtext.g:8895:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // InternalTmscXtext.g:8997:15: ( '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt28=2;
             int LA28_0 = input.LA(1);
 
@@ -1822,10 +1822,10 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt28) {
                 case 1 :
-                    // InternalTmscXtext.g:8895:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // InternalTmscXtext.g:8997:16: '\"' ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // InternalTmscXtext.g:8895:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // InternalTmscXtext.g:8997:20: ( '\\\\' . | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop26:
                     do {
                         int alt26=3;
@@ -1841,7 +1841,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt26) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8895:21: '\\\\' .
+                    	    // InternalTmscXtext.g:8997:21: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1849,7 +1849,7 @@ public class InternalTmscXtextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:8895:28: ~ ( ( '\\\\' | '\"' ) )
+                    	    // InternalTmscXtext.g:8997:28: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1874,10 +1874,10 @@ public class InternalTmscXtextLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:8895:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // InternalTmscXtext.g:8997:48: '\\'' ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // InternalTmscXtext.g:8895:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // InternalTmscXtext.g:8997:53: ( '\\\\' . | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop27:
                     do {
                         int alt27=3;
@@ -1893,7 +1893,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                         switch (alt27) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:8895:54: '\\\\' .
+                    	    // InternalTmscXtext.g:8997:54: '\\\\' .
                     	    {
                     	    match('\\'); 
                     	    matchAny(); 
@@ -1901,7 +1901,7 @@ public class InternalTmscXtextLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:8895:61: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // InternalTmscXtext.g:8997:61: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFF') ) {
                     	        input.consume();
@@ -1944,12 +1944,12 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_ML_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8897:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // InternalTmscXtext.g:8897:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // InternalTmscXtext.g:8999:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // InternalTmscXtext.g:8999:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // InternalTmscXtext.g:8897:24: ( options {greedy=false; } : . )*
+            // InternalTmscXtext.g:8999:24: ( options {greedy=false; } : . )*
             loop29:
             do {
                 int alt29=2;
@@ -1974,7 +1974,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                 switch (alt29) {
             	case 1 :
-            	    // InternalTmscXtext.g:8897:52: .
+            	    // InternalTmscXtext.g:8999:52: .
             	    {
             	    matchAny(); 
 
@@ -2004,12 +2004,12 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_SL_COMMENT;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8899:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // InternalTmscXtext.g:8899:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // InternalTmscXtext.g:9001:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // InternalTmscXtext.g:9001:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // InternalTmscXtext.g:8899:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // InternalTmscXtext.g:9001:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop30:
             do {
                 int alt30=2;
@@ -2022,7 +2022,7 @@ public class InternalTmscXtextLexer extends Lexer {
 
                 switch (alt30) {
             	case 1 :
-            	    // InternalTmscXtext.g:8899:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // InternalTmscXtext.g:9001:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFF') ) {
             	        input.consume();
@@ -2042,7 +2042,7 @@ public class InternalTmscXtextLexer extends Lexer {
                 }
             } while (true);
 
-            // InternalTmscXtext.g:8899:40: ( ( '\\r' )? '\\n' )?
+            // InternalTmscXtext.g:9001:40: ( ( '\\r' )? '\\n' )?
             int alt32=2;
             int LA32_0 = input.LA(1);
 
@@ -2051,9 +2051,9 @@ public class InternalTmscXtextLexer extends Lexer {
             }
             switch (alt32) {
                 case 1 :
-                    // InternalTmscXtext.g:8899:41: ( '\\r' )? '\\n'
+                    // InternalTmscXtext.g:9001:41: ( '\\r' )? '\\n'
                     {
-                    // InternalTmscXtext.g:8899:41: ( '\\r' )?
+                    // InternalTmscXtext.g:9001:41: ( '\\r' )?
                     int alt31=2;
                     int LA31_0 = input.LA(1);
 
@@ -2062,7 +2062,7 @@ public class InternalTmscXtextLexer extends Lexer {
                     }
                     switch (alt31) {
                         case 1 :
-                            // InternalTmscXtext.g:8899:41: '\\r'
+                            // InternalTmscXtext.g:9001:41: '\\r'
                             {
                             match('\r'); 
 
@@ -2094,10 +2094,10 @@ public class InternalTmscXtextLexer extends Lexer {
         try {
             int _type = RULE_WS;
             int _channel = DEFAULT_TOKEN_CHANNEL;
-            // InternalTmscXtext.g:8901:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // InternalTmscXtext.g:8901:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTmscXtext.g:9003:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // InternalTmscXtext.g:9003:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // InternalTmscXtext.g:8901:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // InternalTmscXtext.g:9003:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt33=0;
             loop33:
             do {

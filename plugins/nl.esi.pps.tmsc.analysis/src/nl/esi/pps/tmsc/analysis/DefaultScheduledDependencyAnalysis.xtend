@@ -11,7 +11,6 @@
 package nl.esi.pps.tmsc.analysis
 
 import nl.esi.pps.tmsc.Dependency
-import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.FullScopeTMSC
 import nl.esi.pps.tmsc.LifelineSegment
 
@@ -48,12 +47,10 @@ class DefaultScheduledDependencyAnalysis {
 
     /**
      * Partial traced life-line segments (i.e. start and end of trace effect) should not be analyzed as we don't know. 
-     * Executions are not analyzed as they are a derivative from the TMSC. 
      */
     protected def boolean shouldBeAnalyzed(Dependency dependency) {
         return switch (dependency) {
-        	LifelineSegment: dependency.isFullyTraced 
-        	Execution: false
+        	LifelineSegment: dependency.isFullyTraced
         	default: true
         }
     }

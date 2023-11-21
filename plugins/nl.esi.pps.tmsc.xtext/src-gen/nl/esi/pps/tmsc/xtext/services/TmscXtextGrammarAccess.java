@@ -1197,12 +1197,17 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Keyword cLeftCurlyBracketKeyword_8_0 = (Keyword)cGroup_8.eContents().get(0);
 		private final Alternatives cAlternatives_8_1 = (Alternatives)cGroup_8.eContents().get(1);
 		private final Group cGroup_8_1_0 = (Group)cAlternatives_8_1.eContents().get(0);
-		private final Keyword cScheduledKeyword_8_1_0_0 = (Keyword)cGroup_8_1_0.eContents().get(0);
+		private final Keyword cTimeBoundKeyword_8_1_0_0 = (Keyword)cGroup_8_1_0.eContents().get(0);
 		private final Keyword cColonKeyword_8_1_0_1 = (Keyword)cGroup_8_1_0.eContents().get(1);
-		private final Assignment cScheduledAssignment_8_1_0_2 = (Assignment)cGroup_8_1_0.eContents().get(2);
-		private final RuleCall cScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_0_2_0 = (RuleCall)cScheduledAssignment_8_1_0_2.eContents().get(0);
-		private final Assignment cPropertiesAssignment_8_1_1 = (Assignment)cAlternatives_8_1.eContents().get(1);
-		private final RuleCall cPropertiesXPropertyParserRuleCall_8_1_1_0 = (RuleCall)cPropertiesAssignment_8_1_1.eContents().get(0);
+		private final Assignment cTimeBoundAssignment_8_1_0_2 = (Assignment)cGroup_8_1_0.eContents().get(2);
+		private final RuleCall cTimeBoundABS_EBIGDECIMALTerminalRuleCall_8_1_0_2_0 = (RuleCall)cTimeBoundAssignment_8_1_0_2.eContents().get(0);
+		private final Group cGroup_8_1_1 = (Group)cAlternatives_8_1.eContents().get(1);
+		private final Keyword cScheduledKeyword_8_1_1_0 = (Keyword)cGroup_8_1_1.eContents().get(0);
+		private final Keyword cColonKeyword_8_1_1_1 = (Keyword)cGroup_8_1_1.eContents().get(1);
+		private final Assignment cScheduledAssignment_8_1_1_2 = (Assignment)cGroup_8_1_1.eContents().get(2);
+		private final RuleCall cScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_1_2_0 = (RuleCall)cScheduledAssignment_8_1_1_2.eContents().get(0);
+		private final Assignment cPropertiesAssignment_8_1_2 = (Assignment)cAlternatives_8_1.eContents().get(2);
+		private final RuleCall cPropertiesXPropertyParserRuleCall_8_1_2_0 = (RuleCall)cPropertiesAssignment_8_1_2.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_8_2 = (Keyword)cGroup_8.eContents().get(2);
 		
 		//XEvent:
@@ -1216,7 +1221,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//    ('!' outgoingDependencies+=XDependency
 		//    | '?' incomingDependencies+=[XDependency|IDString])*
 		//    ('{'
-		//        ('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//        |properties+=XProperty)*
 		//    '}')?;
 		@Override public ParserRule getRule() { return rule; }
@@ -1231,7 +1237,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//('!' outgoingDependencies+=XDependency
 		//| '?' incomingDependencies+=[XDependency|IDString])*
 		//('{'
-		//    ('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//    ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//    |properties+=XProperty)*
 		//'}')?
 		public Group getGroup() { return cGroup; }
@@ -1347,7 +1354,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		public RuleCall getIncomingDependenciesXDependencyIDStringParserRuleCall_7_1_1_0_1() { return cIncomingDependenciesXDependencyIDStringParserRuleCall_7_1_1_0_1; }
 		
 		//('{'
-		//    ('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//    ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//    |properties+=XProperty)*
 		//'}')?
 		public Group getGroup_8() { return cGroup_8; }
@@ -1355,30 +1363,46 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//'{'
 		public Keyword getLeftCurlyBracketKeyword_8_0() { return cLeftCurlyBracketKeyword_8_0; }
 		
-		//('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+		//|'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//|properties+=XProperty)*
 		public Alternatives getAlternatives_8_1() { return cAlternatives_8_1; }
 		
-		//'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 		public Group getGroup_8_1_0() { return cGroup_8_1_0; }
 		
-		//'scheduled'
-		public Keyword getScheduledKeyword_8_1_0_0() { return cScheduledKeyword_8_1_0_0; }
+		//'time-bound'
+		public Keyword getTimeBoundKeyword_8_1_0_0() { return cTimeBoundKeyword_8_1_0_0; }
 		
 		//':'
 		public Keyword getColonKeyword_8_1_0_1() { return cColonKeyword_8_1_0_1; }
 		
+		//timeBound=ABS_EBIGDECIMAL
+		public Assignment getTimeBoundAssignment_8_1_0_2() { return cTimeBoundAssignment_8_1_0_2; }
+		
+		//ABS_EBIGDECIMAL
+		public RuleCall getTimeBoundABS_EBIGDECIMALTerminalRuleCall_8_1_0_2_0() { return cTimeBoundABS_EBIGDECIMALTerminalRuleCall_8_1_0_2_0; }
+		
+		//'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		public Group getGroup_8_1_1() { return cGroup_8_1_1; }
+		
+		//'scheduled'
+		public Keyword getScheduledKeyword_8_1_1_0() { return cScheduledKeyword_8_1_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_8_1_1_1() { return cColonKeyword_8_1_1_1; }
+		
 		//scheduled=EBOOLEAN_OBJECT
-		public Assignment getScheduledAssignment_8_1_0_2() { return cScheduledAssignment_8_1_0_2; }
+		public Assignment getScheduledAssignment_8_1_1_2() { return cScheduledAssignment_8_1_1_2; }
 		
 		//EBOOLEAN_OBJECT
-		public RuleCall getScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_0_2_0() { return cScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_0_2_0; }
+		public RuleCall getScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_1_2_0() { return cScheduledEBOOLEAN_OBJECTParserRuleCall_8_1_1_2_0; }
 		
 		//properties+=XProperty
-		public Assignment getPropertiesAssignment_8_1_1() { return cPropertiesAssignment_8_1_1; }
+		public Assignment getPropertiesAssignment_8_1_2() { return cPropertiesAssignment_8_1_2; }
 		
 		//XProperty
-		public RuleCall getPropertiesXPropertyParserRuleCall_8_1_1_0() { return cPropertiesXPropertyParserRuleCall_8_1_1_0; }
+		public RuleCall getPropertiesXPropertyParserRuleCall_8_1_2_0() { return cPropertiesXPropertyParserRuleCall_8_1_2_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_8_2() { return cRightCurlyBracketKeyword_8_2; }
@@ -2552,7 +2576,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//    ('!' outgoingDependencies+=XDependency
 	//    | '?' incomingDependencies+=[XDependency|IDString])*
 	//    ('{'
-	//        ('scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	//        ('time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	//        |properties+=XProperty)*
 	//    '}')?;
 	public XEventElements getXEventAccess() {

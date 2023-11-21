@@ -125,7 +125,7 @@ public final class ActivityAnalysis {
   
   public static ScopedTMSC createCausalScheduledActivityTMSC(final Interval interval) {
     final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo());
-    final List<? extends Dependency> epochDependencies = ActivityAnalysis.createEpochDependencies(interval.getFrom(), causalDependencies);
+    final List<? extends Dependency> epochDependencies = ActivityAnalysis.createEpochDependencies(interval, causalDependencies);
     Iterables.<Dependency>addAll(causalDependencies, epochDependencies);
     final Set<Dependency> causalActivityDependencies = ActivityAnalysis.findActivityDependencies(interval);
     causalActivityDependencies.retainAll(causalDependencies);
@@ -142,23 +142,28 @@ public final class ActivityAnalysis {
   }
   
   public static ScopedTMSC createScheduledActivityTMSC(final Interval interval) {
-    final Set<Dependency> activityDependencies = ActivityAnalysis.findActivityDependencies(interval);
+    final Function1<Dependency, Boolean> _function = (Dependency it) -> {
+      Long _startTime = it.getStartTime();
+      Long _startTime_1 = interval.getStartTime();
+      return Boolean.valueOf((_startTime.compareTo(_startTime_1) < 0));
+    };
+    final Set<Dependency> activityDependencies = IterableExtensions.<Dependency>toSet(IterableExtensions.<Dependency>reject(ActivityAnalysis.findActivityDependencies(interval), _function));
     StringConcatenation _builder = new StringConcatenation();
     String _name = interval.getName();
     _builder.append(_name);
     _builder.append(" scheduled activity");
     final ScopedTMSC saTmsc = TmscQueries.createScopedTMSC(activityDependencies, _builder, interval.getFrom(), interval.getTo());
-    final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), saTmsc.getInitialEvents(), saTmsc.getFinalEvents());
-    boolean _containsAll = causalDependencies.containsAll(activityDependencies);
+    final Set<Dependency> activityCausalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), saTmsc.getInitialEvents(), saTmsc.getFinalEvents());
+    boolean _containsAll = activityCausalDependencies.containsAll(activityDependencies);
     boolean _not = (!_containsAll);
     if (_not) {
       throw new IllegalStateException("Programming error, please contact PPS support!");
     }
-    final List<? extends Dependency> epochDependencies = ActivityAnalysis.createEpochDependencies(interval.getFrom(), causalDependencies);
-    Iterables.<Dependency>addAll(causalDependencies, epochDependencies);
-    causalDependencies.removeAll(activityDependencies);
-    final Set<Dependency> causalProjections = ActivityAnalysis.projectToScope(causalDependencies, saTmsc);
-    epochDependencies.removeAll(causalProjections);
+    final List<? extends Dependency> epochDependencies = ActivityAnalysis.createEpochDependencies(interval);
+    Iterables.<Dependency>addAll(activityCausalDependencies, epochDependencies);
+    activityCausalDependencies.removeAll(activityDependencies);
+    final Set<Dependency> activityCausalProjections = ActivityAnalysis.projectToScope(activityCausalDependencies, saTmsc);
+    epochDependencies.removeAll(activityCausalProjections);
     TmscQueries.disposeTemp(epochDependencies);
     return saTmsc;
   }
@@ -168,7 +173,13 @@ public final class ActivityAnalysis {
     return tmscProjection.projectToScope(dependencies);
   }
   
-  private static List<? extends Dependency> createEpochDependencies(final Event epochEvent, final Set<Dependency> causalDependencies) {
+  private static List<? extends Dependency> createEpochDependencies(final Interval interval) {
+    final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo());
+    return ActivityAnalysis.createEpochDependencies(interval, causalDependencies);
+  }
+  
+  private static List<? extends Dependency> createEpochDependencies(final Interval interval, final Set<Dependency> causalDependencies) {
+    final Event epochEvent = interval.getFrom();
     final ArrayList<Dependency> epochDependencies = CollectionLiterals.<Dependency>newArrayList();
     final HashSet<Lifeline> epochLifelines = CollectionLiterals.<Lifeline>newHashSet(epochEvent.getLifeline());
     TmscTopologicalOrder<Event> _eventsInTopologicalOrder = TmscTopologicalOrder.getEventsInTopologicalOrder(TmscQueries.createCachedQueryTMSC(causalDependencies));
@@ -221,13 +232,13 @@ public final class ActivityAnalysis {
         final Function1<Dependency, Boolean> _function = (Dependency d) -> {
           return Boolean.valueOf((ActivityAnalysis.isActivity(d) && (!metricProcessor.isActivityCutOff(d, ((MetricInstance)interval)))));
         };
-        return TmscQueries.findAdjecantDependenciesBetween(((MetricInstance)interval).getTmsc(), ((MetricInstance)interval).getFrom(), ((MetricInstance)interval).getTo(), _function);
+        return TmscQueries.findAdjacentDependenciesBetween(((MetricInstance)interval).getTmsc(), ((MetricInstance)interval).getFrom(), ((MetricInstance)interval).getTo(), _function);
       }
     }
     final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
       return Boolean.valueOf(ActivityAnalysis.isActivity(it));
     };
-    return TmscQueries.findAdjecantDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo(), _function_1);
+    return TmscQueries.findAdjacentDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo(), _function_1);
   }
   
   public static boolean isActivity(final Dependency dependency) {
