@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?pde version="3.8"?>
+<target name="Generated from TNO - PPS" sequenceNumber="2">
+  <locations>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="com.google.guava" version="0.0.0"/>
+      <unit id="com.sun.jna.platform" version="0.0.0"/>
+      <unit id="io.github.classgraph" version="0.0.0"/>
+      <unit id="org.antlr.runtime" version="0.0.0"/>
+      <unit id="org.aopalliance" version="0.0.0"/>
+      <unit id="org.apache.commons.cli" version="0.0.0"/>
+      <unit id="org.apache.commons.collections" version="0.0.0"/>
+      <unit id="org.apache.commons.lang" version="0.0.0"/>
+      <unit id="org.apache.commons.lang3" version="0.0.0"/>
+      <unit id="org.apache.log4j" version="0.0.0"/>
+      <unit id="org.eclipse.e4.tools.emf.ui" version="0.0.0"/>
+      <unit id="org.eclipse.e4.tools.services" version="0.0.0"/>
+      <unit id="org.eclipse.ecf.core.feature.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.ecf.core.ssl.feature.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.ecf.filetransfer.feature.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.ecf.filetransfer.httpclient45.feature.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.ecf.filetransfer.ssl.feature.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.emf.codegen" version="0.0.0"/>
+      <unit id="org.eclipse.emf.codegen.ecore" version="0.0.0"/>
+      <unit id="org.eclipse.emf.common.ui" version="0.0.0"/>
+      <unit id="org.eclipse.emf.ecore.edit" version="0.0.0"/>
+      <unit id="org.eclipse.emf.ecore.editor" version="0.0.0"/>
+      <unit id="org.eclipse.emf.edit.ui" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe.core" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe.utils" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe2.language" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe2.launcher.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe2.lib" version="0.0.0"/>
+      <unit id="org.eclipse.emf.mwe2.runtime" version="0.0.0"/>
+      <unit id="org.eclipse.equinox.executable.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.ocl.common" version="0.0.0"/>
+      <unit id="org.eclipse.ocl.pivot" version="0.0.0"/>
+      <unit id="org.eclipse.sdk.feature.group" version="0.0.0"/>
+      <unit id="org.eclipse.xtend.lib" version="0.0.0"/>
+      <unit id="org.eclipse.xtend.lib.macro" version="0.0.0"/>
+      <unit id="org.eclipse.xtext" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.builder" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.common.types" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.common.types.edit" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.common.types.ui" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ecore" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ide" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.smap" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ui" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ui.codemining" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ui.codetemplates" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ui.codetemplates.ide" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ui.codetemplates.ui" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.ui.shared" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.util" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.xbase" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.xbase.ide" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.xbase.lib" version="0.0.0"/>
+      <unit id="org.eclipse.xtext.xtext.generator" version="0.0.0"/>
+      <unit id="org.objectweb.asm" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/releases/2021-12/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.e4.tools.spies.feature.feature.group" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.trace4cps.common.jfreechart.feature.feature.group" version="0.0.0"/>
+      <unit id="org.jfree.jfreechart" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/trace4cps/nightly/update-site/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.lsat.common.emf.ecore" version="0.0.0"/>
+      <unit id="org.eclipse.lsat.common.emf.ui" version="0.0.0"/>
+      <unit id="org.eclipse.lsat.common.emf.validation" version="0.0.0"/>
+      <unit id="org.eclipse.lsat.common.queries" version="0.0.0"/>
+      <unit id="org.eclipse.lsat.common.xtend" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/lsat/nightly/update-site/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="net.sourceforge.plantuml.feature.feature.group" version="0.0.0"/>
+      <unit id="net.sourceforge.plantuml.lib.feature.feature.group" version="0.0.0"/>
+      <repository location="https://hallvard.github.io/plantuml/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/justj/jres/11/updates/release/latest/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="com.google.inject" version="0.0.0"/>
+      <unit id="com.sun.jna" version="0.0.0"/>
+      <unit id="org.apache.commons.math3" version="0.0.0"/>
+      <repository location="https://download.eclipse.org/tools/orbit/downloads/drops/R20211122181901/repository/"/>
+    </location>
+    <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
+      <unit id="de.itemis.xtext.antlr.feature.feature.group" version="0.0.0"/>
+      <repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
+    </location>
+  </locations>
+</target>

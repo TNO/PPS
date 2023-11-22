@@ -6,6 +6,11 @@ PPS provides insight in software execution over time and enables automatic perfo
 
 * T.B.D.
 
+Handy links:
+
+- [PPS Developer Guide](plugins/nl.esi.pps.doc.developer/adoc/index.adoc)
+- [PPS User Guide](plugins/nl.esi.pps.doc.user/adoc/index.adoc)
+
 ## License
 
 Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
