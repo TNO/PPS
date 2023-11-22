@@ -73,6 +73,17 @@
     </content>
   </setupTask>
   <setupTask
+      xsi:type="setup:ResourceCreationTask"
+      excludedTriggers="STARTUP MANUAL"
+      targetURL="${workspace.location|uri}/.metadata/.plugins/org.eclipse.core.runtime/.settings/org.eclipse.ui.prefs"
+      encoding="UTF-8">
+    <description>Don't show the welcome screen when Eclipse is (first) started.</description>
+    <content>
+      eclipse.preferences.version=1
+      showIntro=false
+    </content>
+  </setupTask>
+  <setupTask
       xsi:type="setup.p2:P2Task">
     <requirement
         name="org.eclipse.sdk.feature.group"/>
@@ -758,7 +769,7 @@
             project="nl.esi.pps.root"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.15/@workingSets[name='${scope.project.label}%20-%20Products'] //@setupTasks.15/@workingSets[name='${scope.project.label}%20-%20Features'] //@setupTasks.15/@workingSets[name='${scope.project.label}%20-%20Plugins']"/>
+            excludedWorkingSet="//@setupTasks.16/@workingSets[name='${scope.project.label}%20-%20Products'] //@setupTasks.16/@workingSets[name='${scope.project.label}%20-%20Features'] //@setupTasks.16/@workingSets[name='${scope.project.label}%20-%20Plugins']"/>
       </predicate>
     </workingSet>
     <description>The dynamic working sets for ${scope.project.label}</description>

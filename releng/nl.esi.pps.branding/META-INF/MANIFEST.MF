@@ -1,0 +1,7 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: PPS
+Bundle-SymbolicName: nl.esi.pps.branding
+Bundle-Version: 0.20.0.qualifier
+Automatic-Module-Name: org.eclipse.lsat.branding
+Bundle-Vendor: TNO
