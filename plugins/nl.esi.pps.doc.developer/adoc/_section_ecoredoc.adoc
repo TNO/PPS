@@ -1,0 +1,2542 @@
+////
+  // Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+  //
+  // This program and the accompanying materials are made available
+  // under the terms of the MIT License which is available at
+  // https://opensource.org/licenses/MIT
+  //
+  // SPDX-License-Identifier: MIT
+////
+
+// IMPORTANT: This document was automatically generated from the ecore models
+//            by a tooling which is not available in the open source.
+
+include::_initCommon.adoc[]
+
+// White Up-Pointing Triangle
+:wupt: &#9651;
+
+:inherited: {wupt}{nbsp}
+
+// Black Up-Pointing Triangle
+:bupt: &#9650;
+
+:override: {bupt}{nbsp}
+
+// White Down-Pointing Triangle
+:wdpt: &#9661;
+
+:inheritedBy: {wdpt}{nbsp}
+
+// Black Down-Pointing Triangle
+:bdpt: &#9660;
+
+:overriddenBy: {bdpt}{nbsp}
+
+:toc:
+:toclevels: 4
+:miscellaneous.tabsize: 2
+:tabsize: 2
+:icons: font
+:experimental:
+:source-highlighter: pygments
+:prewrap!:
+:table-caption!:
+
+= PPS meta-models
+
+
+[[architecture]]
+== Contents of architecture
+
+The architecture meta-model defines the minimal set of concepts that are required to define the xref:tmsc[TMSC] meta-model.
+The architecture package contains sub-packages that represent the lifecycle stages of an architecture as inspired by Koziolek et al.footnote:[H. Koziolek, "Performance Evaluation of Component-based Software Systems: A Survey", Elsevier, 2010.], where the author presents a view on the software component lifecycle. 
+This study considers 4 levels of lifecycle stages: the xref:specified[specification], xref:implemented[implementation], deployment and runtime level.
+This architecture considers an additional distinction in the runtime level, which is divided in the (runtime) xref:instantiated[instantiated] and (runtime) stimulated stage.
+The xref:tmsc[TMSC] meta-model defines concepts that belong to the stimulated stage.
+
+[[architecture-ecore-diagram]]
+.Diagram of the architecture meta-model
+image::{metamodelsdir}/architecture.png[width=1523,height=609]
+
+
+
+
+Ns Prefix:: architecture
+Ns URI:: http://www.esi.nl/pps/architecture
+
+=== Types
+
+[[architecture-ArchitectureModel]]
+==== Interface ArchitectureModel
+
+ArchitectureModel is a marker interface for root containers that contain architecture elements. Is is not required for an architecture to implement the interface, but it may speed up certain analyses.
+
+
+
+.Used at
+* `<<tmsc-FullScopeTMSC-architectures, tmsc.{zwsp}FullScopeTMSC.{zwsp}architectures>>`
+
+[[architecture-NamedArchitectureElement]]
+==== Abstract Class NamedArchitectureElement
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Sub-types
+* `<<deployed-Host, deployed.{zwsp}Host>>`
+* `<<implemented-Function, implemented.{zwsp}Function>>`
+* `<<implemented-FunctionParameter, implemented.{zwsp}FunctionParameter>>`
+* `<<implemented-IPCClientFunction, implemented.{zwsp}IPCClientFunction>>`
+* `<<implemented-IPCFunction, implemented.{zwsp}IPCFunction>>`
+* `<<implemented-IPCServerFunction, implemented.{zwsp}IPCServerFunction>>`
+* `<<instantiated-Executor, instantiated.{zwsp}Executor>>`
+* `<<specified-Component, specified.{zwsp}Component>>`
+* `<<specified-Interface, specified.{zwsp}Interface>>`
+* `<<specified-Operation, specified.{zwsp}Operation>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`name`[[architecture-NamedArchitectureElement-name]]
+|`EString`
+|
+|
+|===
+
+
+[[deployed]]
+== Contents of deployed
+
+In the Deployed lifecycle stage, the implemented software components are built and bundled into binaries. 
+At this stage, the binaries are placed into a filesystem from where they can be installed to the different hosts.
+The installation takes place during the transition from Deployed to Instantiated stage.
+During this transition the binaries are mapped (installed) to specific hosts.
+We consider for the sake of simplicity that the deployment of binaries onto hosts is static and performed before the system is initiated/started.
+
+[[deployed-ecore-diagram]]
+.Diagram of the deployed lyfecycle stage in the architecture meta-model
+image::{metamodelsdir}/deployed.png[width=208,height=323,pdfwidth=1.73in,pdfheight=2.69in]
+
+
+Ns Prefix:: architecture_deployed
+Ns URI:: http://www.esi.nl/pps/architecture/deployed
+
+=== Types
+
+[[deployed-Host]]
+==== Class Host
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Used at
+* `<<instantiated-Executor-getHost, instantiated.{zwsp}Executor.{zwsp}getHost()>>`
+
+
+[[implemented]]
+== Contents of implemented
+
+In the Implementation lifecycle stage, the specified software components and interfaces are implemented. 
+Depending on the software architecture, as well as the execution platform, a component may have more than one implementation, which may be related to a specific execution platform (i.e., programming language, type of processing unit, etc.) or other factors (i.e., quality of service, etc.)
+
+[[implemented-ecore-diagram]]
+.Diagram of the implemented lyfecycle stage in the architecture meta-model
+image::{metamodelsdir}/implemented.png[width=911,height=503]
+
+
+Ns Prefix:: architecture_implemented
+Ns URI:: http://www.esi.nl/pps/architecture/implemented
+
+=== Enumerations
+
+[[implemented-FunctionParameterKind]]
+==== FunctionParameterKind
+
+
+Default Value:: `in`
+
+.Literals
+[cols="<20m,>10m,<70a",options="header"]
+|===
+|Symbol
+|Value
+|Description
+
+|IN[[implemented-FunctionParameterKind-IN]]
+|0
+|
+
+|OUT[[implemented-FunctionParameterKind-OUT]]
+|1
+|
+
+|IN_OUT[[implemented-FunctionParameterKind-IN_OUT]]
+|2
+|
+
+|RETURN[[implemented-FunctionParameterKind-RETURN]]
+|3
+|
+|===
+
+.Used at
+* `<<implemented-FunctionParameter-kind, implemented.{zwsp}FunctionParameter.{zwsp}kind>>`
+
+=== Types
+
+[[implemented-Function]]
+==== Class Function
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Sub-types
+* `<<implemented-IPCClientFunction, implemented.{zwsp}IPCClientFunction>>`
+* `<<implemented-IPCFunction, implemented.{zwsp}IPCFunction>>`
+* `<<implemented-IPCServerFunction, implemented.{zwsp}IPCServerFunction>>`
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`parameters`[[implemented-Function-parameters]]
+|`<<implemented-FunctionParameter, implemented.{zwsp}FunctionParameter>>`
+
+_EOpposite:_ `<<implemented-FunctionParameter-function, function>>`
+|
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`operation`[[implemented-Function-operation]]
+
+`<<implemented-IPCFunction-getOperation, {overriddenBy}implemented.{zwsp}IPCFunction.{zwsp}getOperation()>>`
+|`<<specified-Operation, specified.{zwsp}Operation>>`
+|
+|
+|===
+
+.Used at
+* `<<implemented-FunctionParameter-function, implemented.{zwsp}FunctionParameter.{zwsp}function>>`
+* `<<tmsc-EntryEvent-function, tmsc.{zwsp}EntryEvent.{zwsp}function>>`
+* `<<tmsc-Event-function, tmsc.{zwsp}Event.{zwsp}function>>`
+* `<<tmsc-Execution-function, tmsc.{zwsp}Execution.{zwsp}function>>`
+* `<<tmsc-ExitEvent-function, tmsc.{zwsp}ExitEvent.{zwsp}function>>`
+
+[[implemented-FunctionParameter]]
+==== Class FunctionParameter
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`kind`[[implemented-FunctionParameter-kind]]
+|`<<implemented-FunctionParameterKind, implemented.{zwsp}FunctionParameterKind>>`
+|`[1]`
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`function`[[implemented-FunctionParameter-function]]
+|`<<implemented-Function, implemented.{zwsp}Function>>`
+
+_EOpposite:_ `<<implemented-Function-parameters, parameters>>`
+|non-resolveProxies +
+*container* +
+`[1]`
+|
+|===
+
+.Used at
+* `<<implemented-Function-parameters, implemented.{zwsp}Function.{zwsp}parameters>>`
+* `<<implemented-IPCClientFunction-parameters, implemented.{zwsp}IPCClientFunction.{zwsp}parameters>>`
+* `<<implemented-IPCFunction-parameters, implemented.{zwsp}IPCFunction.{zwsp}parameters>>`
+* `<<implemented-IPCServerFunction-parameters, implemented.{zwsp}IPCServerFunction.{zwsp}parameters>>`
+* `<<tmsc-FunctionArgumentMapEntry-key, tmsc.{zwsp}FunctionArgumentMapEntry.{zwsp}key>>`
+
+[[implemented-IPCClientFunction]]
+==== Class IPCClientFunction
+
+A Component that executes (see TMSC) IPCClientFunction X' referring to Operation X, requires the Interface containing Operation X.
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<implemented-Function, implemented.{zwsp}Function>>`
+* `<<implemented-IPCFunction, implemented.{zwsp}IPCFunction>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+[[implemented-IPCFunction]]
+==== Abstract Class IPCFunction
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<implemented-Function, implemented.{zwsp}Function>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Sub-types
+* `<<implemented-IPCClientFunction, implemented.{zwsp}IPCClientFunction>>`
+* `<<implemented-IPCServerFunction, implemented.{zwsp}IPCServerFunction>>`
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getOperation()`[[implemented-IPCFunction-getOperation]]
+
+`<<implemented-Function-operation, {override}implemented.{zwsp}Function.{zwsp}operation>>`
+|_returns_ +
+`<<specified-Operation, specified.{zwsp}Operation>>`
+|`[1]`
+|
+
+|===
+
+[[implemented-IPCServerFunction]]
+==== Class IPCServerFunction
+
+A Component that executes (see TMSC) IPCServerFunction Y' referring to Operation Y, provides the Interface containing Operation Y.
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<implemented-Function, implemented.{zwsp}Function>>`
+* `<<implemented-IPCFunction, implemented.{zwsp}IPCFunction>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+
+[[instantiated]]
+== Contents of instantiated
+
+At instantiated stage the system is started, and the components are instantiated and start living in memory. 
+Here, the runtime component takes form and is mapped on OS execution entities, i.e., on a specific thread which is mapped on specific process, etc. 
+Communication ports are created and instantiated enabling communication among the runtime components. 
+The OS execution entities, i.e., processes and threads are mapped on specific processing unit, with specific scheduling policies, priorities, etc.
+
+[[instantiated-ecore-diagram]]
+.Diagram of the instantiated lyfecycle stage in the architecture meta-model
+image::{metamodelsdir}/instantiated.png[width=427,height=299,pdfwidth=3.56in,pdfheight=2.49in]
+
+
+Ns Prefix:: architecture_instantiated
+Ns URI:: http://www.esi.nl/pps/architecture/instantiated
+
+=== Types
+
+[[instantiated-Executor]]
+==== Class Executor
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getHost()`[[instantiated-Executor-getHost]]
+|_returns_ +
+`<<deployed-Host, deployed.{zwsp}Host>>`
+|
+|Typically an executor is deployed onto a host, but PPS doesn't make any assumptions on the kind of relation, hence this relation is merely implemented as an operation and it is up to the architecture implementer to define the relation.
+The default implementation of this method returns the container of type Host in the hierarchy of this Executor.
+
+|===
+
+.Used at
+* `<<instantiated-ExecutorGroup-getExecutors, instantiated.{zwsp}ExecutorGroup.{zwsp}getExecutors()>>`
+* `<<tmsc-Lifeline-executor, tmsc.{zwsp}Lifeline.{zwsp}executor>>`
+
+[[instantiated-ExecutorGroup]]
+==== Interface ExecutorGroup
+
+The ExecutorGroup allows to create logical groups of Executors that have a relation. When selecting an ExecutorGroup in the Outline view of the TMSC viewer, all its Executors will be visualized.
+
+
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getExecutors()`[[instantiated-ExecutorGroup-getExecutors]]
+|_returns_ +
+`<<instantiated-Executor, instantiated.{zwsp}Executor>>`
+|unique
+|Typically an ExecutorGroup contains Executors, but PPS doesn't make any assumptions on the kind of relation, hence this relation is merely implemented as an operation and it is up to the architecture implementer to define the relation.
+The default implementation of this method returns all first-level descendants of this ExecutorGroup that are of kind Executor, meaning if an Executor contains another Executor, the latter will not be included in the result.
+
+|===
+
+
+[[metric]]
+== Contents of metric
+
+[[metric-ecore-diagram]]
+.Diagram of the Metric meta-model
+image::{metamodelsdir}/metric.png[width=754,height=479,pdfwidth=6.28in,pdfheight=3.99in]
+
+
+Ns Prefix:: tmsc_metric
+Ns URI:: http://www.esi.nl/tmsc/metric
+
+=== Types
+
+[[metric-Metric]]
+==== Class Metric
+
+
+
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`budget`[[metric-Metric-budget]]
+|`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|
+|
+
+|`configuration`[[metric-Metric-configuration]]
+|`EString`
+|
+|
+
+|`id`[[metric-Metric-id]]
+|`EString`
+|`[1]`
+|
+
+|`name`[[metric-Metric-name]]
+|`EString`
+|`[1]`
+|
+|===
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`instances`[[metric-Metric-instances]]
+|`<<metric-MetricInstance, metric.{zwsp}MetricInstance>>`
+
+_EOpposite:_ `<<metric-MetricInstance-metric, metric>>`
+|_EKeys:_ `id`
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`category`[[metric-Metric-category]]
+|`<<metric-MetricCategory, metric.{zwsp}MetricCategory>>`
+
+_EOpposite:_ `<<metric-MetricCategory-metrics, metrics>>`
+|`[1]`
+|
+
+|`tmscs`[[metric-Metric-tmscs]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+|
+|The TMSCs that were analyzed to resolve the Metric instances that are contained by this Metric.
+|===
+
+.Used at
+* `<<metric-MetricCategory-metrics, metric.{zwsp}MetricCategory.{zwsp}metrics>>`
+* `<<metric-MetricInstance-metric, metric.{zwsp}MetricInstance.{zwsp}metric>>`
+* `<<metric-MetricModel-metrics, metric.{zwsp}MetricModel.{zwsp}metrics>>`
+
+[[metric-MetricCategory]]
+==== Class MetricCategory
+
+
+
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`name`[[metric-MetricCategory-name]]
+|`EString`
+|`[1]`
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`metrics`[[metric-MetricCategory-metrics]]
+|`<<metric-Metric, metric.{zwsp}Metric>>`
+
+_EOpposite:_ `<<metric-Metric-category, category>>`
+|
+|
+|===
+
+.Used at
+* `<<metric-Metric-category, metric.{zwsp}Metric.{zwsp}category>>`
+* `<<metric-MetricModel-categories, metric.{zwsp}MetricModel.{zwsp}categories>>`
+
+[[metric-MetricInstance]]
+==== Class MetricInstance
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+* `<<tmsc-Interval, tmsc.{zwsp}Interval>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`exceedsBudget`[[metric-MetricInstance-exceedsBudget]]
+|`EBoolean`
+|unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`id`[[metric-MetricInstance-id]]
+|`EString`
+|`[1]`
+|
+
+|`name`[[metric-MetricInstance-name]]
+
+`<<tmsc-Interval-getName, {override}tmsc.{zwsp}Interval.{zwsp}getName()>>`
+|`EString`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`metric`[[metric-MetricInstance-metric]]
+|`<<metric-Metric, metric.{zwsp}Metric>>`
+
+_EOpposite:_ `<<metric-Metric-instances, instances>>`
+|*container* +
+`[1]`
+|
+|===
+
+.Used at
+* `<<metric-Metric-instances, metric.{zwsp}Metric.{zwsp}instances>>`
+
+[[metric-MetricModel]]
+==== Class MetricModel
+
+
+
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`categories`[[metric-MetricModel-categories]]
+|`<<metric-MetricCategory, metric.{zwsp}MetricCategory>>`
+|_EKeys:_ `name`
+|
+
+|`metrics`[[metric-MetricModel-metrics]]
+|`<<metric-Metric, metric.{zwsp}Metric>>`
+|_EKeys:_ `id`
+|
+|===
+
+
+[[properties]]
+== Contents of properties
+
+[[properties-ecore-diagram]]
+.Diagram of the properties meta-model
+image::{metamodelsdir}/properties.png[width=580,height=83,pdfwidth=4.83in,pdfheight=0.69in]
+
+
+Ns Prefix:: properties
+Ns URI:: http://www.esi.nl/properties
+
+=== Data Types
+
+[[properties-EPropertyValue]]
+==== EPropertyValue
+
+
+Instance Type Name:: `java.io.Serializable`
+
+.Used at
+* `<<properties-PropertyMapEntry-value, properties.{zwsp}PropertyMapEntry.{zwsp}value>>`
+
+=== Types
+
+[[properties-PropertiesContainer]]
+==== Abstract Class PropertiesContainer
+
+The PropertiesContainer facilitates the seamless extension of specific modeling elements with additional attributes, that are required for specific type of analysis. Though this allows rapid prototyping or customer specific annotations, for every property that is added to the model the question should be raised if this property is a primary citizen of the meta-model. If so, the property should be promoted as attribute or reference in the meta-model.
+
+
+
+.Sub-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<deployed-Host, deployed.{zwsp}Host>>`
+* `<<implemented-Function, implemented.{zwsp}Function>>`
+* `<<implemented-FunctionParameter, implemented.{zwsp}FunctionParameter>>`
+* `<<implemented-IPCClientFunction, implemented.{zwsp}IPCClientFunction>>`
+* `<<implemented-IPCFunction, implemented.{zwsp}IPCFunction>>`
+* `<<implemented-IPCServerFunction, implemented.{zwsp}IPCServerFunction>>`
+* `<<instantiated-Executor, instantiated.{zwsp}Executor>>`
+* `<<metric-MetricInstance, metric.{zwsp}MetricInstance>>`
+* `<<specified-Component, specified.{zwsp}Component>>`
+* `<<specified-Interface, specified.{zwsp}Interface>>`
+* `<<specified-Operation, specified.{zwsp}Operation>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-DomainDependency, tmsc.{zwsp}DomainDependency>>`
+* `<<tmsc-EntryEvent, tmsc.{zwsp}EntryEvent>>`
+* `<<tmsc-Event, tmsc.{zwsp}Event>>`
+* `<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+* `<<tmsc-ExitEvent, tmsc.{zwsp}ExitEvent>>`
+* `<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+* `<<tmsc-Interval, tmsc.{zwsp}Interval>>`
+* `<<tmsc-Lifeline, tmsc.{zwsp}Lifeline>>`
+* `<<tmsc-LifelineSegment, tmsc.{zwsp}LifelineSegment>>`
+* `<<tmsc-Measurement, tmsc.{zwsp}Measurement>>`
+* `<<tmsc-Message, tmsc.{zwsp}Message>>`
+* `<<tmsc-MessageControl, tmsc.{zwsp}MessageControl>>`
+* `<<tmsc-Reply, tmsc.{zwsp}Reply>>`
+* `<<tmsc-Request, tmsc.{zwsp}Request>>`
+* `<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+* `<<tmsc-TMSC, tmsc.{zwsp}TMSC>>`
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`properties`[[properties-PropertiesContainer-properties]]
+|`<<properties-PropertyMapEntry, properties.{zwsp}PropertyMapEntry>>`
+|
+|
+|===
+
+[[properties-PropertyMapEntry]]
+==== Class PropertyMapEntry
+
+
+Instance Type Name:: `java.util.Map$Entry`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`key`[[properties-PropertyMapEntry-key]]
+|`EString`
+|`[1]`
+|
+
+|`value`[[properties-PropertyMapEntry-value]]
+|`<<properties-EPropertyValue, properties.{zwsp}EPropertyValue>>`
+|
+|
+|===
+
+.Used at
+* `<<architecture-NamedArchitectureElement-properties, architecture.{zwsp}NamedArchitectureElement.{zwsp}properties>>`
+* `<<deployed-Host-properties, deployed.{zwsp}Host.{zwsp}properties>>`
+* `<<implemented-Function-properties, implemented.{zwsp}Function.{zwsp}properties>>`
+* `<<implemented-FunctionParameter-properties, implemented.{zwsp}FunctionParameter.{zwsp}properties>>`
+* `<<implemented-IPCClientFunction-properties, implemented.{zwsp}IPCClientFunction.{zwsp}properties>>`
+* `<<implemented-IPCFunction-properties, implemented.{zwsp}IPCFunction.{zwsp}properties>>`
+* `<<implemented-IPCServerFunction-properties, implemented.{zwsp}IPCServerFunction.{zwsp}properties>>`
+* `<<instantiated-Executor-properties, instantiated.{zwsp}Executor.{zwsp}properties>>`
+* `<<metric-MetricInstance-properties, metric.{zwsp}MetricInstance.{zwsp}properties>>`
+* `<<properties-PropertiesContainer-properties, properties.{zwsp}PropertiesContainer.{zwsp}properties>>`
+* `<<specified-Component-properties, specified.{zwsp}Component.{zwsp}properties>>`
+* `<<specified-Interface-properties, specified.{zwsp}Interface.{zwsp}properties>>`
+* `<<specified-Operation-properties, specified.{zwsp}Operation.{zwsp}properties>>`
+* `<<tmsc-Dependency-properties, tmsc.{zwsp}Dependency.{zwsp}properties>>`
+* `<<tmsc-DomainDependency-properties, tmsc.{zwsp}DomainDependency.{zwsp}properties>>`
+* `<<tmsc-EntryEvent-properties, tmsc.{zwsp}EntryEvent.{zwsp}properties>>`
+* `<<tmsc-Event-properties, tmsc.{zwsp}Event.{zwsp}properties>>`
+* `<<tmsc-Execution-properties, tmsc.{zwsp}Execution.{zwsp}properties>>`
+* `<<tmsc-ExitEvent-properties, tmsc.{zwsp}ExitEvent.{zwsp}properties>>`
+* `<<tmsc-FullScopeTMSC-properties, tmsc.{zwsp}FullScopeTMSC.{zwsp}properties>>`
+* `<<tmsc-Interval-properties, tmsc.{zwsp}Interval.{zwsp}properties>>`
+* `<<tmsc-Lifeline-properties, tmsc.{zwsp}Lifeline.{zwsp}properties>>`
+* `<<tmsc-LifelineSegment-properties, tmsc.{zwsp}LifelineSegment.{zwsp}properties>>`
+* `<<tmsc-Measurement-properties, tmsc.{zwsp}Measurement.{zwsp}properties>>`
+* `<<tmsc-Message-properties, tmsc.{zwsp}Message.{zwsp}properties>>`
+* `<<tmsc-MessageControl-properties, tmsc.{zwsp}MessageControl.{zwsp}properties>>`
+* `<<tmsc-Reply-properties, tmsc.{zwsp}Reply.{zwsp}properties>>`
+* `<<tmsc-Request-properties, tmsc.{zwsp}Request.{zwsp}properties>>`
+* `<<tmsc-ScopedTMSC-properties, tmsc.{zwsp}ScopedTMSC.{zwsp}properties>>`
+* `<<tmsc-TMSC-properties, tmsc.{zwsp}TMSC.{zwsp}properties>>`
+
+
+[[specified]]
+== Contents of specified
+
+In this lifecycle stage, the specification of the software components takes place. 
+Provided and required interfaces describe the contracts between the software components and encode the service specification. 
+At this stage, the software interfaces are also specified by bundling operations that each of those implements.
+
+[[specified-ecore-diagram]]
+.Diagram of the specified lyfecycle stage in the architecture meta-model
+image::{metamodelsdir}/specified.png[width=791,height=371,pdfwidth=6.59in,pdfheight=3.09in]
+
+
+Ns Prefix:: architecture_specified
+Ns URI:: http://www.esi.nl/pps/architecture/specified
+
+=== Types
+
+[[specified-Component]]
+==== Class Component
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`providedInterfaces`[[specified-Component-providedInterfaces]]
+|`<<specified-Interface, specified.{zwsp}Interface>>`
+
+_EOpposite:_ `<<specified-Interface-providedBy, providedBy>>`
+|
+|
+
+|`requiredInterfaces`[[specified-Component-requiredInterfaces]]
+|`<<specified-Interface, specified.{zwsp}Interface>>`
+
+_EOpposite:_ `<<specified-Interface-requiredBy, requiredBy>>`
+|
+|
+|===
+
+.Used at
+* `<<specified-Interface-providedBy, specified.{zwsp}Interface.{zwsp}providedBy>>`
+* `<<specified-Interface-requiredBy, specified.{zwsp}Interface.{zwsp}requiredBy>>`
+* `<<tmsc-EntryEvent-component, tmsc.{zwsp}EntryEvent.{zwsp}component>>`
+* `<<tmsc-Event-component, tmsc.{zwsp}Event.{zwsp}component>>`
+* `<<tmsc-Execution-component, tmsc.{zwsp}Execution.{zwsp}component>>`
+* `<<tmsc-ExitEvent-component, tmsc.{zwsp}ExitEvent.{zwsp}component>>`
+
+[[specified-Interface]]
+==== Class Interface
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`operations`[[specified-Interface-operations]]
+|`<<specified-Operation, specified.{zwsp}Operation>>`
+
+_EOpposite:_ `<<specified-Operation-interface, interface>>`
+|
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`providedBy`[[specified-Interface-providedBy]]
+|`<<specified-Component, specified.{zwsp}Component>>`
+
+_EOpposite:_ `<<specified-Component-providedInterfaces, providedInterfaces>>`
+|
+|
+
+|`requiredBy`[[specified-Interface-requiredBy]]
+|`<<specified-Component, specified.{zwsp}Component>>`
+
+_EOpposite:_ `<<specified-Component-requiredInterfaces, requiredInterfaces>>`
+|
+|
+|===
+
+.Used at
+* `<<specified-Component-providedInterfaces, specified.{zwsp}Component.{zwsp}providedInterfaces>>`
+* `<<specified-Component-requiredInterfaces, specified.{zwsp}Component.{zwsp}requiredInterfaces>>`
+* `<<specified-Operation-interface, specified.{zwsp}Operation.{zwsp}interface>>`
+
+[[specified-Operation]]
+==== Class Operation
+
+
+
+
+.Super-types
+* `<<architecture-NamedArchitectureElement, architecture.{zwsp}NamedArchitectureElement>>`
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`interface`[[specified-Operation-interface]]
+|`<<specified-Interface, specified.{zwsp}Interface>>`
+
+_EOpposite:_ `<<specified-Interface-operations, operations>>`
+|*container* +
+`[1]`
+|
+|===
+
+.Used at
+* `<<implemented-Function-operation, implemented.{zwsp}Function.{zwsp}operation>>`
+* `<<implemented-IPCClientFunction-operation, implemented.{zwsp}IPCClientFunction.{zwsp}operation>>`
+* `<<implemented-IPCClientFunction-getOperation, implemented.{zwsp}IPCFunction.{zwsp}getOperation()>>`
+* `<<implemented-IPCFunction-getOperation, implemented.{zwsp}IPCFunction.{zwsp}getOperation()>>`
+* `<<implemented-IPCServerFunction-operation, implemented.{zwsp}IPCServerFunction.{zwsp}operation>>`
+* `<<implemented-IPCServerFunction-getOperation, implemented.{zwsp}IPCFunction.{zwsp}getOperation()>>`
+* `<<specified-Interface-operations, specified.{zwsp}Interface.{zwsp}operations>>`
+
+
+[[tmsc]]
+== Contents of tmsc
+
+
+
+[[tmsc-ecore-diagram]]
+.Diagram of the TMSC meta-model
+image::{metamodelsdir}/tmsc.png[width=1571,height=959]
+
+[[callstack-ecore-diagram]]
+.Diagram of call-stacks in the TMSC meta-model
+image::{metamodelsdir}/callstack.png[width=1175,height=886]
+
+[[measurment-ecore-diagram]]
+.Diagram of measurments in the TMSC meta-model
+image::{metamodelsdir}/measurement.png[width=1053,height=431]
+
+
+Ns Prefix:: tmsc
+Ns URI:: http://www.esi.nl/pps/tmsc
+
+=== Data Types
+
+[[tmsc-EDuration]]
+==== EDuration
+
+Represents a duration in nanoseconds.
+
+Instance Type Name:: `java.lang.Long`
+
+.Used at
+* `<<metric-Metric-budget, metric.{zwsp}Metric.{zwsp}budget>>`
+* `<<metric-MetricInstance-duration, metric.{zwsp}MetricInstance.{zwsp}duration>>`
+* `<<metric-MetricInstance-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Dependency-duration, tmsc.{zwsp}Dependency.{zwsp}duration>>`
+* `<<tmsc-Dependency-timeBound, tmsc.{zwsp}Dependency.{zwsp}timeBound>>`
+* `<<tmsc-DomainDependency-duration, tmsc.{zwsp}DomainDependency.{zwsp}duration>>`
+* `<<tmsc-DomainDependency-timeBound, tmsc.{zwsp}DomainDependency.{zwsp}timeBound>>`
+* `<<tmsc-DomainDependency-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Execution-duration, tmsc.{zwsp}Execution.{zwsp}duration>>`
+* `<<tmsc-FullScopeTMSC-duration, tmsc.{zwsp}FullScopeTMSC.{zwsp}duration>>`
+* `<<tmsc-ITimeRange-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Interval-duration, tmsc.{zwsp}Interval.{zwsp}duration>>`
+* `<<tmsc-LifelineSegment-duration, tmsc.{zwsp}LifelineSegment.{zwsp}duration>>`
+* `<<tmsc-LifelineSegment-timeBound, tmsc.{zwsp}LifelineSegment.{zwsp}timeBound>>`
+* `<<tmsc-LifelineSegment-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Measurement-duration, tmsc.{zwsp}Measurement.{zwsp}duration>>`
+* `<<tmsc-Measurement-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Message-duration, tmsc.{zwsp}Message.{zwsp}duration>>`
+* `<<tmsc-Message-timeBound, tmsc.{zwsp}Message.{zwsp}timeBound>>`
+* `<<tmsc-Message-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-MessageControl-duration, tmsc.{zwsp}MessageControl.{zwsp}duration>>`
+* `<<tmsc-MessageControl-timeBound, tmsc.{zwsp}MessageControl.{zwsp}timeBound>>`
+* `<<tmsc-MessageControl-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Reply-duration, tmsc.{zwsp}Reply.{zwsp}duration>>`
+* `<<tmsc-Reply-timeBound, tmsc.{zwsp}Reply.{zwsp}timeBound>>`
+* `<<tmsc-Reply-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+* `<<tmsc-Request-duration, tmsc.{zwsp}Request.{zwsp}duration>>`
+* `<<tmsc-Request-timeBound, tmsc.{zwsp}Request.{zwsp}timeBound>>`
+* `<<tmsc-Request-getDuration, tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+
+[[tmsc-EID]]
+==== EID
+
+
+Instance Type Name:: `java.lang.String`
+
+.Used at
+* `<<tmsc-ScopedTMSC-name, tmsc.{zwsp}ScopedTMSC.{zwsp}name>>`
+
+[[tmsc-ETimestamp]]
+==== ETimestamp
+
+Represents a time stamp in nanoseconds. 
+The timestamp can be either relative (i.e. relative to 0) or absolute (i.e. relative to the epoch). 
+Please note that {@link FullScopeTMSC#setEpochTime(boolean)} should be set accordingly.
+
+Instance Type Name:: `java.lang.Long`
+
+.Used at
+* `<<metric-MetricInstance-endTime, metric.{zwsp}MetricInstance.{zwsp}endTime>>`
+* `<<metric-MetricInstance-startTime, metric.{zwsp}MetricInstance.{zwsp}startTime>>`
+* `<<metric-MetricInstance-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<metric-MetricInstance-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-Dependency-endTime, tmsc.{zwsp}Dependency.{zwsp}endTime>>`
+* `<<tmsc-Dependency-startTime, tmsc.{zwsp}Dependency.{zwsp}startTime>>`
+* `<<tmsc-DomainDependency-endTime, tmsc.{zwsp}DomainDependency.{zwsp}endTime>>`
+* `<<tmsc-DomainDependency-startTime, tmsc.{zwsp}DomainDependency.{zwsp}startTime>>`
+* `<<tmsc-DomainDependency-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-DomainDependency-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-EntryEvent-timestamp, tmsc.{zwsp}EntryEvent.{zwsp}timestamp>>`
+* `<<tmsc-Event-timestamp, tmsc.{zwsp}Event.{zwsp}timestamp>>`
+* `<<tmsc-Execution-endTime, tmsc.{zwsp}Execution.{zwsp}endTime>>`
+* `<<tmsc-Execution-startTime, tmsc.{zwsp}Execution.{zwsp}startTime>>`
+* `<<tmsc-ExitEvent-timestamp, tmsc.{zwsp}ExitEvent.{zwsp}timestamp>>`
+* `<<tmsc-FullScopeTMSC-endTime, tmsc.{zwsp}FullScopeTMSC.{zwsp}endTime>>`
+* `<<tmsc-FullScopeTMSC-startTime, tmsc.{zwsp}FullScopeTMSC.{zwsp}startTime>>`
+* `<<tmsc-ITimeRange-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-ITimeRange-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-Interval-endTime, tmsc.{zwsp}Interval.{zwsp}endTime>>`
+* `<<tmsc-Interval-startTime, tmsc.{zwsp}Interval.{zwsp}startTime>>`
+* `<<tmsc-LifelineSegment-endTime, tmsc.{zwsp}LifelineSegment.{zwsp}endTime>>`
+* `<<tmsc-LifelineSegment-startTime, tmsc.{zwsp}LifelineSegment.{zwsp}startTime>>`
+* `<<tmsc-LifelineSegment-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-LifelineSegment-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-Measurement-endTime, tmsc.{zwsp}Measurement.{zwsp}endTime>>`
+* `<<tmsc-Measurement-startTime, tmsc.{zwsp}Measurement.{zwsp}startTime>>`
+* `<<tmsc-Measurement-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-Measurement-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-Message-endTime, tmsc.{zwsp}Message.{zwsp}endTime>>`
+* `<<tmsc-Message-startTime, tmsc.{zwsp}Message.{zwsp}startTime>>`
+* `<<tmsc-Message-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-Message-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-MessageControl-endTime, tmsc.{zwsp}MessageControl.{zwsp}endTime>>`
+* `<<tmsc-MessageControl-startTime, tmsc.{zwsp}MessageControl.{zwsp}startTime>>`
+* `<<tmsc-MessageControl-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-MessageControl-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-Reply-endTime, tmsc.{zwsp}Reply.{zwsp}endTime>>`
+* `<<tmsc-Reply-startTime, tmsc.{zwsp}Reply.{zwsp}startTime>>`
+* `<<tmsc-Reply-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-Reply-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+* `<<tmsc-Request-endTime, tmsc.{zwsp}Request.{zwsp}endTime>>`
+* `<<tmsc-Request-startTime, tmsc.{zwsp}Request.{zwsp}startTime>>`
+* `<<tmsc-Request-getEndTime, tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+* `<<tmsc-Request-getStartTime, tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+
+=== Types
+
+[[tmsc-Dependency]]
+==== Abstract Class Dependency
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+.Sub-types
+* `<<tmsc-DomainDependency, tmsc.{zwsp}DomainDependency>>`
+* `<<tmsc-LifelineSegment, tmsc.{zwsp}LifelineSegment>>`
+* `<<tmsc-Message, tmsc.{zwsp}Message>>`
+* `<<tmsc-MessageControl, tmsc.{zwsp}MessageControl>>`
+* `<<tmsc-Reply, tmsc.{zwsp}Reply>>`
+* `<<tmsc-Request, tmsc.{zwsp}Request>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`duration`[[tmsc-Dependency-duration]]
+
+`<<tmsc-ITimeRange-getDuration, {override}tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+|`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`endTime`[[tmsc-Dependency-endTime]]
+
+`<<tmsc-ITimeRange-getEndTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`projection`[[tmsc-Dependency-projection]]
+|`EBoolean`
+|
+|If true, this dependency was not originally part of the TMSC, but is an effect of projection, see nl.esi.pps.tmsc.util.TmscProjection class.
+Projections should typically not be visible to the user, unless they provide additional information.
+
+|`scheduled`[[tmsc-Dependency-scheduled]]
+|`EBooleanObject`
+|
+|If true,  this dependency was induced by the (software) platform as result of scheduling. 
+If false, this dependency reflects a control or data dependency as programmed in code.
+By default Executions and LifelineSegments-without-activeExecution are considered to be scheduled dependencies, see TmscRefinements#refineWithCallStacks(Lifeline).
+
+|`startTime`[[tmsc-Dependency-startTime]]
+
+`<<tmsc-ITimeRange-getStartTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`timeBound`[[tmsc-Dependency-timeBound]]
+|`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|
+|The time-bound specifies the lowerbound for the duration of this dependency. This analysis attribute is used in e.g. critical-path and slack analysis.
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`scopes`[[tmsc-Dependency-scopes]]
+|`<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+
+_EOpposite:_ `<<tmsc-ScopedTMSC-dependencies, dependencies>>`
+|non-resolveProxies +
+unordered +
+transient
+|All dependencies of a child-scope ScopedTMSC should be contained by its parent-scope TMSC.
+
+Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage.
+
+|`source`[[tmsc-Dependency-source]]
+|`<<tmsc-Event, tmsc.{zwsp}Event>>`
+
+_EOpposite:_ `<<tmsc-Event-fullScopeOutgoingDependencies, fullScopeOutgoingDependencies>>`
+|non-resolveProxies +
+`[1]` +
+transient
+|
+
+|`target`[[tmsc-Dependency-target]]
+|`<<tmsc-Event, tmsc.{zwsp}Event>>`
+
+_EOpposite:_ `<<tmsc-Event-fullScopeIncomingDependencies, fullScopeIncomingDependencies>>`
+|non-resolveProxies +
+`[1]` +
+transient
+|
+
+|`tmsc`[[tmsc-Dependency-tmsc]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+
+_EOpposite:_ `<<tmsc-FullScopeTMSC-dependencies, dependencies>>`
+|*container* +
+`[1]`
+|
+|===
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `isEpochTime()`[[tmsc-Dependency-isEpochTime]]
+
+`<<tmsc-ITimeRange-isEpochTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}isEpochTime()>>`
+|_returns_ +
+`EBoolean`
+|
+|
+
+|===
+
+.Used at
+* `<<tmsc-EntryEvent-fullScopeIncomingDependencies, tmsc.{zwsp}EntryEvent.{zwsp}fullScopeIncomingDependencies>>`
+* `<<tmsc-EntryEvent-fullScopeOutgoingDependencies, tmsc.{zwsp}EntryEvent.{zwsp}fullScopeOutgoingDependencies>>`
+* `<<tmsc-Event-fullScopeIncomingDependencies, tmsc.{zwsp}Event.{zwsp}fullScopeIncomingDependencies>>`
+* `<<tmsc-Event-fullScopeOutgoingDependencies, tmsc.{zwsp}Event.{zwsp}fullScopeOutgoingDependencies>>`
+* `<<tmsc-ExitEvent-fullScopeIncomingDependencies, tmsc.{zwsp}ExitEvent.{zwsp}fullScopeIncomingDependencies>>`
+* `<<tmsc-ExitEvent-fullScopeOutgoingDependencies, tmsc.{zwsp}ExitEvent.{zwsp}fullScopeOutgoingDependencies>>`
+* `<<tmsc-FullScopeTMSC-dependencies, tmsc.{zwsp}FullScopeTMSC.{zwsp}dependencies>>`
+* `<<tmsc-FullScopeTMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-FullScopeTMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+* `<<tmsc-ITMSC-getDependencies, tmsc.{zwsp}ITMSC.{zwsp}getDependencies()>>`
+* `<<tmsc-ITMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-ITMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+* `<<tmsc-ScopedTMSC-dependencies, tmsc.{zwsp}ScopedTMSC.{zwsp}dependencies>>`
+* `<<tmsc-ScopedTMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-ScopedTMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+* `<<tmsc-TMSC-getDependencies, tmsc.{zwsp}ITMSC.{zwsp}getDependencies()>>`
+* `<<tmsc-TMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-TMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+
+[[tmsc-DomainDependency]]
+==== Class DomainDependency
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+[[tmsc-EntryEvent]]
+==== Class EntryEvent
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Event, tmsc.{zwsp}Event>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`execution`[[tmsc-EntryEvent-execution]]
+
+`<<tmsc-Event-getExecution, {override}tmsc.{zwsp}Event.{zwsp}getExecution()>>`
+
+`<<tmsc-Event-setExecution-tmsc_Execution, {override}tmsc.{zwsp}Event.{zwsp}setExecution(Execution)>>`
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+
+_EOpposite:_ `<<tmsc-Execution-entry, entry>>`
+|non-resolveProxies +
+transient
+|
+|===
+
+.Used at
+* `<<tmsc-Execution-entry, tmsc.{zwsp}Execution.{zwsp}entry>>`
+
+[[tmsc-Event]]
+==== Abstract Class Event
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Sub-types
+* `<<tmsc-EntryEvent, tmsc.{zwsp}EntryEvent>>`
+* `<<tmsc-ExitEvent, tmsc.{zwsp}ExitEvent>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`timestamp`[[tmsc-Event-timestamp]]
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]`
+|
+
+|`traced`[[tmsc-Event-traced]]
+|`EBoolean`
+|`[1]` +
+_Default:_ `true`
+|
+|===
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`arguments`[[tmsc-Event-arguments]]
+|`<<tmsc-FunctionArgumentMapEntry, tmsc.{zwsp}FunctionArgumentMapEntry>>`
+|resolveProxies
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`component`[[tmsc-Event-component]]
+|`<<specified-Component, specified.{zwsp}Component>>`
+|`[1]`
+|
+
+|`fullScopeIncomingDependencies`[[tmsc-Event-fullScopeIncomingDependencies]]
+|`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+
+_EOpposite:_ `<<tmsc-Dependency-target, target>>`
+|non-resolveProxies
+|
+
+|`fullScopeOutgoingDependencies`[[tmsc-Event-fullScopeOutgoingDependencies]]
+|`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+
+_EOpposite:_ `<<tmsc-Dependency-source, source>>`
+|non-resolveProxies
+|
+
+|`function`[[tmsc-Event-function]]
+|`<<implemented-Function, implemented.{zwsp}Function>>`
+|`[1]`
+|
+
+|`lifeline`[[tmsc-Event-lifeline]]
+|`<<tmsc-Lifeline, tmsc.{zwsp}Lifeline>>`
+
+_EOpposite:_ `<<tmsc-Lifeline-events, events>>`
+|*container* +
+`[1]`
+|
+
+|`scopes`[[tmsc-Event-scopes]]
+|`<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+|non-resolveProxies +
+unordered +
+unchangeable +
+derived +
+transient +
+volatile
+|Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage.
+
+|`tmsc`[[tmsc-Event-tmsc]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getExecution()`[[tmsc-Event-getExecution]]
+
+`<<tmsc-EntryEvent-execution, {overriddenBy}tmsc.{zwsp}EntryEvent.{zwsp}execution>>`
+
+`<<tmsc-ExitEvent-execution, {overriddenBy}tmsc.{zwsp}ExitEvent.{zwsp}execution>>`
+|_returns_ +
+`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+|
+|
+
+.2+|_abstract_ `setExecution({zwsp}Execution)`[[tmsc-Event-setExecution-tmsc_Execution]]
+
+`<<tmsc-EntryEvent-execution, {overriddenBy}tmsc.{zwsp}EntryEvent.{zwsp}execution>>`
+
+`<<tmsc-ExitEvent-execution, {overriddenBy}tmsc.{zwsp}ExitEvent.{zwsp}execution>>`
+|_returns_ +
+`void`
+|
+|
+
+|`Execution` +
+`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+|
+|
+
+|===
+
+.Used at
+* `<<metric-MetricInstance-from, metric.{zwsp}MetricInstance.{zwsp}from>>`
+* `<<metric-MetricInstance-to, metric.{zwsp}MetricInstance.{zwsp}to>>`
+* `<<tmsc-Dependency-source, tmsc.{zwsp}Dependency.{zwsp}source>>`
+* `<<tmsc-Dependency-target, tmsc.{zwsp}Dependency.{zwsp}target>>`
+* `<<tmsc-DomainDependency-source, tmsc.{zwsp}DomainDependency.{zwsp}source>>`
+* `<<tmsc-DomainDependency-target, tmsc.{zwsp}DomainDependency.{zwsp}target>>`
+* `<<tmsc-FullScopeTMSC-getEvents, tmsc.{zwsp}ITMSC.{zwsp}getEvents()>>`
+* `<<tmsc-FullScopeTMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-FullScopeTMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+* `<<tmsc-ITMSC-getEvents, tmsc.{zwsp}ITMSC.{zwsp}getEvents()>>`
+* `<<tmsc-ITMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-ITMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+* `<<tmsc-Interval-from, tmsc.{zwsp}Interval.{zwsp}from>>`
+* `<<tmsc-Interval-to, tmsc.{zwsp}Interval.{zwsp}to>>`
+* `<<tmsc-Lifeline-events, tmsc.{zwsp}Lifeline.{zwsp}events>>`
+* `<<tmsc-LifelineSegment-source, tmsc.{zwsp}LifelineSegment.{zwsp}source>>`
+* `<<tmsc-LifelineSegment-target, tmsc.{zwsp}LifelineSegment.{zwsp}target>>`
+* `<<tmsc-Measurement-from, tmsc.{zwsp}Measurement.{zwsp}from>>`
+* `<<tmsc-Measurement-to, tmsc.{zwsp}Measurement.{zwsp}to>>`
+* `<<tmsc-Message-source, tmsc.{zwsp}Message.{zwsp}source>>`
+* `<<tmsc-Message-target, tmsc.{zwsp}Message.{zwsp}target>>`
+* `<<tmsc-MessageControl-source, tmsc.{zwsp}MessageControl.{zwsp}source>>`
+* `<<tmsc-MessageControl-target, tmsc.{zwsp}MessageControl.{zwsp}target>>`
+* `<<tmsc-Reply-source, tmsc.{zwsp}Reply.{zwsp}source>>`
+* `<<tmsc-Reply-target, tmsc.{zwsp}Reply.{zwsp}target>>`
+* `<<tmsc-Request-source, tmsc.{zwsp}Request.{zwsp}source>>`
+* `<<tmsc-Request-target, tmsc.{zwsp}Request.{zwsp}target>>`
+* `<<tmsc-ScopedTMSC-origin, tmsc.{zwsp}ScopedTMSC.{zwsp}origin>>`
+* `<<tmsc-ScopedTMSC-getEvents, tmsc.{zwsp}ITMSC.{zwsp}getEvents()>>`
+* `<<tmsc-ScopedTMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-ScopedTMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+* `<<tmsc-TMSC-getEvents, tmsc.{zwsp}ITMSC.{zwsp}getEvents()>>`
+* `<<tmsc-TMSC-getIncomingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getIncomingDependencies(event)>>`
+* `<<tmsc-TMSC-getOutgoingDependencies-tmsc_Event, tmsc.{zwsp}ITMSC.{zwsp}getOutgoingDependencies(event)>>`
+
+[[tmsc-Execution]]
+==== Class Execution
+
+Execution should be considered final and should not be overridden. 
+Executions are added by means of a refinement transformation, see {@link nl.esi.pps.tmsc.transform.TmscRefinements#refineWithCallStacks(FullScopeTMSC)}
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`duration`[[tmsc-Execution-duration]]
+
+`<<tmsc-ITimeRange-getDuration, {override}tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+|`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`endTime`[[tmsc-Execution-endTime]]
+
+`<<tmsc-ITimeRange-getEndTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`startTime`[[tmsc-Execution-startTime]]
+
+`<<tmsc-ITimeRange-getStartTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`children`[[tmsc-Execution-children]]
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+
+_EOpposite:_ `<<tmsc-Execution-parent, parent>>`
+|non-resolveProxies
+|
+
+|`component`[[tmsc-Execution-component]]
+|`<<specified-Component, specified.{zwsp}Component>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`entry`[[tmsc-Execution-entry]]
+|`<<tmsc-EntryEvent, tmsc.{zwsp}EntryEvent>>`
+
+_EOpposite:_ `<<tmsc-EntryEvent-execution, execution>>`
+|non-resolveProxies +
+`[1]`
+|
+
+|`exit`[[tmsc-Execution-exit]]
+|`<<tmsc-ExitEvent, tmsc.{zwsp}ExitEvent>>`
+
+_EOpposite:_ `<<tmsc-ExitEvent-execution, execution>>`
+|non-resolveProxies +
+`[1]`
+|
+
+|`function`[[tmsc-Execution-function]]
+|`<<implemented-Function, implemented.{zwsp}Function>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`lifeline`[[tmsc-Execution-lifeline]]
+|`<<tmsc-Lifeline, tmsc.{zwsp}Lifeline>>`
+
+_EOpposite:_ `<<tmsc-Lifeline-executions, executions>>`
+|non-resolveProxies +
+*container* +
+`[1]` +
+transient
+|
+
+|`parent`[[tmsc-Execution-parent]]
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+
+_EOpposite:_ `<<tmsc-Execution-children, children>>`
+|non-resolveProxies +
+transient
+|Definition 2.3.5
+
+|`root`[[tmsc-Execution-root]]
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`segments`[[tmsc-Execution-segments]]
+|`<<tmsc-LifelineSegment, tmsc.{zwsp}LifelineSegment>>`
+
+_EOpposite:_ `<<tmsc-LifelineSegment-activeExecution, activeExecution>>`
+|non-resolveProxies +
+unchangeable +
+derived +
+transient +
+volatile
+|Returns the LifeLineSegments for which this Execution is the active execution on its LifeLine.
+
+Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage.
+
+|`tmsc`[[tmsc-Execution-tmsc]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `isEpochTime()`[[tmsc-Execution-isEpochTime]]
+
+`<<tmsc-ITimeRange-isEpochTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}isEpochTime()>>`
+|_returns_ +
+`EBoolean`
+|
+|
+
+|===
+
+.Used at
+* `<<tmsc-EntryEvent-execution, tmsc.{zwsp}EntryEvent.{zwsp}execution>>`
+* `<<tmsc-Event-getExecution, tmsc.{zwsp}Event.{zwsp}getExecution()>>`
+* `<<tmsc-Event-setExecution-tmsc_Execution, tmsc.{zwsp}Event.{zwsp}setExecution(Execution)>>`
+* `<<tmsc-Execution-children, tmsc.{zwsp}Execution.{zwsp}children>>`
+* `<<tmsc-Execution-parent, tmsc.{zwsp}Execution.{zwsp}parent>>`
+* `<<tmsc-Execution-root, tmsc.{zwsp}Execution.{zwsp}root>>`
+* `<<tmsc-ExitEvent-execution, tmsc.{zwsp}ExitEvent.{zwsp}execution>>`
+* `<<tmsc-Lifeline-executions, tmsc.{zwsp}Lifeline.{zwsp}executions>>`
+* `<<tmsc-Lifeline-rootExecutions, tmsc.{zwsp}Lifeline.{zwsp}rootExecutions>>`
+* `<<tmsc-LifelineSegment-activeExecution, tmsc.{zwsp}LifelineSegment.{zwsp}activeExecution>>`
+
+[[tmsc-ExitEvent]]
+==== Class ExitEvent
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Event, tmsc.{zwsp}Event>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`execution`[[tmsc-ExitEvent-execution]]
+
+`<<tmsc-Event-getExecution, {override}tmsc.{zwsp}Event.{zwsp}getExecution()>>`
+
+`<<tmsc-Event-setExecution-tmsc_Execution, {override}tmsc.{zwsp}Event.{zwsp}setExecution(Execution)>>`
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+
+_EOpposite:_ `<<tmsc-Execution-exit, exit>>`
+|non-resolveProxies +
+transient
+|
+|===
+
+.Used at
+* `<<tmsc-Execution-exit, tmsc.{zwsp}Execution.{zwsp}exit>>`
+
+[[tmsc-FullScopeTMSC]]
+==== Class FullScopeTMSC
+
+FullScopeTMSC contains all events (via Lifeline) and dependencies of the TMSC model. 
+It has the startTime and endTime attributes which are timestamps derived from the TMSC model, denoting the start and end time of the considered trace.
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITMSC, tmsc.{zwsp}ITMSC>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+* `<<tmsc-TMSC, tmsc.{zwsp}TMSC>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`duration`[[tmsc-FullScopeTMSC-duration]]
+
+`<<tmsc-ITimeRange-getDuration, {override}tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+|`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`endTime`[[tmsc-FullScopeTMSC-endTime]]
+
+`<<tmsc-ITimeRange-getEndTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]`
+|
+
+|`epochTime`[[tmsc-FullScopeTMSC-epochTime]]
+|`EBoolean`
+|`[1]` +
+_Default:_ `false`
+|
+
+|`startTime`[[tmsc-FullScopeTMSC-startTime]]
+
+`<<tmsc-ITimeRange-getStartTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]`
+|
+|===
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`dependencies`[[tmsc-FullScopeTMSC-dependencies]]
+
+`<<tmsc-ITMSC-getDependencies, {override}tmsc.{zwsp}ITMSC.{zwsp}getDependencies()>>`
+|`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+
+_EOpposite:_ `<<tmsc-Dependency-tmsc, tmsc>>`
+|
+|
+
+|`lifelines`[[tmsc-FullScopeTMSC-lifelines]]
+|`<<tmsc-Lifeline, tmsc.{zwsp}Lifeline>>`
+
+_EOpposite:_ `<<tmsc-Lifeline-tmsc, tmsc>>`
+|
+|
+
+|`measurements`[[tmsc-FullScopeTMSC-measurements]]
+|`<<tmsc-Measurement, tmsc.{zwsp}Measurement>>`
+|resolveProxies
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`architectures`[[tmsc-FullScopeTMSC-architectures]]
+|`<<architecture-ArchitectureModel, architecture.{zwsp}ArchitectureModel>>`
+|
+|References all model roots (i.e. ArchitectureModels) that own the architectural elements that are referenced by the model elements of this FullScopeTMSC.
+|===
+
+.Used at
+* `<<metric-Metric-tmscs, metric.{zwsp}Metric.{zwsp}tmscs>>`
+* `<<metric-MetricInstance-tmsc, metric.{zwsp}MetricInstance.{zwsp}tmsc>>`
+* `<<tmsc-Dependency-tmsc, tmsc.{zwsp}Dependency.{zwsp}tmsc>>`
+* `<<tmsc-DomainDependency-tmsc, tmsc.{zwsp}DomainDependency.{zwsp}tmsc>>`
+* `<<tmsc-EntryEvent-tmsc, tmsc.{zwsp}EntryEvent.{zwsp}tmsc>>`
+* `<<tmsc-Event-tmsc, tmsc.{zwsp}Event.{zwsp}tmsc>>`
+* `<<tmsc-Execution-tmsc, tmsc.{zwsp}Execution.{zwsp}tmsc>>`
+* `<<tmsc-ExitEvent-tmsc, tmsc.{zwsp}ExitEvent.{zwsp}tmsc>>`
+* `<<tmsc-FullScopeTMSC-fullScope, tmsc.{zwsp}FullScopeTMSC.{zwsp}fullScope>>`
+* `<<tmsc-Interval-tmsc, tmsc.{zwsp}Interval.{zwsp}tmsc>>`
+* `<<tmsc-Lifeline-tmsc, tmsc.{zwsp}Lifeline.{zwsp}tmsc>>`
+* `<<tmsc-LifelineSegment-tmsc, tmsc.{zwsp}LifelineSegment.{zwsp}tmsc>>`
+* `<<tmsc-Measurement-tmsc, tmsc.{zwsp}Measurement.{zwsp}tmsc>>`
+* `<<tmsc-Message-tmsc, tmsc.{zwsp}Message.{zwsp}tmsc>>`
+* `<<tmsc-MessageControl-tmsc, tmsc.{zwsp}MessageControl.{zwsp}tmsc>>`
+* `<<tmsc-Reply-tmsc, tmsc.{zwsp}Reply.{zwsp}tmsc>>`
+* `<<tmsc-Request-tmsc, tmsc.{zwsp}Request.{zwsp}tmsc>>`
+* `<<tmsc-ScopedTMSC-fullScope, tmsc.{zwsp}ScopedTMSC.{zwsp}fullScope>>`
+* `<<tmsc-TMSC-fullScope, tmsc.{zwsp}TMSC.{zwsp}fullScope>>`
+
+[[tmsc-FunctionArgumentMapEntry]]
+==== Class FunctionArgumentMapEntry
+
+
+Instance Type Name:: `java.util.Map$Entry`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`value`[[tmsc-FunctionArgumentMapEntry-value]]
+|`EString`
+|`[1]`
+|For now we have chosen to persist function arguments as a String to avoid the introduction of a complex type system. 
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`key`[[tmsc-FunctionArgumentMapEntry-key]]
+|`<<implemented-FunctionParameter, implemented.{zwsp}FunctionParameter>>`
+|`[1]`
+|
+|===
+
+.Used at
+* `<<tmsc-EntryEvent-arguments, tmsc.{zwsp}EntryEvent.{zwsp}arguments>>`
+* `<<tmsc-Event-arguments, tmsc.{zwsp}Event.{zwsp}arguments>>`
+* `<<tmsc-ExitEvent-arguments, tmsc.{zwsp}ExitEvent.{zwsp}arguments>>`
+
+[[tmsc-ITMSC]]
+==== Interface ITMSC
+
+
+Instance Type Name:: `nl.esi.pps.tmsc.ITMSC`
+
+.Sub-types
+* `<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+* `<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+* `<<tmsc-TMSC, tmsc.{zwsp}TMSC>>`
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getDependencies()`[[tmsc-ITMSC-getDependencies]]
+
+`<<tmsc-FullScopeTMSC-dependencies, {overriddenBy}tmsc.{zwsp}FullScopeTMSC.{zwsp}dependencies>>`
+
+`<<tmsc-ScopedTMSC-dependencies, {overriddenBy}tmsc.{zwsp}ScopedTMSC.{zwsp}dependencies>>`
+|_returns_ +
+`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+|unique
+|
+
+.1+|_abstract_ `getEvents()`[[tmsc-ITMSC-getEvents]]
+|_returns_ +
+`<<tmsc-Event, tmsc.{zwsp}Event>>`
+|unique
+|
+
+.2+|_abstract_ `getIncomingDependencies({zwsp}event)`[[tmsc-ITMSC-getIncomingDependencies-tmsc_Event]]
+|_returns_ +
+`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+|unique
+|
+
+|`event` +
+`<<tmsc-Event, tmsc.{zwsp}Event>>`
+|`[1]`
+|
+
+.2+|_abstract_ `getOutgoingDependencies({zwsp}event)`[[tmsc-ITMSC-getOutgoingDependencies-tmsc_Event]]
+|_returns_ +
+`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+|unique
+|
+
+|`event` +
+`<<tmsc-Event, tmsc.{zwsp}Event>>`
+|`[1]`
+|
+
+|===
+
+[[tmsc-ITimeRange]]
+==== Interface ITimeRange
+
+
+Instance Type Name:: `nl.esi.pps.tmsc.ITimeRange`
+
+.Sub-types
+* `<<metric-MetricInstance, metric.{zwsp}MetricInstance>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-DomainDependency, tmsc.{zwsp}DomainDependency>>`
+* `<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+* `<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+* `<<tmsc-Interval, tmsc.{zwsp}Interval>>`
+* `<<tmsc-LifelineSegment, tmsc.{zwsp}LifelineSegment>>`
+* `<<tmsc-Measurement, tmsc.{zwsp}Measurement>>`
+* `<<tmsc-Message, tmsc.{zwsp}Message>>`
+* `<<tmsc-MessageControl, tmsc.{zwsp}MessageControl>>`
+* `<<tmsc-Reply, tmsc.{zwsp}Reply>>`
+* `<<tmsc-Request, tmsc.{zwsp}Request>>`
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getDuration()`[[tmsc-ITimeRange-getDuration]]
+
+`<<tmsc-Dependency-duration, {overriddenBy}tmsc.{zwsp}Dependency.{zwsp}duration>>`
+
+`<<tmsc-Execution-duration, {overriddenBy}tmsc.{zwsp}Execution.{zwsp}duration>>`
+
+`<<tmsc-FullScopeTMSC-duration, {overriddenBy}tmsc.{zwsp}FullScopeTMSC.{zwsp}duration>>`
+
+`<<tmsc-Interval-duration, {overriddenBy}tmsc.{zwsp}Interval.{zwsp}duration>>`
+|_returns_ +
+`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|`[1]`
+|
+
+.1+|_abstract_ `getEndTime()`[[tmsc-ITimeRange-getEndTime]]
+
+`<<tmsc-Dependency-endTime, {overriddenBy}tmsc.{zwsp}Dependency.{zwsp}endTime>>`
+
+`<<tmsc-Execution-endTime, {overriddenBy}tmsc.{zwsp}Execution.{zwsp}endTime>>`
+
+`<<tmsc-FullScopeTMSC-endTime, {overriddenBy}tmsc.{zwsp}FullScopeTMSC.{zwsp}endTime>>`
+
+`<<tmsc-Interval-endTime, {overriddenBy}tmsc.{zwsp}Interval.{zwsp}endTime>>`
+|_returns_ +
+`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]`
+|
+
+.1+|_abstract_ `getStartTime()`[[tmsc-ITimeRange-getStartTime]]
+
+`<<tmsc-Dependency-startTime, {overriddenBy}tmsc.{zwsp}Dependency.{zwsp}startTime>>`
+
+`<<tmsc-Execution-startTime, {overriddenBy}tmsc.{zwsp}Execution.{zwsp}startTime>>`
+
+`<<tmsc-FullScopeTMSC-startTime, {overriddenBy}tmsc.{zwsp}FullScopeTMSC.{zwsp}startTime>>`
+
+`<<tmsc-Interval-startTime, {overriddenBy}tmsc.{zwsp}Interval.{zwsp}startTime>>`
+|_returns_ +
+`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]`
+|
+
+.1+|_abstract_ `isEpochTime()`[[tmsc-ITimeRange-isEpochTime]]
+
+`<<tmsc-Dependency-isEpochTime, {overriddenBy}tmsc.{zwsp}Dependency.{zwsp}isEpochTime()>>`
+
+`<<tmsc-Execution-isEpochTime, {overriddenBy}tmsc.{zwsp}Execution.{zwsp}isEpochTime()>>`
+
+`<<tmsc-Interval-isEpochTime, {overriddenBy}tmsc.{zwsp}Interval.{zwsp}isEpochTime()>>`
+|_returns_ +
+`EBoolean`
+|`[1]`
+|
+
+|===
+
+[[tmsc-Interval]]
+==== Abstract Class Interval
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+.Sub-types
+* `<<metric-MetricInstance, metric.{zwsp}MetricInstance>>`
+* `<<tmsc-Measurement, tmsc.{zwsp}Measurement>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`duration`[[tmsc-Interval-duration]]
+
+`<<tmsc-ITimeRange-getDuration, {override}tmsc.{zwsp}ITimeRange.{zwsp}getDuration()>>`
+|`<<tmsc-EDuration, tmsc.{zwsp}EDuration>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`endTime`[[tmsc-Interval-endTime]]
+
+`<<tmsc-ITimeRange-getEndTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getEndTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`startTime`[[tmsc-Interval-startTime]]
+
+`<<tmsc-ITimeRange-getStartTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}getStartTime()>>`
+|`<<tmsc-ETimestamp, tmsc.{zwsp}ETimestamp>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`from`[[tmsc-Interval-from]]
+|`<<tmsc-Event, tmsc.{zwsp}Event>>`
+|`[1]`
+|
+
+|`scopes`[[tmsc-Interval-scopes]]
+|`<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+|
+|Typically analysis stores its result as a ScopedTMSC. This relation can be used to avoid duplicate analysis results in the model.
+
+|`tmsc`[[tmsc-Interval-tmsc]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`to`[[tmsc-Interval-to]]
+|`<<tmsc-Event, tmsc.{zwsp}Event>>`
+|`[1]`
+|
+|===
+
+.Operations
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Aspect and Type
+|Properties
+|Description
+.1+|_abstract_ `getName()`[[tmsc-Interval-getName]]
+
+`<<metric-MetricInstance-name, {overriddenBy}metric.{zwsp}MetricInstance.{zwsp}name>>`
+
+`<<tmsc-Measurement-name, {overriddenBy}tmsc.{zwsp}Measurement.{zwsp}name>>`
+|_returns_ +
+`EString`
+|`[1]`
+|
+
+.1+|_abstract_ `isEpochTime()`[[tmsc-Interval-isEpochTime]]
+
+`<<tmsc-ITimeRange-isEpochTime, {override}tmsc.{zwsp}ITimeRange.{zwsp}isEpochTime()>>`
+|_returns_ +
+`EBoolean`
+|
+|
+
+|===
+
+[[tmsc-Lifeline]]
+==== Class Lifeline
+
+Lifeline is the modeling element as defined in the UML Message Sequence Chart formalism and it is equivalent only to the instantiated nature (viewpoint) of the Component modeling element as defined in the abstract TMSC meta-model. 
+A lifeline contains the behavior of an Executor, in the form of a sequence of events, over a specific time span.
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`traced`[[tmsc-Lifeline-traced]]
+|`EBoolean`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`events`[[tmsc-Lifeline-events]]
+|`<<tmsc-Event, tmsc.{zwsp}Event>>`
+
+_EOpposite:_ `<<tmsc-Event-lifeline, lifeline>>`
+|
+|
+
+|`executions`[[tmsc-Lifeline-executions]]
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+
+_EOpposite:_ `<<tmsc-Execution-lifeline, lifeline>>`
+|
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`executor`[[tmsc-Lifeline-executor]]
+|`<<instantiated-Executor, instantiated.{zwsp}Executor>>`
+|`[1]`
+|
+
+|`rootExecutions`[[tmsc-Lifeline-rootExecutions]]
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+|non-resolveProxies +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`segments`[[tmsc-Lifeline-segments]]
+|`<<tmsc-LifelineSegment, tmsc.{zwsp}LifelineSegment>>`
+
+_EOpposite:_ `<<tmsc-LifelineSegment-lifeline, lifeline>>`
+|non-resolveProxies +
+unchangeable +
+derived +
+transient +
+volatile
+|Note that this is a derived 'many' relation. Though the return type 'EList' provides methods to alter the content, no altering method should be used and will throw an UnsupportedOperationException upon usage.
+
+|`tmsc`[[tmsc-Lifeline-tmsc]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+
+_EOpposite:_ `<<tmsc-FullScopeTMSC-lifelines, lifelines>>`
+|*container* +
+`[1]`
+|
+|===
+
+.Used at
+* `<<tmsc-EntryEvent-lifeline, tmsc.{zwsp}EntryEvent.{zwsp}lifeline>>`
+* `<<tmsc-Event-lifeline, tmsc.{zwsp}Event.{zwsp}lifeline>>`
+* `<<tmsc-Execution-lifeline, tmsc.{zwsp}Execution.{zwsp}lifeline>>`
+* `<<tmsc-ExitEvent-lifeline, tmsc.{zwsp}ExitEvent.{zwsp}lifeline>>`
+* `<<tmsc-FullScopeTMSC-lifelines, tmsc.{zwsp}FullScopeTMSC.{zwsp}lifelines>>`
+* `<<tmsc-LifelineSegment-lifeline, tmsc.{zwsp}LifelineSegment.{zwsp}lifeline>>`
+
+[[tmsc-LifelineSegment]]
+==== Class LifelineSegment
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`activeExecution`[[tmsc-LifelineSegment-activeExecution]]
+|`<<tmsc-Execution, tmsc.{zwsp}Execution>>`
+
+_EOpposite:_ `<<tmsc-Execution-segments, segments>>`
+|non-resolveProxies +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`lifeline`[[tmsc-LifelineSegment-lifeline]]
+|`<<tmsc-Lifeline, tmsc.{zwsp}Lifeline>>`
+
+_EOpposite:_ `<<tmsc-Lifeline-segments, segments>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.Used at
+* `<<tmsc-Execution-segments, tmsc.{zwsp}Execution.{zwsp}segments>>`
+* `<<tmsc-Lifeline-segments, tmsc.{zwsp}Lifeline.{zwsp}segments>>`
+
+[[tmsc-Measurement]]
+==== Class Measurement
+
+
+
+[[measurement-ecore-diagram]]
+.Diagram of measurements in the TMSC meta-model
+image::{metamodelsdir}/measurement.png[width=1053,height=431]
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+* `<<tmsc-Interval, tmsc.{zwsp}Interval>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`name`[[tmsc-Measurement-name]]
+
+`<<tmsc-Interval-getName, {override}tmsc.{zwsp}Interval.{zwsp}getName()>>`
+|`EString`
+|`[1]`
+|
+|===
+
+.Used at
+* `<<tmsc-FullScopeTMSC-measurements, tmsc.{zwsp}FullScopeTMSC.{zwsp}measurements>>`
+
+[[tmsc-Message]]
+==== Class Message
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+.Sub-types
+* `<<tmsc-Reply, tmsc.{zwsp}Reply>>`
+* `<<tmsc-Request, tmsc.{zwsp}Request>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`controlDependencies`[[tmsc-Message-controlDependencies]]
+|`<<tmsc-MessageControl, tmsc.{zwsp}MessageControl>>`
+
+_EOpposite:_ `<<tmsc-MessageControl-message, message>>`
+|non-resolveProxies
+|
+|===
+
+.Used at
+* `<<tmsc-MessageControl-message, tmsc.{zwsp}MessageControl.{zwsp}message>>`
+
+[[tmsc-MessageControl]]
+==== Class MessageControl
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`message`[[tmsc-MessageControl-message]]
+|`<<tmsc-Message, tmsc.{zwsp}Message>>`
+
+_EOpposite:_ `<<tmsc-Message-controlDependencies, controlDependencies>>`
+|non-resolveProxies +
+`[1]` +
+transient
+|
+|===
+
+.Used at
+* `<<tmsc-Message-controlDependencies, tmsc.{zwsp}Message.{zwsp}controlDependencies>>`
+* `<<tmsc-Reply-controlDependencies, tmsc.{zwsp}Reply.{zwsp}controlDependencies>>`
+* `<<tmsc-Request-controlDependencies, tmsc.{zwsp}Request.{zwsp}controlDependencies>>`
+
+[[tmsc-Reply]]
+==== Class Reply
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+* `<<tmsc-Message, tmsc.{zwsp}Message>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`request`[[tmsc-Reply-request]]
+|`<<tmsc-Request, tmsc.{zwsp}Request>>`
+
+_EOpposite:_ `<<tmsc-Request-replies, replies>>`
+|non-resolveProxies +
+transient
+|
+|===
+
+.Used at
+* `<<tmsc-Request-replies, tmsc.{zwsp}Request.{zwsp}replies>>`
+
+[[tmsc-Request]]
+==== Class Request
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+* `<<tmsc-ITimeRange, tmsc.{zwsp}ITimeRange>>`
+* `<<tmsc-Message, tmsc.{zwsp}Message>>`
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`replies`[[tmsc-Request-replies]]
+|`<<tmsc-Reply, tmsc.{zwsp}Reply>>`
+
+_EOpposite:_ `<<tmsc-Reply-request, request>>`
+|non-resolveProxies
+|
+|===
+
+.Used at
+* `<<tmsc-Reply-request, tmsc.{zwsp}Reply.{zwsp}request>>`
+
+[[tmsc-ScopedTMSC]]
+==== Class ScopedTMSC
+
+ScopedTMSC is a sub-graph of the whole TMSC model and defined for facilitating fragmentation of the TMSC model to sub-graphs (e.g. indication of a path), i.e. events and dependencies that hold specific properties, activities, etc. 
+Each ScopedTMSC can be considered as a part of its parent scope TMSC and allows application of analysis techniques, i.e., critical path analysis, locally in a sub-graph. 
+The dependencies of a child scope are contained by its parent scope.
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITMSC, tmsc.{zwsp}ITMSC>>`
+* `<<tmsc-TMSC, tmsc.{zwsp}TMSC>>`
+
+.Attributes
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`fqn`[[tmsc-ScopedTMSC-fqn]]
+|`EString`
+|`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+
+|`name`[[tmsc-ScopedTMSC-name]]
+|`<<tmsc-EID, tmsc.{zwsp}EID>>`
+|`[1]`
+|
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`dependencies`[[tmsc-ScopedTMSC-dependencies]]
+
+`<<tmsc-ITMSC-getDependencies, {override}tmsc.{zwsp}ITMSC.{zwsp}getDependencies()>>`
+|`<<tmsc-Dependency, tmsc.{zwsp}Dependency>>`
+
+_EOpposite:_ `<<tmsc-Dependency-scopes, scopes>>`
+|non-resolveProxies
+|
+
+|`origin`[[tmsc-ScopedTMSC-origin]]
+|`<<tmsc-Event, tmsc.{zwsp}Event>>`
+|
+|Typically a ScopedTMSC represents an analysis result that is created from a certain event or events, this is called the origin of the scope.
+Setting this attribute is optional, but may help successor analyses.
+
+|`parentScope`[[tmsc-ScopedTMSC-parentScope]]
+|`<<tmsc-TMSC, tmsc.{zwsp}TMSC>>`
+
+_EOpposite:_ `<<tmsc-TMSC-childScopes, childScopes>>`
+|*container* +
+`[1]`
+|
+|===
+
+.Used at
+* `<<metric-MetricInstance-scopes, metric.{zwsp}MetricInstance.{zwsp}scopes>>`
+* `<<tmsc-Dependency-scopes, tmsc.{zwsp}Dependency.{zwsp}scopes>>`
+* `<<tmsc-DomainDependency-scopes, tmsc.{zwsp}DomainDependency.{zwsp}scopes>>`
+* `<<tmsc-EntryEvent-scopes, tmsc.{zwsp}EntryEvent.{zwsp}scopes>>`
+* `<<tmsc-Event-scopes, tmsc.{zwsp}Event.{zwsp}scopes>>`
+* `<<tmsc-ExitEvent-scopes, tmsc.{zwsp}ExitEvent.{zwsp}scopes>>`
+* `<<tmsc-FullScopeTMSC-childScopes, tmsc.{zwsp}FullScopeTMSC.{zwsp}childScopes>>`
+* `<<tmsc-Interval-scopes, tmsc.{zwsp}Interval.{zwsp}scopes>>`
+* `<<tmsc-LifelineSegment-scopes, tmsc.{zwsp}LifelineSegment.{zwsp}scopes>>`
+* `<<tmsc-Measurement-scopes, tmsc.{zwsp}Measurement.{zwsp}scopes>>`
+* `<<tmsc-Message-scopes, tmsc.{zwsp}Message.{zwsp}scopes>>`
+* `<<tmsc-MessageControl-scopes, tmsc.{zwsp}MessageControl.{zwsp}scopes>>`
+* `<<tmsc-Reply-scopes, tmsc.{zwsp}Reply.{zwsp}scopes>>`
+* `<<tmsc-Request-scopes, tmsc.{zwsp}Request.{zwsp}scopes>>`
+* `<<tmsc-ScopedTMSC-childScopes, tmsc.{zwsp}ScopedTMSC.{zwsp}childScopes>>`
+* `<<tmsc-TMSC-childScopes, tmsc.{zwsp}TMSC.{zwsp}childScopes>>`
+
+[[tmsc-TMSC]]
+==== Abstract Class TMSC
+
+TMSC is a directed acyclic graph with events and dependencies, and some additional structural properties. 
+A TMSC should at least contain all events that are referred to by its dependencies.
+Two specializations are considered the FullScopeTMSC and ScopedTMSC.
+
+
+
+
+
+.Super-types
+* `<<properties-PropertiesContainer, properties.{zwsp}PropertiesContainer>>`
+* `<<tmsc-ITMSC, tmsc.{zwsp}ITMSC>>`
+
+.Sub-types
+* `<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+* `<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+
+.Containments
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`childScopes`[[tmsc-TMSC-childScopes]]
+|`<<tmsc-ScopedTMSC, tmsc.{zwsp}ScopedTMSC>>`
+
+_EOpposite:_ `<<tmsc-ScopedTMSC-parentScope, parentScope>>`
+|_EKeys:_ `name`
+|All dependencies of a child scope should also be contained by its parent scope.
+|===
+
+.References
+[cols="<30,<20,<20,<40a",options="header"]
+|===
+|Name
+|Type
+|Properties
+|Description
+
+|`fullScope`[[tmsc-TMSC-fullScope]]
+|`<<tmsc-FullScopeTMSC, tmsc.{zwsp}FullScopeTMSC>>`
+|non-resolveProxies +
+`[1]` +
+unchangeable +
+derived +
+transient +
+volatile
+|
+|===
+
+.Used at
+* `<<tmsc-ScopedTMSC-parentScope, tmsc.{zwsp}ScopedTMSC.{zwsp}parentScope>>`

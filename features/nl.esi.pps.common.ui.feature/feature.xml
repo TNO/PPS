@@ -14,7 +14,9 @@
       id="nl.esi.pps.common.ui.feature"
       label="PPS Common UI Feature"
       version="0.20.0.qualifier"
-      provider-name="ESI (TNO)">
+      provider-name="ESI (TNO)"
+      license-feature="nl.esi.pps.license"
+      license-feature-version="0.0.0">
 
    <description url="http://www.example.com/description">
       [Enter Feature Description here.]
