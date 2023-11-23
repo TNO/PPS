@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ *
+ * This program and the accompanying materials are made available
+ * under the terms of the MIT License which is available at
+ * https://opensource.org/licenses/MIT
+ *
+ * SPDX-License-Identifier: MIT
+ */
 modeltype m_genmodel "strict" uses genmodel('http://www.eclipse.org/emf/2002/GenModel');
 modeltype m_ecore "strict" uses ecore('http://www.eclipse.org/emf/2002/Ecore');
 
