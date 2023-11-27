@@ -1,4 +1,14 @@
-# This workflow will build a Java project with Maven, and cache/restore any dependencies to improve the workflow execution time
+#
+# Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+#
+# This program and the accompanying materials are made available
+# under the terms of the MIT License which is available at
+# https://opensource.org/licenses/MIT
+#
+# SPDX-License-Identifier: MIT
+#
+
+# This workflow will build PPS with Maven, and cache/restore any dependencies to improve the workflow execution time
 # For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
 
 # This workflow uses actions that are not certified by GitHub.
@@ -6,7 +16,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Java CI with Maven
+name: Build and test PPS
 
 on:
   push:
@@ -29,9 +39,17 @@ jobs:
         architecture: x64
         cache: maven
     - name: Build with Maven
-      run: mvn -B verify --file pom.xml
-    - run: mkdir staging && cp products/nl.esi.pps.product/target/*.zip staging && cp products/nl.esi.pps.product/target/products/*.zip staging
-    - uses: actions/upload-artifact@v3
+      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.enduser=nightly
+    - name: Publish Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
+    - name: Publish update-site
+      uses: actions/upload-artifact@v3
       with:
-        name: Package
-        path: staging
+        name: PPS-update-site
+        path: products/nl.esi.pps.product/target/repository
+    - name: Publish product
+      uses: actions/upload-artifact@v3
+      with:
+        name: PPS-product
+        path: products/nl.esi.pps.product/target/products/pps-*-win32.win32.x86_64.zip
