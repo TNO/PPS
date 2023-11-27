@@ -8,6 +8,7 @@
 #
 # SPDX-License-Identifier: MIT
 #
+
 QUALIFIER_POSTFIX="dev"
 
 if [[ $# -gt 0 ]]; then

@@ -39,7 +39,7 @@ jobs:
         architecture: x64
         cache: maven
     - name: Build with Maven
-      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.enduser=nightly -Dpps.version.qualifier=$(versionQualifier.sh nightly)
+      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.enduser=nightly -Dpps.version.qualifier=$(./versionQualifier.sh nightly)
     - name: Publish Test Report
       if: success() || failure()
       uses: scacap/action-surefire-report@v1
