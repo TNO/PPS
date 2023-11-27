@@ -636,6 +636,15 @@
         <value>remoteURI</value>
       </detail>
     </annotation>
+    <configSections
+        name="user">
+      <properties
+          key="name"
+          value="${github.author.name}"/>
+      <properties
+          key="email"
+          value="${github.author.email}"/>
+    </configSections>
     <description>${scope.project.label}</description>
   </setupTask>
   <setupTask
