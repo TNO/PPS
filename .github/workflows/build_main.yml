@@ -39,17 +39,19 @@ jobs:
         architecture: x64
         cache: maven
     - name: Build with Maven
-      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.enduser=nightly -Dpps.version.qualifier=$(./versionQualifier.sh nightly)
+      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.qualifier=$(./versionQualifier.sh)
     - name: Publish Test Report
       if: success() || failure()
       uses: scacap/action-surefire-report@v1
+    - name: Publish documentation
+      uses: actions/upload-artifact@v3
+      with:
+        name: PPS-user-guide
+        path: plugins/nl.esi.pps.doc.user/target/website
+        retention-days: 5
     - name: Publish update-site
       uses: actions/upload-artifact@v3
       with:
-        name: PPS-update-site-nightly
+        name: PPS-update-site
         path: products/nl.esi.pps.product/target/repository
-    - name: Publish product
-      uses: actions/upload-artifact@v3
-      with:
-        name: PPS-product-nightly
-        path: products/nl.esi.pps.product/target/products/nl.esi.pps.ide/win32/win32/x86_64
+        retention-days: 5

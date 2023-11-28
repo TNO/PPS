@@ -36,7 +36,7 @@
                     <repositoryName>PPS Update Site</repositoryName>
 
                     <!-- Custom archive file name (excluding file extension). -->
-                    <finalName>${pps.binary.prefix}-${pps.version.enduser}-updatesite</finalName>
+                    <finalName>${pps.binary.version.enduser}-updatesite</finalName>
                 </configuration>
             </plugin>
 
@@ -61,12 +61,12 @@
                             <!-- Undocumented, see https://dev.eclipse.org/mhonarc/lists/tycho-user/msg05560.html -->
                             <!-- But available, see https://bugs.eclipse.org/bugs/show_bug.cgi?id=357503 -->
                             <!-- The 'os', 'ws' and 'arch' values are automatically added, as is the file extension. -->
-                            <archiveFileName>${pps.binary.prefix}-${pps.version.enduser}</archiveFileName>
+                            <archiveFileName>${pps.binary.version.enduser}</archiveFileName>
 
                             <!-- Add root folder, to prevent issues when extracting to current folder. -->
                             <rootFolders>
-                                <linux>${pps.binary.prefix}-${pps.version.enduser}</linux>
-                                <win32>${pps.binary.prefix}-${pps.version.enduser}</win32>
+                                <linux>${pps.binary.version.enduser}</linux>
+                                <win32>${pps.binary.version.enduser}</win32>
                             </rootFolders>
                         </product>
                     </products>
@@ -91,10 +91,6 @@
                         <goals>
                             <goal>archive-products</goal>
                         </goals>
-                        <!-- Archive after signing. -->
-                        <!-- By default, all are in 'package' phase, leading to signing after archiving. -->
-                        <!-- Declare archiving to occur in later phase. -->
-                        <phase>pre-integration-test</phase> <!-- Changed from default 'package' phase. -->
                     </execution>
                 </executions>
             </plugin>

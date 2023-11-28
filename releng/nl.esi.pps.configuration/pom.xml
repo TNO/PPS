@@ -32,6 +32,8 @@
         <!-- The prefix to use for released binaries -->
         <pps.binary.prefix>pps</pps.binary.prefix>
 
+        <pps.binary.version.enduser>${pps.binary.prefix}-${pps.version.enduser}</pps.binary.version.enduser>
+
         <!-- Building Java11 compliant code -->
         <java.source>11</java.source>
         <maven.compiler.source>${java.source}</maven.compiler.source>

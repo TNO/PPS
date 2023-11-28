@@ -1,0 +1,62 @@
+////
+  // Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+  //
+  // This program and the accompanying materials are made available
+  // under the terms of the MIT License which is available at
+  // https://opensource.org/licenses/MIT
+  //
+  // SPDX-License-Identifier: MIT
+////
+
+include::_initCommon.adoc[]
+
+// Enable custom style in index-docinfo.html
+:docinfo:
+
+:!table-caption:
+
+
+:win-x64: win32.win32.x86_64.zip
+
+= Platform Performance Suite (PPS)
+
+== Downloads
+
+The Platform Performance Suite (PPS) is available as a portable IDE and also as a feature for the Eclipse IDE through the P2 update site repository.
+
+.IDE
+
+The PPS IDE offers the most complete and integrated experience, from convenient editing to execution of the various tools.
+It suits most users.
+
+The PPS IDE is portable, so just download, extract, and run it, to get started quickly.
+
+.Download PPS IDE {pps-version-enduser} (link:userguide/index.html#release-notes[release notes])
+[cols="2,^1"]
+|===
+|Windows x64 (64-bit)
+|https://github.com/TNO/PPS/releases/download/{pps-version-enduser}/{pps-binary-version-enduser}-{win-x64}[download]
+
+|===
+
+Windows::
+  * Extract the downloaded archive somewhere on your hard disk:
+  ** Extract to a directory where you have read and write access.
+  ** There is no need to extract to an empty folder, as all files in the archive are contained within a root folder.
+  ** Don't extract in too deep a path as then you may get issues with too long paths.
+  * Execute `pps.exe` from the directory that contains the extracted files to launch the PPS IDE.
+
+
+.P2 update site
+
+The PPS P2 update site contains all plugins and features, for easy integration into OSGi-based applications.
+
+PPS {pps-version-enduser} is available as an Eclipse P2 update site:
+
+`\https://tno.github.io/pps/update-site/{pps-version-enduser}/`
+
+== Learn more
+
+For more information about PPS, please read the link:userguide/index.html[PPS user guide].
+
+include::_legal.adoc[]
