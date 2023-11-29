@@ -21,21 +21,4 @@
             <outputDirectory />
         </fileSet>
     </fileSets>
-
-    <dependencySets>
-        <dependencySet>
-            <includes>
-                <include>nl.esi.pps:nl.esi.pps.doc.user:zip:website</include>
-            </includes>
-            <unpack>true</unpack>
-            <outputDirectory>userguide</outputDirectory>
-        </dependencySet>
-        <dependencySet>
-            <includes>
-                <include>nl.esi.pps:nl.esi.pps.product:zip</include>
-            </includes>
-            <unpack>true</unpack>
-            <outputDirectory>update-site/${pps.version.enduser}</outputDirectory>
-        </dependencySet>
-    </dependencySets>
 </assembly>
