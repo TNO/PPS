@@ -64,23 +64,14 @@
                             <outputDirectory>${project.build.directory}/website</outputDirectory>
                             <backend>html5</backend>
                             <attributes>
-                                <imagesdir />
-                                <imgsdir>images</imgsdir>
-                                <doctype>book</doctype>
                                 <icons>font</icons>
-                                <sectanchors>true</sectanchors>
+                                <sectanchors>false</sectanchors>
                                 <toc>left</toc>
                                 <toclevels>3</toclevels>
                                 <pps-binary-prefix>${pps.binary.prefix}</pps-binary-prefix>
                                 <pps-version-enduser>${pps.version.enduser}</pps-version-enduser>
                                 <pps-binary-version-enduser>${pps.binary.version.enduser}</pps-binary-version-enduser>
                             </attributes>
-                            <resources>
-                                <resource>
-                                    <directory>${basedir}/images</directory>
-                                    <targetPath>images</targetPath>
-                                </resource>
-                            </resources>
                         </configuration>
                     </execution>
                 </executions>

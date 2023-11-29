@@ -6,7 +6,7 @@ The TMSC-models, as well as the results of the analysis, are presented to the us
 
 ## Documentation
 
-To get up-and-running and to learn more about PPS, please read its documentation at [https://tno.github.io/pps](https://tno.github.io/pps/index.html)
+To get up-and-running and to learn more about PPS, please read its documentation at [https://tno.github.io/PPS/](https://tno.github.io/PPS/)
 
 ### Development environment setup
 

@@ -40,6 +40,31 @@
                 </configuration>
             </plugin>
 
+            <!-- Add index page to update site. -->
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>generate-website</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDirectory>adoc</sourceDirectory>
+                            <outputDirectory>${project.build.directory}/repository</outputDirectory>
+                            <backend>html5</backend>
+                            <attributes>
+                                <icons>font</icons>
+                                <sectanchors>false</sectanchors>
+                                <pps-version-enduser>${pps.version.enduser}</pps-version-enduser>
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
             <!-- Customize products. -->
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
