@@ -14,7 +14,7 @@ To get up-and-running and to learn more about PPS, please read its documentation
 > Contributions are always welcome!
 > Before starting PPS development, please read the [PPS Developer Guide](plugins/nl.esi.pps.doc.developer/adoc/index.adoc).
 
-Follow these instructions to set up an PPS development environment.
+Follow these instructions to set up a PPS development environment.
 
 To create a development environment (first time only):
 
