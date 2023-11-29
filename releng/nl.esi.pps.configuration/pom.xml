@@ -30,7 +30,9 @@
         <pps.version.qualifier>dev</pps.version.qualifier>
 
         <!-- The prefix to use for released binaries -->
-        <pps.binary.prefix>tno-pps</pps.binary.prefix>
+        <pps.binary.prefix>pps</pps.binary.prefix>
+
+        <pps.binary.version.enduser>${pps.binary.prefix}-${pps.version.enduser}</pps.binary.version.enduser>
 
         <!-- Building Java11 compliant code -->
         <java.source>11</java.source>
@@ -261,11 +263,6 @@
                     -->
                     <environments>
                         <environment>
-                            <os>linux</os>
-                            <ws>gtk</ws>
-                            <arch>x86_64</arch>
-                        </environment>
-                        <environment>
                             <os>win32</os>
                             <ws>win32</ws>
                             <arch>x86_64</arch>
@@ -360,6 +357,12 @@
                 <plugin>
                     <groupId>org.eclipse.tycho</groupId>
                     <artifactId>tycho-p2-director-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-p2-repository-plugin</artifactId>
                     <version>${tycho.version}</version>
                 </plugin>
 

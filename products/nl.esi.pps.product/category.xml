@@ -43,4 +43,8 @@
          The Platform Performance Suite, by ESI (TNO)
       </description>
    </category-def>
+   <repository-reference location="https://download.eclipse.org/trace4cps/nightly/update-site/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/lsat/nightly/update-site/" enabled="true" />
+   <repository-reference location="https://hallvard.github.io/plantuml/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20211122181901/repository/" enabled="true" />
 </site>

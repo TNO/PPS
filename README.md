@@ -1,17 +1,20 @@
 # Platform Performance Suite (PPS)
 
-PPS provides insight in software execution over time and enables automatic performance diagnostics.
+The Platform Performance Suite (PPS) provides insight in software execution over time and enables automatic performance diagnostics.
+Various generic analysis techniques like critical path, root-cause, outlier identification analysis can be applied to the Timed Message Sequence Chart (TMSC) model.
+The TMSC-models, as well as the results of the analysis, are presented to the user by various visualizations focusing on facilitating the diagnosis at specific abstraction levels.
 
 ## Documentation
 
-Handy links:
-
-- [PPS User Guide](plugins/nl.esi.pps.doc.user/adoc/index.adoc)
-- [PPS Developer Guide](plugins/nl.esi.pps.doc.developer/adoc/index.adoc)
+To get up-and-running and to learn more about PPS, please read its documentation at [https://tno.github.io/PPS/](https://tno.github.io/PPS/)
 
 ### Development environment setup
 
-Follow these instructions to set up an PPS development environment.
+> [!NOTE]
+> Contributions are always welcome!
+> Before starting PPS development, please read the [PPS Developer Guide](plugins/nl.esi.pps.doc.developer/adoc/index.adoc).
+
+Follow these instructions to set up a PPS development environment.
 
 To create a development environment (first time only):
 
