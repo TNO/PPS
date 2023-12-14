@@ -18,7 +18,9 @@ Project Explorer view::
  Each project is simply a directory on the hard disk, and can be expanded to show the files and directories it contains.
  By double clicking a file, it is opened in the <<wb-editor-area>> by the default editor that is associated with that file. +
  The files in the Project Explorer view support contextual actions by means of the <<wb-context-menu>>.
- The supported actions for a file are explained in more detail in the section of the editor that is associated with that file.
+ The supported actions for a file are explained in more detail in the section of the editor that is associated with that file. +
++
+TIP: Toggling the image:{imgsdir}/icons/synced.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Link with Editor] button in the _Project Explorer_ view toolbar ties the view to always show the current file being edited.
 
 [[wb-editor-area, editor area]]
 Editor area::
@@ -75,7 +77,8 @@ Context menu::
  The context menu shows all available actions for both the view and its selection. +
 +
 image::{imgsdir}/context-menu.png[width=352,height=250,pdfwidth=2.93in,pdfheight=2.08in]
- 
+
+[[pps-preferences]]
 === Preferences
 
 Use the command link:{eclipse-help-location}/org.eclipse.platform.doc.user/reference/ref-72.htm[Preferences] dialog pages to set how you want Eclipse to operate. 

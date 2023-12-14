@@ -12,8 +12,9 @@ endif::output-html[]
 endif::output-site[]
 
 This user guide describes how to use the Platform Performance Suite (PPS).
-
-image::{imgsdir}/under_construction.png[width=5464,height=704] 
+PPS provides insight in software execution over time and enables automatic performance diagnostics.
+Various generic analysis techniques like critical path, root-cause, outlier identification analysis can be applied to the Timed Message Sequence Chart (TMSC) model.
+The TMSC-models, as well as the results of the analysis, are presented to the user by various visualizations focusing on facilitating the diagnosis at specific abstraction levels.
 
 <<<
 
