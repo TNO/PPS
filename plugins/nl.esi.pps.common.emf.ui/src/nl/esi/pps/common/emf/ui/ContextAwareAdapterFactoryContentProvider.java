@@ -73,6 +73,7 @@ public class ContextAwareAdapterFactoryContentProvider<ContentType> extends Adap
 		} else {
 			findContentWithinContext(input, content);
 		}
+		content.remove(null);
 		return content.toArray((ContentType[]) Array.newInstance(contentType, content.size()));
 	}
 	

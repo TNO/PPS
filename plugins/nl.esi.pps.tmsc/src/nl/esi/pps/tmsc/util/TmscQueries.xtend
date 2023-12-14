@@ -22,7 +22,9 @@ import java.util.List
 import java.util.Map
 import java.util.Set
 import java.util.function.Predicate
+import nl.esi.pps.architecture.implemented.Function
 import nl.esi.pps.tmsc.Dependency
+import nl.esi.pps.tmsc.EntryEvent
 import nl.esi.pps.tmsc.Event
 import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.FullScopeTMSC
@@ -40,8 +42,6 @@ import org.eclipse.lsat.common.util.UniqueQueue
 import org.eclipse.xtend.lib.annotations.Accessors
 
 import static extension org.eclipse.lsat.common.xtend.Queries.*
-import nl.esi.pps.architecture.implemented.Function
-import nl.esi.pps.tmsc.EntryEvent
 
 final class TmscQueries {
     private new() {
@@ -543,9 +543,17 @@ final class TmscQueries {
      * An performance optimized version of {@code event.getScopes().contains(tmsc)}.
      */
     static def boolean isInScope(Event event, ScopedTMSC tmsc) {
-        return event.fullScopeIncomingDependencies.union(event.fullScopeOutgoingDependencies).exists[scopes.contains(tmsc)]
+        return tmsc !== null && event.fullScopeIncomingDependencies.union(event.fullScopeOutgoingDependencies).exists[scopes.contains(tmsc)]
     }
-
+    
+    static def boolean isInScope(Event event, Iterable<? extends ScopedTMSC> tmscs) {
+        if (tmscs.isNullOrEmpty) {
+            return false
+        }
+        val eventScopes = event.fullScopeIncomingDependencies.union(event.fullScopeOutgoingDependencies).flatMap[scopes]
+        return eventScopes.exists[scope | tmscs.contains(scope)]
+    }
+    
     static def void disposeTemp(ScopedTMSC tmsc, boolean disposeTempDependencies) {
         if (tmsc.eContainer !== null) {
             throw new IllegalArgumentException(

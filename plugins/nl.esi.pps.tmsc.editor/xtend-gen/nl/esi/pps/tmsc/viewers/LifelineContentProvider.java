@@ -130,9 +130,17 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
     if (!_matched) {
       if (context instanceof Dependency) {
         _matched=true;
-        Lifeline _lifeline = ((Dependency)context).getSource().getLifeline();
+        Event _source = ((Dependency)context).getSource();
+        Lifeline _lifeline = null;
+        if (_source!=null) {
+          _lifeline=_source.getLifeline();
+        }
         content.add(_lifeline);
-        Lifeline _lifeline_1 = ((Dependency)context).getTarget().getLifeline();
+        Event _target = ((Dependency)context).getTarget();
+        Lifeline _lifeline_1 = null;
+        if (_target!=null) {
+          _lifeline_1=_target.getLifeline();
+        }
         content.add(_lifeline_1);
       }
     }
@@ -151,6 +159,16 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
           _lifeline_1=_to.getLifeline();
         }
         content.add(_lifeline_1);
+        if (((!((Interval)context).getScopes().isEmpty()) && (((Interval)context).getTmsc() != null))) {
+          final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
+            final Function1<Event, Boolean> _function_1 = (Event it_1) -> {
+              return Boolean.valueOf(TmscQueries.isInScope(it_1, ((Interval)context).getScopes()));
+            };
+            return Boolean.valueOf(IterableExtensions.<Event>exists(it.getEvents(), _function_1));
+          };
+          Iterable<Lifeline> _select = Queries.<Lifeline>select(((Interval)context).getTmsc().getLifelines(), _function);
+          Iterables.<Lifeline>addAll(content, _select);
+        }
       }
     }
     if (!_matched) {
