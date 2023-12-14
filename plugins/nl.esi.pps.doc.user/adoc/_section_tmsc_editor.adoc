@@ -13,76 +13,38 @@ include::_initCommon.adoc[]
 [[tmsc-editor]]
 == TMSC graphical viewer
 
-[[tmsc-view-tab, TMSC view tab]]
-=== Timed message sequence chart view tab
+The runtime behavior and timing of software applications can be visualized using Timed Message Sequence Charts (TMSC).
+Various generic analysis techniques like critical path, root-cause, outlier identification analysis can be applied to the TMSC model.
+To learn more about Timed Message Sequence Charts, please read section <<tmsc>>.
+
+The TMSC `\*.tmsc` or `*.tmscz` files can be viewed by using the TMSC graphical viewer.
+By double clicking on a TMSC file, this viewer opens.
+After opening the viewer, the viewer starts loading the model.
+Once the model is loaded, the viewer is filled with the data from the model.
+The editor features various views, each with a different purpose, namely:
+
+* Project Explorer View (detached)
+* Outline View (detached) 
+* Selection View (tab)
+* Timed Message Sequence Chart View (tab)
+* PlantUML View (detached) 
+* Data Analysis View (detached)
+
+[[tmsc]]
+=== Timed Message Sequence Charts
 
 The runtime behavior and timing of software applications can be visualized using Timed Message Sequence Charts (TMSC).
-In a TMSC, the life-line of an executor is shown on as a horizontal swimming lane, and (real) time is shown along the horizontal axis.
-The executor labels are shown on the vertical axis.
-The function calls that are executed by an executor are shown as bars within the swimming lane.
-The bars are labeled with their execution name.
+In a TMSC, executors are shown on as horizontal swimlanes, and (real) time is shown along the horizontal axis.
+The labels of the executors are shown on the vertical axis.
+An executor is  a single threaded computational resource with run-to-completion semantics.
+The function calls that are executed by an executor are shown as bars within its swimlane and are called executions.
+The bars are labeled with the function name.
 Nested function call executions are drawn as stacked bars, resulting in a call stack.
-Arrows between the bars denote the data and/or control flow dependencies.
-The arrows indicate where executors are communicating with each other, and where executor local events are raised and handled.
+Arrows between the bars denote the data and control flow dependencies.
+The arrows indicate where executors are communicating with each other.
 Section <<tmsc-relations-uml-sdl>> compares TMSCs to similar representations.
 
-Due to <<outline-dynamic-inclusion-filtering>> some executors might not be shown; however, the visible executors might communicate with this hidden executors.
-Communication text balloons are shown in this case, depending on the <<tmsc-dependencies-visibility, selected dependencies visibility>>.
-The arrow from/to the balloon indicates the data flow of the communication and the text in the balloon describes the other side.
-
-image::{imgsdir}/tmsc-view-tab.png[width=1515,height=1030]
-
-It is possible to select executions or dependencies by clicking on them, also see section <<chart-selection>>.
-Selected elements are shown with a thicker yellow border.
-Once selected, the details of the execution can be seen in the _Properties_ view and in the <<tmsc-data-analysis-view>>.
-
-TIP: By default, the _Properties_ view displays normal properties.
-To view expert properties click the image:{imgsdir}/icons/filter_ps.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Show Advanced Properties] button to reveal them.
- 
-The _Timed message sequence chart_ view tab supports some common functions to support analysis of its data, like:
-
-* Dynamic filtering based on the _Outline_ view selection, see Section <<outline-dynamic-inclusion-filtering>>.
-* Select executions and dependencies by clicking on them, see section <<chart-selection>>.
-  Once selected, details can be seen in the _Properties_ view and in the <<tmsc-data-analysis-view>>.
-* Measuring the time between executions, see Section <<time-measurement>>.
-* Synchronize the current visible time window with all other supported editors, see Section <<synchronized-timing>>.
-* Place a link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/cbookmrk.htm[bookmark] at a specific area within a file. 
-* Saving a snapshot of the chart, see Section <<chart-export-png>>.
-* Panning and zooming, see Section <<panning-and-zooming>>.
-
-On top of these common functions, the _TMSC_ tab has the following additional action bar buttons.
-
-[[tmsc-view-tab-actions]]
-[cols="^10,30,60",options="header"]
-|===
-|Icon |Action |Description
-
-[[tmsc-rendering-strategy-selection]]
-|image:{imgsdir}/icons/rendering_default.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
-|btn:[Select Rendering Strategy]
-|Changes the appearance of the TMSC depending on the analysis that is applied to the TMSC.
-Please read section <<tmsc-rendering-strategies>> for more information. +
-Please note that the icon depends on the current selection and therefore might be different than illustrated here.
-
-[[tmsc-dependencies-visibility]]
-|image:{imgsdir}/icons/DependenciesVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
-|btn:[Select Dependencies Visibility]
-|image:{imgsdir}/icons/DependenciesVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Show all dependencies. +
-image:{imgsdir}/icons/DependenciesVisibilityHIDE_ANNOTATIONS.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide communication text balloons on dependencies. +
-image:{imgsdir}/icons/DependenciesVisibilityHIDE_CROSSING.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Also hide dependencies that cross the current visible area of the chart. In other words, dependencies that do not start or end within the visible area. +
-image:{imgsdir}/icons/DependenciesVisibilityNONE.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide all dependencies.
-
-[[tmsc-executions-visibility]]
-|image:{imgsdir}/icons/ExecutionsVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
-|btn:[Select Executions Visibility]
-|image:{imgsdir}/icons/ExecutionsVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Show all executions. +
-image:{imgsdir}/icons/ExecutionsVisibilityHIDE_ANNOTATIONS.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide communication text balloons on executions. +
-image:{imgsdir}/icons/ExecutionsVisibilityNONE.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide all executions.
-
-|===
-
-[[tmsc-rendering-strategies]]
-==== Rendering strategies
+Section <<tmsc-tmsc-view>> shows an example visualization.
 
 [[tmsc-relations-uml-sdl]]
 ==== Relations to (Message) Sequence Charts and Flame Graphs
@@ -118,13 +80,67 @@ These Flame Chart are connected by arrows to show inter-executor relations.
 Note that, Flame Charts should not be confused with Flame Graphs, 
 Flame Graphs put the alphabet on the horizontal axis instead of the time, http://www.brendangregg.com/flamegraphs.html#Variations[see Brendan Gregg's pages^].
 
-=== Selection view tab
+[[tmsc-activities-and-paths]]
+==== On Activities and Paths
 
-The _Selection_ view tab is similar to the _Outline_ view.
-It shows the model in a tree view.
-Clicking an element in the tree selects the element and shows the details of that element in the _Properties_ view.
+TODO
 
-This view supports dynamic filtering based on the _Outline_ view selection (see section <<outline-dynamic-inclusion-filtering>>) to filter elements of interest.
+[[tmsc-projection]]
+.TMSC projection
+
+TODO
+ 
+[[tmsc-critical-path-analysis]]
+==== Critical Path Analysis
+
+The TMSC also allows more advanced analysis like critical path analysis.
+Critical path analysis is always applied on the full TMSC.
+
+A https://en.wikipedia.org/wiki/Transitive_reduction[transitive reduction^] is applied on the TMSC before the analysis is performed.
+In short this means that all path segments which are superfluous are removed.
+
+Critical path analysis to an event can be applied by following the TMSC dependencies in their opposite direction, only taking the route of dependencies with the shortest duration.
+
+The description above is a very simplistic summary of a much more sophisticated algorithm as described in this paper: http://www.es.ele.tue.nl/esreports/esr-2019-01.pdf[Inferring Timed Message Sequence Charts from execution traces of large-scale component-based software systems^].
+The algorithm as described in the paper is used as base for implementation.
+
+[[tmsc-metric-analysis]]
+==== Metric Analysis
+
+The TMSC metric analysis allows to validate whether timing requirements are met for predefined metrics.
+Currently, metrics and their budgets can be defined programmatically by means of implementing an extension point as described in the PPS developer guide.
+When a metric is analyzed, this results in a sequence of metric instances, one for every occurrence found.
+Each metric instance has a duration and all metric instances are analyzed to mark instances that exceed their budget.
+
+[[tmsc-root-cause-analysis]]
+==== Root cause analysis
+
+CAUTION: The functionality as described in this section still needs to be formalized in a paper.
+This section will be updated when the paper is available.
+
+IMPORTANT: Please read section <<tmsc-activities-and-paths>> prior to this section.
+
+Automatic root cause analysis can automatically detect if a metric instance was delayed by either resource contention and or service contention.
+This section explains the detection algorithm on a high level.
+
+[[tmsc-service-contention]]
+.Service contention
+Service contention basically means that an activity cannot execute as fast as possible because it is delayed by another activity which uses the same services.
+To detect this, two ingredients are needed: the <<tmsc-critical-path-analysis, critical path>> and the <<tmsc-activities-and-paths, activity TMSC>>, both between the start and end of a metric instance.
+We can now say that all critical TMSC dependencies which are not part of the activity TMSC are caused by _service contention_.
+
+[[tmsc-resource-contention]]
+.Resource contention
+Resource contention basically means that an execution within an activty takes more time than normal, but what is 'normal'.
+For metric instances multiple instances can be found within a trace.
+Typically these metric instances execute the same software functions in the same sequence, what we call repetitive behavior.
+We can use this repetitive behavior to determine the 'normal' execution time for each function within a metric instance.
+Outlier detection based on the https://en.wikipedia.org/wiki/Interquartile_range#Outliers[interquartile range^], with a multiplicand of 3.0, is used to detect _resource contention_. 
+
+[[tmsc-slack-analysis]]
+==== Slack Analysis
+
+TODO
 
 [[tmsc-project-explorer-view]]
 === Project Explorer view
@@ -138,13 +154,50 @@ These files support the following contextual actions:
 
 |image:{imgsdir}/icons/MetricAnalysis.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Analyze metrics...]
-|TODO
+a|Starts metric analysis for the selected TMSC, please read section <<tmsc-metric-analysis>> for more information.
+When clicked, a wizard is presented to select the metrics to analyse.
+When done, the analyzed metrics and their resolved instances are saved in the TMSC.
+When the TMSC is opened in the TMSC graphical viewer the metrics and their resolved instances are visible in the <<tmsc-outline-view>>.
+
+WARNING: This item is only visible if metrics are available.
+
+image::{imgsdir}/tmsc-metric-analysis-wizard.png[width=309,height=268,pdfwidth=2.58in,pdfheight=2.23in]
 
 |image:{imgsdir}/icons/timeshift.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Time-shift...]
+a|The time-shift function can be used to correct all times in a TMSC file by applying an offset.
+When clicked, a dialog is presented to specify the amount of time to shift.
+
+CAUTION: Please close the TMSC graphical viewer for the selected TMSCs before applying a time-offset to avoid unresponsiveness of the IDE.
+
+image::{imgsdir}/tmsc-time-shift.png[width=273,height=201,pdfwidth=2.28in,pdfheight=1.68in]
+
+|===
+
+ifdef::output-advanced[]
+
+CAUTION: The next options will only be enabled when the _'Show advanced features'_ option is enabled  in the <<pps-preferences, PPS preferences>>.
+These features may be unstable, and might produce unexpected results.
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|
+|btn:[Create IPC scope]
+|TODO
+
+|
+|btn:[Create isomorphism report]
+|TODO
+
+|image:{imgsdir}/icons/normalize_timing.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Normalize timing]
 |TODO
 
 |===
+
+endif::output-advanced[]
 
 [[tmsc-outline-view]]
 === Outline view
@@ -153,7 +206,7 @@ These files support the following contextual actions:
 ====
 The _Outline_ view supports dynamic filtering of its elements, by means of entering a <<outline-dynamic-inclusion-filtering, search pattern>> in its filter text box.
 
-image::{imgsdir}/outline-filter.png[width=184,height=54,pdfwidth=1.53in,pdfheight=0.45in]
+image::{imgsdir}/outline-filter.png[width=140,height=47,pdfwidth=1.17in,pdfheight=0.39in]
 ====
 
 The _Outline_ view shows the model in a tree view.
@@ -161,7 +214,7 @@ Clicking an element in the tree selects the element and shows the details of tha
 
 By selecting elements in the tree both the resource and time context of an editor view can be reduced, see also Section <<outline-dynamic-inclusion-filtering>>.
 With reduction of the resource context is meant that the editor area will show only content which is related to the selected _Outline_ elements.
-For example, when a life-line is selected, the <<tmsc-view-tab>> view will only show this life-line and the life-lines that it directly communicates with.
+For example, when a life-line is selected, the <<tmsc-tmsc-view>> view will only show this life-line and the life-lines that it directly communicates with.
 This feature is active if the image:{imgsdir}/icons/push_context.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Push Context] toggle bottom is selected.
 
 When the image:{imgsdir}/icons/push_time.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Push Time Range] toggle button is selected, the editor area will automatically show the time range which includes the time context for the selected _Outline_ elements.
@@ -175,46 +228,405 @@ The model elements in the content outline tree support the following contextual 
 |TMSC
 |image:{imgsdir}/icons/MetricAnalysis.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Analyze metrics...]
-|TODO
+a|Starts metric analysis for the selected TMSC, please read section <<tmsc-metric-analysis>> for more information.
+When clicked, a wizard is presented to select the metrics to analyze.
+When done, the analyzed metrics and their resolved instances are visible in the <<tmsc-outline-view>> and can be saved using the menu:File[Save] menu.
 
-|TMSC
+WARNING: This item is only visible if metrics are available.
+
+image::{imgsdir}/tmsc-metric-analysis-wizard.png[width=309,height=268,pdfwidth=2.58in,pdfheight=2.23in]
+
+|TMSC +
  Scoped{nbh}TMSC
 |image:{imgsdir}/icons/time_pin.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Analyze slack]
-|TODO
+|Performs slack analysis on the selected TMSC, read section <<tmsc-slack-analysis>> for more information.
+When done, the rendering strategy is changed to the <<tmsc-rendering-strategy-slack, slack rendering strategy>> to show the calculated slack.
 
 |Scoped{nbh}TMSC
 |image:{imgsdir}/icons/saveas.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Save as TMSC]
-|TODO
+|Saves the scoped TMSC, including its child scopes, into a new file, retaining only the elements of the TMSC that are required to store the scoped TMSC.
+This allows the user to only store a small portion of a larger TMSC.
 
 |Metric +
  Metric{nbh}Instance
 |image:{imgsdir}/icons/AddAnnotation.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Add metric annotations to TMSC]
-|TODO
+|Adds measurement annotations for the selected metric instances to the TMSC chart.
 
-|Measurement +
+|Dependency +
+ Execution +
+ Event +
+ Measurement +
  Metric{nbh}Instance
 |image:{imgsdir}/icons/time_warning.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Analyze critical path]
-|TODO
+|Performs critical path analysis on the selected element, read section <<tmsc-critical-path-analysis>> for more information.
+If a measurement or metric instance is selected, the critical path analysis run from the end until the start-time of the interval.
+In other cases the critical path analysis starts at the start of the selected element and only stops at the end of the critical path.
+
+When done, the rendering strategy is changed to the <<tmsc-rendering-strategy-critical, critical path rendering strategy>> to show the critical path.
+The critical path is also visible in the <<tmsc-outline-view>> as Scoped TMSC and can be saved using the menu:File[Save] menu.
 
 |Metric{nbh}Instance (_exceeding budget_)
 |image:{imgsdir}/icons/time_warning.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
 |btn:[Analyze root cause]
+|Performs root-cause analysis on the selected metric instance, read section <<tmsc-root-cause-analysis>> for more information.
+
+When done, the rendering strategy is changed to the <<tmsc-rendering-strategy-critical, critical path rendering strategy>> to show the root cause analysis results.
+The results are also visible in the <<tmsc-outline-view>> as Scoped TMSC and can be saved using the menu:File[Save] menu.
+
+|===
+
+ifdef::output-advanced[]
+
+CAUTION: The next options will only be enabled when the _'Show advanced features'_ option is enabled  in the <<pps-preferences, PPS preferences>>.
+These features may be unstable, and might produce unexpected results.
+
+[cols="20,^10,30,40",options="header"]
+|===
+|Elements |Icon |Action |Description
+
+|Measurement
+|image:{imgsdir}/icons/MetricAnalysis.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Convert to metric...]
+|TODO
+
+|Scoped{nbh}TMSC
+|image:{imgsdir}/icons/twowaycompare_co.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Compare TMSCs]
+|TODO
+
+|Event +
+ Measurement +
+ Metric{nbh}Instance
+|
+|btn:[Analyze activity path ]
+|TODO
+
+|Measurement +
+ Metric{nbh}Instance
+|
+|btn:[Create TMSC...]
+|TODO
+
+|Dependencies +
+ Executions
+|image:{imgsdir}/icons/add_ScopedTMSC.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Create scope...]
+|TODO
+
+|TMSC
+|
+|btn:[Create IPC scope]
+|TODO
+
+[[tmsc-isomorphic-equivalence-classes]]
+|Metric
+|
+|btn:[Create isomorphism classes of TMSCs...]
+|TODO
+
+|TMSC
+|
+|btn:[Analyze time-bounds...]
 |TODO
 
 |===
 
+endif::output-advanced[]
+
+[[tmsc-selection-view]]
+=== Selection view
+
+The _Selection_ view tab is similar to the _Outline_ view.
+It shows the model in a tree view.
+Clicking an element in the tree selects the element and shows the details of that element in the _Properties_ view.
+
+This view supports dynamic filtering based on the _Outline_ view selection (see section <<outline-dynamic-inclusion-filtering>>) to filter elements of interest.
+
+[[tmsc-tmsc-view, TMSC view]]
+=== Timed message sequence chart view
+
+In a TMSC, the life-line of an executor is shown on as a horizontal swimlane, and (real) time is shown along the horizontal axis.
+The executor labels are shown on the vertical axis.
+The function calls that are executed by an executor are shown as bars within the swimlane.
+The bars are labeled with their execution name.
+Nested function call executions are drawn as stacked bars, resulting in a call stack.
+Arrows between the bars denote the data and/or control flow dependencies.
+The arrows indicate where executors are communicating with each other.
+
+Due to <<outline-dynamic-inclusion-filtering>> some executors might not be shown; however, the visible executors might communicate with this hidden executors.
+Communication text balloons are shown in this case, depending on the <<tmsc-dependencies-visibility, selected dependencies visibility>>.
+The arrow from/to the balloon indicates the data flow of the communication and the text in the balloon describes the other side.
+
+image::{imgsdir}/tmsc-tmsc-view.png[width=1515,height=1030]
+
+It is possible to select executions or dependencies by clicking on them, also see section <<chart-selection>>.
+Selected elements are shown with a thicker yellow border.
+Once selected, the details of the execution can be seen in the _Properties_ view and in the <<tmsc-data-analysis-view>>.
+
+TIP: By default, the _Properties_ view displays normal properties.
+To view expert properties click the image:{imgsdir}/icons/filter_ps.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Show Advanced Properties] button to reveal them.
+ 
+The _Timed message sequence chart_ view tab supports some common functions to support analysis of its data, like:
+
+* Dynamic filtering based on the _Outline_ view selection, see Section <<outline-dynamic-inclusion-filtering>>.
+* Select executions and dependencies by clicking on them, see section <<chart-selection>>.
+  Once selected, details can be seen in the _Properties_ view and in the <<tmsc-data-analysis-view>>.
+* Measuring the time between executions, see Section <<time-measurement>>.
+* Synchronize the current visible time window with all other supported editors, see Section <<synchronized-timing>>.
+* Place a link:{eclipse-help-location}/org.eclipse.platform.doc.user/concepts/cbookmrk.htm[bookmark] at a specific area within a file. 
+* Saving a snapshot of the chart, see Section <<chart-export-png>>.
+* Panning and zooming, see Section <<panning-and-zooming>>.
+
+On top of these common functions, the _TMSC_ tab has the following additional action bar buttons.
+
+[[tmsc-tmsc-view-actions]]
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/rendering_default.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+[[tmsc-rendering-strategy-selection]]
+|btn:[Select Rendering Strategy]
+|Changes the appearance of the TMSC depending on the analysis that is applied to the TMSC.
+Please read section <<tmsc-rendering-strategies>> for more information. +
+Please note that the icon depends on the current selection and therefore might be different than illustrated here.
+
+|image:{imgsdir}/icons/DependenciesVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+[[tmsc-dependencies-visibility]]
+|btn:[Select Dependencies Visibility]
+|image:{imgsdir}/icons/DependenciesVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Show all dependencies. +
+image:{imgsdir}/icons/DependenciesVisibilityHIDE_ANNOTATIONS.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide communication text balloons on dependencies. +
+image:{imgsdir}/icons/DependenciesVisibilityHIDE_CROSSING.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Also hide dependencies that cross the current visible area of the chart. In other words, dependencies that do not start or end within the visible area. +
+image:{imgsdir}/icons/DependenciesVisibilityNONE.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide all dependencies.
+
+|image:{imgsdir}/icons/ExecutionsVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+[[tmsc-executions-visibility]]
+|btn:[Select Executions Visibility]
+|image:{imgsdir}/icons/ExecutionsVisibilityALL.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Show all executions. +
+image:{imgsdir}/icons/ExecutionsVisibilityHIDE_ANNOTATIONS.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide communication text balloons on executions. +
+image:{imgsdir}/icons/ExecutionsVisibilityNONE.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] Hide all executions.
+
+|image:{imgsdir}/icons/Optimization.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Optimize]
+|"Optimize" the life-line order of the TMSC view.
+This groups the life-lines by minimizing the distance in the graph of messages for the visible time range.
+ The button moves the life-lines only when pressed. 
+ When the time range is moved, the optimization action can be re-applied.
+
+|===
+
+[[tmsc-rendering-strategies]]
+==== Rendering strategies
+
+Rendering strategies allow to visualize TMSCs from different viewpoints to support tailored user feedback for different analyses.
+When just viewing a TMSC, different colors and strokes for executions and dependencies might help the user to better understand their domain, whereas for, e.g., critical path analysis it is important that the dependencies on the critical path are highlighted.
+The rendering strategies in PPS are flexible and extendible (as described in the developer guide).
+
+TIP: Performing an analysis may change the applied rendering strategy.
+Please use the <<tmsc-rendering-strategy-selection, rendering strategy toolbar button>> to go back to the previous rendering strategy if needed. 
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Name |Description
+
+|image:{imgsdir}/icons/rendering_properties.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+[[tmsc-rendering-strategy-properties]]
+|btn:[Based on properties]
+|This rendering strategy is typically used together with the <<tmsct-editor>>.
+This strategy will render the TMSC elements based on properties that are added to the TMSC model.
+Please read the comments that are included in the `tutorial.tmsct` for more information.
+
+|image:{imgsdir}/icons/time_warning.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+[[tmsc-rendering-strategy-critical]]
+|btn:[Critical Path]
+a|This strategy is used to show the <<tmsc-critical-path-analysis>> and <<tmsc-root-cause-analysis>> results.
+To learn more about these analyses and how to interpret their results, please read their corresponding sections. +
+All executions are grayed-out as the analysis results focus on paths.
+The critical dependencies are rendered as thicker arrows where:
+
+* Blue: The critical path behaves as expected or no outliers where found during root-cause analysis.
+* Yellow: The dependency has an abnormal duration, but did not cause the metric instance to exceed its budget.
+* Red: The dependency caused the metric instance to exceed its budget.
+
+
+|image:{imgsdir}/icons/rendering_default.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+[[tmsc-rendering-strategy-default]]
+|btn:[Default]
+|This is the default rendering strategy and can be used to render any TMSC.
+This strategy shows all elements except life-line segments and projected dependencies.
+No color strategy is applied for executions, messages are dark-gray and other dependencies are light-gray.
+
+|image:{imgsdir}/icons/time_pin.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+[[tmsc-rendering-strategy-slack]]
+|btn:[Slack]
+|This strategy is used to show the <<tmsc-slack-analysis>> result.
+To learn more about this analysis and how to interpret its results, please read the corresponding section.
+The strategy shows the TMSC using the <<tmsc-rendering-strategy-default, default rendering strategy>> and adds annotations for events that indicate how much slack is allowed before that point in software becomes critical.
+
+|===
+
+ifdef::output-advanced[]
+
+CAUTION: The next rendering strategies will only be enabled when the _'Show advanced features'_ option is enabled  in the <<pps-preferences, PPS preferences>>.
+These features may be unstable, and might produce unexpected results.
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Name |Description
+
+[[tmsc-rendering-strategy-activity]]
+|image:{imgsdir}/icons/Activity.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Activity]
+|This strategy highlights all "activity" dependencies (i.e. where the `scheduled` attribute is `false`) in the TMSC.
+This strategy can be used to, e.g., debug the result of a "Scheduled dependency analysis" implementation. 
+
+[[tmsc-rendering-strategy-component]]
+|image:{imgsdir}/icons/Component.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Color by component]
+|This strategy colors executions based on their component, meaning that all executions of a component get the same color.
+
+[[tmsc-rendering-strategy-scopes]]
+|image:{imgsdir}/icons/rendering_scopes.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Color by scope]
+|This strategy colors dependencies based on the scopes that they belong to.
+As dependencies can belong to multiple scopes, every unique combination of scopes gets its own color.
+This strategy can be used to reason about, e.g., the output of <<tmsc-isomorphic-equivalence-classes, isomorphic equivalence grouping>>.   
+
+[[tmsc-rendering-strategy-full]]
+|image:{imgsdir}/icons/rendering_full.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Full TMSC]
+|The full rendering strategy is equivalent to the <<tmsc-rendering-strategy-default, default rendering strategy>>, but shows all elements in the TMSC.
+This strategy can be used for debugging purposes.
+
+|===
+
+endif::output-advanced[]
+
 [[tmsc-plantuml-view]]
 === PlantUML view
+
+[.float-group]
+--
+image::{imgsdir}/tmsc-plantuml-view.png[float=right, width=346,height=661,pdfwidth=2.88in,pdfheight=5.51in]
+
+PPS includes the https://plantuml.com/eclipse[PlantUML Eclipse Plugin] to show UML diagrams for some architecture elements in the runtime architecture of a TMSC.
+
+When an interface is selected in the <<tmsc-outline-view>>, the interface and the components that are requiring or providing the interface are shown in a component diagram.
+
+When a component is selected in the <<tmsc-outline-view>>, the component, its required and provided interfaces and the components that respectively provide or require those interfaces are shown in a component diagram.
+
+The selected architecture element is rendered in yellow as illustrated in the figure at the right.
+--
 
 [[tmsc-data-analysis-view]]
 === Data Analysis view
 
+TIP: To open the Data Analysis view, click the menu:Window[Show View, Data Analysis] menu.
+
+This view can be used to perform analysis on TMSC elements like executions, messages or metrics.
+By <<chart-selection, selecting>> an element, it can be analyzed in detail.
+All comparable occurrences of the element will be collected and analyzed in the selected chart.
+What makes an element comparable, depends on the type of the element.
+For executions, their function and either component or executor are considered.
+
+Apart from the standard analysis of a single element, there is also the possibility to analyze measurements.
+To access this function, the user must first perform a <<time-measurement, time measurement>> for two executions.
+By selecting the measurement, the execution pair can be analyzed in detail.
+All occurrences of execution pairs for the selected measurement will be collected and analyzed in the selected chart.
+
+The charts in the _Data Analysis_ view support some common functions to support analysis of their data, like:
+
+* Panning and zooming, see Section <<panning-and-zooming>>.
+* Saving a snapshot of the chart, see Section <<chart-export-png>>.
+
+On top of these common functions, the _Data Analysis_ view has the following additional action bar buttons.
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/analysisprovider_obj.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] {toolbar-menu}
+|btn:[Select Data Analysis Type]
+a|Two types of charts are available for analyzing the data, please read their corresponding sections for more information: +
+image:{imgsdir}/icons/analysisprovider_obj.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] <<tmsc-time-series-viewer, Time series>> +
+image:{imgsdir}/icons/histogram.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] <<tmsc-histogram-viewer, Histogram>>
+
+|image:{imgsdir}/icons/clone_editor.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[New Data Analysis View]
+|If pushed, it opens another instance of the _Data Analysis_ view.
+The other instance can be used to, for instance, view both the <<tmsc-time-series-viewer, time series>> and <<tmsc-histogram-viewer, histogram>> at the same time, or to keep one of the views pinned to a selection.
+
+|image:{imgsdir}/icons/pin_view.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Pin to selection]
+|If pushed, this Data Analysis view is pinned to the current selection. 
+
+|image:{imgsdir}/icons/filter_ps.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Filter Outliers]
+a|If pushed, a dialog is shown that allows to remove outliers from the current data set.
+The following outlier detection algorithms are supported:
+
+Interquartile range::
+    From https://en.wikipedia.org/wiki/Interquartile_range#Outliers[Wikipedia^]: 
+    The interquartile range is often used to find outliers in data.
+    Outliers here are defined as observations that fall below stem:[Q1 − "multiplicitant"*IQR] or above stem:[Q3 + "multiplicitant"*IQR], where a multiplicitant of 1.5 is used to detect mild outliers and 3 is used for extreme outliers.
+
+Sigma test::
+    From http://www.brendangregg.com/Articles/Detecting_Outliers.pdf[Brendan Gregg^]: 
+    This identifies the presence of outliers based on their distance from the bulk of the data, and should be relatively easy to understand. +
+    First, calculate the max sigma: +
+    stem:[maxσ = (max(x) – μ) / σ] +
+    This is how far the max is above the mean, μ, in units of standard deviation, σ (sigma).
+    The sigma test is then: +
+    stem:[outliers = (maxσ >= "threshold")] +
+    If any measurement exceeds "threshold" standard deviations, we can say that the sample contains outliers.
+
+Range::
+    Outliers here are defined as observations that fall below stem:["min"] or above stem:["max"]
+    
+|===
+
 [[tmsc-time-series-viewer]]
 ==== Time series viewer
 
+This chart displays the durations for all comparable elements for the selected element, including the element itself.
+A description for the selected element is displayed in the title of the chart.
+Statistical information can be found just below the title of the chart: mean, standard deviation, minimum and maximum.
+
+image::{imgsdir}/tmsc-data-analysis-time-series.png[width=653,height=288,pdfwidth=5.44in,pdfheight=2.40in]
+
+Every occurrence will be visualized as a vertical bar, with the height being equal to the duration.
+The occurrences are ordered 'as is', just like the order in the original data set.
+The originally selected element is also selected in the bar chart.
+
+IMPORTANT: If a <<tmsc-metric-analysis, metric>> is selected, the durations of its instances will be visualized, where red bars denote instances that exceed the metric budget.
+
+On top of the common _Data Analysis_ functions, the _Time Series Chart_ view also supports <<chart-selection, selection>> and the following additional action bar buttons.
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/LocateValue.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Locate value]
+a|If pushed, the current selection of the Data Analysis view is synchronized to the <<tmsc-outline-view>> of the TMSC graphical viewer.
+
+NOTE: Depending on the <<outline-dynamic-inclusion-filtering, content outline settings>> the selection may also be pushed to the active viewer.
+
+|===
+
 [[tmsc-histogram-viewer]]
 ==== Histogram viewer
+
+This chart displays a histogram of the durations for all comparable elements for the selected element, including the element itself.
+A description for the selected element is displayed in the title of the chart.
+Additional statistical information can be found just below the title of the chart: mean, standard deviation, minimum and maximum.
+
+image::{imgsdir}/tmsc-data-analysis-histogram.png[width=653,height=288,pdfwidth=5.44in,pdfheight=2.40in]
+
+The width of the duration intervals on the x-axis can be adjusted by the user using the 'Nr. of bins' slider.
+The duration of the originally selected element is shown as a vertical, yellow marker.
+The red line shows the https://en.wikipedia.org/wiki/Cumulative_distribution_function[Cumulative Distribution Function (CDF)^] which shows the probability that the duration will take a value less than or equal to asciimath:[x].

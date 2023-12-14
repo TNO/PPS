@@ -49,7 +49,7 @@ public class MetricDataAnalysisItemContentProvider implements IDataAnalysisItemC
 		return null;
 	}
 
-	private Metric getMetric(Object object) {
+	protected Metric getMetric(Object object) {
 		if (object instanceof MetricInstance) {
 			return ((MetricInstance) object).getMetric();
 		}

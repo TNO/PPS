@@ -127,6 +127,7 @@ class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider {
         propertyNames += PropertiesMetricProcessor::PROPERTY_METRIC_BUDGET
         propertyNames += PropertiesMetricProcessor::PROPERTY_METRIC_INSTANCE_FROM_ID
         propertyNames += PropertiesMetricProcessor::PROPERTY_METRIC_INSTANCE_TO_ID
+        propertyNames += PropertiesMetricProcessor::PROPERTY_METRIC_ACTIVITY_CUT_OFF
         for (propertyName : propertyNames) {
             acceptor.accept(createCompletionProposal(propertyName, propertyName, null, context))
         }

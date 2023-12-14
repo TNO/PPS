@@ -35,7 +35,6 @@ import nl.esi.pps.common.emf.synchronizedtiming.ui.SynchronizedTimingViewerPane;
 import nl.esi.pps.common.ide.ui.action.DropDownMenuAction;
 import nl.esi.pps.common.ide.ui.action.DropDownMenuAction.DropDownAction;
 import nl.esi.pps.common.jfreechart.chart.axis.NanoTimeAxis;
-import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.presentation.TmscEditorPlugin;
 import nl.esi.pps.tmsc.rendering.plot.IRenderingStrategy;
@@ -75,12 +74,14 @@ public class TmscPlotViewerPane extends SynchronizedTimingViewerPane {
 		IConfigurationElement[] renderingStrategyConfigurations = RenderingStrategyRegistryReader
 				.getRenderingStrategyConfigurations();
 		DropDownAction[] renderingStrategyActions = QueryableIterable.from(renderingStrategyConfigurations)
-				.select(this::isEnabled)
+				.select(this::isRenderingStrategyEnabled)
 				.collectOne(this::createRenderingStrategyAction)
 				.sortedBy(DropDownAction::getText, String.CASE_INSENSITIVE_ORDER)
 				.toArray(DropDownAction.class);
 		getToolBarManager().appendToGroup(GROUP_TMSC,
 				new DropDownMenuAction("Select Rendering Strategy", renderingStrategyActions));
+		getMenuManager().appendToGroup(GROUP_TMSC,
+				new DropDownMenuAction("Rendering Strategy", "Select Rendering Strategy", renderingStrategyActions));
 		
 		getToolBarManager().appendToGroup(GROUP_TMSC, new DropDownMenuAction("Select Dependencies Visibility", 
 				new SelectDependenciesVisibilityAction(DependenciesVisibility.ALL, getViewer()),
@@ -93,16 +94,14 @@ public class TmscPlotViewerPane extends SynchronizedTimingViewerPane {
 				new SelectExecutionsVisibilityAction(ExecutionsVisibility.HIDE_ANNOTATIONS, getViewer()),
 				new SelectExecutionsVisibilityAction(ExecutionsVisibility.NONE, getViewer())));
 		
-		if (PPSPreferences.isAdvancedFeaturesEnabled()) {
-			getToolBarManager().appendToGroup(GROUP_TMSC, optimizeLifelineOrderAction);
-		}
+		getToolBarManager().appendToGroup(GROUP_TMSC, optimizeLifelineOrderAction);
 
 		getMenuManager().appendToGroup(GROUP_SYNCHRONIZED_TIMING, gotoTimeAction);
 
 		updateActionBars();
 	}
 	
-	private boolean isEnabled(IConfigurationElement renderingStrategyConfiguration) {
+	protected boolean isRenderingStrategyEnabled(IConfigurationElement renderingStrategyConfiguration) {
 		IRenderingStrategy renderingStrategy = RenderingStrategyRegistryReader.getIRenderingStrategy(renderingStrategyConfiguration);
 		return renderingStrategy.isSupported(getEditingDomain());
 	}
@@ -138,7 +137,9 @@ public class TmscPlotViewerPane extends SynchronizedTimingViewerPane {
 		
 		@Override
 		protected void runChecked() {
+			viewer.getChartPanelComposite().getChart().removeChangeListener(this);
 			viewer.setRenderingStrategyID(renderingStrategyID, true);
+			viewer.getChartPanelComposite().getChart().addChangeListener(this);
 		}
 	}
 

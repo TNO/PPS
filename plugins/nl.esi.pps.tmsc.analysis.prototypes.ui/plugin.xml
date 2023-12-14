@@ -17,7 +17,6 @@
          id="nl.esi.pps.tmsc.analysis.prototypes.ui.fragment"
          point="org.eclipse.e4.workbench.model">
       <fragment
-            apply="initial"
             uri="fragment.e4xmi">
       </fragment>
    </extension>

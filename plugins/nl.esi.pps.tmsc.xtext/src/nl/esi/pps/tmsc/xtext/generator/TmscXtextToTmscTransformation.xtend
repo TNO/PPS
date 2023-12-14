@@ -214,6 +214,9 @@ class TmscXtextToTmscTransformation {
             events.forEach[traced = false]
         }
         addPropertiesIfAbsent(xExecutor.properties)
+        if (xExecutor.eContainer instanceof XHost) {
+            addPropertiesIfAbsent((xExecutor.eContainer as XHost).properties)
+        }
     }
     
     @Resolvable

@@ -497,8 +497,8 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 		}
 		ISelection selection = getSelection();
 		if (selection instanceof Iterable) {
-			for (Interval interval : from((Iterable<?>) selection).objectsOfKind(Interval.class)) {
-				// Ensure annotations for selection
+			for (Interval interval : from((Iterable<?>) selection).objectsOfKind(Interval.class).reject(i -> i.eResource() == null)) {
+				// Ensure annotations for selection, but only if contained by a resource to avoid deletion left-overs
 				IntervalAnnotation.add(TmscPlotViewer.this, interval);
 			}
 		}

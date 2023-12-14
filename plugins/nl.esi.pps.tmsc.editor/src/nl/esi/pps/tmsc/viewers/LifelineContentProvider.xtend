@@ -14,6 +14,7 @@ import java.util.Set
 import nl.esi.pps.architecture.deployed.Host
 import nl.esi.pps.architecture.implemented.Function
 import nl.esi.pps.architecture.instantiated.Executor
+import nl.esi.pps.architecture.instantiated.ExecutorGroup
 import nl.esi.pps.architecture.specified.Component
 import nl.esi.pps.architecture.specified.Interface
 import nl.esi.pps.architecture.specified.Operation
@@ -34,7 +35,6 @@ import org.eclipse.emf.ecore.resource.ResourceSet
 
 import static extension nl.esi.pps.tmsc.util.TmscQueries.*
 import static extension org.eclipse.lsat.common.xtend.Queries.*
-import nl.esi.pps.architecture.instantiated.ExecutorGroup
 
 /** 
  * Content provider that queries the applicable {@link Lifeline lifelines} for
@@ -66,7 +66,7 @@ class LifelineContentProvider extends ContextAwareAdapterFactoryContentProvider<
                 content += context.lifelines
             }
             ScopedTMSC case (context.fullScope !== null): {
-                // Bugfix: when a scope is selected in outline and then removed (i.e. undo command),
+                // Bugfix: when a scope is selected in the outline and then removed (i.e. undo command),
                 // the fullScope becomes null, resulting in a NullpointerException, hence the null
                 // check in this case
                 content += context.fullScope.lifelines.select[events.exists[isInScope(context)]]
@@ -84,12 +84,16 @@ class LifelineContentProvider extends ContextAwareAdapterFactoryContentProvider<
                 content += context.connectedLifelines
             }
             Dependency: {
-                content += context.source.lifeline
-                content += context.target.lifeline
+                content += context.source?.lifeline
+                content += context.target?.lifeline
             }
             Interval: {
                 content += context.from?.lifeline
                 content += context.to?.lifeline
+                if (!context.scopes.isEmpty && context.tmsc !== null) {
+                    // If an interval contains analysis results (i.e. scopes), also show their content.
+                    content += context.tmsc.lifelines.select[events.exists[isInScope(context.scopes)]]
+                }
             }
             // Architecture contexts
             ExecutorGroup: {

@@ -28,6 +28,6 @@ ifndef::gendocdir[:gendocdir: ../target/adoc-gen]
 // non-breaking hyphen
 :nbh: &#8209;
 
-:toolbar-menu: &#9662;
+:toolbar-menu: &#9660;
 
 :eclipse-help-location: https://help.eclipse.org/2021-12/topic

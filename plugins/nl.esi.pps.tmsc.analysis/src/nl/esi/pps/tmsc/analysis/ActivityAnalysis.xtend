@@ -167,6 +167,7 @@ final class ActivityAnalysis {
                         scheduled = true
                         projection = true
                         epoch = true
+                        resourceSharing = releaseTime > epochEvent.timestamp
                     ]
                 }
                 epochDependencies += epochDependency
@@ -214,7 +215,7 @@ final class ActivityAnalysis {
      */
     private static class DependencyResourceSharingProjection implements DependencyFeatureProjection<Boolean> {
         override calculateProjectedValue(Event projectionSource, Map<Dependency, Boolean> projectionValues) {
-            return projectionValues.containsValue(true) || projectionValues.keySet.exists[activity]
+            return projectionValues.containsValue(true) || projectionValues.keySet.exists[activity || resourceSharing]
         }
         
         override apply(Dependency projection, Boolean targetFeatureValue) {

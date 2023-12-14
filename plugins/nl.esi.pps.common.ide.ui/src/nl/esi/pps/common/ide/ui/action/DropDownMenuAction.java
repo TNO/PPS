@@ -32,8 +32,14 @@ public class DropDownMenuAction extends Action implements IMenuCreator {
 	private final IPropertyChangeListener CHECKED_LISTENER = new IPropertyChangeListener() {
 		@Override
 		public void propertyChange(PropertyChangeEvent event) {
-			if (IAction.CHECKED.equals(event.getProperty()) && Boolean.TRUE.equals(event.getNewValue())) {
+			if (!IAction.CHECKED.equals(event.getProperty())) {
+				return;
+			}
+			if (Boolean.TRUE.equals(event.getNewValue())) {
 				handleActionChecked((IAction) event.getSource());
+			} else if (actions.stream().noneMatch(IAction::isChecked)) {
+				setImageDescriptor(
+						PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_WARN_TSK));
 			}
 		}
 	};
@@ -45,14 +51,22 @@ public class DropDownMenuAction extends Action implements IMenuCreator {
 	private final List<? extends DropDownAction> actions;
 	
 	public DropDownMenuAction(String text, DropDownAction... actions) {
-		this(text, Arrays.asList(actions));
+		this(text, text, actions);
+	}
+
+	public DropDownMenuAction(String text, String toolTipText, DropDownAction... actions) {
+		this(text, toolTipText, Arrays.asList(actions));
 	}
 
 	public DropDownMenuAction(String text, List<? extends DropDownAction> actions) {
+		this(text, text, actions);
+	}
+	
+	public DropDownMenuAction(String text, String toolTipText, List<? extends DropDownAction> actions) {
 		super(text, Action.AS_DROP_DOWN_MENU);
 		this.actions = actions;
 		setMenuCreator(this);
-		setToolTipText(text);
+		setToolTipText(toolTipText);
 		setImageDescriptor(
 				PlatformUI.getWorkbench().getSharedImages().getImageDescriptor(ISharedImages.IMG_OBJS_WARN_TSK));
 
@@ -64,8 +78,7 @@ public class DropDownMenuAction extends Action implements IMenuCreator {
 		}
 	}
 	
-	private void handleActionChecked(IAction action) {
-		setText(action.getText());
+	protected void handleActionChecked(IAction action) {
 		setImageDescriptor(action.getImageDescriptor());
 	}
 	

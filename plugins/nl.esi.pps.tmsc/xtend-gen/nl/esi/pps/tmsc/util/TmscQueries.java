@@ -1111,10 +1111,24 @@ public final class TmscQueries {
    * An performance optimized version of {@code event.getScopes().contains(tmsc)}.
    */
   public static boolean isInScope(final Event event, final ScopedTMSC tmsc) {
-    final Function1<Dependency, Boolean> _function = (Dependency it) -> {
+    return ((tmsc != null) && IterableExtensions.<Dependency>exists(Queries.<Dependency>union(event.getFullScopeIncomingDependencies(), event.getFullScopeOutgoingDependencies()), ((Function1<Dependency, Boolean>) (Dependency it) -> {
       return Boolean.valueOf(it.getScopes().contains(tmsc));
+    })));
+  }
+  
+  public static boolean isInScope(final Event event, final Iterable<? extends ScopedTMSC> tmscs) {
+    boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(tmscs);
+    if (_isNullOrEmpty) {
+      return false;
+    }
+    final Function1<Dependency, EList<ScopedTMSC>> _function = (Dependency it) -> {
+      return it.getScopes();
     };
-    return IterableExtensions.<Dependency>exists(Queries.<Dependency>union(event.getFullScopeIncomingDependencies(), event.getFullScopeOutgoingDependencies()), _function);
+    final Iterable<ScopedTMSC> eventScopes = IterableExtensions.<Dependency, ScopedTMSC>flatMap(Queries.<Dependency>union(event.getFullScopeIncomingDependencies(), event.getFullScopeOutgoingDependencies()), _function);
+    final Function1<ScopedTMSC, Boolean> _function_1 = (ScopedTMSC scope) -> {
+      return Boolean.valueOf(IterableExtensions.contains(tmscs, scope));
+    };
+    return IterableExtensions.<ScopedTMSC>exists(eventScopes, _function_1);
   }
   
   public static void disposeTemp(final ScopedTMSC tmsc, final boolean disposeTempDependencies) {

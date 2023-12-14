@@ -36,7 +36,7 @@ class RootCauseClassification {
 
     def String describeRootCause(Dependency dependency) {
         if (dependency.source.lifeline == dependency.target.lifeline || dependency.epoch) {
-            if (dependency.epoch || dependency.resourceSharing == true) {
+            if (dependency.resourceSharing == true) {
                 return '''Detected service contention on «dependency.target.resource».'''
             } else if (dependency.scheduled == false && dependency instanceof LifelineSegment) {
                 return '''Detected resource contention on «dependency.target.resource» in «(dependency as LifelineSegment).task».'''

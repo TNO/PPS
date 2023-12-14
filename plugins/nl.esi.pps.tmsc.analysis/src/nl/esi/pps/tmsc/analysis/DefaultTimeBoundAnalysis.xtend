@@ -22,6 +22,7 @@ import org.eclipse.xtend.lib.annotations.Data
 import org.eclipse.xtend.lib.annotations.FinalFieldsConstructor
 
 import static extension nl.esi.pps.tmsc.util.TmscQueries.*
+import nl.esi.pps.tmsc.EntryEvent
 
 @FinalFieldsConstructor
 class DefaultTimeBoundAnalysis {
@@ -110,7 +111,8 @@ class DefaultTimeBoundAnalysis {
      * before the application continues.
      */
     protected def boolean isWaitEvent(Event event) {
-        return event.execution !== null && event.execution.parent === null
+        // By default the start of a new call-stack is expected to await a message
+        return event instanceof EntryEvent && event.execution !== null && event.execution.parent === null
     }
     
     protected def long getTimeout(Dependency dependency) {

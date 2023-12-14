@@ -13,6 +13,40 @@ include::_initCommon.adoc[]
 [[tmsct-editor]]
 == TMSC textual editor
 
+The TMSC textual syntax allows you to create small example traces, to explore, test or document PPS features.
+The textual syntax is not developed for large traces as it will suffer from scalability issues.
+For large traces a custom TMSC reconstructor should be implemented as documented in the PPS developer guide.
+
+The TMSC textual editor provides syntax highlighting and code completion to support writing TMSCs.
+It also provides means to customize the visualization of the TMSC by e.g., defining colors for executions and dependencies.
+All features of the syntax are explained in the comment that are included in the `tutorial.tmsct` file that is part of the TMSC examples project as provided by PPS.
+Use the menu:File[New > Example...] menu and choose the `TMSC Examples Wizard` to add this TMSC examples project to your PPS workspace.
+Then click the btn:[Finish] button to complete the import.
+
+image::{imgsdir}/tmsct-examples-wizard.png[width=449,height=296,pdfwidth=3.74in,pdfheight=2.47in]
+
+[NOTE]
+==== 
+During import the following question may pop up.
+You may want to check `Remember my descision`.
+Then click the btn:[Yes] button to continue. 
+
+image::{imgsdir}/tmsct-configure-xtext.png[width=518,height=167,pdfwidth=4.32in,pdfheight=1.39in]
+====
+
+When the wizard is done, the `tutorial.tmsct` file is automatically opened in the editor area.
+Upon a save of a `\*.tmsct` file, a `*.tmsc` file with the same name is automatically generated in the `src-gen` folder within the project.
+This TMSC file can be opened with the <<tmsc-editor>>.
+
+TIP: Toggling the image:{imgsdir}/icons/synced.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] btn:[Link with Editor] button in the _Project Explorer_ view toolbar ties the view to always show the current file being edited.
+
+In the screenshot below, the editor area contains the TMSC textual editor and the <<tmsc-editor>> side-by-side.
+By default editors will be opened stacked, but editors can be moved by means of dragging the tab of an editor to another location.
+Opening a textual editor and graphical viewer side-by-side is useful as the changes in the textual editor will be reflected in the graphical viewer upon save.
+
+image::{imgsdir}/tmsct-tutorial.png[width=1186,height=553]
+
+[[tmsct-project-explorer-view]]
 === Project Explorer view
 
 The `tmsct` file extension is associated with the TMSC textual editor.

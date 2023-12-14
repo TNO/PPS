@@ -212,6 +212,8 @@ public class TmscActionBarContributor extends BookmarkActionBarContributor imple
 		menuManager.add(new ActionContributionItem(undoAction));
 		menuManager.add(new ActionContributionItem(redoAction));
 		menuManager.add(new Separator());
+		menuManager.add(new ActionContributionItem(deleteAction));
+		menuManager.add(new Separator());
 
 		if ((style & ADDITIONS_LAST_STYLE) != 0) {
 			menuManager.add(new Separator("additions"));

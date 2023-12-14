@@ -31,8 +31,7 @@
  * - use shorter aliases
  * - use complex names, i.e. including non-word characters
  * - control the order of the executors in the TMSC
- * 
- * TIP: Optionally you can group executors by hosts that they are running on
+ * - group executors by hosts that they are running on
  */
 component "Component 2" as C
 host Host1 as H1 {
@@ -140,6 +139,11 @@ S5 < fs5 ?RP5
  */
 tmsc settings {
 	/*
+	 * This special property specifies whether to save the architecture model within the generated
+	 * TMSC '*.tmsc' file itself (internal) or to save it in its own architecture '*.arch' file (external).
+	 */
+	architecture: internal
+	/*
 	 * These properties are applied to the TMSC 
 	 * 
 	 * Four types of property values can be used:
@@ -178,7 +182,7 @@ tmsc settings {
  * - stroke (nl.esi.pps.tmsc.rendering.RenderingStroke name, i.e. [FAT_|VERY_FAT_](SOLID|DASHED|DOT_DASH|LONG_DASHED)):
  *   Applies to dependency. Specifies the stroke to use for the dependency.
  * - hidden (true|false): 
- *   Applies to dependencies. If true, hides the dependency from the plot.
+ *   Applies to dependency, function and component. If true, hides the dependency or execution from the plot.
  *
  * TIP: Use Ctrl+Space to list the predefined values for these rendering properties
  */
@@ -190,16 +194,23 @@ message settings {
 }
 function "Send 6" as fs6 {
 	// These properties are applied on all executions of i.e. function fs6
+	hidden: false
 	paint: "#FB9A99"
 }
 component "Component 6" as C6 {
 	// These properties are applied on all executions of i.e. component C6.
 	// Please note that the paint property of a function has precedence over this property.
+	hidden: false
 	paint: GOLD
 }
 executor "Sender 6" as S6 {
-	// The paint is used as background paint for the swimlane of this executor,
-	// indicating that this component is 'special'
+	/*
+	 * The paint is used as background paint for the swimlane of this executor,
+	 * indicating that this component is 'special'
+	 *
+	 * TIP: Putting this property on the enclosing host of an executor will apply
+	 *      the background paint to all its executors.
+	 */
 	paint: BLUE
 }
 
@@ -257,6 +268,9 @@ e7s s7 < cf7 ?RP7
 
 /*
  * Metrics
+ *
+ * IMPORTANT: This feature only works if 'Show advanced features' is checked in
+ *            the PPS preferences, please read the user guide for more information.
  * 
  * Metric define a budget between two events in a trace. A metric is considered
  * to be well-defined if there is a always causal relation between those events.
@@ -285,3 +299,17 @@ r8 > sfx
 r8 < sfx
 r8 < sf8 !reply RP8b(request: RQ8b)
 s8 < cf8 ?RP8b {metricInstanceToID: "8b"}
+
+function sfx {
+	/*
+	 * As part of root-cause analysis activities between metrics are compared to each other.
+	 * If a metric is not well-defined, its activity may precede the start event of the metric,
+	 * causing the resulting activity containing too much information. Activity cut-offs help
+	 * to limit the scope of the activity, by placing markers on dependencies where to cut
+	 * the activity graph.
+	 * The metricActivityCutOff property can be put on any dependency or (indirectly) on an
+	 * execution. In the example below, the property is put on a function, resulting in all
+	 * life-line segments of an execution executing this function being an activity cut-off.
+	 */
+	metricActivityCutOff: true
+}
