@@ -62,4 +62,14 @@ public interface IDataAnalysisInput {
 	 * @see IDataAnalysisItemContentProvider#getDuration(Object, Object, String)
 	 */
 	Long getDuration(Object sibling, String configuration);
+
+	/**
+	 * @see IDataAnalysisItemContentProvider#isCategorized(Object, String)
+	 */
+	boolean isCategorized(String configuration);
+
+	/**
+	 * @see IDataAnalysisItemContentProvider#getCategory(Object, Object, String)
+	 */
+	String getCategory(Object sibling, String configuration);
 }

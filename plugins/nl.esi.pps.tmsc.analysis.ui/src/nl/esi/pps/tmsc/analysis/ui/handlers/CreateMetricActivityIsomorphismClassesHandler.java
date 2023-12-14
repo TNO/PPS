@@ -10,12 +10,9 @@
 
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static org.eclipse.lsat.common.queries.QueryableIterable.from;
+import static nl.esi.pps.tmsc.analysis.ui.handlers.CreateMetricActivityIsomorphismClassesHelper.createIsomorphismClasses;
 
-import java.text.DecimalFormat;
 import java.util.Collections;
-import java.util.List;
-import java.util.function.Function;
 
 import javax.inject.Named;
 
@@ -43,19 +40,13 @@ import org.eclipse.swt.widgets.Shell;
 
 import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.ScopedTMSC;
-import nl.esi.pps.tmsc.TMSC;
-import nl.esi.pps.tmsc.TmscFactory;
 import nl.esi.pps.tmsc.analysis.ui.commands.CreateScopedTMSCCommand;
 import nl.esi.pps.tmsc.compare.ArchitectureLifecycleStage;
-import nl.esi.pps.tmsc.compare.TmscIsomorphismMatcher;
 import nl.esi.pps.tmsc.metric.Metric;
 import nl.esi.pps.tmsc.rendering.plot.ScopesRenderingStrategy;
 import nl.esi.pps.tmsc.util.TmscQueries;
 
 public class CreateMetricActivityIsomorphismClassesHandler extends CreateScopedTMSCCommandHandler {
-	private static final DecimalFormat INDEX_FORMAT = new DecimalFormat("000");
-	private static final String INDEX_PROPERTY = "Isomorphism class";
-	
 	public CreateMetricActivityIsomorphismClassesHandler() {
 		super("create isomorphism classes of TMSCs");
 	}
@@ -107,43 +98,17 @@ public class CreateMetricActivityIsomorphismClassesHandler extends CreateScopedT
 		}
 		
 		@Override
-		@SuppressWarnings("deprecation")
 		protected ScopedTMSC createScopedTMSC(MultiStatus status, IProgressMonitor monitor) {
 			ScopedTMSC tmsc = super.createScopedTMSC(status, monitor);
 			// Apply some rendering hints such that this scope isn't grouped by the renderer
 			ScopesRenderingStrategy.setGroupKey(tmsc, false);
 			
-			List<List<ScopedTMSC>> isomorphismClasses = TmscIsomorphismMatcher.findIsomorphismClasses(
-					metric.getInstances().stream().map(strategy::createTMSC).iterator(), stage);
-			// Apply some rendering hints such that these scopes aren't grouped by the renderer
-			from(isomorphismClasses).collect(Function.identity()).closure(true, TMSC::getChildScopes)
-					.forEach(scope -> ScopesRenderingStrategy.setGroupKey(scope, false));
-			
-			for (int index = 0; index < isomorphismClasses.size(); index++) {
-				List<ScopedTMSC> isomorphicTMSCs = isomorphismClasses.get(index);
-				ScopedTMSC isomorphismClassTMSC = TmscFactory.eINSTANCE.createScopedTMSC();
-				isomorphismClassTMSC.setName(TmscQueries
-						.toEID(String.format("Isomorphism class %s %d %d", INDEX_FORMAT.format(index + 1),
-								isomorphicTMSCs.size(), isomorphicTMSCs.get(0).getDependencies().size())));
-				isomorphismClassTMSC.getProperties().put(INDEX_PROPERTY, INDEX_FORMAT.format(index + 1));
-				isomorphismClassTMSC.getChildScopes().addAll(isomorphicTMSCs);
-				
-				// All dependencies of a child scope should also be contained by its parent scope.
-				isomorphismClassTMSC.getChildScopes().forEach(
-						childScope -> isomorphismClassTMSC.getDependencies().addAll(childScope.getDependencies()));
-
-				// IsomorphismClassTMSC itself is child-scope of tmsc
-				tmsc.getChildScopes().add(isomorphismClassTMSC);
-				tmsc.getDependencies().addAll(isomorphismClassTMSC.getDependencies());
+			for (ScopedTMSC isomorphismClass : createIsomorphismClasses(metric, strategy, stage)) {
+				TmscQueries.addScopedTMSC(tmsc, isomorphismClass);
 			}
 			
 			return tmsc;
 		}
-	}
-	
-	@SuppressWarnings("deprecation")
-	public static String getIsomorphismClassIndex(TMSC tmsc) {
-		return (String) tmsc.getProperties().get(INDEX_PROPERTY);
 	}
 	
 	private static class StrategyAndStageSelectionDialog extends CreateIntervalActivityStrategy.StrategySelectionDialog {

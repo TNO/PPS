@@ -27,17 +27,17 @@ class DataAnalysisInput implements IDataAnalysisInput {
 	public Object getInput() {
 		return input;
 	}
-	
+
 	@Override
 	public Set<String> getConfigurations() {
 		return contentProvider.getConfigurations(input);
 	}
-	
+
 	@Override
 	public String getTitle(String configuration) {
 		return contentProvider.getTitle(input, configuration);
 	}
-	
+
 	@Override
 	public Long getBudget(String configuration) {
 		return contentProvider.getBudget(input, configuration);
@@ -51,5 +51,15 @@ class DataAnalysisInput implements IDataAnalysisInput {
 	@Override
 	public Long getDuration(Object sibling, String configuration) {
 		return contentProvider.getDuration(input, sibling, configuration);
+	}
+
+	@Override
+	public boolean isCategorized(String configuration) {
+		return contentProvider.isCategorized(input, configuration);
+	}
+
+	@Override
+	public String getCategory(Object sibling, String configuration) {
+		return contentProvider.getCategory(input, sibling, configuration);
 	}
 }

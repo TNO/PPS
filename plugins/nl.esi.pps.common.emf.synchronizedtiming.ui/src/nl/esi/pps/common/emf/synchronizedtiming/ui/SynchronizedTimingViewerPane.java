@@ -10,9 +10,8 @@
 
 package nl.esi.pps.common.emf.synchronizedtiming.ui;
 
+import static java.lang.String.format;
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_DATASET_VIEW;
-import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_EXPORT_IMAGE;
-import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_LEGEND_ONOFF;
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_MARGIN_SYNC;
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_MARGIN_SYNC_ENABLED;
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_TIME_SYNC;
@@ -20,7 +19,6 @@ import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_TIME_S
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_ZOOM_OUT_HORIZONTAL;
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_ZOOM_OUT_VERTICAL;
 import static nl.esi.pps.common.emf.synchronizedtiming.ui.Activator.IMAGE_ZOOM_VIEW;
-import static java.lang.String.format;
 
 import java.awt.Rectangle;
 import java.util.Collection;
@@ -58,12 +56,11 @@ import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.plot.XYPlot;
 import org.jfree.chart.plot.Zoomable;
-import org.jfree.chart.title.LegendTitle;
-import org.jfree.chart.title.Title;
 
 import nl.esi.pps.common.emf.synchronizedtiming.TimeSyncSupport;
 import nl.esi.pps.common.emf.synchronizedtiming.TimeSyncSupportProvider;
 import nl.esi.pps.common.emf.synchronizedtiming.jfree.ExportImageAction;
+import nl.esi.pps.common.emf.synchronizedtiming.jfree.ShowLegendAction;
 
 public abstract class SynchronizedTimingViewerPane extends ActionsViewerPane {
 	protected static final String GROUP_VIEW = "view";
@@ -83,7 +80,7 @@ public abstract class SynchronizedTimingViewerPane extends ActionsViewerPane {
 	protected final ZoomOutAction zoomOutAction = new ZoomOutAction();
 	protected final ZoomToSelectionXAction zoomToSelectionXAction = new ZoomToSelectionXAction();
 	protected final ZoomToSelectionYAction zoomToSelectionYAction = new ZoomToSelectionYAction();
-	protected final ShowLegendAction showLegendAction = new ShowLegendAction();
+	protected @Nullable ViewerShowLegendAction showLegendAction; // Initialized in 'createControl' method.
 	protected @Nullable ViewerExportImageAction exportImageAction; // Initialized in 'createControl' method.
 
 	public SynchronizedTimingViewerPane(IWorkbenchPage page, IWorkbenchPart part) {
@@ -104,7 +101,7 @@ public abstract class SynchronizedTimingViewerPane extends ActionsViewerPane {
 		return null;
 	}
 
-	private @Nullable ChartPanelComposite getChartPanelComposite() {
+	@Nullable ChartPanelComposite getChartPanelComposite() {
 		final ChartPanelViewer chartPanelViewer = getChartPanelViewer();
 		return chartPanelViewer == null ? null : chartPanelViewer.getChartPanelComposite();
 	}
@@ -202,11 +199,10 @@ public abstract class SynchronizedTimingViewerPane extends ActionsViewerPane {
 
 	protected void addViewActions() {
 		exportImageAction = new ViewerExportImageAction(getChartPanelComposite());
+		showLegendAction = new ViewerShowLegendAction(getChartPanelComposite());
 
 		getMenuManager().appendToGroup(GROUP_VIEW, exportImageAction);
 		getMenuManager().appendToGroup(GROUP_VIEW, showLegendAction);
-		
-		showLegendAction.update();
 	}
 		
 	protected class TimeSyncAction extends Action {
@@ -437,7 +433,7 @@ public abstract class SynchronizedTimingViewerPane extends ActionsViewerPane {
 
 	protected class ViewerExportImageAction extends ExportImageAction {
 		public ViewerExportImageAction(@Nullable ChartPanelComposite chartPanelComposite) {
-			super(chartPanelComposite, Activator.getDescriptor(IMAGE_EXPORT_IMAGE));
+			super(chartPanelComposite);
 		}
 
 		@Override
@@ -462,48 +458,25 @@ public abstract class SynchronizedTimingViewerPane extends ActionsViewerPane {
 			super.run();
 		}
 	}
-
-	protected class ShowLegendAction extends Action {
-		public ShowLegendAction() {
-			super("Show Legend", IAction.AS_CHECK_BOX);
-			setImageDescriptor(Activator.getDescriptor(IMAGE_LEGEND_ONOFF));
-			setToolTipText("If checked, this chart will show a legend.");
-		}
-
-		public void update() {
-			ChartPanelComposite chartPanelComposite = getChartPanelComposite();
-			JFreeChart chart = null == chartPanelComposite ? null : chartPanelComposite.getChart();
-			LegendTitle legend = null == chart ? null : chart.getLegend();
-			setVisible(null != legend);
-			setChecked(null != legend && legend.isVisible());
-		}
-		
-		protected void setVisible(boolean visible) {
-			for (IContributionItem item : getToolBarManager().getItems()) {
-				if (item instanceof ActionContributionItem && ((ActionContributionItem)item).getAction() == ShowLegendAction.this) {
-					item.setVisible(visible);
-				}
-			}
-			for (IContributionItem item : getMenuManager().getItems()) {
-				if (item instanceof ActionContributionItem && ((ActionContributionItem)item).getAction() == ShowLegendAction.this) {
-					item.setVisible(visible);
-				}
-			}
+	
+	protected class ViewerShowLegendAction extends ShowLegendAction {
+		public ViewerShowLegendAction(@Nullable ChartPanelComposite plotComposite) {
+			super(plotComposite);
 		}
 
 		@Override
-		public void run() {
-			ChartPanelComposite chartPanelComposite = getChartPanelComposite();
-			if (null == chartPanelComposite) return;
-			ChartPanel chartPanel = chartPanelComposite.getChartPanel();
-			if (null == chartPanel) return;
-			JFreeChart chart = chartPanel.getChart();
-			if (null == chart) return;
-
-			for (int i = 0; i < chart.getSubtitleCount(); i++) {
-				Title subtitle = chart.getSubtitle(i);
-				if (subtitle instanceof LegendTitle) {
-					subtitle.setVisible(isChecked());
+		public void setEnabled(boolean enabled) {
+			super.setEnabled(enabled);
+			
+			// Also hide the action if disabled
+			for (IContributionItem item : getToolBarManager().getItems()) {
+				if (item instanceof ActionContributionItem && ((ActionContributionItem)item).getAction() == ViewerShowLegendAction.this) {
+					item.setVisible(enabled);
+				}
+			}
+			for (IContributionItem item : getMenuManager().getItems()) {
+				if (item instanceof ActionContributionItem && ((ActionContributionItem)item).getAction() == ViewerShowLegendAction.this) {
+					item.setVisible(enabled);
 				}
 			}
 		}
