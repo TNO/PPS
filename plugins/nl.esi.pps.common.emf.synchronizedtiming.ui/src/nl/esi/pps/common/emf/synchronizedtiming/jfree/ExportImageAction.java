@@ -44,7 +44,7 @@ public class ExportImageAction extends Action {
 		this(null, Activator.getDescriptor(Activator.IMAGE_EXPORT_IMAGE));
 	}
 	
-	public ExportImageAction(ChartPanelComposite plotComposite) {
+	public ExportImageAction(@Nullable ChartPanelComposite plotComposite) {
 		this(plotComposite, Activator.getDescriptor(Activator.IMAGE_EXPORT_IMAGE));
 	}
 

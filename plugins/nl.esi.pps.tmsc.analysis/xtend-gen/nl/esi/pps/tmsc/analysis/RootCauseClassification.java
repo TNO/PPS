@@ -46,7 +46,9 @@ public class RootCauseClassification {
   
   public String describeRootCause(final Dependency dependency) {
     if ((Objects.equal(dependency.getSource().getLifeline(), dependency.getTarget().getLifeline()) || ActivityAnalysis.isEpoch(dependency))) {
-      if ((ActivityAnalysis.isEpoch(dependency) || (ActivityAnalysis.isResourceSharing(dependency) == true))) {
+      boolean _isResourceSharing = ActivityAnalysis.isResourceSharing(dependency);
+      boolean _equals = (_isResourceSharing == true);
+      if (_equals) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Detected service contention on ");
         String _resource = this.getResource(dependency.getTarget());

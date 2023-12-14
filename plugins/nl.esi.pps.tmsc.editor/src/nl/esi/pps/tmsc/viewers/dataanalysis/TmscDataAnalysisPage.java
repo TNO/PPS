@@ -31,14 +31,15 @@ import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.trace4cps.common.jfreechart.ui.viewers.ChartPanelContentViewer;
+import org.eclipse.trace4cps.common.jfreechart.ui.widgets.ChartPanelComposite;
 import org.eclipse.ui.part.IPageSite;
 
 import nl.esi.pps.common.emf.synchronizedtiming.jfree.ExportImageAction;
+import nl.esi.pps.common.emf.synchronizedtiming.jfree.ShowLegendAction;
 import nl.esi.pps.common.emf.ui.views.dataanalysis.DataAnalysisMultiViewerPage;
 import nl.esi.pps.common.ide.ui.action.DropDownMenuAction;
 import nl.esi.pps.common.ide.ui.action.DropDownMenuAction.DropDownAction;
 import nl.esi.pps.common.ide.ui.views.dataanalysis.DataAnalysisView;
-
 import nl.esi.pps.tmsc.presentation.TmscEditor;
 import nl.esi.pps.tmsc.presentation.TmscEditorPlugin;
 import nl.esi.pps.tmsc.provider.ext.ui.AdapterFactoryDataAnalysisContentProvider;
@@ -50,6 +51,7 @@ public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 	private static final String DATA_ANALYSIS_NOT_AVAILABLE = "Not available";
 
 	private final ExportImageAction exportImageAction = new ExportImageAction();
+	private final ShowLegendAction showLegendAction = new ShowLegendAction();
 	private final DurationFilterAction durationFilterAction = new DurationFilterAction(() -> getSite().getShell());
 
 	private final ArrayList<ISelectionChangedListener> selectionChangedListeners = new ArrayList<>();
@@ -89,6 +91,7 @@ public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 		toolBarManager.insertBefore(DataAnalysisView.GROUP_VIEW_END, durationFilterAction);
 
 		menuManager.insertBefore(DataAnalysisView.GROUP_VIEW_END, exportImageAction);
+		menuManager.insertBefore(DataAnalysisView.GROUP_VIEW_END, showLegendAction);
 		
 		DataAnalysisViewerType[] viewerTypes = DataAnalysisViewerType.values();
 		DropDownAction[] viewerTypeActions = new DropDownAction[viewerTypes.length];
@@ -104,6 +107,7 @@ public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 	public void dispose() {
 		// Workaround for memory leak in menu manager due to Eclipse bug 543827
 		exportImageAction.setChartPanelComposite(null);
+		showLegendAction.setChartPanelComposite(null);
 		super.dispose();
 	}
 
@@ -196,9 +200,17 @@ public abstract class TmscDataAnalysisPage extends DataAnalysisMultiViewerPage
 	@Override
 	protected void viewerChanged(Viewer oldViewer, Viewer newViewer) {
 		super.viewerChanged(oldViewer, newViewer);
-		exportImageAction.setChartPanelComposite(newViewer instanceof ChartPanelContentViewer
-				? ((ChartPanelContentViewer) newViewer).getChartPanelComposite()
-				: null);
+		
+		ChartPanelComposite chartPanelComposite = getChartPanelComposite(newViewer);
+		exportImageAction.setChartPanelComposite(chartPanelComposite);
+		showLegendAction.setChartPanelComposite(chartPanelComposite);
+	}
+	
+	private ChartPanelComposite getChartPanelComposite(Viewer newViewer) {
+		if (newViewer instanceof ChartPanelContentViewer) {
+			return ((ChartPanelContentViewer) newViewer).getChartPanelComposite();
+		}
+		return null;
 	}
 
 	@Override

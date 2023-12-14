@@ -55,6 +55,16 @@ public class DataAnalysisItemContentProvider extends ItemProviderAdapter impleme
 		return getRegisteredContentProviders(object).get(configuration).getDuration(object, sibling, configuration);
 	}
 
+	@Override
+	public boolean isCategorized(Object object, String configuration) {
+		return getRegisteredContentProviders(object).get(configuration).isCategorized(object, configuration);
+	}
+
+	@Override
+	public String getCategory(Object object, Object sibling, String configuration) {
+		return getRegisteredContentProviders(object).get(configuration).getCategory(object, sibling, configuration);
+	}
+
 	private Map<String, IDataAnalysisItemContentProvider> getRegisteredContentProviders(Object object) {
 		if (object instanceof EObject) {
 			EClass eClass = ((EObject) object).eClass();

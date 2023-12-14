@@ -40,8 +40,8 @@ public enum DependenciesVisibility {
 	}
 
 	public void apply(DependenciesRenderer renderer, boolean notify) {
-		renderer.setDefaultSeriesVisible(this.compareTo(NONE) < 0, notify);
-		renderer.setDefaultDrawPlotCrossingLines(this.compareTo(HIDE_CROSSING) < 0, notify);
+		renderer.setDefaultSeriesVisible(this.compareTo(NONE) < 0, false);
+		renderer.setDefaultDrawPlotCrossingLines(this.compareTo(HIDE_CROSSING) < 0, false);
 		renderer.setDefaultAnnotationsVisible(this.compareTo(HIDE_ANNOTATIONS) < 0, notify);
 	}
 

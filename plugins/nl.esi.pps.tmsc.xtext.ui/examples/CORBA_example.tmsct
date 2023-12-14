@@ -247,7 +247,7 @@ S Switch < call_lib
 S Switch < flip_switch {metricInstanceToID: 2}
 
 // Bulb A behavior
-+555e-3 A ORB > event_loop
+1.630 A ORB > event_loop
 A ORB > handle_event
 A ORB > read
 A ORB < read
@@ -637,6 +637,8 @@ ipc-server function "Handle log" as handle_log implements Logging.log {
 }
 
 component ORB {
+    // Currently this property has no effect. Setting it to true will hide all executions
+    // of the ORB component in the call-stacks, resulting in a cleaner application view.
 	hidden: false
 }
 function "Event loop" as event_loop {

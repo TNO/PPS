@@ -58,5 +58,20 @@ public interface IDataAnalysisItemContentProvider {
 	 * {@code object} itself.
 	 */
 	Long getDuration(Object object, Object sibling, String configuration);
+
+	/**
+	 * @return (@code true} if the bars in the time-series viewer should be colored
+	 *         based on a {@link #getCategory(Object, Object, String) category}.
+	 */
+	default boolean isCategorized(Object object, String configuration) {
+		return false;
+	}
+
+	/**
+	 * @return the category for the {@code sibling} in the time-series viewer.
+	 */
+	default String getCategory(Object object, Object sibling, String configuration) {
+		return DEFAULT_CONFIGURATION;
+	}
 }
 // end::developer-guide[]

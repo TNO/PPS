@@ -19,8 +19,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.TreeSet;
 import nl.esi.pps.preferences.PPSPreferences;
+import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
+import nl.esi.pps.tmsc.Execution;
 import nl.esi.pps.tmsc.FullScopeTMSC;
+import nl.esi.pps.tmsc.LifelineSegment;
 import nl.esi.pps.tmsc.metric.extension.IMetricProcessor;
 import nl.esi.pps.tmsc.text.EDurationFormat;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -44,6 +47,8 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
   public static final String PROPERTY_METRIC_INSTANCE_FROM_ID = "metricInstanceFromID";
   
   public static final String PROPERTY_METRIC_INSTANCE_TO_ID = "metricInstanceToID";
+  
+  public static final String PROPERTY_METRIC_ACTIVITY_CUT_OFF = "metricActivityCutOff";
   
   @Override
   public boolean isEnabled(final FullScopeTMSC tmsc) {
@@ -147,6 +152,45 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
     return Collections.<MetricInstance>unmodifiableCollection(metricInstances);
   }
   
+  @Override
+  public boolean isActivityCutOff(final Dependency dependency, final MetricInstance metricInstance) {
+    Serializable cutOffValue = PropertiesMetricProcessor.getMetricActivityCutOff(dependency);
+    if ((cutOffValue == null)) {
+      if ((dependency instanceof LifelineSegment)) {
+        cutOffValue = PropertiesMetricProcessor.getMetricActivityCutOff(((LifelineSegment)dependency).getActiveExecution());
+      }
+    }
+    return this.isActivityCutOff(cutOffValue);
+  }
+  
+  private boolean isActivityCutOff(final Serializable cutOffValue) {
+    boolean _matched = false;
+    if (Objects.equal(cutOffValue, null)) {
+      _matched=true;
+      return false;
+    }
+    if (!_matched) {
+      if (cutOffValue instanceof Boolean) {
+        _matched=true;
+        return ((Boolean) cutOffValue).booleanValue();
+      }
+    }
+    if (!_matched) {
+      if (cutOffValue instanceof String) {
+        _matched=true;
+        return Boolean.parseBoolean(((String)cutOffValue));
+      }
+    }
+    {
+      StringConcatenation _builder = new StringConcatenation();
+      _builder.append("Invalid metricActivityCutOff value \'");
+      _builder.append(cutOffValue);
+      _builder.append("\', only boolean is allowed.");
+      PropertiesMetricProcessor.LOGGER.error(_builder.toString());
+      return false;
+    }
+  }
+  
   public static Serializable getMetricBudget(final FullScopeTMSC container) {
     final String key = "metricBudget";
     final Object value = container.getProperties().get(key);
@@ -185,6 +229,36 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
   
   public static void setMetricInstanceToID(final Event container, final Serializable value) {
     final String key = "metricInstanceToID";
+    if (value == null) {
+    container.getProperties().remove(key);
+    } else {
+        container.getProperties().put(key, value);
+    }
+  }
+  
+  public static Serializable getMetricActivityCutOff(final Dependency container) {
+    final String key = "metricActivityCutOff";
+    final Object value = container.getProperties().get(key);
+    return (Serializable) value;
+  }
+  
+  public static void setMetricActivityCutOff(final Dependency container, final Serializable value) {
+    final String key = "metricActivityCutOff";
+    if (value == null) {
+    container.getProperties().remove(key);
+    } else {
+        container.getProperties().put(key, value);
+    }
+  }
+  
+  public static Serializable getMetricActivityCutOff(final Execution container) {
+    final String key = "metricActivityCutOff";
+    final Object value = container.getProperties().get(key);
+    return (Serializable) value;
+  }
+  
+  public static void setMetricActivityCutOff(final Execution container, final Serializable value) {
+    final String key = "metricActivityCutOff";
     if (value == null) {
     container.getProperties().remove(key);
     } else {

@@ -21,9 +21,9 @@ import nl.esi.pps.tmsc.rendering.plot.IRenderingSeriesConfigurator;
 import nl.esi.pps.tmsc.viewers.plot.DependenciesRenderer;
 
 public enum CriticalPathRenderingKey implements IRenderingSeriesConfigurator {
-	CRITICAL_ACTIVITY("Critical", PURE_BLUE, FAT_SOLID, true), CRITICAL_SCHEDULED("Critical", PURE_BLUE, FAT_DASHED, false),
-	OUTLIER_ACTIVITY("Outlier", PURE_ORANGE, FAT_SOLID, true), OUTLIER_SCHEDULED("Outlier", PURE_ORANGE, FAT_DASHED, false),
-	ROOT_CAUSE_ACTIVITY("Root cause", PURE_RED, FAT_SOLID, true), ROOT_CAUSE_SCHEDULED("Root cause", PURE_RED, FAT_DASHED, false);
+	CRITICAL_RESOURCE("Critical", PURE_BLUE, FAT_SOLID, true), CRITICAL_SERVICE("Critical", PURE_BLUE, FAT_DASHED, false),
+	OUTLIER_RESOURCE("Outlier", PURE_ORANGE, FAT_SOLID, true), OUTLIER_SERVICE("Outlier", PURE_ORANGE, FAT_DASHED, false),
+	ROOT_CAUSE_RESOURCE("Root cause", PURE_RED, FAT_SOLID, true), ROOT_CAUSE_SERVICE("Root cause", PURE_RED, FAT_DASHED, false);
 
 	private final String literal;
 	private final RenderingPaint paint;

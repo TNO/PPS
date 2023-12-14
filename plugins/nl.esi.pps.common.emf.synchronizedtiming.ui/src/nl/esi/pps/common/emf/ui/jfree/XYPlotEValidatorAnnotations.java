@@ -96,6 +96,9 @@ public class XYPlotEValidatorAnnotations {
 		}
 
 		for (Resource resource : coordinates.keySet().stream().map(EObject::eResource).collect(Collectors.toSet())) {
+			if (resource == null) {
+				continue;
+			}
 			IResource iResource = URIHelper.asIResource(resource.getURI());
 			ResourceSet resourceSet = resource.getResourceSet();
 			if (iResource == null || resourceSet == null) {

@@ -157,16 +157,18 @@ Hold down the kbd:[Alt] key while such a support line is shown, and left click i
 Then hover to move the support line to another end point of a task and again left click while holding the kbd:[Alt] key.
 An annotation is then shown that visually and textually shows the time between the two support lines.
 The measurement is also added to the model and as shown image:{imgsdir}/icons/Measurement.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] in the _Outline_ view and the dirty (*) state of the editor.
-The user can choose to save image:{imgsdir}/icons/save_edit.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] the measurement or to undo the operation by using the menu:Edit[Undo] menu.
+The user can choose to save image:{imgsdir}/icons/save.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] the measurement or to undo the operation by using the menu:Edit[Undo] menu.
 
 TIP: To change the text of the measurement annotation, please <<chart-selection, select>> the annotation and edit the _Name_ in the _Properties View_.
+
+TIP: To delete a measurement annotation, please <<chart-selection, select>> the annotation and either hit the kbd:[Del] key or use the image:{imgsdir}/icons/delete_edit.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] menu:Delete[] context menu.
 
 image::{imgsdir}/measure-time.png[width=1212,height=559]
 
 [[chart-export-png]]
 === Export chart to PNG file
 
-It is possible to save a snapshot of a chart by clicking the btn:[Export As Image] image:{imgsdir}/icons/export-image.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] from the view menu (small triangle button image:{imgsdir}/icons/view_menu.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] at the right top of the view).
+It is possible to save a snapshot of a chart by clicking the btn:[Export As Image] image:{imgsdir}/icons/export-image.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] from the view menu (small triangle image:{imgsdir}/icons/viewer_pane_menu.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] or 3-dots image:{imgsdir}/icons/view_menu.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in] button at the right top of the view).
 The action will open a save dialog which allows you to select the location and the name of the exported PNG file.
 
 NOTE: The PNG is saved with the same resolution and size as currently displayed.
@@ -226,6 +228,58 @@ If you open a second workbench window, the editors/views within each workbench w
 Editors/views across different workbench windows are not synchronized.
 This is helpful when looking at different traces in separate workbench windows.
 
+[[editor-split-clone]]
+=== Splitting and cloning editors
+
+Some editors have multiple tabs, where each tab has a different view on the same data.
+It can be useful to have multiple editors on the same data, to show different views on the same data, at the same time.
+To support this, editors can be split and cloned.
+
+When an editor has the focus, the following toolbar buttons are present in the toolbar:
+
+[cols="^10,30,60",options="header"]
+|===
+|Icon |Action |Description
+
+|image:{imgsdir}/icons/split_horizontal.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Toggle Split Editor (Horizontal)]
+|If pushed, the editor is split into two parts, each shown horizontally, one above the other.
+Splitting horizontally while already split vertically, changes the vertical split into a horizontal split.
+Splitting horizontally while already split horizontally, undoes the horizontal split.
+
+|image:{imgsdir}/icons/split_vertical.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Toggle Split Editor (Vertical)]
+|If pushed, the editor is split into two parts, each shown vertically, one besides the other.
+Splitting vertically while already split horizontally, changes the horizontal split into a vertical split.
+Splitting vertically while already split vertically, undoes the vertical split.
+
+|image:{imgsdir}/icons/clone_editor.png[width=16,height=16,pdfwidth=0.13in,pdfheight=0.13in]
+|btn:[Clone Editor]
+|If pushed, the editor is cloned.
+A second instance of the editor is then available that can be used independently of the original editor.
+|===
+
+When splitting, the two editors remain bound together, and can only be moved together.
+The split can later be undone.
+When cloning, the two editors can be independently moved, closed, etc.
+
+Putting two editors below each other can be especially useful when applying <<synchronized-timing,timing synchronization>> to the views of those editors.
+
+[[workbench-window-new]]
+=== Multiple workbench windows
+
+By default the Eclipse IDE opens with one window, called the _workbench_ window.
+Working with traces, various editors may be opened, typically on data that is related.
+When working with with multiple traces, especially when using multiple monitors, it can be of benefit to open a second workbench window.
+In this second workbench window, editors for a different trace can be opened, and analyzed.
+This keeps the editors/data for one trace in one window, separate from the editors/data of the other trace in the other window.
+The data for the different traces in the workbench windows on the different monitors can then for instance be compared.
+Also, <<synchronized-timing,timing synchronization>> is applied per workbench window.
+To open a new workbench window, click the menu:Window[New Window] menu.
+
+image::{imgsdir}/window-new.png[width=516,height=108,pdfwidth=4.30in,pdfheight=0.90in]
+
+
 [[outline-dynamic-inclusion-filtering, dynamic inclusion filtering]]
 === Dynamic Inclusion Filtering
 
@@ -236,7 +290,7 @@ This complicates focussing on relevant data and the following functions therefor
 |===
 |Icon |Action |Description
 
-|image:{imgsdir}/outline-filter.png[width=184,height=54,pdfwidth=1.53in,pdfheight=0.45in]
+|image:{imgsdir}/outline-filter.png[width=140,height=47,pdfwidth=1.17in,pdfheight=0.39in]
 |btn:[type filter text]
 |Dynamic filtering of its elements, by means of entering a search pattern in its filter text box.
 

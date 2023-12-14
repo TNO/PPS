@@ -16,6 +16,7 @@ import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
 import nl.esi.pps.tmsc.Dependency;
+import nl.esi.pps.tmsc.EntryEvent;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.Lifeline;
@@ -296,7 +297,7 @@ public class DefaultTimeBoundAnalysis {
    * before the application continues.
    */
   protected boolean isWaitEvent(final Event event) {
-    return ((event.getExecution() != null) && (event.getExecution().getParent() == null));
+    return (((event instanceof EntryEvent) && (event.getExecution() != null)) && (event.getExecution().getParent() == null));
   }
   
   protected long getTimeout(final Dependency dependency) {

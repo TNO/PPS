@@ -74,7 +74,7 @@ public final class ActivityAnalysis {
     @Override
     public Boolean calculateProjectedValue(final Event projectionSource, final Map<Dependency, Boolean> projectionValues) {
       return Boolean.valueOf((projectionValues.containsValue(Boolean.valueOf(true)) || IterableExtensions.<Dependency>exists(projectionValues.keySet(), ((Function1<Dependency, Boolean>) (Dependency it) -> {
-        return Boolean.valueOf(ActivityAnalysis.isActivity(it));
+        return Boolean.valueOf((ActivityAnalysis.isActivity(it) || ActivityAnalysis.isResourceSharing(it)));
       }))));
     }
     
@@ -214,6 +214,9 @@ public final class ActivityAnalysis {
             it.setScheduled(Boolean.valueOf(true));
             it.setProjection(true);
             ActivityAnalysis.setEpoch(it, true);
+            Long _timestamp_1 = epochEvent.getTimestamp();
+            boolean _greaterThan = (releaseTime.compareTo(_timestamp_1) > 0);
+            ActivityAnalysis.setResourceSharing(it, _greaterThan);
           };
           DomainDependency _doubleArrow = ObjectExtensions.<DomainDependency>operator_doubleArrow(_createDomainDependency, _function_3);
           epochDependency = _doubleArrow;

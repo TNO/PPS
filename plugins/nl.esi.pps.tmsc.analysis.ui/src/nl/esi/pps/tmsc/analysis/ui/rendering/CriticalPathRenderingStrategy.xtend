@@ -51,12 +51,12 @@ class CriticalPathRenderingStrategy extends EnumRenderingStrategy<VoidRenderingK
     
     override protected getRenderingKey(Dependency dependency) {
         return switch it: dependency {
-            case rootCause && activity: ROOT_CAUSE_ACTIVITY
-            case rootCause: ROOT_CAUSE_SCHEDULED
-            case criticalOutlier && activity: OUTLIER_ACTIVITY
-            case criticalOutlier: OUTLIER_SCHEDULED
-            case critical && activity: CRITICAL_ACTIVITY
-            case critical: CRITICAL_SCHEDULED
+            case rootCause && resourceSharing: ROOT_CAUSE_SERVICE
+            case rootCause: ROOT_CAUSE_RESOURCE
+            case criticalOutlier && resourceSharing: OUTLIER_SERVICE
+            case criticalOutlier: OUTLIER_RESOURCE
+            case critical && resourceSharing: CRITICAL_SERVICE
+            case critical: CRITICAL_RESOURCE
         }
     }
     
@@ -97,14 +97,14 @@ class CriticalPathRenderingStrategy extends EnumRenderingStrategy<VoidRenderingK
         
         // Only the legends of the activity variants are rendered as their color is equal to the scheduled variant, 
         // so if the scheduled variant is not empty, make sure that its activity variant is visible in the legend.
-        if (dependenciesDataset.getItemCount(CRITICAL_SCHEDULED.series) > 0) {
-            dependenciesRenderer.setSeriesVisibleInLegend(CRITICAL_ACTIVITY.series, true, false)
+        if (dependenciesDataset.getItemCount(CRITICAL_SERVICE.series) > 0) {
+            dependenciesRenderer.setSeriesVisibleInLegend(CRITICAL_RESOURCE.series, true, false)
         }
-        if (dependenciesDataset.getItemCount(OUTLIER_SCHEDULED.series) > 0) {
-            dependenciesRenderer.setSeriesVisibleInLegend(OUTLIER_ACTIVITY.series, true, false)
+        if (dependenciesDataset.getItemCount(OUTLIER_SERVICE.series) > 0) {
+            dependenciesRenderer.setSeriesVisibleInLegend(OUTLIER_RESOURCE.series, true, false)
         }
-        if (dependenciesDataset.getItemCount(ROOT_CAUSE_SCHEDULED.series) > 0) {
-            dependenciesRenderer.setSeriesVisibleInLegend(ROOT_CAUSE_ACTIVITY.series, true, false)
+        if (dependenciesDataset.getItemCount(ROOT_CAUSE_SERVICE.series) > 0) {
+            dependenciesRenderer.setSeriesVisibleInLegend(ROOT_CAUSE_RESOURCE.series, true, false)
         }
     }
 }

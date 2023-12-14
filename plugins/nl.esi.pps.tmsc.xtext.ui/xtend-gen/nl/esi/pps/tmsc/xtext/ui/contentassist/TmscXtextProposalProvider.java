@@ -173,6 +173,7 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
     propertyNames.add(PropertiesMetricProcessor.PROPERTY_METRIC_BUDGET);
     propertyNames.add(PropertiesMetricProcessor.PROPERTY_METRIC_INSTANCE_FROM_ID);
     propertyNames.add(PropertiesMetricProcessor.PROPERTY_METRIC_INSTANCE_TO_ID);
+    propertyNames.add(PropertiesMetricProcessor.PROPERTY_METRIC_ACTIVITY_CUT_OFF);
     for (final String propertyName : propertyNames) {
       acceptor.accept(this.createCompletionProposal(propertyName, propertyName, null, context));
     }

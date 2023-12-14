@@ -75,6 +75,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyNumberValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyStringValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyValue;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.lsat.common.xtend.Queries;
 import org.eclipse.lsat.common.xtend.annotations.Resolvable;
 import org.eclipse.lsat.common.xtend.annotations.Transform;
@@ -543,6 +544,11 @@ public class TmscXtextToTmscTransformation {
       it.getEvents().forEach(_function_2);
     }
     this.addPropertiesIfAbsent(it, xExecutor.getProperties());
+    EObject _eContainer = xExecutor.eContainer();
+    if ((_eContainer instanceof XHost)) {
+      EObject _eContainer_1 = xExecutor.eContainer();
+      this.addPropertiesIfAbsent(it, ((XHost) _eContainer_1).getProperties());
+    }
   }
   
   @Resolvable
