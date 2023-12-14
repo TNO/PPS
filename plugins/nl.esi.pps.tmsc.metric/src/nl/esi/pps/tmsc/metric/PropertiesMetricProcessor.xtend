@@ -16,8 +16,11 @@ import java.util.Collections
 import java.util.TreeSet
 import nl.esi.emf.properties.xtend.PersistedProperty
 import nl.esi.pps.preferences.PPSPreferences
+import nl.esi.pps.tmsc.Dependency
 import nl.esi.pps.tmsc.Event
+import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.FullScopeTMSC
+import nl.esi.pps.tmsc.LifelineSegment
 import nl.esi.pps.tmsc.metric.^extension.IMetricProcessor
 import nl.esi.pps.tmsc.text.EDurationFormat
 import org.slf4j.Logger
@@ -42,6 +45,11 @@ class PropertiesMetricProcessor implements IMetricProcessor {
 
     @PersistedProperty(Event)
     public static val Serializable metricInstanceToID
+
+    public static val PROPERTY_METRIC_ACTIVITY_CUT_OFF = 'metricActivityCutOff'
+
+    @PersistedProperty(Dependency, Execution)
+    public static val Serializable metricActivityCutOff
 
     override isEnabled(FullScopeTMSC tmsc) {
         return tmsc !== null && PPSPreferences.isAdvancedFeaturesEnabled()
@@ -105,5 +113,32 @@ class PropertiesMetricProcessor implements IMetricProcessor {
             metricInstances += metricInstance
         }
         return Collections::unmodifiableCollection(metricInstances)
+    }
+    
+    override isActivityCutOff(Dependency dependency, MetricInstance metricInstance) {
+        var cutOffValue = dependency.metricActivityCutOff
+        if (cutOffValue === null) {
+            if (dependency instanceof LifelineSegment) {
+                cutOffValue = dependency.activeExecution.metricActivityCutOff
+            }
+        }
+        return isActivityCutOff(cutOffValue)
+    }
+    
+    def private boolean isActivityCutOff(Serializable cutOffValue) {
+        switch (cutOffValue) {
+            case null:
+                return false
+            Boolean: {
+                return cutOffValue
+            }
+            String: {
+                return Boolean.parseBoolean(cutOffValue)
+            }
+            default: {
+                LOGGER.error('''Invalid metricActivityCutOff value '«cutOffValue»', only boolean is allowed.''')
+                return false
+            }
+        }
     }
 }
