@@ -43,41 +43,41 @@ public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRen
     CriticalPathRenderingKey _switchResult = null;
     final Dependency it = dependency;
     boolean _matched = false;
-    if ((RootCauseAnalysis.isRootCause(it) && ActivityAnalysis.isActivity(it))) {
+    if ((RootCauseAnalysis.isRootCause(it) && ActivityAnalysis.isResourceSharing(it))) {
       _matched=true;
-      _switchResult = CriticalPathRenderingKey.ROOT_CAUSE_ACTIVITY;
+      _switchResult = CriticalPathRenderingKey.ROOT_CAUSE_SERVICE;
     }
     if (!_matched) {
       boolean _isRootCause = RootCauseAnalysis.isRootCause(it);
       if (_isRootCause) {
         _matched=true;
-        _switchResult = CriticalPathRenderingKey.ROOT_CAUSE_SCHEDULED;
+        _switchResult = CriticalPathRenderingKey.ROOT_CAUSE_RESOURCE;
       }
     }
     if (!_matched) {
-      if ((this.isCriticalOutlier(it) && ActivityAnalysis.isActivity(it))) {
+      if ((this.isCriticalOutlier(it) && ActivityAnalysis.isResourceSharing(it))) {
         _matched=true;
-        _switchResult = CriticalPathRenderingKey.OUTLIER_ACTIVITY;
+        _switchResult = CriticalPathRenderingKey.OUTLIER_SERVICE;
       }
     }
     if (!_matched) {
       boolean _isCriticalOutlier = this.isCriticalOutlier(it);
       if (_isCriticalOutlier) {
         _matched=true;
-        _switchResult = CriticalPathRenderingKey.OUTLIER_SCHEDULED;
+        _switchResult = CriticalPathRenderingKey.OUTLIER_RESOURCE;
       }
     }
     if (!_matched) {
-      if ((CriticalPathAnalysis.isCritical(it) && ActivityAnalysis.isActivity(it))) {
+      if ((CriticalPathAnalysis.isCritical(it) && ActivityAnalysis.isResourceSharing(it))) {
         _matched=true;
-        _switchResult = CriticalPathRenderingKey.CRITICAL_ACTIVITY;
+        _switchResult = CriticalPathRenderingKey.CRITICAL_SERVICE;
       }
     }
     if (!_matched) {
       boolean _isCritical = CriticalPathAnalysis.isCritical(it);
       if (_isCritical) {
         _matched=true;
-        _switchResult = CriticalPathRenderingKey.CRITICAL_SCHEDULED;
+        _switchResult = CriticalPathRenderingKey.CRITICAL_RESOURCE;
       }
     }
     return _switchResult;
@@ -123,20 +123,20 @@ public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRen
   @Override
   protected void hideEmptySeriesInLegend(final XYEdgeSeriesCollection dependenciesDataset, final DependenciesRenderer dependenciesRenderer, final XYIntervalSeriesCollection executionsDataset, final ExecutionsRenderer executionsRenderer) {
     super.hideEmptySeriesInLegend(dependenciesDataset, dependenciesRenderer, executionsDataset, executionsRenderer);
-    int _itemCount = dependenciesDataset.getItemCount(this.getSeries(CriticalPathRenderingKey.CRITICAL_SCHEDULED));
+    int _itemCount = dependenciesDataset.getItemCount(this.getSeries(CriticalPathRenderingKey.CRITICAL_SERVICE));
     boolean _greaterThan = (_itemCount > 0);
     if (_greaterThan) {
-      dependenciesRenderer.setSeriesVisibleInLegend(this.getSeries(CriticalPathRenderingKey.CRITICAL_ACTIVITY), Boolean.valueOf(true), false);
+      dependenciesRenderer.setSeriesVisibleInLegend(this.getSeries(CriticalPathRenderingKey.CRITICAL_RESOURCE), Boolean.valueOf(true), false);
     }
-    int _itemCount_1 = dependenciesDataset.getItemCount(this.getSeries(CriticalPathRenderingKey.OUTLIER_SCHEDULED));
+    int _itemCount_1 = dependenciesDataset.getItemCount(this.getSeries(CriticalPathRenderingKey.OUTLIER_SERVICE));
     boolean _greaterThan_1 = (_itemCount_1 > 0);
     if (_greaterThan_1) {
-      dependenciesRenderer.setSeriesVisibleInLegend(this.getSeries(CriticalPathRenderingKey.OUTLIER_ACTIVITY), Boolean.valueOf(true), false);
+      dependenciesRenderer.setSeriesVisibleInLegend(this.getSeries(CriticalPathRenderingKey.OUTLIER_RESOURCE), Boolean.valueOf(true), false);
     }
-    int _itemCount_2 = dependenciesDataset.getItemCount(this.getSeries(CriticalPathRenderingKey.ROOT_CAUSE_SCHEDULED));
+    int _itemCount_2 = dependenciesDataset.getItemCount(this.getSeries(CriticalPathRenderingKey.ROOT_CAUSE_SERVICE));
     boolean _greaterThan_2 = (_itemCount_2 > 0);
     if (_greaterThan_2) {
-      dependenciesRenderer.setSeriesVisibleInLegend(this.getSeries(CriticalPathRenderingKey.ROOT_CAUSE_ACTIVITY), Boolean.valueOf(true), false);
+      dependenciesRenderer.setSeriesVisibleInLegend(this.getSeries(CriticalPathRenderingKey.ROOT_CAUSE_RESOURCE), Boolean.valueOf(true), false);
     }
   }
 }
