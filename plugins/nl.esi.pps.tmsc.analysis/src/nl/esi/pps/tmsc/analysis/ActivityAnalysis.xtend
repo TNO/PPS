@@ -27,6 +27,7 @@ import nl.esi.pps.tmsc.util.TmscProjection
 import static extension nl.esi.pps.tmsc.sort.TmscTopologicalOrder.*
 import static extension nl.esi.pps.tmsc.util.TmscQueries.*
 import static extension org.eclipse.lsat.common.xtend.Queries.*
+import nl.esi.pps.tmsc.DomainDependency
 
 final class ActivityAnalysis {
     public static val EPOCH_PROJECTION = new DependencyEpochProjection()
@@ -141,35 +142,35 @@ final class ActivityAnalysis {
     private static def List<? extends Dependency> createEpochDependencies(Interval interval,
         Set<Dependency> causalDependencies) {
         val epochEvent = interval.from
-        val epochDependencies = newArrayList
+        val List<DomainDependency> epochDependencies = newArrayList
         
-        // Do not add an dependency to the epoch itself, hence mark it life-line as already processed
-        val epochLifelines = newHashSet(epochEvent.lifeline)
-        for (event : causalDependencies.createCachedQueryTMSC().getEventsInTopologicalOrder()) {
-            if (epochLifelines.add(event.lifeline)) {
+        for (event : causalDependencies.createCachedQueryTMSC().getEventsInTopologicalOrder().excluding(epochEvent)) {
+            val epochDependency = event.fullScopeIncomingDependencies.filter(DomainDependency).findFirst [ d |
+                d.source == epochEvent && d.epoch == true
+            ]
+            if (epochDependency === null) {
+                // Epoch dependency does not exist yet, so check if one is required
                 val incomingDependencies = new HashSet(event.fullScopeIncomingDependencies)
-                var epochDependency = incomingDependencies.findFirst[source == epochEvent && epoch == true]
-                if (epochDependency === null) {
-                    // Epoch dependency does not exist yet, so create one
-                    incomingDependencies.removeAll(causalDependencies)
+                incomingDependencies.removeAll(causalDependencies)
+                incomingDependencies.removeIf[timeBound === null]
+                
+                if (!incomingDependencies.isEmpty) {
                     // Release time: the max of the time-stamp of the epoch and the release time on the life-line 
                     // (if any; is time-stamp of last event on life-line before event + dependency time-bound)
-                    val releaseTimesOnLifeline = incomingDependencies.reject[timeBound === null].map [
-                        source.timestamp + timeBound
-                    ]
+                    val releaseTimesOnLifeline = incomingDependencies.map[source.timestamp + timeBound]
                     val releaseTime = releaseTimesOnLifeline.union(epochEvent.timestamp).max
-                    // Now add a dependency between the epoch and the first event on the thread, 
+                    // Now add a dependency between the epoch and the event, 
                     // using the release time as timeBound
-                    epochDependency = TmscFactory::eINSTANCE.createDomainDependency => [
+                    epochDependencies += TmscFactory::eINSTANCE.createDomainDependency => [
                         source = epochEvent
                         target = event
                         timeBound = releaseTime - epochEvent.timestamp
                         scheduled = true
                         projection = true
                         epoch = true
-                        resourceSharing = releaseTime > epochEvent.timestamp
                     ]
                 }
+            } else {
                 epochDependencies += epochDependency
             }
         }

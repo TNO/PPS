@@ -11,16 +11,15 @@ package nl.esi.pps.tmsc.analysis;
 
 import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.function.Predicate;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.DomainDependency;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.Interval;
-import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.ScopedTMSC;
 import nl.esi.pps.tmsc.TmscFactory;
 import nl.esi.pps.tmsc.metric.MetricInstance;
@@ -179,49 +178,50 @@ public final class ActivityAnalysis {
   
   private static List<? extends Dependency> createEpochDependencies(final Interval interval, final Set<Dependency> causalDependencies) {
     final Event epochEvent = interval.getFrom();
-    final ArrayList<Dependency> epochDependencies = CollectionLiterals.<Dependency>newArrayList();
-    final HashSet<Lifeline> epochLifelines = CollectionLiterals.<Lifeline>newHashSet(epochEvent.getLifeline());
-    TmscTopologicalOrder<Event> _eventsInTopologicalOrder = TmscTopologicalOrder.getEventsInTopologicalOrder(TmscQueries.createCachedQueryTMSC(causalDependencies));
-    for (final Event event : _eventsInTopologicalOrder) {
-      boolean _add = epochLifelines.add(event.getLifeline());
-      if (_add) {
-        EList<Dependency> _fullScopeIncomingDependencies = event.getFullScopeIncomingDependencies();
-        final HashSet<Dependency> incomingDependencies = new HashSet<Dependency>(_fullScopeIncomingDependencies);
-        final Function1<Dependency, Boolean> _function = (Dependency it) -> {
-          return Boolean.valueOf((Objects.equal(it.getSource(), epochEvent) && (ActivityAnalysis.isEpoch(it) == true)));
+    final List<DomainDependency> epochDependencies = CollectionLiterals.<DomainDependency>newArrayList();
+    Iterable<Event> _excluding = Queries.<Event>excluding(TmscTopologicalOrder.getEventsInTopologicalOrder(TmscQueries.createCachedQueryTMSC(causalDependencies)), epochEvent);
+    for (final Event event : _excluding) {
+      {
+        final Function1<DomainDependency, Boolean> _function = (DomainDependency d) -> {
+          return Boolean.valueOf((Objects.equal(d.getSource(), epochEvent) && (ActivityAnalysis.isEpoch(d) == true)));
         };
-        Dependency epochDependency = IterableExtensions.<Dependency>findFirst(incomingDependencies, _function);
+        final DomainDependency epochDependency = IterableExtensions.<DomainDependency>findFirst(Iterables.<DomainDependency>filter(event.getFullScopeIncomingDependencies(), DomainDependency.class), _function);
         if ((epochDependency == null)) {
+          EList<Dependency> _fullScopeIncomingDependencies = event.getFullScopeIncomingDependencies();
+          final HashSet<Dependency> incomingDependencies = new HashSet<Dependency>(_fullScopeIncomingDependencies);
           incomingDependencies.removeAll(causalDependencies);
-          final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
+          final Predicate<Dependency> _function_1 = (Dependency it) -> {
             Long _timeBound = it.getTimeBound();
-            return Boolean.valueOf((_timeBound == null));
+            return (_timeBound == null);
           };
-          final Function1<Dependency, Long> _function_2 = (Dependency it) -> {
-            Long _timestamp = it.getSource().getTimestamp();
-            Long _timeBound = it.getTimeBound();
-            return Long.valueOf(((_timestamp).longValue() + (_timeBound).longValue()));
-          };
-          final Iterable<Long> releaseTimesOnLifeline = IterableExtensions.<Dependency, Long>map(IterableExtensions.<Dependency>reject(incomingDependencies, _function_1), _function_2);
-          final Long releaseTime = IterableExtensions.<Long>max(Queries.<Long>union(releaseTimesOnLifeline, epochEvent.getTimestamp()));
-          DomainDependency _createDomainDependency = TmscFactory.eINSTANCE.createDomainDependency();
-          final Procedure1<DomainDependency> _function_3 = (DomainDependency it) -> {
-            it.setSource(epochEvent);
-            it.setTarget(event);
-            Long _timestamp = epochEvent.getTimestamp();
-            long _minus = ((releaseTime).longValue() - (_timestamp).longValue());
-            it.setTimeBound(Long.valueOf(_minus));
-            it.setScheduled(Boolean.valueOf(true));
-            it.setProjection(true);
-            ActivityAnalysis.setEpoch(it, true);
-            Long _timestamp_1 = epochEvent.getTimestamp();
-            boolean _greaterThan = (releaseTime.compareTo(_timestamp_1) > 0);
-            ActivityAnalysis.setResourceSharing(it, _greaterThan);
-          };
-          DomainDependency _doubleArrow = ObjectExtensions.<DomainDependency>operator_doubleArrow(_createDomainDependency, _function_3);
-          epochDependency = _doubleArrow;
+          incomingDependencies.removeIf(_function_1);
+          boolean _isEmpty = incomingDependencies.isEmpty();
+          boolean _not = (!_isEmpty);
+          if (_not) {
+            final Function1<Dependency, Long> _function_2 = (Dependency it) -> {
+              Long _timestamp = it.getSource().getTimestamp();
+              Long _timeBound = it.getTimeBound();
+              return Long.valueOf(((_timestamp).longValue() + (_timeBound).longValue()));
+            };
+            final Iterable<Long> releaseTimesOnLifeline = IterableExtensions.<Dependency, Long>map(incomingDependencies, _function_2);
+            final Long releaseTime = IterableExtensions.<Long>max(Queries.<Long>union(releaseTimesOnLifeline, epochEvent.getTimestamp()));
+            DomainDependency _createDomainDependency = TmscFactory.eINSTANCE.createDomainDependency();
+            final Procedure1<DomainDependency> _function_3 = (DomainDependency it) -> {
+              it.setSource(epochEvent);
+              it.setTarget(event);
+              Long _timestamp = epochEvent.getTimestamp();
+              long _minus = ((releaseTime).longValue() - (_timestamp).longValue());
+              it.setTimeBound(Long.valueOf(_minus));
+              it.setScheduled(Boolean.valueOf(true));
+              it.setProjection(true);
+              ActivityAnalysis.setEpoch(it, true);
+            };
+            DomainDependency _doubleArrow = ObjectExtensions.<DomainDependency>operator_doubleArrow(_createDomainDependency, _function_3);
+            epochDependencies.add(_doubleArrow);
+          }
+        } else {
+          epochDependencies.add(epochDependency);
         }
-        epochDependencies.add(epochDependency);
       }
     }
     return epochDependencies;
