@@ -20,8 +20,14 @@ class TimeBoundOutlierAnalysis {
     @PersistedProperty(value = Dependency, unsettable = true)
     public static val Long timeBoundOutlierThreshold
 
+    @PersistedProperty(value = Dependency, unsettable = true)
+    public static val Long preTimeBoundOutlierThreshold
+    
     @PersistedProperty(value = Dependency, unsettable = true, mutable=true)
     public static val ArrayList<Long> timeBoundSamples = newArrayList
+
+    @PersistedProperty(value = Dependency, unsettable = true, mutable=true)
+    public static val ArrayList<Long> preTimeBoundSamples = newArrayList
     
     static val IQR_FACTOR = 3.0
     
@@ -31,6 +37,10 @@ class TimeBoundOutlierAnalysis {
     
     static def Iterable<Dependency> analyseTimeBoundOutliers(TMSC tmsc) {
         return tmsc.dependencies.filter[isTimeBoundOutlier]
+    }
+    
+    static def Iterable<Dependency> analysePreTimeBoundOutliers(TMSC tmsc) {
+        return tmsc.dependencies.filter[isPreTimeBoundOutlier]
     }
     
     static def boolean isTimeBoundOutlier(Dependency dependency) {
@@ -44,6 +54,17 @@ class TimeBoundOutlierAnalysis {
         return dependency.timeBound > timeBoundOutlierThreshold
     }
     
+    static def boolean isPreTimeBoundOutlier(Dependency dependency) {
+        if (dependency.timeBound === null) {
+            return false
+        }
+        val timeBoundOutlierThreshold = dependency.analysePreTimeBoundOutlierThreshold(false)
+        if (timeBoundOutlierThreshold === null) {
+            return false
+        }
+        return dependency.timeBound > timeBoundOutlierThreshold
+    }
+    
     static def Long analyseTimeBoundOutlierThreshold(Dependency dependency, boolean refresh) {
         if (dependency.isSetTimeBoundOutlierThreshold && !refresh) {
             return dependency.timeBoundOutlierThreshold
@@ -51,11 +72,26 @@ class TimeBoundOutlierAnalysis {
         if (!dependency.isSetTimeBoundSamples || dependency.timeBoundSamples.isEmpty) {
             return null
         }
+        
         val iqr = dependency.timeBoundSamples.interquartileRange
         val Q1 = iqr.key
         val Q3 = iqr.value
         dependency.timeBoundOutlierThreshold = Math::ceil(Q3 + ((Q3 - Q1) * IQR_FACTOR)).longValue
         return dependency.timeBoundOutlierThreshold
+    }
+    
+    static def Long analysePreTimeBoundOutlierThreshold(Dependency dependency, boolean refresh) {
+        if (dependency.isSetPreTimeBoundOutlierThreshold && !refresh) {
+            return dependency.preTimeBoundOutlierThreshold
+        }
+        if (!dependency.isSetPreTimeBoundSamples || dependency.preTimeBoundSamples.isEmpty) {
+            return null
+        }
+        val iqr = dependency.preTimeBoundSamples.interquartileRange
+        val Q1 = iqr.key
+        val Q3 = iqr.value
+        dependency.preTimeBoundOutlierThreshold = Math::ceil(Q3 + ((Q3 - Q1) * IQR_FACTOR)).longValue
+        return dependency.preTimeBoundOutlierThreshold
     }
 
     /**

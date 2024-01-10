@@ -289,7 +289,7 @@ public class RootCauseAnalysis {
     }
   }
   
-  protected void analyseRootCause(final MetricInstance metricInstance, final ScopedTMSC causalScheduledActivity) {
+  public void analyseRootCause(final MetricInstance metricInstance, final ScopedTMSC causalScheduledActivity) {
     final Consumer<Dependency> _function = (Dependency it) -> {
       RootCauseAnalysis.unsetRootCause(it);
     };

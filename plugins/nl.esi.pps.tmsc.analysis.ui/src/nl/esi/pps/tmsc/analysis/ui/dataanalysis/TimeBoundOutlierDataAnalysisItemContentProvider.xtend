@@ -19,23 +19,41 @@ import static extension nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis.*
 import static extension org.eclipse.lsat.common.xtend.Queries.*
 
 class TimeBoundOutlierDataAnalysisItemContentProvider implements IDataAnalysisItemContentProvider {
+    
+    static final String TIME_BOUNDS_PRE = "Time-bounds (pre)"
+    static final String TIME_BOUNDS = "Time-bounds"
+    
     override getConfigurations(Object object) {
-        val dependency = object as Dependency
-        return if (dependency.isSetTimeBoundSamples) singleton('Time-bounds')
+       val dependency = object as Dependency
+       val configurations = newLinkedHashSet
+       if (dependency.isSetTimeBoundSamples) {
+           configurations += TIME_BOUNDS
+       } 
+       if (dependency.isSetPreTimeBoundSamples) {
+           configurations += TIME_BOUNDS_PRE
+       } 
+       return configurations
     }
 
     override String getTitle(Object object, String configuration) {
-        return 'Time-bounds'
+        return configuration 
     }
 
     override Long getBudget(Object object, String configuration) {
         val dependency = object as Dependency
-        return dependency.timeBoundOutlierThreshold
+        return switch (configuration) {
+            case TIME_BOUNDS: dependency.timeBoundOutlierThreshold
+            case TIME_BOUNDS_PRE: dependency.preTimeBoundOutlierThreshold
+        }
     }
 
     override Iterable<?> getSiblings(Object object, String configuration) {
         val dependency = object as Dependency
-        return singleton(object).union(dependency.timeBoundSamples)
+        val timeBoundSamples = switch (configuration) {
+           case TIME_BOUNDS: dependency.timeBoundSamples
+           case TIME_BOUNDS_PRE: dependency.preTimeBoundSamples
+       }
+       return singleton(object).union(timeBoundSamples)
     }
 
     override Long getDuration(Object object, Object sibling, String configuration) {

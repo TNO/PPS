@@ -27,7 +27,9 @@ Require-Bundle: org.eclipse.emf.ecore;visibility:=reexport,
  org.eclipse.core.expressions;resolution:=optional,
  org.eclipse.lsat.common.emf.validation,
  org.apache.commons.collections,
- org.eclipse.xtext.xbase.lib;visibility:=reexport
+ org.eclipse.xtext.xbase.lib;visibility:=reexport,
+ com.github.tno.gltsdiff;bundle-version="0.1.0",
+ org.apache.commons.math3;bundle-version="3.6.1"
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: nl.esi.pps.tmsc.TmscPlugin
 Import-Package: org.slf4j;version="1.7.2"

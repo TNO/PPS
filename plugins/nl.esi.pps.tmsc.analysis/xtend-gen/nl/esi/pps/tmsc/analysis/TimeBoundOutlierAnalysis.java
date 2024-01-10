@@ -34,6 +34,13 @@ public class TimeBoundOutlierAnalysis {
     return IterableExtensions.<Dependency>filter(tmsc.getDependencies(), _function);
   }
   
+  public static Iterable<Dependency> analysePreTimeBoundOutliers(final TMSC tmsc) {
+    final Function1<Dependency, Boolean> _function = (Dependency it) -> {
+      return Boolean.valueOf(TimeBoundOutlierAnalysis.isPreTimeBoundOutlier(it));
+    };
+    return IterableExtensions.<Dependency>filter(tmsc.getDependencies(), _function);
+  }
+  
   public static boolean isTimeBoundOutlier(final Dependency dependency) {
     Long _timeBound = dependency.getTimeBound();
     boolean _tripleEquals = (_timeBound == null);
@@ -41,6 +48,20 @@ public class TimeBoundOutlierAnalysis {
       return false;
     }
     final Long timeBoundOutlierThreshold = TimeBoundOutlierAnalysis.analyseTimeBoundOutlierThreshold(dependency, false);
+    if ((timeBoundOutlierThreshold == null)) {
+      return false;
+    }
+    Long _timeBound_1 = dependency.getTimeBound();
+    return (_timeBound_1.compareTo(timeBoundOutlierThreshold) > 0);
+  }
+  
+  public static boolean isPreTimeBoundOutlier(final Dependency dependency) {
+    Long _timeBound = dependency.getTimeBound();
+    boolean _tripleEquals = (_timeBound == null);
+    if (_tripleEquals) {
+      return false;
+    }
+    final Long timeBoundOutlierThreshold = TimeBoundOutlierAnalysis.analysePreTimeBoundOutlierThreshold(dependency, false);
     if ((timeBoundOutlierThreshold == null)) {
       return false;
     }
@@ -63,6 +84,23 @@ public class TimeBoundOutlierAnalysis {
     double _plus = ((Q3).doubleValue() + _multiply);
     TimeBoundOutlierAnalysis.setTimeBoundOutlierThreshold(dependency, Long.valueOf(Double.valueOf(Math.ceil(_plus)).longValue()));
     return TimeBoundOutlierAnalysis.getTimeBoundOutlierThreshold(dependency);
+  }
+  
+  public static Long analysePreTimeBoundOutlierThreshold(final Dependency dependency, final boolean refresh) {
+    if ((TimeBoundOutlierAnalysis.isSetPreTimeBoundOutlierThreshold(dependency) && (!refresh))) {
+      return TimeBoundOutlierAnalysis.getPreTimeBoundOutlierThreshold(dependency);
+    }
+    if (((!TimeBoundOutlierAnalysis.isSetPreTimeBoundSamples(dependency)) || TimeBoundOutlierAnalysis.getPreTimeBoundSamples(dependency).isEmpty())) {
+      return null;
+    }
+    final Pair<Double, Double> iqr = TimeBoundOutlierAnalysis.getInterquartileRange(TimeBoundOutlierAnalysis.getPreTimeBoundSamples(dependency));
+    final Double Q1 = iqr.getKey();
+    final Double Q3 = iqr.getValue();
+    double _minus = DoubleExtensions.operator_minus(Q3, Q1);
+    double _multiply = (_minus * TimeBoundOutlierAnalysis.IQR_FACTOR);
+    double _plus = ((Q3).doubleValue() + _multiply);
+    TimeBoundOutlierAnalysis.setPreTimeBoundOutlierThreshold(dependency, Long.valueOf(Double.valueOf(Math.ceil(_plus)).longValue()));
+    return TimeBoundOutlierAnalysis.getPreTimeBoundOutlierThreshold(dependency);
   }
   
   /**
@@ -162,6 +200,33 @@ public class TimeBoundOutlierAnalysis {
     container.getProperties().remove(key);
   }
   
+  public static Long getPreTimeBoundOutlierThreshold(final Dependency container) {
+    final String key = "preTimeBoundOutlierThreshold";
+    final Object value = container.getProperties().get(key);
+    return (Long) value;
+  }
+  
+  public static void setPreTimeBoundOutlierThreshold(final Dependency container, final Long value) {
+    final String key = "preTimeBoundOutlierThreshold";
+    container.getProperties().put(key, value);
+  }
+  
+  /**
+   * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getPreTimeBoundOutlierThreshold <em>preTimeBoundOutlierThreshold</em>}' property is set on {@code container}.
+   */
+  public static boolean isSetPreTimeBoundOutlierThreshold(final Dependency container) {
+    final String key = "preTimeBoundOutlierThreshold";
+    return container.getProperties().containsKey(key);
+  }
+  
+  /**
+   * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getPreTimeBoundOutlierThreshold <em>preTimeBoundOutlierThreshold</em>}' property on {@code container}.
+   */
+  public static void unsetPreTimeBoundOutlierThreshold(final Dependency container) {
+    final String key = "preTimeBoundOutlierThreshold";
+    container.getProperties().remove(key);
+  }
+  
   /**
    * Creates initial value for persisted {@code timeBoundSamples} property on Dependency
    */
@@ -194,6 +259,41 @@ public class TimeBoundOutlierAnalysis {
    */
   public static void unsetTimeBoundSamples(final Dependency container) {
     final String key = "timeBoundSamples";
+    container.getProperties().remove(key);
+  }
+  
+  /**
+   * Creates initial value for persisted {@code preTimeBoundSamples} property on Dependency
+   */
+  private static final ArrayList<Long> _getInitial_Dependency_PreTimeBoundSamples() {
+    ArrayList<Long> _newArrayList = CollectionLiterals.<Long>newArrayList();
+    return _newArrayList;
+  }
+  
+  public static ArrayList<Long> getPreTimeBoundSamples(final Dependency container) {
+    final String key = "preTimeBoundSamples";
+    final Object value = container.getProperties().map().computeIfAbsent(key, k -> _getInitial_Dependency_PreTimeBoundSamples());
+    return (ArrayList<Long>) value;
+  }
+  
+  public static void setPreTimeBoundSamples(final Dependency container, final ArrayList<Long> value) {
+    final String key = "preTimeBoundSamples";
+    container.getProperties().put(key, value);
+  }
+  
+  /**
+   * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getPreTimeBoundSamples <em>preTimeBoundSamples</em>}' property is set on {@code container}.
+   */
+  public static boolean isSetPreTimeBoundSamples(final Dependency container) {
+    final String key = "preTimeBoundSamples";
+    return container.getProperties().containsKey(key);
+  }
+  
+  /**
+   * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getPreTimeBoundSamples <em>preTimeBoundSamples</em>}' property on {@code container}.
+   */
+  public static void unsetPreTimeBoundSamples(final Dependency container) {
+    final String key = "preTimeBoundSamples";
     container.getProperties().remove(key);
   }
 }

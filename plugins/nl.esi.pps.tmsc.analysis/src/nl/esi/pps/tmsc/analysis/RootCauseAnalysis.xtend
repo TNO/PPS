@@ -212,7 +212,7 @@ class RootCauseAnalysis {
         }
     }
     
-    def protected void analyseRootCause(MetricInstance metricInstance, ScopedTMSC causalScheduledActivity) {
+    def void analyseRootCause(MetricInstance metricInstance, ScopedTMSC causalScheduledActivity) {
         // Advanced root-cause analysis
         causalScheduledActivity.dependencies.forEach[unsetRootCause]
         val advancedRootCauseAnalysis = new AdvancedRootCauseAnalysis()

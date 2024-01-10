@@ -26,6 +26,7 @@ import java.util.function.BiPredicate;
 
 import javax.inject.Named;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -73,12 +74,15 @@ import nl.esi.pps.tmsc.ScopedTMSC;
 import nl.esi.pps.tmsc.TMSC;
 import nl.esi.pps.tmsc.TmscPlugin;
 import nl.esi.pps.tmsc.compare.ArchitectureLifecycleStage;
-import nl.esi.pps.tmsc.compare.TMSCComparison;
+import nl.esi.pps.tmsc.compare.ITmscMatchResult;
+import nl.esi.pps.tmsc.compare.ext.TMSCMatcher;
+import nl.esi.pps.tmsc.compare.ext.TMSCVisualization;
 import nl.esi.pps.tmsc.metric.MetricModel;
 import nl.esi.pps.tmsc.provider.TmscEditPlugin;
 import nl.esi.pps.tmsc.rendering.RenderingProperties;
 import nl.esi.pps.tmsc.rendering.plot.ScopesRenderingStrategy;
 import nl.esi.pps.tmsc.util.ScopedTmscCopier;
+import nl.esi.pps.tmsc.util.TmscQueries;
 
 public class CompareTmscHandler {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CompareTmscHandler.class);
@@ -109,11 +113,11 @@ public class CompareTmscHandler {
 		if (from((Iterable<?>) selection).forAll(e -> e instanceof TMSC)) {
 			ScopedTMSC tmsc1 = (ScopedTMSC) selectionIterator.next();
 			ScopedTMSC tmsc2 = (ScopedTMSC) selectionIterator.next();
-			jobFunction = monitor -> doJob(tmsc1, tmsc2, inputDialog.getValue(), inputDialog.getStage(), monitor);
+			jobFunction = monitor -> doJob(tmsc1, tmsc2, inputDialog.getValue(), inputDialog.getStage(), inputDialog.getMatcher(), monitor);
 		} else {
 			IFile tmscIFile1 = (IFile) selectionIterator.next();
 			IFile tmscIFile2 = (IFile) selectionIterator.next();
-			jobFunction = monitor -> doJob(tmscIFile1, tmscIFile2, inputDialog.getValue(), inputDialog.getStage(), monitor);
+			jobFunction = monitor -> doJob(tmscIFile1, tmscIFile2, inputDialog.getValue(), inputDialog.getStage(), inputDialog.getMatcher(), monitor);
 		}
 		
 		String jobName = "Compare TMSCs";
@@ -123,7 +127,7 @@ public class CompareTmscHandler {
 		job.schedule();
 	}
 
-	public static IStatus doJob(IFile tmscIFile1, IFile tmscIFile2, String postfix, ArchitectureLifecycleStage stage, IProgressMonitor monitor)
+	public static IStatus doJob(IFile tmscIFile1, IFile tmscIFile2, String postfix, ArchitectureLifecycleStage stage, TMSCMatcher matcher, IProgressMonitor monitor)
 			throws ErrorStatusException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 101);
 		subMonitor.setTaskName("Comparing TMSCs...");
@@ -134,7 +138,7 @@ public class CompareTmscHandler {
 		ResourceSet resourceSet = TmscEditPlugin.createResourceSet();
 		TMSC tmsc1 = loadCompareTMSC(URIHelper.asURI(tmscIFile1), postfix, resourceSet, subMonitor.split(20), result);
 		TMSC tmsc2 = loadCompareTMSC(URIHelper.asURI(tmscIFile2), postfix, resourceSet, subMonitor.split(20), result);
-		doCompare(tmsc1, tmsc2, postfix, stage, subMonitor.split(60), result);
+		doCompare(tmsc1, tmsc2, postfix, stage, matcher, subMonitor.split(60), result);
 
 		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), tmscIFile1, tmscIFile2);
 		return result;
@@ -171,7 +175,7 @@ public class CompareTmscHandler {
 		}
 	}
 
-	public static IStatus doJob(ScopedTMSC tmsc1, ScopedTMSC tmsc2, String postfix, ArchitectureLifecycleStage stage, IProgressMonitor monitor)
+	public static IStatus doJob(ScopedTMSC tmsc1, ScopedTMSC tmsc2, String postfix, ArchitectureLifecycleStage stage, TMSCMatcher matcher, IProgressMonitor monitor)
 			throws ErrorStatusException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 101);
 		subMonitor.setTaskName("Comparing TMSCs...");
@@ -188,7 +192,7 @@ public class CompareTmscHandler {
 				
 		TMSC compareTMSC1 = createCompareTMSC(tmsc1, postfix1, subMonitor.split(20));
 		TMSC compareTMSC2 = createCompareTMSC(tmsc2, postfix2, subMonitor.split(20));
-		doCompare(compareTMSC1, compareTMSC2, postfix, stage, subMonitor.split(60), result);
+		doCompare(compareTMSC1, compareTMSC2, postfix, stage, matcher, subMonitor.split(60), result);
 
 		IResource resource1 = URIHelper.asIResource(tmsc1.eResource().getURI());
 		IResource resource2 = URIHelper.asIResource(tmsc2.eResource().getURI());
@@ -215,7 +219,7 @@ public class CompareTmscHandler {
 		return compareTMSC;
 	}
 
-	private static void doCompare(TMSC tmsc1, TMSC tmsc2, String postfix, ArchitectureLifecycleStage stage, IProgressMonitor monitor, FailOnErrorStatus result)
+	private static void doCompare(TMSC tmsc1, TMSC tmsc2, String postfix, ArchitectureLifecycleStage stage, TMSCMatcher matcher, IProgressMonitor monitor, FailOnErrorStatus result)
 			throws ErrorStatusException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 60);
 		subMonitor.setTaskName("Comparing TMSCs");
@@ -229,7 +233,9 @@ public class CompareTmscHandler {
 		}
 
 		subMonitor.split(20);
-		TMSCComparison.compare(tmsc1, tmsc2, postfix, equivalence);
+		ITmscMatchResult matchResult = matcher.match(tmsc1, tmsc2, equivalence);
+		matcher.diffHighlighter(tmsc1, tmsc2, matchResult, postfix);
+		TMSCVisualization.diffCorrelation(tmsc1, tmsc2, matchResult);
 		
 		saveCompareTMSC(tmsc1, subMonitor.split(20), result);
 		saveCompareTMSC(tmsc2, subMonitor.split(20), result);
@@ -237,6 +243,7 @@ public class CompareTmscHandler {
 	
 	private static void saveCompareTMSC(TMSC tmsc, IProgressMonitor monitor, FailOnErrorStatus result)
 			throws ErrorStatusException {
+		TmscQueries.makeRelativeTiming(tmsc);
 		URI tmscSaveURI = tmsc.eResource().getURI();
 		try {
 			monitor.setTaskName("Saving TMSC to " + tmscSaveURI.lastSegment());
@@ -254,9 +261,10 @@ public class CompareTmscHandler {
 		String fileName = loadURI.trimFileExtension().lastSegment();
 		return loadURI.trimSegments(1).appendSegment(fileName + "_" + postfix).appendFileExtension(fileExtension);
 	}
-
+	
 	private static class CompareInputDialog extends InputDialog {
 		private ArchitectureLifecycleStage stage = ArchitectureLifecycleStage.IMPLEMENTED;
+		private TMSCMatcher matcher = TMSCMatcher.Isomorphism;
 
 		public CompareInputDialog(Shell parentShell) {
 			super(parentShell, "Compare TMSCs",
@@ -274,11 +282,12 @@ public class CompareTmscHandler {
 			super.createDialogArea(inputComposite);
 			
 			Group btnGroup = new Group(inputComposite, SWT.NONE);
+
 			btnGroup.setFont(parent.getFont());
 			btnGroup.setText("Architecture lifecycle stage");
 			btnGroup.setLayout(new GridLayout());
 			btnGroup.setLayoutData(new GridData(GridData.FILL_BOTH));
-
+			
 			for (ArchitectureLifecycleStage stage : ArchitectureLifecycleStage.values()) {
 				Button btn = new Button(btnGroup, SWT.RADIO);
 				btn.setText(stage.getLabel());
@@ -297,11 +306,71 @@ public class CompareTmscHandler {
 				});
 			}
 
+			Group btnGroup2 = new Group(inputComposite, SWT.NONE);
+			btnGroup2.setFont(parent.getFont());
+			btnGroup2.setText("Comparison algorithm - any combination is allowed");
+			btnGroup2.setLayout(new GridLayout());
+			btnGroup2.setLayoutData(new GridData(GridData.FILL_BOTH));
+			
+			Button[] btn = new Button[3];
+			btn[0] = new Button(btnGroup2, SWT.CHECK);
+			btn[0].setText("Service");
+			btn[1] = new Button(btnGroup2, SWT.CHECK);
+			btn[1].setText("Isomorphism");
+			btn[1].setSelection(true);
+			btn[2] = new Button(btnGroup2, SWT.CHECK);
+			btn[2].setText("Walkinshaw");
+			String str = "010";
+			StringBuilder selection = new StringBuilder(str);
+			
+			for (Button b : btn) {
+				b.addSelectionListener(new SelectionAdapter() {
+					@Override
+					public void widgetSelected(SelectionEvent e) {
+						int index = ArrayUtils.indexOf(btn, b);
+						if (b.getSelection())
+							selection.setCharAt(index, '1');
+						else
+							selection.setCharAt(index, '0');
+						
+						switch (selection.toString()) {
+						case "100":
+							CompareInputDialog.this.matcher = TMSCMatcher.Service;
+							break;
+						case "010":
+							CompareInputDialog.this.matcher = TMSCMatcher.Isomorphism;
+							break;
+						case "110":
+							CompareInputDialog.this.matcher = TMSCMatcher.Service_Isomorphism;
+							break;
+						case "001":
+							CompareInputDialog.this.matcher = TMSCMatcher.Walkinshaw;
+							break;
+						case "101":
+							CompareInputDialog.this.matcher = TMSCMatcher.Service_Walkinshaw;
+							break;
+						case "011":
+							CompareInputDialog.this.matcher = TMSCMatcher.Isomorphism_Walkinshaw;
+							break;
+						case "111":
+							CompareInputDialog.this.matcher = TMSCMatcher.Service_Isomorphism_Walkinshaw;
+							break;
+						default:
+							break;
+						}
+					}
+				});
+			}
+			
 			return inputComposite;
 		}
 		
 		public ArchitectureLifecycleStage getStage() {
 			return stage;
+		}
+		
+		public TMSCMatcher getMatcher() {
+			return matcher;
 		}
 	}
 }

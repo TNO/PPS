@@ -40,6 +40,12 @@ public class TmscMatchResult implements ITmscMatchResult {
 		matches = HashBiMap.create();
 	}
 	
+	public TmscMatchResult(ITMSC left, ITMSC right, BiMap<Event, Event> initialMatches) {
+		leftTmsc = left;
+		rightTmsc = right;
+		matches = HashBiMap.create(initialMatches);
+	}
+
 	public void addMatch(Event left, Event right) throws IllegalArgumentException {
 		if (invalid.contains(left) || invalid.contains(right)) {
 			throw new IllegalArgumentException("Match is already marked as invalid");

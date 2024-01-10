@@ -38,6 +38,12 @@
       <children xsi:type="menu:DirectMenuItem" xmi:id="_5wf48FRqEe647uV_5_xVgw" elementId="nl.esi.pps.tmsc.analysis.ui.directmenuitem.TimeBoundAnalysis" label="Analyze time-bounds..." tooltip="Prepares the TMSC for time-bound based analyses, e,g., critical path analysis" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.TimeBoundAnalysisHandler">
         <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_KWzj4FRrEe647uV_5_xVgw" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.TimeBoundAnalysisHandler"/>
       </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_aIdhMN6rEe2lKJpSHbuy6w" elementId="nl.esi.pps.tmsc.analysis.ui.directmenuitem.CreateOutlierComparisonReport" label="Create dependency overlap report" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.CreateOutlierComparisonReportHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_aIdhMd6rEe2lKJpSHbuy6w" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.CreateOutlierComparisonReportHandler"/>
+      </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_S8eGAOmrEe2unrUYQd-6yw" elementId="nl.esi.pps.tmsc.analysis.ui.directmenuitem.CreatePatchQualificationReport" label="Patch Qualification (pair-wise TMSC comparison)" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.CreatePatchQualificationReportHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_S8eGAemrEe2unrUYQd-6yw" contributionURI="bundleclass://nl.esi.pps.tmsc.analysis.ui/nl.esi.pps.tmsc.analysis.ui.handlers.CreatePatchQualificationReportHandler"/>
+      </children>
     </elements>
   </fragments>
 </fragment:ModelFragments>
