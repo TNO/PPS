@@ -317,7 +317,7 @@ public class DefaultTimeBoundAnalysis {
   /**
    * Sets the {@code dependency} time-bound, ensuring that it will never be greater than its duration.
    */
-  private void setSafeTimeBound(final Dependency dependency, final Long timeBound) {
+  protected void setSafeTimeBound(final Dependency dependency, final Long timeBound) {
     if (((timeBound == null) || (dependency.getDuration() == null))) {
       dependency.setTimeBound(null);
     } else {

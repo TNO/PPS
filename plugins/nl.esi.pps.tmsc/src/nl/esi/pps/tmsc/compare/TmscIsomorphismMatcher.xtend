@@ -114,7 +114,8 @@ class TmscIsomorphismMatcher {
         boolean failAtEnd, BiPredicate<? super Event, ? super Event> eventEquivalence) {
         debug('Matching TMSCs {} and {}', leftTmsc.label, rightTmsc.label)
         if (eventMatches === null || eventMatches.isEmpty) {
-            throw new IllegalArgumentException('This algorithm requires at least 1 event match to start.')
+            debug('This algorithm requires at least 1 event match to start.')
+            return TmscMatchResult.EMPTY;
         } else if (!failAtEnd && leftTmsc.dependencies.size != rightTmsc.dependencies.size) {
             // TMSC are not considered to be isomorphic equivalent when they contain different amounts of dependencies
             debug('TMSCs are different: Size: {} != {}', leftTmsc.dependencies.size, rightTmsc.dependencies.size)
@@ -139,9 +140,9 @@ class TmscIsomorphismMatcher {
         if (failAtEnd) {
             debug(String.format('TMSCs match for %.2f%%', matchState.result.matchPercentage * 100))
         } else if (matchState.result.isFullMatch) {
-            debug('TMSCs are different!')
-        } else {
             debug('TMSCs are equivalent!')
+        } else {
+            debug('TMSCs are different!')
         }
 
         return matchState.result;

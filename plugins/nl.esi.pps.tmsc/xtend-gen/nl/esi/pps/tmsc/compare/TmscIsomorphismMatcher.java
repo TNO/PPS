@@ -284,7 +284,8 @@ public class TmscIsomorphismMatcher {
   public static ITmscMatchResult match(final ITMSC leftTmsc, final ITMSC rightTmsc, final BiMap<Event, Event> eventMatches, final boolean failAtEnd, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     TmscIsomorphismMatcher.LOGGER.debug("Matching TMSCs {} and {}", TmscIsomorphismMatcher.getLabel(leftTmsc), TmscIsomorphismMatcher.getLabel(rightTmsc));
     if (((eventMatches == null) || eventMatches.isEmpty())) {
-      throw new IllegalArgumentException("This algorithm requires at least 1 event match to start.");
+      TmscIsomorphismMatcher.LOGGER.debug("This algorithm requires at least 1 event match to start.");
+      return TmscMatchResult.EMPTY;
     } else {
       if (((!failAtEnd) && (leftTmsc.getDependencies().size() != rightTmsc.getDependencies().size()))) {
         TmscIsomorphismMatcher.LOGGER.debug("TMSCs are different: Size: {} != {}", Integer.valueOf(leftTmsc.getDependencies().size()), Integer.valueOf(rightTmsc.getDependencies().size()));
@@ -319,9 +320,9 @@ public class TmscIsomorphismMatcher {
     } else {
       boolean _isFullMatch = matchState.result.isFullMatch();
       if (_isFullMatch) {
-        TmscIsomorphismMatcher.LOGGER.debug("TMSCs are different!");
-      } else {
         TmscIsomorphismMatcher.LOGGER.debug("TMSCs are equivalent!");
+      } else {
+        TmscIsomorphismMatcher.LOGGER.debug("TMSCs are different!");
       }
     }
     return matchState.result;

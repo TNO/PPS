@@ -17,6 +17,7 @@ import nl.esi.pps.architecture.implemented.FunctionParameterKind;
 import nl.esi.pps.architecture.implemented.ImplementedFactory;
 import nl.esi.pps.tmsc.EntryEvent;
 import nl.esi.pps.tmsc.Event;
+import nl.esi.pps.tmsc.Execution;
 import nl.esi.pps.tmsc.ExitEvent;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -34,11 +35,54 @@ public class FunctionParametersUtil {
   private FunctionParametersUtil() {
   }
   
+  public static String getArgument(final Execution execution, final String parameterName) {
+    if ((execution == null)) {
+      return null;
+    }
+    final FunctionParameter parameter = FunctionParametersUtil.getParameter(execution.getFunction(), parameterName);
+    if ((parameter == null)) {
+      return null;
+    }
+    String _switchResult = null;
+    FunctionParameterKind _kind = parameter.getKind();
+    if (_kind != null) {
+      switch (_kind) {
+        case IN:
+          _switchResult = FunctionParametersUtil.getArgument(execution.getEntry(), parameter);
+          break;
+        case OUT:
+        case RETURN:
+          _switchResult = FunctionParametersUtil.getArgument(execution.getExit(), parameter);
+          break;
+        case IN_OUT:
+          String _elvis = null;
+          String _argument = FunctionParametersUtil.getArgument(execution.getExit(), parameter);
+          if (_argument != null) {
+            _elvis = _argument;
+          } else {
+            String _argument_1 = FunctionParametersUtil.getArgument(execution.getEntry(), parameter);
+            _elvis = _argument_1;
+          }
+          _switchResult = _elvis;
+          break;
+        default:
+          break;
+      }
+    }
+    return _switchResult;
+  }
+  
   public static String getReturnValue(final ExitEvent event) {
+    if ((event == null)) {
+      return null;
+    }
     return FunctionParametersUtil.getArgument(event, ((String) null));
   }
   
   public static String getArgument(final Event event, final String parameterName) {
+    if ((event == null)) {
+      return null;
+    }
     final FunctionParameter parameter = FunctionParametersUtil.getParameter(event.getFunction(), parameterName);
     if ((parameter == null)) {
       return null;
@@ -47,14 +91,23 @@ public class FunctionParametersUtil {
   }
   
   public static String getArgument(final Event event, final FunctionParameter parameter) {
+    if ((event == null)) {
+      return null;
+    }
     return event.getArguments().get(parameter);
   }
   
   public static void setReturnValue(final ExitEvent event, final String value) {
+    if ((event == null)) {
+      return;
+    }
     FunctionParametersUtil.setArgument(event, ((String) null), value);
   }
   
   public static void setArgument(final Event event, final String parameterName, final String value) {
+    if ((event == null)) {
+      return;
+    }
     FunctionParameter parameter = FunctionParametersUtil.getParameter(event.getFunction(), parameterName);
     FunctionParameterKind _switchResult = null;
     boolean _matched = false;
@@ -107,10 +160,14 @@ public class FunctionParametersUtil {
   }
   
   public static void setArgument(final Event event, final FunctionParameter parameter, final String value) {
-    if ((value == null)) {
-      event.getArguments().removeKey(parameter);
+    if ((event == null)) {
+      return;
     } else {
-      event.getArguments().put(parameter, value);
+      if ((value == null)) {
+        event.getArguments().removeKey(parameter);
+      } else {
+        event.getArguments().put(parameter, value);
+      }
     }
   }
   
@@ -119,6 +176,9 @@ public class FunctionParametersUtil {
   }
   
   public static FunctionParameter getParameter(final Function function, final String parameterName, final FunctionParameterKind parameterKind) {
+    if ((function == null)) {
+      return null;
+    }
     final Function1<FunctionParameter, Boolean> _function = (FunctionParameter it) -> {
       String _name = it.getName();
       return Boolean.valueOf(Objects.equal(_name, parameterName));

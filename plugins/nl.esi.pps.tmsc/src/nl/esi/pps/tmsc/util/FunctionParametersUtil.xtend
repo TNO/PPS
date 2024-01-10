@@ -16,6 +16,7 @@ import nl.esi.pps.architecture.implemented.FunctionParameterKind
 import nl.esi.pps.architecture.implemented.ImplementedFactory
 import nl.esi.pps.tmsc.EntryEvent
 import nl.esi.pps.tmsc.Event
+import nl.esi.pps.tmsc.Execution
 import nl.esi.pps.tmsc.ExitEvent
 
 class FunctionParametersUtil {
@@ -24,12 +25,34 @@ class FunctionParametersUtil {
     private new() {
         // Empty for utility classes
     }
+    
+    static def getArgument(Execution execution, String parameterName) {
+        if (execution === null) {
+            return null
+        }
+        val parameter = execution.function.getParameter(parameterName)
+        if (parameter === null) {
+            return null
+        }
+        return switch (parameter.kind) {
+        	case IN: execution.entry.getArgument(parameter)
+            case OUT,
+            case RETURN : execution.exit.getArgument(parameter)
+            case IN_OUT: execution.exit.getArgument(parameter) ?: execution.entry.getArgument(parameter)
+        }
+    }
 
     static def String getReturnValue(ExitEvent event) {
+        if (event === null) {
+            return null
+        }
         return event.getArgument(null as String)
     }
 
     static def String getArgument(Event event, String parameterName) {
+        if (event === null) {
+            return null
+        }
         val parameter = event.function.getParameter(parameterName)
         if (parameter === null) {
             return null
@@ -38,14 +61,23 @@ class FunctionParametersUtil {
     }
 
     static def String getArgument(Event event, FunctionParameter parameter) {
+        if (event === null) {
+            return null
+        }
         return event.arguments.get(parameter)
     }
 
     static def void setReturnValue(ExitEvent event, String value) {
+        if (event === null) {
+            return
+        }
         event.setArgument(null as String, value)
     }
     
     static def void setArgument(Event event, String parameterName, String value) {
+        if (event === null) {
+            return
+        }
         var parameter = event.function.getParameter(parameterName)
         val parameterKind = switch (event) {
             ExitEvent: {
@@ -79,7 +111,9 @@ class FunctionParametersUtil {
     }
 
     static def void setArgument(Event event, FunctionParameter parameter, String value) {
-        if (value === null) {
+        if (event === null) {
+            return
+        } else if (value === null) {
             event.arguments.removeKey(parameter)
         } else {
             event.arguments.put(parameter, value)
@@ -92,6 +126,9 @@ class FunctionParametersUtil {
 
     def static FunctionParameter getParameter(Function function, String parameterName,
         FunctionParameterKind parameterKind) {
+        if (function === null) {
+            return null
+        }
         val parameter = function.parameters.findFirst[name == parameterName]
         if (parameter !== null) {
             if (parameterKind !== null && parameter.kind != parameterKind) {

@@ -135,7 +135,7 @@ class DefaultTimeBoundAnalysis {
     }
 
     /** Sets the {@code dependency} time-bound, ensuring that it will never be greater than its duration. */
-    private def void setSafeTimeBound(Dependency dependency, Long timeBound) {
+    protected def void setSafeTimeBound(Dependency dependency, Long timeBound) {
         if (timeBound === null || dependency.duration === null) {
             dependency.timeBound = null
         } else {

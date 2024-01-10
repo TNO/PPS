@@ -1274,6 +1274,17 @@ public final class TmscQueries {
     }
   }
   
+  public static void makeRelativeTiming(final TMSC tmsc) {
+    final FullScopeTMSC fullScope = tmsc.getFullScope();
+    if ((tmsc instanceof ScopedTMSC)) {
+      ScopedTmscCopier.deriveStartEndTime(((ScopedTMSC)tmsc));
+    }
+    Long _startTime = fullScope.getStartTime();
+    long _minus = (-(_startTime).longValue());
+    TmscQueries.shiftTime(fullScope, _minus);
+    fullScope.setEpochTime(false);
+  }
+  
   public static void shiftTime(final FullScopeTMSC tmsc, final long delta) {
     final Function1<Event, Boolean> _function = (Event it) -> {
       Long _timestamp = it.getTimestamp();
