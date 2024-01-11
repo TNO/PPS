@@ -624,6 +624,15 @@ final class TmscQueries {
         }
     }
 
+    static def void makeRelativeTiming(TMSC tmsc) {
+        val fullScope = tmsc.fullScope
+        if (tmsc instanceof ScopedTMSC) {
+            ScopedTmscCopier.deriveStartEndTime(tmsc);
+        }
+        fullScope.shiftTime(-fullScope.getStartTime());
+        fullScope.epochTime = false
+    }
+
     static def void shiftTime(FullScopeTMSC tmsc, long delta) {
         tmsc.events.reject[timestamp === null].forEach[timestamp = timestamp + delta]
         tmsc.startTime = tmsc.startTime + delta
