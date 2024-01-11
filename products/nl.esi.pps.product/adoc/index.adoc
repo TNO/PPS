@@ -1,0 +1,27 @@
+////
+  // Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+  //
+  // This program and the accompanying materials are made available
+  // under the terms of the MIT License which is available at
+  // https://opensource.org/licenses/MIT
+  //
+  // SPDX-License-Identifier: MIT
+////
+
+ifndef::pps-version-enduser[:pps-version-enduser: dev]
+
+:idprefix:
+:idseparator: -
+
+// Enable custom style in index-docinfo.html
+:docinfo:
+
+= Eclipse software repository | Platform Performance Suite (PPS)
+
+== You're close!
+
+This URL is an Eclipse software repository; you must use it in Eclipse (https://help.eclipse.org/topic/org.eclipse.platform.doc.user/tasks/tasks-127.htm[see how]).
+
+TIP: The Platform Performance Suite (PPS) {pps-version-enduser} is also available as a portable IDE, see https://github.com/TNO/PPS/releases/tag/{pps-version-enduser}[].
+
+image::https://download.eclipse.org/errors/content/eclipse-software-install-win10-v1.png[]

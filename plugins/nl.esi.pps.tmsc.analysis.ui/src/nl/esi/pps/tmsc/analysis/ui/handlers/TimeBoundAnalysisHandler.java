@@ -1,4 +1,12 @@
- 
+/*
+ * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ *
+ * This program and the accompanying materials are made available
+ * under the terms of the MIT License which is available at
+ * https://opensource.org/licenses/MIT
+ *
+ * SPDX-License-Identifier: MIT
+ */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
 import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
@@ -34,7 +42,7 @@ import nl.esi.pps.tmsc.text.EDurationFormat;
 import nl.esi.pps.ui.handlers.AbstractCommandHandler;
 
 public class TimeBoundAnalysisHandler extends AbstractCommandHandler {
-	
+
 	@Evaluate
 	@CanExecute
 	public boolean canExecute(@Named(IServiceConstants.ACTIVE_SELECTION) @Optional IStructuredSelection selection) {

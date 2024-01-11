@@ -1,3 +1,12 @@
+/**
+ * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ *
+ * This program and the accompanying materials are made available
+ * under the terms of the MIT License which is available at
+ * https://opensource.org/licenses/MIT
+ *
+ * SPDX-License-Identifier: MIT
+ */
 // Trace
 1 "My implicit executor" "My implicit component" > "My implicit function"
 2 "My implicit executor" "My implicit component" > "My implicit sub-function"

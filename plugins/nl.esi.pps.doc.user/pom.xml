@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>nl.esi.pps</groupId>
+        <artifactId>nl.esi.pps.root</artifactId>
+        <version>0.20.0-SNAPSHOT</version>
+        <relativePath>../../</relativePath>
+    </parent>
+
+    <artifactId>nl.esi.pps.doc.user</artifactId>
+    <packaging>eclipse-plugin</packaging>
+    <name>PPS User Guide</name>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.asciidoctor</groupId>
+                <artifactId>asciidoctor-maven-plugin</artifactId>
+                <configuration>
+                    <!-- Attributes common to all output formats -->
+                    <sourceDirectory>adoc</sourceDirectory>
+                    <attributes>
+                        <last-update-label>false</last-update-label>
+                        <sectnumlevels>4</sectnumlevels>
+                        <toclevels>4</toclevels>
+                        <doctype>book</doctype>
+                        <icons>font</icons>
+                        <eclipse-help-location>https://help.eclipse.org/2021-12/topic</eclipse-help-location>
+                    </attributes>
+                </configuration>
+
+                <executions>
+                    <!-- Rendering the Eclipse Help pages -->
+                    <execution>
+                        <id>generate-eclipse-help</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/eclipse-help</outputDirectory>
+                            <backend>html5</backend>
+                            <attributes>
+                                <imagesdir />
+                                <imgsdir>../../images</imgsdir>
+                                <!-- Using a cleaner skin, see https://github.com/darshandsoni/asciidoctor-skins#usage -->
+                                <stylesdir>${project.basedir}/css</stylesdir>
+                                <stylesheet>adoc-foundation.css</stylesheet>
+                                <output-html />
+                                <output-eclipse-help />
+                                <eclipse-help-location>/help/topic</eclipse-help-location>
+                            </attributes>
+                        </configuration>
+                    </execution>
+
+                    <!-- Rendering Website -->
+                    <execution>
+                        <id>generate-website</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/website</outputDirectory>
+                            <backend>html5</backend>
+                            <attributes>
+                                <imagesdir />
+                                <imgsdir>images</imgsdir>
+                                <sectnums />
+                                <sectanchors>true</sectanchors>
+                                <toc>left</toc>
+                                <output-html />
+                                <output-site />
+                            </attributes>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/images</directory>
+                                    <targetPath>images</targetPath>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Rendering the PDF -->
+                    <execution>
+                        <id>generate-pdf</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDocumentName>index.adoc</sourceDocumentName>
+                            <outputFile>${project.build.directory}/website/pps-user-guide.pdf</outputFile>
+                            <backend>pdf</backend>
+                            <attributes>
+                                <imagesdir />
+                                <imgsdir>${basedir}/images</imgsdir>
+                                <sectnums />
+                                <toc />
+                                <numbered />
+                                <pagenums />
+                                <output-pdf />
+                                <output-site />
+                            </attributes>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>com.bsiag.geneclipsetoc</groupId>
+                <artifactId>geneclipsetoc-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>geneclipsetoc</goal>
+                        </goals>
+                        <configuration>
+                            <outputTocFile>${project.build.directory}/eclipse-help/toc.xml</outputTocFile>
+                            <sourceFolder>${basedir}</sourceFolder>
+                            <pages>
+                                <page>target/eclipse-help/index.html</page>
+                            </pages>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Package the Eclipse Help contents -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-packaging-plugin</artifactId>
+                <configuration>
+                    <additionalFileSets>
+                        <fileSet>
+                            <!-- Putting it in the same dir within the jar ensures us that 
+                                 doc will work in runtime instance and RCP -->
+                            <prefix>target/eclipse-help/</prefix>
+                            <directory>${project.build.directory}/eclipse-help/</directory>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </fileSet>
+                    </additionalFileSets>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-website</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>${basedir}/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
