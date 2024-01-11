@@ -161,6 +161,7 @@
                                 <exclude>src-gen/**</exclude>
                                 <exclude>xtend-gen/**</exclude>
                                 <exclude>**/*.aird</exclude>
+                                <exclude>**/*.dot</exclude>
                                 <exclude>**/*.e4xmi</exclude>
                                 <exclude>**/*.ecore</exclude>
                                 <exclude>**/*.genmodel</exclude>
