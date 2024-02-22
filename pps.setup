@@ -30,11 +30,11 @@
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.lsat.version"
-      value="nightly"/>
+      value="v0.3"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.trace4cps.version"
-      value="nightly"/>
+      value="v0.2"/>
   <setupTask
       xsi:type="setup:VariableTask"
       name="eclipse.justj.version"
