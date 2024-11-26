@@ -65,5 +65,4 @@ include::_section_data_analysis.adoc[]
 
 <<<
 
-include::_section_ecoredoc.adoc[leveloffset=1]
-
+include::{gendocdir}/ecore-documentation.adoc[leveloffset=1]
