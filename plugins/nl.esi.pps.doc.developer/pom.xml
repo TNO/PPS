@@ -60,6 +60,35 @@
             </plugin>
 
             <plugin>
+                <groupId>com.altran.general.emf.ecoredoc</groupId>
+                <artifactId>ecoredoc-maven-plugin</artifactId>
+                <version>0.10.0-SNAPSHOT</version>
+                <executions>
+                    <execution>
+                        <phase>generate-sources</phase>
+                        <goals>
+                            <goal>ecoredoc</goal>
+                        </goals>
+                        <configuration>
+                            <resolve>true</resolve>
+                            <config>
+                                <documentTitle>PPS meta-models</documentTitle>
+                                <renderDefaults>false</renderDefaults>
+                                <repeatInherited>false</repeatInherited>
+                            </config>
+                            <inputFiles>
+                                <inputFile>../nl.esi.emf.properties/model/properties.ecore</inputFile>
+                                <inputFile>../nl.esi.pps.architecture/model/architecture.ecore</inputFile>
+                                <inputFile>../nl.esi.pps.tmsc/model/tmsc.ecore</inputFile>
+                                <inputFile>../nl.esi.pps.tmsc.metric/model/metric.ecore</inputFile>
+                            </inputFiles>
+                            <outputFile>${project.build.directory}/adoc-gen/ecore-documentation.adoc</outputFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
                 <groupId>org.asciidoctor</groupId>
                 <artifactId>asciidoctor-maven-plugin</artifactId>
                 <configuration>

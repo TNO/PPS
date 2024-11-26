@@ -686,7 +686,7 @@
         </detail>
         <detail
             key="generateVersions">
-          <value>false</value>
+          <value>true</value>
         </detail>
         <detail
             key="includeAllPlatforms">
@@ -705,6 +705,12 @@
           name="org.eclipse.emf.mwe2.launcher.feature.group"/>
       <requirement
           name="org.eclipse.e4.tools.spies.feature.feature.group"/>
+      <requirement
+          name="net.sourceforge.plantuml.feature.feature.group"
+          versionRange="[1.1.26,1.1.26]"/>
+      <requirement
+          name="net.sourceforge.plantuml.lib.feature.feature.group"
+          versionRange="[1.2021.3,1.2021.3]"/>
       <requirement
           name="*"/>
       <sourceLocator

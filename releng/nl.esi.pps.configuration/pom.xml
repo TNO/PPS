@@ -85,6 +85,18 @@
                 <enabled>false</enabled>
             </snapshots>
         </pluginRepository>
+
+        <!-- com.altran.general.emf.ecoredoc:ecoredoc-maven-plugin -->
+        <pluginRepository>
+            <id>ecoredoc-snapshots</id>
+            <url>https://altran-mde.github.io/ecore_doc/maven-repo</url>
+            <releases>
+                <enabled>false</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </pluginRepository>
     </pluginRepositories>
 
     <organization>
@@ -413,6 +425,32 @@
                     <groupId>com.bsiag.geneclipsetoc</groupId>
                     <artifactId>geneclipsetoc-maven-plugin</artifactId>
                     <version>${geneclipsetoc.maven.plugin.version}</version>
+                </plugin>
+                
+                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>com.altran.general.emf.ecoredoc</groupId>
+                                        <artifactId>ecoredoc-maven-plugin</artifactId>
+                                        <versionRange>[0.0.0,)</versionRange>
+                                        <goals>
+                                            <goal>ecoredoc</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <ignore></ignore>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
