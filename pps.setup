@@ -12,39 +12,9 @@
     xmlns:setup.targlets="http://www.eclipse.org/oomph/setup/targlets/1.0"
     xmlns:setup.workingsets="http://www.eclipse.org/oomph/setup/workingsets/1.0"
     xmlns:workingsets="http://www.eclipse.org/oomph/workingsets/1.0"
-    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 http://git.eclipse.org/c/oomph/org.eclipse.oomph.git/plain/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/WorkingSets.ecore"
+    xsi:schemaLocation="http://www.eclipse.org/oomph/setup/git/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Git.ecore http://www.eclipse.org/oomph/setup/jdt/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/JDT.ecore http://www.eclipse.org/oomph/predicates/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Predicates.ecore http://www.eclipse.org/oomph/setup/projects/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/Projects.ecore http://www.eclipse.org/oomph/setup/targlets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/SetupTarglets.ecore http://www.eclipse.org/oomph/setup/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/SetupWorkingSets.ecore http://www.eclipse.org/oomph/workingsets/1.0 https://raw.githubusercontent.com/eclipse-oomph/oomph/master/setups/models/WorkingSets.ecore"
     name="tno.pps"
     label="TNO - PPS">
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.ide.version"
-      value="2021-12"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.orbit.version"
-      value="R20211122181901"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="m2eclipse-tycho.version"
-      value="0.9.0"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.lsat.version"
-      value="v0.3"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.trace4cps.version"
-      value="v0.2"/>
-  <setupTask
-      xsi:type="setup:VariableTask"
-      name="eclipse.justj.version"
-      value="11"/>
-  <setupTask
-      xsi:type="jdt:JRETask"
-      version="JavaSE-11"
-      location="${jre.location-11}">
-    <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
-  </setupTask>
   <setupTask
       xsi:type="setup:EclipseIniTask"
       option="-Xmx"
@@ -82,48 +52,6 @@
       eclipse.preferences.version=1
       showIntro=false
     </content>
-  </setupTask>
-  <setupTask
-      xsi:type="setup.p2:P2Task">
-    <requirement
-        name="org.eclipse.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.jdt.feature.group"/>
-    <requirement
-        name="org.eclipse.pde.feature.group"/>
-    <requirement
-        name="org.eclipse.emf.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.emf.validation.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.egit.feature.group"/>
-    <requirement
-        name="org.eclipse.xtext.sdk.feature.group"/>
-    <requirement
-        name="de.itemis.xtext.antlr.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
-    <requirement
-        name="org.eclipse.e4.core.tools.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.m2e.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.m2e.logback.feature.feature.group"/>
-    <requirement
-        name="org.sonatype.tycho.m2e.feature.feature.group"/>
-    <requirement
-        name="org.eclipse.oomph.setup.sdk.feature.group"/>
-    <requirement
-        name="de.jcup.asciidoctoreditor.feature.group"/>
-    <repository
-        url="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/${m2eclipse-tycho.version}/N/LATEST/"/>
-    <repository
-        url="https://de-jcup.github.io/update-site-eclipse-asciidoctor-editor/update-site/"/>
-    <repository
-        url="http://download.itemis.com/updates/releases/2.1.1/"/>
-    <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
   </setupTask>
   <setupTask
       xsi:type="setup:CompoundTask"
@@ -658,86 +586,6 @@
       name="eclipse.target.platform"
       value="None"/>
   <setupTask
-      xsi:type="setup.targlets:TargletTask">
-    <targlet
-        name="${scope.project.label}"
-        activeRepositoryList="PPS">
-      <annotation
-          source="http:/www.eclipse.org/oomph/targlets/TargetDefinitionGenerator">
-        <detail
-            key="location">
-          <value>${git.clone.pps.git.location}/releng/nl.esi.pps.target/nl.esi.pps.target.target</value>
-        </detail>
-        <detail
-            key="extraUnits">
-          <value>org.eclipse.equinox.executable.feature.group</value>
-        </detail>
-        <detail
-            key="generateImplicitUnits">
-          <value>true</value>
-        </detail>
-        <detail
-            key="minimizeImplicitUnits">
-          <value>true</value>
-        </detail>
-        <detail
-            key="includeMode">
-          <value>planner</value>
-        </detail>
-        <detail
-            key="generateVersions">
-          <value>true</value>
-        </detail>
-        <detail
-            key="includeAllPlatforms">
-          <value>false</value>
-        </detail>
-        <detail
-            key="includeSource">
-          <value>true</value>
-        </detail>
-      </annotation>
-      <requirement
-          name="org.eclipse.sdk.feature.group"/>
-      <requirement
-          name="de.itemis.xtext.antlr.feature.feature.group"/>
-      <requirement
-          name="org.eclipse.emf.mwe2.launcher.feature.group"/>
-      <requirement
-          name="org.eclipse.e4.tools.spies.feature.feature.group"/>
-      <requirement
-          name="net.sourceforge.plantuml.feature.feature.group"
-          versionRange="[1.1.26,1.1.26]"/>
-      <requirement
-          name="net.sourceforge.plantuml.lib.feature.feature.group"
-          versionRange="[1.2021.3,1.2021.3]"/>
-      <requirement
-          name="*"/>
-      <sourceLocator
-          rootFolder="${git.clone.pps.git.location}"
-          locateNestedProjects="true"/>
-      <repositoryList
-          name="PPS">
-        <repository
-            url="https://download.eclipse.org/releases/${eclipse.ide.version}/"/>
-        <repository
-            url="https://download.eclipse.org/tools/orbit/downloads/drops/${eclipse.orbit.version}/repository/"/>
-        <repository
-            url="https://download.eclipse.org/trace4cps/${eclipse.trace4cps.version}/update-site/"/>
-        <repository
-            url="https://download.eclipse.org/lsat/${eclipse.lsat.version}/update-site/"/>
-        <repository
-            url="https://hallvard.github.io/plantuml/"/>
-        <repository
-            url="http://download.itemis.com/updates/releases/2.1.1/"/>
-        <repository
-            url="https://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/"/>
-        <repository
-            url="https://download.eclipse.org/justj/jres/${eclipse.justj.version}/updates/release/latest/"/>
-      </repositoryList>
-    </targlet>
-  </setupTask>
-  <setupTask
       xsi:type="setup.workingsets:WorkingSetTask">
     <workingSet
         name="${scope.project.label} - Plugins">
@@ -784,7 +632,7 @@
             project="nl.esi.pps.root"/>
         <operand
             xsi:type="workingsets:ExclusionPredicate"
-            excludedWorkingSet="//@setupTasks.16/@workingSets[name='${scope.project.label}%20-%20Products'] //@setupTasks.16/@workingSets[name='${scope.project.label}%20-%20Features'] //@setupTasks.16/@workingSets[name='${scope.project.label}%20-%20Plugins']"/>
+            excludedWorkingSet="//@setupTasks.7/@workingSets[name='${scope.project.label}%20-%20Products'] //@setupTasks.7/@workingSets[name='${scope.project.label}%20-%20Features'] //@setupTasks.7/@workingSets[name='${scope.project.label}%20-%20Plugins']"/>
       </predicate>
     </workingSet>
     <description>The dynamic working sets for ${scope.project.label}</description>
@@ -797,6 +645,304 @@
         value="=https://raw.githubusercontent.com/TNO/PPS/main/pps.setup->${git.clone.pps.git.location|uri}/pps.setup"
         vm="true">
       <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.ide.version"
+        value="2021-12"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.orbit.version"
+        value="R20211122181901"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="m2eclipse-tycho.version"
+        value="0.9.0"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.lsat.version"
+        value="v0.3"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.trace4cps.version"
+        value="v0.2"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.justj.version"
+        value="11"/>
+    <setupTask
+        xsi:type="jdt:JRETask"
+        version="JavaSE-11"
+        location="${jre.location-11}">
+      <description>Define the JRE needed to compile and run the Java projects of ${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.p2:P2Task">
+      <requirement
+          name="org.eclipse.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.jdt.feature.group"/>
+      <requirement
+          name="org.eclipse.pde.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.ecoretools.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.validation.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.egit.feature.group"/>
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"/>
+      <requirement
+          name="de.itemis.xtext.antlr.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.e4.core.tools.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.m2e.logback.feature.feature.group"/>
+      <requirement
+          name="org.sonatype.tycho.m2e.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.oomph.setup.sdk.feature.group"/>
+      <requirement
+          name="de.jcup.asciidoctoreditor.feature.group"/>
+      <repository
+          url="https://repo1.maven.org/maven2/.m2e/connectors/m2eclipse-tycho/${m2eclipse-tycho.version}/N/LATEST/"/>
+      <repository
+          url="https://de-jcup.github.io/update-site-eclipse-asciidoctor-editor/update-site/"/>
+      <repository
+          url="http://download.itemis.com/updates/releases/2.1.1/"/>
+      <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="${scope.project.label}"
+          activeRepositoryList="PPS">
+        <annotation
+            source="http:/www.eclipse.org/oomph/targlets/TargetDefinitionGenerator">
+          <detail
+              key="location">
+            <value>${git.clone.pps.git.location}/releng/nl.esi.pps.target/nl.esi.pps.target.target</value>
+          </detail>
+          <detail
+              key="extraUnits">
+            <value>org.eclipse.equinox.executable.feature.group</value>
+          </detail>
+          <detail
+              key="generateImplicitUnits">
+            <value>true</value>
+          </detail>
+          <detail
+              key="minimizeImplicitUnits">
+            <value>true</value>
+          </detail>
+          <detail
+              key="includeMode">
+            <value>planner</value>
+          </detail>
+          <detail
+              key="generateVersions">
+            <value>true</value>
+          </detail>
+          <detail
+              key="includeAllPlatforms">
+            <value>false</value>
+          </detail>
+          <detail
+              key="includeSource">
+            <value>true</value>
+          </detail>
+        </annotation>
+        <requirement
+            name="org.eclipse.sdk.feature.group"/>
+        <requirement
+            name="de.itemis.xtext.antlr.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
+        <requirement
+            name="org.eclipse.e4.tools.spies.feature.feature.group"/>
+        <requirement
+            name="net.sourceforge.plantuml.feature.feature.group"
+            versionRange="[1.1.26,1.1.26]"/>
+        <requirement
+            name="net.sourceforge.plantuml.lib.feature.feature.group"
+            versionRange="[1.2021.3,1.2021.3]"/>
+        <requirement
+            name="*"/>
+        <sourceLocator
+            rootFolder="${git.clone.pps.git.location}"
+            locateNestedProjects="true"/>
+        <repositoryList
+            name="PPS">
+          <repository
+              url="https://download.eclipse.org/releases/${eclipse.ide.version}/"/>
+          <repository
+              url="https://download.eclipse.org/tools/orbit/downloads/drops/${eclipse.orbit.version}/repository/"/>
+          <repository
+              url="https://download.eclipse.org/trace4cps/${eclipse.trace4cps.version}/update-site/"/>
+          <repository
+              url="https://download.eclipse.org/lsat/${eclipse.lsat.version}/update-site/"/>
+          <repository
+              url="https://hallvard.github.io/plantuml/"/>
+          <repository
+              url="http://download.itemis.com/updates/releases/2.1.1/"/>
+          <repository
+              url="https://download.eclipse.org/e4/snapshots/org.eclipse.e4.tools/latest/"/>
+          <repository
+              url="https://download.eclipse.org/justj/jres/${eclipse.justj.version}/updates/release/latest/"/>
+        </repositoryList>
+      </targlet>
+    </setupTask>
+  </stream>
+  <stream name="eclipse-2024-09"
+      label="Eclipse 2024-09">
+    <setupTask
+        xsi:type="setup:EclipseIniTask"
+        option="-Doomph.redirection.pps.git"
+        value="=https://raw.githubusercontent.com/TNO/PPS/eclipse-2024-09/pps.setup->${git.clone.pps.git.location|uri}/pps.setup"
+        vm="true">
+      <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.ide.version"
+        value="2024-09"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.lsat.version"
+        value="v0.4-RC2"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.trace4cps.version"
+        value="v0.3"/>
+    <setupTask
+        xsi:type="setup:VariableTask"
+        name="eclipse.justj.version"
+        value="21"/>
+    <setupTask
+        xsi:type="setup.p2:P2Task">
+      <requirement
+          name="org.eclipse.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.jdt.feature.group"/>
+      <requirement
+          name="org.eclipse.pde.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.emf.ecoretools.design.feature.group"
+          versionRange="[3.3.2,4.0.0)"/>
+      <requirement
+          name="org.eclipse.emf.validation.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.egit.feature.group"/>
+      <requirement
+          name="org.eclipse.xtext.sdk.feature.group"/>
+      <requirement
+          name="de.itemis.xtext.antlr.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.m2m.qvt.oml.sdk.feature.group"/>
+      <requirement
+          name="org.eclipse.e4.core.tools.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.oomph.setup.sdk.feature.group"/>
+      <requirement
+          name="org.apache.commons.logging"
+          versionRange="[1.2.0,1.2.0]"/>
+      <requirement
+          name="org.eclipse.m2e.pde.feature.feature.group"/>
+      <requirement
+          name="org.eclipse.cbi.targetplatform.feature.feature.group"/>
+      <requirement
+          name="de.jcup.asciidoctoreditor.feature.group"/>
+      <repository
+          url="https://de-jcup.github.io/update-site-eclipse-asciidoctor-editor/update-site/"/>
+      <repository
+          url="http://download.itemis.com/updates/releases/2.1.1/"/>
+      <repository
+          url="https://download.eclipse.org/cbi/updates/tpd/release/latest"/>
+      <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
+    </setupTask>
+    <setupTask
+        xsi:type="setup.targlets:TargletTask">
+      <targlet
+          name="${scope.project.label}"
+          activeRepositoryList="PPS">
+        <annotation
+            source="http:/www.eclipse.org/oomph/targlets/TargetDefinitionGenerator">
+          <detail
+              key="location">
+            <value>${git.clone.pps.git.location}/releng/nl.esi.pps.target/nl.esi.pps.target.target</value>
+          </detail>
+          <detail
+              key="extraUnits">
+            <value>org.eclipse.equinox.executable.feature.group</value>
+          </detail>
+          <detail
+              key="generateImplicitUnits">
+            <value>true</value>
+          </detail>
+          <detail
+              key="minimizeImplicitUnits">
+            <value>true</value>
+          </detail>
+          <detail
+              key="includeMode">
+            <value>planner</value>
+          </detail>
+          <detail
+              key="generateVersions">
+            <value>true</value>
+          </detail>
+          <detail
+              key="includeAllPlatforms">
+            <value>false</value>
+          </detail>
+          <detail
+              key="includeSource">
+            <value>true</value>
+          </detail>
+        </annotation>
+        <requirement
+            name="org.eclipse.sdk.feature.group"/>
+        <requirement
+            name="de.itemis.xtext.antlr.feature.feature.group"/>
+        <requirement
+            name="org.eclipse.emf.mwe2.launcher.feature.group"/>
+        <requirement
+            name="org.eclipse.e4.core.tools.feature.feature.group"/>
+        <requirement
+            name="net.sourceforge.plantuml.feature.feature.group"/>
+        <requirement
+            name="net.sourceforge.plantuml.lib.feature.feature.group"/>
+        <requirement
+            name="*"/>
+        <sourceLocator
+            rootFolder="${git.clone.pps.git.location}"
+            locateNestedProjects="true"/>
+        <repositoryList
+            name="PPS">
+          <repository
+              url="https://download.eclipse.org/releases/${eclipse.ide.version}/"/>
+          <repository
+              url="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/${eclipse.ide.version}/"/>
+          <repository
+              url="https://download.eclipse.org/trace4cps/${eclipse.trace4cps.version}/update-site/"/>
+          <repository
+              url="https://download.eclipse.org/lsat/${eclipse.lsat.version}/update-site/"/>
+          <repository
+              url="https://hallvard.github.io/plantuml/"/>
+          <repository
+              url="http://download.itemis.com/updates/releases/2.1.1/"/>
+          <repository
+              url="https://download.eclipse.org/justj/jres/${eclipse.justj.version}/updates/release/latest/"/>
+        </repositoryList>
+      </targlet>
     </setupTask>
   </stream>
   <logicalProjectContainer

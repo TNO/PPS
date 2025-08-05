@@ -15,6 +15,16 @@ include::_initCommon.adoc[]
 
 The release notes of the Platform Performance Suite (PPS) are listed below, in reverse chronological order.
 
+=== pass:normal[PPS v0.30]
+
+.Software upgrades
+
+- Eclipse 2020-06 -> Eclipse 2024-09
+- Eclipse LSAT v0.3 -> https://eclipse.dev/lsat/userguide/index.html#release-notes[Eclipse LSAT v0.4]
+- Eclipse TRACE4CPS v0.2 -> https://eclipse.dev/trace4cps/#release-notes[Eclipse TRACE4CPS v0.3]
+- Eclipse JustJ 11 -> https://download.eclipse.org/justj/jres/21/updates/release/latest[Eclipse JustJ 21]
+
+
 === pass:normal[PPS v0.20]
 
 This release prepares PPS to be open sourced.

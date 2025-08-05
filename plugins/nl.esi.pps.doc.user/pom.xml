@@ -38,7 +38,7 @@
                         <toclevels>4</toclevels>
                         <doctype>book</doctype>
                         <icons>font</icons>
-                        <eclipse-help-location>https://help.eclipse.org/2021-12/topic</eclipse-help-location>
+                        <eclipse-help-location>https://help.eclipse.org/2024-09/topic</eclipse-help-location>
                     </attributes>
                 </configuration>
 

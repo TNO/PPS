@@ -21,7 +21,6 @@
     </parent>
 
     <artifactId>nl.esi.pps.root</artifactId>
-    <version>0.20.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>PPS Root</name>
     <description>Platform Performance Suite (PPS)</description>

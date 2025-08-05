@@ -36,7 +36,7 @@ So, you got a binary distribution of PPS and you want to tailor it for your own 
 This section describes how to convert your PPS to an Eclipse PDE to customize PPS.
 
 . First extract the PPS distribution, choose a PPS version (i.e., windows or linux), extract it and start it, e.g. `pps.exe`.
-. Now use the menu:Help[Install New Software...] menu to install the `Eclipse Plugin Development Tools` from the Eclipse 2021-12 (i.e., 4.22) update site: https://download.eclipse.org/eclipse/updates/4.22/[] +
+. Now use the menu:Help[Install New Software...] menu to install the `Eclipse Plugin Development Tools` from the Eclipse 2024-09 (i.e., 4.33) update site: https://download.eclipse.org/eclipse/updates/4.33/[] +
 +
 image::{imgsdir}/install-pde.png[width=869,height=705]
 
