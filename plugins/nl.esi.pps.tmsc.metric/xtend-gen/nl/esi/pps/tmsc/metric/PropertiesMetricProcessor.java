@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.metric;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.Serializable;
 import java.text.ParseException;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Objects;
 import java.util.TreeSet;
 import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.Dependency;
@@ -38,29 +38,29 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("all")
 public class PropertiesMetricProcessor implements IMetricProcessor {
   protected static final Logger LOGGER = LoggerFactory.getLogger(PropertiesMetricProcessor.class);
-  
+
   @Extension
   protected static final MetricFactory m_metric = MetricFactory.eINSTANCE;
-  
+
   public static final String PROPERTY_METRIC_BUDGET = "metricBudget";
-  
+
   public static final String PROPERTY_METRIC_INSTANCE_FROM_ID = "metricInstanceFromID";
-  
+
   public static final String PROPERTY_METRIC_INSTANCE_TO_ID = "metricInstanceToID";
-  
+
   public static final String PROPERTY_METRIC_ACTIVITY_CUT_OFF = "metricActivityCutOff";
-  
+
   @Override
   public boolean isEnabled(final FullScopeTMSC tmsc) {
     return ((tmsc != null) && PPSPreferences.isAdvancedFeaturesEnabled());
   }
-  
+
   @Override
   public String getConfiguration(final FullScopeTMSC tmsc) {
     Serializable _metricBudget = PropertiesMetricProcessor.getMetricBudget(tmsc);
     final Serializable budget = _metricBudget;
     boolean _matched = false;
-    if (Objects.equal(budget, null)) {
+    if (Objects.equals(budget, null)) {
       _matched=true;
       return null;
     }
@@ -104,7 +104,7 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
     }
     return null;
   }
-  
+
   @Override
   public Long getBudget(final String configuration, final Long defaultBudget) {
     if ((configuration != null)) {
@@ -124,7 +124,7 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
     }
     return defaultBudget;
   }
-  
+
   @Override
   public Collection<MetricInstance> resolveInstances(final FullScopeTMSC tmsc, final String configuration) {
     final Function1<Event, Serializable> _function = (Event it) -> {
@@ -151,7 +151,7 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
     }
     return Collections.<MetricInstance>unmodifiableCollection(metricInstances);
   }
-  
+
   @Override
   public boolean isActivityCutOff(final Dependency dependency, final MetricInstance metricInstance) {
     Serializable cutOffValue = PropertiesMetricProcessor.getMetricActivityCutOff(dependency);
@@ -162,10 +162,10 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
     }
     return this.isActivityCutOff(cutOffValue);
   }
-  
+
   private boolean isActivityCutOff(final Serializable cutOffValue) {
     boolean _matched = false;
-    if (Objects.equal(cutOffValue, null)) {
+    if (Objects.equals(cutOffValue, null)) {
       _matched=true;
       return false;
     }
@@ -190,13 +190,13 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
       return false;
     }
   }
-  
+
   public static Serializable getMetricBudget(final FullScopeTMSC container) {
     final String key = "metricBudget";
     final Object value = container.getProperties().get(key);
     return (Serializable) value;
   }
-  
+
   public static void setMetricBudget(final FullScopeTMSC container, final Serializable value) {
     final String key = "metricBudget";
     if (value == null) {
@@ -205,13 +205,13 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
         container.getProperties().put(key, value);
     }
   }
-  
+
   public static Serializable getMetricInstanceFromID(final Event container) {
     final String key = "metricInstanceFromID";
     final Object value = container.getProperties().get(key);
     return (Serializable) value;
   }
-  
+
   public static void setMetricInstanceFromID(final Event container, final Serializable value) {
     final String key = "metricInstanceFromID";
     if (value == null) {
@@ -220,13 +220,13 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
         container.getProperties().put(key, value);
     }
   }
-  
+
   public static Serializable getMetricInstanceToID(final Event container) {
     final String key = "metricInstanceToID";
     final Object value = container.getProperties().get(key);
     return (Serializable) value;
   }
-  
+
   public static void setMetricInstanceToID(final Event container, final Serializable value) {
     final String key = "metricInstanceToID";
     if (value == null) {
@@ -235,13 +235,13 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
         container.getProperties().put(key, value);
     }
   }
-  
+
   public static Serializable getMetricActivityCutOff(final Dependency container) {
     final String key = "metricActivityCutOff";
     final Object value = container.getProperties().get(key);
     return (Serializable) value;
   }
-  
+
   public static void setMetricActivityCutOff(final Dependency container, final Serializable value) {
     final String key = "metricActivityCutOff";
     if (value == null) {
@@ -250,13 +250,13 @@ public class PropertiesMetricProcessor implements IMetricProcessor {
         container.getProperties().put(key, value);
     }
   }
-  
+
   public static Serializable getMetricActivityCutOff(final Execution container) {
     final String key = "metricActivityCutOff";
     final Object value = container.getProperties().get(key);
     return (Serializable) value;
   }
-  
+
   public static void setMetricActivityCutOff(final Execution container, final Serializable value) {
     final String key = "metricActivityCutOff";
     if (value == null) {

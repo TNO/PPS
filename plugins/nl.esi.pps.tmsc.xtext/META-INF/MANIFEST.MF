@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.lsat.common.xtend,
  org.eclipse.xtext.xbase.lib;bundle-version="2.14.0",
  org.eclipse.xtend.lib;bundle-version="2.14.0"
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.tmsc.xtext,
  nl.esi.pps.tmsc.xtext.conversion,
  nl.esi.pps.tmsc.xtext.formatting,

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -50,21 +50,21 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 public class RootCauseAnalysis {
   @Extension
   private final StatusLogger logger = new StatusLogger("nl.esi.pps.tmsc.analysis", "Root Cause Analysis");
-  
+
   private final ArchitectureLifecycleStage stage;
-  
+
   public RootCauseAnalysis() {
     this(ArchitectureLifecycleStage.IMPLEMENTED);
   }
-  
+
   public RootCauseAnalysis(final ArchitectureLifecycleStage stage) {
     this.stage = stage;
   }
-  
+
   public MultiStatus getStatus() {
     return this.logger.getStatus();
   }
-  
+
   public static Iterable<Dependency> getRootCauses(final ScopedTMSC scopedTMSC) {
     boolean _isRootCauseAnalysisResult = RootCauseAnalysis.isRootCauseAnalysisResult(scopedTMSC);
     boolean _not = (!_isRootCauseAnalysisResult);
@@ -76,11 +76,11 @@ public class RootCauseAnalysis {
     };
     return IterableExtensions.<Dependency>filter(scopedTMSC.getDependencies(), _function);
   }
-  
+
   public ScopedTMSC analyseRootCause(final MetricInstance metricInstance, final IProgressMonitor monitor) {
     return this.analyseRootCause(Collections.<MetricInstance>singleton(metricInstance), metricInstance.getMetric(), monitor).get(metricInstance);
   }
-  
+
   public Map<MetricInstance, ScopedTMSC> analyseRootCause(final Collection<MetricInstance> metricInstances, final Metric _metric, final IProgressMonitor monitor) {
     if (((metricInstances == null) || metricInstances.isEmpty())) {
       this.logger.error("Programming error, no metric instances provided for metric {}.", _metric.getName());
@@ -88,7 +88,7 @@ public class RootCauseAnalysis {
     }
     final Function1<MetricInstance, Boolean> _function = (MetricInstance it) -> {
       Metric _metric_1 = it.getMetric();
-      return Boolean.valueOf((!Objects.equal(_metric_1, _metric)));
+      return Boolean.valueOf((!Objects.equals(_metric_1, _metric)));
     };
     boolean _exists = IterableExtensions.<MetricInstance>exists(metricInstances, _function);
     if (_exists) {
@@ -159,7 +159,7 @@ public class RootCauseAnalysis {
     }
     return analysisResult;
   }
-  
+
   protected void collectTimeBoundSamples(final Metric _metric, final Map<MetricInstance, ScopedTMSC> analysisCausalScheduledActivities) {
     final Function1<MetricInstance, Boolean> _function = (MetricInstance it) -> {
       return Boolean.valueOf(it.isExceedsBudget());
@@ -178,7 +178,7 @@ public class RootCauseAnalysis {
     };
     compareScheduledActivities.values().forEach(_function_3);
   }
-  
+
   /**
    * Based on isomorphism of the causal-activity, collects time-bounds for all
    * matching dependencies (incl. scheduled dependencies).
@@ -221,7 +221,7 @@ public class RootCauseAnalysis {
     };
     analysisCausalScheduledActivities.forEach(_function_1);
   }
-  
+
   /**
    * Based on isomorphism of the activity, collects time-bounds for all
    * matching dependencies (incl. scheduled dependencies).
@@ -261,7 +261,7 @@ public class RootCauseAnalysis {
     };
     analysisCausalScheduledActivities.forEach(_function_1);
   }
-  
+
   protected void collectTimeBoundSamples(final ITMSC causalScheduledActivityLeft, final ITMSC scheduledActivityRight, final ITmscMatchResult matchResult) {
     final ITmscMatchResult appliedMatchResult = matchResult.applyTo(causalScheduledActivityLeft, scheduledActivityRight);
     Collection<Dependency> _dependencies = causalScheduledActivityLeft.getDependencies();
@@ -287,7 +287,7 @@ public class RootCauseAnalysis {
       }
     }
   }
-  
+
   protected void analyseRootCause(final MetricInstance metricInstance, final ScopedTMSC causalScheduledActivity) {
     final Consumer<Dependency> _function = (Dependency it) -> {
       RootCauseAnalysis.unsetRootCause(it);
@@ -315,12 +315,12 @@ public class RootCauseAnalysis {
     };
     tempDependencies.forEach(_function_3);
   }
-  
+
   /**
    * Default value for persisted {@code rootCause} property on Dependency
    */
   private static final boolean _DEFAULT_DEPENDENCY_ROOTCAUSE = false;
-  
+
   public static boolean isRootCause(final Dependency container) {
     final String key = "rootCause";
     final Object value = container.getProperties().get(key);
@@ -329,12 +329,12 @@ public class RootCauseAnalysis {
     }
     return (boolean) value;
   }
-  
+
   public static void setRootCause(final Dependency container, final boolean value) {
     final String key = "rootCause";
     container.getProperties().put(key, value);
   }
-  
+
   /**
    * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.RootCauseAnalysis#isRootCause <em>rootCause</em>}' property is set on {@code container}.
    */
@@ -342,7 +342,7 @@ public class RootCauseAnalysis {
     final String key = "rootCause";
     return container.getProperties().containsKey(key);
   }
-  
+
   /**
    * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.RootCauseAnalysis#isRootCause <em>rootCause</em>}' property on {@code container}.
    */
@@ -350,12 +350,12 @@ public class RootCauseAnalysis {
     final String key = "rootCause";
     container.getProperties().remove(key);
   }
-  
+
   /**
    * Default value for persisted {@code rootCauseAnalysisResult} property on ScopedTMSC
    */
   private static final boolean _DEFAULT_SCOPEDTMSC_ROOTCAUSEANALYSISRESULT = false;
-  
+
   public static boolean isRootCauseAnalysisResult(final ScopedTMSC container) {
     final String key = "rootCauseAnalysisResult";
     final Object value = container.getProperties().get(key);
@@ -364,7 +364,7 @@ public class RootCauseAnalysis {
     }
     return (boolean) value;
   }
-  
+
   public static void setRootCauseAnalysisResult(final ScopedTMSC container, final boolean value) {
     final String key = "rootCauseAnalysisResult";
     if (value == _DEFAULT_SCOPEDTMSC_ROOTCAUSEANALYSISRESULT) {

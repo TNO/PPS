@@ -9,8 +9,7 @@ Export-Package: nl.esi.pps.tmsc.metric.ui;x-internal:=true,
  nl.esi.pps.tmsc.metric.ui.commands;x-internal:=true,
  nl.esi.pps.tmsc.metric.ui.handlers;x-internal:=true,
  nl.esi.pps.tmsc.metric.ui.wizard
-Require-Bundle: javax.inject,
- org.eclipse.osgi,
+Require-Bundle: org.eclipse.osgi,
  org.eclipse.jface,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
@@ -23,7 +22,7 @@ Require-Bundle: javax.inject,
  nl.esi.pps.tmsc.editor,
  org.eclipse.lsat.common.queries,
  nl.esi.pps.ui
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Import-Package: javax.annotation;version="1.2.0",
  javax.inject;version="1.0.0"

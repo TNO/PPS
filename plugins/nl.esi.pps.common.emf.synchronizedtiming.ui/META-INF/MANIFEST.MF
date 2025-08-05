@@ -16,7 +16,7 @@ Require-Bundle: nl.esi.pps.common.emf.ui;visibility:=reexport,
  org.eclipse.jdt.annotation;resolution:=optional,
  org.eclipse.ui,
  org.eclipse.ui.ide
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Bundle-ActivationPolicy: lazy
 Export-Package: nl.esi.pps.common.emf.synchronizedtiming,
  nl.esi.pps.common.emf.synchronizedtiming.events,

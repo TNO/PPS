@@ -8,4 +8,4 @@ Automatic-Module-Name: nl.esi.pps.product.branding
 Require-Bundle: org.eclipse.platform,
  org.eclipse.equinox.app,
  org.eclipse.ui.intro
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21

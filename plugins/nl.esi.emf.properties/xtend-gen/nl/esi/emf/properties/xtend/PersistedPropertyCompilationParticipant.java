@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,9 +9,9 @@
  */
 package nl.esi.emf.properties.xtend;
 
-import com.google.common.base.Objects;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.Objects;
 import org.eclipse.xtend.lib.macro.AbstractFieldProcessor;
 import org.eclipse.xtend.lib.macro.TransformationContext;
 import org.eclipse.xtend.lib.macro.declaration.AnnotationReference;
@@ -70,7 +70,7 @@ public class PersistedPropertyCompilationParticipant extends AbstractFieldProces
     TypeReference _xifexpression = null;
     Type _type = categoryProvider.getType();
     Type _findTypeGlobally = context.findTypeGlobally(DefaultCategoryProvider.class);
-    boolean _notEquals = (!Objects.equal(_type, _findTypeGlobally));
+    boolean _notEquals = (!Objects.equals(_type, _findTypeGlobally));
     if (_notEquals) {
       TypeReference _xblockexpression = null;
       {
@@ -86,7 +86,7 @@ public class PersistedPropertyCompilationParticipant extends AbstractFieldProces
           return it.getDeclaration();
         };
         final Function1<MethodDeclaration, Boolean> _function_1 = (MethodDeclaration it) -> {
-          return Boolean.valueOf((Objects.equal(it.getSimpleName(), "getCategory") && (IterableExtensions.size(it.getParameters()) == 1)));
+          return Boolean.valueOf((Objects.equals(it.getSimpleName(), "getCategory") && (IterableExtensions.size(it.getParameters()) == 1)));
         };
         final MethodDeclaration categoryMethod = IterableExtensions.<MethodDeclaration>findFirst(IterableExtensions.map(categoryProvider.getAllResolvedMethods(), _function), _function_1);
         if ((categoryMethod == null)) {
@@ -239,12 +239,12 @@ public class PersistedPropertyCompilationParticipant extends AbstractFieldProces
     Type _type_1 = propertyType.getType();
     boolean _matched_2 = false;
     Type _findTypeGlobally_1 = context.findTypeGlobally(Boolean.class);
-    if (Objects.equal(_type_1, _findTypeGlobally_1)) {
+    if (Objects.equals(_type_1, _findTypeGlobally_1)) {
       _matched_2=true;
     }
     if (!_matched_2) {
       Type _findTypeGlobally_2 = context.findTypeGlobally(boolean.class);
-      if (Objects.equal(_type_1, _findTypeGlobally_2)) {
+      if (Objects.equals(_type_1, _findTypeGlobally_2)) {
         _matched_2=true;
       }
     }

@@ -7,7 +7,7 @@ Bundle-Version: 0.20.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.tmsc,
  nl.esi.pps.tmsc.compare,
  nl.esi.pps.tmsc.impl,

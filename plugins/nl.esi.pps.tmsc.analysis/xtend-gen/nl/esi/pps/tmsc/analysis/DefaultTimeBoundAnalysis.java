@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,9 +9,9 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -40,13 +40,13 @@ public class DefaultTimeBoundAnalysis {
   @Data
   private static class MinimumDurationKey {
     private final Lifeline from;
-    
+
     private final Lifeline to;
-    
+
     private final EClass dependencyType;
-    
+
     private final boolean messageControl;
-    
+
     public MinimumDurationKey(final Dependency dependency) {
       Event _source = dependency.getSource();
       Lifeline _lifeline = null;
@@ -68,7 +68,7 @@ public class DefaultTimeBoundAnalysis {
         this.messageControl = false;
       }
     }
-    
+
     public Long computeMinimumDuration() {
       final Function1<Event, EList<Dependency>> _function = (Event it) -> {
         return it.getFullScopeOutgoingDependencies();
@@ -79,19 +79,19 @@ public class DefaultTimeBoundAnalysis {
         if (_target!=null) {
           _lifeline=_target.getLifeline();
         }
-        return Boolean.valueOf(Objects.equal(_lifeline, this.to));
+        return Boolean.valueOf(Objects.equals(_lifeline, this.to));
       };
       Iterable<? extends Dependency> siblings = IterableExtensions.<Dependency>filter(IterableExtensions.<Event, Dependency>flatMap(this.from.getEvents(), _function), _function_1);
       if (this.messageControl) {
         final Function1<MessageControl, Boolean> _function_2 = (MessageControl it) -> {
           EClass _eClass = it.getMessage().eClass();
-          return Boolean.valueOf(Objects.equal(_eClass, this.dependencyType));
+          return Boolean.valueOf(Objects.equals(_eClass, this.dependencyType));
         };
         siblings = IterableExtensions.<MessageControl>filter(Iterables.<MessageControl>filter(siblings, MessageControl.class), _function_2);
       } else {
         final Function1<Dependency, Boolean> _function_3 = (Dependency it) -> {
           EClass _eClass = it.eClass();
-          return Boolean.valueOf(Objects.equal(_eClass, this.dependencyType));
+          return Boolean.valueOf(Objects.equals(_eClass, this.dependencyType));
         };
         siblings = IterableExtensions.filter(siblings, _function_3);
       }
@@ -100,7 +100,7 @@ public class DefaultTimeBoundAnalysis {
       };
       return IterableExtensions.<Long>min(IterableExtensions.<Long>filterNull(IterableExtensions.map(siblings, _function_4)));
     }
-    
+
     @Override
     @Pure
     public int hashCode() {
@@ -111,7 +111,7 @@ public class DefaultTimeBoundAnalysis {
       result = prime * result + ((this.dependencyType== null) ? 0 : this.dependencyType.hashCode());
       return prime * result + (this.messageControl ? 1231 : 1237);
     }
-    
+
     @Override
     @Pure
     public boolean equals(final Object obj) {
@@ -141,7 +141,7 @@ public class DefaultTimeBoundAnalysis {
         return false;
       return true;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -152,32 +152,32 @@ public class DefaultTimeBoundAnalysis {
       b.add("messageControl", this.messageControl);
       return b.toString();
     }
-    
+
     @Pure
     public Lifeline getFrom() {
       return this.from;
     }
-    
+
     @Pure
     public Lifeline getTo() {
       return this.to;
     }
-    
+
     @Pure
     public EClass getDependencyType() {
       return this.dependencyType;
     }
-    
+
     @Pure
     public boolean isMessageControl() {
       return this.messageControl;
     }
   }
-  
+
   private final Map<DefaultTimeBoundAnalysis.MinimumDurationKey, Long> minimumDurationCache = CollectionLiterals.<DefaultTimeBoundAnalysis.MinimumDurationKey, Long>newHashMap();
-  
+
   private final long defaultTimeBound;
-  
+
   public void analyzeTimeBounds(final FullScopeTMSC tmsc) {
     final Function1<Lifeline, EList<Event>> _function = (Lifeline it) -> {
       return it.getEvents();
@@ -187,7 +187,7 @@ public class DefaultTimeBoundAnalysis {
     };
     IterableExtensions.<Lifeline, Event>flatMap(tmsc.getLifelines(), _function).forEach(_function_1);
   }
-  
+
   public void analyzeTimeBounds(final Event event) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       Long _duration = it.getDuration();
@@ -252,7 +252,7 @@ public class DefaultTimeBoundAnalysis {
       IterableExtensions.<Dependency>reject(messages, _function_5).forEach(_function_6);
     }
   }
-  
+
   /**
    * Returns {@code true} if time-bound should be analyzed for {@code dependency}.
    */
@@ -291,7 +291,7 @@ public class DefaultTimeBoundAnalysis {
     }
     return _switchResult;
   }
-  
+
   /**
    * Returns {@code true} if the {@code event} is expected to await some message
    * before the application continues.
@@ -299,11 +299,11 @@ public class DefaultTimeBoundAnalysis {
   protected boolean isWaitEvent(final Event event) {
     return (((event instanceof EntryEvent) && (event.getExecution() != null)) && (event.getExecution().getParent() == null));
   }
-  
+
   protected long getTimeout(final Dependency dependency) {
     return 0L;
   }
-  
+
   protected long getDefaultTimeBound(final Dependency dependency) {
     if ((dependency instanceof LifelineSegment)) {
       return this.defaultTimeBound;
@@ -322,7 +322,7 @@ public class DefaultTimeBoundAnalysis {
     }
     return this.defaultTimeBound;
   }
-  
+
   /**
    * Sets the {@code dependency} time-bound, ensuring that it will never be greater than its duration.
    */
@@ -333,7 +333,7 @@ public class DefaultTimeBoundAnalysis {
       dependency.setTimeBound(Long.valueOf(Math.min((dependency.getDuration()).longValue(), (timeBound).longValue())));
     }
   }
-  
+
   protected long getMinimumDuration(final Dependency dependency) {
     DefaultTimeBoundAnalysis.MinimumDurationKey _minimumDurationKey = new DefaultTimeBoundAnalysis.MinimumDurationKey(dependency);
     final Function<DefaultTimeBoundAnalysis.MinimumDurationKey, Long> _function = (DefaultTimeBoundAnalysis.MinimumDurationKey it) -> {
@@ -341,7 +341,7 @@ public class DefaultTimeBoundAnalysis {
     };
     return (this.minimumDurationCache.computeIfAbsent(_minimumDurationKey, _function)).longValue();
   }
-  
+
   public DefaultTimeBoundAnalysis(final long defaultTimeBound) {
     super();
     this.defaultTimeBound = defaultTimeBound;

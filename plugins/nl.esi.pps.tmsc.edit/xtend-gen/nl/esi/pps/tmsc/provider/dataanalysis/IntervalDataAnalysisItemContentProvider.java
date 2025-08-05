@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,10 +9,10 @@
  */
 package nl.esi.pps.tmsc.provider.dataanalysis;
 
-import com.google.common.base.Objects;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.EventType;
@@ -35,7 +35,7 @@ public class IntervalDataAnalysisItemContentProvider implements IDataAnalysisIte
   public Set<String> getConfigurations(final Object object) {
     return Collections.<String>singleton(IDataAnalysisItemContentProvider.DEFAULT_CONFIGURATION);
   }
-  
+
   @Override
   public String getTitle(final Object object, final String configuration) {
     final Interval interval = ((Interval) object);
@@ -60,7 +60,7 @@ public class IntervalDataAnalysisItemContentProvider implements IDataAnalysisIte
     _builder.append(_name_3);
     return _builder.toString();
   }
-  
+
   @Override
   public Iterable<?> getSiblings(final Object object, final String configuration) {
     final Interval interval = ((Interval) object);
@@ -96,14 +96,14 @@ public class IntervalDataAnalysisItemContentProvider implements IDataAnalysisIte
     }
     return pairs;
   }
-  
+
   private Iterable<Event> getSiblings(final Event event, final String configuration) {
     final Function1<Event, Boolean> _function = (Event it) -> {
-      return Boolean.valueOf(((Objects.equal(it.eClass(), event.eClass()) && Objects.equal(it.getFunction(), event.getFunction())) && Objects.equal(it.getComponent(), event.getComponent())));
+      return Boolean.valueOf(((Objects.equals(it.eClass(), event.eClass()) && Objects.equals(it.getFunction(), event.getFunction())) && Objects.equals(it.getComponent(), event.getComponent())));
     };
     return IterableExtensions.<Event>filter(event.getLifeline().getEvents(), _function);
   }
-  
+
   @Override
   public Long getDuration(final Object object, final Object sibling, final String configuration) {
     final Interval interval = ((Interval) sibling);

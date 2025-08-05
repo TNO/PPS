@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: nl.esi.pps.architecture.provider.ArchitectureEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.architecture.deployed.provider,
  nl.esi.pps.architecture.implemented.provider,
  nl.esi.pps.architecture.instantiated.provider,

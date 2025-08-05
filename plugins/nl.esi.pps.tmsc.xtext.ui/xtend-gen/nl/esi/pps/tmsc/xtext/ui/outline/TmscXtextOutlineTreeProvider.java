@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -30,12 +30,12 @@ public class TmscXtextOutlineTreeProvider extends DefaultOutlineTreeProvider {
     };
     this.getChildren(modelElement).forEach(_function);
   }
-  
+
   @Override
   protected boolean _isLeaf(final EObject modelElement) {
     return IterableExtensions.isEmpty(this.getChildren(modelElement));
   }
-  
+
   /**
    * We do not want to show the properties in the outline
    */

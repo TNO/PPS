@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,12 +9,12 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.DomainDependency;
@@ -57,15 +57,15 @@ public final class ActivityAnalysis {
       };
       return Boolean.valueOf(IterableExtensions.<Map.Entry<Dependency, Boolean>>forall(projectionValues.entrySet(), _function));
     }
-    
+
     @Override
     public void apply(final Dependency projection, final Boolean targetFeatureValue) {
-      if ((projection.isProjection() && Objects.equal(targetFeatureValue, Boolean.TRUE))) {
+      if ((projection.isProjection() && Objects.equals(targetFeatureValue, Boolean.TRUE))) {
         ActivityAnalysis.setEpoch(projection, true);
       }
     }
   }
-  
+
   /**
    * If the dependencies that are projected contain activity dependencies,
    * this means that the resource was used by other activities and therefore resourceSharing is set to true
@@ -77,22 +77,22 @@ public final class ActivityAnalysis {
         return Boolean.valueOf((ActivityAnalysis.isActivity(it) || ActivityAnalysis.isResourceSharing(it)));
       }))));
     }
-    
+
     @Override
     public void apply(final Dependency projection, final Boolean targetFeatureValue) {
-      if ((projection.isProjection() && Objects.equal(targetFeatureValue, Boolean.TRUE))) {
+      if ((projection.isProjection() && Objects.equals(targetFeatureValue, Boolean.TRUE))) {
         ActivityAnalysis.setResourceSharing(projection, true);
       }
     }
   }
-  
+
   public static final ActivityAnalysis.DependencyEpochProjection EPOCH_PROJECTION = new ActivityAnalysis.DependencyEpochProjection();
-  
+
   public static final ActivityAnalysis.DependencyResourceSharingProjection RESOURCE_SHARING_PROJECTION = new ActivityAnalysis.DependencyResourceSharingProjection();
-  
+
   private ActivityAnalysis() {
   }
-  
+
   public static ScopedTMSC createActivityTMSC(final Interval interval) {
     Set<Dependency> _findActivityDependencies = ActivityAnalysis.findActivityDependencies(interval);
     StringConcatenation _builder = new StringConcatenation();
@@ -101,7 +101,7 @@ public final class ActivityAnalysis {
     _builder.append(" activity");
     return TmscQueries.createScopedTMSC(_findActivityDependencies, _builder, interval.getFrom(), interval.getTo());
   }
-  
+
   public static ScopedTMSC createCausalTMSC(final Interval interval) {
     final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo());
     StringConcatenation _builder = new StringConcatenation();
@@ -110,7 +110,7 @@ public final class ActivityAnalysis {
     _builder.append(" causal");
     return TmscQueries.createScopedTMSC(causalDependencies, _builder, interval.getFrom(), interval.getTo());
   }
-  
+
   public static ScopedTMSC createCausalActivityTMSC(final Interval interval) {
     final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo());
     final Set<Dependency> causalActivityDependencies = ActivityAnalysis.findActivityDependencies(interval);
@@ -121,7 +121,7 @@ public final class ActivityAnalysis {
     _builder.append(" causal activity");
     return TmscQueries.createScopedTMSC(causalActivityDependencies, _builder, interval.getFrom(), interval.getTo());
   }
-  
+
   public static ScopedTMSC createCausalScheduledActivityTMSC(final Interval interval) {
     final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo());
     final List<? extends Dependency> epochDependencies = ActivityAnalysis.createEpochDependencies(interval, causalDependencies);
@@ -139,7 +139,7 @@ public final class ActivityAnalysis {
     TmscQueries.disposeTemp(epochDependencies);
     return csaTmsc;
   }
-  
+
   public static ScopedTMSC createScheduledActivityTMSC(final Interval interval) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       Long _startTime = it.getStartTime();
@@ -166,17 +166,17 @@ public final class ActivityAnalysis {
     TmscQueries.disposeTemp(epochDependencies);
     return saTmsc;
   }
-  
+
   private static Set<Dependency> projectToScope(final Iterable<? extends Dependency> dependencies, final ScopedTMSC scope) {
     final TmscProjection tmscProjection = new TmscProjection(scope, ActivityAnalysis.EPOCH_PROJECTION, ActivityAnalysis.RESOURCE_SHARING_PROJECTION);
     return tmscProjection.projectToScope(dependencies);
   }
-  
+
   private static List<? extends Dependency> createEpochDependencies(final Interval interval) {
     final Set<Dependency> causalDependencies = TmscQueries.findCausalDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo());
     return ActivityAnalysis.createEpochDependencies(interval, causalDependencies);
   }
-  
+
   private static List<? extends Dependency> createEpochDependencies(final Interval interval, final Set<Dependency> causalDependencies) {
     final Event epochEvent = interval.getFrom();
     final ArrayList<Dependency> epochDependencies = CollectionLiterals.<Dependency>newArrayList();
@@ -188,7 +188,7 @@ public final class ActivityAnalysis {
         EList<Dependency> _fullScopeIncomingDependencies = event.getFullScopeIncomingDependencies();
         final HashSet<Dependency> incomingDependencies = new HashSet<Dependency>(_fullScopeIncomingDependencies);
         final Function1<Dependency, Boolean> _function = (Dependency it) -> {
-          return Boolean.valueOf((Objects.equal(it.getSource(), epochEvent) && (ActivityAnalysis.isEpoch(it) == true)));
+          return Boolean.valueOf((Objects.equals(it.getSource(), epochEvent) && (ActivityAnalysis.isEpoch(it) == true)));
         };
         Dependency epochDependency = IterableExtensions.<Dependency>findFirst(incomingDependencies, _function);
         if ((epochDependency == null)) {
@@ -226,7 +226,7 @@ public final class ActivityAnalysis {
     }
     return epochDependencies;
   }
-  
+
   public static Set<Dependency> findActivityDependencies(final Interval interval) {
     if ((interval instanceof MetricInstance)) {
       final MetricProcessor metricProcessor = MetricPlugin.getPlugin().getRegisteredMetricProcessors(((MetricInstance)interval).getTmsc()).get(((MetricInstance)interval).getMetric().getId());
@@ -242,17 +242,17 @@ public final class ActivityAnalysis {
     };
     return TmscQueries.findAdjacentDependenciesBetween(interval.getTmsc(), interval.getFrom(), interval.getTo(), _function_1);
   }
-  
+
   public static boolean isActivity(final Dependency dependency) {
     Boolean _scheduled = dependency.getScheduled();
-    return Objects.equal(_scheduled, Boolean.FALSE);
+    return Objects.equals(_scheduled, Boolean.FALSE);
   }
-  
+
   /**
    * Default value for persisted {@code epoch} property on Dependency
    */
   private static final boolean _DEFAULT_DEPENDENCY_EPOCH = false;
-  
+
   public static boolean isEpoch(final Dependency container) {
     final String key = "epoch";
     final Object value = container.getProperties().get(key);
@@ -261,7 +261,7 @@ public final class ActivityAnalysis {
     }
     return (boolean) value;
   }
-  
+
   public static void setEpoch(final Dependency container, final boolean value) {
     final String key = "epoch";
     if (value == _DEFAULT_DEPENDENCY_EPOCH) {
@@ -270,12 +270,12 @@ public final class ActivityAnalysis {
         container.getProperties().put(key, value);
     }
   }
-  
+
   /**
    * Default value for persisted {@code resourceSharing} property on Dependency
    */
   private static final boolean _DEFAULT_DEPENDENCY_RESOURCESHARING = false;
-  
+
   public static boolean isResourceSharing(final Dependency container) {
     final String key = "resourceSharing";
     final Object value = container.getProperties().get(key);
@@ -284,7 +284,7 @@ public final class ActivityAnalysis {
     }
     return (boolean) value;
   }
-  
+
   public static void setResourceSharing(final Dependency container, final boolean value) {
     final String key = "resourceSharing";
     if (value == _DEFAULT_DEPENDENCY_RESOURCESHARING) {

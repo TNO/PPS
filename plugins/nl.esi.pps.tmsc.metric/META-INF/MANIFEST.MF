@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: nl.esi.pps.tmsc.metric.MetricPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.tmsc.metric,
  nl.esi.pps.tmsc.metric.extension,
  nl.esi.pps.tmsc.metric.impl,

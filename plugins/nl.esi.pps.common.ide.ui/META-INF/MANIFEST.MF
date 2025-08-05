@@ -12,7 +12,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.core.expressions,
  org.eclipse.jface,
  org.eclipse.equinox.registry
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.common.ide.ui,
  nl.esi.pps.common.ide.ui.action,
  nl.esi.pps.common.ide.ui.browser,

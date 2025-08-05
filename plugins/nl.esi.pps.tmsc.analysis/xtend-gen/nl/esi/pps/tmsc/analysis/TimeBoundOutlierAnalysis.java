@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -22,17 +22,17 @@ import org.eclipse.xtext.xbase.lib.Pair;
 @SuppressWarnings("all")
 public class TimeBoundOutlierAnalysis {
   private static final double IQR_FACTOR = 3.0;
-  
+
   private TimeBoundOutlierAnalysis() {
   }
-  
+
   public static Iterable<Dependency> analyseTimeBoundOutliers(final TMSC tmsc) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       return Boolean.valueOf(TimeBoundOutlierAnalysis.isTimeBoundOutlier(it));
     };
     return IterableExtensions.<Dependency>filter(tmsc.getDependencies(), _function);
   }
-  
+
   public static boolean isTimeBoundOutlier(final Dependency dependency) {
     Long _timeBound = dependency.getTimeBound();
     boolean _tripleEquals = (_timeBound == null);
@@ -46,7 +46,7 @@ public class TimeBoundOutlierAnalysis {
     Long _timeBound_1 = dependency.getTimeBound();
     return (_timeBound_1.compareTo(timeBoundOutlierThreshold) > 0);
   }
-  
+
   public static Long analyseTimeBoundOutlierThreshold(final Dependency dependency, final boolean refresh) {
     if ((TimeBoundOutlierAnalysis.isSetTimeBoundOutlierThreshold(dependency) && (!refresh))) {
       return TimeBoundOutlierAnalysis.getTimeBoundOutlierThreshold(dependency);
@@ -63,7 +63,7 @@ public class TimeBoundOutlierAnalysis {
     TimeBoundOutlierAnalysis.setTimeBoundOutlierThreshold(dependency, Long.valueOf(Double.valueOf(Math.ceil(_plus)).longValue()));
     return TimeBoundOutlierAnalysis.getTimeBoundOutlierThreshold(dependency);
   }
-  
+
   /**
    * @see https://en.wikipedia.org/wiki/Interquartile_range
    */
@@ -120,7 +120,7 @@ public class TimeBoundOutlierAnalysis {
     }
     return _switchResult;
   }
-  
+
   private static <T extends Object> T at(final List<T> values, final int position) {
     T _xifexpression = null;
     if ((position < 0)) {
@@ -133,18 +133,18 @@ public class TimeBoundOutlierAnalysis {
     }
     return _xifexpression;
   }
-  
+
   public static Long getTimeBoundOutlierThreshold(final Dependency container) {
     final String key = "timeBoundOutlierThreshold";
     final Object value = container.getProperties().get(key);
     return (Long) value;
   }
-  
+
   public static void setTimeBoundOutlierThreshold(final Dependency container, final Long value) {
     final String key = "timeBoundOutlierThreshold";
     container.getProperties().put(key, value);
   }
-  
+
   /**
    * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getTimeBoundOutlierThreshold <em>timeBoundOutlierThreshold</em>}' property is set on {@code container}.
    */
@@ -152,7 +152,7 @@ public class TimeBoundOutlierAnalysis {
     final String key = "timeBoundOutlierThreshold";
     return container.getProperties().containsKey(key);
   }
-  
+
   /**
    * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getTimeBoundOutlierThreshold <em>timeBoundOutlierThreshold</em>}' property on {@code container}.
    */
@@ -160,7 +160,7 @@ public class TimeBoundOutlierAnalysis {
     final String key = "timeBoundOutlierThreshold";
     container.getProperties().remove(key);
   }
-  
+
   /**
    * Creates initial value for persisted {@code timeBoundSamples} property on Dependency
    */
@@ -168,18 +168,18 @@ public class TimeBoundOutlierAnalysis {
     ArrayList<Long> _newArrayList = CollectionLiterals.<Long>newArrayList();
     return _newArrayList;
   }
-  
+
   public static ArrayList<Long> getTimeBoundSamples(final Dependency container) {
     final String key = "timeBoundSamples";
     final Object value = container.getProperties().map().computeIfAbsent(key, k -> _getInitial_Dependency_TimeBoundSamples());
     return (ArrayList<Long>) value;
   }
-  
+
   public static void setTimeBoundSamples(final Dependency container, final ArrayList<Long> value) {
     final String key = "timeBoundSamples";
     container.getProperties().put(key, value);
   }
-  
+
   /**
    * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getTimeBoundSamples <em>timeBoundSamples</em>}' property is set on {@code container}.
    */
@@ -187,7 +187,7 @@ public class TimeBoundOutlierAnalysis {
     final String key = "timeBoundSamples";
     return container.getProperties().containsKey(key);
   }
-  
+
   /**
    * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.TimeBoundOutlierAnalysis#getTimeBoundSamples <em>timeBoundSamples</em>}' property on {@code container}.
    */

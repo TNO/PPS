@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -34,7 +34,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 @SuppressWarnings("all")
 public class CreateMetricActivityIsomorphismClassesHelper {
   private static final DecimalFormat CLASS_FORMAT = new DecimalFormat("000");
-  
+
   public static Iterable<ScopedTMSC> createIsomorphismClasses(final Metric metric, final CreateIntervalActivityStrategy strategy, final ArchitectureLifecycleStage stage) {
     final Function1<MetricInstance, ScopedTMSC> _function = (MetricInstance mi) -> {
       ScopedTMSC _createTMSC = strategy.createTMSC(mi);
@@ -87,13 +87,13 @@ public class CreateMetricActivityIsomorphismClassesHelper {
     };
     return IterableExtensions.<Pair<Integer, List<ScopedTMSC>>, ScopedTMSC>map(IterableExtensions.<List<ScopedTMSC>>indexed(TmscIsomorphismMatcher.<ScopedTMSC>findIsomorphismClasses(metricInstanceTmscs, stage)), _function_1);
   }
-  
+
   public static String getIsomorphismType(final ScopedTMSC container) {
     final String key = "isomorphismType";
     final Object value = container.getProperties().get(key);
     return (String) value;
   }
-  
+
   public static void setIsomorphismType(final ScopedTMSC container, final String value) {
     final String key = "isomorphismType";
     if (value == null) {
@@ -102,13 +102,13 @@ public class CreateMetricActivityIsomorphismClassesHelper {
         container.getProperties().put(key, value);
     }
   }
-  
+
   public static String getIsomorphismStage(final ScopedTMSC container) {
     final String key = "isomorphismStage";
     final Object value = container.getProperties().get(key);
     return (String) value;
   }
-  
+
   public static void setIsomorphismStage(final ScopedTMSC container, final String value) {
     final String key = "isomorphismStage";
     if (value == null) {
@@ -117,13 +117,13 @@ public class CreateMetricActivityIsomorphismClassesHelper {
         container.getProperties().put(key, value);
     }
   }
-  
+
   public static String getIsomorphismClass(final ScopedTMSC container) {
     final String key = "isomorphismClass";
     final Object value = container.getProperties().get(key);
     return (String) value;
   }
-  
+
   public static void setIsomorphismClass(final ScopedTMSC container, final String value) {
     final String key = "isomorphismClass";
     if (value == null) {

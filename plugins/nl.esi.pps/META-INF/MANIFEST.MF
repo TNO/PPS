@@ -5,6 +5,6 @@ Bundle-SymbolicName: nl.esi.pps
 Bundle-Version: 0.20.0.qualifier
 Bundle-Vendor: ESI (TNO)
 Automatic-Module-Name: nl.esi.pps
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.equinox.preferences
 Export-Package: nl.esi.pps.preferences

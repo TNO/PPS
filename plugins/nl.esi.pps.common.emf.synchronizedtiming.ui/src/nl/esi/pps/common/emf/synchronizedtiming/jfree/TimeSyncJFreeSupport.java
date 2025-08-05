@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  *
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -15,6 +15,7 @@ import java.awt.Graphics2D;
 import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 import org.eclipse.core.runtime.Assert;
@@ -163,7 +164,7 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 		if (plot == null) {
 			return;
 		}
-		
+
 		// Get current margin.
 		Integer curWidth = getViewMarginWidth();
 		if (curWidth == null) {
@@ -187,7 +188,7 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 			}
 			return;
 		}
-		
+
 		setMarginWidthInternal(width, plot, curWidth, plotArea);
 	}
 
@@ -199,10 +200,10 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 					"Set margin width skipped. No left axis found, for plot: " + plot + ", control=" + getControl());
 			return;
 		}
-		
+
 		RectangleEdge edge = (plot.getDomainAxis() == axis) ? plot.getDomainAxisEdge() : plot.getRangeAxisEdge();
 		Assert.isNotNull(edge);
-		
+
 		setMarginWidthOnAxis(width, plot, curWidth, plotArea, axis, edge);
 	}
 
@@ -241,9 +242,11 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 	}
 
 	protected @Nullable ValueAxis getLeftAxis() {
-		return streamXYPlots(getXYPlot()).map(this::getLeftAxis).filter(Objects::nonNull).findFirst().orElse(null);
+        Optional<ValueAxis> axis =
+                streamXYPlots(getXYPlot()).map(this::getLeftAxis).filter(Objects::nonNull).findFirst();
+        return axis.isPresent() ? axis.get() : null;
 	}
-	
+
 	protected @Nullable ValueAxis getLeftAxis(XYPlot xyPlot) {
 		for (int i = 0; i < xyPlot.getRangeAxisCount(); i++) {
 			if (xyPlot.getRangeAxisEdge(i) == RectangleEdge.LEFT) {
@@ -287,7 +290,7 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 		if (plot == null) {
 			return;
 		}
-		
+
 		// Remove right side chart padding.
 		JFreeChart chart = chartPanelComposite.getChart();
 		if (chart != null) {
@@ -297,7 +300,7 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 					new RectangleInsets(chartPadding.getTop(), chartPadding.getLeft(), chartPadding.getBottom(), 0));
 			}
 		}
-		
+
 		streamXYPlots(plot).forEach(this::setMinimumRightMargin);
 	}
 
@@ -379,7 +382,7 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 		resetTimeSync();
 		resetMarginSync();
 	}
-	
+
 	public void dispose() {
 		disableReceivingEvents();
 		setEnabled(false);
@@ -388,7 +391,7 @@ public class TimeSyncJFreeSupport extends TimeSyncSupport implements PlotChangeL
 			plot.removeChangeListener(this);
 		}
 	}
-	
+
 	@SuppressWarnings("null")
 	protected Stream<XYPlot> streamXYPlots(@Nullable XYPlot xyPlot) {
 		if (xyPlot == null) {

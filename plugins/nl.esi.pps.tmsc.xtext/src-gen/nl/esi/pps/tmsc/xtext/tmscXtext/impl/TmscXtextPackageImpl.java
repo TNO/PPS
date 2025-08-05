@@ -233,7 +233,6 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
   {
     super(eNS_URI, TmscXtextFactory.eINSTANCE);
   }
-
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

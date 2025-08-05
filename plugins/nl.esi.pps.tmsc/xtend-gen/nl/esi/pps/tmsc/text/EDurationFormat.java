@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -28,30 +28,30 @@ public class EDurationFormat extends NumberFormat {
    * The default {@link EDurationFormat}, assuming that durations are in nanoseconds.
    */
   public static final EDurationFormat eINSTANCE = new EDurationFormat();
-  
+
   private static final Pattern PATTERN_NANOSECONDS = Pattern.compile("\\s*n(ano)?\\s*s(ec(onds)?)?\\.?");
-  
+
   private static final Pattern PATTERN_MICROSECONDS = Pattern.compile("\\s*(µ|u|micro)\\s*s(ec(onds)?)?\\.?");
-  
+
   private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\s*(m(illi)?)\\s*s(ec(onds)?)?\\.?");
-  
+
   private static final Pattern PATTERN_SECONDS = Pattern.compile("\\s*s(ec(onds)?)?\\.?");
-  
+
   private static final Pattern PATTERN_MINUTES = Pattern.compile("\\s*min(utes)?\\.?");
-  
+
   private static final Pattern PATTERN_HOURS = Pattern.compile("\\s*((h(r(s)?)?)|hours)\\.?");
-  
+
   private static final Pattern PATTERN_DAYS = Pattern.compile("\\s*d(ay(s)?)?\\.?");
-  
+
   @Accessors
   private TimeUnit minimumTimeUnit = TimeUnit.NANOSECONDS;
-  
+
   @Accessors
   private TimeUnit maximumTimeUnit = TimeUnit.SECONDS;
-  
+
   public EDurationFormat() {
   }
-  
+
   public EDurationFormat(final TimeUnit minUnit, final TimeUnit maxUnit) {
     boolean _greaterThan = (minUnit.compareTo(maxUnit) > 0);
     if (_greaterThan) {
@@ -60,7 +60,7 @@ public class EDurationFormat extends NumberFormat {
     this.minimumTimeUnit = minUnit;
     this.maximumTimeUnit = maxUnit;
   }
-  
+
   @Override
   public StringBuffer format(final Object number, final StringBuffer toAppendTo, final FieldPosition pos) {
     StringBuffer _xblockexpression = null;
@@ -72,12 +72,12 @@ public class EDurationFormat extends NumberFormat {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public StringBuffer format(final double number, final StringBuffer toAppendTo, final FieldPosition pos) {
     return this.format(Math.round(number), toAppendTo, pos);
   }
-  
+
   @Override
   public StringBuffer format(final long number, final StringBuffer toAppendTo, final FieldPosition pos) {
     final long value = this.minimumTimeUnit.convert(number, TimeUnit.NANOSECONDS);
@@ -100,7 +100,7 @@ public class EDurationFormat extends NumberFormat {
     }
     return toAppendTo.append(value).append(this.getPostfix(this.minimumTimeUnit));
   }
-  
+
   private String getPostfix(final TimeUnit unit) {
     String _switchResult = null;
     if (unit != null) {
@@ -132,7 +132,7 @@ public class EDurationFormat extends NumberFormat {
     }
     return _switchResult;
   }
-  
+
   @Override
   public Long parse(final String source) throws ParseException {
     final ParsePosition parsePosition = new ParsePosition(0);
@@ -154,7 +154,7 @@ public class EDurationFormat extends NumberFormat {
     double _multiply = (_doubleValue * multiplier);
     return Long.valueOf(Math.round(_multiply));
   }
-  
+
   @Override
   public Long parse(final String source, final ParsePosition parsePosition) {
     final Number number = NumberFormat.getNumberInstance().parse(source, parsePosition);
@@ -171,7 +171,7 @@ public class EDurationFormat extends NumberFormat {
     double _multiply = (_doubleValue * multiplier);
     return Long.valueOf(Math.round(_multiply));
   }
-  
+
   private long getMultiplier(final String source, final ParsePosition parsePosition) {
     long _switchResult = (long) 0;
     boolean _matched = false;
@@ -227,7 +227,7 @@ public class EDurationFormat extends NumberFormat {
     }
     return _switchResult;
   }
-  
+
   private boolean matches(final Pattern pattern, final String source, final ParsePosition parsePosition) {
     final String unit = source.substring(parsePosition.getIndex());
     final Matcher matcher = pattern.matcher(unit);
@@ -247,21 +247,21 @@ public class EDurationFormat extends NumberFormat {
     }
     return false;
   }
-  
+
   @Pure
   public TimeUnit getMinimumTimeUnit() {
     return this.minimumTimeUnit;
   }
-  
+
   public void setMinimumTimeUnit(final TimeUnit minimumTimeUnit) {
     this.minimumTimeUnit = minimumTimeUnit;
   }
-  
+
   @Pure
   public TimeUnit getMaximumTimeUnit() {
     return this.maximumTimeUnit;
   }
-  
+
   public void setMaximumTimeUnit(final TimeUnit maximumTimeUnit) {
     this.maximumTimeUnit = maximumTimeUnit;
   }

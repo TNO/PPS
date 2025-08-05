@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,10 +9,10 @@
  */
 package nl.esi.pps.tmsc.viewers;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import nl.esi.pps.architecture.deployed.Host;
 import nl.esi.pps.architecture.implemented.Function;
@@ -56,13 +56,13 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
       Metric.class, MetricInstance.class, 
       ResourceSet.class);
   }
-  
+
   @Override
   protected void findContentWithinContext(final Object element, final Set<Lifeline> content) {
     super.findContentWithinContext(element, content);
     content.remove(null);
   }
-  
+
   @Override
   protected void findContent(final Object context, final Set<Lifeline> content) {
     boolean _matched = false;
@@ -186,7 +186,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
         _matched=true;
         final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
           Executor _executor = it.getExecutor();
-          return Boolean.valueOf(Objects.equal(_executor, context));
+          return Boolean.valueOf(Objects.equals(_executor, context));
         };
         Iterable<Lifeline> _filter = IterableExtensions.<Lifeline>filter(this.findLifelines(((EObject)context)), _function);
         Iterables.<Lifeline>addAll(content, _filter);
@@ -197,7 +197,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
         _matched=true;
         final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
           Host _host = it.getExecutor().getHost();
-          return Boolean.valueOf(Objects.equal(_host, context));
+          return Boolean.valueOf(Objects.equals(_host, context));
         };
         Iterable<Lifeline> _filter = IterableExtensions.<Lifeline>filter(this.findLifelines(((EObject)context)), _function);
         Iterables.<Lifeline>addAll(content, _filter);
@@ -209,7 +209,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
         final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
           final Function1<Event, Boolean> _function_1 = (Event it_1) -> {
             Component _component = it_1.getComponent();
-            return Boolean.valueOf(Objects.equal(_component, context));
+            return Boolean.valueOf(Objects.equals(_component, context));
           };
           return Boolean.valueOf(IterableExtensions.<Event>exists(it.getEvents(), _function_1));
         };
@@ -223,7 +223,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
         final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
           final Function1<Event, Boolean> _function_1 = (Event it_1) -> {
             Function _function_2 = it_1.getFunction();
-            return Boolean.valueOf(Objects.equal(_function_2, context));
+            return Boolean.valueOf(Objects.equals(_function_2, context));
           };
           return Boolean.valueOf(IterableExtensions.<Event>exists(it.getEvents(), _function_1));
         };
@@ -237,7 +237,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
         final Function1<Lifeline, Boolean> _function = (Lifeline it) -> {
           final Function1<Event, Boolean> _function_1 = (Event it_1) -> {
             Operation _operation = it_1.getFunction().getOperation();
-            return Boolean.valueOf(Objects.equal(_operation, context));
+            return Boolean.valueOf(Objects.equals(_operation, context));
           };
           return Boolean.valueOf(IterableExtensions.<Event>exists(it.getEvents(), _function_1));
         };
@@ -255,7 +255,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
             if (_operation!=null) {
               _interface=_operation.getInterface();
             }
-            return Boolean.valueOf(Objects.equal(_interface, context));
+            return Boolean.valueOf(Objects.equals(_interface, context));
           };
           return Boolean.valueOf(IterableExtensions.<Event>exists(it.getEvents(), _function_1));
         };
@@ -299,7 +299,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
       super.findContent(context, content);
     }
   }
-  
+
   protected Iterable<Lifeline> getConnectedLifelines(final Event event) {
     final Function1<Dependency, Event> _function = (Dependency it) -> {
       return it.getTarget();
@@ -313,7 +313,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
     };
     return IterableExtensions.<Event, Lifeline>map(adjacentEvents, _function_2);
   }
-  
+
   protected Iterable<Lifeline> findLifelines(final EObject eObject) {
     Iterable<Lifeline> _elvis = null;
     Resource _eResource = null;
@@ -336,7 +336,7 @@ public class LifelineContentProvider extends ContextAwareAdapterFactoryContentPr
     }
     return _elvis;
   }
-  
+
   protected Iterable<Lifeline> findLifelines(final ResourceSet resourceSet) {
     final Function1<Resource, EList<EObject>> _function = (Resource it) -> {
       return it.getContents();

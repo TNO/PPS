@@ -80,6 +80,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	}
 
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('}' 'tmsc' 'settings' '{')*
 	 *
@@ -132,12 +133,15 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) properties+=XProperty
+	 
+	 * </pre>
 	 */
 	protected void emit_TmscXtextModel___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('tmsc' 'settings' '{' '}')*
 	 *
@@ -238,12 +242,15 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) functions+=XFunction
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) hosts+=XHost
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) interfaces+=XInterface
+	 
+	 * </pre>
 	 */
 	protected void emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
@@ -251,12 +258,15 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     name=ID (ambiguity) (rule end)
 	 *     provides+=[XInterface|ID] (ambiguity) (rule end)
 	 *     requires+=[XInterface|ID] (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XComponent___LeftCurlyBracketKeyword_5_0_RightCurlyBracketKeyword_5_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
@@ -265,23 +275,29 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     function=[XFunction|IDString] (ambiguity) (rule end)
 	 *     incomingDependencies+=[XDependency|IDString] (ambiguity) (rule end)
 	 *     outgoingDependencies+=XDependency (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XEvent___LeftCurlyBracketKeyword_8_0_RightCurlyBracketKeyword_8_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XExecutor___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
@@ -289,39 +305,50 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     name=ID (ambiguity) (rule end)
 	 *     operation=[XOperation|FQN] (ambiguity) (rule end)
 	 *     parameters+=XFunctionParameter ')' (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XFunction___LeftCurlyBracketKeyword_6_0_RightCurlyBracketKeyword_6_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
 	/**
+	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('{' '}')?
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     name=ID (ambiguity) (rule end)
+	 
+	 * </pre>
 	 */
 	protected void emit_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);

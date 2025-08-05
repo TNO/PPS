@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,7 @@
  */
 package nl.esi.pps.tmsc.validation;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.specified.Component;
 import nl.esi.pps.common.emf.ecore.validation.EValidatorBase;
@@ -33,7 +33,7 @@ public class DefaultTmscValidator extends EValidatorBase {
   public DefaultTmscValidator() {
     super(TmscPlugin.PLUGIN_ID);
   }
-  
+
   @Override
   public void validate(final EClass eClass, final EObject eObject, final ValidationReporter reporter) {
     if ((eObject instanceof Dependency)) {
@@ -49,14 +49,14 @@ public class DefaultTmscValidator extends EValidatorBase {
       this.validateScopedTMSC(((ScopedTMSC)eObject), reporter);
     }
   }
-  
+
   private void validateDependency(final Dependency dependency, @Extension final ValidationReporter reporter) {
     if ((((dependency.getDuration() != null) && (dependency.getTimeBound() != null)) && 
       (dependency.getTimeBound().compareTo(dependency.getDuration()) > 0))) {
       reporter.warning("The time-bound of a dependency should be less than or equal to its duration.", dependency);
     }
   }
-  
+
   private void validateExecution(final Execution execution, @Extension final ValidationReporter reporter) {
     EntryEvent _entry = execution.getEntry();
     Lifeline _lifeline = null;
@@ -68,7 +68,7 @@ public class DefaultTmscValidator extends EValidatorBase {
     if (_root!=null) {
       _lifeline_1=_root.getLifeline();
     }
-    boolean _notEquals = (!Objects.equal(_lifeline, _lifeline_1));
+    boolean _notEquals = (!Objects.equals(_lifeline, _lifeline_1));
     if (_notEquals) {
       reporter.error("The entry event of an execution should refer to the same life-line as the execution itself.", execution);
     }
@@ -82,7 +82,7 @@ public class DefaultTmscValidator extends EValidatorBase {
     if (_root_1!=null) {
       _lifeline_3=_root_1.getLifeline();
     }
-    boolean _notEquals_1 = (!Objects.equal(_lifeline_2, _lifeline_3));
+    boolean _notEquals_1 = (!Objects.equals(_lifeline_2, _lifeline_3));
     if (_notEquals_1) {
       reporter.error("The exit event of an execution should refer to the same life-line as the execution itself.", execution);
     }
@@ -96,7 +96,7 @@ public class DefaultTmscValidator extends EValidatorBase {
     if (_exit_1!=null) {
       _component_1=_exit_1.getComponent();
     }
-    boolean _notEquals_2 = (!Objects.equal(_component, _component_1));
+    boolean _notEquals_2 = (!Objects.equals(_component, _component_1));
     if (_notEquals_2) {
       reporter.error("The source and target event of an execution should refer to the same component.", execution);
     }
@@ -110,12 +110,12 @@ public class DefaultTmscValidator extends EValidatorBase {
     if (_exit_2!=null) {
       _function_1=_exit_2.getFunction();
     }
-    boolean _notEquals_3 = (!Objects.equal(_function, _function_1));
+    boolean _notEquals_3 = (!Objects.equals(_function, _function_1));
     if (_notEquals_3) {
       reporter.error("The source and target event of an execution should refer to the same function.", execution);
     }
   }
-  
+
   private void validateLifelineSegment(final LifelineSegment lifelineSegment, @Extension final ValidationReporter reporter) {
     Event _source = lifelineSegment.getSource();
     Lifeline _lifeline = null;
@@ -127,12 +127,12 @@ public class DefaultTmscValidator extends EValidatorBase {
     if (_target!=null) {
       _lifeline_1=_target.getLifeline();
     }
-    boolean _notEquals = (!Objects.equal(_lifeline, _lifeline_1));
+    boolean _notEquals = (!Objects.equals(_lifeline, _lifeline_1));
     if (_notEquals) {
       reporter.error("The source and target event of a life-line segment should refer to the same life-line.", lifelineSegment);
     }
   }
-  
+
   private void validateScopedTMSC(final ScopedTMSC tmsc, @Extension final ValidationReporter reporter) {
     TMSC _parentScope = tmsc.getParentScope();
     boolean _tripleEquals = (_parentScope == null);

@@ -4,8 +4,7 @@ Bundle-Name: TMSC Analysis Prototypes UI
 Bundle-SymbolicName: nl.esi.pps.tmsc.analysis.prototypes.ui;singleton:=true
 Bundle-Version: 0.20.0.qualifier
 Bundle-Vendor: ESI (TNO)
-Require-Bundle: javax.inject,
- org.eclipse.osgi,
+Require-Bundle: org.eclipse.osgi,
  org.eclipse.jface,
  org.eclipse.e4.ui.services,
  org.eclipse.e4.core.di.annotations,
@@ -15,8 +14,9 @@ Require-Bundle: javax.inject,
  org.eclipse.lsat.common.queries,
  nl.esi.pps,
  nl.esi.pps.common.emf.ui
-Bundle-RequiredExecutionEnvironment: JavaSE-11
-Import-Package: javax.annotation;version="1.2.0"
+Bundle-RequiredExecutionEnvironment: JavaSE-21
+Import-Package: javax.annotation;version="1.2.0",
+ javax.inject;version="1.0.0"
 Automatic-Module-Name: nl.esi.pps.tmsc.analysis.prototypes.ui
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: nl.esi.pps.tmsc.analysis.prototypes.ui.Activator

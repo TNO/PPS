@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -26,44 +26,44 @@ import org.eclipse.xtext.xbase.lib.Pure;
 @SuppressWarnings("all")
 public class ETimestampFormat extends NumberFormat {
   public static final ETimestampFormat GMT = new ETimestampFormat(null, TimeZone.getTimeZone("GMT"));
-  
+
   public static final ETimestampFormat GMT_SECONDS = new ETimestampFormat(TimeUnit.SECONDS, TimeZone.getTimeZone("GMT"));
-  
+
   public static final ETimestampFormat GMT_MILLISECONDS = new ETimestampFormat(TimeUnit.MILLISECONDS, TimeZone.getTimeZone("GMT"));
-  
+
   public static final ETimestampFormat GMT_MICROSECONDS = new ETimestampFormat(TimeUnit.MICROSECONDS, TimeZone.getTimeZone("GMT"));
-  
+
   public static final ETimestampFormat GMT_NANOSECONDS = new ETimestampFormat(TimeUnit.NANOSECONDS, TimeZone.getTimeZone("GMT"));
-  
+
   /**
    * The default {@link ETimestampFormat}, assuming that time-stamps are in nanoseconds and GMT time-zone.
    */
   public static final ETimestampFormat eINSTANCE = ETimestampFormat.GMT_NANOSECONDS;
-  
+
   private static final char DEFAULT_DECIMAL_SEPARATOR = '.';
-  
+
   private static final char DEFAULT_THOUSANDTH_SEPARATOR = ' ';
-  
+
   private static final DecimalFormat THOUSANDTH_FORMAT = new DecimalFormat("000");
-  
+
   private final SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-  
+
   @Accessors
   private TimeUnit timeUnit;
-  
+
   public ETimestampFormat(final TimeUnit unit, final TimeZone zone) {
     this.timeUnit = unit;
     this.setTimeZone(zone);
   }
-  
+
   public TimeZone getTimeZone() {
     return this.dateFormat.getTimeZone();
   }
-  
+
   public void setTimeZone(final TimeZone zone) {
     this.dateFormat.setTimeZone(zone);
   }
-  
+
   @Override
   public StringBuffer format(final Object number, final StringBuffer toAppendTo, final FieldPosition pos) {
     StringBuffer _xblockexpression = null;
@@ -75,12 +75,12 @@ public class ETimestampFormat extends NumberFormat {
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public StringBuffer format(final double number, final StringBuffer toAppendTo, final FieldPosition pos) {
     return this.format(Math.round(number), toAppendTo, pos);
   }
-  
+
   @Override
   public StringBuffer format(final long number, final StringBuffer toAppendTo, final FieldPosition pos) {
     final long date = Math.floorDiv(number, 1_000_000L);
@@ -119,7 +119,7 @@ public class ETimestampFormat extends NumberFormat {
     }
     return toAppendTo;
   }
-  
+
   @Override
   public Long parse(final String source, final ParsePosition parsePosition) {
     final int orgIndex = parsePosition.getIndex();
@@ -177,7 +177,7 @@ public class ETimestampFormat extends NumberFormat {
     long _plus_1 = (_plus + ((microsThousandth).intValue() * 1_000));
     return Long.valueOf((_plus_1 + (nanosThousandth).intValue()));
   }
-  
+
   private Integer parseThousandth(final String source, final ParsePosition parsePosition, final char separator) {
     int _length = source.length();
     int _index = parsePosition.getIndex();
@@ -213,12 +213,12 @@ public class ETimestampFormat extends NumberFormat {
     }
     return Integer.valueOf(number.intValue());
   }
-  
+
   @Pure
   public TimeUnit getTimeUnit() {
     return this.timeUnit;
   }
-  
+
   public void setTimeUnit(final TimeUnit timeUnit) {
     this.timeUnit = timeUnit;
   }

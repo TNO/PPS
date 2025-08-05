@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -26,18 +26,18 @@ public class ExecutionDataAnalysisItemContentProvider implements IDataAnalysisIt
    * by the same{@link Execution#getComponent() component.}
    */
   private static final String CONF_COMPONENT = "By same component";
-  
+
   /**
    * Data analysis of all {@link Execution executions} with the same{@link Execution#getFunction() function}
    * on the same{@link Execution#getLifeline() executor.}
    */
   private static final String CONF_EXECUTOR = "On same executor";
-  
+
   @Override
   public Set<String> getConfigurations(final Object object) {
     return CollectionLiterals.<String>newLinkedHashSet(ExecutionDataAnalysisItemContentProvider.CONF_EXECUTOR, ExecutionDataAnalysisItemContentProvider.CONF_COMPONENT);
   }
-  
+
   @Override
   public String getTitle(final Object object, final String configuration) {
     final Execution execution = ((Execution) object);
@@ -77,7 +77,7 @@ public class ExecutionDataAnalysisItemContentProvider implements IDataAnalysisIt
     }
     return _switchResult;
   }
-  
+
   @Override
   public Iterable<?> getSiblings(final Object object, final String configuration) {
     final Execution execution = ((Execution) object);
@@ -99,7 +99,7 @@ public class ExecutionDataAnalysisItemContentProvider implements IDataAnalysisIt
     }
     return _switchResult;
   }
-  
+
   @Override
   public Long getDuration(final Object object, final Object sibling, final String configuration) {
     final Execution execution = ((Execution) sibling);

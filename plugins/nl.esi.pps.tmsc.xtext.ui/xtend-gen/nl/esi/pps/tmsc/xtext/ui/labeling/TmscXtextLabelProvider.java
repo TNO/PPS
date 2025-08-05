@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -40,7 +40,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
   public TmscXtextLabelProvider(final AdapterFactoryLabelProvider delegate) {
     super(delegate);
   }
-  
+
   public String text(final XDependencySettings xDependencySettings) {
     StringConcatenation _builder = new StringConcatenation();
     XDependencyType _type = xDependencySettings.getType();
@@ -48,7 +48,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     _builder.append(" settings");
     return _builder.toString();
   }
-  
+
   public String text(final XEvent xEvent) {
     final INode timestampNode = IterableExtensions.<INode>head(NodeModelUtils.findNodesForFeature(xEvent, TmscXtextPackage.Literals.XEVENT__TIMESTAMP));
     StringConcatenation _builder = new StringConcatenation();
@@ -64,7 +64,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     }
     return _builder.toString();
   }
-  
+
   public String image(final XEvent xEvent) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("full/obj16/Event");
@@ -73,11 +73,11 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     _builder.append(".gif");
     return this.fromTmscEditPlugin(_builder);
   }
-  
+
   public String text(final XEventType xEventType) {
     return StringExtensions.toFirstUpper(xEventType.getName().toLowerCase());
   }
-  
+
   public String image(final XDependency dependency) {
     String _switchResult = null;
     XDependencyType _type = TmscXtextQueries.getType(dependency);
@@ -107,7 +107,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     }
     return _switchResult;
   }
-  
+
   public String text(final XNamedArchitectureElement xElement) {
     String _elvis = null;
     String _description = xElement.getDescription();
@@ -119,7 +119,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     }
     return _elvis;
   }
-  
+
   public String image(final XNamedArchitectureElement xElement) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("full/obj16/");
@@ -128,7 +128,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     _builder.append(".gif");
     return this.fromArchitectureEditPlugin(_builder);
   }
-  
+
   public String image(final XFunction function) {
     String _switchResult = null;
     boolean _matched = false;
@@ -149,7 +149,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     }
     return _switchResult;
   }
-  
+
   private String fromArchitectureEditPlugin(final CharSequence path) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("platform:/plugin/");
@@ -159,7 +159,7 @@ public class TmscXtextLabelProvider extends DefaultEObjectLabelProvider {
     _builder.append(path);
     return _builder.toString();
   }
-  
+
   private String fromTmscEditPlugin(final CharSequence path) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("platform:/plugin/");

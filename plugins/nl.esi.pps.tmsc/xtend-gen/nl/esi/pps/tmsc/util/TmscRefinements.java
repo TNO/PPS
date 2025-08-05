@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,10 +9,10 @@
  */
 package nl.esi.pps.tmsc.util;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.Consumer;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.tmsc.Dependency;
@@ -39,10 +39,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public final class TmscRefinements {
   @Extension
   private static final TmscFactory m_tmsc = TmscFactory.eINSTANCE;
-  
+
   private TmscRefinements() {
   }
-  
+
   /**
    * This method adds {@link LifelineSegment lifeline-segments} to guarantee the
    * order of events on a {@link Lifeline}.<br>
@@ -55,7 +55,7 @@ public final class TmscRefinements {
     };
     tmsc.getLifelines().forEach(_function);
   }
-  
+
   /**
    * This method adds {@link LifelineSegment lifeline-segments} to guarantee the
    * order of events on a {@link Lifeline}.<br>
@@ -78,15 +78,15 @@ public final class TmscRefinements {
     Iterable<LifelineSegment> _map = IterableExtensions.<Pair<Event, Event>, LifelineSegment>map(IterableExtensions.<Pair<Event, Event>>reject(PairwiseIterable.<Event>of(lifeline.getEvents()), _function), _function_1);
     Iterables.<Dependency>addAll(_dependencies, _map);
   }
-  
+
   private static boolean lifelineSegmentExists(final Event _source, final Event _target) {
     final Function1<LifelineSegment, Boolean> _function = (LifelineSegment it) -> {
       Event _source_1 = it.getSource();
-      return Boolean.valueOf(Objects.equal(_source_1, _source));
+      return Boolean.valueOf(Objects.equals(_source_1, _source));
     };
     return IterableExtensions.<LifelineSegment>exists(Iterables.<LifelineSegment>filter(_target.getFullScopeIncomingDependencies(), LifelineSegment.class), _function);
   }
-  
+
   /**
    * This method adds {@link Execution executions} to a {@link Lifeline} that
    * represent call-stacks over time.<br>
@@ -99,7 +99,7 @@ public final class TmscRefinements {
     };
     tmsc.getLifelines().forEach(_function);
   }
-  
+
   /**
    * This method adds {@link Execution executions} to a {@link Lifeline} that
    * represent call-stacks over time.<br>
@@ -136,7 +136,7 @@ public final class TmscRefinements {
         if (event instanceof ExitEvent) {
           _matched=true;
           boolean _matched_1 = false;
-          if (Objects.equal(currentExecution, null)) {
+          if (Objects.equals(currentExecution, null)) {
             _matched_1=true;
             final Execution execution = TmscRefinements.m_tmsc.createExecution();
             EList<Execution> _executions = lifeline.getExecutions();
@@ -167,7 +167,7 @@ public final class TmscRefinements {
           if (!_matched_1) {
             Function _function_1 = currentExecution.getFunction();
             Function _function_2 = ((ExitEvent)event).getFunction();
-            boolean _notEquals = (!Objects.equal(_function_1, _function_2));
+            boolean _notEquals = (!Objects.equals(_function_1, _function_2));
             if (_notEquals) {
               _matched_1=true;
               StringConcatenation _builder = new StringConcatenation();
@@ -195,10 +195,10 @@ public final class TmscRefinements {
     boolean _isEmpty_1 = rootExecutions.isEmpty();
     boolean _not_1 = (!_isEmpty_1);
     if (_not_1) {
-      TmscRefinements.createExitEvent(IterableExtensions.<Execution>last(rootExecutions));
+      TmscRefinements.createExitEvent(rootExecutions.getLast());
     }
   }
-  
+
   private static ExitEvent createExitEvent(final Execution execution) {
     ExitEvent _exit = execution.getExit();
     boolean _tripleNotEquals = (_exit != null);
@@ -210,7 +210,7 @@ public final class TmscRefinements {
     if (_isEmpty) {
       _xifexpression = execution.getEntry();
     } else {
-      _xifexpression = TmscRefinements.createExitEvent(IterableExtensions.<Execution>last(execution.getChildren()));
+      _xifexpression = TmscRefinements.createExitEvent(execution.getChildren().getLast());
     }
     final Event lifelineSegmentSource = _xifexpression;
     execution.setExit(TmscRefinements.m_tmsc.createExitEvent());

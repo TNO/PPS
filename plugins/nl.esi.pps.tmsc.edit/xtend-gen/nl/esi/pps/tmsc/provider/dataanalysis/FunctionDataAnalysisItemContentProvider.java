@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,9 +9,9 @@
  */
 package nl.esi.pps.tmsc.provider.dataanalysis;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.tmsc.Execution;
@@ -34,13 +34,13 @@ public class FunctionDataAnalysisItemContentProvider implements IDataAnalysisIte
   public Set<String> getConfigurations(final Object object) {
     return Collections.<String>singleton(IDataAnalysisItemContentProvider.DEFAULT_CONFIGURATION);
   }
-  
+
   @Override
   public String getTitle(final Object object, final String configuration) {
     final Function function = ((Function) object);
     return function.getName();
   }
-  
+
   @Override
   public Iterable<?> getSiblings(final Object object, final String configuration) {
     final Function function = ((Function) object);
@@ -64,11 +64,11 @@ public class FunctionDataAnalysisItemContentProvider implements IDataAnalysisIte
     };
     final Function1<Execution, Boolean> _function_3 = (Execution it) -> {
       Function _function_4 = it.getFunction();
-      return Boolean.valueOf(Objects.equal(_function_4, function));
+      return Boolean.valueOf(Objects.equals(_function_4, function));
     };
     return IterableExtensions.<Execution>filter(IterableExtensions.<Lifeline, Execution>flatMap(IterableExtensions.<FullScopeTMSC, Lifeline>flatMap(Iterables.<FullScopeTMSC>filter(IterableExtensions.<Resource, EObject>flatMap(resourceSet.getResources(), _function), FullScopeTMSC.class), _function_1), _function_2), _function_3);
   }
-  
+
   @Override
   public Long getDuration(final Object object, final Object sibling, final String configuration) {
     final Execution execution = ((Execution) sibling);

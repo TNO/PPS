@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import java.util.Collection;
+import java.util.Objects;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.Interval;
@@ -28,11 +28,11 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public final class CriticalPathAnalysis {
   private final boolean markCritical;
-  
+
   private final Function1<? super Event, ? extends Long> timestampFunc;
-  
+
   private final Function1<? super Dependency, ? extends Long> timeBoundFunc;
-  
+
   public CriticalPathAnalysis() {
     this.markCritical = true;
     final Function1<Event, Long> _function = (Event it) -> {
@@ -44,13 +44,13 @@ public final class CriticalPathAnalysis {
     };
     this.timeBoundFunc = _function_1;
   }
-  
+
   public CriticalPathAnalysis(final Function1<? super Event, ? extends Long> timestampFunc, final Function1<? super Dependency, ? extends Long> timeBoundFunc) {
     this.markCritical = false;
     this.timestampFunc = timestampFunc;
     this.timeBoundFunc = timeBoundFunc;
   }
-  
+
   public static ScopedTMSC analyseCriticalPath(final Interval interval) {
     final Function1<ScopedTMSC, Boolean> _function = (ScopedTMSC it) -> {
       return Boolean.valueOf(CriticalPathAnalysis.isCriticalPathAnalysisResult(it));
@@ -72,7 +72,7 @@ public final class CriticalPathAnalysis {
     _scopes.add(criticalPath);
     return criticalPath;
   }
-  
+
   /**
    * Finds {@link Dependency dependencies} that denote the critical path to
    * the specified {@code event}.
@@ -86,7 +86,7 @@ public final class CriticalPathAnalysis {
     };
     return Queries.<Dependency>until(this.closureIncomingDependencies(tmsc, event), _function);
   }
-  
+
   /**
    * Finds {@link Dependency dependencies} that denote the critical path to
    * the specified {@code to} event. Analysis is stopped when {@code from} event
@@ -96,7 +96,7 @@ public final class CriticalPathAnalysis {
    */
   public BranchIterable<Dependency> findCriticalPathBetween(final TMSC tmsc, final Event from, final Event to) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
-      return Boolean.valueOf((Objects.equal(it.getTarget(), from) || (it.getTarget().getTimestamp().compareTo(from.getTimestamp()) <= 0)));
+      return Boolean.valueOf((Objects.equals(it.getTarget(), from) || (it.getTarget().getTimestamp().compareTo(from.getTimestamp()) <= 0)));
     };
     final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
       boolean _analyseCritical = this.analyseCritical(it);
@@ -104,7 +104,7 @@ public final class CriticalPathAnalysis {
     };
     return Queries.<Dependency>until(Queries.<Dependency>until(this.closureIncomingDependencies(tmsc, to), _function), _function_1);
   }
-  
+
   private BranchIterable<Dependency> closureIncomingDependencies(@Extension final TMSC tmsc, final Event event) {
     final Function1<Dependency, Iterable<? extends Dependency>> _function = (Dependency it) -> {
       Event _source = it.getSource();
@@ -116,7 +116,7 @@ public final class CriticalPathAnalysis {
     };
     return Queries.<Dependency>closure(tmsc.getIncomingDependencies(event), true, _function);
   }
-  
+
   private boolean analyseCritical(final Dependency dependency) {
     Long _xifexpression = null;
     Event _source = dependency.getSource();
@@ -146,12 +146,12 @@ public final class CriticalPathAnalysis {
       return criticalValue;
     }
   }
-  
+
   /**
    * Default value for persisted {@code critical} property on Dependency
    */
   private static final boolean _DEFAULT_DEPENDENCY_CRITICAL = false;
-  
+
   public static boolean isCritical(final Dependency container) {
     final String key = "critical";
     final Object value = container.getProperties().get(key);
@@ -160,12 +160,12 @@ public final class CriticalPathAnalysis {
     }
     return (boolean) value;
   }
-  
+
   public static void setCritical(final Dependency container, final boolean value) {
     final String key = "critical";
     container.getProperties().put(key, value);
   }
-  
+
   /**
    * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.CriticalPathAnalysis#isCritical <em>critical</em>}' property is set on {@code container}.
    */
@@ -173,7 +173,7 @@ public final class CriticalPathAnalysis {
     final String key = "critical";
     return container.getProperties().containsKey(key);
   }
-  
+
   /**
    * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.CriticalPathAnalysis#isCritical <em>critical</em>}' property on {@code container}.
    */
@@ -181,12 +181,12 @@ public final class CriticalPathAnalysis {
     final String key = "critical";
     container.getProperties().remove(key);
   }
-  
+
   /**
    * Default value for persisted {@code criticalPathAnalysisResult} property on ScopedTMSC
    */
   private static final boolean _DEFAULT_SCOPEDTMSC_CRITICALPATHANALYSISRESULT = false;
-  
+
   private static boolean isCriticalPathAnalysisResult(final ScopedTMSC container) {
     final String key = "criticalPathAnalysisResult";
     final Object value = container.getProperties().get(key);
@@ -195,7 +195,7 @@ public final class CriticalPathAnalysis {
     }
     return (boolean) value;
   }
-  
+
   private static void setCriticalPathAnalysisResult(final ScopedTMSC container, final boolean value) {
     final String key = "criticalPathAnalysisResult";
     if (value == _DEFAULT_SCOPEDTMSC_CRITICALPATHANALYSISRESULT) {

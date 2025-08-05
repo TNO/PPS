@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -19,9 +19,9 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 @SuppressWarnings("all")
 public class StringFallbackValueConverter implements IValueConverter<String> {
   private final IValueConverter<String> fallbackValueConverter;
-  
+
   private final IValueConverter<String> stringValueConverter;
-  
+
   /**
    * Prefer ID with fallback to STRING
    */
@@ -37,7 +37,7 @@ public class StringFallbackValueConverter implements IValueConverter<String> {
       }
     }
   }
-  
+
   /**
    * Try STRING with fallback to ID
    */
@@ -51,7 +51,7 @@ public class StringFallbackValueConverter implements IValueConverter<String> {
     }
     return _xifexpression;
   }
-  
+
   public StringFallbackValueConverter(final IValueConverter<String> fallbackValueConverter, final IValueConverter<String> stringValueConverter) {
     super();
     this.fallbackValueConverter = fallbackValueConverter;

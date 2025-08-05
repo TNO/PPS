@@ -3,10 +3,10 @@
  */
 package nl.esi.pps.tmsc.xtext.ui.internal;
 
-import com.google.common.collect.Maps;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import nl.esi.pps.tmsc.xtext.TmscXtextRuntimeModule;
 import nl.esi.pps.tmsc.xtext.ui.TmscXtextUiModule;
@@ -29,7 +29,7 @@ public class XtextActivator extends AbstractUIPlugin {
 	
 	private static XtextActivator INSTANCE;
 	
-	private Map<String, Injector> injectors = Collections.synchronizedMap(Maps.<String, Injector> newHashMapWithExpectedSize(1));
+	private Map<String, Injector> injectors = Collections.synchronizedMap(new HashMap<>(2));
 	
 	@Override
 	public void start(BundleContext context) throws Exception {

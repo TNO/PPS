@@ -5,7 +5,7 @@ Bundle-SymbolicName: nl.esi.pps.tmsc.analysis
 Bundle-Version: 0.20.0.qualifier
 Bundle-Vendor: ESI (TNO)
 Automatic-Module-Name: nl.esi.pps.tmsc.analysis
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.equinox.common,
  nl.esi.pps.tmsc,
  org.eclipse.lsat.common.xtend,

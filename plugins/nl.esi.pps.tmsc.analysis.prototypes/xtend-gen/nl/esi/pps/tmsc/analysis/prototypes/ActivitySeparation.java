@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -31,7 +31,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 public class ActivitySeparation {
   @Extension
   private static final TmscFactory m_tmsc = TmscFactory.eINSTANCE;
-  
+
   public static void separateActivities(final FullScopeTMSC tmsc) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       return Boolean.valueOf(ActivityAnalysis.isActivity(it));

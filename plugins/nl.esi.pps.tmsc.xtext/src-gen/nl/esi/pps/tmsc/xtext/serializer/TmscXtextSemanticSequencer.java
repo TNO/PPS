@@ -109,6 +109,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	}
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     TmscXtextModel returns TmscXtextModel
 	 *
@@ -126,6 +127,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         executors+=XExecutor | 
 	 *         events+=XEvent
 	 *     )*
+	 * </pre>
 	 */
 	protected void sequence_TmscXtextModel(ISerializationContext context, TmscXtextModel semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -133,6 +135,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XNamedArchitectureElement returns XComponent
 	 *     XComponent returns XComponent
@@ -145,6 +148,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         (requires+=[XInterface|ID] requires+=[XInterface|ID]*)? 
 	 *         (timeBound=ABS_EBIGDECIMAL | scheduled=EBOOLEAN_OBJECT | properties+=XProperty)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XComponent(ISerializationContext context, XComponent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -152,11 +156,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XDependencySettings returns XDependencySettings
 	 *
 	 * Constraint:
 	 *     (type=XDependencyType (timeBound=ABS_EBIGDECIMAL | scheduled=EBOOLEAN_OBJECT | prefix=IDString | properties+=XProperty)*)
+	 * </pre>
 	 */
 	protected void sequence_XDependencySettings(ISerializationContext context, XDependencySettings semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -164,11 +170,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XDependencyTypeObject returns XDependencyTypeObject
 	 *
 	 * Constraint:
 	 *     value=XDependencyType
+	 * </pre>
 	 */
 	protected void sequence_XDependencyTypeObject(ISerializationContext context, XDependencyTypeObject semanticObject) {
 		if (errorAcceptor != null) {
@@ -182,6 +190,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XDependency returns XDependency
 	 *
@@ -201,6 +210,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *             )
 	 *         )?
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XDependency(ISerializationContext context, XDependency semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -208,11 +218,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XEventArgument returns XEventArgument
 	 *
 	 * Constraint:
 	 *     (parameter=[XFunctionParameter|ID] value=IDString)
+	 * </pre>
 	 */
 	protected void sequence_XEventArgument(ISerializationContext context, XEventArgument semanticObject) {
 		if (errorAcceptor != null) {
@@ -229,6 +241,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XEvent returns XEvent
 	 *
@@ -245,6 +258,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         timeBound=ABS_EBIGDECIMAL? 
 	 *         ((scheduled=EBOOLEAN_OBJECT | properties+=XProperty)? timeBound=ABS_EBIGDECIMAL?)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XEvent(ISerializationContext context, XEvent semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -252,12 +266,14 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XNamedArchitectureElement returns XExecutor
 	 *     XExecutor returns XExecutor
 	 *
 	 * Constraint:
 	 *     (untraced?='untraced'? description=IDString? name=ID (timeBound=ABS_EBIGDECIMAL | scheduled=EBOOLEAN_OBJECT | properties+=XProperty)*)
+	 * </pre>
 	 */
 	protected void sequence_XExecutor(ISerializationContext context, XExecutor semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -265,11 +281,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XFunctionParameter returns XFunctionParameter
 	 *
 	 * Constraint:
 	 *     (kind=XFunctionParameterKind name=ID (properties+=XProperty properties+=XProperty*)?)
+	 * </pre>
 	 */
 	protected void sequence_XFunctionParameter(ISerializationContext context, XFunctionParameter semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -277,6 +295,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XNamedArchitectureElement returns XFunction
 	 *     XFunction returns XFunction
@@ -290,6 +309,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         operation=[XOperation|FQN]? 
 	 *         (timeBound=ABS_EBIGDECIMAL | scheduled=EBOOLEAN_OBJECT | properties+=XProperty)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XFunction(ISerializationContext context, XFunction semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -297,6 +317,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XNamedArchitectureElement returns XHost
 	 *     XHost returns XHost
@@ -308,6 +329,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         name=ID 
 	 *         (timeBound=ABS_EBIGDECIMAL | scheduled=EBOOLEAN_OBJECT | properties+=XProperty | executors+=XExecutor)*
 	 *     )
+	 * </pre>
 	 */
 	protected void sequence_XHost(ISerializationContext context, XHost semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -315,12 +337,14 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XNamedArchitectureElement returns XInterface
 	 *     XInterface returns XInterface
 	 *
 	 * Constraint:
 	 *     (description=IDString? name=ID (properties+=XProperty | operations+=XOperation)*)
+	 * </pre>
 	 */
 	protected void sequence_XInterface(ISerializationContext context, XInterface semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -328,12 +352,14 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XNamedArchitectureElement returns XOperation
 	 *     XOperation returns XOperation
 	 *
 	 * Constraint:
 	 *     (description=IDString? name=ID properties+=XProperty*)
+	 * </pre>
 	 */
 	protected void sequence_XOperation(ISerializationContext context, XOperation semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -341,11 +367,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XPropertyValue returns XPropertyBooleanValue
 	 *
 	 * Constraint:
 	 *     value=EBOOLEAN_OBJECT
+	 * </pre>
 	 */
 	protected void sequence_XPropertyValue(ISerializationContext context, XPropertyBooleanValue semanticObject) {
 		if (errorAcceptor != null) {
@@ -359,11 +387,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XPropertyValue returns XPropertyMutliValue
 	 *
 	 * Constraint:
 	 *     (values+=XPropertyValue values+=XPropertyValue*)
+	 * </pre>
 	 */
 	protected void sequence_XPropertyValue(ISerializationContext context, XPropertyMutliValue semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
@@ -371,11 +401,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XPropertyValue returns XPropertyNumberValue
 	 *
 	 * Constraint:
 	 *     value=EBIGDECIMAL
+	 * </pre>
 	 */
 	protected void sequence_XPropertyValue(ISerializationContext context, XPropertyNumberValue semanticObject) {
 		if (errorAcceptor != null) {
@@ -389,11 +421,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XPropertyValue returns XPropertyStringValue
 	 *
 	 * Constraint:
 	 *     value=IDString
+	 * </pre>
 	 */
 	protected void sequence_XPropertyValue(ISerializationContext context, XPropertyStringValue semanticObject) {
 		if (errorAcceptor != null) {
@@ -407,11 +441,13 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	
 	
 	/**
+	 * <pre>
 	 * Contexts:
 	 *     XProperty returns XProperty
 	 *
 	 * Constraint:
 	 *     (name=IDString value=XPropertyValue)
+	 * </pre>
 	 */
 	protected void sequence_XProperty(ISerializationContext context, XProperty semanticObject) {
 		if (errorAcceptor != null) {

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,7 @@
  */
 package nl.esi.pps.tmsc.util;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.implemented.FunctionParameter;
 import nl.esi.pps.architecture.implemented.FunctionParameterKind;
@@ -30,10 +30,10 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class FunctionParametersUtil {
   @Extension
   private static final ImplementedFactory m_impl = ImplementedFactory.eINSTANCE;
-  
+
   private FunctionParametersUtil() {
   }
-  
+
   public static String getArgument(final Execution execution, final String parameterName) {
     if ((execution == null)) {
       return null;
@@ -70,14 +70,14 @@ public class FunctionParametersUtil {
     }
     return _switchResult;
   }
-  
+
   public static String getReturnValue(final ExitEvent event) {
     if ((event == null)) {
       return null;
     }
     return FunctionParametersUtil.getArgument(event, ((String) null));
   }
-  
+
   public static String getArgument(final Event event, final String parameterName) {
     if ((event == null)) {
       return null;
@@ -88,21 +88,21 @@ public class FunctionParametersUtil {
     }
     return FunctionParametersUtil.getArgument(event, parameter);
   }
-  
+
   public static String getArgument(final Event event, final FunctionParameter parameter) {
     if ((event == null)) {
       return null;
     }
     return event.getArguments().get(parameter);
   }
-  
+
   public static void setReturnValue(final ExitEvent event, final String value) {
     if ((event == null)) {
       return;
     }
     FunctionParametersUtil.setArgument(event, ((String) null), value);
   }
-  
+
   public static void setArgument(final Event event, final String parameterName, final String value) {
     if ((event == null)) {
       return;
@@ -116,7 +116,7 @@ public class FunctionParametersUtil {
       if ((parameterName == null)) {
         FunctionParameterKind _xblockexpression = null;
         {
-          if (((parameter != null) && (!Objects.equal(parameter.getKind(), FunctionParameterKind.RETURN)))) {
+          if (((parameter != null) && (!Objects.equals(parameter.getKind(), FunctionParameterKind.RETURN)))) {
             StringConcatenation _builder = new StringConcatenation();
             _builder.append("Expected return parameter when name is not set, but was ");
             FunctionParameterKind _kind = parameter.getKind();
@@ -128,7 +128,7 @@ public class FunctionParametersUtil {
         _xifexpression = _xblockexpression;
       } else {
         FunctionParameterKind _xifexpression_1 = null;
-        if (((parameter != null) && (!Objects.equal(parameter.getKind(), FunctionParameterKind.OUT)))) {
+        if (((parameter != null) && (!Objects.equals(parameter.getKind(), FunctionParameterKind.OUT)))) {
           _xifexpression_1 = FunctionParameterKind.IN_OUT;
         } else {
           _xifexpression_1 = FunctionParameterKind.OUT;
@@ -141,7 +141,7 @@ public class FunctionParametersUtil {
       if (event instanceof EntryEvent) {
         _matched=true;
         FunctionParameterKind _xifexpression = null;
-        if (((parameter != null) && (!Objects.equal(parameter.getKind(), FunctionParameterKind.IN)))) {
+        if (((parameter != null) && (!Objects.equals(parameter.getKind(), FunctionParameterKind.IN)))) {
           _xifexpression = FunctionParameterKind.IN_OUT;
         } else {
           _xifexpression = FunctionParameterKind.IN;
@@ -157,7 +157,7 @@ public class FunctionParametersUtil {
     }
     FunctionParametersUtil.setArgument(event, parameter, value);
   }
-  
+
   public static void setArgument(final Event event, final FunctionParameter parameter, final String value) {
     if ((event == null)) {
       return;
@@ -169,22 +169,22 @@ public class FunctionParametersUtil {
       }
     }
   }
-  
+
   public static FunctionParameter getParameter(final Function function, final String parameterName) {
     return FunctionParametersUtil.getParameter(function, parameterName, null);
   }
-  
+
   public static FunctionParameter getParameter(final Function function, final String parameterName, final FunctionParameterKind parameterKind) {
     if ((function == null)) {
       return null;
     }
     final Function1<FunctionParameter, Boolean> _function = (FunctionParameter it) -> {
       String _name = it.getName();
-      return Boolean.valueOf(Objects.equal(_name, parameterName));
+      return Boolean.valueOf(Objects.equals(_name, parameterName));
     };
     final FunctionParameter parameter = IterableExtensions.<FunctionParameter>findFirst(function.getParameters(), _function);
     if ((parameter != null)) {
-      if (((parameterKind != null) && (!Objects.equal(parameter.getKind(), parameterKind)))) {
+      if (((parameterKind != null) && (!Objects.equals(parameter.getKind(), parameterKind)))) {
         StringConcatenation _builder = new StringConcatenation();
         _builder.append("Expected parameter kind ");
         FunctionParameterKind _kind = parameter.getKind();

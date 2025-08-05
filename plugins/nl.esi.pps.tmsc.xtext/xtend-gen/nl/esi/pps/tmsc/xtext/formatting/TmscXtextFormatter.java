@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -23,7 +23,7 @@ public class TmscXtextFormatter extends AbstractDeclarativeFormatter {
   @Inject
   @Extension
   private TmscXtextGrammarAccess tmscXtextGrammarAccess;
-  
+
   @Override
   protected void configureFormatting(final FormattingConfig it) {
     it.setAutoLinewrap(120);

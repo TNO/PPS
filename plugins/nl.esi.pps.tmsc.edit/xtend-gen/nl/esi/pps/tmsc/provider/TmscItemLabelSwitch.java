@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.tmsc.provider;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.Objects;
 import nl.esi.emf.edit.provider.EMFEditUtil;
 import nl.esi.pps.architecture.ArchitecturePackage;
 import nl.esi.pps.architecture.deployed.DeployedPackage;
@@ -39,44 +39,45 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class TmscItemLabelSwitch {
   public static final TmscItemLabelSwitch eINSTANCE = new TmscItemLabelSwitch();
-  
+
   protected String _getText(final Object object) {
     return String.valueOf(object);
   }
-  
+
   protected String _getText(final EObject eObject) {
     String _switchResult = null;
     EPackage _ePackage = eObject.eClass().getEPackage();
     boolean _matched = false;
-    if (Objects.equal(_ePackage, TmscPackage.eINSTANCE)) {
+    if (Objects.equals(_ePackage, TmscPackage.eINSTANCE)) {
       _matched=true;
       _switchResult = this.getText(eObject.eClass());
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, SpecifiedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, SpecifiedPackage.eINSTANCE)) {
         _matched=true;
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, ImplementedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, DeployedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, InstantiatedPackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, InstantiatedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, ArchitecturePackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, ArchitecturePackage.eINSTANCE)) {
           _matched=true;
         }
       }
@@ -89,12 +90,12 @@ public class TmscItemLabelSwitch {
     }
     return _switchResult;
   }
-  
+
   protected String _getText(final EClass eClass) {
     String _switchResult = null;
     EPackage _ePackage = eClass.getEPackage();
     boolean _matched = false;
-    if (Objects.equal(_ePackage, TmscPackage.eINSTANCE)) {
+    if (Objects.equals(_ePackage, TmscPackage.eINSTANCE)) {
       _matched=true;
       StringConcatenation _builder = new StringConcatenation();
       _builder.append("_UI_");
@@ -104,26 +105,26 @@ public class TmscItemLabelSwitch {
       _switchResult = TmscEditPlugin.INSTANCE.getString(_builder.toString());
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, SpecifiedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, SpecifiedPackage.eINSTANCE)) {
         _matched=true;
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, ImplementedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, DeployedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, InstantiatedPackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, InstantiatedPackage.eINSTANCE)) {
           _matched=true;
         }
       }
       if (!_matched) {
-        if (Objects.equal(_ePackage, ArchitecturePackage.eINSTANCE)) {
+        if (Objects.equals(_ePackage, ArchitecturePackage.eINSTANCE)) {
           _matched=true;
         }
       }
@@ -144,15 +145,15 @@ public class TmscItemLabelSwitch {
     }
     return _elvis;
   }
-  
+
   protected String _getText(final FullScopeTMSC tmsc) {
     return this.getText(tmsc.eClass());
   }
-  
+
   protected String _getText(final ScopedTMSC tmsc) {
     return tmsc.getName();
   }
-  
+
   protected String _getText(final Lifeline lifeline) {
     final Executor executor = lifeline.getExecutor();
     if ((executor == null)) {
@@ -171,7 +172,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_text_1);
     return _builder.toString();
   }
-  
+
   protected String _getText(final EntryEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Entry at ");
@@ -179,7 +180,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_format);
     return _builder.toString();
   }
-  
+
   protected String _getText(final ExitEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("Exit at ");
@@ -187,7 +188,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_format);
     return _builder.toString();
   }
-  
+
   protected String _getText(final MessageControl messageControl) {
     StringConcatenation _builder = new StringConcatenation();
     Message _message = messageControl.getMessage();
@@ -216,7 +217,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_reference_1);
     return _builder.toString();
   }
-  
+
   private String _getReference(final EntryEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("entry of ");
@@ -231,7 +232,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_text_1);
     return _builder.toString();
   }
-  
+
   private String _getReference(final ExitEvent event) {
     StringConcatenation _builder = new StringConcatenation();
     _builder.append("exit of ");
@@ -246,7 +247,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_text_1);
     return _builder.toString();
   }
-  
+
   protected String _getText(final Dependency dependency) {
     StringConcatenation _builder = new StringConcatenation();
     String _text = this.getText(dependency.eClass());
@@ -267,7 +268,7 @@ public class TmscItemLabelSwitch {
     _builder.append(_reference_1);
     return _builder.toString();
   }
-  
+
   protected String _getText(final LifelineSegment lifelineSegment) {
     String _elvis = null;
     Execution _activeExecution = lifelineSegment.getActiveExecution();
@@ -282,7 +283,7 @@ public class TmscItemLabelSwitch {
     }
     return _elvis;
   }
-  
+
   protected String _getText(final Execution execution) {
     Function _function = execution.getFunction();
     String _text = null;
@@ -291,11 +292,12 @@ public class TmscItemLabelSwitch {
     }
     return _text;
   }
-  
+
   protected String _getText(final Interval interval) {
     return interval.getName();
   }
-  
+
+  @XbaseGenerated
   public String getText(final Object eClass) {
     if (eClass instanceof EClass) {
       return _getText((EClass)eClass);
@@ -328,7 +330,8 @@ public class TmscItemLabelSwitch {
         Arrays.<Object>asList(eClass).toString());
     }
   }
-  
+
+  @XbaseGenerated
   private String getReference(final Event event) {
     if (event instanceof EntryEvent) {
       return _getReference((EntryEvent)event);

@@ -8,7 +8,7 @@ Bundle-ClassPath: .
 Bundle-Activator: nl.esi.pps.architecture.example.provider.ExampleEditPlugin$Implementation
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.architecture.example.provider
 Require-Bundle: org.eclipse.core.runtime,
  nl.esi.pps.architecture.example;visibility:=reexport,
