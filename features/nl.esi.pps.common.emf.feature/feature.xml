@@ -13,7 +13,7 @@
 <feature
       id="nl.esi.pps.common.emf.feature"
       label="PPS Common EMF Utilities Feature"
-      version="0.20.0.qualifier"
+      version="0.30.0.qualifier"
       provider-name="ESI (TNO)"
       license-feature="nl.esi.pps.license"
       license-feature-version="0.0.0">
@@ -32,7 +32,7 @@
 
    <requires>
       <import feature="org.eclipse.emf.ecore" version="2.10" match="greaterOrEqual"/>
-      <import feature="nl.esi.pps.common.ui.feature" version="0.20.0" match="equivalent"/>
+      <import feature="nl.esi.pps.common.ui.feature" version="0.30.0" match="equivalent"/>
       <import feature="org.eclipse.trace4cps.common.jfreechart.feature" version="0.2.0.qualifier" match="greaterOrEqual"/>
    </requires>
 

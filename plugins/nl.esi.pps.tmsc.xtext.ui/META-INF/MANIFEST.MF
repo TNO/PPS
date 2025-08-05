@@ -3,7 +3,7 @@ Automatic-Module-Name: nl.esi.pps.tmsc.xtext.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: Timed Message Sequence Chart Xtext UI
 Bundle-Vendor: ESI (TNO)
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-SymbolicName: nl.esi.pps.tmsc.xtext.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: nl.esi.pps.tmsc.editor,

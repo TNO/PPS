@@ -16,7 +16,7 @@
     <parent>
         <groupId>nl.esi.pps</groupId>
         <artifactId>nl.esi.pps.root</artifactId>
-        <version>0.20.0-SNAPSHOT</version>
+        <version>0.30.0-SNAPSHOT</version>
         <relativePath>../../</relativePath>
     </parent>
 

@@ -13,7 +13,7 @@
 <feature
       id="nl.esi.pps.tmsc.feature"
       label="TMSC Feature"
-      version="0.20.0.qualifier"
+      version="0.30.0.qualifier"
       provider-name="ESI (TNO)"
       license-feature="nl.esi.pps.license"
       license-feature-version="0.0.0">
@@ -31,7 +31,7 @@
    </license>
 
    <requires>
-      <import feature="nl.esi.pps.common.emf.feature" version="0.20.0" match="equivalent"/>
+      <import feature="nl.esi.pps.common.emf.feature" version="0.30.0" match="equivalent"/>
    </requires>
 
    <plugin

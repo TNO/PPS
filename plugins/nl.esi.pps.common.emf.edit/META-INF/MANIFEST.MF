@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: PPS Common EMF Edit Utilities
 Bundle-SymbolicName: nl.esi.pps.common.emf.edit
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-Vendor: ESI (TNO)
 Automatic-Module-Name: nl.esi.pps.common.emf.edit
 Bundle-RequiredExecutionEnvironment: JavaSE-21

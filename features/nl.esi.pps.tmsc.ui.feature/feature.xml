@@ -13,7 +13,7 @@
 <feature
       id="nl.esi.pps.tmsc.ui.feature"
       label="TMSC UI Feature"
-      version="0.20.0.qualifier"
+      version="0.30.0.qualifier"
       provider-name="ESI (TNO)"
       license-feature="nl.esi.pps.license"
       license-feature-version="0.0.0">
@@ -37,7 +37,7 @@
    <requires>
       <import feature="net.sourceforge.plantuml.feature" version="1.1.26" match="greaterOrEqual"/>
       <import feature="org.eclipse.trace4cps.common.jfreechart.feature" version="0.2.0.qualifier" match="greaterOrEqual"/>
-      <import feature="nl.esi.pps.common.emf.feature" version="0.20.0" match="equivalent"/>
+      <import feature="nl.esi.pps.common.emf.feature" version="0.30.0" match="equivalent"/>
    </requires>
 
    <plugin

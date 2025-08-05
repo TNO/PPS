@@ -14,7 +14,7 @@
 
     <groupId>nl.esi.pps</groupId>
     <artifactId>nl.esi.pps.configuration</artifactId>
-    <version>0.20.0-SNAPSHOT</version>
+    <version>0.30.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>PPS Configuration</name>
 

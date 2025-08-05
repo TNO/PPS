@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: nl.esi.pps.tmsc.metric;singleton:=true
 Automatic-Module-Name: nl.esi.pps.tmsc.metric
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: nl.esi.pps.tmsc.metric.MetricPlugin$Implementation
 Bundle-Vendor: %providerName

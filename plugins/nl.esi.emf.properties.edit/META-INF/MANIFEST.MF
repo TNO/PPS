@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: nl.esi.emf.properties.edit;singleton:=true
 Automatic-Module-Name: nl.esi.emf.properties.edit
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: nl.esi.emf.properties.provider.PropertiesEditPlugin$Implementation
 Bundle-Vendor: %providerName

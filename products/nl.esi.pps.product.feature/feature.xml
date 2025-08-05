@@ -13,7 +13,7 @@
 <feature
       id="nl.esi.pps.product.feature"
       label="PPS IDE Feature"
-      version="0.20.0.qualifier"
+      version="0.30.0.qualifier"
       provider-name="ESI (TNO)"
       plugin="nl.esi.pps.product.branding">
 

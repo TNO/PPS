@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: TMSC Analysis Prototypes UI
 Bundle-SymbolicName: nl.esi.pps.tmsc.analysis.prototypes.ui;singleton:=true
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-Vendor: ESI (TNO)
 Require-Bundle: org.eclipse.osgi,
  org.eclipse.jface,

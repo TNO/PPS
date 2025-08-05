@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: PPS Common Synchronized Timing UI
 Bundle-SymbolicName: nl.esi.pps.common.emf.synchronizedtiming.ui;singleton:=true
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-Activator: nl.esi.pps.common.emf.synchronizedtiming.ui.Activator
 Bundle-Vendor: ESI (TNO)
 Require-Bundle: nl.esi.pps.common.emf.ui;visibility:=reexport,

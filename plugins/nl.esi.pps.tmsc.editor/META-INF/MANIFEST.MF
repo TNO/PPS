@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: nl.esi.pps.tmsc.editor;singleton:=true
 Automatic-Module-Name: nl.esi.pps.tmsc.editor
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-ClassPath: .
 Bundle-Activator: nl.esi.pps.tmsc.presentation.TmscEditorPlugin$Implementation
 Bundle-Vendor: %providerName

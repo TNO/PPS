@@ -12,7 +12,7 @@
 -->
 <?pde version="3.5"?>
 
-<product name="PPS" uid="nl.esi.pps.ide" id="nl.esi.pps.product.branding.product" application="org.eclipse.ui.ide.workbench" version="0.20.0.qualifier" useFeatures="true" includeLaunchers="true">
+<product name="PPS" uid="nl.esi.pps.ide" id="nl.esi.pps.product.branding.product" application="org.eclipse.ui.ide.workbench" version="0.30.0.qualifier" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/nl.esi.pps.product.branding/images/pps_about.png"/>
