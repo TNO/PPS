@@ -815,7 +815,7 @@
     <setupTask
         xsi:type="setup:VariableTask"
         name="eclipse.lsat.version"
-        value="v0.4-RC2"/>
+        value="v0.4"/>
     <setupTask
         xsi:type="setup:VariableTask"
         name="eclipse.trace4cps.version"

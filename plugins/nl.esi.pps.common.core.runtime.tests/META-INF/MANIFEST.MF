@@ -6,7 +6,7 @@ Bundle-Version: 0.30.0.qualifier
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.junit;bundle-version="4.0.0",
  nl.esi.pps.common.core.runtime,
- org.apache.commons.io,
+ org.apache.commons.commons-io,
  org.apache.commons.lang
 Automatic-Module-Name: nl.esi.pps.common.core.runtime.tests
 Bundle-Vendor: ESI (TNO)
