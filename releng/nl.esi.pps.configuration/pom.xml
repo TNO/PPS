@@ -410,6 +410,9 @@
                     <groupId>org.eclipse.tycho</groupId>
                     <artifactId>tycho-surefire-plugin</artifactId>
                     <version>${tycho.version}</version>
+                    <configuration>
+                        <argLine>--add-opens java.base/java.util.zip=ALL-UNNAMED</argLine>
+                    </configuration>
                 </plugin>
 
                 <plugin>
