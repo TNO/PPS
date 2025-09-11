@@ -13,7 +13,7 @@ import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URISyntaxException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -54,17 +54,17 @@ public class XYPlotEValidatorAnnotations {
 		BufferedImage warningImage = null;
 		BufferedImage errorImage = null;
 		try {
-			infoImage = ImageIO.read(new URL("platform:/plugin/" + PLUGIN_ID + "/icons/info.png"));
-			warningImage = ImageIO.read(new URL("platform:/plugin/" + PLUGIN_ID + "/icons/warning.png"));
-			errorImage = ImageIO.read(new URL("platform:/plugin/" + PLUGIN_ID + "/icons/error.png"));
-		} catch (IOException e) {
+			infoImage = ImageIO.read(new java.net.URI("platform:/plugin/" + PLUGIN_ID + "/icons/info.png").toURL());
+			warningImage = ImageIO.read(new java.net.URI("platform:/plugin/" + PLUGIN_ID + "/icons/warning.png").toURL());
+			errorImage = ImageIO.read(new java.net.URI("platform:/plugin/" + PLUGIN_ID + "/icons/error.png").toURL());
+		} catch (URISyntaxException | IOException e) {
 			StatusManager.getManager().handle(new Status(IStatus.ERROR, PLUGIN_ID, e.getMessage(), e));
 		}
 		INFO_IMAGE = infoImage;
 		WARNING_IMAGE = warningImage;
 		ERROR_IMAGE = errorImage;
 	}
-	
+
 	private XYPlotEValidatorAnnotations() {
 		// Empty for utility classes
 	}
@@ -112,7 +112,7 @@ public class XYPlotEValidatorAnnotations {
 					if (Arrays.binarySearch(severities, severity) < 0) {
 						continue;
 					}
-					
+
 					Object objectURI = marker.getAttribute(EValidator.URI_ATTRIBUTE);
 					if (objectURI instanceof String) {
 						EObject eObject = resourceSet.getEObject(URI.createURI((String) objectURI), true);
@@ -124,7 +124,7 @@ public class XYPlotEValidatorAnnotations {
 							} else  if (severity == IMarker.SEVERITY_WARNING) {
 								image = WARNING_IMAGE;
 							}
-							
+
 							EValidatorAnnotation annotation = new EValidatorAnnotation(point.getX(), point.getY(),
 									image, eObject);
 							String tooltip = marker.getAttribute(IMarker.MESSAGE, null);
@@ -141,17 +141,17 @@ public class XYPlotEValidatorAnnotations {
 		}
 		LOGGER.debug("addEValidatorAnnotations <--");
 	}
-	
+
 	private static class EValidatorAnnotation extends XYImageAnnotation implements BackReferenceProvider<EObject> {
 		private static final long serialVersionUID = -7106357805427006000L;
 
 		private final transient EObject backReference;
-		
+
 		public EValidatorAnnotation(double x, double y, Image image, EObject backReference) {
 			super(x, y, image);
 			this.backReference = backReference;
 		}
-		
+
 		@Override
 		public EObject getBackReference() {
 			return backReference;
