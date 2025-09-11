@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,7 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import java.util.function.Consumer;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
@@ -22,7 +22,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public final class NormalizeTiming {
   private NormalizeTiming() {
   }
-  
+
   /**
    * Normalizes the timing of a {@code tmsc} by:
    * <ol>
@@ -44,7 +44,7 @@ public final class NormalizeTiming {
       long _xifexpression = (long) 0;
       Lifeline _lifeline = it.getSource().getLifeline();
       Lifeline _lifeline_1 = it.getTarget().getLifeline();
-      boolean _equals = Objects.equal(_lifeline, _lifeline_1);
+      boolean _equals = Objects.equals(_lifeline, _lifeline_1);
       if (_equals) {
         _xifexpression = 15_000L;
       } else {

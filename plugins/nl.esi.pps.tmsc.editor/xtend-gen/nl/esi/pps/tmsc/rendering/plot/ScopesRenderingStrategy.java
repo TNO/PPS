@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -23,12 +23,12 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 @SuppressWarnings("all")
 public class ScopesRenderingStrategy extends GroupingRenderingStrategy {
   public static final String ID = (TmscEditorPlugin.getPlugin().getSymbolicName() + ".scopes_rendering_strategy");
-  
+
   @Override
   public boolean isSupported(final EditingDomain editingDomain) {
     return PPSPreferences.isAdvancedFeaturesEnabled();
   }
-  
+
   @Override
   public boolean select(final Viewer viewer, final Object parentElement, final Object element) {
     boolean _switchResult = false;
@@ -46,24 +46,24 @@ public class ScopesRenderingStrategy extends GroupingRenderingStrategy {
     }
     return _switchResult;
   }
-  
+
   @Override
   protected String getGroupKey(final Execution execution) {
     return null;
   }
-  
+
   @Override
   protected String getGroupKey(final Dependency dependency) {
     return this.getGroupKey(this.getScopesGroup(dependency));
   }
-  
+
   private Iterable<ScopedTMSC> getScopesGroup(final Dependency dependency) {
     final Function1<ScopedTMSC, Boolean> _function = (ScopedTMSC it) -> {
       return Boolean.valueOf(ScopesRenderingStrategy.isGroupKey(it));
     };
     return IterableExtensions.<ScopedTMSC>filter(dependency.getScopes(), _function);
   }
-  
+
   private String getGroupKey(final Iterable<ScopedTMSC> scopesGroup) {
     String _xifexpression = null;
     boolean _isEmpty = IterableExtensions.isEmpty(scopesGroup);
@@ -80,12 +80,12 @@ public class ScopesRenderingStrategy extends GroupingRenderingStrategy {
     }
     return _xifexpression;
   }
-  
+
   /**
    * Default value for persisted {@code groupKey} property on ScopedTMSC
    */
   private static final boolean _DEFAULT_SCOPEDTMSC_GROUPKEY = true;
-  
+
   public static boolean isGroupKey(final ScopedTMSC container) {
     final String key = "groupKey";
     final Object value = container.getProperties().get(key);
@@ -94,7 +94,7 @@ public class ScopesRenderingStrategy extends GroupingRenderingStrategy {
     }
     return (boolean) value;
   }
-  
+
   public static void setGroupKey(final ScopedTMSC container, final boolean value) {
     final String key = "groupKey";
     if (value == _DEFAULT_SCOPEDTMSC_GROUPKEY) {

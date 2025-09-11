@@ -3,7 +3,7 @@ Automatic-Module-Name: nl.esi.pps.tmsc.xtext.ui
 Bundle-ManifestVersion: 2
 Bundle-Name: Timed Message Sequence Chart Xtext UI
 Bundle-Vendor: ESI (TNO)
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-SymbolicName: nl.esi.pps.tmsc.xtext.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: nl.esi.pps.tmsc.editor,
@@ -24,7 +24,7 @@ Require-Bundle: nl.esi.pps.tmsc.editor,
  org.eclipse.lsat.common.xtend
 Import-Package: org.apache.log4j,
  org.eclipse.xtext.ui.codemining;resolution:=optional
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.tmsc.xtext.ui;x-internal:=true,
  nl.esi.pps.tmsc.xtext.ui.codemining;x-internal:=true,
  nl.esi.pps.tmsc.xtext.ui.contentassist,

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -35,21 +35,21 @@ public class UrgentTmscValidator extends EValidatorBase {
   public UrgentTmscValidator() {
     super(TmscPlugin.PLUGIN_ID);
   }
-  
+
   @Override
   public void validate(final EClass eClass, final EObject eObject, final ValidationReporter reporter) {
     if ((eObject instanceof TMSC)) {
       this.validateTMSC(((TMSC)eObject), reporter);
     }
   }
-  
+
   private void validateTMSC(final TMSC tmsc, final ValidationReporter reporter) {
     final Consumer<Event> _function = (Event it) -> {
       this.validateEvent(it, tmsc, reporter);
     };
     tmsc.getEvents().forEach(_function);
   }
-  
+
   private void validateEvent(final Event event, @Extension final TMSC tmsc, @Extension final ValidationReporter reporter) {
     Long _timestamp = event.getTimestamp();
     boolean _tripleEquals = (_timestamp == null);

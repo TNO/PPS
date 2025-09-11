@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,12 +9,12 @@
  */
 package nl.esi.pps.tmsc.util;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.BiPredicate;
@@ -62,12 +62,12 @@ public class TmscProjection {
         EClass _switchResult = null;
         EClass _value = it.getValue();
         boolean _matched = false;
-        if (Objects.equal(_value, null)) {
+        if (Objects.equals(_value, null)) {
           _matched=true;
         }
         if (!_matched) {
           EClass _eClass = it.getKey().eClass();
-          if (Objects.equal(_value, _eClass)) {
+          if (Objects.equals(_value, _eClass)) {
             _matched=true;
           }
         }
@@ -100,19 +100,19 @@ public class TmscProjection {
       }
       return _switchResult;
     }
-    
+
     @Override
     public void apply(final Dependency projection, final EClass targetFeatureValue) {
       throw new UnsupportedOperationException("Programming error, please contact PPS support!");
     }
   }
-  
+
   private static class DependencyTimeBoundProjection implements DependencyFeatureProjection<Long> {
     @Override
     public Long getInitialValue(final Event projectionSource) {
       return Long.valueOf(0L);
     }
-    
+
     @Override
     public Long calculateProjectedValue(final Event projectionSource, final Map<Dependency, Long> projectionValues) {
       final Function1<Map.Entry<Dependency, Long>, Boolean> _function = (Map.Entry<Dependency, Long> it) -> {
@@ -135,22 +135,22 @@ public class TmscProjection {
       };
       return IterableExtensions.<Long>max(IterableExtensions.<Map.Entry<Dependency, Long>, Long>map(validProjectionValues, _function_2));
     }
-    
+
     @Override
     public void apply(final Dependency projection, final Long projectedValue) {
-      if (((projection.getTimeBound() != null) && (!Objects.equal(projection.getTimeBound(), projectedValue)))) {
+      if (((projection.getTimeBound() != null) && (!Objects.equals(projection.getTimeBound(), projectedValue)))) {
         throw new IllegalArgumentException("Programming error, please contact PPS support!");
       }
       projection.setTimeBound(projectedValue);
     }
   }
-  
+
   private static class DependencyScheduledProjection implements DependencyFeatureProjection<Boolean> {
     @Override
     public Boolean getInitialValue(final Event projectionSource) {
       return Boolean.valueOf(false);
     }
-    
+
     @Override
     public Boolean calculateProjectedValue(final Event projectionSource, final Map<Dependency, Boolean> projectionValues) {
       final Function1<Map.Entry<Dependency, Boolean>, Boolean> _function = (Map.Entry<Dependency, Boolean> it) -> {
@@ -172,15 +172,15 @@ public class TmscProjection {
       boolean _exists = IterableExtensions.<Map.Entry<Dependency, Boolean>>exists(validProjectionValues, _function_2);
       return Boolean.valueOf((!_exists));
     }
-    
+
     @Override
     public void apply(final Dependency projection, final Boolean projectedValue) {
       Boolean _scheduled = projection.getScheduled();
-      boolean _equals = Objects.equal(_scheduled, Boolean.FALSE);
+      boolean _equals = Objects.equals(_scheduled, Boolean.FALSE);
       if (_equals) {
         return;
       }
-      if (((projection.isProjection() && Objects.equal(projection.getScheduled(), Boolean.TRUE)) && Objects.equal(projectedValue, Boolean.FALSE))) {
+      if (((projection.isProjection() && Objects.equals(projection.getScheduled(), Boolean.TRUE)) && Objects.equals(projectedValue, Boolean.FALSE))) {
         throw new IllegalArgumentException("Programming error, please contact PPS support!");
       }
       if ((projectedValue != null)) {
@@ -188,24 +188,24 @@ public class TmscProjection {
       }
     }
   }
-  
+
   public static final TmscProjection.DependencyTimeBoundProjection DEFAULT_TIME_BOUND_PROJECTION = new TmscProjection.DependencyTimeBoundProjection();
-  
+
   public static final TmscProjection.DependencyScheduledProjection DEFAULT_SCHEDULED_PROJECTION = new TmscProjection.DependencyScheduledProjection();
-  
+
   /**
    * This is a special projection, hence private and always added, see {@link DependencyTypeProjection}.
    */
   private static final TmscProjection.DependencyTypeProjection TYPE_PROJECTION = new TmscProjection.DependencyTypeProjection();
-  
+
   private final ScopedTMSC tmsc;
-  
+
   private final List<DependencyFeatureProjection<Object>> featureProjections = CollectionLiterals.<DependencyFeatureProjection<Object>>newArrayList();
-  
+
   public TmscProjection(final ScopedTMSC tmsc, final DependencyFeatureProjection<?>... additionalFeatureProjections) {
     this(tmsc, true, additionalFeatureProjections);
   }
-  
+
   protected TmscProjection(final ScopedTMSC tmsc, final boolean addDefaultProjections, final DependencyFeatureProjection<?>... featureProjections) {
     this.tmsc = tmsc;
     Iterable<DependencyFeatureProjection<?>> allFeatureProjections = Queries.<DependencyFeatureProjection<?>>union(((Iterable<? extends DependencyFeatureProjection<?>>)Conversions.doWrapArray(featureProjections)), TmscProjection.TYPE_PROJECTION);
@@ -217,7 +217,7 @@ public class TmscProjection {
     };
     allFeatureProjections.forEach(_function);
   }
-  
+
   public Set<Dependency> projectToScope(final Iterable<? extends Dependency> dependencies) {
     final Function1<Dependency, List<Event>> _function = (Dependency it) -> {
       return TmscQueries.getEvents(it);
@@ -228,7 +228,7 @@ public class TmscProjection {
     };
     return this.projectToScope(dependencies, null, _function_1);
   }
-  
+
   public Set<Dependency> projectToScope(final Iterable<? extends Dependency> dependencies, final IProgressMonitor monitor, final Predicate<? super Event> scopePredicate) {
     final SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
     final List<List<Dependency>> projectionSets = TmscQueries.findDisjunctTMSCs(dependencies, scopePredicate);
@@ -251,7 +251,7 @@ public class TmscProjection {
     }
     return projections;
   }
-  
+
   protected Set<Dependency> project(final Iterable<? extends Dependency> dependenciesToProject, final BiPredicate<? super Event, ? super Event> predicate) {
     final LinkedHashSet<Dependency> projections = CollectionLiterals.<Dependency>newLinkedHashSet();
     final TmscQueries.CachedQueryTMSC tmscToProject = TmscQueries.createCachedQueryTMSC(dependenciesToProject);
@@ -329,7 +329,7 @@ public class TmscProjection {
     Iterables.<Dependency>addAll(_dependencies, projections);
     return projections;
   }
-  
+
   protected Dependency resolveProjectionDependency(final Event projectionSource, final Event projectionTarget, final EClass projectionType) {
     boolean _isSuperTypeOf = TmscPackage.Literals.DEPENDENCY.isSuperTypeOf(projectionType);
     boolean _not = (!_isSuperTypeOf);
@@ -338,7 +338,7 @@ public class TmscProjection {
     }
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       Event _target = it.getTarget();
-      return Boolean.valueOf(Objects.equal(_target, projectionTarget));
+      return Boolean.valueOf(Objects.equals(_target, projectionTarget));
     };
     final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
       boolean _contains = it.getScopes().contains(this.tmsc);

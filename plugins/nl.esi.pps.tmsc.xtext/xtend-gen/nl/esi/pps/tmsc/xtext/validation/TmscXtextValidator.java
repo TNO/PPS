@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.xtext.validation;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,6 +17,7 @@ import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -71,7 +71,7 @@ import org.eclipse.xtext.xbase.lib.StringExtensions;
 @SuppressWarnings("all")
 public class TmscXtextValidator extends AbstractTmscXtextValidator {
   public static final String UNIQUE_NAME_XNAMED_ARCHITECTURE_ELEMENT = "uniqueXNamedArchitectureElement";
-  
+
   @Check
   public void checkUniqueXComponentName(final XNamedArchitectureElement namedElement) {
     final EStructuralFeature feature = namedElement.eContainingFeature();
@@ -80,7 +80,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
     final Function1<XNamedArchitectureElement, Boolean> _function = (XNamedArchitectureElement it) -> {
       String _name = it.getName();
       String _name_1 = namedElement.getName();
-      return Boolean.valueOf(Objects.equal(_name, _name_1));
+      return Boolean.valueOf(Objects.equals(_name, _name_1));
     };
     boolean _exists = IterableExtensions.<XNamedArchitectureElement>exists(siblings, _function);
     if (_exists) {
@@ -95,9 +95,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextPackage.Literals.XNAMED_ARCHITECTURE_ELEMENT__NAME, TmscXtextValidator.UNIQUE_NAME_XNAMED_ARCHITECTURE_ELEMENT);
     }
   }
-  
+
   public static final String UNIQUE_NAME_XDEPENDENCY = "uniqueXDependencyName";
-  
+
   @Check
   public void checkUniqueXDependencyName(final TmscXtextModel model) {
     final Function1<XEvent, EList<XDependency>> _function = (XEvent it) -> {
@@ -122,9 +122,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
     };
     Iterables.<XDependency>concat(IterableExtensions.<List<XDependency>>filter(IterableExtensions.<String, XDependency>groupBy(IterableExtensions.<XEvent, XDependency>flatMap(model.getEvents(), _function), _function_1).values(), _function_2)).forEach(_function_3);
   }
-  
+
   public static final String UNIQUE_NAME_XPROPERTY = "uniqueXPropertyName";
-  
+
   @Check
   public void checkUniqueXPropertyName(final XProperty xProperty) {
     final EStructuralFeature feature = xProperty.eContainingFeature();
@@ -133,7 +133,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
     final Function1<XProperty, Boolean> _function = (XProperty it) -> {
       String _name = it.getName();
       String _name_1 = xProperty.getName();
-      return Boolean.valueOf(Objects.equal(_name, _name_1));
+      return Boolean.valueOf(Objects.equals(_name, _name_1));
     };
     boolean _exists = IterableExtensions.<XProperty>exists(siblings, _function);
     if (_exists) {
@@ -146,15 +146,15 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextValidator.UNIQUE_NAME_XPROPERTY);
     }
   }
-  
+
   public static final String UNIQUE_TYPE_XDEPENDENCY_DEFAULTS = "uniqueXDependencyDefaultsType";
-  
+
   @Check
   public void checkUniqueXDependencyDefaultsType(final XDependencySettings xDependencySettings) {
     final Function1<XDependencySettings, Boolean> _function = (XDependencySettings it) -> {
       XDependencyType _type = it.getType();
       XDependencyType _type_1 = xDependencySettings.getType();
-      return Boolean.valueOf(Objects.equal(_type, _type_1));
+      return Boolean.valueOf(Objects.equals(_type, _type_1));
     };
     boolean _exists = IterableExtensions.<XDependencySettings>exists(EcoreUtil2.<XDependencySettings>getSiblingsOfType(xDependencySettings, XDependencySettings.class), _function);
     if (_exists) {
@@ -166,9 +166,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextPackage.Literals.XDEPENDENCY_SETTINGS__TYPE, TmscXtextValidator.UNIQUE_TYPE_XDEPENDENCY_DEFAULTS);
     }
   }
-  
+
   public static final String UNIQUE_PREFIX_XDEPENDENCY_DEFAULTS = "uniqueXDependencyDefaultsPrefix";
-  
+
   @Check
   public void checkUniqueXDependencyDefaultsPrefix(final XDependencySettings xDependencySettings) {
     String _prefix = xDependencySettings.getPrefix();
@@ -207,9 +207,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextPackage.Literals.XDEPENDENCY_SETTINGS__PREFIX, TmscXtextValidator.UNIQUE_PREFIX_XDEPENDENCY_DEFAULTS);
     }
   }
-  
+
   public static final String MULTIPLE_XDEPENDENCY_RECEIVE = "multipleXDependencyReceive";
-  
+
   @Check
   public void checkMultipleXDependencyReceive(final TmscXtextModel model) {
     final HashMap<XDependency, ArrayList<XEvent>> receives = CollectionLiterals.<XDependency, ArrayList<XEvent>>newHashMap();
@@ -243,11 +243,11 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
     };
     MapExtensions.<XDependency, ArrayList<XEvent>>filter(receives, _function_1).forEach(_function_2);
   }
-  
+
   public static final String XDEPENDENCY_TYPE_REPLY_REQUEST = "xDependencyTypeReplyRequest";
-  
+
   public static final String XDEPENDENCY_REQUEST_TYPE_REQUEST = "xDependencyRequestTypeRequest";
-  
+
   @Check
   public void checkXDependencyRequestReply(final XDependency dependency) {
     XDependency _request = dependency.getRequest();
@@ -256,23 +256,23 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
       return;
     }
     XDependencyType _type = TmscXtextQueries.getType(dependency);
-    boolean _notEquals = (!Objects.equal(_type, XDependencyType.REPLY));
+    boolean _notEquals = (!Objects.equals(_type, XDependencyType.REPLY));
     if (_notEquals) {
       this.error("Request is only applicable for a reply", TmscXtextPackage.Literals.XDEPENDENCY__REQUEST, 
         TmscXtextValidator.XDEPENDENCY_TYPE_REPLY_REQUEST);
     }
     XDependencyType _type_1 = TmscXtextQueries.getType(dependency.getRequest());
-    boolean _notEquals_1 = (!Objects.equal(_type_1, XDependencyType.REQUEST));
+    boolean _notEquals_1 = (!Objects.equals(_type_1, XDependencyType.REQUEST));
     if (_notEquals_1) {
       this.error("Request should be of type request", TmscXtextPackage.Literals.XDEPENDENCY__REQUEST, 
         TmscXtextValidator.XDEPENDENCY_REQUEST_TYPE_REQUEST);
     }
   }
-  
+
   public static final String XDEPENDENCY_TYPE_MESSAGE_DETECT_MESSAGE = "xDependencyTypeMessageControlMessage";
-  
+
   public static final String XDEPENDENCY_MESSAGE_TYPE_MESSAGE = "xDependencyMessageTypeMessage";
-  
+
   @Check
   public void checkXDependencyMessageControlMessage(final XDependency dependency) {
     XDependency _message = dependency.getMessage();
@@ -281,7 +281,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
       return;
     }
     XDependencyType _type = TmscXtextQueries.getType(dependency);
-    boolean _notEquals = (!Objects.equal(_type, XDependencyType.MESSAGE_CONTROL));
+    boolean _notEquals = (!Objects.equals(_type, XDependencyType.MESSAGE_CONTROL));
     if (_notEquals) {
       this.error("Message is only applicable for a message-control", TmscXtextPackage.Literals.XDEPENDENCY__MESSAGE, 
         TmscXtextValidator.XDEPENDENCY_TYPE_MESSAGE_DETECT_MESSAGE);
@@ -301,9 +301,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
     } else {
     }
   }
-  
+
   public static final String XFUNCTION_NOT_USED = "xFunctionNotUsed";
-  
+
   @Check
   public void checkXFunctionNotUsed(final XFunction xFunction) {
     final Function1<XEvent, XFunction> _function = (XEvent it) -> {
@@ -320,9 +320,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
       this.info(_builder.toString(), null, TmscXtextValidator.XFUNCTION_NOT_USED);
     }
   }
-  
+
   public static final String XCOMPONENT_NOT_USED = "xComponentNotUsed";
-  
+
   @Check
   public void checkXComponentNotUsed(final XComponent xComponent) {
     final Function1<XEvent, XComponent> _function = (XEvent it) -> {
@@ -339,9 +339,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
       this.info(_builder.toString(), null, TmscXtextValidator.XCOMPONENT_NOT_USED);
     }
   }
-  
+
   public static final String XFUNCTION_OPERATION = "xFunctionOperation";
-  
+
   @Check
   public void checkXFunctionOperation(final XFunction xFunction) {
     if (((xFunction.getOperation() == null) && (xFunction.isIpcClient() || xFunction.isIpcServer()))) {
@@ -349,9 +349,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextPackage.Literals.XFUNCTION__OPERATION, TmscXtextValidator.XFUNCTION_OPERATION);
     }
   }
-  
+
   public static final String XINTERFACE_NOT_PROVIDED = "xInterfaceNotProvided";
-  
+
   @Check
   public void checkXInterfaceNotProvided(final XEvent xEvent) {
     final ICompositeNode componentNode = NodeModelUtils.getNode(xEvent.getComponent());
@@ -379,9 +379,9 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextPackage.Literals.XEVENT__FUNCTION, TmscXtextValidator.XINTERFACE_NOT_PROVIDED);
     }
   }
-  
+
   public static final String XINTERFACE_NOT_REQUIRED = "xInterfaceNotRequired";
-  
+
   @Check
   public void checkXInterfaceNotRequired(final XEvent xEvent) {
     final ICompositeNode componentNode = NodeModelUtils.getNode(xEvent.getComponent());
@@ -409,14 +409,14 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         TmscXtextPackage.Literals.XEVENT__FUNCTION, TmscXtextValidator.XINTERFACE_NOT_REQUIRED);
     }
   }
-  
+
   public static final String XEVENT_ARGUMENT_KIND_NOT_EXPECTED = "xEventArgumentKindNotExpected";
-  
+
   @Check
   public void checkXEventArgumentKindNotExpected(final XEvent xEvent) {
     EnumSet<XFunctionParameterKind> _xifexpression = null;
     XEventType _type = xEvent.getType();
-    boolean _equals = Objects.equal(_type, XEventType.ENTRY);
+    boolean _equals = Objects.equals(_type, XEventType.ENTRY);
     if (_equals) {
       _xifexpression = EnumSet.<XFunctionParameterKind>of(XFunctionParameterKind.IN, XFunctionParameterKind.IN_OUT);
     } else {
@@ -441,11 +441,11 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
     };
     IterableExtensions.<XEventArgument>reject(xEvent.getArguments(), _function).forEach(_function_1);
   }
-  
+
   public static final String XEVENT_ORDER_TIME = "xEventOrderTime";
-  
+
   public static final String XEVENT_ORDER_CALL_STACK = "xEventOrderCallStack";
-  
+
   @Check(CheckType.NORMAL)
   public void checkXEventOrder(final TmscXtextModel model) {
     final Function1<XEvent, XExecutor> _function = (XEvent it) -> {
@@ -471,7 +471,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         IterableExtensions.<XEvent, BigDecimal>fold(executorEvents, null, _function_1);
         final Function2<LinkedList<XFunction>, XEvent, LinkedList<XFunction>> _function_2 = (LinkedList<XFunction> callStack, XEvent event) -> {
           XEventType _type = event.getType();
-          boolean _equals = Objects.equal(_type, XEventType.ENTRY);
+          boolean _equals = Objects.equals(_type, XEventType.ENTRY);
           if (_equals) {
             callStack.push(event.getFunction());
           } else {
@@ -480,7 +480,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
             if (_not) {
               final XFunction expectedFunction = callStack.pop();
               XFunction _function_3 = event.getFunction();
-              boolean _notEquals = (!Objects.equal(_function_3, expectedFunction));
+              boolean _notEquals = (!Objects.equals(_function_3, expectedFunction));
               if (_notEquals) {
                 StringConcatenation _builder = new StringConcatenation();
                 _builder.append("Expected exit of function ");
@@ -502,19 +502,19 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
       }
     }
   }
-  
+
   @Check
   public void checkXRenderingPropertyValue(final XPropertyStringValue propertyValue) {
     final EObject property = propertyValue.eContainer();
     if ((property instanceof XProperty)) {
       String _name = ((XProperty)property).getName();
       boolean _matched = false;
-      if (Objects.equal(_name, null)) {
+      if (Objects.equals(_name, null)) {
         _matched=true;
         return;
       }
       if (!_matched) {
-        if (Objects.equal(_name, RenderingProperties.PROPERTY_PAINT)) {
+        if (Objects.equals(_name, RenderingProperties.PROPERTY_PAINT)) {
           _matched=true;
           boolean _startsWith = propertyValue.getValue().startsWith("#");
           if (_startsWith) {
@@ -545,7 +545,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         }
       }
       if (!_matched) {
-        if (Objects.equal(_name, RenderingProperties.PROPERTY_STROKE)) {
+        if (Objects.equals(_name, RenderingProperties.PROPERTY_STROKE)) {
           _matched=true;
           try {
             Enum.<RenderingStroke>valueOf(RenderingStroke.class, propertyValue.getValue());
@@ -559,7 +559,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         }
       }
       if (!_matched) {
-        if (Objects.equal(_name, RenderingProperties.PROPERTY_RENDERING_DEPENDENCIES)) {
+        if (Objects.equals(_name, RenderingProperties.PROPERTY_RENDERING_DEPENDENCIES)) {
           _matched=true;
           try {
             Enum.<RenderingDependencies>valueOf(RenderingDependencies.class, propertyValue.getValue());
@@ -573,7 +573,7 @@ public class TmscXtextValidator extends AbstractTmscXtextValidator {
         }
       }
       if (!_matched) {
-        if (Objects.equal(_name, RenderingProperties.PROPERTY_RENDERING_EXECUTIONS)) {
+        if (Objects.equals(_name, RenderingProperties.PROPERTY_RENDERING_EXECUTIONS)) {
           _matched=true;
           try {
             Enum.<RenderingExecutions>valueOf(RenderingExecutions.class, propertyValue.getValue());

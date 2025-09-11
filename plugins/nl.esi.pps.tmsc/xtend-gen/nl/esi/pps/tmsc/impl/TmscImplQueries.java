@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,11 +9,11 @@
  */
 package nl.esi.pps.tmsc.impl;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import nl.esi.pps.architecture.implemented.Function;
 import nl.esi.pps.architecture.specified.Component;
@@ -35,12 +35,13 @@ import org.eclipse.lsat.common.xtend.Queries;
 import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 final class TmscImplQueries {
   private TmscImplQueries() {
   }
-  
+
   /**
    * @see Execution#getStartTime()
    */
@@ -52,7 +53,7 @@ final class TmscImplQueries {
     }
     return _timestamp;
   }
-  
+
   /**
    * @see Dependency#getStartTime()
    */
@@ -64,7 +65,7 @@ final class TmscImplQueries {
     }
     return _timestamp;
   }
-  
+
   /**
    * @see Interval#getStartTime()
    */
@@ -76,7 +77,7 @@ final class TmscImplQueries {
     }
     return _timestamp;
   }
-  
+
   /**
    * @see Execution#getEndTime()
    */
@@ -88,7 +89,7 @@ final class TmscImplQueries {
     }
     return _timestamp;
   }
-  
+
   /**
    * @see Dependency#getEndTime()
    */
@@ -100,7 +101,7 @@ final class TmscImplQueries {
     }
     return _timestamp;
   }
-  
+
   /**
    * @see Interval#getEndTime()
    */
@@ -112,7 +113,7 @@ final class TmscImplQueries {
     }
     return _timestamp;
   }
-  
+
   /**
    * @see FullScopeTMSC#getEvents()
    */
@@ -122,7 +123,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Lifeline, Event>flatMap(tmsc.getLifelines(), _function);
   }
-  
+
   /**
    * @see ScopedTMSC#getEvents()
    */
@@ -132,14 +133,14 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Event>toSet(IterableExtensions.<Dependency, Event>flatMap(tmsc.getDependencies(), _function));
   }
-  
+
   /**
    * @see FullScopeTMSC#getIncomingDependencies(Event)
    */
   protected static Iterable<Dependency> _getIncomingDependenciesImpl(final FullScopeTMSC tmsc, final Event event) {
     return event.getFullScopeIncomingDependencies();
   }
-  
+
   /**
    * @see ScopedTMSC#getIncomingDependencies(Event)
    */
@@ -149,14 +150,14 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Dependency>filter(event.getFullScopeIncomingDependencies(), _function);
   }
-  
+
   /**
    * @see FullScopeTMSC#getOutgoingDependencies(Event)
    */
   protected static Iterable<Dependency> _getOutgoingDependenciesImpl(final FullScopeTMSC tmsc, final Event event) {
     return event.getFullScopeOutgoingDependencies();
   }
-  
+
   /**
    * @see ScopedTMSC#getOutgoingDependencies(Event)
    */
@@ -166,7 +167,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Dependency>filter(event.getFullScopeOutgoingDependencies(), _function);
   }
-  
+
   /**
    * @see TMSC#getFullScope()
    */
@@ -177,7 +178,7 @@ final class TmscImplQueries {
     }
     return ((FullScopeTMSC) fullScope);
   }
-  
+
   /**
    * @see ScopedTMSC#getFqn()
    */
@@ -196,7 +197,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.join(ListExtensions.<ScopedTMSC, String>map(Queries.<ScopedTMSC>reverse(Queries.<ScopedTMSC>climbTree(Collections.<ScopedTMSC>singleton(tmsc), true, _function)), _function_1), ".");
   }
-  
+
   /**
    * @see Lifeline#getSegments()
    */
@@ -206,7 +207,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Event, LifelineSegment>flatMap(lifeline.getEvents(), _function);
   }
-  
+
   /**
    * @see Lifeline#isTraced()
    */
@@ -216,7 +217,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Event>exists(lifeline.getEvents(), _function);
   }
-  
+
   public static Iterable<Execution> getRootExecutionsImpl(final Lifeline lifeline) {
     final Function1<Execution, Boolean> _function = (Execution it) -> {
       Execution _parent = it.getParent();
@@ -224,7 +225,7 @@ final class TmscImplQueries {
     };
     return Queries.<Execution>select(lifeline.getExecutions(), _function);
   }
-  
+
   /**
    * @see Event#getTmsc()
    */
@@ -236,7 +237,7 @@ final class TmscImplQueries {
     }
     return _tmsc;
   }
-  
+
   /**
    * @see Event#getScopes()
    */
@@ -246,7 +247,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<ScopedTMSC>toSet(IterableExtensions.<Dependency, ScopedTMSC>flatMap(Queries.<Dependency>union(event.getFullScopeIncomingDependencies(), event.getFullScopeOutgoingDependencies()), _function));
   }
-  
+
   /**
    * @see Event#getTmsc()
    */
@@ -258,7 +259,7 @@ final class TmscImplQueries {
     }
     return _tmsc;
   }
-  
+
   /**
    * @see Execution#getFullScopeRoot()
    */
@@ -269,7 +270,7 @@ final class TmscImplQueries {
     }
     return rootExecution;
   }
-  
+
   /**
    * @see Execution#getComponent()
    */
@@ -292,7 +293,7 @@ final class TmscImplQueries {
     }
     return _elvis;
   }
-  
+
   /**
    * @see Execution#getFunction()
    */
@@ -315,7 +316,7 @@ final class TmscImplQueries {
     }
     return _elvis;
   }
-  
+
   /**
    * @see Execution#getSegments()
    */
@@ -328,7 +329,7 @@ final class TmscImplQueries {
     };
     return IterableExtensions.<Event, LifelineSegment>flatMap(IterableExtensions.<Event>filterNull(Queries.<Event>union(Collections.<EntryEvent>singleton(execution.getEntry()), ListExtensions.<Execution, ExitEvent>map(execution.getChildren(), _function))), _function_1);
   }
-  
+
   /**
    * @see CallStackDependency#getLifeline()
    */
@@ -351,7 +352,7 @@ final class TmscImplQueries {
     }
     return _elvis;
   }
-  
+
   /**
    * Different call-stack dependencies and which execution is active.
    * 
@@ -388,32 +389,32 @@ final class TmscImplQueries {
       _switchResult = null;
     }
     if (!_matched) {
-      if ((Objects.equal(EventType.getType(it.getSource()), EventType.ENTRY) && Objects.equal(EventType.getType(it.getTarget()), EventType.ENTRY))) {
+      if ((Objects.equals(EventType.getType(it.getSource()), EventType.ENTRY) && Objects.equals(EventType.getType(it.getTarget()), EventType.ENTRY))) {
         _matched=true;
         _switchResult = sourceExecution;
       }
     }
     if (!_matched) {
-      if ((Objects.equal(EventType.getType(it.getSource()), EventType.EXIT) && Objects.equal(EventType.getType(it.getTarget()), EventType.EXIT))) {
+      if ((Objects.equals(EventType.getType(it.getSource()), EventType.EXIT) && Objects.equals(EventType.getType(it.getTarget()), EventType.EXIT))) {
         _matched=true;
         _switchResult = targetExecution;
       }
     }
     if (!_matched) {
-      if (((Objects.equal(EventType.getType(it.getSource()), EventType.ENTRY) && Objects.equal(EventType.getType(it.getTarget()), EventType.EXIT)) && (sourceExecution == targetExecution))) {
+      if (((Objects.equals(EventType.getType(it.getSource()), EventType.ENTRY) && Objects.equals(EventType.getType(it.getTarget()), EventType.EXIT)) && (sourceExecution == targetExecution))) {
         _matched=true;
         _switchResult = sourceExecution;
       }
     }
     if (!_matched) {
-      if ((Objects.equal(EventType.getType(it.getSource()), EventType.EXIT) && Objects.equal(EventType.getType(it.getTarget()), EventType.ENTRY))) {
+      if ((Objects.equals(EventType.getType(it.getSource()), EventType.EXIT) && Objects.equals(EventType.getType(it.getTarget()), EventType.ENTRY))) {
         _matched=true;
         _switchResult = TmscQueries.getCommonAncestor(sourceExecution, targetExecution);
       }
     }
     return _switchResult;
   }
-  
+
   public static FullScopeTMSC getTmscImpl(final Interval interval) {
     FullScopeTMSC _elvis = null;
     Event _from = interval.getFrom();
@@ -433,7 +434,8 @@ final class TmscImplQueries {
     }
     return _elvis;
   }
-  
+
+  @XbaseGenerated
   public static Long getStartTimeImpl(final Object dependency) {
     if (dependency instanceof Dependency) {
       return _getStartTimeImpl((Dependency)dependency);
@@ -446,7 +448,8 @@ final class TmscImplQueries {
         Arrays.<Object>asList(dependency).toString());
     }
   }
-  
+
+  @XbaseGenerated
   public static Long getEndTimeImpl(final Object dependency) {
     if (dependency instanceof Dependency) {
       return _getEndTimeImpl((Dependency)dependency);
@@ -459,7 +462,8 @@ final class TmscImplQueries {
         Arrays.<Object>asList(dependency).toString());
     }
   }
-  
+
+  @XbaseGenerated
   public static Iterable<Event> getEventsImpl(final TMSC tmsc) {
     if (tmsc instanceof FullScopeTMSC) {
       return _getEventsImpl((FullScopeTMSC)tmsc);
@@ -470,7 +474,8 @@ final class TmscImplQueries {
         Arrays.<Object>asList(tmsc).toString());
     }
   }
-  
+
+  @XbaseGenerated
   public static Iterable<Dependency> getIncomingDependenciesImpl(final TMSC tmsc, final Event event) {
     if (tmsc instanceof FullScopeTMSC) {
       return _getIncomingDependenciesImpl((FullScopeTMSC)tmsc, event);
@@ -481,7 +486,8 @@ final class TmscImplQueries {
         Arrays.<Object>asList(tmsc, event).toString());
     }
   }
-  
+
+  @XbaseGenerated
   public static Iterable<Dependency> getOutgoingDependenciesImpl(final TMSC tmsc, final Event event) {
     if (tmsc instanceof FullScopeTMSC) {
       return _getOutgoingDependenciesImpl((FullScopeTMSC)tmsc, event);

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.compare;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Iterables;
@@ -19,6 +18,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.function.BiPredicate;
@@ -55,19 +55,19 @@ import org.slf4j.LoggerFactory;
 public class TmscIsomorphismMatcher {
   private static class MatchState {
     private final Map<Dependency, TopologicalOrderIterator<Dependency>> leftDependency2TopologicalOrder = CollectionLiterals.<Dependency, TopologicalOrderIterator<Dependency>>newLinkedHashMap();
-    
+
     private final Map<Dependency, TopologicalOrderIterator<Dependency>> rightDependency2TopologicalOrder = CollectionLiterals.<Dependency, TopologicalOrderIterator<Dependency>>newLinkedHashMap();
-    
+
     private final Map<Dependency, Dependency> matchedDependencies = CollectionLiterals.<Dependency, Dependency>newLinkedHashMap();
-    
+
     private final Set<Dependency> leftRemainder = CollectionLiterals.<Dependency>newLinkedHashSet();
-    
+
     private final Set<Dependency> rightRemainder = CollectionLiterals.<Dependency>newLinkedHashSet();
-    
+
     private final TmscMatchResult result;
-    
+
     private final boolean failAtEnd;
-    
+
     public MatchState(final ITMSC leftTmsc, final ITMSC rightTmsc, final boolean failAtEnd) {
       TmscMatchResult _tmscMatchResult = new TmscMatchResult(leftTmsc, rightTmsc);
       this.result = _tmscMatchResult;
@@ -77,7 +77,7 @@ public class TmscIsomorphismMatcher {
       Collection<Dependency> _dependencies_1 = rightTmsc.getDependencies();
       Iterables.<Dependency>addAll(this.rightRemainder, _dependencies_1);
     }
-    
+
     public void addMatch(final Event left, final Event right) throws IllegalArgumentException {
       this.result.addMatch(left, right);
       if (this.failAtEnd) {
@@ -118,7 +118,7 @@ public class TmscIsomorphismMatcher {
         }
       }
     }
-    
+
     public Pair<Set<Dependency>, Set<Dependency>> startCycle(final Function1<? super ITMSC, ? extends TmscTopologicalOrder<Dependency>> factory) {
       boolean _isCycleDone = this.isCycleDone();
       boolean _not = (!_isCycleDone);
@@ -157,7 +157,7 @@ public class TmscIsomorphismMatcher {
       this.rightRemainder.clear();
       return Pair.<Set<Dependency>, Set<Dependency>>of(this.leftDependency2TopologicalOrder.keySet(), this.rightDependency2TopologicalOrder.keySet());
     }
-    
+
     public boolean isCycleDone() {
       return (IterableExtensions.<TopologicalOrderIterator<Dependency>>forall(this.leftDependency2TopologicalOrder.values(), ((Function1<TopologicalOrderIterator<Dependency>, Boolean>) (TopologicalOrderIterator<Dependency> it) -> {
         boolean _hasNext = it.hasNext();
@@ -168,7 +168,7 @@ public class TmscIsomorphismMatcher {
           return Boolean.valueOf((!_hasNext));
         })));
     }
-    
+
     public Iterator<Dependency> consumeLeft(final Dependency dependency) {
       Iterator<Dependency> _xblockexpression = null;
       {
@@ -181,7 +181,7 @@ public class TmscIsomorphismMatcher {
       }
       return _xblockexpression;
     }
-    
+
     public void processLeftBranchInNextCycle(final Dependency dependency, final boolean includeSelf) {
       final Function1<Dependency, Iterable<? extends Dependency>> _function = (Dependency it) -> {
         return IteratorExtensions.<Dependency>toIterable(this.consumeLeft(it));
@@ -189,7 +189,7 @@ public class TmscIsomorphismMatcher {
       BranchIterable<Dependency> _walkTree = Queries.<Dependency>walkTree(Collections.<Dependency>singleton(dependency), includeSelf, _function);
       Iterables.<Dependency>addAll(this.leftRemainder, _walkTree);
     }
-    
+
     public Iterator<Dependency> consumeRight(final Dependency dependency) {
       Iterator<Dependency> _xblockexpression = null;
       {
@@ -202,7 +202,7 @@ public class TmscIsomorphismMatcher {
       }
       return _xblockexpression;
     }
-    
+
     public void processRightBranchInNextCycle(final Dependency dependency, final boolean includeSelf) {
       final Function1<Dependency, Iterable<? extends Dependency>> _function = (Dependency it) -> {
         return IteratorExtensions.<Dependency>toIterable(this.consumeRight(it));
@@ -211,10 +211,10 @@ public class TmscIsomorphismMatcher {
       Iterables.<Dependency>addAll(this.rightRemainder, _walkTree);
     }
   }
-  
+
   @Extension
   private static final Logger LOGGER = LoggerFactory.getLogger(TmscIsomorphismMatcher.class);
-  
+
   /**
    * Typically we create a TMSC from a Metric instance.
    * These instances know their from and to events and
@@ -232,7 +232,7 @@ public class TmscIsomorphismMatcher {
     }
     return map;
   }
-  
+
   /**
    * Discover the initial and final events matches of the left and right TMSC,
    * based on the provided event equivalence.<br>
@@ -243,7 +243,7 @@ public class TmscIsomorphismMatcher {
     matches.putAll(EquivalenceMatcher.<Event>matchExact(leftTmsc.getFinalEvents(), rightTmsc.getFinalEvents(), eventEquivalence));
     return matches;
   }
-  
+
   /**
    * Discover unique events matches of the left and right TMSC,
    * based on the provided event equivalence.<br>
@@ -254,7 +254,7 @@ public class TmscIsomorphismMatcher {
   public static BiMap<Event, Event> discoverAllEventMatches(final ITMSC leftTmsc, final ITMSC rightTmsc, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     return EquivalenceMatcher.<Event>matchExact(leftTmsc.getEvents(), rightTmsc.getEvents(), eventEquivalence);
   }
-  
+
   /**
    * Returns a list of lists, representing the isomorphism classes of TMSCs that are isomorphic to each other,
    * considering the specified architecture life-cycle stage.
@@ -271,15 +271,15 @@ public class TmscIsomorphismMatcher {
     };
     return IteratorQueries.<T>groupBy(tmscs, _function, _function_1);
   }
-  
+
   public static boolean isIsomorphic(final ITMSC leftTmsc, final ITMSC rightTmsc, final BiMap<Event, Event> eventMatches, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     return TmscIsomorphismMatcher.match(leftTmsc, rightTmsc, eventMatches, false, eventEquivalence).isFullMatch();
   }
-  
+
   public static ITmscMatchResult match(final ITMSC leftTmsc, final ITMSC rightTmsc, final BiMap<Event, Event> eventMatches, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     return TmscIsomorphismMatcher.match(leftTmsc, rightTmsc, eventMatches, true, eventEquivalence);
   }
-  
+
   public static ITmscMatchResult match(final ITMSC leftTmsc, final ITMSC rightTmsc, final BiMap<Event, Event> eventMatches, final boolean failAtEnd, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     TmscIsomorphismMatcher.LOGGER.debug("Matching TMSCs {} and {}", TmscIsomorphismMatcher.getLabel(leftTmsc), TmscIsomorphismMatcher.getLabel(rightTmsc));
     if (((eventMatches == null) || eventMatches.isEmpty())) {
@@ -326,7 +326,7 @@ public class TmscIsomorphismMatcher {
     }
     return matchState.result;
   }
-  
+
   private static String getLabel(final ITMSC tmsc) {
     String _switchResult = null;
     boolean _matched = false;
@@ -357,11 +357,11 @@ public class TmscIsomorphismMatcher {
     }
     return _elvis;
   }
-  
+
   private static boolean matchCycle(@Extension final TmscIsomorphismMatcher.MatchState matchState, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     final BiPredicate<Event, Event> _function = (Event leftEvent, Event rightEvent) -> {
       Event _rightMatch = matchState.result.getRightMatch(leftEvent);
-      return Objects.equal(_rightMatch, rightEvent);
+      return Objects.equals(_rightMatch, rightEvent);
     };
     final DependencyEquivalence equivalence = new DependencyEquivalence(_function, eventEquivalence);
     final Function1<ITMSC, TmscTopologicalOrder<Dependency>> _function_1 = (ITMSC it) -> {
@@ -379,7 +379,7 @@ public class TmscIsomorphismMatcher {
       {
         final EquivalenceMatcher.Match<Dependency> match = dependencyMatches.remove();
         EquivalenceMatcher.Match.MatchKind _kind = match.getKind();
-        boolean _equals = Objects.equal(_kind, EquivalenceMatcher.Match.MatchKind.Exact);
+        boolean _equals = Objects.equals(_kind, EquivalenceMatcher.Match.MatchKind.Exact);
         if (_equals) {
           final Dependency leftMatch = IterableExtensions.<Dependency>head(match.getLeft());
           final Dependency rightMatch = IterableExtensions.<Dependency>head(match.getRight());
@@ -428,11 +428,11 @@ public class TmscIsomorphismMatcher {
     }
     return true;
   }
-  
+
   private static boolean matchCycleReverse(@Extension final TmscIsomorphismMatcher.MatchState matchState, final BiPredicate<? super Event, ? super Event> eventEquivalence) {
     final BiPredicate<Event, Event> _function = (Event leftEvent, Event rightEvent) -> {
       Event _rightMatch = matchState.result.getRightMatch(leftEvent);
-      return Objects.equal(_rightMatch, rightEvent);
+      return Objects.equals(_rightMatch, rightEvent);
     };
     final DependencyEquivalence reverseEquivalence = new DependencyEquivalence(eventEquivalence, _function);
     final Function1<ITMSC, TmscTopologicalOrder<Dependency>> _function_1 = (ITMSC it) -> {
@@ -450,7 +450,7 @@ public class TmscIsomorphismMatcher {
       {
         final EquivalenceMatcher.Match<Dependency> match = dependencyMatches.remove();
         EquivalenceMatcher.Match.MatchKind _kind = match.getKind();
-        boolean _equals = Objects.equal(_kind, EquivalenceMatcher.Match.MatchKind.Exact);
+        boolean _equals = Objects.equals(_kind, EquivalenceMatcher.Match.MatchKind.Exact);
         if (_equals) {
           final Dependency leftMatch = IterableExtensions.<Dependency>head(match.getLeft());
           final Dependency rightMatch = IterableExtensions.<Dependency>head(match.getRight());

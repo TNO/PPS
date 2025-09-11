@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: nl.esi.emf.properties;singleton:=true
 Automatic-Module-Name: nl.esi.emf.properties
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.emf.properties,
  nl.esi.emf.properties.impl,
  nl.esi.emf.properties.util,

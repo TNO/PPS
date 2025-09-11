@@ -3,11 +3,11 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %pluginName
 Bundle-SymbolicName: nl.esi.pps.architecture.example;singleton:=true
 Automatic-Module-Name: nl.esi.pps.architecture.example
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-ClassPath: .
 Bundle-Vendor: %providerName
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Export-Package: nl.esi.pps.architecture.example,
  nl.esi.pps.architecture.example.impl,
  nl.esi.pps.architecture.example.util

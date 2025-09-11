@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.viewers;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.graph.EndpointPair;
 import com.google.common.graph.Graph;
@@ -20,6 +19,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import nl.esi.pps.common.emf.synchronizedtiming.range.TimeRange;
@@ -41,10 +41,10 @@ import org.slf4j.LoggerFactory;
 @SuppressWarnings("all")
 public class LifelineOrderOptimizer {
   private static final Logger LOGGER = LoggerFactory.getLogger(LifelineOrderOptimizer.class);
-  
+
   private LifelineOrderOptimizer() {
   }
-  
+
   public static Collection<Lifeline> optimizeOrder(final TimeRange timeRange, final Lifeline... lifelines) {
     final Set<Message> messages = LifelineOrderOptimizer.filterMessages(timeRange, lifelines);
     final MutableGraph<Lifeline> graph = GraphBuilder.directed().expectedNodeCount(lifelines.length).<Lifeline>build();
@@ -103,7 +103,7 @@ public class LifelineOrderOptimizer {
     }
     return ListExtensions.<Lifeline>reverse(sortedLifelines);
   }
-  
+
   public static Set<Message> filterMessages(final TimeRange timeRange, final Lifeline... lifelines) {
     final Function1<Lifeline, EList<Event>> _function = (Lifeline it) -> {
       return it.getEvents();
@@ -118,7 +118,7 @@ public class LifelineOrderOptimizer {
     final Function1<Message, Boolean> _function_3 = (Message it) -> {
       Lifeline _lifeline = it.getSource().getLifeline();
       Lifeline _lifeline_1 = it.getTarget().getLifeline();
-      return Boolean.valueOf(Objects.equal(_lifeline, _lifeline_1));
+      return Boolean.valueOf(Objects.equals(_lifeline, _lifeline_1));
     };
     final Function1<Message, Boolean> _function_4 = (Message it) -> {
       return Boolean.valueOf(events.contains(it.getTarget()));
@@ -130,7 +130,7 @@ public class LifelineOrderOptimizer {
     final Function1<Message, Boolean> _function_6 = (Message it) -> {
       Lifeline _lifeline = it.getSource().getLifeline();
       Lifeline _lifeline_1 = it.getTarget().getLifeline();
-      return Boolean.valueOf(Objects.equal(_lifeline, _lifeline_1));
+      return Boolean.valueOf(Objects.equals(_lifeline, _lifeline_1));
     };
     final Function1<Message, Boolean> _function_7 = (Message it) -> {
       return Boolean.valueOf(events.contains(it.getSource()));
@@ -138,7 +138,7 @@ public class LifelineOrderOptimizer {
     final Iterable<Message> incomingMessages = IterableExtensions.<Message>filter(IterableExtensions.<Message>reject(IterableExtensions.<Event, Message>flatMap(events, _function_5), _function_6), _function_7);
     return IterableExtensions.<Message>toSet(Queries.<Message>union(outgoingMessages, incomingMessages));
   }
-  
+
   public static <N extends Object> List<MutableGraph<N>> disjunct(final Graph<N> graph) {
     final Map<N, MutableGraph<N>> node2graph = CollectionLiterals.<N, MutableGraph<N>>newLinkedHashMap();
     Set<EndpointPair<N>> _edges = graph.edges();
@@ -195,7 +195,7 @@ public class LifelineOrderOptimizer {
     }
     return IterableExtensions.<MutableGraph<N>>toList(Queries.<MutableGraph<N>>unique(node2graph.values(), false));
   }
-  
+
   public static <N extends Object> List<N> getNodesInTopologicalOrder(final Graph<N> graph) {
     final Function1<N, N> _function = (N k) -> {
       return k;
@@ -241,7 +241,7 @@ public class LifelineOrderOptimizer {
     }
     return result;
   }
-  
+
   public static <N extends Object> MutableGraph<N> reverse(final Graph<N> graph) {
     final MutableGraph<N> reversed = GraphBuilder.<N>from(graph).<N>build();
     final Consumer<N> _function = (N n) -> {

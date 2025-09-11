@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  *
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -137,7 +137,7 @@ final class TmscRefinements {
         // End-of-trace effect (i.e. execution ended after trace ended) is supported
         // The TMSC model requires an event for the execution exit, so create one
         if (!rootExecutions.isEmpty) {
-            rootExecutions.last.createExitEvent
+            rootExecutions.getLast().createExitEvent
         }
     }
 
@@ -148,7 +148,7 @@ final class TmscRefinements {
         }
         // Delegate first for correct event order on Lifeline
         val lifelineSegmentSource = execution.children.isEmpty ? execution.entry : 
-            execution.children.last.createExitEvent
+            execution.children.getLast().createExitEvent
 
         execution.exit = createExitEvent
         execution.exit.traced = false

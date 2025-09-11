@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.util;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
 import java.util.ArrayList;
@@ -22,6 +21,7 @@ import java.util.LinkedHashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
@@ -68,17 +68,17 @@ public final class TmscQueries {
   public static class CachedQueryTMSC implements ITMSC {
     @Accessors
     private final List<Event> origin = new ArrayList<Event>(2);
-    
+
     @Accessors
     private final List<Dependency> dependencies;
-    
+
     private final Map<Event, List<Dependency>> incomingDependencies;
-    
+
     private final Map<Event, List<Dependency>> outgoingDependencies;
-    
+
     @Accessors
     private String name;
-    
+
     public CachedQueryTMSC(final Iterable<? extends Dependency> dependencies) {
       if ((dependencies instanceof Collection)) {
         int _size = ((Collection)dependencies).size();
@@ -114,17 +114,17 @@ public final class TmscQueries {
         }
       }
     }
-    
+
     @Override
     public List<Dependency> getIncomingDependencies(final Event event) {
       return this.incomingDependencies.getOrDefault(event, Collections.<Dependency>emptyList());
     }
-    
+
     @Override
     public List<Dependency> getOutgoingDependencies(final Event event) {
       return this.outgoingDependencies.getOrDefault(event, Collections.<Dependency>emptyList());
     }
-    
+
     @Override
     public Collection<Event> getInitialEvents() {
       Set<Event> _keySet = this.outgoingDependencies.keySet();
@@ -132,13 +132,13 @@ public final class TmscQueries {
       initialEvents.removeAll(this.incomingDependencies.keySet());
       return initialEvents;
     }
-    
+
     @Override
     public boolean isInitialEvent(final Event event) {
       boolean _containsKey = this.incomingDependencies.containsKey(event);
       return (!_containsKey);
     }
-    
+
     @Override
     public Collection<Event> getFinalEvents() {
       Set<Event> _keySet = this.incomingDependencies.keySet();
@@ -146,13 +146,13 @@ public final class TmscQueries {
       finalEvents.removeAll(this.outgoingDependencies.keySet());
       return finalEvents;
     }
-    
+
     @Override
     public boolean isFinalEvent(final Event event) {
       boolean _containsKey = this.outgoingDependencies.containsKey(event);
       return (!_containsKey);
     }
-    
+
     public ScopedTMSC createScopedTMSC() {
       ScopedTMSC _createScopedTMSC = TmscQueries.createScopedTMSC(this.dependencies, this.name);
       final Procedure1<ScopedTMSC> _function = (ScopedTMSC scope) -> {
@@ -161,31 +161,31 @@ public final class TmscQueries {
       };
       return ObjectExtensions.<ScopedTMSC>operator_doubleArrow(_createScopedTMSC, _function);
     }
-    
+
     @Pure
     public List<Event> getOrigin() {
       return this.origin;
     }
-    
+
     @Pure
     @Override
     public List<Dependency> getDependencies() {
       return this.dependencies;
     }
-    
+
     @Pure
     public String getName() {
       return this.name;
     }
-    
+
     public void setName(final String name) {
       this.name = name;
     }
   }
-  
+
   private TmscQueries() {
   }
-  
+
   public static String toDebugString(final nl.esi.pps.architecture.implemented.Function function) {
     StringConcatenation _builder = new StringConcatenation();
     EClass _eClass = null;
@@ -206,7 +206,7 @@ public final class TmscQueries {
     _builder.append("]");
     return _builder.toString();
   }
-  
+
   public static String toDebugString(final Execution execution) {
     StringConcatenation _builder = new StringConcatenation();
     nl.esi.pps.architecture.implemented.Function _function = null;
@@ -238,7 +238,7 @@ public final class TmscQueries {
     _builder.append(_debugString_2);
     return _builder.toString();
   }
-  
+
   public static String toDebugString(final Dependency dependency) {
     StringConcatenation _builder = new StringConcatenation();
     Event _source = null;
@@ -272,7 +272,7 @@ public final class TmscQueries {
     _builder.append(_debugString_1);
     return _builder.toString();
   }
-  
+
   public static String toDebugString(final Event event) {
     StringConcatenation _builder = new StringConcatenation();
     {
@@ -304,14 +304,14 @@ public final class TmscQueries {
     _builder.append(_format);
     return _builder.toString();
   }
-  
+
   public static BranchIterable<Execution> getCallStack(final Execution execution) {
     final Function1<Execution, Iterable<? extends Execution>> _function = (Execution it) -> {
       return it.getChildren();
     };
     return Queries.<Execution>walkTree(Collections.<Execution>singletonList(execution), true, _function);
   }
-  
+
   public static Iterable<Event> getCallStackEvents(final Execution execution) {
     Iterable<Event> _switchResult = null;
     final Execution it = execution;
@@ -344,7 +344,7 @@ public final class TmscQueries {
     }
     return _switchResult;
   }
-  
+
   public static Iterable<LifelineSegment> getCallStackLifelineSegments(final Execution execution) {
     if (((execution.getEntry() == null) || (execution.getExit() == null))) {
       return Collections.<LifelineSegment>emptyList();
@@ -360,11 +360,11 @@ public final class TmscQueries {
     final Function1<LifelineSegment, Boolean> _function_1 = (LifelineSegment it) -> {
       Event _target = it.getTarget();
       ExitEvent _exit = execution.getExit();
-      return Boolean.valueOf(Objects.equal(_target, _exit));
+      return Boolean.valueOf(Objects.equals(_target, _exit));
     };
     return Queries.<LifelineSegment>upToAndIncluding(Queries.<LifelineSegment>climbTree(Collections.<LifelineSegment>singleton(TmscQueries.getOutgoingLifelineSegment(execution.getEntry())), true, _function), _function_1);
   }
-  
+
   /**
    * Returns a list, containing the {@link Dependency#getSource() source event}
    * and/or {@link Dependency#getTarget() target event}. The list only contains an
@@ -399,7 +399,7 @@ public final class TmscQueries {
     }
     return _switchResult;
   }
-  
+
   /**
    * Returns a list, containing the {@link Execution#getEntry() entry event}
    * and/or {@link Execution#getExit() exit event}. The list only contains an
@@ -434,7 +434,7 @@ public final class TmscQueries {
     }
     return _switchResult;
   }
-  
+
   /**
    * Returns a list, containing the {@link Interval#getFrom() from event}
    * and/or {@link Interval#getTo() to event}. The list only contains an
@@ -469,7 +469,7 @@ public final class TmscQueries {
     }
     return _switchResult;
   }
-  
+
   /**
    * Returns <code>true</code> if both {@link Dependency#getSource() source} and
    * {@link Dependency#getTarget() target} are set and both are
@@ -478,7 +478,7 @@ public final class TmscQueries {
   public static boolean isFullyTraced(final Dependency dependency) {
     return (TmscQueries.isSourceTraced(dependency) && TmscQueries.isTargetTraced(dependency));
   }
-  
+
   /**
    * Returns <code>true</code> if {@link Dependency#getSource() source} is set and
    * {@link Event#isTraced() traced}, <code>false</code> otherwise.
@@ -498,7 +498,7 @@ public final class TmscQueries {
     }
     return _and;
   }
-  
+
   /**
    * Returns <code>true</code> if {@link Dependency#getTarget() target} is set and
    * {@link Event#isTraced() traced}, <code>false</code> otherwise.
@@ -518,7 +518,7 @@ public final class TmscQueries {
     }
     return _and;
   }
-  
+
   /**
    * Returns <code>true</code> if both {@link Execution#getEntry() entry event} and
    * {@link Execution#getExit() exit event} are set and both are
@@ -527,7 +527,7 @@ public final class TmscQueries {
   public static boolean isFullyTraced(final Execution execution) {
     return (TmscQueries.isEntryTraced(execution) && TmscQueries.isExitTraced(execution));
   }
-  
+
   /**
    * Returns <code>true</code> if {@link Execution#getEntry() entry event} is set and
    * {@link Event#isTraced() traced}, <code>false</code> otherwise.
@@ -547,7 +547,7 @@ public final class TmscQueries {
     }
     return _and;
   }
-  
+
   /**
    * Returns <code>true</code> if {@link Execution#getExit() exit event} is set and
    * {@link Event#isTraced() traced}, <code>false</code> otherwise.
@@ -567,7 +567,7 @@ public final class TmscQueries {
     }
     return _and;
   }
-  
+
   /**
    * Returns the nearest common ancestor for both <code>execution1</code> and <code>execution2</code>.
    */
@@ -585,7 +585,7 @@ public final class TmscQueries {
     };
     return IterableExtensions.<Execution>findFirst(ancestors2, _function_2);
   }
-  
+
   /**
    * Creates a valid {@link TmscPackage.Literals#EID EID} string for
    * <code>text</code>.<br>
@@ -599,7 +599,7 @@ public final class TmscQueries {
     }
     return _xifexpression;
   }
-  
+
   /**
    * Causal dependencies are defined as the intersection of the transitive closure
    * of outgoing dependencies of 'from' and the transitive closure of incoming
@@ -610,7 +610,7 @@ public final class TmscQueries {
   public static Set<Dependency> findCausalDependenciesBetween(final ITMSC tmsc, final Event from, final Event to) {
     return TmscQueries.findCausalDependenciesBetween(tmsc, Collections.<Event>singleton(from), Collections.<Event>singleton(to));
   }
-  
+
   /**
    * Causal dependencies are defined as the intersection of the transitive closure
    * of outgoing dependencies of 'from' and the transitive closure of incoming
@@ -667,7 +667,7 @@ public final class TmscQueries {
     causalDependencies.retainAll(IterableExtensions.<Dependency>toSet(cause));
     return causalDependencies;
   }
-  
+
   /**
    * Finds the transitive closure of adjacent (a.k.a. in any direction) dependencies
    * that match the {@code predicate} and are not before from.timestamp on the from.lifeline and
@@ -741,7 +741,7 @@ public final class TmscQueries {
     }
     return adjacentDependencies;
   }
-  
+
   private static boolean isBefore(final Event event, final Event anchor) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -755,7 +755,7 @@ public final class TmscQueries {
     if (!_matched) {
       Long _timestamp = event.getTimestamp();
       Long _timestamp_1 = anchor.getTimestamp();
-      boolean _equals = Objects.equal(_timestamp, _timestamp_1);
+      boolean _equals = Objects.equals(_timestamp, _timestamp_1);
       if (_equals) {
         _matched=true;
         int _indexOnLifeline = TmscQueries.indexOnLifeline(event);
@@ -770,7 +770,7 @@ public final class TmscQueries {
     }
     return _switchResult;
   }
-  
+
   private static boolean isAfter(final Event event, final Event anchor) {
     boolean _switchResult = false;
     boolean _matched = false;
@@ -784,7 +784,7 @@ public final class TmscQueries {
     if (!_matched) {
       Long _timestamp = event.getTimestamp();
       Long _timestamp_1 = anchor.getTimestamp();
-      boolean _equals = Objects.equal(_timestamp, _timestamp_1);
+      boolean _equals = Objects.equals(_timestamp, _timestamp_1);
       if (_equals) {
         _matched=true;
         int _indexOnLifeline = TmscQueries.indexOnLifeline(event);
@@ -799,7 +799,7 @@ public final class TmscQueries {
     }
     return _switchResult;
   }
-  
+
   /**
    * Returns the {@link List#indexOf(Object) index of} {@code event} within its
    * life-line.
@@ -810,7 +810,7 @@ public final class TmscQueries {
   private static int indexOnLifeline(final Event event) {
     return event.getLifeline().getEvents().indexOf(event);
   }
-  
+
   /**
    * Group dependencies to disjunct TMSCs (as groups of dependencies): <ol>
    * <li>When source and target of a dependency do not belong to an TMSC, assign the dependency to a new TMSC</li>
@@ -878,7 +878,7 @@ public final class TmscQueries {
     }
     return IterableExtensions.<List<Dependency>>toList(Queries.<List<Dependency>>unique(event2tmsc.values(), false));
   }
-  
+
   /**
    * Group dependencies to disjunct TMSCs (as groups of dependencies): <ol>
    * <li>When source and target of a dependency do not belong to an TMSC, assign the dependency to a new TMSC</li>
@@ -950,7 +950,7 @@ public final class TmscQueries {
     }
     return IterableExtensions.<List<Dependency>>toList(Queries.<List<Dependency>>unique(Queries.<List<Dependency>>union(sourceEvent2tmsc.values(), targetEvent2tmsc.values()), false));
   }
-  
+
   /**
    * Trims a TMSC, removing all events at the border that match the <tt>predicate</tt>.
    */
@@ -983,7 +983,7 @@ public final class TmscQueries {
     CollectionExtensions.<Dependency>removeAll(trimmedDependencies, trailingDependencies);
     return trimmedDependencies;
   }
-  
+
   /**
    * Returns all dependencies (including <code>dependency</code>) of the same type (i.e.
    * same {@link EObject#eClass() eClass}) between the source lifeline and target
@@ -994,12 +994,12 @@ public final class TmscQueries {
       return it.getFullScopeOutgoingDependencies();
     };
     final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
-      return Boolean.valueOf((Objects.equal(it.eClass(), dependency.eClass()) && Objects.equal(it.getTarget().getLifeline(), dependency.getTarget().getLifeline())));
+      return Boolean.valueOf((Objects.equals(it.eClass(), dependency.eClass()) && Objects.equals(it.getTarget().getLifeline(), dependency.getTarget().getLifeline())));
     };
     Iterable<Dependency> _filter = IterableExtensions.<Dependency>filter(IterableExtensions.<Event, Dependency>flatMap(dependency.getSource().getLifeline().getEvents(), _function), _function_1);
     return ((Iterable<T>) _filter);
   }
-  
+
   /**
    * Returns all executions with the same {@link Execution#getFunction() function}
    * for the same {@link Execution#getComponent() component}
@@ -1009,11 +1009,11 @@ public final class TmscQueries {
       return it.getExecutions();
     };
     final Function1<Execution, Boolean> _function_1 = (Execution it) -> {
-      return Boolean.valueOf((Objects.equal(it.getFunction(), execution.getFunction()) && Objects.equal(it.getComponent(), execution.getComponent())));
+      return Boolean.valueOf((Objects.equals(it.getFunction(), execution.getFunction()) && Objects.equals(it.getComponent(), execution.getComponent())));
     };
     return IterableExtensions.<Execution>filter(IterableExtensions.<Lifeline, Execution>flatMap(execution.getTmsc().getLifelines(), _function), _function_1);
   }
-  
+
   /**
    * Returns all executions with the same {@link Execution#getFunction() function}
    * for the same {@link Execution#getLifeline() lifeline}
@@ -1022,11 +1022,11 @@ public final class TmscQueries {
     final Function1<Execution, Boolean> _function = (Execution it) -> {
       nl.esi.pps.architecture.implemented.Function _function_1 = it.getFunction();
       nl.esi.pps.architecture.implemented.Function _function_2 = execution.getFunction();
-      return Boolean.valueOf(Objects.equal(_function_1, _function_2));
+      return Boolean.valueOf(Objects.equals(_function_1, _function_2));
     };
     return IterableExtensions.<Execution>filter(execution.getLifeline().getExecutions(), _function);
   }
-  
+
   /**
    * Convenience method for creating {@link ITMSC} instances that are required by some queries.
    */
@@ -1037,7 +1037,7 @@ public final class TmscQueries {
     };
     return ObjectExtensions.<TmscQueries.CachedQueryTMSC>operator_doubleArrow(_cachedQueryTMSC, _function);
   }
-  
+
   /**
    * Convenience method for creating {@link ITMSC} instances that are required by some queries.
    */
@@ -1049,7 +1049,7 @@ public final class TmscQueries {
     };
     return ObjectExtensions.<TmscQueries.CachedQueryTMSC>operator_doubleArrow(_cachedQueryTMSC, _function);
   }
-  
+
   /**
    * Convenience method for creating a {@link ScopedTMSC} instance, that does two things:
    * <ol>
@@ -1072,7 +1072,7 @@ public final class TmscQueries {
     };
     return ObjectExtensions.<ScopedTMSC>operator_doubleArrow(_createScopedTMSC, _function);
   }
-  
+
   /**
    * Adding a {@code child} scope might require to add (new) dependencies
    * to the {@code parent} TMSC and its ancestors.
@@ -1083,7 +1083,7 @@ public final class TmscQueries {
     _childScopes.add(child);
     return TmscQueries.<Dependency>addDependencies(parent, child.getDependencies());
   }
-  
+
   /**
    * Adds dependencies to a TMSC and its ancestors, only if they are not yet added.
    * Only the added dependencies are returned.
@@ -1106,7 +1106,7 @@ public final class TmscQueries {
     }
     return dependenciesToAdd;
   }
-  
+
   /**
    * An performance optimized version of {@code event.getScopes().contains(tmsc)}.
    */
@@ -1115,7 +1115,7 @@ public final class TmscQueries {
       return Boolean.valueOf(it.getScopes().contains(tmsc));
     })));
   }
-  
+
   public static boolean isInScope(final Event event, final Iterable<? extends ScopedTMSC> tmscs) {
     boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(tmscs);
     if (_isNullOrEmpty) {
@@ -1130,7 +1130,7 @@ public final class TmscQueries {
     };
     return IterableExtensions.<ScopedTMSC>exists(eventScopes, _function_1);
   }
-  
+
   public static void disposeTemp(final ScopedTMSC tmsc, final boolean disposeTempDependencies) {
     EObject _eContainer = tmsc.eContainer();
     boolean _tripleNotEquals = (_eContainer != null);
@@ -1161,7 +1161,7 @@ public final class TmscQueries {
     };
     tempDependencies.forEach(_function_3);
   }
-  
+
   public static void disposeTemp(final Iterable<? extends Dependency> dependencies) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       EObject _eContainer = it.eContainer();
@@ -1190,7 +1190,7 @@ public final class TmscQueries {
     };
     tempDependencies.forEach(_function_5);
   }
-  
+
   public static void disposeTemp(final Dependency dependency) {
     EObject _eContainer = dependency.eContainer();
     boolean _tripleNotEquals = (_eContainer != null);
@@ -1206,7 +1206,7 @@ public final class TmscQueries {
     };
     IterableExtensions.<EStructuralFeature>filter(dependency.eClass().getEAllStructuralFeatures(), _function).forEach(_function_1);
   }
-  
+
   /**
    * Returns the dependencies whose events include {@code event}.
    * 
@@ -1219,7 +1219,7 @@ public final class TmscQueries {
   public static Iterable<Dependency> getFullScopeDependencies(final Event event) {
     return Queries.<Dependency>union(event.getFullScopeIncomingDependencies(), event.getFullScopeOutgoingDependencies());
   }
-  
+
   public static BranchIterable<Event> getPreviousEventsOnLifeline(final Event event) {
     final Function1<Event, Event> _function = (Event it) -> {
       LifelineSegment _incomingLifelineSegment = TmscQueries.getIncomingLifelineSegment(it);
@@ -1231,14 +1231,14 @@ public final class TmscQueries {
     };
     return Queries.<Event>climbTree(Collections.<Event>singleton(event), _function);
   }
-  
+
   public static LifelineSegment getIncomingLifelineSegment(final Event event) {
     final Function1<LifelineSegment, Boolean> _function = (LifelineSegment it) -> {
       return Boolean.valueOf(it.isProjection());
     };
     return TmscQueries.<LifelineSegment>getAtMostOne(IterableExtensions.<LifelineSegment>reject(Iterables.<LifelineSegment>filter(event.getFullScopeIncomingDependencies(), LifelineSegment.class), _function));
   }
-  
+
   public static BranchIterable<Event> getNextEventsOnLifeline(final Event event) {
     final Function1<Event, Event> _function = (Event it) -> {
       LifelineSegment _outgoingLifelineSegment = TmscQueries.getOutgoingLifelineSegment(it);
@@ -1250,14 +1250,14 @@ public final class TmscQueries {
     };
     return Queries.<Event>climbTree(Collections.<Event>singleton(event), _function);
   }
-  
+
   public static LifelineSegment getOutgoingLifelineSegment(final Event event) {
     final Function1<LifelineSegment, Boolean> _function = (LifelineSegment it) -> {
       return Boolean.valueOf(it.isProjection());
     };
     return TmscQueries.<LifelineSegment>getAtMostOne(IterableExtensions.<LifelineSegment>reject(Iterables.<LifelineSegment>filter(event.getFullScopeOutgoingDependencies(), LifelineSegment.class), _function));
   }
-  
+
   public static <T extends Object> T getAtMostOne(final Iterable<T> source) {
     final Iterator<T> iterator = source.iterator();
     boolean _hasNext = iterator.hasNext();
@@ -1272,7 +1272,7 @@ public final class TmscQueries {
       return null;
     }
   }
-  
+
   public static void makeRelativeTiming(final TMSC tmsc) {
     final FullScopeTMSC fullScope = tmsc.getFullScope();
     if ((tmsc instanceof ScopedTMSC)) {
@@ -1283,7 +1283,7 @@ public final class TmscQueries {
     TmscQueries.shiftTime(fullScope, _minus);
     fullScope.setEpochTime(false);
   }
-  
+
   public static void shiftTime(final FullScopeTMSC tmsc, final long delta) {
     final Function1<Event, Boolean> _function = (Event it) -> {
       Long _timestamp = it.getTimestamp();

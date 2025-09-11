@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -23,7 +23,7 @@ import org.eclipse.xtext.xbase.lib.Exceptions;
 public class ISO8601ValueConverter implements IValueConverter<BigDecimal> {
   private static final BigDecimal minimumDate = BigDecimal.valueOf(
     ZonedDateTime.parse("1971-01-01T00:00:00Z", DateTimeFormatter.ISO_OFFSET_DATE_TIME).toInstant().getEpochSecond());
-  
+
   @Override
   public String toString(final BigDecimal value) throws ValueConverterException {
     boolean _lessThan = (value.compareTo(ISO8601ValueConverter.minimumDate) < 0);
@@ -34,7 +34,7 @@ public class ISO8601ValueConverter implements IValueConverter<BigDecimal> {
     final long nanoAdjustment = value.remainder(BigDecimal.ONE).movePointRight(9).longValue();
     return DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(Instant.ofEpochSecond(epochSecond, nanoAdjustment));
   }
-  
+
   @Override
   public BigDecimal toValue(final String string, final INode node) throws ValueConverterException {
     try {

@@ -1,6 +1,6 @@
 <!--
 
-    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+    Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
 
     This program and the accompanying materials are made available
     under the terms of the MIT License which is available at
@@ -14,7 +14,7 @@
 
     <groupId>nl.esi.pps</groupId>
     <artifactId>nl.esi.pps.configuration</artifactId>
-    <version>0.20.0-SNAPSHOT</version>
+    <version>0.30.0-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>PPS Configuration</name>
 
@@ -35,7 +35,7 @@
         <pps.binary.version.enduser>${pps.binary.prefix}-${pps.version.enduser}</pps.binary.version.enduser>
 
         <!-- Building Java11 compliant code -->
-        <java.source>11</java.source>
+        <java.source>21</java.source>
         <maven.compiler.source>${java.source}</maven.compiler.source>
         <maven.compiler.target>${java.source}</maven.compiler.target>
 
@@ -44,26 +44,33 @@
         <project.build.resourceEncoding>UTF-8</project.build.resourceEncoding>
         <maven.compiler.encoding>UTF-8</maven.compiler.encoding>
 
+        <maven.compiler.release>${java.source}</maven.compiler.release>
+
+        <!-- Minimal Maven version to use. -->
+        <maven.minimal.version>3.9.0</maven.minimal.version>
+
+        <!-- Maven enforcer version. -->
+        <maven.enforcer.version>3.4.1</maven.enforcer.version>
+
         <!-- Tycho version to use. -->
-        <tycho.version>2.6.0</tycho.version>
+        <tycho.version>4.0.13</tycho.version>
         <tycho.extras.version>${tycho.version}</tycho.extras.version>
         <!-- Allow feature modules to override default behavior -->
         <source.feature.skip>false</source.feature.skip>
 
-        <!-- Xtext/Xtend versions for Eclipse 2021-12 -->
-        <xtext.version>2.25.0</xtext.version>
-        <mwe2.version>3.6.0</mwe2.version>
+        <!-- Xtext/Xtend versions for Eclipse 2024-09 -->
+        <xtext.version>2.36.0</xtext.version>
+        <mwe2.version>2.19.0</mwe2.version>
 
         <!-- Documentation plug-in versions. -->
-        <asciidoctor.maven.plugin.version>2.2.2</asciidoctor.maven.plugin.version>
-        <asciidoctorj.version>2.5.7</asciidoctorj.version>
-        <asciidoctorj.diagram.version>2.2.4</asciidoctorj.diagram.version>
-        <asciidoctorj.pdf.version>2.3.4</asciidoctorj.pdf.version>
-        <jruby.version>9.2.20.1</jruby.version>
+        <asciidoctor.maven.plugin.version>3.0.0</asciidoctor.maven.plugin.version>
+        <asciidoctorj.version>2.5.13</asciidoctorj.version>
+        <asciidoctorj.diagram.version>2.3.1</asciidoctorj.diagram.version>
+        <asciidoctorj.pdf.version>2.3.17</asciidoctorj.pdf.version>
         <geneclipsetoc.maven.plugin.version>1.0.3</geneclipsetoc.maven.plugin.version>
 
         <!-- https://mycila.carbou.me/license-maven-plugin/ -->
-        <license.maven.plugin.version>4.2.rc2</license.maven.plugin.version>
+        <license.maven.plugin.version>4.6</license.maven.plugin.version>
     </properties>
 
     <scm>
@@ -116,11 +123,11 @@
         <defaultGoal>clean verify</defaultGoal>
 
         <plugins>
-            <!-- Enforce minimum Maven 3.5 -->
+            <!-- Enforce prerequisite versions. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-enforcer-plugin</artifactId>
-                <version>1.4.1</version>
+                <version>${maven.enforcer.version}</version>
                 <executions>
                     <execution>
                         <id>enforce-maven</id>
@@ -129,8 +136,11 @@
                         </goals>
                         <configuration>
                             <rules>
+                                <requireJavaVersion>
+                                    <version>${java.source}</version>
+                                </requireJavaVersion>
                                 <requireMavenVersion>
-                                    <version>[3.5,)</version>
+                                    <version>${maven.minimal.version}</version>
                                 </requireMavenVersion>
                             </rules>
                         </configuration>
@@ -163,6 +173,7 @@
                         <adoc>ASCIIDOC_STYLE</adoc>
                         <csv>SCRIPT_STYLE</csv>
                         <mappings>SCRIPT_STYLE</mappings>
+                        <tpd>JAVADOC_STYLE</tpd>
                         <tmsct>JAVADOC_STYLE</tmsct>
                     </mapping>
                     <licenseSets>
@@ -232,11 +243,18 @@
                 </configuration>
             </plugin>
 
+            <!-- Prevent warnings for projects with multiple source directories. -->
+            <!-- See also https://github.com/eclipse-tycho/tycho/discussions/2717. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>3.6.0</version>
+            </plugin>
+
             <!-- Configure packaging of JARs. -->
             <plugin>
                 <groupId>org.eclipse.tycho</groupId>
                 <artifactId>tycho-packaging-plugin</artifactId>
-                <version>${tycho.version}</version>
 
                 <configuration>
                     <!-- Use property-based fixed qualifier for all plugins/features/etc. -->
@@ -257,15 +275,13 @@
                 <configuration>
                     <!-- Let JustJ handle the execution environment. -->
                     <!-- See https://www.eclipse.org/justj/?page=documentation for more information. -->
-                    <executionEnvironment>org.eclipse.justj.openjdk.hotspot.jre.full-11</executionEnvironment>
+                    <executionEnvironment>org.eclipse.justj.openjdk.hotspot.jre.full-${java.source}</executionEnvironment>
 
                     <!-- Configure target platform file. -->
                     <target>
-                        <artifact>
-                            <groupId>nl.esi.pps</groupId>
-                            <artifactId>nl.esi.pps.target</artifactId>
-                            <version>0.20.0-SNAPSHOT</version>
-                        </artifact>
+                        <file>
+                            ${maven.multiModuleProjectDirectory}/releng//nl.esi.pps.target/nl.esi.pps.target.target
+                        </file>
                     </target>
 
                     <!--
@@ -280,19 +296,77 @@
                             <arch>x86_64</arch>
                         </environment>
                     </environments>
+
+                    <!-- For building and using Maven plugins during the build. -->
+                    <pomDependencies>consider</pomDependencies>
                 </configuration>
+            </plugin>
+
+            <!-- Enable source bundles/features. -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-source-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <addMavenDescriptor>false</addMavenDescriptor>
+                    </archive>
+                    <missingSourcesAction>FAIL</missingSourcesAction>
+                    <skip>${source.feature.skip}</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>plugin-source</id>
+                        <goals>
+                            <goal>plugin-source</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>feature-source</id>
+                        <goals>
+                            <goal>feature-source</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- The following is needed for generated source features that are part of an update site. -->
+            <!-- Tycho will warn about this if not configured. -->
+            <plugin>
+                <groupId>org.eclipse.tycho</groupId>
+                <artifactId>tycho-p2-plugin</artifactId>
+                <version>${tycho.version}</version>
+                <executions>
+                    <execution>
+                        <!-- Don't attach (default) metadata before the source-feature execution. -->
+                        <id>default-p2-metadata-default</id>
+                        <configuration>
+                            <attachP2Metadata>false</attachP2Metadata>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <!-- Do attach metadata after the source-feature execution. -->
+                        <id>attach-p2-metadata</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>p2-metadata</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <!-- Enable unit testing. -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
-                <version>3.0.0-M5</version>
+                <version>3.5.2</version>
+                <configuration>
+                    <argLine>--add-opens java.base/java.util.zip=ALL-UNNAMED</argLine>
+                </configuration>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.surefire</groupId>
                         <artifactId>surefire-junit47</artifactId>
-                        <version>3.0.0-M5</version>
+                        <version>3.5.2</version>
                     </dependency>
                 </dependencies>
             </plugin>
@@ -301,34 +375,6 @@
             <plugin>
                 <groupId>org.eclipse.xtend</groupId>
                 <artifactId>xtend-maven-plugin</artifactId>
-                <version>${xtext.version}</version>
-                <executions>
-                    <execution>
-                        <goals>
-                            <goal>compile</goal>
-                            <goal>xtend-install-debug-info</goal>
-                        </goals>
-                    </execution>
-                </executions>
-                <configuration>
-                    <outputDirectory>${project.basedir}/xtend-gen</outputDirectory>
-                    <testOutputDirectory>${project.basedir}/xtend-gen</testOutputDirectory>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-clean-plugin</artifactId>
-                <version>3.1.0</version>
-                <configuration>
-                    <filesets combine.children="append">
-                        <fileset>
-                            <directory>${project.basedir}/xtend-gen</directory>
-                            <includes>
-                                <include>**/*</include>
-                            </includes>
-                        </fileset>
-                    </filesets>
-                </configuration>
             </plugin>
         </plugins>
 
@@ -336,7 +382,7 @@
             <plugins>
                 <plugin>
                     <artifactId>maven-assembly-plugin</artifactId>
-                    <version>2.6</version>
+                    <version>3.7.1</version>
                 </plugin>
 
                 <plugin>
@@ -364,6 +410,40 @@
                     <groupId>org.eclipse.tycho</groupId>
                     <artifactId>tycho-surefire-plugin</artifactId>
                     <version>${tycho.version}</version>
+                    <configuration>
+                        <argLine>--add-opens java.base/java.util.zip=ALL-UNNAMED</argLine>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-packaging-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-source-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-bnd-plugin</artifactId>
+                    <version>${tycho.version}</version>
+                    <executions>
+                        <execution>
+                            <!-- Suppress Plugin execution not covered by lifecycle configuration -->
+                            <?m2e ignore?>
+                            <id>default-process</id>
+                        </execution>
+                    </executions>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.tycho</groupId>
+                    <artifactId>tycho-p2-repository-plugin</artifactId>
+                    <version>${tycho.version}</version>
                 </plugin>
 
                 <plugin>
@@ -373,9 +453,50 @@
                 </plugin>
 
                 <plugin>
-                    <groupId>org.eclipse.tycho</groupId>
-                    <artifactId>tycho-p2-repository-plugin</artifactId>
-                    <version>${tycho.version}</version>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.4.0</version>
+                    <executions>
+                        <execution>
+                            <!-- Suppress Plugin execution not covered by lifecycle configuration -->
+                            <?m2e ignore?>
+                            <id>default-clean-1</id>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <filesets combine.children="append">
+                            <fileset>
+                                <directory>${project.basedir}/xtend-gen</directory>
+                                <includes>
+                                    <include>**/*</include>
+                                </includes>
+                                <excludes>
+                                    <exclude>.gitignore</exclude>
+                                </excludes>
+                            </fileset>
+                        </filesets>
+                    </configuration>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.eclipse.xtend</groupId>
+                    <artifactId>xtend-maven-plugin</artifactId>
+                    <version>${xtext.version}</version>
+                    <executions>
+                        <execution>
+                            <?m2e ignore?>
+                            <goals>
+                                <goal>compile</goal>
+                                <goal>xtend-install-debug-info</goal>
+                                <goal>testCompile</goal>
+                                <goal>xtend-test-install-debug-info</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <outputDirectory>${project.basedir}/xtend-gen</outputDirectory>
+                        <testOutputDirectory>${project.basedir}/xtend-gen</testOutputDirectory>
+                    </configuration>
                 </plugin>
 
                 <!-- AsciiDoctor documentation generation configuration. -->
@@ -399,11 +520,6 @@
                             <artifactId>asciidoctorj-pdf</artifactId>
                             <version>${asciidoctorj.pdf.version}</version>
                         </dependency>
-                        <dependency>
-                            <groupId>org.jruby</groupId>
-                            <artifactId>jruby-complete</artifactId>
-                            <version>${jruby.version}</version>
-                        </dependency>
                     </dependencies>
                     <configuration>
                         <requires>
@@ -426,32 +542,6 @@
                     <artifactId>geneclipsetoc-maven-plugin</artifactId>
                     <version>${geneclipsetoc.maven.plugin.version}</version>
                 </plugin>
-                
-                <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself.-->
-                <plugin>
-                    <groupId>org.eclipse.m2e</groupId>
-                    <artifactId>lifecycle-mapping</artifactId>
-                    <version>1.0.0</version>
-                    <configuration>
-                        <lifecycleMappingMetadata>
-                            <pluginExecutions>
-                                <pluginExecution>
-                                    <pluginExecutionFilter>
-                                        <groupId>com.altran.general.emf.ecoredoc</groupId>
-                                        <artifactId>ecoredoc-maven-plugin</artifactId>
-                                        <versionRange>[0.0.0,)</versionRange>
-                                        <goals>
-                                            <goal>ecoredoc</goal>
-                                        </goals>
-                                    </pluginExecutionFilter>
-                                    <action>
-                                        <ignore></ignore>
-                                    </action>
-                                </pluginExecution>
-                            </pluginExecutions>
-                        </lifecycleMappingMetadata>
-                    </configuration>
-                </plugin>
             </plugins>
         </pluginManagement>
     </build>
@@ -470,7 +560,6 @@
                     <plugin>
                         <groupId>org.eclipse.tycho</groupId>
                         <artifactId>tycho-packaging-plugin</artifactId>
-                        <version>${tycho.version}</version>
                         <configuration>
                             <additionalFileSets>
                                 <fileSet>
@@ -542,88 +631,6 @@
             </build>
         </profile>
 
-        <profile>
-            <id>create-plugin-source</id>
-            <activation>
-                <file>
-                    <exists>${basedir}/META-INF/MANIFEST.MF</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-source-plugin</artifactId>
-                        <version>${tycho.version}</version>
-                        <executions>
-                            <execution>
-                                <id>plugin-source</id>
-                                <goals>
-                                    <goal>plugin-source</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
-        <profile>
-            <id>create-feature-source</id>
-            <activation>
-                <file>
-                    <exists>${basedir}/feature.xml</exists>
-                </file>
-            </activation>
-            <build>
-                <plugins>
-                    <plugin>
-                        <groupId>org.eclipse.tycho.extras</groupId>
-                        <artifactId>tycho-source-feature-plugin</artifactId>
-                        <version>${tycho.extras.version}</version>
-                        <configuration>
-                            <skip>${source.feature.skip}</skip>
-                            <missingSourcesAction>FAIL</missingSourcesAction>
-                        </configuration>
-                        <executions>
-                            <execution>
-                                <id>source-feature</id>
-                                <goals>
-                                    <goal>source-feature</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                    <plugin>
-                        <groupId>org.eclipse.tycho</groupId>
-                        <artifactId>tycho-p2-plugin</artifactId>
-                        <version>${tycho.version}</version>
-                        <!--
-                            The following is needed for generated source features that are part of an update site.
-                            Tycho will warn about this if not configured.
-                        -->
-                        <executions>
-                            <execution>
-                                <!-- Don't attach (default) metadata before the "generate-source-feature" execution. -->
-                                <id>default-p2-metadata-default</id>
-                                <configuration>
-                                    <attachP2Metadata>false</attachP2Metadata>
-                                </configuration>
-                            </execution>
-                            <execution>
-                                <!-- Do attach metadata after the "generate-source-feature" execution. -->
-                                <id>attach-p2-metadata</id>
-                                <phase>package</phase>
-                                <goals>
-                                    <goal>p2-metadata</goal>
-                                </goals>
-                            </execution>
-                        </executions>
-                    </plugin>
-                </plugins>
-            </build>
-        </profile>
-
         <!-- This profile prevents errors for m2eclipse, only when Eclipse is active. -->
         <profile>
             <id>eclipse-m2e</id>
@@ -660,6 +667,19 @@
                                                 <versionRange>[1.7.0,)</versionRange>
                                                 <goals>
                                                     <goal>target-platform</goal>
+                                                </goals>
+                                            </pluginExecutionFilter>
+                                            <action>
+                                                <ignore></ignore>
+                                            </action>
+                                        </pluginExecution>
+                                        <pluginExecution>
+                                            <pluginExecutionFilter>
+                                                <groupId>com.altran.general.emf.ecoredoc</groupId>
+                                                <artifactId>ecoredoc-maven-plugin</artifactId>
+                                                <versionRange>[0.0.0,)</versionRange>
+                                                <goals>
+                                                    <goal>ecoredoc</goal>
                                                 </goals>
                                             </pluginExecutionFilter>
                                             <action>

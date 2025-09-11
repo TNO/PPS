@@ -1,5 +1,5 @@
 ////
-  // Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+  // Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
   //
   // This program and the accompanying materials are made available
   // under the terms of the MIT License which is available at
@@ -30,5 +30,5 @@ ifndef::metamodelsdir[:metamodelsdir: ../target/meta-models]
 // non-breaking hyphen
 :nbh: &#8209;
 
-:eclipse-help-location: https://help.eclipse.org/2021-12/topic
+:eclipse-help-location: https://help.eclipse.org/2024-09/topic
 :pps-user-guide: {eclipse-help-location}/nl.esi.pps.doc.user/target/eclipse-help/index.html

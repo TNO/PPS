@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: PPS Common JFreeChart UI
 Bundle-SymbolicName: nl.esi.pps.common.jfreechart.ui;singleton:=true
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-Vendor: ESI (TNO)
 Automatic-Module-Name: nl.esi.pps.common.jfreechart.ui
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.trace4cps.common.jfreechart.ui;visibility:=reexport,
  nl.esi.pps.common.jfreechart;visibility:=reexport,
  org.eclipse.jface

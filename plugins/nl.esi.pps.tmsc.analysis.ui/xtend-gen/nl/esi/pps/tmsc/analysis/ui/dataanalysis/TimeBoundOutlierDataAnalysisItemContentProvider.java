@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -28,24 +28,24 @@ public class TimeBoundOutlierDataAnalysisItemContentProvider implements IDataAna
     }
     return _xifexpression;
   }
-  
+
   @Override
   public String getTitle(final Object object, final String configuration) {
     return "Time-bounds";
   }
-  
+
   @Override
   public Long getBudget(final Object object, final String configuration) {
     final Dependency dependency = ((Dependency) object);
     return TimeBoundOutlierAnalysis.getTimeBoundOutlierThreshold(dependency);
   }
-  
+
   @Override
   public Iterable<?> getSiblings(final Object object, final String configuration) {
     final Dependency dependency = ((Dependency) object);
     return Queries.<Object>union(Collections.<Object>singleton(object), TimeBoundOutlierAnalysis.getTimeBoundSamples(dependency));
   }
-  
+
   @Override
   public Long getDuration(final Object object, final Object sibling, final String configuration) {
     Long _switchResult = null;

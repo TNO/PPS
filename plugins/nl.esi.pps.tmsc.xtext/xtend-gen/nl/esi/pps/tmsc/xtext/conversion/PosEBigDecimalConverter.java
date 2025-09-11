@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -33,7 +33,7 @@ public class PosEBigDecimalConverter implements IValueConverter<BigDecimal> {
     _builder_1.append(value);
     return _builder_1.toString();
   }
-  
+
   @Override
   public BigDecimal toValue(final String string, final INode node) throws ValueConverterException {
     try {

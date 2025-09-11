@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -29,11 +29,11 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 class EventTopologicalOrder implements TopologicalOrderIterator<Event> {
   @Extension
   private final ITMSC tmsc;
-  
+
   private final Queue<Event> enabledElements = CollectionLiterals.<Event>newLinkedList();
-  
+
   private final Map<Event, Integer> elementThreshold = CollectionLiterals.<Event, Integer>newLinkedHashMap();
-  
+
   public EventTopologicalOrder(final ITMSC tmsc) {
     this.tmsc = tmsc;
     Collection<Event> _events = tmsc.getEvents();
@@ -52,12 +52,12 @@ class EventTopologicalOrder implements TopologicalOrderIterator<Event> {
       }
     }
   }
-  
+
   @Override
   public boolean hasNext() {
     return ((!this.enabledElements.isEmpty()) || (!this.elementThreshold.isEmpty()));
   }
-  
+
   @Override
   public Event next() {
     boolean _isEmpty = this.enabledElements.isEmpty();
@@ -69,7 +69,7 @@ class EventTopologicalOrder implements TopologicalOrderIterator<Event> {
     Iterables.<Event>addAll(this.enabledElements, _doConsume);
     return next;
   }
-  
+
   @Override
   public Iterator<Event> consume(final Event event) {
     boolean _remove = this.enabledElements.remove(event);
@@ -81,7 +81,7 @@ class EventTopologicalOrder implements TopologicalOrderIterator<Event> {
       throw new IllegalArgumentException("Event cannot be consumed");
     }
   }
-  
+
   private LinkedList<Event> doConsume(final Event event) {
     final LinkedList<Event> newEnabledElements = CollectionLiterals.<Event>newLinkedList();
     final Function1<Dependency, Event> _function = (Dependency it) -> {
@@ -107,7 +107,7 @@ class EventTopologicalOrder implements TopologicalOrderIterator<Event> {
     }
     return newEnabledElements;
   }
-  
+
   @Override
   public Iterator<Event> getEnabledElements() {
     return Iterators.<Event>unmodifiableIterator(this.enabledElements.iterator());

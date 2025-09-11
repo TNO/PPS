@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,7 @@
  */
 package nl.esi.pps.tmsc.xtext.scoping;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextPackage;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XEvent;
 import org.eclipse.emf.ecore.EObject;
@@ -30,7 +30,7 @@ public class TmscXtextScopeProvider extends AbstractTmscXtextScopeProvider {
   public IScope getScope(final EObject context, final EReference reference) {
     IScope _switchResult = null;
     boolean _matched = false;
-    if (Objects.equal(reference, TmscXtextPackage.Literals.XEVENT_ARGUMENT__PARAMETER)) {
+    if (Objects.equals(reference, TmscXtextPackage.Literals.XEVENT_ARGUMENT__PARAMETER)) {
       _matched=true;
       IScope _xblockexpression = null;
       {

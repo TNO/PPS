@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,12 +9,12 @@
  */
 package nl.esi.pps.tmsc.util;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -52,14 +52,14 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class ScopedTmscCopier extends EcoreUtil.Copier {
   private final Set<Dependency> registeredDependencies = CollectionLiterals.<Dependency>newHashSet();
-  
+
   private final Set<Execution> registeredExecutions = CollectionLiterals.<Execution>newHashSet();
-  
+
   private final Map<Lifeline, Set<Event>> registeredLifelineEvents = CollectionLiterals.<Lifeline, Set<Event>>newHashMap();
-  
+
   private ScopedTmscCopier() {
   }
-  
+
   /**
    * Finds all {@link EcoreUtil#getRootContainer(EObject) root containers} within
    * the same {@link EObject#eResource() resource} of {@code tmsc} for which
@@ -77,18 +77,18 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     };
     return ScopedTmscCopier.findOtherRootContainersToCopy(tmsc, _function);
   }
-  
+
   public static EObject[] findOtherRootContainersToCopy(final ScopedTMSC tmsc, final Function1<? super EObject, ? extends Boolean> rejectPredicate) {
     return ScopedTmscCopier.findOtherRootContainersToCopy(Collections.<ScopedTMSC>singleton(tmsc), rejectPredicate);
   }
-  
+
   public static EObject[] findOtherRootContainersToCopy(final Iterable<ScopedTMSC> tmscs) {
     final Function1<EObject, Boolean> _function = (EObject it) -> {
       return Boolean.valueOf(false);
     };
     return ScopedTmscCopier.findOtherRootContainersToCopy(tmscs, _function);
   }
-  
+
   public static EObject[] findOtherRootContainersToCopy(final Iterable<ScopedTMSC> tmscs, final Function1<? super EObject, ? extends Boolean> rejectPredicate) {
     final Function1<ScopedTMSC, Resource> _function = (ScopedTMSC it) -> {
       return it.eResource();
@@ -146,16 +146,16 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     referredRootContainers.removeIf(_function_8);
     final Predicate<EObject> _function_9 = (EObject c) -> {
       Resource _eResource = c.eResource();
-      return (!Objects.equal(_eResource, tmscsResource));
+      return (!Objects.equals(_eResource, tmscsResource));
     };
     referredRootContainers.removeIf(_function_9);
     return ((EObject[])Conversions.unwrapArray(referredRootContainers, EObject.class));
   }
-  
+
   public static void deriveStartEndTime(final ScopedTMSC tmsc) {
     ScopedTmscCopier.deriveStartEndTime(Collections.<ScopedTMSC>singleton(tmsc));
   }
-  
+
   public static void deriveStartEndTime(final Iterable<ScopedTMSC> tmscs) {
     boolean _isNullOrEmpty = IterableExtensions.isNullOrEmpty(tmscs);
     if (_isNullOrEmpty) {
@@ -204,7 +204,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       fullScope.setEndTime(Queries.<Long>max(Queries.<Event, Long>xcollectOne(IterableExtensions.<ScopedTMSC, Event>flatMap(tmscs, _function_9), _function_10), fullScope.getEndTime()));
     }
   }
-  
+
   private static FullScopeTMSC getFullScope(final Iterable<ScopedTMSC> tmscs) {
     final Function1<ScopedTMSC, FullScopeTMSC> _function = (ScopedTMSC it) -> {
       return it.getFullScope();
@@ -217,7 +217,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     }
     return IterableExtensions.<FullScopeTMSC>head(fullScopes);
   }
-  
+
   /**
    * The equivalent of {@link EObject#eContents()}, but for
    * {@link EClass#getEAllReferences() non-containment references}.
@@ -251,7 +251,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     };
     return IterableExtensions.<EReference, EObject>flatMap(IterableExtensions.<EReference>reject(eObject.eClass().getEAllReferences(), _function), _function_1);
   }
-  
+
   /**
    * Creates a self contained copy of a {@link ScopedTMSC}, containing just enough
    * content to be persisted and rendered.
@@ -266,7 +266,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
   public static Map<EObject, EObject> copyTmsc(final ScopedTMSC scopedSource, final EObject... otherRootContainers) {
     return ScopedTmscCopier.copyTmscs(Collections.<ScopedTMSC>singleton(scopedSource), otherRootContainers);
   }
-  
+
   public static Map<EObject, EObject> copyTmscs(final Iterable<ScopedTMSC> scopedSources, final EObject... otherRootContainers) {
     boolean _isEmpty = IterableExtensions.isEmpty(scopedSources);
     if (_isEmpty) {
@@ -339,7 +339,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     fullTarget.getLifelines().forEach(_function_4);
     return copier;
   }
-  
+
   private static Execution updateCallStackHierarchy(final Lifeline lifeline) {
     final Function2<Execution, Event, Execution> _function = (Execution currentExecution, Event event) -> {
       final Execution eventExecution = event.getExecution();
@@ -374,7 +374,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     };
     return IterableExtensions.<Event, Execution>fold(lifeline.getEvents(), null, _function);
   }
-  
+
   private void register(final Dependency dependency) {
     if ((dependency == null)) {
       return;
@@ -397,7 +397,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       this.registeredLifelineEvents.computeIfAbsent(dependency.getTarget().getLifeline(), _function_1).add(dependency.getTarget());
     }
   }
-  
+
   private void register(final Execution execution) {
     if ((execution == null)) {
       return;
@@ -420,14 +420,14 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       this.registeredLifelineEvents.computeIfAbsent(execution.getEntry().getLifeline(), _function_1).add(execution.getExit());
     }
   }
-  
+
   private boolean isRegistered(final Event event) {
     final Function1<Set<Event>, Boolean> _function = (Set<Event> it) -> {
       return Boolean.valueOf(it.contains(event));
     };
     return IterableExtensions.<Set<Event>>exists(this.registeredLifelineEvents.values(), _function);
   }
-  
+
   /**
    * Apply mapping semantics, copy once
    */
@@ -442,14 +442,14 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
     }
     return _xifexpression;
   }
-  
+
   /**
    * @see #copyAll(Collection)
    */
   public <T extends Object> Collection<T> copyAll(final Iterable<? extends T> eObjects) {
     return this.<T>copyAll(IterableExtensions.toList(eObjects));
   }
-  
+
   /**
    * We do not want to copy the whole model, so apply filtering for specific containments.
    */
@@ -457,14 +457,14 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
   protected void copyContainment(final EReference eReference, final EObject eObject, final EObject copyEObject) {
     boolean _matched = false;
     if (eObject instanceof FullScopeTMSC) {
-      boolean _equals = Objects.equal(eReference, TmscPackage.Literals.TMSC__CHILD_SCOPES);
+      boolean _equals = Objects.equals(eReference, TmscPackage.Literals.TMSC__CHILD_SCOPES);
       if (_equals) {
         _matched=true;
         return;
       }
     }
     if (!_matched) {
-      boolean _equals = Objects.equal(eReference, TmscPackage.Literals.FULL_SCOPE_TMSC__MEASUREMENTS);
+      boolean _equals = Objects.equals(eReference, TmscPackage.Literals.FULL_SCOPE_TMSC__MEASUREMENTS);
       if (_equals) {
         _matched=true;
         final FullScopeTMSC source = ((FullScopeTMSC) eObject);
@@ -478,7 +478,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       }
     }
     if (!_matched) {
-      boolean _equals_1 = Objects.equal(eReference, TmscPackage.Literals.FULL_SCOPE_TMSC__DEPENDENCIES);
+      boolean _equals_1 = Objects.equals(eReference, TmscPackage.Literals.FULL_SCOPE_TMSC__DEPENDENCIES);
       if (_equals_1) {
         _matched=true;
         final FullScopeTMSC source_1 = ((FullScopeTMSC) eObject);
@@ -492,7 +492,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       }
     }
     if (!_matched) {
-      boolean _equals_2 = Objects.equal(eReference, TmscPackage.Literals.FULL_SCOPE_TMSC__LIFELINES);
+      boolean _equals_2 = Objects.equals(eReference, TmscPackage.Literals.FULL_SCOPE_TMSC__LIFELINES);
       if (_equals_2) {
         _matched=true;
         final FullScopeTMSC source_2 = ((FullScopeTMSC) eObject);
@@ -506,7 +506,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       }
     }
     if (!_matched) {
-      boolean _equals_3 = Objects.equal(eReference, TmscPackage.Literals.LIFELINE__EVENTS);
+      boolean _equals_3 = Objects.equals(eReference, TmscPackage.Literals.LIFELINE__EVENTS);
       if (_equals_3) {
         _matched=true;
         final Lifeline source_3 = ((Lifeline) eObject);
@@ -521,7 +521,7 @@ public class ScopedTmscCopier extends EcoreUtil.Copier {
       }
     }
     if (!_matched) {
-      boolean _equals_4 = Objects.equal(eReference, TmscPackage.Literals.LIFELINE__EXECUTIONS);
+      boolean _equals_4 = Objects.equals(eReference, TmscPackage.Literals.LIFELINE__EXECUTIONS);
       if (_equals_4) {
         _matched=true;
         final Lifeline source_4 = ((Lifeline) eObject);

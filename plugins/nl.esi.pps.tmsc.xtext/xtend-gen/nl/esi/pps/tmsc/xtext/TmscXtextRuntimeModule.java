@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -28,22 +28,22 @@ public class TmscXtextRuntimeModule extends AbstractTmscXtextRuntimeModule {
   public Class<? extends IValueConverterService> bindIValueConverterService() {
     return TmscXtextValueConverterService.class;
   }
-  
+
   @Override
   public Class<? extends ILinkingService> bindILinkingService() {
     return TmscXtextLinkingService.class;
   }
-  
+
   @Override
   public Class<? extends ITransientValueService> bindITransientValueService() {
     return TmscXtextTransientValueService.class;
   }
-  
+
   @Override
   public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
     return ImportUriGlobalScopeProvider.class;
   }
-  
+
   @Override
   public Class<? extends IFormatter> bindIFormatter() {
     return TmscXtextFormatter.class;

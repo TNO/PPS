@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.architecture.provider;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
+import java.util.Objects;
 import nl.esi.emf.edit.provider.EMFEditUtil;
 import nl.esi.pps.architecture.ArchitecturePackage;
 import nl.esi.pps.architecture.NamedArchitectureElement;
@@ -23,39 +23,40 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtend2.lib.StringConcatenation;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class ArchitectureItemLabelSwitch {
   public static final ArchitectureItemLabelSwitch eINSTANCE = new ArchitectureItemLabelSwitch();
-  
+
   protected String _getText(final Object object) {
     return String.valueOf(object);
   }
-  
+
   protected String _getText(final EObject eObject) {
     String _switchResult = null;
     EPackage _ePackage = eObject.eClass().getEPackage();
     boolean _matched = false;
-    if (Objects.equal(_ePackage, SpecifiedPackage.eINSTANCE)) {
+    if (Objects.equals(_ePackage, SpecifiedPackage.eINSTANCE)) {
       _matched=true;
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, ImplementedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, DeployedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, InstantiatedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, InstantiatedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, ArchitecturePackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, ArchitecturePackage.eINSTANCE)) {
         _matched=true;
       }
     }
@@ -67,31 +68,31 @@ public class ArchitectureItemLabelSwitch {
     }
     return _switchResult;
   }
-  
+
   protected String _getText(final EClass eClass) {
     String _switchResult = null;
     EPackage _ePackage = eClass.getEPackage();
     boolean _matched = false;
-    if (Objects.equal(_ePackage, SpecifiedPackage.eINSTANCE)) {
+    if (Objects.equals(_ePackage, SpecifiedPackage.eINSTANCE)) {
       _matched=true;
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, ImplementedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, ImplementedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, DeployedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, DeployedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, InstantiatedPackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, InstantiatedPackage.eINSTANCE)) {
         _matched=true;
       }
     }
     if (!_matched) {
-      if (Objects.equal(_ePackage, ArchitecturePackage.eINSTANCE)) {
+      if (Objects.equals(_ePackage, ArchitecturePackage.eINSTANCE)) {
         _matched=true;
       }
     }
@@ -116,11 +117,11 @@ public class ArchitectureItemLabelSwitch {
     }
     return _elvis;
   }
-  
+
   protected String _getText(final NamedArchitectureElement element) {
     return element.getName();
   }
-  
+
   protected String _getText(final FunctionParameter parameter) {
     StringConcatenation _builder = new StringConcatenation();
     String _literal = parameter.getKind().getLiteral();
@@ -130,7 +131,8 @@ public class ArchitectureItemLabelSwitch {
     _builder.append(_name);
     return _builder.toString();
   }
-  
+
+  @XbaseGenerated
   public String getText(final Object eClass) {
     if (eClass instanceof EClass) {
       return _getText((EClass)eClass);

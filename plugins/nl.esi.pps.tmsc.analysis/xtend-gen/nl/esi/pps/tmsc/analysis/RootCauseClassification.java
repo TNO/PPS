@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.Execution;
@@ -25,15 +25,15 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 @SuppressWarnings("all")
 public class RootCauseClassification {
   private final ArchitectureLifecycleStage stage;
-  
+
   public RootCauseClassification() {
     this(ArchitectureLifecycleStage.IMPLEMENTED);
   }
-  
+
   public RootCauseClassification(final ArchitectureLifecycleStage stage) {
     this.stage = stage;
   }
-  
+
   public List<String> describeRootCauses(final MetricInstance metricInstance) {
     final Function1<ScopedTMSC, Iterable<Dependency>> _function = (ScopedTMSC it) -> {
       return RootCauseAnalysis.getRootCauses(it);
@@ -43,9 +43,9 @@ public class RootCauseClassification {
     };
     return IterableExtensions.<String>toList(IterableExtensions.<Dependency, String>map(IterableExtensions.<ScopedTMSC, Dependency>flatMap(metricInstance.getScopes(), _function), _function_1));
   }
-  
+
   public String describeRootCause(final Dependency dependency) {
-    if ((Objects.equal(dependency.getSource().getLifeline(), dependency.getTarget().getLifeline()) || ActivityAnalysis.isEpoch(dependency))) {
+    if ((Objects.equals(dependency.getSource().getLifeline(), dependency.getTarget().getLifeline()) || ActivityAnalysis.isEpoch(dependency))) {
       boolean _isResourceSharing = ActivityAnalysis.isResourceSharing(dependency);
       boolean _equals = (_isResourceSharing == true);
       if (_equals) {
@@ -87,11 +87,11 @@ public class RootCauseClassification {
       return _builder_3.toString();
     }
   }
-  
+
   private String getResource(final Event event) {
     return this.stage.describeResource(event, false);
   }
-  
+
   private String getTask(final LifelineSegment lifelineSegment) {
     final Execution activeExecution = lifelineSegment.getActiveExecution();
     if ((activeExecution == null)) {

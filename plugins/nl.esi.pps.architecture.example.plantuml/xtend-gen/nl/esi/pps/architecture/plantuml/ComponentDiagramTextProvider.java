@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -32,6 +32,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.Pair;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 @SuppressWarnings("all")
@@ -39,13 +40,13 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
   @Data
   public static class ComponentsAndInterfaces {
     private final Set<Component> components = CollectionLiterals.<Component>newLinkedHashSet();
-    
+
     private final Set<Interface> interfaces = CollectionLiterals.<Interface>newLinkedHashSet();
-    
+
     public boolean isEmpty() {
       return (this.components.isEmpty() && this.interfaces.isEmpty());
     }
-    
+
     @Override
     @Pure
     public int hashCode() {
@@ -54,7 +55,7 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
       result = prime * result + ((this.components== null) ? 0 : this.components.hashCode());
       return prime * result + ((this.interfaces== null) ? 0 : this.interfaces.hashCode());
     }
-    
+
     @Override
     @Pure
     public boolean equals(final Object obj) {
@@ -77,7 +78,7 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
         return false;
       return true;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -86,34 +87,34 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
       b.add("interfaces", this.interfaces);
       return b.toString();
     }
-    
+
     @Pure
     public Set<Component> getComponents() {
       return this.components;
     }
-    
+
     @Pure
     public Set<Interface> getInterfaces() {
       return this.interfaces;
     }
   }
-  
+
   @Override
   public boolean supportsSelection(final ISelection selection) {
     boolean _isEmpty = this.findComponentsAndInterfaces(selection).isEmpty();
     return (!_isEmpty);
   }
-  
+
   @Override
   public String getDiagramText(final IEditorPart editorPart, final ISelection selection) {
     return this.getDiagramText(selection);
   }
-  
+
   @Override
   public String getDiagramText(final IViewPart viewPart, final ISelection selection) {
     return this.getDiagramText(selection);
   }
-  
+
   private String getDiagramText(final ISelection selection) {
     final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i = this.findComponentsAndInterfaces(selection);
     boolean _isEmpty = c_and_i.isEmpty();
@@ -246,7 +247,7 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
     }
     return _builder.toString();
   }
-  
+
   private ComponentDiagramTextProvider.ComponentsAndInterfaces findComponentsAndInterfaces(final ISelection selection) {
     final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i = new ComponentDiagramTextProvider.ComponentsAndInterfaces();
     if ((selection instanceof IStructuredSelection)) {
@@ -257,17 +258,17 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
     }
     return c_and_i;
   }
-  
+
   private void _addComponentsAndInterfaces(final EObject eObject, final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i) {
   }
-  
+
   private void _addComponentsAndInterfaces(final ExampleArchitecture architecture, final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i) {
     EList<Interface> _interfaces = architecture.getInterfaces();
     Iterables.<Interface>addAll(c_and_i.interfaces, _interfaces);
     EList<Component> _components = architecture.getComponents();
     Iterables.<Component>addAll(c_and_i.components, _components);
   }
-  
+
   private void _addComponentsAndInterfaces(final Component component, final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i) {
     EList<Interface> _providedInterfaces = component.getProvidedInterfaces();
     Iterables.<Interface>addAll(c_and_i.interfaces, _providedInterfaces);
@@ -285,7 +286,7 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
     Iterable<Component> _flatMap_1 = IterableExtensions.<Interface, Component>flatMap(component.getRequiredInterfaces(), _function_1);
     Iterables.<Component>addAll(c_and_i.components, _flatMap_1);
   }
-  
+
   private void _addComponentsAndInterfaces(final Interface _interface, final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i) {
     c_and_i.interfaces.add(_interface);
     EList<Component> _providedBy = _interface.getProvidedBy();
@@ -293,7 +294,8 @@ public class ComponentDiagramTextProvider implements DiagramTextProvider {
     EList<Component> _requiredBy = _interface.getRequiredBy();
     Iterables.<Component>addAll(c_and_i.components, _requiredBy);
   }
-  
+
+  @XbaseGenerated
   private void addComponentsAndInterfaces(final EObject component, final ComponentDiagramTextProvider.ComponentsAndInterfaces c_and_i) {
     if (component instanceof Component) {
       _addComponentsAndInterfaces((Component)component, c_and_i);

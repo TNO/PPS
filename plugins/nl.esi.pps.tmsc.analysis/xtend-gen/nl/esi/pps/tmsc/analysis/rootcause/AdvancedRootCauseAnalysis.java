@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -44,14 +44,14 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure2;
 public class AdvancedRootCauseAnalysis {
   @Extension
   private final StatusLogger logger = new StatusLogger("nl.esi.pps.tmsc.analysis", "Advanced Root Cause Analysis");
-  
+
   @IntermediateProperty(Dependency.class)
   private final Map<Dependency, Long> _IntermediateProperty_urgentTimeBound = new java.util.WeakHashMap<>();
-  
+
   public MultiStatus getStatus() {
     return this.logger.getStatus();
   }
-  
+
   /**
    * @param tmsc requires a {@link ActivityAnalysis#createCausalScheduledActivityTMSC(nl.esi.pps.tmsc.Interval) causal scheduled activity TMSC}.
    */
@@ -245,7 +245,7 @@ public class AdvancedRootCauseAnalysis {
       AdvancedRootCauseAnalysis.formatDuration(Long.valueOf((_minus_1 - budget))));
     return rootCause;
   }
-  
+
   private void computeUrgentTimestamps(final TMSC tmsc, final Iterable<Dependency> potentialCause) {
     this.disposeUrgentTimeBound();
     final Consumer<Dependency> _function = (Dependency it) -> {
@@ -261,7 +261,7 @@ public class AdvancedRootCauseAnalysis {
     };
     UrgencyAnalysis.analyseUrgency(tmsc, _function_2);
   }
-  
+
   private static <T extends Object> Long sum(final Iterable<T> source, final Function1<? super T, ? extends Long> sumBy) {
     final Function2<Long, T, Long> _function = (Long $0, T $1) -> {
       Long _apply = sumBy.apply($1);
@@ -269,29 +269,29 @@ public class AdvancedRootCauseAnalysis {
     };
     return IterableExtensions.<T, Long>fold(source, Long.valueOf(0L), _function);
   }
-  
+
   private static long getMaxGain(final Dependency dependency) {
     Long _timeBound = dependency.getTimeBound();
     Long _timeBoundOutlierThreshold = TimeBoundOutlierAnalysis.getTimeBoundOutlierThreshold(dependency);
     long _minus = ((_timeBound).longValue() - (_timeBoundOutlierThreshold).longValue());
     return Math.max(_minus, 0L);
   }
-  
+
   private static String formatDuration(final Long duration) {
     return EDurationFormat.eINSTANCE.format(duration);
   }
-  
+
   private static String formatTimestamp(final Long timestamp) {
     return ETimestampFormat.eINSTANCE.format(timestamp);
   }
-  
+
   private static final Long _DEFAULT_DEPENDENCY_URGENTTIMEBOUND = Long.valueOf(0L);
-  
+
   private Long getUrgentTimeBound(final Dependency owner) {
     Long value = _IntermediateProperty_urgentTimeBound.get(owner);
     return value == null ? _DEFAULT_DEPENDENCY_URGENTTIMEBOUND : value;
   }
-  
+
   private void setUrgentTimeBound(final Dependency owner, final Long value) {
     if (value == _DEFAULT_DEPENDENCY_URGENTTIMEBOUND) {
         _IntermediateProperty_urgentTimeBound.remove(owner);
@@ -299,7 +299,7 @@ public class AdvancedRootCauseAnalysis {
         _IntermediateProperty_urgentTimeBound.put(owner, value);
     }
   }
-  
+
   private void disposeUrgentTimeBound() {
     _IntermediateProperty_urgentTimeBound.clear();
   }

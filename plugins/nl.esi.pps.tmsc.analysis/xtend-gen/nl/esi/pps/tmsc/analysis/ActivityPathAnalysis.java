@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import java.util.Collection;
+import java.util.Objects;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.Interval;
@@ -46,7 +46,7 @@ public final class ActivityPathAnalysis {
     _scopes.add(activityPath);
     return activityPath;
   }
-  
+
   /**
    * Finds {@link Dependency dependencies} that denote the activity path to
    * the specified {@code event}.
@@ -54,11 +54,11 @@ public final class ActivityPathAnalysis {
   public static BranchIterable<Dependency> findActivityPathTo(final TMSC tmsc, final Event event) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       Boolean _scheduled = it.getScheduled();
-      return Boolean.valueOf((!Objects.equal(_scheduled, Boolean.FALSE)));
+      return Boolean.valueOf((!Objects.equals(_scheduled, Boolean.FALSE)));
     };
     return Queries.<Dependency>until(ActivityPathAnalysis.closureIncomingDependencies(tmsc, event), _function);
   }
-  
+
   /**
    * Finds {@link Dependency dependencies} that denote the activity path to
    * the specified {@code to} event. Analysis is stopped when {@code from} event
@@ -66,15 +66,15 @@ public final class ActivityPathAnalysis {
    */
   public static BranchIterable<Dependency> findActivityPathBetween(final TMSC tmsc, final Event from, final Event to) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
-      return Boolean.valueOf((Objects.equal(it.getTarget(), from) || (it.getTarget().getTimestamp().compareTo(from.getTimestamp()) <= 0)));
+      return Boolean.valueOf((Objects.equals(it.getTarget(), from) || (it.getTarget().getTimestamp().compareTo(from.getTimestamp()) <= 0)));
     };
     final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
       Boolean _scheduled = it.getScheduled();
-      return Boolean.valueOf((!Objects.equal(_scheduled, Boolean.FALSE)));
+      return Boolean.valueOf((!Objects.equals(_scheduled, Boolean.FALSE)));
     };
     return Queries.<Dependency>until(Queries.<Dependency>until(ActivityPathAnalysis.closureIncomingDependencies(tmsc, to), _function), _function_1);
   }
-  
+
   private static BranchIterable<Dependency> closureIncomingDependencies(@Extension final TMSC tmsc, final Event event) {
     final Function1<Dependency, Iterable<? extends Dependency>> _function = (Dependency it) -> {
       Event _source = it.getSource();
@@ -86,12 +86,12 @@ public final class ActivityPathAnalysis {
     };
     return Queries.<Dependency>closure(tmsc.getIncomingDependencies(event), true, _function);
   }
-  
+
   /**
    * Default value for persisted {@code activityPathAnalysisResult} property on ScopedTMSC
    */
   private static final boolean _DEFAULT_SCOPEDTMSC_ACTIVITYPATHANALYSISRESULT = false;
-  
+
   private static boolean isActivityPathAnalysisResult(final ScopedTMSC container) {
     final String key = "activityPathAnalysisResult";
     final Object value = container.getProperties().get(key);
@@ -100,7 +100,7 @@ public final class ActivityPathAnalysis {
     }
     return (boolean) value;
   }
-  
+
   private static void setActivityPathAnalysisResult(final ScopedTMSC container, final boolean value) {
     final String key = "activityPathAnalysisResult";
     if (value == _DEFAULT_SCOPEDTMSC_ACTIVITYPATHANALYSISRESULT) {

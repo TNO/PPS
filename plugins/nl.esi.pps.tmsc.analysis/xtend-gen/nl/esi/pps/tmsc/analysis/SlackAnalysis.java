@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -21,7 +21,7 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public final class SlackAnalysis {
   private SlackAnalysis() {
   }
-  
+
   /**
    * For each {@link TMSC#getEvents() event} in {@code tmsc}, calculates the
    * {@link #getSlack(Event, TMSC) slack} that can be added to the
@@ -54,12 +54,12 @@ public final class SlackAnalysis {
       }
     }
   }
-  
+
   /**
    * Default value for persisted {@code slack} property on Event
    */
   private static final long _DEFAULT_EVENT_SLACK = 0;
-  
+
   /**
    * The {@link #getSlack(Event, TMSC) slack} that can be added to the
    * {@link Event#getTimestamp() time-stamp} of the event, without impacting the
@@ -78,7 +78,7 @@ public final class SlackAnalysis {
     }
     return (long) value;
   }
-  
+
   /**
    * The {@link #getSlack(Event, TMSC) slack} that can be added to the
    * {@link Event#getTimestamp() time-stamp} of the event, without impacting the
@@ -93,7 +93,7 @@ public final class SlackAnalysis {
             "slack" : category + "/slack";
     container.getProperties().put(key, value);
   }
-  
+
   /**
    * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.SlackAnalysis#getSlack <em>slack</em>}' property is set on {@code container}.
    */
@@ -103,7 +103,7 @@ public final class SlackAnalysis {
             "slack" : category + "/slack";
     return container.getProperties().containsKey(key);
   }
-  
+
   /**
    * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.SlackAnalysis#getSlack <em>slack</em>}' property on {@code container}.
    */

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -25,6 +25,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.Pure;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 
 /**
@@ -35,17 +36,17 @@ public class TmscTimeRangeProvider {
   @Data
   private static class NanoTimeRange {
     private final boolean epoch;
-    
+
     private final long start;
-    
+
     private final long end;
-    
+
     public NanoTimeRange(final boolean epoch, final long start, final long end) {
       this.epoch = epoch;
       this.start = Math.min(start, end);
       this.end = Math.max(start, end);
     }
-    
+
     public AbstractTimeRange toTimeRange() {
       final long margin = Math.max(Math.round(((this.end - this.start) * 0.05)), 5);
       final long mStart = Math.max((this.start - margin), 0);
@@ -58,7 +59,7 @@ public class TmscTimeRangeProvider {
       }
       return _xifexpression;
     }
-    
+
     @Override
     @Pure
     public int hashCode() {
@@ -68,7 +69,7 @@ public class TmscTimeRangeProvider {
       result = prime * result + (int) (this.start ^ (this.start >>> 32));
       return prime * result + (int) (this.end ^ (this.end >>> 32));
     }
-    
+
     @Override
     @Pure
     public boolean equals(final Object obj) {
@@ -87,7 +88,7 @@ public class TmscTimeRangeProvider {
         return false;
       return true;
     }
-    
+
     @Override
     @Pure
     public String toString() {
@@ -97,23 +98,23 @@ public class TmscTimeRangeProvider {
       b.add("end", this.end);
       return b.toString();
     }
-    
+
     @Pure
     public boolean isEpoch() {
       return this.epoch;
     }
-    
+
     @Pure
     public long getStart() {
       return this.start;
     }
-    
+
     @Pure
     public long getEnd() {
       return this.end;
     }
   }
-  
+
   public static TimeRange getTimeRange(final Object object) {
     TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange = TmscTimeRangeProvider.doGetTimeRange(object);
     AbstractTimeRange _timeRange = null;
@@ -122,15 +123,15 @@ public class TmscTimeRangeProvider {
     }
     return _timeRange;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final Object object) {
     return null;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final TmscTimeRangeProvider.NanoTimeRange timeRange) {
     return timeRange;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final Iterable<?> elements) {
     final Function1<Object, TmscTimeRangeProvider.NanoTimeRange> _function = (Object it) -> {
       return TmscTimeRangeProvider.doGetTimeRange(it);
@@ -171,7 +172,7 @@ public class TmscTimeRangeProvider {
     }
     return _switchResult;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final ITimeRange timeRange) {
     TmscTimeRangeProvider.NanoTimeRange _xifexpression = null;
     Long _duration = timeRange.getDuration();
@@ -184,7 +185,7 @@ public class TmscTimeRangeProvider {
     }
     return _xifexpression;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final Event event) {
     TmscTimeRangeProvider.NanoTimeRange _xifexpression = null;
     Long _timestamp = event.getTimestamp();
@@ -197,7 +198,7 @@ public class TmscTimeRangeProvider {
     }
     return _xifexpression;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final ScopedTMSC tmsc) {
     Collection<Event> _xifexpression = null;
     boolean _isEmpty = tmsc.getOrigin().isEmpty();
@@ -222,7 +223,7 @@ public class TmscTimeRangeProvider {
     }
     return _xifexpression_1;
   }
-  
+
   private static TmscTimeRangeProvider.NanoTimeRange _doGetTimeRange(final Lifeline lifeline) {
     final Function1<Event, Long> _function = (Event it) -> {
       return it.getTimestamp();
@@ -239,7 +240,8 @@ public class TmscTimeRangeProvider {
     }
     return _xifexpression;
   }
-  
+
+  @XbaseGenerated
   private static TmscTimeRangeProvider.NanoTimeRange doGetTimeRange(final Object tmsc) {
     if (tmsc instanceof ScopedTMSC) {
       return _doGetTimeRange((ScopedTMSC)tmsc);

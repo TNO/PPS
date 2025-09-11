@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -23,7 +23,7 @@ public class MetricImplQueries {
     _builder.append(_id);
     return _builder.toString();
   }
-  
+
   public static boolean isExceedsBudgetImpl(final MetricInstance metricInstance) {
     final Long budget = metricInstance.getMetric().getBudget();
     final Long duration = metricInstance.getDuration();

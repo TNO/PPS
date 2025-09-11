@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,7 @@
  */
 package nl.esi.pps.tmsc.xtext.ui.quickfix;
 
-import com.google.common.base.Objects;
+import java.util.Objects;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextFactory;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XEvent;
@@ -42,7 +42,7 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class TmscXtextQuickfixProvider extends DefaultQuickfixProvider {
   @Extension
   private static final TmscXtextFactory m_tmsct = TmscXtextFactory.eINSTANCE;
-  
+
   @Fix(TmscXtextValidator.XINTERFACE_NOT_PROVIDED)
   public void provideInterface(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final ISemanticModification _function = (EObject element, IModificationContext context) -> {
@@ -53,7 +53,7 @@ public class TmscXtextQuickfixProvider extends DefaultQuickfixProvider {
     };
     acceptor.accept(issue, "Provide interface", "Provide the interface", null, _function);
   }
-  
+
   @Fix(TmscXtextValidator.XINTERFACE_NOT_REQUIRED)
   public void requireInterface(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final ISemanticModification _function = (EObject element, IModificationContext context) -> {
@@ -64,7 +64,7 @@ public class TmscXtextQuickfixProvider extends DefaultQuickfixProvider {
     };
     acceptor.accept(issue, "Require interface", "Require the interface", null, _function);
   }
-  
+
   @Fix(TmscXtextValidator.XEVENT_ORDER_CALL_STACK)
   public void addExitEvent(final Issue issue, final IssueResolutionAcceptor acceptor) {
     final String functionName = IterableExtensions.<String>head(((Iterable<String>)Conversions.doWrapArray(issue.getData())));
@@ -86,7 +86,7 @@ public class TmscXtextQuickfixProvider extends DefaultQuickfixProvider {
       final Procedure1<XEvent> _function_1 = (XEvent it) -> {
         final Function1<XFunction, Boolean> _function_2 = (XFunction it_1) -> {
           String _name = it_1.getName();
-          return Boolean.valueOf(Objects.equal(_name, functionName));
+          return Boolean.valueOf(Objects.equals(_name, functionName));
         };
         it.setFunction(IterableExtensions.<XFunction>findFirst(model.getFunctions(), _function_2));
         it.setType(XEventType.EXIT);

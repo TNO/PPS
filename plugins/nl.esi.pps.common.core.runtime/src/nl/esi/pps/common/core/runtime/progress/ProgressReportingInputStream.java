@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  *
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,6 +9,7 @@
  */
 package nl.esi.pps.common.core.runtime.progress;
 
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.commons.io.input.CountingInputStream;
@@ -38,6 +39,7 @@ import org.eclipse.jdt.annotation.Nullable;
  *
  * @see nl.esi.pps.common.core.runtime.progress.ProgressReportingInputStreamFactory
  */
+@SuppressWarnings("deprecation")
 public class ProgressReportingInputStream extends CountingInputStream {
 	/**
 	 * Callback interface for extended progress reporting (e.g. setting some
@@ -77,7 +79,7 @@ public class ProgressReportingInputStream extends CountingInputStream {
 	 * @throws RuntimeException
 	 *             If {@code monitor} is {@code null}.
 	 */
-	public ProgressReportingInputStream(final @NonNull InputStream in, final long totalLength,
+    public ProgressReportingInputStream(final @NonNull InputStream in, final long totalLength,
 			final @NonNull IProgressMonitor monitor) {
 		super(in);
 
@@ -89,8 +91,8 @@ public class ProgressReportingInputStream extends CountingInputStream {
 		this.monitor = SubMonitor.convert(monitor, normalize(totalLength));
 	}
 
-	@Override
-	protected synchronized void afterRead(final int n) {
+    @Override
+    protected synchronized void afterRead(final int n) throws IOException {
 		super.afterRead(n);
 
 		if (shouldReportProgress()) {

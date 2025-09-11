@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,10 +9,10 @@
  */
 package nl.esi.pps.tmsc.metric.extension;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.util.Collection;
 import java.util.Map;
+import java.util.Objects;
 import nl.esi.pps.tmsc.Dependency;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.metric.Metric;
@@ -38,25 +38,25 @@ import org.eclipse.xtext.xbase.lib.Pure;
 public class MetricProcessor {
   @Extension
   private static final MetricFactory m_metric = MetricFactory.eINSTANCE;
-  
+
   private final Map<String, Long> configurationBudgets = CollectionLiterals.<String, Long>newLinkedHashMap();
-  
+
   @Accessors
   private final String id;
-  
+
   @Accessors
   private final String name;
-  
+
   @Accessors
   private final String category;
-  
+
   @Accessors
   private final String modelId;
-  
+
   private final Long defaultBudget;
-  
+
   private final IMetricProcessor metricProcessor;
-  
+
   /**
    * Adds a budget for a configuration
    */
@@ -68,28 +68,28 @@ public class MetricProcessor {
     this.configurationBudgets.put(configuration, budget);
     return true;
   }
-  
+
   /**
    * Removes a budget for a configuration
    */
   public void removeBudget(final String configuration) {
     this.configurationBudgets.remove(configuration);
   }
-  
+
   /**
    * @see IMetricProcessor#isEnabled(FullScopeTMSC)
    */
   public boolean isEnabled(final FullScopeTMSC tmsc) {
     return this.metricProcessor.isEnabled(tmsc);
   }
-  
+
   /**
    * @see IMetricProcessor#isRequiredToResolveInstances(String, String)
    */
   public boolean isRequiredToResolveInstances(final String hostName, final String componentName) {
     return this.metricProcessor.isRequiredToResolveInstances(hostName, componentName);
   }
-  
+
   /**
    * Resolves the instances for this metric and adds them to the
    * {@link #getMetricModel(FullScopeTMSC) default metric model}.
@@ -100,7 +100,7 @@ public class MetricProcessor {
   public Metric analyse(final FullScopeTMSC tmsc) {
     return this.analyse(tmsc, MetricProcessor.getMetricModel(tmsc));
   }
-  
+
   /**
    * Resolves the instances for this metric and adds them to the {@code metricModel}.
    */
@@ -122,7 +122,7 @@ public class MetricProcessor {
     Iterables.<MetricInstance>addAll(_instances, metricInstances);
     return metric;
   }
-  
+
   /**
    * Convenience method that finds the Metric model in the resource of the TMSC, or
    * creates a new Metric model if it could not be found (and adds it to the
@@ -146,16 +146,16 @@ public class MetricProcessor {
     }
     return metricModel;
   }
-  
+
   private static Metric createMetric(final MetricProcessor metricExtension, final MetricModel metricModel) {
     final Function1<Metric, Boolean> _function = (Metric it) -> {
       String _id = it.getId();
-      return Boolean.valueOf(Objects.equal(_id, metricExtension.id));
+      return Boolean.valueOf(Objects.equals(_id, metricExtension.id));
     };
     EcoreUtil.deleteAll(IterableExtensions.<Metric>toList(IterableExtensions.<Metric>filter(metricModel.getMetrics(), _function)), true);
     final Function1<MetricCategory, Boolean> _function_1 = (MetricCategory it) -> {
       String _name = it.getName();
-      return Boolean.valueOf(Objects.equal(_name, metricExtension.category));
+      return Boolean.valueOf(Objects.equals(_name, metricExtension.category));
     };
     MetricCategory metricCategory = IterableExtensions.<MetricCategory>findFirst(metricModel.getCategories(), _function_1);
     if ((metricCategory == null)) {
@@ -172,26 +172,26 @@ public class MetricProcessor {
     _metrics.add(metric);
     return metric;
   }
-  
+
   /**
    * @see IMetricProcessor#getAnalysisTimeWindow(MetricInstance)
    */
   public Pair<Long, Long> getAnalysisTimeWindow(final MetricInstance metricInstance) {
     return this.metricProcessor.getAnalysisTimeWindow(metricInstance);
   }
-  
+
   /**
    * @see IMetricProcessor#isActivityCutOff(Dependency, MetricInstance)
    */
   public boolean isActivityCutOff(final Dependency dependency, final MetricInstance metricInstance) {
     return this.metricProcessor.isActivityCutOff(dependency, metricInstance);
   }
-  
+
   @Override
   public String toString() {
     return this.id;
   }
-  
+
   public MetricProcessor(final String id, final String name, final String category, final String modelId, final Long defaultBudget, final IMetricProcessor metricProcessor) {
     super();
     this.id = id;
@@ -201,22 +201,22 @@ public class MetricProcessor {
     this.defaultBudget = defaultBudget;
     this.metricProcessor = metricProcessor;
   }
-  
+
   @Pure
   public String getId() {
     return this.id;
   }
-  
+
   @Pure
   public String getName() {
     return this.name;
   }
-  
+
   @Pure
   public String getCategory() {
     return this.category;
   }
-  
+
   @Pure
   public String getModelId() {
     return this.modelId;

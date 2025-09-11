@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,9 +9,9 @@
  */
 package nl.esi.pps.tmsc.xtext.ui.codemining;
 
-import com.google.common.base.Objects;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import nl.esi.pps.tmsc.rendering.RenderingProperties;
 import nl.esi.pps.tmsc.viewers.plot.RenderingStrategyRegistryReader;
 import nl.esi.pps.tmsc.xtext.TmscXtextQueries;
@@ -44,6 +44,7 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.IteratorExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class TmscXtextCodeMiningProvider extends AbstractXtextCodeMiningProvider {
@@ -58,20 +59,20 @@ public class TmscXtextCodeMiningProvider extends AbstractXtextCodeMiningProvider
     };
     IteratorExtensions.<EObject>forEach(resource.getAllContents(), _function);
   }
-  
+
   private void _createCodeMinings(final EObject eObject, final IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
   }
-  
+
   private void _createCodeMinings(final XProperty xProperty, final IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
     String _name = xProperty.getName();
-    boolean _equals = Objects.equal(_name, RenderingProperties.PROPERTY_RENDERING_STRATEGY_ID);
+    boolean _equals = Objects.equals(_name, RenderingProperties.PROPERTY_RENDERING_STRATEGY_ID);
     if (_equals) {
       final XPropertyValue xPropertyValue = xProperty.getValue();
       if ((xPropertyValue instanceof XPropertyStringValue)) {
         final Function1<IConfigurationElement, Boolean> _function = (IConfigurationElement it) -> {
           String _iD = RenderingStrategyRegistryReader.getID(it);
           String _value = ((XPropertyStringValue)xPropertyValue).getValue();
-          return Boolean.valueOf(Objects.equal(_iD, _value));
+          return Boolean.valueOf(Objects.equals(_iD, _value));
         };
         final IConfigurationElement renderingStrategyConfiguration = IterableExtensions.<IConfigurationElement>findFirst(((Iterable<IConfigurationElement>)Conversions.doWrapArray(RenderingStrategyRegistryReader.getRenderingStrategyConfigurations())), _function);
         String _xifexpression = null;
@@ -90,7 +91,7 @@ public class TmscXtextCodeMiningProvider extends AbstractXtextCodeMiningProvider
       }
     }
   }
-  
+
   private void _createCodeMinings(final XDependency xDependency, final IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
     XDependencyTypeObject _typeObject = xDependency.getTypeObject();
     boolean _tripleEquals = (_typeObject == null);
@@ -103,7 +104,7 @@ public class TmscXtextCodeMiningProvider extends AbstractXtextCodeMiningProvider
       acceptor.accept(this.createNewLineContentCodeMining(annotationOffset, _builder.toString()));
     }
   }
-  
+
   private void _createCodeMinings(final XEvent xEvent, final IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
     final EList<XDependency> dependencies = xEvent.getIncomingDependencies();
     final List<INode> dependencyNodes = NodeModelUtils.findNodesForFeature(xEvent, TmscXtextPackage.Literals.XEVENT__INCOMING_DEPENDENCIES);
@@ -118,7 +119,7 @@ public class TmscXtextCodeMiningProvider extends AbstractXtextCodeMiningProvider
       }
     }
   }
-  
+
   private void _createCodeMinings(final XEventArgument xEventArgument, final IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
     XFunctionParameter _parameter = xEventArgument.getParameter();
     boolean _tripleNotEquals = (_parameter != null);
@@ -131,7 +132,8 @@ public class TmscXtextCodeMiningProvider extends AbstractXtextCodeMiningProvider
       acceptor.accept(this.createNewLineContentCodeMining(annotationOffset, _builder.toString()));
     }
   }
-  
+
+  @XbaseGenerated
   private void createCodeMinings(final EObject xDependency, final IAcceptor<? super ICodeMining> acceptor) throws BadLocationException {
     if (xDependency instanceof XDependency) {
       _createCodeMinings((XDependency)xDependency, acceptor);

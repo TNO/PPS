@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -21,25 +21,25 @@ import org.eclipse.xtext.xbase.lib.util.ToStringBuilder;
 @SuppressWarnings("all")
 public class DependencyEquivalence implements BiPredicate<Dependency, Dependency> {
   private final BiPredicate<? super Event, ? super Event> sourceEventEquivalence;
-  
+
   private final BiPredicate<? super Event, ? super Event> targetEventEquivalence;
-  
+
   public DependencyEquivalence(final BiPredicate<? super Event, ? super Event> sourceEventEquivalence, final BiPredicate<? super Event, ? super Event> targetEventEquivalence) {
     this.sourceEventEquivalence = sourceEventEquivalence;
     this.targetEventEquivalence = targetEventEquivalence;
   }
-  
+
   @Override
   public boolean test(final Dependency d1, final Dependency d2) {
     return ((DependencyEquivalence.equalsType(d1, d2) && 
       this.sourceEventEquivalence.test(d1.getSource(), d2.getSource())) && 
       this.targetEventEquivalence.test(d1.getTarget(), d2.getTarget()));
   }
-  
+
   public static boolean equalsType(final Dependency d1, final Dependency d2) {
     return ((d1.isProjection() == d2.isProjection()) && Objects.equals(d1.eClass(), d2.eClass()));
   }
-  
+
   @Override
   @Pure
   public int hashCode() {
@@ -48,7 +48,7 @@ public class DependencyEquivalence implements BiPredicate<Dependency, Dependency
     result = prime * result + ((this.sourceEventEquivalence== null) ? 0 : this.sourceEventEquivalence.hashCode());
     return prime * result + ((this.targetEventEquivalence== null) ? 0 : this.targetEventEquivalence.hashCode());
   }
-  
+
   @Override
   @Pure
   public boolean equals(final Object obj) {
@@ -71,7 +71,7 @@ public class DependencyEquivalence implements BiPredicate<Dependency, Dependency
       return false;
     return true;
   }
-  
+
   @Override
   @Pure
   public String toString() {
@@ -80,12 +80,12 @@ public class DependencyEquivalence implements BiPredicate<Dependency, Dependency
     b.add("targetEventEquivalence", this.targetEventEquivalence);
     return b.toString();
   }
-  
+
   @Pure
   public BiPredicate<? super Event, ? super Event> getSourceEventEquivalence() {
     return this.sourceEventEquivalence;
   }
-  
+
   @Pure
   public BiPredicate<? super Event, ? super Event> getTargetEventEquivalence() {
     return this.targetEventEquivalence;

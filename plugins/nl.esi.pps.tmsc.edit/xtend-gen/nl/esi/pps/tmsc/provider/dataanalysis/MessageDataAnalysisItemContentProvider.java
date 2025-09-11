@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.tmsc.provider.dataanalysis;
 
-import com.google.common.base.Objects;
 import java.util.Collections;
+import java.util.Objects;
 import java.util.Set;
 import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.Message;
@@ -28,13 +28,13 @@ public class MessageDataAnalysisItemContentProvider implements IDataAnalysisItem
     Set<String> _xifexpression = null;
     Lifeline _lifeline = message.getSource().getLifeline();
     Lifeline _lifeline_1 = message.getTarget().getLifeline();
-    boolean _notEquals = (!Objects.equal(_lifeline, _lifeline_1));
+    boolean _notEquals = (!Objects.equals(_lifeline, _lifeline_1));
     if (_notEquals) {
       _xifexpression = Collections.<String>singleton(IDataAnalysisItemContentProvider.DEFAULT_CONFIGURATION);
     }
     return _xifexpression;
   }
-  
+
   @Override
   public String getTitle(final Object object, final String configuration) {
     final Message message = ((Message) object);
@@ -49,12 +49,12 @@ public class MessageDataAnalysisItemContentProvider implements IDataAnalysisItem
     _builder.append(_name_2);
     return _builder.toString();
   }
-  
+
   @Override
   public Iterable<?> getSiblings(final Object object, final String configuration) {
     return TmscQueries.<Message>findAllOfTypeBetweenLifelines(((Message) object));
   }
-  
+
   @Override
   public Long getDuration(final Object object, final Object sibling, final String configuration) {
     final Message message = ((Message) sibling);

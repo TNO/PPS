@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.xtext.ui.contentassist;
 
-import com.google.common.base.Objects;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Iterators;
@@ -17,6 +16,7 @@ import com.google.inject.Inject;
 import java.util.EnumSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 import nl.esi.pps.common.jfreechart.rendering.RenderingPaint;
@@ -71,15 +71,15 @@ import org.eclipse.xtext.xbase.lib.ListExtensions;
 public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider {
   @Inject
   private IImageHelper imageHelper;
-  
+
   @Inject
   @Extension
   private TmscXtextGrammarAccess tmscXtextGrammarAccess;
-  
+
   @Inject
   @Extension
   private IValueConverterService valueConverterService;
-  
+
   @Override
   public void completeXEvent_IncomingDependencies(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final Function1<XEvent, EList<XDependency>> _function = (XEvent it) -> {
@@ -99,7 +99,7 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
           this.getImage(xDependency), context));
     }
   }
-  
+
   @Override
   public void completeXDependency_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final Function1<XDependencySettings, Boolean> _function = (XDependencySettings it) -> {
@@ -119,18 +119,18 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
         this.createCompletionProposal(_prefix, _builder.toString(), null, context));
     }
   }
-  
+
   @Override
   public void completeXDependency_Request(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     AbstractElement _terminal = assignment.getTerminal();
     final Predicate<IEObjectDescription> _function = (IEObjectDescription it) -> {
       EObject _eObjectOrProxy = it.getEObjectOrProxy();
       XDependencyType _type = TmscXtextQueries.getType(((XDependency) _eObjectOrProxy));
-      return Objects.equal(_type, XDependencyType.REQUEST);
+      return Objects.equals(_type, XDependencyType.REQUEST);
     };
     this.lookupCrossReference(((CrossReference) _terminal), context, acceptor, _function);
   }
-  
+
   @Override
   public void completeXDependency_Message(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     AbstractElement _terminal = assignment.getTerminal();
@@ -156,7 +156,7 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
     };
     this.lookupCrossReference(((CrossReference) _terminal), context, acceptor, _function);
   }
-  
+
   @Override
   public void completeXProperty_Name(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     super.completeXProperty_Name(model, assignment, context, acceptor);
@@ -178,13 +178,13 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
       acceptor.accept(this.createCompletionProposal(propertyName, propertyName, null, context));
     }
   }
-  
+
   @Override
   public void completeXPropertyValue_Value(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     super.completeXPropertyValue_Value(model, assignment, context, acceptor);
     AbstractElement _terminal = assignment.getTerminal();
     RuleCall _valueIDStringParserRuleCall_0_1_0 = this.tmscXtextGrammarAccess.getXPropertyValueAccess().getValueIDStringParserRuleCall_0_1_0();
-    boolean _equals = Objects.equal(_terminal, _valueIDStringParserRuleCall_0_1_0);
+    boolean _equals = Objects.equals(_terminal, _valueIDStringParserRuleCall_0_1_0);
     if (_equals) {
       String _name = ((XProperty) model).getName();
       final String propertyName = _name;
@@ -232,7 +232,7 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
             {
               final Function1<XProperty, Boolean> _function = (XProperty it) -> {
                 String _name_1 = it.getName();
-                return Boolean.valueOf(Objects.equal(_name_1, propertyName));
+                return Boolean.valueOf(Objects.equals(_name_1, propertyName));
               };
               final Iterator<XProperty> properties = IteratorExtensions.<XProperty>filter(Iterators.<XProperty>filter(EcoreUtil.getRootContainer(model).eAllContents(), XProperty.class), _function);
               final Function1<XProperty, XPropertyValue> _function_1 = (XProperty it) -> {
@@ -260,7 +260,7 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
         {
           final Function1<XProperty, Boolean> _function = (XProperty it) -> {
             String _name_1 = it.getName();
-            return Boolean.valueOf(Objects.equal(_name_1, propertyName));
+            return Boolean.valueOf(Objects.equals(_name_1, propertyName));
           };
           final Iterator<XProperty> properties = IteratorExtensions.<XProperty>filter(Iterators.<XProperty>filter(EcoreUtil.getRootContainer(model).eAllContents(), XProperty.class), _function);
           final Function1<XProperty, XPropertyValue> _function_1 = (XProperty it) -> {
@@ -285,13 +285,13 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
       }
     }
   }
-  
+
   @Override
   public void completeXEventArgument_Parameter(final EObject model, final Assignment assignment, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     final XEvent xEvent = EcoreUtil2.<XEvent>getContainerOfType(model, XEvent.class);
     EnumSet<XFunctionParameterKind> _xifexpression = null;
     XEventType _type = xEvent.getType();
-    boolean _equals = Objects.equal(_type, XEventType.ENTRY);
+    boolean _equals = Objects.equals(_type, XEventType.ENTRY);
     if (_equals) {
       _xifexpression = EnumSet.<XFunctionParameterKind>of(XFunctionParameterKind.IN, XFunctionParameterKind.IN_OUT);
     } else {
@@ -305,13 +305,13 @@ public class TmscXtextProposalProvider extends AbstractTmscXtextProposalProvider
     };
     this.lookupCrossReference(((CrossReference) _terminal), context, acceptor, _function);
   }
-  
+
   @Override
   public void complete_EBOOLEAN_OBJECT(final EObject model, final RuleCall ruleCall, final ContentAssistContext context, final ICompletionProposalAcceptor acceptor) {
     acceptor.accept(this.createCompletionProposal("false", "false", null, context));
     acceptor.accept(this.createCompletionProposal("true", "true", null, context));
   }
-  
+
   private String toIDStringProposal(final String value) {
     return this.valueConverterService.toString(value, "IDString");
   }

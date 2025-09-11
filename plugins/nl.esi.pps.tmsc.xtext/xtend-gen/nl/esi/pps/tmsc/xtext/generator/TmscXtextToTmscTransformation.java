@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.xtext.generator;
 
-import com.google.common.base.Objects;
 import com.google.common.collect.Iterables;
 import java.io.Serializable;
 import java.math.BigDecimal;
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Queue;
 import java.util.function.Consumer;
@@ -87,24 +87,25 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 import org.eclipse.xtext.xbase.lib.ListExtensions;
 import org.eclipse.xtext.xbase.lib.ObjectExtensions;
 import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
+import org.eclipse.xtext.xbase.lib.XbaseGenerated;
 
 @SuppressWarnings("all")
 public class TmscXtextToTmscTransformation {
   @Extension
   private static final TmscFactory m_tmsc = TmscFactory.eINSTANCE;
-  
+
   @Extension
   private static final SpecifiedFactory m_arch_spec = SpecifiedFactory.eINSTANCE;
-  
+
   @Extension
   private static final ImplementedFactory m_arch_impl = ImplementedFactory.eINSTANCE;
-  
+
   @Extension
   private static final InstantiatedFactory m_arch_inst = InstantiatedFactory.eINSTANCE;
-  
+
   @Extension
   private static final ExampleFactory m_arch_example = ExampleFactory.eINSTANCE;
-  
+
   @Transform
   private FullScopeTMSC _transform_transform(final TmscXtextModel tmscXtext) {
     ExampleArchitecture _createExampleArchitecture = TmscXtextToTmscTransformation.m_arch_example.createExampleArchitecture();
@@ -152,7 +153,7 @@ public class TmscXtextToTmscTransformation {
     Iterables.<Component>addAll(_components, _map);
     return tmsc;
   }
-  
+
   @Resolvable
   private FullScopeTMSC tmscXtextModel2FullScopeTMSC(final TmscXtextModel tmscXtext) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(tmscXtext);
@@ -168,9 +169,9 @@ public class TmscXtextToTmscTransformation {
     _init_tmscXtextModel2FullScopeTMSC(_result, tmscXtext);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, FullScopeTMSC> _createCache_tmscXtextModel2FullScopeTMSC = CollectionLiterals.newHashMap();
-  
+
   private void _init_tmscXtextModel2FullScopeTMSC(final FullScopeTMSC it, final TmscXtextModel tmscXtext) {
     EList<Lifeline> _lifelines = it.getLifelines();
     final Function1<XHost, EList<XExecutor>> _function = (XHost it_1) -> {
@@ -261,7 +262,7 @@ public class TmscXtextToTmscTransformation {
     IterableExtensions.<Event>filter(it.getEvents(), _function_10).forEach(_function_11);
     this.addPropertiesIfAbsent(it, tmscXtext.getProperties());
   }
-  
+
   @Resolvable
   private Interface xInterface2Interface(final XInterface xInterface) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xInterface);
@@ -277,9 +278,9 @@ public class TmscXtextToTmscTransformation {
     _init_xInterface2Interface(_result, xInterface);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Interface> _createCache_xInterface2Interface = CollectionLiterals.newHashMap();
-  
+
   private void _init_xInterface2Interface(final Interface it, final XInterface xInterface) {
     this.handleXNamedArchitectureElement(it, xInterface);
     EList<Operation> _operations = it.getOperations();
@@ -289,7 +290,7 @@ public class TmscXtextToTmscTransformation {
     List<Operation> _map = ListExtensions.<XOperation, Operation>map(xInterface.getOperations(), _function);
     Iterables.<Operation>addAll(_operations, _map);
   }
-  
+
   @Resolvable
   private Operation xOperation2Operation(final XOperation xOperation) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xOperation);
@@ -305,13 +306,13 @@ public class TmscXtextToTmscTransformation {
     _init_xOperation2Operation(_result, xOperation);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Operation> _createCache_xOperation2Operation = CollectionLiterals.newHashMap();
-  
+
   private void _init_xOperation2Operation(final Operation it, final XOperation xOperation) {
     this.handleXNamedArchitectureElement(it, xOperation);
   }
-  
+
   @Resolvable
   private Component xComponent2Component(final XComponent xComponent) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xComponent);
@@ -327,9 +328,9 @@ public class TmscXtextToTmscTransformation {
     _init_xComponent2Component(_result, xComponent);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Component> _createCache_xComponent2Component = CollectionLiterals.newHashMap();
-  
+
   private void _init_xComponent2Component(final Component it, final XComponent xComponent) {
     this.handleXNamedArchitectureElement(it, xComponent);
     EList<Interface> _providedInterfaces = it.getProvidedInterfaces();
@@ -345,7 +346,7 @@ public class TmscXtextToTmscTransformation {
     List<Interface> _map_1 = ListExtensions.<XInterface, Interface>map(xComponent.getRequires(), _function_1);
     Iterables.<Interface>addAll(_requiredInterfaces, _map_1);
   }
-  
+
   @Resolvable
   private Function xFunction2Function(final XFunction xFunction) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xFunction);
@@ -361,9 +362,9 @@ public class TmscXtextToTmscTransformation {
     _init_xFunction2Function(_result, xFunction);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Function> _createCache_xFunction2Function = CollectionLiterals.newHashMap();
-  
+
   private void _init_xFunction2Function(final Function it, final XFunction xFunction) {
     this.handleXNamedArchitectureElement(it, xFunction);
     EList<FunctionParameter> _parameters = it.getParameters();
@@ -379,7 +380,7 @@ public class TmscXtextToTmscTransformation {
     }
     it.setOperation(_resolveOne);
   }
-  
+
   private Function createFunction(final XFunction xFunction) {
     Function _switchResult = null;
     boolean _matched = false;
@@ -400,7 +401,7 @@ public class TmscXtextToTmscTransformation {
     }
     return _switchResult;
   }
-  
+
   @Resolvable
   private FunctionParameter xFunctionParameter2FunctionParameter(final XFunctionParameter xFunctionParameter) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xFunctionParameter);
@@ -416,9 +417,9 @@ public class TmscXtextToTmscTransformation {
     _init_xFunctionParameter2FunctionParameter(_result, xFunctionParameter);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, FunctionParameter> _createCache_xFunctionParameter2FunctionParameter = CollectionLiterals.newHashMap();
-  
+
   private void _init_xFunctionParameter2FunctionParameter(final FunctionParameter it, final XFunctionParameter xFunctionParameter) {
     it.setName(xFunctionParameter.getName());
     FunctionParameterKind _switchResult = null;
@@ -444,7 +445,7 @@ public class TmscXtextToTmscTransformation {
     it.setKind(_switchResult);
     this.addPropertiesIfAbsent(it, xFunctionParameter.getProperties());
   }
-  
+
   private ExampleHost xHost2Host(final XHost xHost) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xHost);
     final ExampleHost _result;
@@ -459,9 +460,9 @@ public class TmscXtextToTmscTransformation {
     _init_xHost2Host(_result, xHost);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, ExampleHost> _createCache_xHost2Host = CollectionLiterals.newHashMap();
-  
+
   private void _init_xHost2Host(final ExampleHost it, final XHost xHost) {
     this.handleXNamedArchitectureElement(it, xHost);
     EList<Executor> _executors = it.getExecutors();
@@ -471,7 +472,7 @@ public class TmscXtextToTmscTransformation {
     List<Executor> _map = ListExtensions.<XExecutor, Executor>map(xHost.getExecutors(), _function);
     Iterables.<Executor>addAll(_executors, _map);
   }
-  
+
   @Resolvable
   private Executor xExecutor2Executor(final XExecutor xExecutor) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xExecutor);
@@ -487,13 +488,13 @@ public class TmscXtextToTmscTransformation {
     _init_xExecutor2Executor(_result, xExecutor);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Executor> _createCache_xExecutor2Executor = CollectionLiterals.newHashMap();
-  
+
   private void _init_xExecutor2Executor(final Executor it, final XExecutor xExecutor) {
     this.handleXNamedArchitectureElement(it, xExecutor);
   }
-  
+
   private void handleXNamedArchitectureElement(final NamedArchitectureElement element, final XNamedArchitectureElement xElement) {
     String _description = xElement.getDescription();
     boolean _tripleEquals = (_description == null);
@@ -505,7 +506,7 @@ public class TmscXtextToTmscTransformation {
     }
     this.addPropertiesIfAbsent(element, xElement.getProperties());
   }
-  
+
   @Resolvable
   private Lifeline xExecutor2Lifeline(final XExecutor xExecutor) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xExecutor);
@@ -521,15 +522,15 @@ public class TmscXtextToTmscTransformation {
     _init_xExecutor2Lifeline(_result, xExecutor);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Lifeline> _createCache_xExecutor2Lifeline = CollectionLiterals.newHashMap();
-  
+
   private void _init_xExecutor2Lifeline(final Lifeline it, final XExecutor xExecutor) {
     it.setExecutor(this.<Executor>resolveOne(xExecutor, Executor.class));
     EList<Event> _events = it.getEvents();
     final Function1<XEvent, Boolean> _function = (XEvent it_1) -> {
       XExecutor _executor = it_1.getExecutor();
-      return Boolean.valueOf(Objects.equal(_executor, xExecutor));
+      return Boolean.valueOf(Objects.equals(_executor, xExecutor));
     };
     final Function1<XEvent, Event> _function_1 = (XEvent it_1) -> {
       return this.xEvent2Event(it_1);
@@ -550,7 +551,7 @@ public class TmscXtextToTmscTransformation {
       this.addPropertiesIfAbsent(it, ((XHost) _eContainer_1).getProperties());
     }
   }
-  
+
   @Resolvable
   private Event xEvent2Event(final XEvent xEvent) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xEvent);
@@ -566,9 +567,9 @@ public class TmscXtextToTmscTransformation {
     _init_xEvent2Event(_result, xEvent);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Event> _createCache_xEvent2Event = CollectionLiterals.newHashMap();
-  
+
   private void _init_xEvent2Event(final Event it, final XEvent xEvent) {
     it.setTimestamp(TmscXtextToTmscTransformation.toNanos(xEvent.getTimestamp()));
     it.setLifeline(this.<Lifeline>resolveOne(xEvent.getExecutor(), Lifeline.class));
@@ -604,7 +605,7 @@ public class TmscXtextToTmscTransformation {
     xEvent.getArguments().forEach(_function_2);
     this.addPropertiesIfAbsent(it, xEvent.getProperties());
   }
-  
+
   private Event createEvent(final XEventType type) {
     Event _switchResult = null;
     if (type != null) {
@@ -621,7 +622,7 @@ public class TmscXtextToTmscTransformation {
     }
     return _switchResult;
   }
-  
+
   private Component xExecutor2Component(final XExecutor xExecutor) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xExecutor);
     final Component _result;
@@ -636,9 +637,9 @@ public class TmscXtextToTmscTransformation {
     _init_xExecutor2Component(_result, xExecutor);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Component> _createCache_xExecutor2Component = CollectionLiterals.newHashMap();
-  
+
   private void _init_xExecutor2Component(final Component it, final XExecutor xExecutor) {
     String _elvis = null;
     String _description = xExecutor.getDescription();
@@ -650,7 +651,7 @@ public class TmscXtextToTmscTransformation {
     }
     it.setName(_elvis);
   }
-  
+
   @Resolvable
   private Dependency xDependency2Dependency(final XDependency xDependency) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xDependency);
@@ -666,9 +667,9 @@ public class TmscXtextToTmscTransformation {
     _init_xDependency2Dependency(_result, xDependency);
     return _result;
   }
-  
+
   private final HashMap<ArrayList<?>, Dependency> _createCache_xDependency2Dependency = CollectionLiterals.newHashMap();
-  
+
   private void _init_xDependency2Dependency(final Dependency it, final XDependency xDependency) {
     BigDecimal _timeBound = xDependency.getTimeBound();
     boolean _tripleNotEquals = (_timeBound != null);
@@ -683,7 +684,7 @@ public class TmscXtextToTmscTransformation {
     TmscXtextQueries.setXtextName(it, xDependency.getName());
     this.addPropertiesIfAbsent(it, xDependency.getProperties());
   }
-  
+
   private Dependency createDependency(final XDependency xDependency) {
     Dependency _switchResult = null;
     XDependencyType _type = TmscXtextQueries.getType(xDependency);
@@ -727,7 +728,7 @@ public class TmscXtextToTmscTransformation {
     }
     return _switchResult;
   }
-  
+
   private void addDependencyDefaults(final Dependency dependency) {
     if ((dependency instanceof Execution)) {
       throw new IllegalArgumentException("Execution is not expected for this method");
@@ -746,7 +747,7 @@ public class TmscXtextToTmscTransformation {
     final XDependencyType dependencyType = _elvis;
     final Function1<XDependencySettings, Boolean> _function = (XDependencySettings it) -> {
       XDependencyType _type_1 = it.getType();
-      return Boolean.valueOf(Objects.equal(_type_1, dependencyType));
+      return Boolean.valueOf(Objects.equals(_type_1, dependencyType));
     };
     final XDependencySettings dependencySettings = IterableExtensions.<XDependencySettings>findFirst(this.<TmscXtextModel>invResolveOne(dependency.getTmsc(), TmscXtextModel.class).getDependencySettings(), _function);
     final TmscXtextModel tmscSettings = this.<TmscXtextModel>invResolveOne(dependency.getTmsc(), TmscXtextModel.class);
@@ -957,7 +958,7 @@ public class TmscXtextToTmscTransformation {
     }
     this.addPropertiesIfAbsent(dependency, _properties);
   }
-  
+
   private void addExecutionDefaults(final Execution execution) {
     Function _function = execution.getFunction();
     XFunction _invResolveOne = null;
@@ -980,7 +981,7 @@ public class TmscXtextToTmscTransformation {
     }
     this.addPropertiesIfAbsent(execution, _properties_1);
   }
-  
+
   /**
    * Only adds the {@code xProperties} that are not yet set to {@code container}
    */
@@ -996,19 +997,19 @@ public class TmscXtextToTmscTransformation {
       }
     }
   }
-  
+
   private Serializable _getValue(final XPropertyBooleanValue propertyValue) {
     return propertyValue.getValue();
   }
-  
+
   private Serializable _getValue(final XPropertyNumberValue propertyValue) {
     return propertyValue.getValue();
   }
-  
+
   private Serializable _getValue(final XPropertyStringValue propertyValue) {
     return propertyValue.getValue();
   }
-  
+
   private Serializable _getValue(final XPropertyMutliValue propertyValue) {
     final ArrayList<Serializable> result = CollectionLiterals.<Serializable>newArrayList();
     final Function1<XPropertyValue, Serializable> _function = (XPropertyValue it) -> {
@@ -1018,7 +1019,7 @@ public class TmscXtextToTmscTransformation {
     Iterables.<Serializable>addAll(result, _map);
     return result;
   }
-  
+
   static Long toNanos(final BigDecimal seconds) {
     Long _xifexpression = null;
     if ((seconds == null)) {
@@ -1028,7 +1029,8 @@ public class TmscXtextToTmscTransformation {
     }
     return _xifexpression;
   }
-  
+
+  @XbaseGenerated
   private Serializable getValue(final XPropertyValue propertyValue) {
     if (propertyValue instanceof XPropertyBooleanValue) {
       return _getValue((XPropertyBooleanValue)propertyValue);
@@ -1043,28 +1045,28 @@ public class TmscXtextToTmscTransformation {
         Arrays.<Object>asList(propertyValue).toString());
     }
   }
-  
+
   public synchronized FullScopeTMSC transform(final TmscXtextModel tmscXtext) {
     FullScopeTMSC result = _transform_transform(tmscXtext);
     _performLateFunctions();
     return result;
   }
-  
+
   private final Queue<Runnable> _lateFunctions = new java.util.LinkedList<>();
-  
+
   protected void _performLateFunctions() {
     while (!_lateFunctions.isEmpty()) {
         _lateFunctions.remove().run();
     }
   }
-  
+
   /**
    * Late functions are executed at the end of the transformation, just before returning the result.
    */
   protected final void late(final Runnable function) {
     _lateFunctions.add(function);
   }
-  
+
   private Optional<FullScopeTMSC> _resolveOne_tmscXtextModel2FullScopeTMSC(final TmscXtextModel tmscXtext) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(tmscXtext);
     synchronized (_createCache_tmscXtextModel2FullScopeTMSC) {
@@ -1075,22 +1077,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<FullScopeTMSC> _resolveAll_tmscXtextModel2FullScopeTMSC(final TmscXtextModel tmscXtext) {
     final Optional<FullScopeTMSC> resolved = _resolveOne_tmscXtextModel2FullScopeTMSC(tmscXtext);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_tmscXtextModel2FullScopeTMSC(final FullScopeTMSC target, final Class<T> typeToResolve) {
     return _invResolveAll_tmscXtextModel2FullScopeTMSC(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_tmscXtextModel2FullScopeTMSC(final FullScopeTMSC target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_tmscXtextModel2FullScopeTMSC.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   protected <T> T resolveOne(final TmscXtextModel source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(FullScopeTMSC.class) || FullScopeTMSC.class.isAssignableFrom(typeToResolve)) {
         final Optional<FullScopeTMSC> resolved = _resolveOne_tmscXtextModel2FullScopeTMSC(source);
@@ -1100,7 +1102,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final TmscXtextModel source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(FullScopeTMSC.class) || FullScopeTMSC.class.isAssignableFrom(typeToResolve)) {
@@ -1109,7 +1111,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XInterface source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Interface.class) || Interface.class.isAssignableFrom(typeToResolve)) {
         final Optional<Interface> resolved = _resolveOne_xInterface2Interface(source);
@@ -1119,7 +1121,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XInterface source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Interface.class) || Interface.class.isAssignableFrom(typeToResolve)) {
@@ -1128,7 +1130,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XOperation source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Operation.class) || Operation.class.isAssignableFrom(typeToResolve)) {
         final Optional<Operation> resolved = _resolveOne_xOperation2Operation(source);
@@ -1138,7 +1140,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XOperation source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Operation.class) || Operation.class.isAssignableFrom(typeToResolve)) {
@@ -1147,7 +1149,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XComponent source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Component.class) || Component.class.isAssignableFrom(typeToResolve)) {
         final Optional<Component> resolved = _resolveOne_xComponent2Component(source);
@@ -1157,7 +1159,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XComponent source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Component.class) || Component.class.isAssignableFrom(typeToResolve)) {
@@ -1166,7 +1168,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XFunction source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Function.class) || Function.class.isAssignableFrom(typeToResolve)) {
         final Optional<Function> resolved = _resolveOne_xFunction2Function(source);
@@ -1176,7 +1178,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XFunction source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Function.class) || Function.class.isAssignableFrom(typeToResolve)) {
@@ -1185,7 +1187,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XFunctionParameter source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(FunctionParameter.class) || FunctionParameter.class.isAssignableFrom(typeToResolve)) {
         final Optional<FunctionParameter> resolved = _resolveOne_xFunctionParameter2FunctionParameter(source);
@@ -1195,7 +1197,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XFunctionParameter source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(FunctionParameter.class) || FunctionParameter.class.isAssignableFrom(typeToResolve)) {
@@ -1204,7 +1206,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XExecutor source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Executor.class) || Executor.class.isAssignableFrom(typeToResolve)) {
         final Optional<Executor> resolved = _resolveOne_xExecutor2Executor(source);
@@ -1220,7 +1222,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XExecutor source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Executor.class) || Executor.class.isAssignableFrom(typeToResolve)) {
@@ -1233,7 +1235,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XEvent source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Event.class) || Event.class.isAssignableFrom(typeToResolve)) {
         final Optional<Event> resolved = _resolveOne_xEvent2Event(source);
@@ -1243,7 +1245,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XEvent source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Event.class) || Event.class.isAssignableFrom(typeToResolve)) {
@@ -1252,7 +1254,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T resolveOne(final XDependency source, final Class<T> typeToResolve) {
     if (typeToResolve.isAssignableFrom(Dependency.class) || Dependency.class.isAssignableFrom(typeToResolve)) {
         final Optional<Dependency> resolved = _resolveOne_xDependency2Dependency(source);
@@ -1262,7 +1264,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> resolveAll(final XDependency source, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (typeToResolve.isAssignableFrom(Dependency.class) || Dependency.class.isAssignableFrom(typeToResolve)) {
@@ -1271,7 +1273,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final FullScopeTMSC target, final Class<T> typeToResolve) {
     if (TmscXtextModel.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_tmscXtextModel2FullScopeTMSC(target, typeToResolve);
@@ -1281,7 +1283,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final FullScopeTMSC target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (TmscXtextModel.class.isAssignableFrom(typeToResolve)) {
@@ -1289,7 +1291,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Interface target, final Class<T> typeToResolve) {
     if (XInterface.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xInterface2Interface(target, typeToResolve);
@@ -1299,7 +1301,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Interface target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XInterface.class.isAssignableFrom(typeToResolve)) {
@@ -1307,7 +1309,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Operation target, final Class<T> typeToResolve) {
     if (XOperation.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xOperation2Operation(target, typeToResolve);
@@ -1317,7 +1319,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Operation target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XOperation.class.isAssignableFrom(typeToResolve)) {
@@ -1325,7 +1327,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Component target, final Class<T> typeToResolve) {
     if (XComponent.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xComponent2Component(target, typeToResolve);
@@ -1335,7 +1337,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Component target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XComponent.class.isAssignableFrom(typeToResolve)) {
@@ -1343,7 +1345,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Function target, final Class<T> typeToResolve) {
     if (XFunction.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xFunction2Function(target, typeToResolve);
@@ -1353,7 +1355,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Function target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XFunction.class.isAssignableFrom(typeToResolve)) {
@@ -1361,7 +1363,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final FunctionParameter target, final Class<T> typeToResolve) {
     if (XFunctionParameter.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xFunctionParameter2FunctionParameter(target, typeToResolve);
@@ -1371,7 +1373,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final FunctionParameter target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XFunctionParameter.class.isAssignableFrom(typeToResolve)) {
@@ -1379,7 +1381,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Executor target, final Class<T> typeToResolve) {
     if (XExecutor.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xExecutor2Executor(target, typeToResolve);
@@ -1389,7 +1391,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Executor target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XExecutor.class.isAssignableFrom(typeToResolve)) {
@@ -1397,7 +1399,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Lifeline target, final Class<T> typeToResolve) {
     if (XExecutor.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xExecutor2Lifeline(target, typeToResolve);
@@ -1407,7 +1409,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Lifeline target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XExecutor.class.isAssignableFrom(typeToResolve)) {
@@ -1415,7 +1417,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Event target, final Class<T> typeToResolve) {
     if (XEvent.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xEvent2Event(target, typeToResolve);
@@ -1425,7 +1427,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Event target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XEvent.class.isAssignableFrom(typeToResolve)) {
@@ -1433,7 +1435,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   protected <T> T invResolveOne(final Dependency target, final Class<T> typeToResolve) {
     if (XDependency.class.isAssignableFrom(typeToResolve)) {
         final Optional<T> resolved = _invResolveOne_xDependency2Dependency(target, typeToResolve);
@@ -1443,7 +1445,7 @@ public class TmscXtextToTmscTransformation {
     }
     return null;
   }
-  
+
   protected <T> List<T> invResolveAll(final Dependency target, final Class<T> typeToResolve) {
     List<T> resolved = CollectionLiterals.newLinkedList();
     if (XDependency.class.isAssignableFrom(typeToResolve)) {
@@ -1451,7 +1453,7 @@ public class TmscXtextToTmscTransformation {
     }
     return resolved;
   }
-  
+
   private Optional<Interface> _resolveOne_xInterface2Interface(final XInterface xInterface) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xInterface);
     synchronized (_createCache_xInterface2Interface) {
@@ -1462,22 +1464,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Interface> _resolveAll_xInterface2Interface(final XInterface xInterface) {
     final Optional<Interface> resolved = _resolveOne_xInterface2Interface(xInterface);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xInterface2Interface(final Interface target, final Class<T> typeToResolve) {
     return _invResolveAll_xInterface2Interface(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xInterface2Interface(final Interface target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xInterface2Interface.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Operation> _resolveOne_xOperation2Operation(final XOperation xOperation) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xOperation);
     synchronized (_createCache_xOperation2Operation) {
@@ -1488,22 +1490,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Operation> _resolveAll_xOperation2Operation(final XOperation xOperation) {
     final Optional<Operation> resolved = _resolveOne_xOperation2Operation(xOperation);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xOperation2Operation(final Operation target, final Class<T> typeToResolve) {
     return _invResolveAll_xOperation2Operation(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xOperation2Operation(final Operation target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xOperation2Operation.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Component> _resolveOne_xComponent2Component(final XComponent xComponent) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xComponent);
     synchronized (_createCache_xComponent2Component) {
@@ -1514,22 +1516,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Component> _resolveAll_xComponent2Component(final XComponent xComponent) {
     final Optional<Component> resolved = _resolveOne_xComponent2Component(xComponent);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xComponent2Component(final Component target, final Class<T> typeToResolve) {
     return _invResolveAll_xComponent2Component(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xComponent2Component(final Component target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xComponent2Component.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Function> _resolveOne_xFunction2Function(final XFunction xFunction) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xFunction);
     synchronized (_createCache_xFunction2Function) {
@@ -1540,22 +1542,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Function> _resolveAll_xFunction2Function(final XFunction xFunction) {
     final Optional<Function> resolved = _resolveOne_xFunction2Function(xFunction);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xFunction2Function(final Function target, final Class<T> typeToResolve) {
     return _invResolveAll_xFunction2Function(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xFunction2Function(final Function target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xFunction2Function.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<FunctionParameter> _resolveOne_xFunctionParameter2FunctionParameter(final XFunctionParameter xFunctionParameter) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xFunctionParameter);
     synchronized (_createCache_xFunctionParameter2FunctionParameter) {
@@ -1566,22 +1568,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<FunctionParameter> _resolveAll_xFunctionParameter2FunctionParameter(final XFunctionParameter xFunctionParameter) {
     final Optional<FunctionParameter> resolved = _resolveOne_xFunctionParameter2FunctionParameter(xFunctionParameter);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xFunctionParameter2FunctionParameter(final FunctionParameter target, final Class<T> typeToResolve) {
     return _invResolveAll_xFunctionParameter2FunctionParameter(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xFunctionParameter2FunctionParameter(final FunctionParameter target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xFunctionParameter2FunctionParameter.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Executor> _resolveOne_xExecutor2Executor(final XExecutor xExecutor) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xExecutor);
     synchronized (_createCache_xExecutor2Executor) {
@@ -1592,22 +1594,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Executor> _resolveAll_xExecutor2Executor(final XExecutor xExecutor) {
     final Optional<Executor> resolved = _resolveOne_xExecutor2Executor(xExecutor);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xExecutor2Executor(final Executor target, final Class<T> typeToResolve) {
     return _invResolveAll_xExecutor2Executor(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xExecutor2Executor(final Executor target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xExecutor2Executor.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Lifeline> _resolveOne_xExecutor2Lifeline(final XExecutor xExecutor) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xExecutor);
     synchronized (_createCache_xExecutor2Lifeline) {
@@ -1618,22 +1620,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Lifeline> _resolveAll_xExecutor2Lifeline(final XExecutor xExecutor) {
     final Optional<Lifeline> resolved = _resolveOne_xExecutor2Lifeline(xExecutor);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xExecutor2Lifeline(final Lifeline target, final Class<T> typeToResolve) {
     return _invResolveAll_xExecutor2Lifeline(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xExecutor2Lifeline(final Lifeline target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xExecutor2Lifeline.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Event> _resolveOne_xEvent2Event(final XEvent xEvent) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xEvent);
     synchronized (_createCache_xEvent2Event) {
@@ -1644,22 +1646,22 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Event> _resolveAll_xEvent2Event(final XEvent xEvent) {
     final Optional<Event> resolved = _resolveOne_xEvent2Event(xEvent);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xEvent2Event(final Event target, final Class<T> typeToResolve) {
     return _invResolveAll_xEvent2Event(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xEvent2Event(final Event target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xEvent2Event.entrySet().stream().filter(e -> e.getValue() == target)
             .flatMap(e -> e.getKey().stream()).filter(typeToResolve::isInstance).map(typeToResolve::cast);
   }
-  
+
   private Optional<Dependency> _resolveOne_xDependency2Dependency(final XDependency xDependency) {
     final ArrayList<?> _cacheKey = CollectionLiterals.newArrayList(xDependency);
     synchronized (_createCache_xDependency2Dependency) {
@@ -1670,16 +1672,16 @@ public class TmscXtextToTmscTransformation {
         }
     }
   }
-  
+
   private Stream<Dependency> _resolveAll_xDependency2Dependency(final XDependency xDependency) {
     final Optional<Dependency> resolved = _resolveOne_xDependency2Dependency(xDependency);
     return Stream.of(resolved).filter(Optional::isPresent).map(Optional::get);
   }
-  
+
   private <T> Optional<T> _invResolveOne_xDependency2Dependency(final Dependency target, final Class<T> typeToResolve) {
     return _invResolveAll_xDependency2Dependency(target, typeToResolve).findFirst();
   }
-  
+
   private <T> Stream<T> _invResolveAll_xDependency2Dependency(final Dependency target, final Class<T> typeToResolve) {
     // TODO what about synchronization here?
     return _createCache_xDependency2Dependency.entrySet().stream().filter(e -> e.getValue() == target)

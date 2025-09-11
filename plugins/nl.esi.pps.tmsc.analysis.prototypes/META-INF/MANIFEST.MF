@@ -2,10 +2,10 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: TMSC Analysis Prototypes
 Bundle-SymbolicName: nl.esi.pps.tmsc.analysis.prototypes
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Bundle-Vendor: ESI (TNO)
 Automatic-Module-Name: nl.esi.pps.tmsc.analysis.prototypes
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.lsat.common.xtend,
  nl.esi.pps.tmsc,
  nl.esi.pps.tmsc.analysis

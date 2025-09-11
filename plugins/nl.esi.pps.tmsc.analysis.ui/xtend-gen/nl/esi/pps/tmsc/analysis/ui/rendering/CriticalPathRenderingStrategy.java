@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -27,16 +27,16 @@ import org.jfree.data.xy.XYIntervalSeriesCollection;
 @SuppressWarnings("all")
 public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRenderingStrategy.VoidRenderingKey, CriticalPathRenderingKey> {
   public static final String ID = "nl.esi.pps.tmsc.analysis.ui.rendering.critical_path";
-  
+
   public CriticalPathRenderingStrategy() {
     super(EnumRenderingStrategy.VoidRenderingKey.class, CriticalPathRenderingKey.class);
   }
-  
+
   @Override
   protected EnumRenderingStrategy.VoidRenderingKey getRenderingKey(final Execution execution) {
     return null;
   }
-  
+
   @Override
   protected CriticalPathRenderingKey getRenderingKey(final Dependency dependency) {
     CriticalPathRenderingKey _switchResult = null;
@@ -81,12 +81,12 @@ public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRen
     }
     return _switchResult;
   }
-  
+
   private boolean isCriticalOutlier(final Dependency dependency) {
     return ((CriticalPathAnalysis.isCritical(dependency) && TimeBoundOutlierAnalysis.isSetTimeBoundOutlierThreshold(dependency)) && 
       (dependency.getTimeBound().compareTo(TimeBoundOutlierAnalysis.getTimeBoundOutlierThreshold(dependency)) > 0));
   }
-  
+
   @Override
   public boolean select(final Viewer viewer, final Object parentElement, final Object element) {
     boolean _xblockexpression = false;
@@ -100,7 +100,7 @@ public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRen
     }
     return _xblockexpression;
   }
-  
+
   @Override
   public void add(final DependencyDataItem dependencyDataItem, final XYEdgeSeriesCollection dependenciesDataset, final DependenciesRenderer dependenciesRenderer) {
     DependencyDataItem dataItem = dependencyDataItem;
@@ -118,7 +118,7 @@ public class CriticalPathRenderingStrategy extends EnumRenderingStrategy<EnumRen
     }
     super.add(dataItem, dependenciesDataset, dependenciesRenderer);
   }
-  
+
   @Override
   protected void hideEmptySeriesInLegend(final XYEdgeSeriesCollection dependenciesDataset, final DependenciesRenderer dependenciesRenderer, final XYIntervalSeriesCollection executionsDataset, final ExecutionsRenderer executionsRenderer) {
     super.hideEmptySeriesInLegend(dependenciesDataset, dependenciesRenderer, executionsDataset, executionsRenderer);

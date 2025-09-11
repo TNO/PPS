@@ -2,9 +2,9 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: TMSC Compare
 Bundle-SymbolicName: nl.esi.pps.tmsc.compare
-Bundle-Version: 0.20.0.qualifier
+Bundle-Version: 0.30.0.qualifier
 Automatic-Module-Name: nl.esi.pps.tmsc.compare
-Bundle-RequiredExecutionEnvironment: JavaSE-11
+Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.apache.commons.math3,
  org.eclipse.core.resources,
  org.eclipse.lsat.common.queries,

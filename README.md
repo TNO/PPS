@@ -43,10 +43,10 @@ To create a development environment:
       If the button is disabled (grey), you are already using the latest version.
 - In the first wizard window:
     - Select **Eclipse IDE for Eclipse Comitters** from the big list at the top.
-    - Select **2021-12** for **Product Version**.
-    - For **Java 11+ VM** select either a JRE 11 that is installed on your local machine or the JustJ JRE 11 release.
+    - Select **2024-09** for **Product Version**.
+    - For **Java 21+ VM** select either a JRE 21 that is installed on your local machine or the JustJ JRE 21 release.
       Use the button to the right of the dropdown to manage the installed virtual machines on your system.
-      A JDK can also be downloaded from e.g. [Oracle](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or [Adoptium](https://adoptium.net/temurin/archive/?variant=openjdk11&jvmVariant=hotspot&version=11).
+      A JDK can also be downloaded from e.g. [Adoptium](https://adoptium.net/temurin/releases?version=21&os=any&arch=any).
     - Choose whether you want a P2 bundle pool (recommended).
     - Click the **Next** button.
 - In the second wizard window:

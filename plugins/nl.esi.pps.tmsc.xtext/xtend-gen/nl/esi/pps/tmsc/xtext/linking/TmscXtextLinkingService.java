@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,10 +9,10 @@
  */
 package nl.esi.pps.tmsc.xtext.linking;
 
-import com.google.common.base.Objects;
 import com.google.inject.Inject;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import nl.esi.pps.tmsc.xtext.services.TmscXtextGrammarAccess;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextFactory;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel;
@@ -35,11 +35,11 @@ import org.eclipse.xtext.xbase.lib.Procedures.Procedure1;
 public class TmscXtextLinkingService extends DefaultLinkingService {
   @Extension
   private final TmscXtextFactory m_tmsc = TmscXtextFactory.eINSTANCE;
-  
+
   @Inject
   @Extension
   private TmscXtextGrammarAccess tmscXtextGrammarAccess;
-  
+
   @Override
   public List<EObject> getLinkedObjects(final EObject context, final EReference ref, final INode node) throws IllegalNodeException {
     final List<EObject> result = super.getLinkedObjects(context, ref, node);
@@ -51,7 +51,7 @@ public class TmscXtextLinkingService extends DefaultLinkingService {
     EObject _grammarElement = node.getGrammarElement();
     boolean _matched = false;
     CrossReference _executorXExecutorCrossReference_2_0 = this.tmscXtextGrammarAccess.getXEventAccess().getExecutorXExecutorCrossReference_2_0();
-    if (Objects.equal(_grammarElement, _executorXExecutorCrossReference_2_0)) {
+    if (Objects.equals(_grammarElement, _executorXExecutorCrossReference_2_0)) {
       _matched=true;
       XExecutor _createXExecutor = this.m_tmsc.createXExecutor();
       final Procedure1<XExecutor> _function = (XExecutor it) -> {
@@ -64,7 +64,7 @@ public class TmscXtextLinkingService extends DefaultLinkingService {
     }
     if (!_matched) {
       CrossReference _componentXComponentCrossReference_3_0 = this.tmscXtextGrammarAccess.getXEventAccess().getComponentXComponentCrossReference_3_0();
-      if (Objects.equal(_grammarElement, _componentXComponentCrossReference_3_0)) {
+      if (Objects.equals(_grammarElement, _componentXComponentCrossReference_3_0)) {
         _matched=true;
         XComponent _createXComponent = this.m_tmsc.createXComponent();
         final Procedure1<XComponent> _function_1 = (XComponent it) -> {
@@ -78,7 +78,7 @@ public class TmscXtextLinkingService extends DefaultLinkingService {
     }
     if (!_matched) {
       CrossReference _functionXFunctionCrossReference_5_0 = this.tmscXtextGrammarAccess.getXEventAccess().getFunctionXFunctionCrossReference_5_0();
-      if (Objects.equal(_grammarElement, _functionXFunctionCrossReference_5_0)) {
+      if (Objects.equals(_grammarElement, _functionXFunctionCrossReference_5_0)) {
         _matched=true;
         XFunction _createXFunction = this.m_tmsc.createXFunction();
         final Procedure1<XFunction> _function_2 = (XFunction it) -> {

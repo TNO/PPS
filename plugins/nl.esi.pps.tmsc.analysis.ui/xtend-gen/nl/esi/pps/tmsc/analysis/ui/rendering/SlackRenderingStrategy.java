@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,9 +9,9 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.rendering;
 
-import com.google.common.base.Objects;
 import java.awt.geom.Point2D;
 import java.util.List;
+import java.util.Objects;
 import nl.esi.pps.tmsc.Event;
 import nl.esi.pps.tmsc.EventType;
 import nl.esi.pps.tmsc.TMSC;
@@ -32,23 +32,23 @@ import org.jfree.data.xy.XYIntervalSeriesCollection;
 @SuppressWarnings("all")
 public class SlackRenderingStrategy extends DefaultRenderingStrategy {
   public static final String ID = "nl.esi.pps.tmsc.analysis.ui.rendering.slack";
-  
+
   @Override
   public void preRendering(final XYEdgeSeriesCollection dependenciesDataset, final DependenciesRenderer dependenciesRenderer, final XYIntervalSeriesCollection executionsDataset, final ExecutionsRenderer executionsRenderer) {
     super.preRendering(dependenciesDataset, dependenciesRenderer, executionsDataset, executionsRenderer);
     ExecutionsVisibility.ALL.apply(executionsRenderer, false);
   }
-  
+
   @Override
   public void add(final ExecutionDataItem executionDataItem, final XYIntervalSeriesCollection executionsDataset, final ExecutionsRenderer executionsRenderer) {
     super.add(executionDataItem, executionsDataset, executionsRenderer);
     this.addSlackAnnotation(executionsRenderer, executionDataItem, EventType.ENTRY);
     this.addSlackAnnotation(executionsRenderer, executionDataItem, EventType.EXIT);
   }
-  
+
   private void addSlackAnnotation(final ExecutionsRenderer executionsRenderer, final ExecutionDataItem executionDataItem, final EventType eventType) {
     Event _xifexpression = null;
-    boolean _equals = Objects.equal(eventType, EventType.ENTRY);
+    boolean _equals = Objects.equals(eventType, EventType.ENTRY);
     if (_equals) {
       _xifexpression = executionDataItem.getBackReference().getEntry();
     } else {
@@ -56,7 +56,7 @@ public class SlackRenderingStrategy extends DefaultRenderingStrategy {
     }
     final Event event = _xifexpression;
     double _xifexpression_1 = (double) 0;
-    boolean _equals_1 = Objects.equal(eventType, EventType.ENTRY);
+    boolean _equals_1 = Objects.equals(eventType, EventType.ENTRY);
     if (_equals_1) {
       _xifexpression_1 = executionDataItem.getXLowValue();
     } else {

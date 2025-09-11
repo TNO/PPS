@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -32,16 +32,16 @@ public class EquivalenceMatcher {
   public static final class Match<T extends Object> {
     public enum MatchKind {
       Ambiguity,
-      
+
       Addition,
-      
+
       Exact;
     }
-    
+
     private final Collection<T> left;
-    
+
     private final Collection<T> right;
-    
+
     public Match(final Collection<T> left, final Collection<T> right) {
       Collection<T> _elvis = null;
       if (left != null) {
@@ -60,7 +60,7 @@ public class EquivalenceMatcher {
       }
       this.right = _elvis_1;
     }
-    
+
     public EquivalenceMatcher.Match.MatchKind getKind() {
       EquivalenceMatcher.Match.MatchKind _switchResult = null;
       boolean _matched = false;
@@ -79,12 +79,12 @@ public class EquivalenceMatcher {
       }
       return _switchResult;
     }
-    
+
     @Override
     public String toString() {
       return this.getKind().name();
     }
-    
+
     @Override
     @Pure
     public int hashCode() {
@@ -93,7 +93,7 @@ public class EquivalenceMatcher {
       result = prime * result + ((this.left== null) ? 0 : this.left.hashCode());
       return prime * result + ((this.right== null) ? 0 : this.right.hashCode());
     }
-    
+
     @Override
     @Pure
     public boolean equals(final Object obj) {
@@ -116,25 +116,25 @@ public class EquivalenceMatcher {
         return false;
       return true;
     }
-    
+
     @Pure
     public Collection<T> getLeft() {
       return this.left;
     }
-    
+
     @Pure
     public Collection<T> getRight() {
       return this.right;
     }
   }
-  
+
   private EquivalenceMatcher() {
   }
-  
+
   public static <T extends Object> List<EquivalenceMatcher.Match<T>> match(final Iterable<T> left, final Iterable<T> right, final BiPredicate<? super T, ? super T> equivalence) {
     return EquivalenceMatcher.<T>match(left.iterator(), right.iterator(), equivalence);
   }
-  
+
   public static <T extends Object> List<EquivalenceMatcher.Match<T>> match(final Iterator<T> left, final Iterator<T> right, final BiPredicate<? super T, ? super T> equivalence) {
     final List<List<T>> leftGroups = IteratorQueries.<T>groupBy(left, equivalence);
     final List<List<T>> rightGroups = IteratorQueries.<T>groupBy(right, equivalence);
@@ -156,11 +156,11 @@ public class EquivalenceMatcher {
     }
     return result;
   }
-  
+
   public static <T extends Object> BiMap<T, T> matchExact(final Iterable<T> left, final Iterable<T> right, final BiPredicate<? super T, ? super T> equivalence) {
     return EquivalenceMatcher.<T>matchExact(left.iterator(), right.iterator(), equivalence);
   }
-  
+
   public static <T extends Object> BiMap<T, T> matchExact(final Iterator<T> left, final Iterator<T> right, final BiPredicate<? super T, ? super T> equivalence) {
     final Function1<List<T>, Boolean> _function = (List<T> it) -> {
       int _size = it.size();

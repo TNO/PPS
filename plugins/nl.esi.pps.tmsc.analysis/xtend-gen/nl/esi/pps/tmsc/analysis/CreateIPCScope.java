@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -9,8 +9,8 @@
  */
 package nl.esi.pps.tmsc.analysis;
 
-import com.google.common.base.Objects;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 import java.util.function.Predicate;
 import nl.esi.pps.architecture.implemented.Function;
@@ -36,11 +36,11 @@ import org.eclipse.xtext.xbase.lib.IterableExtensions;
 public final class CreateIPCScope {
   @Extension
   private final StatusLogger logger = new StatusLogger("nl.esi.pps.tmsc.analysis", "Create IPC Scope");
-  
+
   public MultiStatus getStatus() {
     return this.logger.getStatus();
   }
-  
+
   public ScopedTMSC createIPCScope(final TMSC tmsc, final IProgressMonitor monitor) {
     final Function1<Dependency, Boolean> _function = (Dependency it) -> {
       return Boolean.valueOf(CreateIPCScope.isIPCScope(it));
@@ -65,7 +65,7 @@ public final class CreateIPCScope {
         this.logger.info("The output should only be used for structural comparison.");
         final Function1<Dependency, Boolean> _function_3 = (Dependency it) -> {
           Boolean _scheduled = it.getScheduled();
-          return Boolean.valueOf(Objects.equal(_scheduled, Boolean.TRUE));
+          return Boolean.valueOf(Objects.equals(_scheduled, Boolean.TRUE));
         };
         _xblockexpression = IterableExtensions.<Dependency>reject(nonIPCDependencies, _function_3);
       }
@@ -81,7 +81,7 @@ public final class CreateIPCScope {
     tmscProjection.projectToScope(dependenciesToProject, monitor, _function_3);
     return ipcScope;
   }
-  
+
   private static boolean isIPCScope(final Dependency dependency) {
     boolean _xifexpression = false;
     boolean _isTraced = dependency.getSource().isTraced();

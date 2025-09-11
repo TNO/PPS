@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -22,7 +22,7 @@ import org.eclipse.xtext.EcoreUtil2;
 public class TmscXtextQueries {
   private TmscXtextQueries() {
   }
-  
+
   public static XDependencyType getType(final XDependency xDependency) {
     if ((xDependency == null)) {
       return null;
@@ -44,13 +44,13 @@ public class TmscXtextQueries {
     }
     return XDependencyType.MESSAGE;
   }
-  
+
   public static String getXtextName(final PropertiesContainer container) {
     final String key = "xtextName";
     final Object value = container.getProperties().get(key);
     return (String) value;
   }
-  
+
   public static void setXtextName(final PropertiesContainer container, final String value) {
     final String key = "xtextName";
     if (value == null) {

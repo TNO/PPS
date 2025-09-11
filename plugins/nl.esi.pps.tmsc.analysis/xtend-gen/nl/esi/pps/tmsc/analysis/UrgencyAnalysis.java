@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -24,14 +24,14 @@ import org.eclipse.xtext.xbase.lib.Functions.Function1;
 public final class UrgencyAnalysis {
   private UrgencyAnalysis() {
   }
-  
+
   public static void analyseUrgency(final TMSC tmsc) {
     final Function1<Dependency, Long> _function = (Dependency it) -> {
       return it.getTimeBound();
     };
     UrgencyAnalysis.analyseUrgency(tmsc, _function);
   }
-  
+
   public static void analyseUrgency(final TMSC tmsc, final Function1<? super Dependency, ? extends Long> timeBoundFunctor) {
     final Consumer<Event> _function = (Event it) -> {
       UrgencyAnalysis.unsetUrgentTimestamp(it, tmsc);
@@ -66,7 +66,7 @@ public final class UrgencyAnalysis {
       }
     }
   }
-  
+
   /**
    * The asap time-stamp of a {@code container} {@link Event} under the constraint of urgency,
    * i.e. considering the {@link Dependency#getTimeBound() time-bounds} of all incoming dependencies
@@ -79,7 +79,7 @@ public final class UrgencyAnalysis {
     final Object value = container.getProperties().get(key);
     return (Long) value;
   }
-  
+
   /**
    * The asap time-stamp of a {@code container} {@link Event} under the constraint of urgency,
    * i.e. considering the {@link Dependency#getTimeBound() time-bounds} of all incoming dependencies
@@ -91,7 +91,7 @@ public final class UrgencyAnalysis {
             "urgentTimestamp" : category + "/urgentTimestamp";
     container.getProperties().put(key, value);
   }
-  
+
   /**
    * Returns whether the value of the '{@link nl.esi.pps.tmsc.analysis.UrgencyAnalysis#getUrgentTimestamp <em>urgentTimestamp</em>}' property is set on {@code container}.
    */
@@ -101,7 +101,7 @@ public final class UrgencyAnalysis {
             "urgentTimestamp" : category + "/urgentTimestamp";
     return container.getProperties().containsKey(key);
   }
-  
+
   /**
    * Unsets the value of the '{@link nl.esi.pps.tmsc.analysis.UrgencyAnalysis#getUrgentTimestamp <em>urgentTimestamp</em>}' property on {@code container}.
    */

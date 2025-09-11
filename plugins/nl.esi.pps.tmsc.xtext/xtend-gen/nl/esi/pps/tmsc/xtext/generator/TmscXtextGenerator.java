@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -62,7 +62,7 @@ public class TmscXtextGenerator extends AbstractGenerator {
   @Inject
   @Extension
   private TmscXtextGrammarAccess tmscXtextGrammarAccess;
-  
+
   @Override
   public void doGenerate(final Resource resource, final IFileSystemAccess2 fsa, final IGeneratorContext context) {
     final TmscXtextModel xtextTmsc = IterableExtensions.<TmscXtextModel>head(Iterables.<TmscXtextModel>filter(resource.getContents(), TmscXtextModel.class));
@@ -145,7 +145,7 @@ public class TmscXtextGenerator extends AbstractGenerator {
       }
     }
   }
-  
+
   private FullScopeTMSC doTransform(final TmscXtextModel tmscXtext) {
     final Function1<XEvent, ICompositeNode> _function = (XEvent it) -> {
       return TmscXtextGenerator.<ICompositeNode>adapt(it, ICompositeNode.class);
@@ -165,7 +165,7 @@ public class TmscXtextGenerator extends AbstractGenerator {
     };
     return ObjectExtensions.<FullScopeTMSC>operator_doubleArrow(_transform, _function_3);
   }
-  
+
   public static <T extends Object> T adapt(final Notifier notifier, final Class<T> adapterType) {
     Adapter _adapter = EcoreUtil.getAdapter(notifier.eAdapters(), adapterType);
     return ((T) _adapter);

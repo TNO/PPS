@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  * 
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -27,11 +27,11 @@ import org.eclipse.xtext.xbase.lib.Extension;
 class DependencyTopologicalOrder implements TopologicalOrderIterator<Dependency> {
   @Extension
   private final ITMSC tmsc;
-  
+
   private final Queue<Dependency> enabledElements = CollectionLiterals.<Dependency>newLinkedList();
-  
+
   private final Map<Dependency, Integer> elementThreshold = CollectionLiterals.<Dependency, Integer>newLinkedHashMap();
-  
+
   public DependencyTopologicalOrder(final ITMSC tmsc) {
     this.tmsc = tmsc;
     Collection<Dependency> _dependencies = tmsc.getDependencies();
@@ -54,12 +54,12 @@ class DependencyTopologicalOrder implements TopologicalOrderIterator<Dependency>
       }
     }
   }
-  
+
   @Override
   public boolean hasNext() {
     return ((!this.enabledElements.isEmpty()) || (!this.elementThreshold.isEmpty()));
   }
-  
+
   @Override
   public Dependency next() {
     boolean _isEmpty = this.enabledElements.isEmpty();
@@ -71,7 +71,7 @@ class DependencyTopologicalOrder implements TopologicalOrderIterator<Dependency>
     Iterables.<Dependency>addAll(this.enabledElements, _doConsume);
     return next;
   }
-  
+
   @Override
   public Iterator<Dependency> consume(final Dependency dependency) {
     boolean _remove = this.enabledElements.remove(dependency);
@@ -83,7 +83,7 @@ class DependencyTopologicalOrder implements TopologicalOrderIterator<Dependency>
       throw new IllegalArgumentException("Dependency cannot be consumed");
     }
   }
-  
+
   private LinkedList<Dependency> doConsume(final Dependency dependency) {
     final LinkedList<Dependency> newEnabledElements = CollectionLiterals.<Dependency>newLinkedList();
     Event _target = dependency.getTarget();
@@ -110,7 +110,7 @@ class DependencyTopologicalOrder implements TopologicalOrderIterator<Dependency>
     }
     return newEnabledElements;
   }
-  
+
   @Override
   public Iterator<Dependency> getEnabledElements() {
     return Iterators.<Dependency>unmodifiableIterator(this.enabledElements.iterator());
