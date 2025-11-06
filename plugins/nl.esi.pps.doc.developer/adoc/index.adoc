@@ -38,18 +38,17 @@ This section describes how to convert your PPS to an Eclipse PDE to customize PP
 . First extract the PPS distribution, choose a PPS version (i.e., windows or linux), extract it and start it, e.g. `pps.exe`.
 . Now use the menu:Help[Install New Software...] menu to install the `Eclipse Plugin Development Tools` from the Eclipse 2024-09 (i.e., 4.33) update site: https://download.eclipse.org/eclipse/updates/4.33/[] +
 +
-image::{imgsdir}/install-pde.png[width=869,height=705]
+image::{imgsdir}/install-pde.png[width=869,height=638]
 
 . Continue the wizard using the btn:[Next] button and finally the btn:[Finish] button. 
   When asked, choose to restart the Eclipse IDE.
 . (The next steps are optional, yet advised) Install the PPS sources by again using the menu:Help[Install New Software...] menu.
-  Now choose to add an update site by clicking the btn:[Add..] button. 
-. In the `Add Repository` dialog, choose to add an archived update site by clicking the btn:[Archive...] button.
-  Navigate to the directory where the PPS distribution is extracted and select the `nl.esi.pps.product-__<version>__.zip` archive.
-  Finally click the btn:[Add] button in the dialog to add the repository.
-. Now select the `PPS` category in the wizard and continue the wizard using the btn:[Next] button and finally the btn:[Finish] button.
+  Now select the `PPS` category from the PPS (e.g., v0.30.0) update site: https://tno.github.io/PPS/update-site/v0.30.0/[] +
+  Please make sure to select the right update site version for your installation.
+  You can see your installed PPS version from the menu:Help[About PPS vX.X] menu.
+. Continue the wizard using the btn:[Next] button and finally the btn:[Finish] button.
   When asked, choose to restart the Eclipse IDE.
-  
+
 Your environment is now ready for extending PPS, e.g., <<tmsc-reconstructor, adding a custom TMSC reconstructor>> or <<data-analysis, extending its data analysis>>.
 
 TIP: To start a PPS including your extensions, simply select one of your projects in the project/package explorer view and use its context menu (i.e., right mouse click) to menu:Run As[Eclipse Application].
