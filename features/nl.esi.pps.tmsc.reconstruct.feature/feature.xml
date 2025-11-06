@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<feature
+      id="nl.esi.pps.tmsc.reconstruct.feature"
+      label="Custom TMSC Reconstructor Example Feature"
+      version="0.30.0.qualifier"
+      provider-name="ESI (TNO)">
+
+   <description url="http://www.example.com/description">
+      [Enter Feature Description here.]
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      [Enter Copyright Description here.]
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      [Enter License Description here.]
+   </license>
+
+   <plugin
+         id="nl.esi.pps.tmsc.reconstruct"
+         version="0.0.0"/>
+
+   <plugin
+         id="nl.esi.pps.tmsc.reconstruct.ui"
+         version="0.0.0"/>
+
+</feature>

@@ -65,7 +65,7 @@ public class ReconstructHandler {
 
 		// Saving models to file
 		URI traceURI = URI.createPlatformResourceURI(traceIFile.getFullPath().toString(), true);
-		URI tmscURI = traceURI.trimFileExtension().appendFileExtension("tmscz");
+		URI tmscURI = traceURI.trimFileExtension().appendFileExtension("tmsc");
 		ResourceSet resourceSet = new ResourceSetImpl();
 		Resource tmscResource = resourceSet.createResource(tmscURI);
 		tmscResource.getContents().add(reconstructor.getTmsc());

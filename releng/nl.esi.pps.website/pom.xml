@@ -40,6 +40,14 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
+            <artifactId>nl.esi.pps.doc.developer</artifactId>
+            <version>${project.version}</version>
+            <classifier>website</classifier>
+            <type>zip</type>
+        </dependency>
+
+        <dependency>
+            <groupId>${project.groupId}</groupId>
             <artifactId>nl.esi.pps.product</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
@@ -98,6 +106,25 @@
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>${project.build.directory}/website/userguide</outputDirectory>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>unpack-developer-guide</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>unpack</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>nl.esi.pps.doc.developer</artifactId>
+                                    <version>${project.version}</version>
+                                    <classifier>website</classifier>
+                                    <type>zip</type>
+                                </artifactItem>
+                            </artifactItems>
+                            <outputDirectory>${project.build.directory}/website/developerguide</outputDirectory>
                         </configuration>
                     </execution>
                     <execution>
