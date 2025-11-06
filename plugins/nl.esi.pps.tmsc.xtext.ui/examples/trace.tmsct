@@ -12,10 +12,14 @@
 2 "My implicit executor" "My implicit component" > "My implicit sub-function"
 3 "My implicit executor" "My implicit component" < "My implicit sub-function"
 4 "My implicit executor" "My implicit component" < "My implicit function"
-5 E1 CA > FA !M1
-6 E2 CA > FB ?M1
-7 E2 CA < FB !M2
-8 E1 CA < FA ?M2
+5 "My implicit executor" "My implicit component" > "My implicit function"
+6 "My implicit executor" "My implicit component" > "My implicit sub-function"
+7 "My implicit executor" "My implicit component" < "My implicit sub-function"
+8 "My implicit executor" "My implicit component" < "My implicit function"
+9 E1 CA > FA !M1
+10 E2 CA > FB ?M1
+11 E2 CA < FB !M2
+12 E1 CA < FA ?M2
 
 // Optional: aliases
 executor "Executor 1" as E1
@@ -23,3 +27,16 @@ executor "Executor 2" as E2
 component "Component A" as CA
 function "Function A" as FA
 function "Function B" as FB
+
+// Optional: A trace can be enhanced by adding settings like a rendering strategy
+tmsc settings {
+	renderingStrategyID: "nl.esi.pps.tmsc.editor.component_rendering_strategy"
+}
+
+// Optional: Applying analyses on the reconstructed TMSC allows advanced analyses like critical path analysis 
+tmsc analyses {
+	time-bound-analysis {
+		// The default time-bound specifies the time between call-stacks that should be considered critical
+		defaultTimeBound: 1
+	}
+}
