@@ -20,6 +20,9 @@ TmscXtextModel:
         |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
         |properties+=XProperty)*
     '}')
+    |('tmsc' 'analyses' '{'
+        analyses+=XTmscAnalysis*
+     '}')
     | dependencySettings+=XDependencySettings
     | interfaces+=XInterface
     | components+=XComponent
@@ -31,6 +34,16 @@ TmscXtextModel:
 
 enum XArchitectureKind:
     INTERNAL='internal' | EXTERNAL='external';
+
+XTmscAnalysis:
+    XTimeBoundAnalysis
+;
+
+XTimeBoundAnalysis: {XTimeBoundAnalysis}
+    'time-bound-analysis' ('{'
+        ('defaultTimeBound' ':' defaultTimeBound=ABS_EBIGDECIMAL)?
+    '}')?
+;
 
 XNamedArchitectureElement:
     XInterface | XOperation | XComponent | XFunction | XHost | XExecutor;

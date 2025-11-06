@@ -11,6 +11,7 @@ import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.nodemodel.INode;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.AbstractElementAlias;
+import org.eclipse.xtext.serializer.analysis.GrammarAlias.AlternativeAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.GroupAlias;
 import org.eclipse.xtext.serializer.analysis.GrammarAlias.TokenAlias;
 import org.eclipse.xtext.serializer.analysis.ISyntacticSequencerPDAProvider.ISynNavigable;
@@ -21,8 +22,15 @@ import org.eclipse.xtext.serializer.sequencer.AbstractSyntacticSequencer;
 public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 
 	protected TmscXtextGrammarAccess grammarAccess;
-	protected AbstractElementAlias match_TmscXtextModel___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a;
+	protected AbstractElementAlias match_TmscXtextModel___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a;
+	protected AbstractElementAlias match_TmscXtextModel___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a;
+	protected AbstractElementAlias match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a__a;
 	protected AbstractElementAlias match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a;
+	protected AbstractElementAlias match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___or_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a_RightCurlyBracketKeyword_1_0_4__q___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a__a__;
+	protected AbstractElementAlias match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a__a;
+	protected AbstractElementAlias match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a;
+	protected AbstractElementAlias match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___or_____TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a_RightCurlyBracketKeyword_1_1_4__q___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a__a__;
+	protected AbstractElementAlias match_TmscXtextModel_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___or___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4____a;
 	protected AbstractElementAlias match_XComponent___LeftCurlyBracketKeyword_5_0_RightCurlyBracketKeyword_5_2__q;
 	protected AbstractElementAlias match_XEvent___LeftCurlyBracketKeyword_8_0_RightCurlyBracketKeyword_8_2__q;
 	protected AbstractElementAlias match_XExecutor___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
@@ -30,12 +38,20 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q;
 	protected AbstractElementAlias match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
 	protected AbstractElementAlias match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
+	protected AbstractElementAlias match_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
 		grammarAccess = (TmscXtextGrammarAccess) access;
-		match_TmscXtextModel___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()));
+		match_TmscXtextModel___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()));
+		match_TmscXtextModel___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()));
+		match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4())));
 		match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()));
+		match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___or_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a_RightCurlyBracketKeyword_1_0_4__q___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a__a__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4())), new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2())), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2())))), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()))));
+		match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4())));
+		match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a = new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()));
+		match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___or_____TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a_RightCurlyBracketKeyword_1_1_4__q___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a__a__ = new AlternativeAlias(false, false, new GroupAlias(false, false, new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4())), new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2())), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new GroupAlias(true, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4())), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2())))), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new GroupAlias(true, true, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()))));
+		match_TmscXtextModel_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___or___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4____a = new AlternativeAlias(true, true, new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_0_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getSettingsKeyword_1_0_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_0_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_0_4())), new GroupAlias(false, false, new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getTmscKeyword_1_1_0()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getAnalysesKeyword_1_1_1()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getLeftCurlyBracketKeyword_1_1_2()), new TokenAlias(false, false, grammarAccess.getTmscXtextModelAccess().getRightCurlyBracketKeyword_1_1_4())));
 		match_XComponent___LeftCurlyBracketKeyword_5_0_RightCurlyBracketKeyword_5_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXComponentAccess().getLeftCurlyBracketKeyword_5_0()), new TokenAlias(false, false, grammarAccess.getXComponentAccess().getRightCurlyBracketKeyword_5_2()));
 		match_XEvent___LeftCurlyBracketKeyword_8_0_RightCurlyBracketKeyword_8_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXEventAccess().getLeftCurlyBracketKeyword_8_0()), new TokenAlias(false, false, grammarAccess.getXEventAccess().getRightCurlyBracketKeyword_8_2()));
 		match_XExecutor___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXExecutorAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXExecutorAccess().getRightCurlyBracketKeyword_4_2()));
@@ -43,6 +59,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_XHost___LeftCurlyBracketKeyword_4_0_RightCurlyBracketKeyword_4_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXHostAccess().getLeftCurlyBracketKeyword_4_0()), new TokenAlias(false, false, grammarAccess.getXHostAccess().getRightCurlyBracketKeyword_4_2()));
 		match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXInterfaceAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXInterfaceAccess().getRightCurlyBracketKeyword_3_2()));
 		match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXOperationAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXOperationAccess().getRightCurlyBracketKeyword_3_2()));
+		match_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXTimeBoundAnalysisAccess().getLeftCurlyBracketKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getXTimeBoundAnalysisAccess().getRightCurlyBracketKeyword_2_2()));
 	}
 	
 	@Override
@@ -57,10 +74,24 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 		List<INode> transitionNodes = collectNodes(fromNode, toNode);
 		for (AbstractElementAlias syntax : transition.getAmbiguousSyntaxes()) {
 			List<INode> syntaxNodes = getNodesFor(transitionNodes, syntax);
-			if (match_TmscXtextModel___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a.equals(syntax))
-				emit_TmscXtextModel___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			if (match_TmscXtextModel___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a.equals(syntax))
+				emit_TmscXtextModel___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a.equals(syntax))
+				emit_TmscXtextModel___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a__a.equals(syntax))
+				emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a__a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a.equals(syntax))
 				emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___or_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a_RightCurlyBracketKeyword_1_0_4__q___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a__a__.equals(syntax))
+				emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___or_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a_RightCurlyBracketKeyword_1_0_4__q___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a__a__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a__a.equals(syntax))
+				emit_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a.equals(syntax))
+				emit_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___or_____TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a_RightCurlyBracketKeyword_1_1_4__q___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a__a__.equals(syntax))
+				emit_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___or_____TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a_RightCurlyBracketKeyword_1_1_4__q___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a__a__(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_TmscXtextModel_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___or___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4____a.equals(syntax))
+				emit_TmscXtextModel_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___or___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4____a(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XComponent___LeftCurlyBracketKeyword_5_0_RightCurlyBracketKeyword_5_2__q.equals(syntax))
 				emit_XComponent___LeftCurlyBracketKeyword_5_0_RightCurlyBracketKeyword_5_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XEvent___LeftCurlyBracketKeyword_8_0_RightCurlyBracketKeyword_8_2__q.equals(syntax))
@@ -75,6 +106,8 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q.equals(syntax))
 				emit_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q.equals(syntax))
+				emit_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -82,45 +115,45 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	/**
 	 * <pre>
 	 * Ambiguous syntax:
-	 *     ('}' 'tmsc' 'settings' '{')*
+	 *     ('}' ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{')*
 	 *
 	 * This ambiguous syntax occurs at:
-	 *     (rule start) 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     (rule start) 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     (rule start) 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     (rule start) 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     architectureKind=XArchitectureKind (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
 	 *     architectureKind=XArchitectureKind (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	 *     architectureKind=XArchitectureKind (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     architectureKind=XArchitectureKind (ambiguity) properties+=XProperty
-	 *     components+=XComponent 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     components+=XComponent 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     components+=XComponent 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     components+=XComponent 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
-	 *     dependencySettings+=XDependencySettings 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     dependencySettings+=XDependencySettings 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     dependencySettings+=XDependencySettings 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     dependencySettings+=XDependencySettings 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
-	 *     events+=XEvent 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     events+=XEvent 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     events+=XEvent 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     events+=XEvent 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
-	 *     executors+=XExecutor 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     executors+=XExecutor 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     executors+=XExecutor 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     executors+=XExecutor 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
-	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     functions+=XFunction 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
-	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     hosts+=XHost 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
-	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
-	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
-	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
-	 *     interfaces+=XInterface 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     properties+=XProperty (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
 	 *     properties+=XProperty (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	 *     properties+=XProperty (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
@@ -136,7 +169,74 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 
 	 * </pre>
 	 */
-	protected void emit_TmscXtextModel___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_TmscXtextModel___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('}' ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{')*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     analyses+=XTmscAnalysis (ambiguity) analyses+=XTmscAnalysis
+	 *     components+=XComponent ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     events+=XEvent ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     executors+=XExecutor ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     functions+=XFunction ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     hosts+=XHost ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 *     interfaces+=XInterface ('tmsc' 'settings' '{' '}')* 'tmsc' 'analyses' '{' (ambiguity) analyses+=XTmscAnalysis
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('tmsc' 'settings' '{' '}' ('tmsc' 'analyses' '{' '}')*)*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -144,6 +244,203 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * <pre>
 	 * Ambiguous syntax:
 	 *     ('tmsc' 'settings' '{' '}')*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* (rule end)
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* components+=XComponent
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* events+=XEvent
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* functions+=XFunction
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* hosts+=XHost
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) ('tmsc' 'analyses' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     components+=XComponent (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     events+=XEvent (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'analyses' '{' ('}' (ambiguity) 'tmsc' 'analyses' '{')* analyses+=XTmscAnalysis
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     (
+	  *         ('tmsc' 'settings' '{' ('}' 'tmsc' 'settings' '{')*) | 
+	  *         (
+	  *             ('tmsc' 'settings' '{' ('}' 'tmsc' 'settings' '{')* '}')? 
+	  *             ('tmsc' 'analyses' '{' '}')+ 
+	  *             'tmsc' 
+	  *             'settings' 
+	  *             '{' 
+	  *             ('}' 'tmsc' 'settings' '{')* 
+	  *             (
+	  *                 '}' 
+	  *                 ('tmsc' 'analyses' '{' '}')+ 
+	  *                 'tmsc' 
+	  *                 'settings' 
+	  *                 '{' 
+	  *                 ('}' 'tmsc' 'settings' '{')*
+	  *             )*
+	  *         )
+	  *     )
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) properties+=XProperty
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___or_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a_RightCurlyBracketKeyword_1_0_4__q___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a___RightCurlyBracketKeyword_1_0_4___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__p_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2___RightCurlyBracketKeyword_1_0_4_TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2__a__a__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('tmsc' 'analyses' '{' '}' ('tmsc' 'settings' '{' '}')*)*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) (rule end)
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) components+=XComponent
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) events+=XEvent
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) functions+=XFunction
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) hosts+=XHost
+	 *     analyses+=XTmscAnalysis '}' ('tmsc' 'settings' '{' '}')* (ambiguity) interfaces+=XInterface
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('tmsc' 'analyses' '{' '}')*
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     (
+	  *         ('tmsc' 'analyses' '{' ('}' 'tmsc' 'analyses' '{')*) | 
+	  *         (
+	  *             ('tmsc' 'analyses' '{' ('}' 'tmsc' 'analyses' '{')* '}')? 
+	  *             ('tmsc' 'settings' '{' '}')+ 
+	  *             'tmsc' 
+	  *             'analyses' 
+	  *             '{' 
+	  *             ('}' 'tmsc' 'analyses' '{')* 
+	  *             (
+	  *                 '}' 
+	  *                 ('tmsc' 'settings' '{' '}')+ 
+	  *                 'tmsc' 
+	  *                 'analyses' 
+	  *                 '{' 
+	  *                 ('}' 'tmsc' 'analyses' '{')*
+	  *             )*
+	  *         )
+	  *     )
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     architectureKind=XArchitectureKind '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     properties+=XProperty '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) analyses+=XTmscAnalysis
+	 
+	 * </pre>
+	 */
+	protected void emit_TmscXtextModel___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___or_____TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a_RightCurlyBracketKeyword_1_1_4__q___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a___RightCurlyBracketKeyword_1_1_4___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__p_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2___RightCurlyBracketKeyword_1_1_4_TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2__a__a__(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     (('tmsc' 'settings' '{' '}') | ('tmsc' 'analyses' '{' '}'))*
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) (rule start)
@@ -154,14 +451,6 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     (rule start) (ambiguity) functions+=XFunction
 	 *     (rule start) (ambiguity) hosts+=XHost
 	 *     (rule start) (ambiguity) interfaces+=XInterface
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) (rule end)
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) components+=XComponent
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) dependencySettings+=XDependencySettings
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) events+=XEvent
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) executors+=XExecutor
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) functions+=XFunction
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) hosts+=XHost
-	 *     architectureKind=XArchitectureKind '}' (ambiguity) interfaces+=XInterface
 	 *     components+=XComponent (ambiguity) (rule end)
 	 *     components+=XComponent (ambiguity) components+=XComponent
 	 *     components+=XComponent (ambiguity) dependencySettings+=XDependencySettings
@@ -218,34 +507,10 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     interfaces+=XInterface (ambiguity) functions+=XFunction
 	 *     interfaces+=XInterface (ambiguity) hosts+=XHost
 	 *     interfaces+=XInterface (ambiguity) interfaces+=XInterface
-	 *     properties+=XProperty '}' (ambiguity) (rule end)
-	 *     properties+=XProperty '}' (ambiguity) components+=XComponent
-	 *     properties+=XProperty '}' (ambiguity) dependencySettings+=XDependencySettings
-	 *     properties+=XProperty '}' (ambiguity) events+=XEvent
-	 *     properties+=XProperty '}' (ambiguity) executors+=XExecutor
-	 *     properties+=XProperty '}' (ambiguity) functions+=XFunction
-	 *     properties+=XProperty '}' (ambiguity) hosts+=XHost
-	 *     properties+=XProperty '}' (ambiguity) interfaces+=XInterface
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) (rule end)
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) components+=XComponent
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) dependencySettings+=XDependencySettings
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) events+=XEvent
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) executors+=XExecutor
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) functions+=XFunction
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) hosts+=XHost
-	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) interfaces+=XInterface
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) (rule end)
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) components+=XComponent
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) dependencySettings+=XDependencySettings
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) events+=XEvent
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) executors+=XExecutor
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) functions+=XFunction
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) hosts+=XHost
-	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) interfaces+=XInterface
 	 
 	 * </pre>
 	 */
-	protected void emit_TmscXtextModel___TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4__a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+	protected void emit_TmscXtextModel_____TmscKeyword_1_0_0_SettingsKeyword_1_0_1_LeftCurlyBracketKeyword_1_0_2_RightCurlyBracketKeyword_1_0_4___or___TmscKeyword_1_1_0_AnalysesKeyword_1_1_1_LeftCurlyBracketKeyword_1_1_2_RightCurlyBracketKeyword_1_1_4____a(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	
@@ -351,6 +616,20 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'time-bound-analysis' (ambiguity) (rule start)
+	 
+	 * </pre>
+	 */
+	protected void emit_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

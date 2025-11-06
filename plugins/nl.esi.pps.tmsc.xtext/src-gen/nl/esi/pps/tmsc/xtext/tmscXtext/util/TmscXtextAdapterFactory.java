@@ -81,6 +81,16 @@ public class TmscXtextAdapterFactory extends AdapterFactoryImpl
         return createTmscXtextModelAdapter();
       }
       @Override
+      public Adapter caseXTmscAnalysis(XTmscAnalysis object)
+      {
+        return createXTmscAnalysisAdapter();
+      }
+      @Override
+      public Adapter caseXTimeBoundAnalysis(XTimeBoundAnalysis object)
+      {
+        return createXTimeBoundAnalysisAdapter();
+      }
+      @Override
       public Adapter caseXNamedArchitectureElement(XNamedArchitectureElement object)
       {
         return createXNamedArchitectureElementAdapter();
@@ -208,6 +218,36 @@ public class TmscXtextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createTmscXtextModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis <em>XTmsc Analysis</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis
+   * @generated
+   */
+  public Adapter createXTmscAnalysisAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis <em>XTime Bound Analysis</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis
+   * @generated
+   */
+  public Adapter createXTimeBoundAnalysisAdapter()
   {
     return null;
   }

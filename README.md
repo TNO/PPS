@@ -106,8 +106,8 @@ In your new development environment, consider changing the following settings:
 ### Building with Maven
 
 > [!CAUTION]
-> PPS should be built using a _Java 11 VM_.
-> The JDK can be downloaded from e.g. [Oracle](https://www.oracle.com/java/technologies/javase/jdk11-archive-downloads.html) or [Adoptium](https://adoptium.net/temurin/archive/?variant=openjdk11&jvmVariant=hotspot&version=11).
+> PPS should be built using a _Java 21 VM_.
+> The JDK can be downloaded from e.g. [Oracle](https://www.oracle.com/java/technologies/downloads/#java21) or [Adoptium](https://adoptium.net/temurin/releases?version=21&os=any&arch=any).
 >
 > To test which Java version is used by Maven, type `mvn -version` in a command shell.
 

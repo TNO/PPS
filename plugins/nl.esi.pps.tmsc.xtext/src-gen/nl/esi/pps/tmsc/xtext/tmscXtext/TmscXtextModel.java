@@ -22,6 +22,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getTimeBound <em>Time Bound</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getScheduled <em>Scheduled</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getProperties <em>Properties</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getAnalyses <em>Analyses</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getDependencySettings <em>Dependency Settings</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getComponents <em>Components</em>}</li>
@@ -117,6 +118,18 @@ public interface TmscXtextModel extends EObject
    * @generated
    */
   EList<XProperty> getProperties();
+
+  /**
+   * Returns the value of the '<em><b>Analyses</b></em>' containment reference list.
+   * The list contents are of type {@link nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Analyses</em>' containment reference list.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextPackage#getTmscXtextModel_Analyses()
+   * @model containment="true"
+   * @generated
+   */
+  EList<XTmscAnalysis> getAnalyses();
 
   /**
    * Returns the value of the '<em><b>Dependency Settings</b></em>' containment reference list.

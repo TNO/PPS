@@ -33,6 +33,24 @@ public interface TmscXtextFactory extends EFactory
   TmscXtextModel createTmscXtextModel();
 
   /**
+   * Returns a new object of class '<em>XTmsc Analysis</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>XTmsc Analysis</em>'.
+   * @generated
+   */
+  XTmscAnalysis createXTmscAnalysis();
+
+  /**
+   * Returns a new object of class '<em>XTime Bound Analysis</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>XTime Bound Analysis</em>'.
+   * @generated
+   */
+  XTimeBoundAnalysis createXTimeBoundAnalysis();
+
+  /**
    * Returns a new object of class '<em>XNamed Architecture Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
