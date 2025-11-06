@@ -12,7 +12,7 @@ To get up-and-running and to learn more about PPS, please read its documentation
 
 > [!NOTE]
 > Contributions are always welcome!
-> Before starting PPS development, please read the [PPS Developer Guide](plugins/nl.esi.pps.doc.developer/adoc/index.adoc).
+> Before starting PPS development, please read the [PPS Developer Guide](https://tno.github.io/PPS/develpperguide/).
 
 Follow these instructions to set up a PPS development environment.
 

@@ -22,6 +22,7 @@
 
     <artifactId>nl.esi.pps.doc.developer</artifactId>
     <packaging>eclipse-plugin</packaging>
+    <name>PPS Developer Guide</name>
 
     <build>
         <plugins>
@@ -128,6 +129,58 @@
                             </attributes>
                         </configuration>
                     </execution>
+
+                    <!-- Rendering Website -->
+                    <execution>
+                        <id>generate-website</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/website</outputDirectory>
+                            <backend>html5</backend>
+                            <attributes>
+                                <imagesdir />
+                                <imgsdir>images</imgsdir>
+                                <sectnums />
+                                <sectanchors>true</sectanchors>
+                                <toc>left</toc>
+                                <output-html />
+                                <output-site />
+                            </attributes>
+                            <resources>
+                                <resource>
+                                    <directory>${basedir}/images</directory>
+                                    <targetPath>images</targetPath>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+
+                    <!-- Rendering the PDF -->
+                    <execution>
+                        <id>generate-pdf</id>
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <sourceDocumentName>index.adoc</sourceDocumentName>
+                            <outputFile>${project.build.directory}/website/pps-developer-guide.pdf</outputFile>
+                            <backend>pdf</backend>
+                            <attributes>
+                                <imagesdir />
+                                <imgsdir>${basedir}/images</imgsdir>
+                                <sectnums />
+                                <toc />
+                                <numbered />
+                                <pagenums />
+                                <output-pdf />
+                                <output-site />
+                            </attributes>
+                        </configuration>
+                    </execution>
                 </executions>
             </plugin>
 
@@ -175,6 +228,24 @@
                         </fileSet>
                     </additionalFileSets>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>package-website</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                        <configuration>
+                            <descriptors>
+                                <descriptor>${basedir}/assembly.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

@@ -19,13 +19,17 @@ Besides that, it is assumed that when using PPS in another domain, traces in ano
 In both cases it is advised to write your own _reconstructor_ that converts these trace directly into a <<tmsc, TMSC meta-model>> instance.
 This section gives an example on how to create such a custom reconstructor.
 
-The custom TMSC reconstructor example is included in the PPS distribution, in the `examples` directory.
-The example can be easily imported into your development environment by using the menu:File[Import...] menu and then choose to import menu:General[Existing Projects into Workspace] from the tree.
-Now continue the wizard and select all the projects from the `examples` directory to be imported.
+The custom TMSC reconstructor example is included in the PPS distribution.
+The example can be easily imported into your development environment by:
+
+. Use the menu:File[Import...] menu and then choose to import menu:Plug-in Development[Plug-ins and Fragments] from the tree.
+. On the next wizard page, select the `Projects with source folders` in the `Import As` section.
+. On the next wizard page filter the available plug-ins and fragments by `nl.esi.pps.tmsc.reconstruct` and click the btn:[Add All ->] button.
+- Now btn:[Finish] the wizard to import the projects.
 
 TIP: For more information on creating custom EMF resources or using extension points, please read the Eclipse and EMF documentation.
 
-TIP: To run PPS with the custom TMSC reconstructor example, please use the context menu on the `nl.esi.pps.tmsc.reconstruct.ui` project and select menu:Run As[Eclipse Application].
+TIP: You can test the example by creating a `*.tmsctrace` file in a project within the Eclipse runtime instance and then use its menu:Reconstruct TMSC[] context menu to create a TMSC for the trace.
 
 First choose a syntax for your trace (e.g., `tmsctrace` in our example) and register it by means of the `org.eclipse.emf.ecore.extension_parser` extension point in the <<plugin-xml-nl.esi.pps.tmsc.reconstruct, plugin-xml>> of your plugin.
 

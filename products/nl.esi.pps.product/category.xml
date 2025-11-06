@@ -35,6 +35,12 @@
    <feature id="nl.esi.pps.common.ui.feature.source">
       <category name="nl.esi.pps"/>
    </feature>
+   <feature id="nl.esi.pps.tmsc.reconstruct.feature">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.tmsc.reconstruct.feature.source">
+      <category name="nl.esi.pps"/>
+   </feature>
    <bundle id="nl.esi.pps.common.emf.codegen.ecore">
       <category name="nl.esi.pps"/>
    </bundle>
@@ -43,8 +49,8 @@
          The Platform Performance Suite, by ESI (TNO)
       </description>
    </category-def>
-   <repository-reference location="https://download.eclipse.org/trace4cps/nightly/update-site/" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/lsat/nightly/update-site/" enabled="true" />
-   <repository-reference location="https://hallvard.github.io/plantuml/" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20211122181901/repository/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/trace4cps/nightly/update-site/" name="" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/lsat/nightly/update-site/" name="" enabled="true" />
+   <repository-reference location="https://hallvard.github.io/plantuml/" name="" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20211122181901/repository/" name="" enabled="true" />
 </site>

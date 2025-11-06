@@ -42,17 +42,18 @@ image::{imgsdir}/install-pde.png[width=869,height=638]
 
 . Continue the wizard using the btn:[Next] button and finally the btn:[Finish] button. 
   When asked, choose to restart the Eclipse IDE.
-. (The next steps are optional, yet advised) Install the PPS sources by again using the menu:Help[Install New Software...] menu.
-  Now select the `PPS` category from the PPS (e.g., v0.30.0) update site: https://tno.github.io/PPS/update-site/v0.30.0/[] +
-  Please make sure to select the right update site version for your installation.
-  You can see your installed PPS version from the menu:Help[About PPS vX.X] menu.
+. After restart install the PPS sources by using the menu:Help[Install New Software...] menu.
+  Select the `PPS` category from the PPS (e.g., v0.30.0) update site: https://tno.github.io/PPS/update-site/v0.30.0/[] +
++
+IMPORTANT: Please make sure to select the right update site version for your installation.
+You can see your installed PPS version from the menu:Help[About PPS vX.X] menu.
 . Continue the wizard using the btn:[Next] button and finally the btn:[Finish] button.
   When asked, choose to restart the Eclipse IDE.
 
 Your environment is now ready for extending PPS, e.g., <<tmsc-reconstructor, adding a custom TMSC reconstructor>> or <<data-analysis, extending its data analysis>>.
 
 TIP: To start a PPS including your extensions, simply select one of your projects in the project/package explorer view and use its context menu (i.e., right mouse click) to menu:Run As[Eclipse Application].
-A new Eclipse instance will be executed containing all PPS features including your own features.
+A new Eclipse instance (i.e. an Eclipse runtime instance) will be executed containing all PPS features including your own features.
 
 <<<
 
