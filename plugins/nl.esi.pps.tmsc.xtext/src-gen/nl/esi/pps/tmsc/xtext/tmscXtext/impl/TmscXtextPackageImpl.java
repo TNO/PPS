@@ -29,6 +29,8 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyMutliValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyNumberValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyStringValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyValue;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -52,6 +54,20 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   private EClass tmscXtextModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass xTmscAnalysisEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass xTimeBoundAnalysisEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -337,7 +353,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_DependencySettings()
+  public EReference getTmscXtextModel_Analyses()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(4);
   }
@@ -348,7 +364,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Interfaces()
+  public EReference getTmscXtextModel_DependencySettings()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(5);
   }
@@ -359,7 +375,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Components()
+  public EReference getTmscXtextModel_Interfaces()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(6);
   }
@@ -370,7 +386,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Functions()
+  public EReference getTmscXtextModel_Components()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(7);
   }
@@ -381,7 +397,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Hosts()
+  public EReference getTmscXtextModel_Functions()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(8);
   }
@@ -392,7 +408,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Executors()
+  public EReference getTmscXtextModel_Hosts()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(9);
   }
@@ -403,9 +419,53 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   @Override
-  public EReference getTmscXtextModel_Events()
+  public EReference getTmscXtextModel_Executors()
   {
     return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EReference getTmscXtextModel_Events()
+  {
+    return (EReference)tmscXtextModelEClass.getEStructuralFeatures().get(11);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getXTmscAnalysis()
+  {
+    return xTmscAnalysisEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getXTimeBoundAnalysis()
+  {
+    return xTimeBoundAnalysisEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getXTimeBoundAnalysis_DefaultTimeBound()
+  {
+    return (EAttribute)xTimeBoundAnalysisEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1313,6 +1373,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     createEAttribute(tmscXtextModelEClass, TMSC_XTEXT_MODEL__TIME_BOUND);
     createEAttribute(tmscXtextModelEClass, TMSC_XTEXT_MODEL__SCHEDULED);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__PROPERTIES);
+    createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__ANALYSES);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__INTERFACES);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__COMPONENTS);
@@ -1320,6 +1381,11 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__HOSTS);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__EXECUTORS);
     createEReference(tmscXtextModelEClass, TMSC_XTEXT_MODEL__EVENTS);
+
+    xTmscAnalysisEClass = createEClass(XTMSC_ANALYSIS);
+
+    xTimeBoundAnalysisEClass = createEClass(XTIME_BOUND_ANALYSIS);
+    createEAttribute(xTimeBoundAnalysisEClass, XTIME_BOUND_ANALYSIS__DEFAULT_TIME_BOUND);
 
     xNamedArchitectureElementEClass = createEClass(XNAMED_ARCHITECTURE_ELEMENT);
     createEAttribute(xNamedArchitectureElementEClass, XNAMED_ARCHITECTURE_ELEMENT__DESCRIPTION);
@@ -1451,6 +1517,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    xTimeBoundAnalysisEClass.getESuperTypes().add(this.getXTmscAnalysis());
     xInterfaceEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xOperationEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xComponentEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
@@ -1468,6 +1535,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     initEAttribute(getTmscXtextModel_TimeBound(), ecorePackage.getEBigDecimal(), "timeBound", null, 0, 1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTmscXtextModel_Scheduled(), ecorePackage.getEBooleanObject(), "scheduled", null, 0, 1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Properties(), this.getXProperty(), null, "properties", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTmscXtextModel_Analyses(), this.getXTmscAnalysis(), null, "analyses", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_DependencySettings(), this.getXDependencySettings(), null, "dependencySettings", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Interfaces(), this.getXInterface(), null, "interfaces", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Components(), this.getXComponent(), null, "components", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1475,6 +1543,11 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     initEReference(getTmscXtextModel_Hosts(), this.getXHost(), null, "hosts", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Executors(), this.getXExecutor(), null, "executors", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getTmscXtextModel_Events(), this.getXEvent(), null, "events", null, 0, -1, TmscXtextModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(xTmscAnalysisEClass, XTmscAnalysis.class, "XTmscAnalysis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(xTimeBoundAnalysisEClass, XTimeBoundAnalysis.class, "XTimeBoundAnalysis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getXTimeBoundAnalysis_DefaultTimeBound(), ecorePackage.getEBigDecimal(), "defaultTimeBound", null, 0, 1, XTimeBoundAnalysis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(xNamedArchitectureElementEClass, XNamedArchitectureElement.class, "XNamedArchitectureElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getXNamedArchitectureElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, XNamedArchitectureElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

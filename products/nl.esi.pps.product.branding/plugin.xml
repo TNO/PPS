@@ -18,7 +18,7 @@
       <product
             application="org.eclipse.ui.ide.workbench"
             description="Platform Performance Suite"
-            name="PPS v0.20">
+            name="PPS v0.30">
          <property
                name="windowImages"
                value="images/pps16.png,images/pps32.png,images/pps48.png,images/pps64.png,images/pps128.png,images/pps256.png">

@@ -67,6 +67,8 @@ public class TmscXtextFactoryImpl extends EFactoryImpl implements TmscXtextFacto
     switch (eClass.getClassifierID())
     {
       case TmscXtextPackage.TMSC_XTEXT_MODEL: return createTmscXtextModel();
+      case TmscXtextPackage.XTMSC_ANALYSIS: return createXTmscAnalysis();
+      case TmscXtextPackage.XTIME_BOUND_ANALYSIS: return createXTimeBoundAnalysis();
       case TmscXtextPackage.XNAMED_ARCHITECTURE_ELEMENT: return createXNamedArchitectureElement();
       case TmscXtextPackage.XINTERFACE: return createXInterface();
       case TmscXtextPackage.XOPERATION: return createXOperation();
@@ -147,6 +149,30 @@ public class TmscXtextFactoryImpl extends EFactoryImpl implements TmscXtextFacto
   {
     TmscXtextModelImpl tmscXtextModel = new TmscXtextModelImpl();
     return tmscXtextModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public XTmscAnalysis createXTmscAnalysis()
+  {
+    XTmscAnalysisImpl xTmscAnalysis = new XTmscAnalysisImpl();
+    return xTmscAnalysis;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public XTimeBoundAnalysis createXTimeBoundAnalysis()
+  {
+    XTimeBoundAnalysisImpl xTimeBoundAnalysis = new XTimeBoundAnalysisImpl();
+    return xTimeBoundAnalysis;
   }
 
   /**

@@ -18,6 +18,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XFunction;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XHost;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XInterface;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XProperty;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
@@ -45,6 +46,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getTimeBound <em>Time Bound</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getScheduled <em>Scheduled</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getProperties <em>Properties</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getAnalyses <em>Analyses</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getDependencySettings <em>Dependency Settings</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getComponents <em>Components</em>}</li>
@@ -127,6 +129,16 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected EList<XProperty> properties;
+
+  /**
+   * The cached value of the '{@link #getAnalyses() <em>Analyses</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnalyses()
+   * @generated
+   * @ordered
+   */
+  protected EList<XTmscAnalysis> analyses;
 
   /**
    * The cached value of the '{@link #getDependencySettings() <em>Dependency Settings</em>}' containment reference list.
@@ -315,6 +327,21 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
+  public EList<XTmscAnalysis> getAnalyses()
+  {
+    if (analyses == null)
+    {
+      analyses = new EObjectContainmentEList<XTmscAnalysis>(XTmscAnalysis.class, this, TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES);
+    }
+    return analyses;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<XDependencySettings> getDependencySettings()
   {
     if (dependencySettings == null)
@@ -426,6 +453,8 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
     {
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         return ((InternalEList<?>)getProperties()).basicRemove(otherEnd, msgs);
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
+        return ((InternalEList<?>)getAnalyses()).basicRemove(otherEnd, msgs);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS:
         return ((InternalEList<?>)getDependencySettings()).basicRemove(otherEnd, msgs);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__INTERFACES:
@@ -462,6 +491,8 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return getScheduled();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         return getProperties();
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
+        return getAnalyses();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS:
         return getDependencySettings();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__INTERFACES:
@@ -503,6 +534,10 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         getProperties().clear();
         getProperties().addAll((Collection<? extends XProperty>)newValue);
+        return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
+        getAnalyses().clear();
+        getAnalyses().addAll((Collection<? extends XTmscAnalysis>)newValue);
         return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS:
         getDependencySettings().clear();
@@ -558,6 +593,9 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         getProperties().clear();
         return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
+        getAnalyses().clear();
+        return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS:
         getDependencySettings().clear();
         return;
@@ -601,6 +639,8 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return SCHEDULED_EDEFAULT == null ? scheduled != null : !SCHEDULED_EDEFAULT.equals(scheduled);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         return properties != null && !properties.isEmpty();
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
+        return analyses != null && !analyses.isEmpty();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS:
         return dependencySettings != null && !dependencySettings.isEmpty();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__INTERFACES:

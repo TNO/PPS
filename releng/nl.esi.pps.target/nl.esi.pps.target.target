@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="Generated from TNO - PPS" sequenceNumber="10">
+<target name="Generated from TNO - PPS" sequenceNumber="11">
   <locations>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="bcpg" version="1.78.1"/>
@@ -164,7 +164,7 @@
       <repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="21.0.8.v20250724-1412"/>
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="21.0.9.v20251105-0741"/>
       <repository location="https://download.eclipse.org/justj/jres/21/updates/release/latest/"/>
     </location>
   </locations>

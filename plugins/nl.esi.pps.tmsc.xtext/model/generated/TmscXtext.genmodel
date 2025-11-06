@@ -33,6 +33,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/timeBound"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/scheduled"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/properties"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/analyses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/dependencySettings"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/interfaces"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/components"/>
@@ -40,6 +41,10 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/hosts"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/executors"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/events"/>
+    </genClasses>
+    <genClasses ecoreClass="TmscXtext.ecore#//XTmscAnalysis"/>
+    <genClasses ecoreClass="TmscXtext.ecore#//XTimeBoundAnalysis">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XTimeBoundAnalysis/defaultTimeBound"/>
     </genClasses>
     <genClasses ecoreClass="TmscXtext.ecore#//XNamedArchitectureElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XNamedArchitectureElement/description"/>

@@ -8,6 +8,8 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="scheduled" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBooleanObject"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="properties" upperBound="-1"
         eType="#//XProperty" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="analyses" upperBound="-1"
+        eType="#//XTmscAnalysis" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="dependencySettings" upperBound="-1"
         eType="#//XDependencySettings" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
@@ -26,6 +28,10 @@
   <eClassifiers xsi:type="ecore:EEnum" name="XArchitectureKind">
     <eLiterals name="INTERNAL" literal="internal"/>
     <eLiterals name="EXTERNAL" value="1" literal="external"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XTmscAnalysis"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XTimeBoundAnalysis" eSuperTypes="#//XTmscAnalysis">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XNamedArchitectureElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

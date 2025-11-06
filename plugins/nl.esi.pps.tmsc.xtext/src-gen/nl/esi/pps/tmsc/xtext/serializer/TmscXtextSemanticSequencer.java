@@ -25,6 +25,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyBooleanValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyMutliValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyNumberValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyStringValue;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
@@ -103,6 +104,9 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 			case TmscXtextPackage.XPROPERTY_STRING_VALUE:
 				sequence_XPropertyValue(context, (XPropertyStringValue) semanticObject); 
 				return; 
+			case TmscXtextPackage.XTIME_BOUND_ANALYSIS:
+				sequence_XTimeBoundAnalysis(context, (XTimeBoundAnalysis) semanticObject); 
+				return; 
 			}
 		if (errorAcceptor != null)
 			errorAcceptor.accept(diagnosticProvider.createInvalidContextOrTypeDiagnostic(semanticObject, context));
@@ -119,6 +123,7 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         timeBound=ABS_EBIGDECIMAL | 
 	 *         scheduled=EBOOLEAN_OBJECT | 
 	 *         properties+=XProperty | 
+	 *         analyses+=XTmscAnalysis | 
 	 *         dependencySettings+=XDependencySettings | 
 	 *         interfaces+=XInterface | 
 	 *         components+=XComponent | 
@@ -460,6 +465,21 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 		feeder.accept(grammarAccess.getXPropertyAccess().getNameIDStringParserRuleCall_0_0(), semanticObject.getName());
 		feeder.accept(grammarAccess.getXPropertyAccess().getValueXPropertyValueParserRuleCall_2_0(), semanticObject.getValue());
 		feeder.finish();
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     XTmscAnalysis returns XTimeBoundAnalysis
+	 *     XTimeBoundAnalysis returns XTimeBoundAnalysis
+	 *
+	 * Constraint:
+	 *     defaultTimeBound=ABS_EBIGDECIMAL?
+	 * </pre>
+	 */
+	protected void sequence_XTimeBoundAnalysis(ISerializationContext context, XTimeBoundAnalysis semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
 	}
 	
 	

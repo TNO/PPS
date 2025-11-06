@@ -18,6 +18,7 @@ import nl.esi.pps.architecture.ArchitecturePlugin;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.TmscPlugin;
 import nl.esi.pps.tmsc.analysis.DefaultScheduledDependencyAnalysis;
+import nl.esi.pps.tmsc.analysis.DefaultTimeBoundAnalysis;
 import nl.esi.pps.tmsc.metric.MetricFactory;
 import nl.esi.pps.tmsc.metric.MetricModel;
 import nl.esi.pps.tmsc.metric.MetricPlugin;
@@ -27,6 +28,8 @@ import nl.esi.pps.tmsc.xtext.services.TmscXtextGrammarAccess;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XArchitectureKind;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XEvent;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.notify.Adapter;
@@ -128,6 +131,21 @@ public class TmscXtextGenerator extends AbstractGenerator {
     if (_not) {
       EList<EObject> _contents_3 = tmscResource.getContents();
       _contents_3.add(metricModel);
+    }
+    EList<XTmscAnalysis> _analyses = xtextTmsc.getAnalyses();
+    for (final XTmscAnalysis analysis : _analyses) {
+      boolean _matched = false;
+      if (analysis instanceof XTimeBoundAnalysis) {
+        _matched=true;
+        final Long defaultTimeBound = TmscXtextToTmscTransformation.toNanos(((XTimeBoundAnalysis)analysis).getDefaultTimeBound());
+        Long _elvis = null;
+        if (defaultTimeBound != null) {
+          _elvis = defaultTimeBound;
+        } else {
+          _elvis = Long.valueOf(0L);
+        }
+        new DefaultTimeBoundAnalysis((long) _elvis).analyzeTimeBounds(tmsc);
+      }
     }
     try {
       tmscResource.save(null);

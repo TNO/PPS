@@ -53,20 +53,27 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Assignment cPropertiesAssignment_1_0_3_3 = (Assignment)cAlternatives_1_0_3.eContents().get(3);
 		private final RuleCall cPropertiesXPropertyParserRuleCall_1_0_3_3_0 = (RuleCall)cPropertiesAssignment_1_0_3_3.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_0_4 = (Keyword)cGroup_1_0.eContents().get(4);
-		private final Assignment cDependencySettingsAssignment_1_1 = (Assignment)cAlternatives_1.eContents().get(1);
-		private final RuleCall cDependencySettingsXDependencySettingsParserRuleCall_1_1_0 = (RuleCall)cDependencySettingsAssignment_1_1.eContents().get(0);
-		private final Assignment cInterfacesAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
-		private final RuleCall cInterfacesXInterfaceParserRuleCall_1_2_0 = (RuleCall)cInterfacesAssignment_1_2.eContents().get(0);
-		private final Assignment cComponentsAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
-		private final RuleCall cComponentsXComponentParserRuleCall_1_3_0 = (RuleCall)cComponentsAssignment_1_3.eContents().get(0);
-		private final Assignment cFunctionsAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
-		private final RuleCall cFunctionsXFunctionParserRuleCall_1_4_0 = (RuleCall)cFunctionsAssignment_1_4.eContents().get(0);
-		private final Assignment cHostsAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
-		private final RuleCall cHostsXHostParserRuleCall_1_5_0 = (RuleCall)cHostsAssignment_1_5.eContents().get(0);
-		private final Assignment cExecutorsAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
-		private final RuleCall cExecutorsXExecutorParserRuleCall_1_6_0 = (RuleCall)cExecutorsAssignment_1_6.eContents().get(0);
-		private final Assignment cEventsAssignment_1_7 = (Assignment)cAlternatives_1.eContents().get(7);
-		private final RuleCall cEventsXEventParserRuleCall_1_7_0 = (RuleCall)cEventsAssignment_1_7.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cTmscKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Keyword cAnalysesKeyword_1_1_1 = (Keyword)cGroup_1_1.eContents().get(1);
+		private final Keyword cLeftCurlyBracketKeyword_1_1_2 = (Keyword)cGroup_1_1.eContents().get(2);
+		private final Assignment cAnalysesAssignment_1_1_3 = (Assignment)cGroup_1_1.eContents().get(3);
+		private final RuleCall cAnalysesXTmscAnalysisParserRuleCall_1_1_3_0 = (RuleCall)cAnalysesAssignment_1_1_3.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_1_1_4 = (Keyword)cGroup_1_1.eContents().get(4);
+		private final Assignment cDependencySettingsAssignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cDependencySettingsXDependencySettingsParserRuleCall_1_2_0 = (RuleCall)cDependencySettingsAssignment_1_2.eContents().get(0);
+		private final Assignment cInterfacesAssignment_1_3 = (Assignment)cAlternatives_1.eContents().get(3);
+		private final RuleCall cInterfacesXInterfaceParserRuleCall_1_3_0 = (RuleCall)cInterfacesAssignment_1_3.eContents().get(0);
+		private final Assignment cComponentsAssignment_1_4 = (Assignment)cAlternatives_1.eContents().get(4);
+		private final RuleCall cComponentsXComponentParserRuleCall_1_4_0 = (RuleCall)cComponentsAssignment_1_4.eContents().get(0);
+		private final Assignment cFunctionsAssignment_1_5 = (Assignment)cAlternatives_1.eContents().get(5);
+		private final RuleCall cFunctionsXFunctionParserRuleCall_1_5_0 = (RuleCall)cFunctionsAssignment_1_5.eContents().get(0);
+		private final Assignment cHostsAssignment_1_6 = (Assignment)cAlternatives_1.eContents().get(6);
+		private final RuleCall cHostsXHostParserRuleCall_1_6_0 = (RuleCall)cHostsAssignment_1_6.eContents().get(0);
+		private final Assignment cExecutorsAssignment_1_7 = (Assignment)cAlternatives_1.eContents().get(7);
+		private final RuleCall cExecutorsXExecutorParserRuleCall_1_7_0 = (RuleCall)cExecutorsAssignment_1_7.eContents().get(0);
+		private final Assignment cEventsAssignment_1_8 = (Assignment)cAlternatives_1.eContents().get(8);
+		private final RuleCall cEventsXEventParserRuleCall_1_8_0 = (RuleCall)cEventsAssignment_1_8.eContents().get(0);
 		
 		//TmscXtextModel:
 		//    {TmscXtextModel}
@@ -76,6 +83,9 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//        |properties+=XProperty)*
 		//    '}')
+		//    |('tmsc' 'analyses' '{'
+		//        analyses+=XTmscAnalysis*
+		//     '}')
 		//    | dependencySettings+=XDependencySettings
 		//    | interfaces+=XInterface
 		//    | components+=XComponent
@@ -92,6 +102,9 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//    |properties+=XProperty)*
 		//'}')
+		//|('tmsc' 'analyses' '{'
+		//    analyses+=XTmscAnalysis*
+		// '}')
 		//| dependencySettings+=XDependencySettings
 		//| interfaces+=XInterface
 		//| components+=XComponent
@@ -110,6 +123,9 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 		//    |properties+=XProperty)*
 		//'}')
+		//|('tmsc' 'analyses' '{'
+		//    analyses+=XTmscAnalysis*
+		// '}')
 		//| dependencySettings+=XDependencySettings
 		//| interfaces+=XInterface
 		//| components+=XComponent
@@ -196,47 +212,141 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_0_4() { return cRightCurlyBracketKeyword_1_0_4; }
 		
+		//('tmsc' 'analyses' '{'
+		//        analyses+=XTmscAnalysis*
+		//     '}')
+		public Group getGroup_1_1() { return cGroup_1_1; }
+		
+		//'tmsc'
+		public Keyword getTmscKeyword_1_1_0() { return cTmscKeyword_1_1_0; }
+		
+		//'analyses'
+		public Keyword getAnalysesKeyword_1_1_1() { return cAnalysesKeyword_1_1_1; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_1_1_2() { return cLeftCurlyBracketKeyword_1_1_2; }
+		
+		//analyses+=XTmscAnalysis*
+		public Assignment getAnalysesAssignment_1_1_3() { return cAnalysesAssignment_1_1_3; }
+		
+		//XTmscAnalysis
+		public RuleCall getAnalysesXTmscAnalysisParserRuleCall_1_1_3_0() { return cAnalysesXTmscAnalysisParserRuleCall_1_1_3_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_1_1_4() { return cRightCurlyBracketKeyword_1_1_4; }
+		
 		//dependencySettings+=XDependencySettings
-		public Assignment getDependencySettingsAssignment_1_1() { return cDependencySettingsAssignment_1_1; }
+		public Assignment getDependencySettingsAssignment_1_2() { return cDependencySettingsAssignment_1_2; }
 		
 		//XDependencySettings
-		public RuleCall getDependencySettingsXDependencySettingsParserRuleCall_1_1_0() { return cDependencySettingsXDependencySettingsParserRuleCall_1_1_0; }
+		public RuleCall getDependencySettingsXDependencySettingsParserRuleCall_1_2_0() { return cDependencySettingsXDependencySettingsParserRuleCall_1_2_0; }
 		
 		//interfaces+=XInterface
-		public Assignment getInterfacesAssignment_1_2() { return cInterfacesAssignment_1_2; }
+		public Assignment getInterfacesAssignment_1_3() { return cInterfacesAssignment_1_3; }
 		
 		//XInterface
-		public RuleCall getInterfacesXInterfaceParserRuleCall_1_2_0() { return cInterfacesXInterfaceParserRuleCall_1_2_0; }
+		public RuleCall getInterfacesXInterfaceParserRuleCall_1_3_0() { return cInterfacesXInterfaceParserRuleCall_1_3_0; }
 		
 		//components+=XComponent
-		public Assignment getComponentsAssignment_1_3() { return cComponentsAssignment_1_3; }
+		public Assignment getComponentsAssignment_1_4() { return cComponentsAssignment_1_4; }
 		
 		//XComponent
-		public RuleCall getComponentsXComponentParserRuleCall_1_3_0() { return cComponentsXComponentParserRuleCall_1_3_0; }
+		public RuleCall getComponentsXComponentParserRuleCall_1_4_0() { return cComponentsXComponentParserRuleCall_1_4_0; }
 		
 		//functions+=XFunction
-		public Assignment getFunctionsAssignment_1_4() { return cFunctionsAssignment_1_4; }
+		public Assignment getFunctionsAssignment_1_5() { return cFunctionsAssignment_1_5; }
 		
 		//XFunction
-		public RuleCall getFunctionsXFunctionParserRuleCall_1_4_0() { return cFunctionsXFunctionParserRuleCall_1_4_0; }
+		public RuleCall getFunctionsXFunctionParserRuleCall_1_5_0() { return cFunctionsXFunctionParserRuleCall_1_5_0; }
 		
 		//hosts+=XHost
-		public Assignment getHostsAssignment_1_5() { return cHostsAssignment_1_5; }
+		public Assignment getHostsAssignment_1_6() { return cHostsAssignment_1_6; }
 		
 		//XHost
-		public RuleCall getHostsXHostParserRuleCall_1_5_0() { return cHostsXHostParserRuleCall_1_5_0; }
+		public RuleCall getHostsXHostParserRuleCall_1_6_0() { return cHostsXHostParserRuleCall_1_6_0; }
 		
 		//executors+=XExecutor
-		public Assignment getExecutorsAssignment_1_6() { return cExecutorsAssignment_1_6; }
+		public Assignment getExecutorsAssignment_1_7() { return cExecutorsAssignment_1_7; }
 		
 		//XExecutor
-		public RuleCall getExecutorsXExecutorParserRuleCall_1_6_0() { return cExecutorsXExecutorParserRuleCall_1_6_0; }
+		public RuleCall getExecutorsXExecutorParserRuleCall_1_7_0() { return cExecutorsXExecutorParserRuleCall_1_7_0; }
 		
 		//events+=XEvent
-		public Assignment getEventsAssignment_1_7() { return cEventsAssignment_1_7; }
+		public Assignment getEventsAssignment_1_8() { return cEventsAssignment_1_8; }
 		
 		//XEvent
-		public RuleCall getEventsXEventParserRuleCall_1_7_0() { return cEventsXEventParserRuleCall_1_7_0; }
+		public RuleCall getEventsXEventParserRuleCall_1_8_0() { return cEventsXEventParserRuleCall_1_8_0; }
+	}
+	public class XTmscAnalysisElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XTmscAnalysis");
+		private final RuleCall cXTimeBoundAnalysisParserRuleCall = (RuleCall)rule.eContents().get(1);
+		
+		//XTmscAnalysis:
+		//    XTimeBoundAnalysis
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//XTimeBoundAnalysis
+		public RuleCall getXTimeBoundAnalysisParserRuleCall() { return cXTimeBoundAnalysisParserRuleCall; }
+	}
+	public class XTimeBoundAnalysisElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XTimeBoundAnalysis");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cXTimeBoundAnalysisAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cTimeBoundAnalysisKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cDefaultTimeBoundKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Keyword cColonKeyword_2_1_1 = (Keyword)cGroup_2_1.eContents().get(1);
+		private final Assignment cDefaultTimeBoundAssignment_2_1_2 = (Assignment)cGroup_2_1.eContents().get(2);
+		private final RuleCall cDefaultTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_2_0 = (RuleCall)cDefaultTimeBoundAssignment_2_1_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		
+		//XTimeBoundAnalysis: {XTimeBoundAnalysis}
+		//    'time-bound-analysis' ('{'
+		//        ('defaultTimeBound' ':' defaultTimeBound=ABS_EBIGDECIMAL)?
+		//    '}')?
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{XTimeBoundAnalysis}
+		//   'time-bound-analysis' ('{'
+		//       ('defaultTimeBound' ':' defaultTimeBound=ABS_EBIGDECIMAL)?
+		//   '}')?
+		public Group getGroup() { return cGroup; }
+		
+		//{XTimeBoundAnalysis}
+		public Action getXTimeBoundAnalysisAction_0() { return cXTimeBoundAnalysisAction_0; }
+		
+		//'time-bound-analysis'
+		public Keyword getTimeBoundAnalysisKeyword_1() { return cTimeBoundAnalysisKeyword_1; }
+		
+		//('{'
+		//       ('defaultTimeBound' ':' defaultTimeBound=ABS_EBIGDECIMAL)?
+		//   '}')?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
+		
+		//('defaultTimeBound' ':' defaultTimeBound=ABS_EBIGDECIMAL)?
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//'defaultTimeBound'
+		public Keyword getDefaultTimeBoundKeyword_2_1_0() { return cDefaultTimeBoundKeyword_2_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2_1_1() { return cColonKeyword_2_1_1; }
+		
+		//defaultTimeBound=ABS_EBIGDECIMAL
+		public Assignment getDefaultTimeBoundAssignment_2_1_2() { return cDefaultTimeBoundAssignment_2_1_2; }
+		
+		//ABS_EBIGDECIMAL
+		public RuleCall getDefaultTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_2_0() { return cDefaultTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_2_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
 	}
 	public class XNamedArchitectureElementElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XNamedArchitectureElement");
@@ -2313,6 +2423,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	private final TmscXtextModelElements pTmscXtextModel;
 	private final XArchitectureKindElements eXArchitectureKind;
+	private final XTmscAnalysisElements pXTmscAnalysis;
+	private final XTimeBoundAnalysisElements pXTimeBoundAnalysis;
 	private final XNamedArchitectureElementElements pXNamedArchitectureElement;
 	private final XInterfaceElements pXInterface;
 	private final XOperationElements pXOperation;
@@ -2353,6 +2465,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		this.grammar = internalFindGrammar(grammarProvider);
 		this.pTmscXtextModel = new TmscXtextModelElements();
 		this.eXArchitectureKind = new XArchitectureKindElements();
+		this.pXTmscAnalysis = new XTmscAnalysisElements();
+		this.pXTimeBoundAnalysis = new XTimeBoundAnalysisElements();
 		this.pXNamedArchitectureElement = new XNamedArchitectureElementElements();
 		this.pXInterface = new XInterfaceElements();
 		this.pXOperation = new XOperationElements();
@@ -2418,6 +2532,9 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
 	//        |properties+=XProperty)*
 	//    '}')
+	//    |('tmsc' 'analyses' '{'
+	//        analyses+=XTmscAnalysis*
+	//     '}')
 	//    | dependencySettings+=XDependencySettings
 	//    | interfaces+=XInterface
 	//    | components+=XComponent
@@ -2441,6 +2558,30 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	public EnumRule getXArchitectureKindRule() {
 		return getXArchitectureKindAccess().getRule();
+	}
+	
+	//XTmscAnalysis:
+	//    XTimeBoundAnalysis
+	//;
+	public XTmscAnalysisElements getXTmscAnalysisAccess() {
+		return pXTmscAnalysis;
+	}
+	
+	public ParserRule getXTmscAnalysisRule() {
+		return getXTmscAnalysisAccess().getRule();
+	}
+	
+	//XTimeBoundAnalysis: {XTimeBoundAnalysis}
+	//    'time-bound-analysis' ('{'
+	//        ('defaultTimeBound' ':' defaultTimeBound=ABS_EBIGDECIMAL)?
+	//    '}')?
+	//;
+	public XTimeBoundAnalysisElements getXTimeBoundAnalysisAccess() {
+		return pXTimeBoundAnalysis;
+	}
+	
+	public ParserRule getXTimeBoundAnalysisRule() {
+		return getXTimeBoundAnalysisAccess().getRule();
 	}
 	
 	//XNamedArchitectureElement:

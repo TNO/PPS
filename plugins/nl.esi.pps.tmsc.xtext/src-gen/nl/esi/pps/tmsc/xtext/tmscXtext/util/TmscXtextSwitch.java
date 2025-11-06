@@ -80,6 +80,21 @@ public class TmscXtextSwitch<T> extends Switch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case TmscXtextPackage.XTMSC_ANALYSIS:
+      {
+        XTmscAnalysis xTmscAnalysis = (XTmscAnalysis)theEObject;
+        T result = caseXTmscAnalysis(xTmscAnalysis);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case TmscXtextPackage.XTIME_BOUND_ANALYSIS:
+      {
+        XTimeBoundAnalysis xTimeBoundAnalysis = (XTimeBoundAnalysis)theEObject;
+        T result = caseXTimeBoundAnalysis(xTimeBoundAnalysis);
+        if (result == null) result = caseXTmscAnalysis(xTimeBoundAnalysis);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case TmscXtextPackage.XNAMED_ARCHITECTURE_ELEMENT:
       {
         XNamedArchitectureElement xNamedArchitectureElement = (XNamedArchitectureElement)theEObject;
@@ -239,6 +254,38 @@ public class TmscXtextSwitch<T> extends Switch<T>
    * @generated
    */
   public T caseTmscXtextModel(TmscXtextModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>XTmsc Analysis</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>XTmsc Analysis</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseXTmscAnalysis(XTmscAnalysis object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>XTime Bound Analysis</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>XTime Bound Analysis</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseXTimeBoundAnalysis(XTimeBoundAnalysis object)
   {
     return null;
   }
