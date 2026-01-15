@@ -36,7 +36,7 @@ enum XArchitectureKind:
     INTERNAL='internal' | EXTERNAL='external';
 
 XTmscAnalysis:
-    XTimeBoundAnalysis
+    XTimeBoundAnalysis | XTimeShift
 ;
 
 XTimeBoundAnalysis: {XTimeBoundAnalysis}
@@ -45,18 +45,24 @@ XTimeBoundAnalysis: {XTimeBoundAnalysis}
     '}')?
 ;
 
+XTimeShift: {XTimeShift}
+    'time-shift' ('{'
+        ('delta' ':' delta=EBIGDECIMAL)?
+    '}')?
+;
+
 XNamedArchitectureElement:
     XInterface | XOperation | XComponent | XFunction | XHost | XExecutor;
 
 XInterface:
-    'interface' (description=IDString 'as')? name=ID 
+    'interface' (description=IDString 'as')? name=ID
     ('{'
         (properties+=XProperty
         |operations+=XOperation)*
     '}')?;
 
 XOperation:
-    'operation' (description=IDString 'as')? name=ID 
+    'operation' (description=IDString 'as')? name=ID
     ('{'
         (properties+=XProperty)*
     '}')?;

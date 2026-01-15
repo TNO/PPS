@@ -33,6 +33,7 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, TmscXtextGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getTmscXtextModelAccess().getAlternatives_1(), "rule__TmscXtextModel__Alternatives_1");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getAlternatives_1_0_3(), "rule__TmscXtextModel__Alternatives_1_0_3");
+			builder.put(grammarAccess.getXTmscAnalysisAccess().getAlternatives(), "rule__XTmscAnalysis__Alternatives");
 			builder.put(grammarAccess.getXNamedArchitectureElementAccess().getAlternatives(), "rule__XNamedArchitectureElement__Alternatives");
 			builder.put(grammarAccess.getXInterfaceAccess().getAlternatives_3_1(), "rule__XInterface__Alternatives_3_1");
 			builder.put(grammarAccess.getXComponentAccess().getAlternatives_5_1(), "rule__XComponent__Alternatives_5_1");
@@ -65,6 +66,9 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getXTimeBoundAnalysisAccess().getGroup(), "rule__XTimeBoundAnalysis__Group__0");
 			builder.put(grammarAccess.getXTimeBoundAnalysisAccess().getGroup_2(), "rule__XTimeBoundAnalysis__Group_2__0");
 			builder.put(grammarAccess.getXTimeBoundAnalysisAccess().getGroup_2_1(), "rule__XTimeBoundAnalysis__Group_2_1__0");
+			builder.put(grammarAccess.getXTimeShiftAccess().getGroup(), "rule__XTimeShift__Group__0");
+			builder.put(grammarAccess.getXTimeShiftAccess().getGroup_2(), "rule__XTimeShift__Group_2__0");
+			builder.put(grammarAccess.getXTimeShiftAccess().getGroup_2_1(), "rule__XTimeShift__Group_2_1__0");
 			builder.put(grammarAccess.getXInterfaceAccess().getGroup(), "rule__XInterface__Group__0");
 			builder.put(grammarAccess.getXInterfaceAccess().getGroup_1(), "rule__XInterface__Group_1__0");
 			builder.put(grammarAccess.getXInterfaceAccess().getGroup_3(), "rule__XInterface__Group_3__0");
@@ -147,6 +151,7 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTmscXtextModelAccess().getExecutorsAssignment_1_7(), "rule__TmscXtextModel__ExecutorsAssignment_1_7");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getEventsAssignment_1_8(), "rule__TmscXtextModel__EventsAssignment_1_8");
 			builder.put(grammarAccess.getXTimeBoundAnalysisAccess().getDefaultTimeBoundAssignment_2_1_2(), "rule__XTimeBoundAnalysis__DefaultTimeBoundAssignment_2_1_2");
+			builder.put(grammarAccess.getXTimeShiftAccess().getDeltaAssignment_2_1_2(), "rule__XTimeShift__DeltaAssignment_2_1_2");
 			builder.put(grammarAccess.getXInterfaceAccess().getDescriptionAssignment_1_0(), "rule__XInterface__DescriptionAssignment_1_0");
 			builder.put(grammarAccess.getXInterfaceAccess().getNameAssignment_2(), "rule__XInterface__NameAssignment_2");
 			builder.put(grammarAccess.getXInterfaceAccess().getPropertiesAssignment_3_1_0(), "rule__XInterface__PropertiesAssignment_3_1_0");

@@ -410,14 +410,25 @@ ruleXTmscAnalysis returns [EObject current=null]
 @after {
 	leaveRule();
 }:
-	{
-		newCompositeNode(grammarAccess.getXTmscAnalysisAccess().getXTimeBoundAnalysisParserRuleCall());
-	}
-	this_XTimeBoundAnalysis_0=ruleXTimeBoundAnalysis
-	{
-		$current = $this_XTimeBoundAnalysis_0.current;
-		afterParserOrEnumRuleCall();
-	}
+	(
+		{
+			newCompositeNode(grammarAccess.getXTmscAnalysisAccess().getXTimeBoundAnalysisParserRuleCall_0());
+		}
+		this_XTimeBoundAnalysis_0=ruleXTimeBoundAnalysis
+		{
+			$current = $this_XTimeBoundAnalysis_0.current;
+			afterParserOrEnumRuleCall();
+		}
+		    |
+		{
+			newCompositeNode(grammarAccess.getXTmscAnalysisAccess().getXTimeShiftParserRuleCall_1());
+		}
+		this_XTimeShift_1=ruleXTimeShift
+		{
+			$current = $this_XTimeShift_1.current;
+			afterParserOrEnumRuleCall();
+		}
+	)
 ;
 
 // Entry rule entryRuleXTimeBoundAnalysis
@@ -483,6 +494,75 @@ ruleXTimeBoundAnalysis returns [EObject current=null]
 			otherlv_6='}'
 			{
 				newLeafNode(otherlv_6, grammarAccess.getXTimeBoundAnalysisAccess().getRightCurlyBracketKeyword_2_2());
+			}
+		)?
+	)
+;
+
+// Entry rule entryRuleXTimeShift
+entryRuleXTimeShift returns [EObject current=null]:
+	{ newCompositeNode(grammarAccess.getXTimeShiftRule()); }
+	iv_ruleXTimeShift=ruleXTimeShift
+	{ $current=$iv_ruleXTimeShift.current; }
+	EOF;
+
+// Rule XTimeShift
+ruleXTimeShift returns [EObject current=null]
+@init {
+	enterRule();
+}
+@after {
+	leaveRule();
+}:
+	(
+		(
+			{
+				$current = forceCreateModelElement(
+					grammarAccess.getXTimeShiftAccess().getXTimeShiftAction_0(),
+					$current);
+			}
+		)
+		otherlv_1='time-shift'
+		{
+			newLeafNode(otherlv_1, grammarAccess.getXTimeShiftAccess().getTimeShiftKeyword_1());
+		}
+		(
+			otherlv_2='{'
+			{
+				newLeafNode(otherlv_2, grammarAccess.getXTimeShiftAccess().getLeftCurlyBracketKeyword_2_0());
+			}
+			(
+				otherlv_3='delta'
+				{
+					newLeafNode(otherlv_3, grammarAccess.getXTimeShiftAccess().getDeltaKeyword_2_1_0());
+				}
+				otherlv_4=':'
+				{
+					newLeafNode(otherlv_4, grammarAccess.getXTimeShiftAccess().getColonKeyword_2_1_1());
+				}
+				(
+					(
+						{
+							newCompositeNode(grammarAccess.getXTimeShiftAccess().getDeltaEBIGDECIMALParserRuleCall_2_1_2_0());
+						}
+						lv_delta_5_0=ruleEBIGDECIMAL
+						{
+							if ($current==null) {
+								$current = createModelElementForParent(grammarAccess.getXTimeShiftRule());
+							}
+							set(
+								$current,
+								"delta",
+								lv_delta_5_0,
+								"nl.esi.pps.tmsc.xtext.TmscXtext.EBIGDECIMAL");
+							afterParserOrEnumRuleCall();
+						}
+					)
+				)
+			)?
+			otherlv_6='}'
+			{
+				newLeafNode(otherlv_6, grammarAccess.getXTimeShiftAccess().getRightCurlyBracketKeyword_2_2());
 			}
 		)?
 	)

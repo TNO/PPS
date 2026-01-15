@@ -69,6 +69,7 @@ public class TmscXtextFactoryImpl extends EFactoryImpl implements TmscXtextFacto
       case TmscXtextPackage.TMSC_XTEXT_MODEL: return createTmscXtextModel();
       case TmscXtextPackage.XTMSC_ANALYSIS: return createXTmscAnalysis();
       case TmscXtextPackage.XTIME_BOUND_ANALYSIS: return createXTimeBoundAnalysis();
+      case TmscXtextPackage.XTIME_SHIFT: return createXTimeShift();
       case TmscXtextPackage.XNAMED_ARCHITECTURE_ELEMENT: return createXNamedArchitectureElement();
       case TmscXtextPackage.XINTERFACE: return createXInterface();
       case TmscXtextPackage.XOPERATION: return createXOperation();
@@ -173,6 +174,18 @@ public class TmscXtextFactoryImpl extends EFactoryImpl implements TmscXtextFacto
   {
     XTimeBoundAnalysisImpl xTimeBoundAnalysis = new XTimeBoundAnalysisImpl();
     return xTimeBoundAnalysis;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public XTimeShift createXTimeShift()
+  {
+    XTimeShiftImpl xTimeShift = new XTimeShiftImpl();
+    return xTimeShift;
   }
 
   /**

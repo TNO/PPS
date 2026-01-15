@@ -26,6 +26,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyMutliValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyNumberValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyStringValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.Action;
@@ -106,6 +107,9 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 				return; 
 			case TmscXtextPackage.XTIME_BOUND_ANALYSIS:
 				sequence_XTimeBoundAnalysis(context, (XTimeBoundAnalysis) semanticObject); 
+				return; 
+			case TmscXtextPackage.XTIME_SHIFT:
+				sequence_XTimeShift(context, (XTimeShift) semanticObject); 
 				return; 
 			}
 		if (errorAcceptor != null)
@@ -479,6 +483,21 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 * </pre>
 	 */
 	protected void sequence_XTimeBoundAnalysis(ISerializationContext context, XTimeBoundAnalysis semanticObject) {
+		genericSequencer.createSequence(context, semanticObject);
+	}
+	
+	
+	/**
+	 * <pre>
+	 * Contexts:
+	 *     XTmscAnalysis returns XTimeShift
+	 *     XTimeShift returns XTimeShift
+	 *
+	 * Constraint:
+	 *     delta=EBIGDECIMAL?
+	 * </pre>
+	 */
+	protected void sequence_XTimeShift(ISerializationContext context, XTimeShift semanticObject) {
 		genericSequencer.createSequence(context, semanticObject);
 	}
 	

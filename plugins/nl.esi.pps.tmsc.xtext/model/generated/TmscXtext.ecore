@@ -33,6 +33,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="XTimeBoundAnalysis" eSuperTypes="#//XTmscAnalysis">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="defaultTimeBound" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XTimeShift" eSuperTypes="#//XTmscAnalysis">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delta" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XNamedArchitectureElement">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

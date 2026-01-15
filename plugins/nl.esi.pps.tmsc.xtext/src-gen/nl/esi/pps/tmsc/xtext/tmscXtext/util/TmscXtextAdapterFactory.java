@@ -91,6 +91,11 @@ public class TmscXtextAdapterFactory extends AdapterFactoryImpl
         return createXTimeBoundAnalysisAdapter();
       }
       @Override
+      public Adapter caseXTimeShift(XTimeShift object)
+      {
+        return createXTimeShiftAdapter();
+      }
+      @Override
       public Adapter caseXNamedArchitectureElement(XNamedArchitectureElement object)
       {
         return createXNamedArchitectureElementAdapter();
@@ -248,6 +253,21 @@ public class TmscXtextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createXTimeBoundAnalysisAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift <em>XTime Shift</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift
+   * @generated
+   */
+  public Adapter createXTimeShiftAdapter()
   {
     return null;
   }

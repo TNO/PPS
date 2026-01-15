@@ -39,6 +39,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	protected AbstractElementAlias match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
 	protected AbstractElementAlias match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q;
 	protected AbstractElementAlias match_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q;
+	protected AbstractElementAlias match_XTimeShift___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q;
 	
 	@Inject
 	protected void init(IGrammarAccess access) {
@@ -60,6 +61,7 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 		match_XInterface___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXInterfaceAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXInterfaceAccess().getRightCurlyBracketKeyword_3_2()));
 		match_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXOperationAccess().getLeftCurlyBracketKeyword_3_0()), new TokenAlias(false, false, grammarAccess.getXOperationAccess().getRightCurlyBracketKeyword_3_2()));
 		match_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXTimeBoundAnalysisAccess().getLeftCurlyBracketKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getXTimeBoundAnalysisAccess().getRightCurlyBracketKeyword_2_2()));
+		match_XTimeShift___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q = new GroupAlias(false, true, new TokenAlias(false, false, grammarAccess.getXTimeShiftAccess().getLeftCurlyBracketKeyword_2_0()), new TokenAlias(false, false, grammarAccess.getXTimeShiftAccess().getRightCurlyBracketKeyword_2_2()));
 	}
 	
 	@Override
@@ -108,6 +110,8 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 				emit_XOperation___LeftCurlyBracketKeyword_3_0_RightCurlyBracketKeyword_3_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else if (match_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q.equals(syntax))
 				emit_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
+			else if (match_XTimeShift___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q.equals(syntax))
+				emit_XTimeShift___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(semanticObject, getLastNavigableState(), syntaxNodes);
 			else acceptNodes(getLastNavigableState(), syntaxNodes);
 		}
 	}
@@ -630,6 +634,20 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 * </pre>
 	 */
 	protected void emit_XTimeBoundAnalysis___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
+		acceptNodes(transition, nodes);
+	}
+	
+	/**
+	 * <pre>
+	 * Ambiguous syntax:
+	 *     ('{' '}')?
+	 *
+	 * This ambiguous syntax occurs at:
+	 *     (rule start) 'time-shift' (ambiguity) (rule start)
+	 
+	 * </pre>
+	 */
+	protected void emit_XTimeShift___LeftCurlyBracketKeyword_2_0_RightCurlyBracketKeyword_2_2__q(EObject semanticObject, ISynNavigable transition, List<INode> nodes) {
 		acceptNodes(transition, nodes);
 	}
 	

@@ -46,6 +46,9 @@
     <genClasses ecoreClass="TmscXtext.ecore#//XTimeBoundAnalysis">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XTimeBoundAnalysis/defaultTimeBound"/>
     </genClasses>
+    <genClasses ecoreClass="TmscXtext.ecore#//XTimeShift">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XTimeShift/delta"/>
+    </genClasses>
     <genClasses ecoreClass="TmscXtext.ecore#//XNamedArchitectureElement">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XNamedArchitectureElement/description"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//XNamedArchitectureElement/name"/>

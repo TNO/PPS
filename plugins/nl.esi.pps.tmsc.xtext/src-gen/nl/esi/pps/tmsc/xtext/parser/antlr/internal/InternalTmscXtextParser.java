@@ -23,7 +23,7 @@ import java.util.HashMap;
 @SuppressWarnings("all")
 public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ABS_EBIGDECIMAL", "RULE_ID", "RULE_ISO8601", "RULE_POS_EBIGDECIMAL", "RULE_STRING", "RULE_NEG_EBIGDECIMAL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'tmsc'", "'settings'", "'{'", "'architecture'", "':'", "'time-bound'", "'scheduled'", "'}'", "'analyses'", "'time-bound-analysis'", "'defaultTimeBound'", "'interface'", "'as'", "'operation'", "'component'", "'provides'", "','", "'requires'", "'ipc-client'", "'ipc-server'", "'function'", "'('", "')'", "'implements'", "'untraced'", "'host'", "'executor'", "'!'", "'?'", "'request'", "'message'", "'prefix'", "'['", "']'", "'.'", "'true'", "'false'", "'internal'", "'external'", "'in'", "'out'", "'inout'", "'return'", "'>'", "'<'", "'reply'", "'domain-dependency'", "'lifeline-segment'", "'message-control'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_ABS_EBIGDECIMAL", "RULE_ID", "RULE_ISO8601", "RULE_POS_EBIGDECIMAL", "RULE_STRING", "RULE_NEG_EBIGDECIMAL", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "'tmsc'", "'settings'", "'{'", "'architecture'", "':'", "'time-bound'", "'scheduled'", "'}'", "'analyses'", "'time-bound-analysis'", "'defaultTimeBound'", "'time-shift'", "'delta'", "'interface'", "'as'", "'operation'", "'component'", "'provides'", "','", "'requires'", "'ipc-client'", "'ipc-server'", "'function'", "'('", "')'", "'implements'", "'untraced'", "'host'", "'executor'", "'!'", "'?'", "'request'", "'message'", "'prefix'", "'['", "']'", "'.'", "'true'", "'false'", "'internal'", "'external'", "'in'", "'out'", "'inout'", "'return'", "'>'", "'<'", "'reply'", "'domain-dependency'", "'lifeline-segment'", "'message-control'"
     };
     public static final int T__50=50;
     public static final int RULE_NEG_EBIGDECIMAL=9;
@@ -56,6 +56,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
     public static final int T__23=23;
     public static final int T__24=24;
     public static final int T__25=25;
+    public static final int T__62=62;
+    public static final int T__63=63;
     public static final int T__20=20;
     public static final int T__21=21;
     public static final int RULE_ISO8601=6;
@@ -551,7 +553,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	        int alt2=2;
             	        int LA2_0 = input.LA(1);
 
-            	        if ( (LA2_0==22) ) {
+            	        if ( (LA2_0==22||LA2_0==24) ) {
             	            alt2=1;
             	        }
 
@@ -968,36 +970,87 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXTmscAnalysis"
-    // InternalTmscXtext.g:406:1: ruleXTmscAnalysis returns [EObject current=null] : this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis ;
+    // InternalTmscXtext.g:406:1: ruleXTmscAnalysis returns [EObject current=null] : (this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis | this_XTimeShift_1= ruleXTimeShift ) ;
     public final EObject ruleXTmscAnalysis() throws RecognitionException {
         EObject current = null;
 
         EObject this_XTimeBoundAnalysis_0 = null;
+
+        EObject this_XTimeShift_1 = null;
 
 
 
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:412:2: (this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis )
-            // InternalTmscXtext.g:413:2: this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis
+            // InternalTmscXtext.g:412:2: ( (this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis | this_XTimeShift_1= ruleXTimeShift ) )
+            // InternalTmscXtext.g:413:2: (this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis | this_XTimeShift_1= ruleXTimeShift )
             {
-            if ( state.backtracking==0 ) {
+            // InternalTmscXtext.g:413:2: (this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis | this_XTimeShift_1= ruleXTimeShift )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-              		newCompositeNode(grammarAccess.getXTmscAnalysisAccess().getXTimeBoundAnalysisParserRuleCall());
-              	
+            if ( (LA4_0==22) ) {
+                alt4=1;
             }
-            pushFollow(FOLLOW_2);
-            this_XTimeBoundAnalysis_0=ruleXTimeBoundAnalysis();
-
-            state._fsp--;
-            if (state.failed) return current;
-            if ( state.backtracking==0 ) {
-
-              		current = this_XTimeBoundAnalysis_0;
-              		afterParserOrEnumRuleCall();
-              	
+            else if ( (LA4_0==24) ) {
+                alt4=2;
             }
+            else {
+                if (state.backtracking>0) {state.failed=true; return current;}
+                NoViableAltException nvae =
+                    new NoViableAltException("", 4, 0, input);
+
+                throw nvae;
+            }
+            switch (alt4) {
+                case 1 :
+                    // InternalTmscXtext.g:414:3: this_XTimeBoundAnalysis_0= ruleXTimeBoundAnalysis
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getXTmscAnalysisAccess().getXTimeBoundAnalysisParserRuleCall_0());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_XTimeBoundAnalysis_0=ruleXTimeBoundAnalysis();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_XTimeBoundAnalysis_0;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+                case 2 :
+                    // InternalTmscXtext.g:423:3: this_XTimeShift_1= ruleXTimeShift
+                    {
+                    if ( state.backtracking==0 ) {
+
+                      			newCompositeNode(grammarAccess.getXTmscAnalysisAccess().getXTimeShiftParserRuleCall_1());
+                      		
+                    }
+                    pushFollow(FOLLOW_2);
+                    this_XTimeShift_1=ruleXTimeShift();
+
+                    state._fsp--;
+                    if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      			current = this_XTimeShift_1;
+                      			afterParserOrEnumRuleCall();
+                      		
+                    }
+
+                    }
+                    break;
+
+            }
+
 
             }
 
@@ -1020,7 +1073,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXTimeBoundAnalysis"
-    // InternalTmscXtext.g:424:1: entryRuleXTimeBoundAnalysis returns [EObject current=null] : iv_ruleXTimeBoundAnalysis= ruleXTimeBoundAnalysis EOF ;
+    // InternalTmscXtext.g:435:1: entryRuleXTimeBoundAnalysis returns [EObject current=null] : iv_ruleXTimeBoundAnalysis= ruleXTimeBoundAnalysis EOF ;
     public final EObject entryRuleXTimeBoundAnalysis() throws RecognitionException {
         EObject current = null;
 
@@ -1028,8 +1081,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:424:59: (iv_ruleXTimeBoundAnalysis= ruleXTimeBoundAnalysis EOF )
-            // InternalTmscXtext.g:425:2: iv_ruleXTimeBoundAnalysis= ruleXTimeBoundAnalysis EOF
+            // InternalTmscXtext.g:435:59: (iv_ruleXTimeBoundAnalysis= ruleXTimeBoundAnalysis EOF )
+            // InternalTmscXtext.g:436:2: iv_ruleXTimeBoundAnalysis= ruleXTimeBoundAnalysis EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXTimeBoundAnalysisRule()); 
@@ -1060,7 +1113,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXTimeBoundAnalysis"
-    // InternalTmscXtext.g:431:1: ruleXTimeBoundAnalysis returns [EObject current=null] : ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? ) ;
+    // InternalTmscXtext.g:442:1: ruleXTimeBoundAnalysis returns [EObject current=null] : ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? ) ;
     public final EObject ruleXTimeBoundAnalysis() throws RecognitionException {
         EObject current = null;
 
@@ -1075,14 +1128,14 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:437:2: ( ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? ) )
-            // InternalTmscXtext.g:438:2: ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? )
+            // InternalTmscXtext.g:448:2: ( ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? ) )
+            // InternalTmscXtext.g:449:2: ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? )
             {
-            // InternalTmscXtext.g:438:2: ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? )
-            // InternalTmscXtext.g:439:3: () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )?
+            // InternalTmscXtext.g:449:2: ( () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )? )
+            // InternalTmscXtext.g:450:3: () otherlv_1= 'time-bound-analysis' (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )?
             {
-            // InternalTmscXtext.g:439:3: ()
-            // InternalTmscXtext.g:440:4: 
+            // InternalTmscXtext.g:450:3: ()
+            // InternalTmscXtext.g:451:4: 
             {
             if ( state.backtracking==0 ) {
 
@@ -1100,16 +1153,16 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
               			newLeafNode(otherlv_1, grammarAccess.getXTimeBoundAnalysisAccess().getTimeBoundAnalysisKeyword_1());
               		
             }
-            // InternalTmscXtext.g:450:3: (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )?
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // InternalTmscXtext.g:461:3: (otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}' )?
+            int alt6=2;
+            int LA6_0 = input.LA(1);
 
-            if ( (LA5_0==15) ) {
-                alt5=1;
+            if ( (LA6_0==15) ) {
+                alt6=1;
             }
-            switch (alt5) {
+            switch (alt6) {
                 case 1 :
-                    // InternalTmscXtext.g:451:4: otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}'
+                    // InternalTmscXtext.g:462:4: otherlv_2= '{' (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )? otherlv_6= '}'
                     {
                     otherlv_2=(Token)match(input,15,FOLLOW_14); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1117,16 +1170,16 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       				newLeafNode(otherlv_2, grammarAccess.getXTimeBoundAnalysisAccess().getLeftCurlyBracketKeyword_2_0());
                       			
                     }
-                    // InternalTmscXtext.g:455:4: (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )?
-                    int alt4=2;
-                    int LA4_0 = input.LA(1);
+                    // InternalTmscXtext.g:466:4: (otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )?
+                    int alt5=2;
+                    int LA5_0 = input.LA(1);
 
-                    if ( (LA4_0==23) ) {
-                        alt4=1;
+                    if ( (LA5_0==23) ) {
+                        alt5=1;
                     }
-                    switch (alt4) {
+                    switch (alt5) {
                         case 1 :
-                            // InternalTmscXtext.g:456:5: otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
+                            // InternalTmscXtext.g:467:5: otherlv_3= 'defaultTimeBound' otherlv_4= ':' ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
                             {
                             otherlv_3=(Token)match(input,23,FOLLOW_6); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1140,11 +1193,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                               					newLeafNode(otherlv_4, grammarAccess.getXTimeBoundAnalysisAccess().getColonKeyword_2_1_1());
                               				
                             }
-                            // InternalTmscXtext.g:464:5: ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
-                            // InternalTmscXtext.g:465:6: (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL )
+                            // InternalTmscXtext.g:475:5: ( (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
+                            // InternalTmscXtext.g:476:6: (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL )
                             {
-                            // InternalTmscXtext.g:465:6: (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL )
-                            // InternalTmscXtext.g:466:7: lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL
+                            // InternalTmscXtext.g:476:6: (lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL )
+                            // InternalTmscXtext.g:477:7: lv_defaultTimeBound_5_0= RULE_ABS_EBIGDECIMAL
                             {
                             lv_defaultTimeBound_5_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_15); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -1212,8 +1265,207 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
     // $ANTLR end "ruleXTimeBoundAnalysis"
 
 
+    // $ANTLR start "entryRuleXTimeShift"
+    // InternalTmscXtext.g:503:1: entryRuleXTimeShift returns [EObject current=null] : iv_ruleXTimeShift= ruleXTimeShift EOF ;
+    public final EObject entryRuleXTimeShift() throws RecognitionException {
+        EObject current = null;
+
+        EObject iv_ruleXTimeShift = null;
+
+
+        try {
+            // InternalTmscXtext.g:503:51: (iv_ruleXTimeShift= ruleXTimeShift EOF )
+            // InternalTmscXtext.g:504:2: iv_ruleXTimeShift= ruleXTimeShift EOF
+            {
+            if ( state.backtracking==0 ) {
+               newCompositeNode(grammarAccess.getXTimeShiftRule()); 
+            }
+            pushFollow(FOLLOW_1);
+            iv_ruleXTimeShift=ruleXTimeShift();
+
+            state._fsp--;
+            if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+               current =iv_ruleXTimeShift; 
+            }
+            match(input,EOF,FOLLOW_2); if (state.failed) return current;
+
+            }
+
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "entryRuleXTimeShift"
+
+
+    // $ANTLR start "ruleXTimeShift"
+    // InternalTmscXtext.g:510:1: ruleXTimeShift returns [EObject current=null] : ( () otherlv_1= 'time-shift' (otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}' )? ) ;
+    public final EObject ruleXTimeShift() throws RecognitionException {
+        EObject current = null;
+
+        Token otherlv_1=null;
+        Token otherlv_2=null;
+        Token otherlv_3=null;
+        Token otherlv_4=null;
+        Token otherlv_6=null;
+        AntlrDatatypeRuleToken lv_delta_5_0 = null;
+
+
+
+        	enterRule();
+
+        try {
+            // InternalTmscXtext.g:516:2: ( ( () otherlv_1= 'time-shift' (otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}' )? ) )
+            // InternalTmscXtext.g:517:2: ( () otherlv_1= 'time-shift' (otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}' )? )
+            {
+            // InternalTmscXtext.g:517:2: ( () otherlv_1= 'time-shift' (otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}' )? )
+            // InternalTmscXtext.g:518:3: () otherlv_1= 'time-shift' (otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}' )?
+            {
+            // InternalTmscXtext.g:518:3: ()
+            // InternalTmscXtext.g:519:4: 
+            {
+            if ( state.backtracking==0 ) {
+
+              				current = forceCreateModelElement(
+              					grammarAccess.getXTimeShiftAccess().getXTimeShiftAction_0(),
+              					current);
+              			
+            }
+
+            }
+
+            otherlv_1=(Token)match(input,24,FOLLOW_13); if (state.failed) return current;
+            if ( state.backtracking==0 ) {
+
+              			newLeafNode(otherlv_1, grammarAccess.getXTimeShiftAccess().getTimeShiftKeyword_1());
+              		
+            }
+            // InternalTmscXtext.g:529:3: (otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}' )?
+            int alt8=2;
+            int LA8_0 = input.LA(1);
+
+            if ( (LA8_0==15) ) {
+                alt8=1;
+            }
+            switch (alt8) {
+                case 1 :
+                    // InternalTmscXtext.g:530:4: otherlv_2= '{' (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )? otherlv_6= '}'
+                    {
+                    otherlv_2=(Token)match(input,15,FOLLOW_16); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_2, grammarAccess.getXTimeShiftAccess().getLeftCurlyBracketKeyword_2_0());
+                      			
+                    }
+                    // InternalTmscXtext.g:534:4: (otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) ) )?
+                    int alt7=2;
+                    int LA7_0 = input.LA(1);
+
+                    if ( (LA7_0==25) ) {
+                        alt7=1;
+                    }
+                    switch (alt7) {
+                        case 1 :
+                            // InternalTmscXtext.g:535:5: otherlv_3= 'delta' otherlv_4= ':' ( (lv_delta_5_0= ruleEBIGDECIMAL ) )
+                            {
+                            otherlv_3=(Token)match(input,25,FOLLOW_6); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              					newLeafNode(otherlv_3, grammarAccess.getXTimeShiftAccess().getDeltaKeyword_2_1_0());
+                              				
+                            }
+                            otherlv_4=(Token)match(input,17,FOLLOW_17); if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              					newLeafNode(otherlv_4, grammarAccess.getXTimeShiftAccess().getColonKeyword_2_1_1());
+                              				
+                            }
+                            // InternalTmscXtext.g:543:5: ( (lv_delta_5_0= ruleEBIGDECIMAL ) )
+                            // InternalTmscXtext.g:544:6: (lv_delta_5_0= ruleEBIGDECIMAL )
+                            {
+                            // InternalTmscXtext.g:544:6: (lv_delta_5_0= ruleEBIGDECIMAL )
+                            // InternalTmscXtext.g:545:7: lv_delta_5_0= ruleEBIGDECIMAL
+                            {
+                            if ( state.backtracking==0 ) {
+
+                              							newCompositeNode(grammarAccess.getXTimeShiftAccess().getDeltaEBIGDECIMALParserRuleCall_2_1_2_0());
+                              						
+                            }
+                            pushFollow(FOLLOW_15);
+                            lv_delta_5_0=ruleEBIGDECIMAL();
+
+                            state._fsp--;
+                            if (state.failed) return current;
+                            if ( state.backtracking==0 ) {
+
+                              							if (current==null) {
+                              								current = createModelElementForParent(grammarAccess.getXTimeShiftRule());
+                              							}
+                              							set(
+                              								current,
+                              								"delta",
+                              								lv_delta_5_0,
+                              								"nl.esi.pps.tmsc.xtext.TmscXtext.EBIGDECIMAL");
+                              							afterParserOrEnumRuleCall();
+                              						
+                            }
+
+                            }
+
+
+                            }
+
+
+                            }
+                            break;
+
+                    }
+
+                    otherlv_6=(Token)match(input,20,FOLLOW_2); if (state.failed) return current;
+                    if ( state.backtracking==0 ) {
+
+                      				newLeafNode(otherlv_6, grammarAccess.getXTimeShiftAccess().getRightCurlyBracketKeyword_2_2());
+                      			
+                    }
+
+                    }
+                    break;
+
+            }
+
+
+            }
+
+
+            }
+
+            if ( state.backtracking==0 ) {
+
+              	leaveRule();
+
+            }
+        }
+
+            catch (RecognitionException re) {
+                recover(input,re);
+                appendSkippedTokens();
+            }
+        finally {
+        }
+        return current;
+    }
+    // $ANTLR end "ruleXTimeShift"
+
+
     // $ANTLR start "entryRuleXInterface"
-    // InternalTmscXtext.g:492:1: entryRuleXInterface returns [EObject current=null] : iv_ruleXInterface= ruleXInterface EOF ;
+    // InternalTmscXtext.g:572:1: entryRuleXInterface returns [EObject current=null] : iv_ruleXInterface= ruleXInterface EOF ;
     public final EObject entryRuleXInterface() throws RecognitionException {
         EObject current = null;
 
@@ -1221,8 +1473,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:492:51: (iv_ruleXInterface= ruleXInterface EOF )
-            // InternalTmscXtext.g:493:2: iv_ruleXInterface= ruleXInterface EOF
+            // InternalTmscXtext.g:572:51: (iv_ruleXInterface= ruleXInterface EOF )
+            // InternalTmscXtext.g:573:2: iv_ruleXInterface= ruleXInterface EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXInterfaceRule()); 
@@ -1253,7 +1505,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXInterface"
-    // InternalTmscXtext.g:499:1: ruleXInterface returns [EObject current=null] : (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? ) ;
+    // InternalTmscXtext.g:579:1: ruleXInterface returns [EObject current=null] : (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? ) ;
     public final EObject ruleXInterface() throws RecognitionException {
         EObject current = null;
 
@@ -1273,48 +1525,48 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:505:2: ( (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? ) )
-            // InternalTmscXtext.g:506:2: (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? )
+            // InternalTmscXtext.g:585:2: ( (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? ) )
+            // InternalTmscXtext.g:586:2: (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? )
             {
-            // InternalTmscXtext.g:506:2: (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? )
-            // InternalTmscXtext.g:507:3: otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )?
+            // InternalTmscXtext.g:586:2: (otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )? )
+            // InternalTmscXtext.g:587:3: otherlv_0= 'interface' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )?
             {
-            otherlv_0=(Token)match(input,24,FOLLOW_16); if (state.failed) return current;
+            otherlv_0=(Token)match(input,26,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_0, grammarAccess.getXInterfaceAccess().getInterfaceKeyword_0());
               		
             }
-            // InternalTmscXtext.g:511:3: ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )?
-            int alt6=2;
-            int LA6_0 = input.LA(1);
+            // InternalTmscXtext.g:591:3: ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )?
+            int alt9=2;
+            int LA9_0 = input.LA(1);
 
-            if ( (LA6_0==RULE_ID) ) {
-                int LA6_1 = input.LA(2);
+            if ( (LA9_0==RULE_ID) ) {
+                int LA9_1 = input.LA(2);
 
-                if ( (LA6_1==25) ) {
-                    alt6=1;
+                if ( (LA9_1==27) ) {
+                    alt9=1;
                 }
             }
-            else if ( (LA6_0==RULE_STRING) ) {
-                alt6=1;
+            else if ( (LA9_0==RULE_STRING) ) {
+                alt9=1;
             }
-            switch (alt6) {
+            switch (alt9) {
                 case 1 :
-                    // InternalTmscXtext.g:512:4: ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as'
+                    // InternalTmscXtext.g:592:4: ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as'
                     {
-                    // InternalTmscXtext.g:512:4: ( (lv_description_1_0= ruleIDString ) )
-                    // InternalTmscXtext.g:513:5: (lv_description_1_0= ruleIDString )
+                    // InternalTmscXtext.g:592:4: ( (lv_description_1_0= ruleIDString ) )
+                    // InternalTmscXtext.g:593:5: (lv_description_1_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:513:5: (lv_description_1_0= ruleIDString )
-                    // InternalTmscXtext.g:514:6: lv_description_1_0= ruleIDString
+                    // InternalTmscXtext.g:593:5: (lv_description_1_0= ruleIDString )
+                    // InternalTmscXtext.g:594:6: lv_description_1_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXInterfaceAccess().getDescriptionIDStringParserRuleCall_1_0_0());
                       					
                     }
-                    pushFollow(FOLLOW_17);
+                    pushFollow(FOLLOW_19);
                     lv_description_1_0=ruleIDString();
 
                     state._fsp--;
@@ -1338,7 +1590,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,25,FOLLOW_18); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,27,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_2, grammarAccess.getXInterfaceAccess().getAsKeyword_1_1());
@@ -1350,11 +1602,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:536:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalTmscXtext.g:537:4: (lv_name_3_0= RULE_ID )
+            // InternalTmscXtext.g:616:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalTmscXtext.g:617:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalTmscXtext.g:537:4: (lv_name_3_0= RULE_ID )
-            // InternalTmscXtext.g:538:5: lv_name_3_0= RULE_ID
+            // InternalTmscXtext.g:617:4: (lv_name_3_0= RULE_ID )
+            // InternalTmscXtext.g:618:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_13); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1380,53 +1632,53 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:554:3: (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )?
-            int alt8=2;
-            int LA8_0 = input.LA(1);
+            // InternalTmscXtext.g:634:3: (otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}' )?
+            int alt11=2;
+            int LA11_0 = input.LA(1);
 
-            if ( (LA8_0==15) ) {
-                alt8=1;
+            if ( (LA11_0==15) ) {
+                alt11=1;
             }
-            switch (alt8) {
+            switch (alt11) {
                 case 1 :
-                    // InternalTmscXtext.g:555:4: otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}'
+                    // InternalTmscXtext.g:635:4: otherlv_4= '{' ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )* otherlv_7= '}'
                     {
-                    otherlv_4=(Token)match(input,15,FOLLOW_19); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,15,FOLLOW_21); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_4, grammarAccess.getXInterfaceAccess().getLeftCurlyBracketKeyword_3_0());
                       			
                     }
-                    // InternalTmscXtext.g:559:4: ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )*
-                    loop7:
+                    // InternalTmscXtext.g:639:4: ( ( (lv_properties_5_0= ruleXProperty ) ) | ( (lv_operations_6_0= ruleXOperation ) ) )*
+                    loop10:
                     do {
-                        int alt7=3;
-                        int LA7_0 = input.LA(1);
+                        int alt10=3;
+                        int LA10_0 = input.LA(1);
 
-                        if ( (LA7_0==RULE_ID||LA7_0==RULE_STRING) ) {
-                            alt7=1;
+                        if ( (LA10_0==RULE_ID||LA10_0==RULE_STRING) ) {
+                            alt10=1;
                         }
-                        else if ( (LA7_0==26) ) {
-                            alt7=2;
+                        else if ( (LA10_0==28) ) {
+                            alt10=2;
                         }
 
 
-                        switch (alt7) {
+                        switch (alt10) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:560:5: ( (lv_properties_5_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:640:5: ( (lv_properties_5_0= ruleXProperty ) )
                     	    {
-                    	    // InternalTmscXtext.g:560:5: ( (lv_properties_5_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:561:6: (lv_properties_5_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:640:5: ( (lv_properties_5_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:641:6: (lv_properties_5_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:561:6: (lv_properties_5_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:562:7: lv_properties_5_0= ruleXProperty
+                    	    // InternalTmscXtext.g:641:6: (lv_properties_5_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:642:7: lv_properties_5_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXInterfaceAccess().getPropertiesXPropertyParserRuleCall_3_1_0_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_19);
+                    	    pushFollow(FOLLOW_21);
                     	    lv_properties_5_0=ruleXProperty();
 
                     	    state._fsp--;
@@ -1454,20 +1706,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:580:5: ( (lv_operations_6_0= ruleXOperation ) )
+                    	    // InternalTmscXtext.g:660:5: ( (lv_operations_6_0= ruleXOperation ) )
                     	    {
-                    	    // InternalTmscXtext.g:580:5: ( (lv_operations_6_0= ruleXOperation ) )
-                    	    // InternalTmscXtext.g:581:6: (lv_operations_6_0= ruleXOperation )
+                    	    // InternalTmscXtext.g:660:5: ( (lv_operations_6_0= ruleXOperation ) )
+                    	    // InternalTmscXtext.g:661:6: (lv_operations_6_0= ruleXOperation )
                     	    {
-                    	    // InternalTmscXtext.g:581:6: (lv_operations_6_0= ruleXOperation )
-                    	    // InternalTmscXtext.g:582:7: lv_operations_6_0= ruleXOperation
+                    	    // InternalTmscXtext.g:661:6: (lv_operations_6_0= ruleXOperation )
+                    	    // InternalTmscXtext.g:662:7: lv_operations_6_0= ruleXOperation
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXInterfaceAccess().getOperationsXOperationParserRuleCall_3_1_1_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_19);
+                    	    pushFollow(FOLLOW_21);
                     	    lv_operations_6_0=ruleXOperation();
 
                     	    state._fsp--;
@@ -1496,7 +1748,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop7;
+                    	    break loop10;
                         }
                     } while (true);
 
@@ -1537,7 +1789,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXOperation"
-    // InternalTmscXtext.g:609:1: entryRuleXOperation returns [EObject current=null] : iv_ruleXOperation= ruleXOperation EOF ;
+    // InternalTmscXtext.g:689:1: entryRuleXOperation returns [EObject current=null] : iv_ruleXOperation= ruleXOperation EOF ;
     public final EObject entryRuleXOperation() throws RecognitionException {
         EObject current = null;
 
@@ -1545,8 +1797,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:609:51: (iv_ruleXOperation= ruleXOperation EOF )
-            // InternalTmscXtext.g:610:2: iv_ruleXOperation= ruleXOperation EOF
+            // InternalTmscXtext.g:689:51: (iv_ruleXOperation= ruleXOperation EOF )
+            // InternalTmscXtext.g:690:2: iv_ruleXOperation= ruleXOperation EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXOperationRule()); 
@@ -1577,7 +1829,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXOperation"
-    // InternalTmscXtext.g:616:1: ruleXOperation returns [EObject current=null] : (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? ) ;
+    // InternalTmscXtext.g:696:1: ruleXOperation returns [EObject current=null] : (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? ) ;
     public final EObject ruleXOperation() throws RecognitionException {
         EObject current = null;
 
@@ -1595,48 +1847,48 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:622:2: ( (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? ) )
-            // InternalTmscXtext.g:623:2: (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? )
+            // InternalTmscXtext.g:702:2: ( (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? ) )
+            // InternalTmscXtext.g:703:2: (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? )
             {
-            // InternalTmscXtext.g:623:2: (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? )
-            // InternalTmscXtext.g:624:3: otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )?
+            // InternalTmscXtext.g:703:2: (otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )? )
+            // InternalTmscXtext.g:704:3: otherlv_0= 'operation' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )?
             {
-            otherlv_0=(Token)match(input,26,FOLLOW_16); if (state.failed) return current;
+            otherlv_0=(Token)match(input,28,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_0, grammarAccess.getXOperationAccess().getOperationKeyword_0());
               		
             }
-            // InternalTmscXtext.g:628:3: ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )?
-            int alt9=2;
-            int LA9_0 = input.LA(1);
+            // InternalTmscXtext.g:708:3: ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )?
+            int alt12=2;
+            int LA12_0 = input.LA(1);
 
-            if ( (LA9_0==RULE_ID) ) {
-                int LA9_1 = input.LA(2);
+            if ( (LA12_0==RULE_ID) ) {
+                int LA12_1 = input.LA(2);
 
-                if ( (LA9_1==25) ) {
-                    alt9=1;
+                if ( (LA12_1==27) ) {
+                    alt12=1;
                 }
             }
-            else if ( (LA9_0==RULE_STRING) ) {
-                alt9=1;
+            else if ( (LA12_0==RULE_STRING) ) {
+                alt12=1;
             }
-            switch (alt9) {
+            switch (alt12) {
                 case 1 :
-                    // InternalTmscXtext.g:629:4: ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as'
+                    // InternalTmscXtext.g:709:4: ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as'
                     {
-                    // InternalTmscXtext.g:629:4: ( (lv_description_1_0= ruleIDString ) )
-                    // InternalTmscXtext.g:630:5: (lv_description_1_0= ruleIDString )
+                    // InternalTmscXtext.g:709:4: ( (lv_description_1_0= ruleIDString ) )
+                    // InternalTmscXtext.g:710:5: (lv_description_1_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:630:5: (lv_description_1_0= ruleIDString )
-                    // InternalTmscXtext.g:631:6: lv_description_1_0= ruleIDString
+                    // InternalTmscXtext.g:710:5: (lv_description_1_0= ruleIDString )
+                    // InternalTmscXtext.g:711:6: lv_description_1_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXOperationAccess().getDescriptionIDStringParserRuleCall_1_0_0());
                       					
                     }
-                    pushFollow(FOLLOW_17);
+                    pushFollow(FOLLOW_19);
                     lv_description_1_0=ruleIDString();
 
                     state._fsp--;
@@ -1660,7 +1912,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,25,FOLLOW_18); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,27,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_2, grammarAccess.getXOperationAccess().getAsKeyword_1_1());
@@ -1672,11 +1924,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:653:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalTmscXtext.g:654:4: (lv_name_3_0= RULE_ID )
+            // InternalTmscXtext.g:733:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalTmscXtext.g:734:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalTmscXtext.g:654:4: (lv_name_3_0= RULE_ID )
-            // InternalTmscXtext.g:655:5: lv_name_3_0= RULE_ID
+            // InternalTmscXtext.g:734:4: (lv_name_3_0= RULE_ID )
+            // InternalTmscXtext.g:735:5: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_13); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -1702,16 +1954,16 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:671:3: (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )?
-            int alt11=2;
-            int LA11_0 = input.LA(1);
+            // InternalTmscXtext.g:751:3: (otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}' )?
+            int alt14=2;
+            int LA14_0 = input.LA(1);
 
-            if ( (LA11_0==15) ) {
-                alt11=1;
+            if ( (LA14_0==15) ) {
+                alt14=1;
             }
-            switch (alt11) {
+            switch (alt14) {
                 case 1 :
-                    // InternalTmscXtext.g:672:4: otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}'
+                    // InternalTmscXtext.g:752:4: otherlv_4= '{' ( (lv_properties_5_0= ruleXProperty ) )* otherlv_6= '}'
                     {
                     otherlv_4=(Token)match(input,15,FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -1719,23 +1971,23 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       				newLeafNode(otherlv_4, grammarAccess.getXOperationAccess().getLeftCurlyBracketKeyword_3_0());
                       			
                     }
-                    // InternalTmscXtext.g:676:4: ( (lv_properties_5_0= ruleXProperty ) )*
-                    loop10:
+                    // InternalTmscXtext.g:756:4: ( (lv_properties_5_0= ruleXProperty ) )*
+                    loop13:
                     do {
-                        int alt10=2;
-                        int LA10_0 = input.LA(1);
+                        int alt13=2;
+                        int LA13_0 = input.LA(1);
 
-                        if ( (LA10_0==RULE_ID||LA10_0==RULE_STRING) ) {
-                            alt10=1;
+                        if ( (LA13_0==RULE_ID||LA13_0==RULE_STRING) ) {
+                            alt13=1;
                         }
 
 
-                        switch (alt10) {
+                        switch (alt13) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:677:5: (lv_properties_5_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:757:5: (lv_properties_5_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:677:5: (lv_properties_5_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:678:6: lv_properties_5_0= ruleXProperty
+                    	    // InternalTmscXtext.g:757:5: (lv_properties_5_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:758:6: lv_properties_5_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -1768,7 +2020,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop10;
+                    	    break loop13;
                         }
                     } while (true);
 
@@ -1809,7 +2061,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXComponent"
-    // InternalTmscXtext.g:704:1: entryRuleXComponent returns [EObject current=null] : iv_ruleXComponent= ruleXComponent EOF ;
+    // InternalTmscXtext.g:784:1: entryRuleXComponent returns [EObject current=null] : iv_ruleXComponent= ruleXComponent EOF ;
     public final EObject entryRuleXComponent() throws RecognitionException {
         EObject current = null;
 
@@ -1817,8 +2069,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:704:51: (iv_ruleXComponent= ruleXComponent EOF )
-            // InternalTmscXtext.g:705:2: iv_ruleXComponent= ruleXComponent EOF
+            // InternalTmscXtext.g:784:51: (iv_ruleXComponent= ruleXComponent EOF )
+            // InternalTmscXtext.g:785:2: iv_ruleXComponent= ruleXComponent EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXComponentRule()); 
@@ -1849,7 +2101,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXComponent"
-    // InternalTmscXtext.g:711:1: ruleXComponent returns [EObject current=null] : (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? ) ;
+    // InternalTmscXtext.g:791:1: ruleXComponent returns [EObject current=null] : (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? ) ;
     public final EObject ruleXComponent() throws RecognitionException {
         EObject current = null;
 
@@ -1882,48 +2134,48 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:717:2: ( (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? ) )
-            // InternalTmscXtext.g:718:2: (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? )
+            // InternalTmscXtext.g:797:2: ( (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? ) )
+            // InternalTmscXtext.g:798:2: (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? )
             {
-            // InternalTmscXtext.g:718:2: (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? )
-            // InternalTmscXtext.g:719:3: otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )?
+            // InternalTmscXtext.g:798:2: (otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )? )
+            // InternalTmscXtext.g:799:3: otherlv_0= 'component' ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )? ( (lv_name_3_0= RULE_ID ) ) (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )? (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )? (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )?
             {
-            otherlv_0=(Token)match(input,27,FOLLOW_16); if (state.failed) return current;
+            otherlv_0=(Token)match(input,29,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_0, grammarAccess.getXComponentAccess().getComponentKeyword_0());
               		
             }
-            // InternalTmscXtext.g:723:3: ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )?
-            int alt12=2;
-            int LA12_0 = input.LA(1);
+            // InternalTmscXtext.g:803:3: ( ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as' )?
+            int alt15=2;
+            int LA15_0 = input.LA(1);
 
-            if ( (LA12_0==RULE_ID) ) {
-                int LA12_1 = input.LA(2);
+            if ( (LA15_0==RULE_ID) ) {
+                int LA15_1 = input.LA(2);
 
-                if ( (LA12_1==25) ) {
-                    alt12=1;
+                if ( (LA15_1==27) ) {
+                    alt15=1;
                 }
             }
-            else if ( (LA12_0==RULE_STRING) ) {
-                alt12=1;
+            else if ( (LA15_0==RULE_STRING) ) {
+                alt15=1;
             }
-            switch (alt12) {
+            switch (alt15) {
                 case 1 :
-                    // InternalTmscXtext.g:724:4: ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as'
+                    // InternalTmscXtext.g:804:4: ( (lv_description_1_0= ruleIDString ) ) otherlv_2= 'as'
                     {
-                    // InternalTmscXtext.g:724:4: ( (lv_description_1_0= ruleIDString ) )
-                    // InternalTmscXtext.g:725:5: (lv_description_1_0= ruleIDString )
+                    // InternalTmscXtext.g:804:4: ( (lv_description_1_0= ruleIDString ) )
+                    // InternalTmscXtext.g:805:5: (lv_description_1_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:725:5: (lv_description_1_0= ruleIDString )
-                    // InternalTmscXtext.g:726:6: lv_description_1_0= ruleIDString
+                    // InternalTmscXtext.g:805:5: (lv_description_1_0= ruleIDString )
+                    // InternalTmscXtext.g:806:6: lv_description_1_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXComponentAccess().getDescriptionIDStringParserRuleCall_1_0_0());
                       					
                     }
-                    pushFollow(FOLLOW_17);
+                    pushFollow(FOLLOW_19);
                     lv_description_1_0=ruleIDString();
 
                     state._fsp--;
@@ -1947,7 +2199,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_2=(Token)match(input,25,FOLLOW_18); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,27,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_2, grammarAccess.getXComponentAccess().getAsKeyword_1_1());
@@ -1959,13 +2211,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:748:3: ( (lv_name_3_0= RULE_ID ) )
-            // InternalTmscXtext.g:749:4: (lv_name_3_0= RULE_ID )
+            // InternalTmscXtext.g:828:3: ( (lv_name_3_0= RULE_ID ) )
+            // InternalTmscXtext.g:829:4: (lv_name_3_0= RULE_ID )
             {
-            // InternalTmscXtext.g:749:4: (lv_name_3_0= RULE_ID )
-            // InternalTmscXtext.g:750:5: lv_name_3_0= RULE_ID
+            // InternalTmscXtext.g:829:4: (lv_name_3_0= RULE_ID )
+            // InternalTmscXtext.g:830:5: lv_name_3_0= RULE_ID
             {
-            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_20); if (state.failed) return current;
+            lv_name_3_0=(Token)match(input,RULE_ID,FOLLOW_22); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					newLeafNode(lv_name_3_0, grammarAccess.getXComponentAccess().getNameIDTerminalRuleCall_2_0());
@@ -1989,28 +2241,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:766:3: (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )?
-            int alt14=2;
-            int LA14_0 = input.LA(1);
+            // InternalTmscXtext.g:846:3: (otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )* )?
+            int alt17=2;
+            int LA17_0 = input.LA(1);
 
-            if ( (LA14_0==28) ) {
-                alt14=1;
+            if ( (LA17_0==30) ) {
+                alt17=1;
             }
-            switch (alt14) {
+            switch (alt17) {
                 case 1 :
-                    // InternalTmscXtext.g:767:4: otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
+                    // InternalTmscXtext.g:847:4: otherlv_4= 'provides' ( (otherlv_5= RULE_ID ) ) (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
                     {
-                    otherlv_4=(Token)match(input,28,FOLLOW_18); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,30,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_4, grammarAccess.getXComponentAccess().getProvidesKeyword_3_0());
                       			
                     }
-                    // InternalTmscXtext.g:771:4: ( (otherlv_5= RULE_ID ) )
-                    // InternalTmscXtext.g:772:5: (otherlv_5= RULE_ID )
+                    // InternalTmscXtext.g:851:4: ( (otherlv_5= RULE_ID ) )
+                    // InternalTmscXtext.g:852:5: (otherlv_5= RULE_ID )
                     {
-                    // InternalTmscXtext.g:772:5: (otherlv_5= RULE_ID )
-                    // InternalTmscXtext.g:773:6: otherlv_5= RULE_ID
+                    // InternalTmscXtext.g:852:5: (otherlv_5= RULE_ID )
+                    // InternalTmscXtext.g:853:6: otherlv_5= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2019,7 +2271,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       						}
                       					
                     }
-                    otherlv_5=(Token)match(input,RULE_ID,FOLLOW_21); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,RULE_ID,FOLLOW_23); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						newLeafNode(otherlv_5, grammarAccess.getXComponentAccess().getProvidesXInterfaceCrossReference_3_1_0());
@@ -2031,32 +2283,32 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:784:4: (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
-                    loop13:
+                    // InternalTmscXtext.g:864:4: (otherlv_6= ',' ( (otherlv_7= RULE_ID ) ) )*
+                    loop16:
                     do {
-                        int alt13=2;
-                        int LA13_0 = input.LA(1);
+                        int alt16=2;
+                        int LA16_0 = input.LA(1);
 
-                        if ( (LA13_0==29) ) {
-                            alt13=1;
+                        if ( (LA16_0==31) ) {
+                            alt16=1;
                         }
 
 
-                        switch (alt13) {
+                        switch (alt16) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:785:5: otherlv_6= ',' ( (otherlv_7= RULE_ID ) )
+                    	    // InternalTmscXtext.g:865:5: otherlv_6= ',' ( (otherlv_7= RULE_ID ) )
                     	    {
-                    	    otherlv_6=(Token)match(input,29,FOLLOW_18); if (state.failed) return current;
+                    	    otherlv_6=(Token)match(input,31,FOLLOW_20); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      					newLeafNode(otherlv_6, grammarAccess.getXComponentAccess().getCommaKeyword_3_2_0());
                     	      				
                     	    }
-                    	    // InternalTmscXtext.g:789:5: ( (otherlv_7= RULE_ID ) )
-                    	    // InternalTmscXtext.g:790:6: (otherlv_7= RULE_ID )
+                    	    // InternalTmscXtext.g:869:5: ( (otherlv_7= RULE_ID ) )
+                    	    // InternalTmscXtext.g:870:6: (otherlv_7= RULE_ID )
                     	    {
-                    	    // InternalTmscXtext.g:790:6: (otherlv_7= RULE_ID )
-                    	    // InternalTmscXtext.g:791:7: otherlv_7= RULE_ID
+                    	    // InternalTmscXtext.g:870:6: (otherlv_7= RULE_ID )
+                    	    // InternalTmscXtext.g:871:7: otherlv_7= RULE_ID
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -2065,7 +2317,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      							}
                     	      						
                     	    }
-                    	    otherlv_7=(Token)match(input,RULE_ID,FOLLOW_21); if (state.failed) return current;
+                    	    otherlv_7=(Token)match(input,RULE_ID,FOLLOW_23); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      							newLeafNode(otherlv_7, grammarAccess.getXComponentAccess().getProvidesXInterfaceCrossReference_3_2_1_0());
@@ -2082,7 +2334,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop13;
+                    	    break loop16;
                         }
                     } while (true);
 
@@ -2092,28 +2344,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:804:3: (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )?
-            int alt16=2;
-            int LA16_0 = input.LA(1);
+            // InternalTmscXtext.g:884:3: (otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )* )?
+            int alt19=2;
+            int LA19_0 = input.LA(1);
 
-            if ( (LA16_0==30) ) {
-                alt16=1;
+            if ( (LA19_0==32) ) {
+                alt19=1;
             }
-            switch (alt16) {
+            switch (alt19) {
                 case 1 :
-                    // InternalTmscXtext.g:805:4: otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )*
+                    // InternalTmscXtext.g:885:4: otherlv_8= 'requires' ( (otherlv_9= RULE_ID ) ) (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )*
                     {
-                    otherlv_8=(Token)match(input,30,FOLLOW_18); if (state.failed) return current;
+                    otherlv_8=(Token)match(input,32,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_8, grammarAccess.getXComponentAccess().getRequiresKeyword_4_0());
                       			
                     }
-                    // InternalTmscXtext.g:809:4: ( (otherlv_9= RULE_ID ) )
-                    // InternalTmscXtext.g:810:5: (otherlv_9= RULE_ID )
+                    // InternalTmscXtext.g:889:4: ( (otherlv_9= RULE_ID ) )
+                    // InternalTmscXtext.g:890:5: (otherlv_9= RULE_ID )
                     {
-                    // InternalTmscXtext.g:810:5: (otherlv_9= RULE_ID )
-                    // InternalTmscXtext.g:811:6: otherlv_9= RULE_ID
+                    // InternalTmscXtext.g:890:5: (otherlv_9= RULE_ID )
+                    // InternalTmscXtext.g:891:6: otherlv_9= RULE_ID
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2122,7 +2374,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       						}
                       					
                     }
-                    otherlv_9=(Token)match(input,RULE_ID,FOLLOW_22); if (state.failed) return current;
+                    otherlv_9=(Token)match(input,RULE_ID,FOLLOW_24); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						newLeafNode(otherlv_9, grammarAccess.getXComponentAccess().getRequiresXInterfaceCrossReference_4_1_0());
@@ -2134,32 +2386,32 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:822:4: (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )*
-                    loop15:
+                    // InternalTmscXtext.g:902:4: (otherlv_10= ',' ( (otherlv_11= RULE_ID ) ) )*
+                    loop18:
                     do {
-                        int alt15=2;
-                        int LA15_0 = input.LA(1);
+                        int alt18=2;
+                        int LA18_0 = input.LA(1);
 
-                        if ( (LA15_0==29) ) {
-                            alt15=1;
+                        if ( (LA18_0==31) ) {
+                            alt18=1;
                         }
 
 
-                        switch (alt15) {
+                        switch (alt18) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:823:5: otherlv_10= ',' ( (otherlv_11= RULE_ID ) )
+                    	    // InternalTmscXtext.g:903:5: otherlv_10= ',' ( (otherlv_11= RULE_ID ) )
                     	    {
-                    	    otherlv_10=(Token)match(input,29,FOLLOW_18); if (state.failed) return current;
+                    	    otherlv_10=(Token)match(input,31,FOLLOW_20); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      					newLeafNode(otherlv_10, grammarAccess.getXComponentAccess().getCommaKeyword_4_2_0());
                     	      				
                     	    }
-                    	    // InternalTmscXtext.g:827:5: ( (otherlv_11= RULE_ID ) )
-                    	    // InternalTmscXtext.g:828:6: (otherlv_11= RULE_ID )
+                    	    // InternalTmscXtext.g:907:5: ( (otherlv_11= RULE_ID ) )
+                    	    // InternalTmscXtext.g:908:6: (otherlv_11= RULE_ID )
                     	    {
-                    	    // InternalTmscXtext.g:828:6: (otherlv_11= RULE_ID )
-                    	    // InternalTmscXtext.g:829:7: otherlv_11= RULE_ID
+                    	    // InternalTmscXtext.g:908:6: (otherlv_11= RULE_ID )
+                    	    // InternalTmscXtext.g:909:7: otherlv_11= RULE_ID
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -2168,7 +2420,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      							}
                     	      						
                     	    }
-                    	    otherlv_11=(Token)match(input,RULE_ID,FOLLOW_22); if (state.failed) return current;
+                    	    otherlv_11=(Token)match(input,RULE_ID,FOLLOW_24); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      							newLeafNode(otherlv_11, grammarAccess.getXComponentAccess().getRequiresXInterfaceCrossReference_4_2_1_0());
@@ -2185,7 +2437,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop15;
+                    	    break loop18;
                         }
                     } while (true);
 
@@ -2195,16 +2447,16 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:842:3: (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )?
-            int alt18=2;
-            int LA18_0 = input.LA(1);
+            // InternalTmscXtext.g:922:3: (otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}' )?
+            int alt21=2;
+            int LA21_0 = input.LA(1);
 
-            if ( (LA18_0==15) ) {
-                alt18=1;
+            if ( (LA21_0==15) ) {
+                alt21=1;
             }
-            switch (alt18) {
+            switch (alt21) {
                 case 1 :
-                    // InternalTmscXtext.g:843:4: otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}'
+                    // InternalTmscXtext.g:923:4: otherlv_12= '{' ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )* otherlv_20= '}'
                     {
                     otherlv_12=(Token)match(input,15,FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2212,36 +2464,36 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       				newLeafNode(otherlv_12, grammarAccess.getXComponentAccess().getLeftCurlyBracketKeyword_5_0());
                       			
                     }
-                    // InternalTmscXtext.g:847:4: ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )*
-                    loop17:
+                    // InternalTmscXtext.g:927:4: ( (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_19_0= ruleXProperty ) ) )*
+                    loop20:
                     do {
-                        int alt17=4;
+                        int alt20=4;
                         switch ( input.LA(1) ) {
                         case 18:
                             {
-                            alt17=1;
+                            alt20=1;
                             }
                             break;
                         case 19:
                             {
-                            alt17=2;
+                            alt20=2;
                             }
                             break;
                         case RULE_ID:
                         case RULE_STRING:
                             {
-                            alt17=3;
+                            alt20=3;
                             }
                             break;
 
                         }
 
-                        switch (alt17) {
+                        switch (alt20) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:848:5: (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:928:5: (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:848:5: (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) )
-                    	    // InternalTmscXtext.g:849:6: otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:928:5: (otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:929:6: otherlv_13= 'time-bound' otherlv_14= ':' ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) )
                     	    {
                     	    otherlv_13=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2255,11 +2507,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_14, grammarAccess.getXComponentAccess().getColonKeyword_5_1_0_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:857:6: ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) )
-                    	    // InternalTmscXtext.g:858:7: (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:937:6: ( (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:938:7: (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL )
                     	    {
-                    	    // InternalTmscXtext.g:858:7: (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL )
-                    	    // InternalTmscXtext.g:859:8: lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL
+                    	    // InternalTmscXtext.g:938:7: (lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:939:8: lv_timeBound_15_0= RULE_ABS_EBIGDECIMAL
                     	    {
                     	    lv_timeBound_15_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2292,10 +2544,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:877:5: (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:957:5: (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:877:5: (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) )
-                    	    // InternalTmscXtext.g:878:6: otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:957:5: (otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:958:6: otherlv_16= 'scheduled' otherlv_17= ':' ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) )
                     	    {
                     	    otherlv_16=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2309,11 +2561,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_17, grammarAccess.getXComponentAccess().getColonKeyword_5_1_1_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:886:6: ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) )
-                    	    // InternalTmscXtext.g:887:7: (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:966:6: ( (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:967:7: (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT )
                     	    {
-                    	    // InternalTmscXtext.g:887:7: (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT )
-                    	    // InternalTmscXtext.g:888:8: lv_scheduled_18_0= ruleEBOOLEAN_OBJECT
+                    	    // InternalTmscXtext.g:967:7: (lv_scheduled_18_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:968:8: lv_scheduled_18_0= ruleEBOOLEAN_OBJECT
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -2351,13 +2603,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 3 :
-                    	    // InternalTmscXtext.g:907:5: ( (lv_properties_19_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:987:5: ( (lv_properties_19_0= ruleXProperty ) )
                     	    {
-                    	    // InternalTmscXtext.g:907:5: ( (lv_properties_19_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:908:6: (lv_properties_19_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:987:5: ( (lv_properties_19_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:988:6: (lv_properties_19_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:908:6: (lv_properties_19_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:909:7: lv_properties_19_0= ruleXProperty
+                    	    // InternalTmscXtext.g:988:6: (lv_properties_19_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:989:7: lv_properties_19_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -2393,7 +2645,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop17;
+                    	    break loop20;
                         }
                     } while (true);
 
@@ -2434,7 +2686,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXFunction"
-    // InternalTmscXtext.g:936:1: entryRuleXFunction returns [EObject current=null] : iv_ruleXFunction= ruleXFunction EOF ;
+    // InternalTmscXtext.g:1016:1: entryRuleXFunction returns [EObject current=null] : iv_ruleXFunction= ruleXFunction EOF ;
     public final EObject entryRuleXFunction() throws RecognitionException {
         EObject current = null;
 
@@ -2442,8 +2694,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:936:50: (iv_ruleXFunction= ruleXFunction EOF )
-            // InternalTmscXtext.g:937:2: iv_ruleXFunction= ruleXFunction EOF
+            // InternalTmscXtext.g:1016:50: (iv_ruleXFunction= ruleXFunction EOF )
+            // InternalTmscXtext.g:1017:2: iv_ruleXFunction= ruleXFunction EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFunctionRule()); 
@@ -2474,7 +2726,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXFunction"
-    // InternalTmscXtext.g:943:1: ruleXFunction returns [EObject current=null] : ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? ) ;
+    // InternalTmscXtext.g:1023:1: ruleXFunction returns [EObject current=null] : ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? ) ;
     public final EObject ruleXFunction() throws RecognitionException {
         EObject current = null;
 
@@ -2509,33 +2761,33 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:949:2: ( ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? ) )
-            // InternalTmscXtext.g:950:2: ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? )
+            // InternalTmscXtext.g:1029:2: ( ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? ) )
+            // InternalTmscXtext.g:1030:2: ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? )
             {
-            // InternalTmscXtext.g:950:2: ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? )
-            // InternalTmscXtext.g:951:3: ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )?
+            // InternalTmscXtext.g:1030:2: ( ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )? )
+            // InternalTmscXtext.g:1031:3: ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )? otherlv_2= 'function' ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )? ( (lv_name_5_0= RULE_ID ) ) (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )? (otherlv_11= 'implements' ( ( ruleFQN ) ) )? (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )?
             {
-            // InternalTmscXtext.g:951:3: ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )?
-            int alt19=3;
-            int LA19_0 = input.LA(1);
+            // InternalTmscXtext.g:1031:3: ( ( (lv_ipcClient_0_0= 'ipc-client' ) ) | ( (lv_ipcServer_1_0= 'ipc-server' ) ) )?
+            int alt22=3;
+            int LA22_0 = input.LA(1);
 
-            if ( (LA19_0==31) ) {
-                alt19=1;
+            if ( (LA22_0==33) ) {
+                alt22=1;
             }
-            else if ( (LA19_0==32) ) {
-                alt19=2;
+            else if ( (LA22_0==34) ) {
+                alt22=2;
             }
-            switch (alt19) {
+            switch (alt22) {
                 case 1 :
-                    // InternalTmscXtext.g:952:4: ( (lv_ipcClient_0_0= 'ipc-client' ) )
+                    // InternalTmscXtext.g:1032:4: ( (lv_ipcClient_0_0= 'ipc-client' ) )
                     {
-                    // InternalTmscXtext.g:952:4: ( (lv_ipcClient_0_0= 'ipc-client' ) )
-                    // InternalTmscXtext.g:953:5: (lv_ipcClient_0_0= 'ipc-client' )
+                    // InternalTmscXtext.g:1032:4: ( (lv_ipcClient_0_0= 'ipc-client' ) )
+                    // InternalTmscXtext.g:1033:5: (lv_ipcClient_0_0= 'ipc-client' )
                     {
-                    // InternalTmscXtext.g:953:5: (lv_ipcClient_0_0= 'ipc-client' )
-                    // InternalTmscXtext.g:954:6: lv_ipcClient_0_0= 'ipc-client'
+                    // InternalTmscXtext.g:1033:5: (lv_ipcClient_0_0= 'ipc-client' )
+                    // InternalTmscXtext.g:1034:6: lv_ipcClient_0_0= 'ipc-client'
                     {
-                    lv_ipcClient_0_0=(Token)match(input,31,FOLLOW_23); if (state.failed) return current;
+                    lv_ipcClient_0_0=(Token)match(input,33,FOLLOW_25); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						newLeafNode(lv_ipcClient_0_0, grammarAccess.getXFunctionAccess().getIpcClientIpcClientKeyword_0_0_0());
@@ -2559,15 +2811,15 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:967:4: ( (lv_ipcServer_1_0= 'ipc-server' ) )
+                    // InternalTmscXtext.g:1047:4: ( (lv_ipcServer_1_0= 'ipc-server' ) )
                     {
-                    // InternalTmscXtext.g:967:4: ( (lv_ipcServer_1_0= 'ipc-server' ) )
-                    // InternalTmscXtext.g:968:5: (lv_ipcServer_1_0= 'ipc-server' )
+                    // InternalTmscXtext.g:1047:4: ( (lv_ipcServer_1_0= 'ipc-server' ) )
+                    // InternalTmscXtext.g:1048:5: (lv_ipcServer_1_0= 'ipc-server' )
                     {
-                    // InternalTmscXtext.g:968:5: (lv_ipcServer_1_0= 'ipc-server' )
-                    // InternalTmscXtext.g:969:6: lv_ipcServer_1_0= 'ipc-server'
+                    // InternalTmscXtext.g:1048:5: (lv_ipcServer_1_0= 'ipc-server' )
+                    // InternalTmscXtext.g:1049:6: lv_ipcServer_1_0= 'ipc-server'
                     {
-                    lv_ipcServer_1_0=(Token)match(input,32,FOLLOW_23); if (state.failed) return current;
+                    lv_ipcServer_1_0=(Token)match(input,34,FOLLOW_25); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       						newLeafNode(lv_ipcServer_1_0, grammarAccess.getXFunctionAccess().getIpcServerIpcServerKeyword_0_1_0());
@@ -2593,42 +2845,42 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_2=(Token)match(input,33,FOLLOW_16); if (state.failed) return current;
+            otherlv_2=(Token)match(input,35,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_2, grammarAccess.getXFunctionAccess().getFunctionKeyword_1());
               		
             }
-            // InternalTmscXtext.g:986:3: ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )?
-            int alt20=2;
-            int LA20_0 = input.LA(1);
+            // InternalTmscXtext.g:1066:3: ( ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as' )?
+            int alt23=2;
+            int LA23_0 = input.LA(1);
 
-            if ( (LA20_0==RULE_ID) ) {
-                int LA20_1 = input.LA(2);
+            if ( (LA23_0==RULE_ID) ) {
+                int LA23_1 = input.LA(2);
 
-                if ( (LA20_1==25) ) {
-                    alt20=1;
+                if ( (LA23_1==27) ) {
+                    alt23=1;
                 }
             }
-            else if ( (LA20_0==RULE_STRING) ) {
-                alt20=1;
+            else if ( (LA23_0==RULE_STRING) ) {
+                alt23=1;
             }
-            switch (alt20) {
+            switch (alt23) {
                 case 1 :
-                    // InternalTmscXtext.g:987:4: ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as'
+                    // InternalTmscXtext.g:1067:4: ( (lv_description_3_0= ruleIDString ) ) otherlv_4= 'as'
                     {
-                    // InternalTmscXtext.g:987:4: ( (lv_description_3_0= ruleIDString ) )
-                    // InternalTmscXtext.g:988:5: (lv_description_3_0= ruleIDString )
+                    // InternalTmscXtext.g:1067:4: ( (lv_description_3_0= ruleIDString ) )
+                    // InternalTmscXtext.g:1068:5: (lv_description_3_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:988:5: (lv_description_3_0= ruleIDString )
-                    // InternalTmscXtext.g:989:6: lv_description_3_0= ruleIDString
+                    // InternalTmscXtext.g:1068:5: (lv_description_3_0= ruleIDString )
+                    // InternalTmscXtext.g:1069:6: lv_description_3_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXFunctionAccess().getDescriptionIDStringParserRuleCall_2_0_0());
                       					
                     }
-                    pushFollow(FOLLOW_17);
+                    pushFollow(FOLLOW_19);
                     lv_description_3_0=ruleIDString();
 
                     state._fsp--;
@@ -2652,7 +2904,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_4=(Token)match(input,25,FOLLOW_18); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,27,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_4, grammarAccess.getXFunctionAccess().getAsKeyword_2_1());
@@ -2664,13 +2916,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1011:3: ( (lv_name_5_0= RULE_ID ) )
-            // InternalTmscXtext.g:1012:4: (lv_name_5_0= RULE_ID )
+            // InternalTmscXtext.g:1091:3: ( (lv_name_5_0= RULE_ID ) )
+            // InternalTmscXtext.g:1092:4: (lv_name_5_0= RULE_ID )
             {
-            // InternalTmscXtext.g:1012:4: (lv_name_5_0= RULE_ID )
-            // InternalTmscXtext.g:1013:5: lv_name_5_0= RULE_ID
+            // InternalTmscXtext.g:1092:4: (lv_name_5_0= RULE_ID )
+            // InternalTmscXtext.g:1093:5: lv_name_5_0= RULE_ID
             {
-            lv_name_5_0=(Token)match(input,RULE_ID,FOLLOW_24); if (state.failed) return current;
+            lv_name_5_0=(Token)match(input,RULE_ID,FOLLOW_26); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					newLeafNode(lv_name_5_0, grammarAccess.getXFunctionAccess().getNameIDTerminalRuleCall_3_0());
@@ -2694,35 +2946,35 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1029:3: (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )?
-            int alt22=2;
-            int LA22_0 = input.LA(1);
+            // InternalTmscXtext.g:1109:3: (otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')' )?
+            int alt25=2;
+            int LA25_0 = input.LA(1);
 
-            if ( (LA22_0==34) ) {
-                alt22=1;
+            if ( (LA25_0==36) ) {
+                alt25=1;
             }
-            switch (alt22) {
+            switch (alt25) {
                 case 1 :
-                    // InternalTmscXtext.g:1030:4: otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')'
+                    // InternalTmscXtext.g:1110:4: otherlv_6= '(' ( (lv_parameters_7_0= ruleXFunctionParameter ) ) (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )* otherlv_10= ')'
                     {
-                    otherlv_6=(Token)match(input,34,FOLLOW_25); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,36,FOLLOW_27); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_6, grammarAccess.getXFunctionAccess().getLeftParenthesisKeyword_4_0());
                       			
                     }
-                    // InternalTmscXtext.g:1034:4: ( (lv_parameters_7_0= ruleXFunctionParameter ) )
-                    // InternalTmscXtext.g:1035:5: (lv_parameters_7_0= ruleXFunctionParameter )
+                    // InternalTmscXtext.g:1114:4: ( (lv_parameters_7_0= ruleXFunctionParameter ) )
+                    // InternalTmscXtext.g:1115:5: (lv_parameters_7_0= ruleXFunctionParameter )
                     {
-                    // InternalTmscXtext.g:1035:5: (lv_parameters_7_0= ruleXFunctionParameter )
-                    // InternalTmscXtext.g:1036:6: lv_parameters_7_0= ruleXFunctionParameter
+                    // InternalTmscXtext.g:1115:5: (lv_parameters_7_0= ruleXFunctionParameter )
+                    // InternalTmscXtext.g:1116:6: lv_parameters_7_0= ruleXFunctionParameter
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXFunctionAccess().getParametersXFunctionParameterParserRuleCall_4_1_0());
                       					
                     }
-                    pushFollow(FOLLOW_26);
+                    pushFollow(FOLLOW_28);
                     lv_parameters_7_0=ruleXFunctionParameter();
 
                     state._fsp--;
@@ -2746,39 +2998,39 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:1053:4: (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )*
-                    loop21:
+                    // InternalTmscXtext.g:1133:4: (otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) ) )*
+                    loop24:
                     do {
-                        int alt21=2;
-                        int LA21_0 = input.LA(1);
+                        int alt24=2;
+                        int LA24_0 = input.LA(1);
 
-                        if ( (LA21_0==29) ) {
-                            alt21=1;
+                        if ( (LA24_0==31) ) {
+                            alt24=1;
                         }
 
 
-                        switch (alt21) {
+                        switch (alt24) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1054:5: otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) )
+                    	    // InternalTmscXtext.g:1134:5: otherlv_8= ',' ( (lv_parameters_9_0= ruleXFunctionParameter ) )
                     	    {
-                    	    otherlv_8=(Token)match(input,29,FOLLOW_25); if (state.failed) return current;
+                    	    otherlv_8=(Token)match(input,31,FOLLOW_27); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      					newLeafNode(otherlv_8, grammarAccess.getXFunctionAccess().getCommaKeyword_4_2_0());
                     	      				
                     	    }
-                    	    // InternalTmscXtext.g:1058:5: ( (lv_parameters_9_0= ruleXFunctionParameter ) )
-                    	    // InternalTmscXtext.g:1059:6: (lv_parameters_9_0= ruleXFunctionParameter )
+                    	    // InternalTmscXtext.g:1138:5: ( (lv_parameters_9_0= ruleXFunctionParameter ) )
+                    	    // InternalTmscXtext.g:1139:6: (lv_parameters_9_0= ruleXFunctionParameter )
                     	    {
-                    	    // InternalTmscXtext.g:1059:6: (lv_parameters_9_0= ruleXFunctionParameter )
-                    	    // InternalTmscXtext.g:1060:7: lv_parameters_9_0= ruleXFunctionParameter
+                    	    // InternalTmscXtext.g:1139:6: (lv_parameters_9_0= ruleXFunctionParameter )
+                    	    // InternalTmscXtext.g:1140:7: lv_parameters_9_0= ruleXFunctionParameter
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXFunctionAccess().getParametersXFunctionParameterParserRuleCall_4_2_1_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_26);
+                    	    pushFollow(FOLLOW_28);
                     	    lv_parameters_9_0=ruleXFunctionParameter();
 
                     	    state._fsp--;
@@ -2807,11 +3059,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop21;
+                    	    break loop24;
                         }
                     } while (true);
 
-                    otherlv_10=(Token)match(input,35,FOLLOW_27); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,37,FOLLOW_29); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_10, grammarAccess.getXFunctionAccess().getRightParenthesisKeyword_4_3());
@@ -2823,28 +3075,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1083:3: (otherlv_11= 'implements' ( ( ruleFQN ) ) )?
-            int alt23=2;
-            int LA23_0 = input.LA(1);
+            // InternalTmscXtext.g:1163:3: (otherlv_11= 'implements' ( ( ruleFQN ) ) )?
+            int alt26=2;
+            int LA26_0 = input.LA(1);
 
-            if ( (LA23_0==36) ) {
-                alt23=1;
+            if ( (LA26_0==38) ) {
+                alt26=1;
             }
-            switch (alt23) {
+            switch (alt26) {
                 case 1 :
-                    // InternalTmscXtext.g:1084:4: otherlv_11= 'implements' ( ( ruleFQN ) )
+                    // InternalTmscXtext.g:1164:4: otherlv_11= 'implements' ( ( ruleFQN ) )
                     {
-                    otherlv_11=(Token)match(input,36,FOLLOW_18); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,38,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_11, grammarAccess.getXFunctionAccess().getImplementsKeyword_5_0());
                       			
                     }
-                    // InternalTmscXtext.g:1088:4: ( ( ruleFQN ) )
-                    // InternalTmscXtext.g:1089:5: ( ruleFQN )
+                    // InternalTmscXtext.g:1168:4: ( ( ruleFQN ) )
+                    // InternalTmscXtext.g:1169:5: ( ruleFQN )
                     {
-                    // InternalTmscXtext.g:1089:5: ( ruleFQN )
-                    // InternalTmscXtext.g:1090:6: ruleFQN
+                    // InternalTmscXtext.g:1169:5: ( ruleFQN )
+                    // InternalTmscXtext.g:1170:6: ruleFQN
                     {
                     if ( state.backtracking==0 ) {
 
@@ -2880,16 +3132,16 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1105:3: (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )?
-            int alt25=2;
-            int LA25_0 = input.LA(1);
+            // InternalTmscXtext.g:1185:3: (otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}' )?
+            int alt28=2;
+            int LA28_0 = input.LA(1);
 
-            if ( (LA25_0==15) ) {
-                alt25=1;
+            if ( (LA28_0==15) ) {
+                alt28=1;
             }
-            switch (alt25) {
+            switch (alt28) {
                 case 1 :
-                    // InternalTmscXtext.g:1106:4: otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}'
+                    // InternalTmscXtext.g:1186:4: otherlv_13= '{' ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )* otherlv_21= '}'
                     {
                     otherlv_13=(Token)match(input,15,FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -2897,36 +3149,36 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       				newLeafNode(otherlv_13, grammarAccess.getXFunctionAccess().getLeftCurlyBracketKeyword_6_0());
                       			
                     }
-                    // InternalTmscXtext.g:1110:4: ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )*
-                    loop24:
+                    // InternalTmscXtext.g:1190:4: ( (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_20_0= ruleXProperty ) ) )*
+                    loop27:
                     do {
-                        int alt24=4;
+                        int alt27=4;
                         switch ( input.LA(1) ) {
                         case 18:
                             {
-                            alt24=1;
+                            alt27=1;
                             }
                             break;
                         case 19:
                             {
-                            alt24=2;
+                            alt27=2;
                             }
                             break;
                         case RULE_ID:
                         case RULE_STRING:
                             {
-                            alt24=3;
+                            alt27=3;
                             }
                             break;
 
                         }
 
-                        switch (alt24) {
+                        switch (alt27) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1111:5: (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1191:5: (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1111:5: (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) )
-                    	    // InternalTmscXtext.g:1112:6: otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1191:5: (otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1192:6: otherlv_14= 'time-bound' otherlv_15= ':' ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) )
                     	    {
                     	    otherlv_14=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2940,11 +3192,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_15, grammarAccess.getXFunctionAccess().getColonKeyword_6_1_0_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1120:6: ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) )
-                    	    // InternalTmscXtext.g:1121:7: (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:1200:6: ( (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1201:7: (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL )
                     	    {
-                    	    // InternalTmscXtext.g:1121:7: (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL )
-                    	    // InternalTmscXtext.g:1122:8: lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL
+                    	    // InternalTmscXtext.g:1201:7: (lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:1202:8: lv_timeBound_16_0= RULE_ABS_EBIGDECIMAL
                     	    {
                     	    lv_timeBound_16_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2977,10 +3229,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:1140:5: (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:1220:5: (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1140:5: (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) )
-                    	    // InternalTmscXtext.g:1141:6: otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:1220:5: (otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:1221:6: otherlv_17= 'scheduled' otherlv_18= ':' ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) )
                     	    {
                     	    otherlv_17=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -2994,11 +3246,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_18, grammarAccess.getXFunctionAccess().getColonKeyword_6_1_1_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1149:6: ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) )
-                    	    // InternalTmscXtext.g:1150:7: (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:1229:6: ( (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:1230:7: (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT )
                     	    {
-                    	    // InternalTmscXtext.g:1150:7: (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT )
-                    	    // InternalTmscXtext.g:1151:8: lv_scheduled_19_0= ruleEBOOLEAN_OBJECT
+                    	    // InternalTmscXtext.g:1230:7: (lv_scheduled_19_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:1231:8: lv_scheduled_19_0= ruleEBOOLEAN_OBJECT
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -3036,13 +3288,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 3 :
-                    	    // InternalTmscXtext.g:1170:5: ( (lv_properties_20_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1250:5: ( (lv_properties_20_0= ruleXProperty ) )
                     	    {
-                    	    // InternalTmscXtext.g:1170:5: ( (lv_properties_20_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:1171:6: (lv_properties_20_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1250:5: ( (lv_properties_20_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1251:6: (lv_properties_20_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:1171:6: (lv_properties_20_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:1172:7: lv_properties_20_0= ruleXProperty
+                    	    // InternalTmscXtext.g:1251:6: (lv_properties_20_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1252:7: lv_properties_20_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -3078,7 +3330,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop24;
+                    	    break loop27;
                         }
                     } while (true);
 
@@ -3119,7 +3371,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXFunctionParameter"
-    // InternalTmscXtext.g:1199:1: entryRuleXFunctionParameter returns [EObject current=null] : iv_ruleXFunctionParameter= ruleXFunctionParameter EOF ;
+    // InternalTmscXtext.g:1279:1: entryRuleXFunctionParameter returns [EObject current=null] : iv_ruleXFunctionParameter= ruleXFunctionParameter EOF ;
     public final EObject entryRuleXFunctionParameter() throws RecognitionException {
         EObject current = null;
 
@@ -3127,8 +3379,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:1199:59: (iv_ruleXFunctionParameter= ruleXFunctionParameter EOF )
-            // InternalTmscXtext.g:1200:2: iv_ruleXFunctionParameter= ruleXFunctionParameter EOF
+            // InternalTmscXtext.g:1279:59: (iv_ruleXFunctionParameter= ruleXFunctionParameter EOF )
+            // InternalTmscXtext.g:1280:2: iv_ruleXFunctionParameter= ruleXFunctionParameter EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXFunctionParameterRule()); 
@@ -3159,7 +3411,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXFunctionParameter"
-    // InternalTmscXtext.g:1206:1: ruleXFunctionParameter returns [EObject current=null] : ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? ) ;
+    // InternalTmscXtext.g:1286:1: ruleXFunctionParameter returns [EObject current=null] : ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? ) ;
     public final EObject ruleXFunctionParameter() throws RecognitionException {
         EObject current = null;
 
@@ -3178,24 +3430,24 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:1212:2: ( ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? ) )
-            // InternalTmscXtext.g:1213:2: ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? )
+            // InternalTmscXtext.g:1292:2: ( ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? ) )
+            // InternalTmscXtext.g:1293:2: ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? )
             {
-            // InternalTmscXtext.g:1213:2: ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? )
-            // InternalTmscXtext.g:1214:3: ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )?
+            // InternalTmscXtext.g:1293:2: ( ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )? )
+            // InternalTmscXtext.g:1294:3: ( (lv_kind_0_0= ruleXFunctionParameterKind ) ) ( (lv_name_1_0= RULE_ID ) ) (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )?
             {
-            // InternalTmscXtext.g:1214:3: ( (lv_kind_0_0= ruleXFunctionParameterKind ) )
-            // InternalTmscXtext.g:1215:4: (lv_kind_0_0= ruleXFunctionParameterKind )
+            // InternalTmscXtext.g:1294:3: ( (lv_kind_0_0= ruleXFunctionParameterKind ) )
+            // InternalTmscXtext.g:1295:4: (lv_kind_0_0= ruleXFunctionParameterKind )
             {
-            // InternalTmscXtext.g:1215:4: (lv_kind_0_0= ruleXFunctionParameterKind )
-            // InternalTmscXtext.g:1216:5: lv_kind_0_0= ruleXFunctionParameterKind
+            // InternalTmscXtext.g:1295:4: (lv_kind_0_0= ruleXFunctionParameterKind )
+            // InternalTmscXtext.g:1296:5: lv_kind_0_0= ruleXFunctionParameterKind
             {
             if ( state.backtracking==0 ) {
 
               					newCompositeNode(grammarAccess.getXFunctionParameterAccess().getKindXFunctionParameterKindEnumRuleCall_0_0());
               				
             }
-            pushFollow(FOLLOW_18);
+            pushFollow(FOLLOW_20);
             lv_kind_0_0=ruleXFunctionParameterKind();
 
             state._fsp--;
@@ -3219,13 +3471,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1233:3: ( (lv_name_1_0= RULE_ID ) )
-            // InternalTmscXtext.g:1234:4: (lv_name_1_0= RULE_ID )
+            // InternalTmscXtext.g:1313:3: ( (lv_name_1_0= RULE_ID ) )
+            // InternalTmscXtext.g:1314:4: (lv_name_1_0= RULE_ID )
             {
-            // InternalTmscXtext.g:1234:4: (lv_name_1_0= RULE_ID )
-            // InternalTmscXtext.g:1235:5: lv_name_1_0= RULE_ID
+            // InternalTmscXtext.g:1314:4: (lv_name_1_0= RULE_ID )
+            // InternalTmscXtext.g:1315:5: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_28); if (state.failed) return current;
+            lv_name_1_0=(Token)match(input,RULE_ID,FOLLOW_30); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               					newLeafNode(lv_name_1_0, grammarAccess.getXFunctionParameterAccess().getNameIDTerminalRuleCall_1_0());
@@ -3249,35 +3501,35 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1251:3: (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )?
-            int alt27=2;
-            int LA27_0 = input.LA(1);
+            // InternalTmscXtext.g:1331:3: (otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')' )?
+            int alt30=2;
+            int LA30_0 = input.LA(1);
 
-            if ( (LA27_0==34) ) {
-                alt27=1;
+            if ( (LA30_0==36) ) {
+                alt30=1;
             }
-            switch (alt27) {
+            switch (alt30) {
                 case 1 :
-                    // InternalTmscXtext.g:1252:4: otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')'
+                    // InternalTmscXtext.g:1332:4: otherlv_2= '(' ( (lv_properties_3_0= ruleXProperty ) ) (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )* otherlv_6= ')'
                     {
-                    otherlv_2=(Token)match(input,34,FOLLOW_16); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,36,FOLLOW_18); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_2, grammarAccess.getXFunctionParameterAccess().getLeftParenthesisKeyword_2_0());
                       			
                     }
-                    // InternalTmscXtext.g:1256:4: ( (lv_properties_3_0= ruleXProperty ) )
-                    // InternalTmscXtext.g:1257:5: (lv_properties_3_0= ruleXProperty )
+                    // InternalTmscXtext.g:1336:4: ( (lv_properties_3_0= ruleXProperty ) )
+                    // InternalTmscXtext.g:1337:5: (lv_properties_3_0= ruleXProperty )
                     {
-                    // InternalTmscXtext.g:1257:5: (lv_properties_3_0= ruleXProperty )
-                    // InternalTmscXtext.g:1258:6: lv_properties_3_0= ruleXProperty
+                    // InternalTmscXtext.g:1337:5: (lv_properties_3_0= ruleXProperty )
+                    // InternalTmscXtext.g:1338:6: lv_properties_3_0= ruleXProperty
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXFunctionParameterAccess().getPropertiesXPropertyParserRuleCall_2_1_0());
                       					
                     }
-                    pushFollow(FOLLOW_26);
+                    pushFollow(FOLLOW_28);
                     lv_properties_3_0=ruleXProperty();
 
                     state._fsp--;
@@ -3301,39 +3553,39 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:1275:4: (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )*
-                    loop26:
+                    // InternalTmscXtext.g:1355:4: (otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) ) )*
+                    loop29:
                     do {
-                        int alt26=2;
-                        int LA26_0 = input.LA(1);
+                        int alt29=2;
+                        int LA29_0 = input.LA(1);
 
-                        if ( (LA26_0==29) ) {
-                            alt26=1;
+                        if ( (LA29_0==31) ) {
+                            alt29=1;
                         }
 
 
-                        switch (alt26) {
+                        switch (alt29) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1276:5: otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1356:5: otherlv_4= ',' ( (lv_properties_5_0= ruleXProperty ) )
                     	    {
-                    	    otherlv_4=(Token)match(input,29,FOLLOW_16); if (state.failed) return current;
+                    	    otherlv_4=(Token)match(input,31,FOLLOW_18); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      					newLeafNode(otherlv_4, grammarAccess.getXFunctionParameterAccess().getCommaKeyword_2_2_0());
                     	      				
                     	    }
-                    	    // InternalTmscXtext.g:1280:5: ( (lv_properties_5_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:1281:6: (lv_properties_5_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1360:5: ( (lv_properties_5_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1361:6: (lv_properties_5_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:1281:6: (lv_properties_5_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:1282:7: lv_properties_5_0= ruleXProperty
+                    	    // InternalTmscXtext.g:1361:6: (lv_properties_5_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1362:7: lv_properties_5_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXFunctionParameterAccess().getPropertiesXPropertyParserRuleCall_2_2_1_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_26);
+                    	    pushFollow(FOLLOW_28);
                     	    lv_properties_5_0=ruleXProperty();
 
                     	    state._fsp--;
@@ -3362,11 +3614,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop26;
+                    	    break loop29;
                         }
                     } while (true);
 
-                    otherlv_6=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,37,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_6, grammarAccess.getXFunctionParameterAccess().getRightParenthesisKeyword_2_3());
@@ -3403,7 +3655,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXHost"
-    // InternalTmscXtext.g:1309:1: entryRuleXHost returns [EObject current=null] : iv_ruleXHost= ruleXHost EOF ;
+    // InternalTmscXtext.g:1389:1: entryRuleXHost returns [EObject current=null] : iv_ruleXHost= ruleXHost EOF ;
     public final EObject entryRuleXHost() throws RecognitionException {
         EObject current = null;
 
@@ -3411,8 +3663,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:1309:46: (iv_ruleXHost= ruleXHost EOF )
-            // InternalTmscXtext.g:1310:2: iv_ruleXHost= ruleXHost EOF
+            // InternalTmscXtext.g:1389:46: (iv_ruleXHost= ruleXHost EOF )
+            // InternalTmscXtext.g:1390:2: iv_ruleXHost= ruleXHost EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXHostRule()); 
@@ -3443,7 +3695,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXHost"
-    // InternalTmscXtext.g:1316:1: ruleXHost returns [EObject current=null] : ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? ) ;
+    // InternalTmscXtext.g:1396:1: ruleXHost returns [EObject current=null] : ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? ) ;
     public final EObject ruleXHost() throws RecognitionException {
         EObject current = null;
 
@@ -3471,27 +3723,27 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:1322:2: ( ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? ) )
-            // InternalTmscXtext.g:1323:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? )
+            // InternalTmscXtext.g:1402:2: ( ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? ) )
+            // InternalTmscXtext.g:1403:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? )
             {
-            // InternalTmscXtext.g:1323:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? )
-            // InternalTmscXtext.g:1324:3: ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )?
+            // InternalTmscXtext.g:1403:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )? )
+            // InternalTmscXtext.g:1404:3: ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'host' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )?
             {
-            // InternalTmscXtext.g:1324:3: ( (lv_untraced_0_0= 'untraced' ) )?
-            int alt28=2;
-            int LA28_0 = input.LA(1);
+            // InternalTmscXtext.g:1404:3: ( (lv_untraced_0_0= 'untraced' ) )?
+            int alt31=2;
+            int LA31_0 = input.LA(1);
 
-            if ( (LA28_0==37) ) {
-                alt28=1;
+            if ( (LA31_0==39) ) {
+                alt31=1;
             }
-            switch (alt28) {
+            switch (alt31) {
                 case 1 :
-                    // InternalTmscXtext.g:1325:4: (lv_untraced_0_0= 'untraced' )
+                    // InternalTmscXtext.g:1405:4: (lv_untraced_0_0= 'untraced' )
                     {
-                    // InternalTmscXtext.g:1325:4: (lv_untraced_0_0= 'untraced' )
-                    // InternalTmscXtext.g:1326:5: lv_untraced_0_0= 'untraced'
+                    // InternalTmscXtext.g:1405:4: (lv_untraced_0_0= 'untraced' )
+                    // InternalTmscXtext.g:1406:5: lv_untraced_0_0= 'untraced'
                     {
-                    lv_untraced_0_0=(Token)match(input,37,FOLLOW_29); if (state.failed) return current;
+                    lv_untraced_0_0=(Token)match(input,39,FOLLOW_31); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(lv_untraced_0_0, grammarAccess.getXHostAccess().getUntracedUntracedKeyword_0_0());
@@ -3514,42 +3766,42 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,38,FOLLOW_16); if (state.failed) return current;
+            otherlv_1=(Token)match(input,40,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_1, grammarAccess.getXHostAccess().getHostKeyword_1());
               		
             }
-            // InternalTmscXtext.g:1342:3: ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )?
-            int alt29=2;
-            int LA29_0 = input.LA(1);
+            // InternalTmscXtext.g:1422:3: ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )?
+            int alt32=2;
+            int LA32_0 = input.LA(1);
 
-            if ( (LA29_0==RULE_ID) ) {
-                int LA29_1 = input.LA(2);
+            if ( (LA32_0==RULE_ID) ) {
+                int LA32_1 = input.LA(2);
 
-                if ( (LA29_1==25) ) {
-                    alt29=1;
+                if ( (LA32_1==27) ) {
+                    alt32=1;
                 }
             }
-            else if ( (LA29_0==RULE_STRING) ) {
-                alt29=1;
+            else if ( (LA32_0==RULE_STRING) ) {
+                alt32=1;
             }
-            switch (alt29) {
+            switch (alt32) {
                 case 1 :
-                    // InternalTmscXtext.g:1343:4: ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as'
+                    // InternalTmscXtext.g:1423:4: ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as'
                     {
-                    // InternalTmscXtext.g:1343:4: ( (lv_description_2_0= ruleIDString ) )
-                    // InternalTmscXtext.g:1344:5: (lv_description_2_0= ruleIDString )
+                    // InternalTmscXtext.g:1423:4: ( (lv_description_2_0= ruleIDString ) )
+                    // InternalTmscXtext.g:1424:5: (lv_description_2_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:1344:5: (lv_description_2_0= ruleIDString )
-                    // InternalTmscXtext.g:1345:6: lv_description_2_0= ruleIDString
+                    // InternalTmscXtext.g:1424:5: (lv_description_2_0= ruleIDString )
+                    // InternalTmscXtext.g:1425:6: lv_description_2_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXHostAccess().getDescriptionIDStringParserRuleCall_2_0_0());
                       					
                     }
-                    pushFollow(FOLLOW_17);
+                    pushFollow(FOLLOW_19);
                     lv_description_2_0=ruleIDString();
 
                     state._fsp--;
@@ -3573,7 +3825,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_3=(Token)match(input,25,FOLLOW_18); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,27,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_3, grammarAccess.getXHostAccess().getAsKeyword_2_1());
@@ -3585,11 +3837,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1367:3: ( (lv_name_4_0= RULE_ID ) )
-            // InternalTmscXtext.g:1368:4: (lv_name_4_0= RULE_ID )
+            // InternalTmscXtext.g:1447:3: ( (lv_name_4_0= RULE_ID ) )
+            // InternalTmscXtext.g:1448:4: (lv_name_4_0= RULE_ID )
             {
-            // InternalTmscXtext.g:1368:4: (lv_name_4_0= RULE_ID )
-            // InternalTmscXtext.g:1369:5: lv_name_4_0= RULE_ID
+            // InternalTmscXtext.g:1448:4: (lv_name_4_0= RULE_ID )
+            // InternalTmscXtext.g:1449:5: lv_name_4_0= RULE_ID
             {
             lv_name_4_0=(Token)match(input,RULE_ID,FOLLOW_13); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -3615,59 +3867,59 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1385:3: (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )?
-            int alt31=2;
-            int LA31_0 = input.LA(1);
+            // InternalTmscXtext.g:1465:3: (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}' )?
+            int alt34=2;
+            int LA34_0 = input.LA(1);
 
-            if ( (LA31_0==15) ) {
-                alt31=1;
+            if ( (LA34_0==15) ) {
+                alt34=1;
             }
-            switch (alt31) {
+            switch (alt34) {
                 case 1 :
-                    // InternalTmscXtext.g:1386:4: otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}'
+                    // InternalTmscXtext.g:1466:4: otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )* otherlv_14= '}'
                     {
-                    otherlv_5=(Token)match(input,15,FOLLOW_30); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,15,FOLLOW_32); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_5, grammarAccess.getXHostAccess().getLeftCurlyBracketKeyword_4_0());
                       			
                     }
-                    // InternalTmscXtext.g:1390:4: ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )*
-                    loop30:
+                    // InternalTmscXtext.g:1470:4: ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) | ( (lv_executors_13_0= ruleXExecutor ) ) )*
+                    loop33:
                     do {
-                        int alt30=5;
+                        int alt33=5;
                         switch ( input.LA(1) ) {
                         case 18:
                             {
-                            alt30=1;
+                            alt33=1;
                             }
                             break;
                         case 19:
                             {
-                            alt30=2;
+                            alt33=2;
                             }
                             break;
                         case RULE_ID:
                         case RULE_STRING:
                             {
-                            alt30=3;
+                            alt33=3;
                             }
                             break;
-                        case 37:
                         case 39:
+                        case 41:
                             {
-                            alt30=4;
+                            alt33=4;
                             }
                             break;
 
                         }
 
-                        switch (alt30) {
+                        switch (alt33) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1391:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1471:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1391:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
-                    	    // InternalTmscXtext.g:1392:6: otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1471:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1472:6: otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
                     	    {
                     	    otherlv_6=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -3681,13 +3933,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_7, grammarAccess.getXHostAccess().getColonKeyword_4_1_0_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1400:6: ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
-                    	    // InternalTmscXtext.g:1401:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:1480:6: ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1481:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
                     	    {
-                    	    // InternalTmscXtext.g:1401:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
-                    	    // InternalTmscXtext.g:1402:8: lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL
+                    	    // InternalTmscXtext.g:1481:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:1482:8: lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL
                     	    {
-                    	    lv_timeBound_8_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_30); if (state.failed) return current;
+                    	    lv_timeBound_8_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_32); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      								newLeafNode(lv_timeBound_8_0, grammarAccess.getXHostAccess().getTimeBoundABS_EBIGDECIMALTerminalRuleCall_4_1_0_2_0());
@@ -3718,10 +3970,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:1420:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:1500:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1420:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
-                    	    // InternalTmscXtext.g:1421:6: otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:1500:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:1501:6: otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
                     	    {
                     	    otherlv_9=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -3735,18 +3987,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_10, grammarAccess.getXHostAccess().getColonKeyword_4_1_1_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1429:6: ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
-                    	    // InternalTmscXtext.g:1430:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:1509:6: ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:1510:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
                     	    {
-                    	    // InternalTmscXtext.g:1430:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
-                    	    // InternalTmscXtext.g:1431:8: lv_scheduled_11_0= ruleEBOOLEAN_OBJECT
+                    	    // InternalTmscXtext.g:1510:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:1511:8: lv_scheduled_11_0= ruleEBOOLEAN_OBJECT
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      								newCompositeNode(grammarAccess.getXHostAccess().getScheduledEBOOLEAN_OBJECTParserRuleCall_4_1_1_2_0());
                     	      							
                     	    }
-                    	    pushFollow(FOLLOW_30);
+                    	    pushFollow(FOLLOW_32);
                     	    lv_scheduled_11_0=ruleEBOOLEAN_OBJECT();
 
                     	    state._fsp--;
@@ -3777,20 +4029,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 3 :
-                    	    // InternalTmscXtext.g:1450:5: ( (lv_properties_12_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1530:5: ( (lv_properties_12_0= ruleXProperty ) )
                     	    {
-                    	    // InternalTmscXtext.g:1450:5: ( (lv_properties_12_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:1451:6: (lv_properties_12_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1530:5: ( (lv_properties_12_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1531:6: (lv_properties_12_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:1451:6: (lv_properties_12_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:1452:7: lv_properties_12_0= ruleXProperty
+                    	    // InternalTmscXtext.g:1531:6: (lv_properties_12_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1532:7: lv_properties_12_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXHostAccess().getPropertiesXPropertyParserRuleCall_4_1_2_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_30);
+                    	    pushFollow(FOLLOW_32);
                     	    lv_properties_12_0=ruleXProperty();
 
                     	    state._fsp--;
@@ -3818,20 +4070,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 4 :
-                    	    // InternalTmscXtext.g:1470:5: ( (lv_executors_13_0= ruleXExecutor ) )
+                    	    // InternalTmscXtext.g:1550:5: ( (lv_executors_13_0= ruleXExecutor ) )
                     	    {
-                    	    // InternalTmscXtext.g:1470:5: ( (lv_executors_13_0= ruleXExecutor ) )
-                    	    // InternalTmscXtext.g:1471:6: (lv_executors_13_0= ruleXExecutor )
+                    	    // InternalTmscXtext.g:1550:5: ( (lv_executors_13_0= ruleXExecutor ) )
+                    	    // InternalTmscXtext.g:1551:6: (lv_executors_13_0= ruleXExecutor )
                     	    {
-                    	    // InternalTmscXtext.g:1471:6: (lv_executors_13_0= ruleXExecutor )
-                    	    // InternalTmscXtext.g:1472:7: lv_executors_13_0= ruleXExecutor
+                    	    // InternalTmscXtext.g:1551:6: (lv_executors_13_0= ruleXExecutor )
+                    	    // InternalTmscXtext.g:1552:7: lv_executors_13_0= ruleXExecutor
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXHostAccess().getExecutorsXExecutorParserRuleCall_4_1_3_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_30);
+                    	    pushFollow(FOLLOW_32);
                     	    lv_executors_13_0=ruleXExecutor();
 
                     	    state._fsp--;
@@ -3860,7 +4112,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop30;
+                    	    break loop33;
                         }
                     } while (true);
 
@@ -3901,7 +4153,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXExecutor"
-    // InternalTmscXtext.g:1499:1: entryRuleXExecutor returns [EObject current=null] : iv_ruleXExecutor= ruleXExecutor EOF ;
+    // InternalTmscXtext.g:1579:1: entryRuleXExecutor returns [EObject current=null] : iv_ruleXExecutor= ruleXExecutor EOF ;
     public final EObject entryRuleXExecutor() throws RecognitionException {
         EObject current = null;
 
@@ -3909,8 +4161,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:1499:50: (iv_ruleXExecutor= ruleXExecutor EOF )
-            // InternalTmscXtext.g:1500:2: iv_ruleXExecutor= ruleXExecutor EOF
+            // InternalTmscXtext.g:1579:50: (iv_ruleXExecutor= ruleXExecutor EOF )
+            // InternalTmscXtext.g:1580:2: iv_ruleXExecutor= ruleXExecutor EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXExecutorRule()); 
@@ -3941,7 +4193,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXExecutor"
-    // InternalTmscXtext.g:1506:1: ruleXExecutor returns [EObject current=null] : ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? ) ;
+    // InternalTmscXtext.g:1586:1: ruleXExecutor returns [EObject current=null] : ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? ) ;
     public final EObject ruleXExecutor() throws RecognitionException {
         EObject current = null;
 
@@ -3967,27 +4219,27 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:1512:2: ( ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? ) )
-            // InternalTmscXtext.g:1513:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? )
+            // InternalTmscXtext.g:1592:2: ( ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? ) )
+            // InternalTmscXtext.g:1593:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? )
             {
-            // InternalTmscXtext.g:1513:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? )
-            // InternalTmscXtext.g:1514:3: ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )?
+            // InternalTmscXtext.g:1593:2: ( ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )? )
+            // InternalTmscXtext.g:1594:3: ( (lv_untraced_0_0= 'untraced' ) )? otherlv_1= 'executor' ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )? ( (lv_name_4_0= RULE_ID ) ) (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )?
             {
-            // InternalTmscXtext.g:1514:3: ( (lv_untraced_0_0= 'untraced' ) )?
-            int alt32=2;
-            int LA32_0 = input.LA(1);
+            // InternalTmscXtext.g:1594:3: ( (lv_untraced_0_0= 'untraced' ) )?
+            int alt35=2;
+            int LA35_0 = input.LA(1);
 
-            if ( (LA32_0==37) ) {
-                alt32=1;
+            if ( (LA35_0==39) ) {
+                alt35=1;
             }
-            switch (alt32) {
+            switch (alt35) {
                 case 1 :
-                    // InternalTmscXtext.g:1515:4: (lv_untraced_0_0= 'untraced' )
+                    // InternalTmscXtext.g:1595:4: (lv_untraced_0_0= 'untraced' )
                     {
-                    // InternalTmscXtext.g:1515:4: (lv_untraced_0_0= 'untraced' )
-                    // InternalTmscXtext.g:1516:5: lv_untraced_0_0= 'untraced'
+                    // InternalTmscXtext.g:1595:4: (lv_untraced_0_0= 'untraced' )
+                    // InternalTmscXtext.g:1596:5: lv_untraced_0_0= 'untraced'
                     {
-                    lv_untraced_0_0=(Token)match(input,37,FOLLOW_31); if (state.failed) return current;
+                    lv_untraced_0_0=(Token)match(input,39,FOLLOW_33); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(lv_untraced_0_0, grammarAccess.getXExecutorAccess().getUntracedUntracedKeyword_0_0());
@@ -4010,42 +4262,42 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,39,FOLLOW_16); if (state.failed) return current;
+            otherlv_1=(Token)match(input,41,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_1, grammarAccess.getXExecutorAccess().getExecutorKeyword_1());
               		
             }
-            // InternalTmscXtext.g:1532:3: ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )?
-            int alt33=2;
-            int LA33_0 = input.LA(1);
+            // InternalTmscXtext.g:1612:3: ( ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as' )?
+            int alt36=2;
+            int LA36_0 = input.LA(1);
 
-            if ( (LA33_0==RULE_ID) ) {
-                int LA33_1 = input.LA(2);
+            if ( (LA36_0==RULE_ID) ) {
+                int LA36_1 = input.LA(2);
 
-                if ( (LA33_1==25) ) {
-                    alt33=1;
+                if ( (LA36_1==27) ) {
+                    alt36=1;
                 }
             }
-            else if ( (LA33_0==RULE_STRING) ) {
-                alt33=1;
+            else if ( (LA36_0==RULE_STRING) ) {
+                alt36=1;
             }
-            switch (alt33) {
+            switch (alt36) {
                 case 1 :
-                    // InternalTmscXtext.g:1533:4: ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as'
+                    // InternalTmscXtext.g:1613:4: ( (lv_description_2_0= ruleIDString ) ) otherlv_3= 'as'
                     {
-                    // InternalTmscXtext.g:1533:4: ( (lv_description_2_0= ruleIDString ) )
-                    // InternalTmscXtext.g:1534:5: (lv_description_2_0= ruleIDString )
+                    // InternalTmscXtext.g:1613:4: ( (lv_description_2_0= ruleIDString ) )
+                    // InternalTmscXtext.g:1614:5: (lv_description_2_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:1534:5: (lv_description_2_0= ruleIDString )
-                    // InternalTmscXtext.g:1535:6: lv_description_2_0= ruleIDString
+                    // InternalTmscXtext.g:1614:5: (lv_description_2_0= ruleIDString )
+                    // InternalTmscXtext.g:1615:6: lv_description_2_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXExecutorAccess().getDescriptionIDStringParserRuleCall_2_0_0());
                       					
                     }
-                    pushFollow(FOLLOW_17);
+                    pushFollow(FOLLOW_19);
                     lv_description_2_0=ruleIDString();
 
                     state._fsp--;
@@ -4069,7 +4321,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_3=(Token)match(input,25,FOLLOW_18); if (state.failed) return current;
+                    otherlv_3=(Token)match(input,27,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_3, grammarAccess.getXExecutorAccess().getAsKeyword_2_1());
@@ -4081,11 +4333,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1557:3: ( (lv_name_4_0= RULE_ID ) )
-            // InternalTmscXtext.g:1558:4: (lv_name_4_0= RULE_ID )
+            // InternalTmscXtext.g:1637:3: ( (lv_name_4_0= RULE_ID ) )
+            // InternalTmscXtext.g:1638:4: (lv_name_4_0= RULE_ID )
             {
-            // InternalTmscXtext.g:1558:4: (lv_name_4_0= RULE_ID )
-            // InternalTmscXtext.g:1559:5: lv_name_4_0= RULE_ID
+            // InternalTmscXtext.g:1638:4: (lv_name_4_0= RULE_ID )
+            // InternalTmscXtext.g:1639:5: lv_name_4_0= RULE_ID
             {
             lv_name_4_0=(Token)match(input,RULE_ID,FOLLOW_13); if (state.failed) return current;
             if ( state.backtracking==0 ) {
@@ -4111,16 +4363,16 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1575:3: (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )?
-            int alt35=2;
-            int LA35_0 = input.LA(1);
+            // InternalTmscXtext.g:1655:3: (otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )?
+            int alt38=2;
+            int LA38_0 = input.LA(1);
 
-            if ( (LA35_0==15) ) {
-                alt35=1;
+            if ( (LA38_0==15) ) {
+                alt38=1;
             }
-            switch (alt35) {
+            switch (alt38) {
                 case 1 :
-                    // InternalTmscXtext.g:1576:4: otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}'
+                    // InternalTmscXtext.g:1656:4: otherlv_5= '{' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}'
                     {
                     otherlv_5=(Token)match(input,15,FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4128,36 +4380,36 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       				newLeafNode(otherlv_5, grammarAccess.getXExecutorAccess().getLeftCurlyBracketKeyword_4_0());
                       			
                     }
-                    // InternalTmscXtext.g:1580:4: ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )*
-                    loop34:
+                    // InternalTmscXtext.g:1660:4: ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )*
+                    loop37:
                     do {
-                        int alt34=4;
+                        int alt37=4;
                         switch ( input.LA(1) ) {
                         case 18:
                             {
-                            alt34=1;
+                            alt37=1;
                             }
                             break;
                         case 19:
                             {
-                            alt34=2;
+                            alt37=2;
                             }
                             break;
                         case RULE_ID:
                         case RULE_STRING:
                             {
-                            alt34=3;
+                            alt37=3;
                             }
                             break;
 
                         }
 
-                        switch (alt34) {
+                        switch (alt37) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1581:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1661:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1581:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
-                    	    // InternalTmscXtext.g:1582:6: otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1661:5: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1662:6: otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
                     	    {
                     	    otherlv_6=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4171,11 +4423,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_7, grammarAccess.getXExecutorAccess().getColonKeyword_4_1_0_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1590:6: ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
-                    	    // InternalTmscXtext.g:1591:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:1670:6: ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1671:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
                     	    {
-                    	    // InternalTmscXtext.g:1591:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
-                    	    // InternalTmscXtext.g:1592:8: lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL
+                    	    // InternalTmscXtext.g:1671:7: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:1672:8: lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL
                     	    {
                     	    lv_timeBound_8_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4208,10 +4460,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:1610:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:1690:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1610:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
-                    	    // InternalTmscXtext.g:1611:6: otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:1690:5: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:1691:6: otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
                     	    {
                     	    otherlv_9=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -4225,11 +4477,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_10, grammarAccess.getXExecutorAccess().getColonKeyword_4_1_1_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1619:6: ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
-                    	    // InternalTmscXtext.g:1620:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:1699:6: ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:1700:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
                     	    {
-                    	    // InternalTmscXtext.g:1620:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
-                    	    // InternalTmscXtext.g:1621:8: lv_scheduled_11_0= ruleEBOOLEAN_OBJECT
+                    	    // InternalTmscXtext.g:1700:7: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:1701:8: lv_scheduled_11_0= ruleEBOOLEAN_OBJECT
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -4267,13 +4519,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 3 :
-                    	    // InternalTmscXtext.g:1640:5: ( (lv_properties_12_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1720:5: ( (lv_properties_12_0= ruleXProperty ) )
                     	    {
-                    	    // InternalTmscXtext.g:1640:5: ( (lv_properties_12_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:1641:6: (lv_properties_12_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1720:5: ( (lv_properties_12_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:1721:6: (lv_properties_12_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:1641:6: (lv_properties_12_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:1642:7: lv_properties_12_0= ruleXProperty
+                    	    // InternalTmscXtext.g:1721:6: (lv_properties_12_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:1722:7: lv_properties_12_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -4309,7 +4561,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop34;
+                    	    break loop37;
                         }
                     } while (true);
 
@@ -4350,7 +4602,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXEvent"
-    // InternalTmscXtext.g:1669:1: entryRuleXEvent returns [EObject current=null] : iv_ruleXEvent= ruleXEvent EOF ;
+    // InternalTmscXtext.g:1749:1: entryRuleXEvent returns [EObject current=null] : iv_ruleXEvent= ruleXEvent EOF ;
     public final EObject entryRuleXEvent() throws RecognitionException {
         EObject current = null;
 
@@ -4358,8 +4610,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:1669:47: (iv_ruleXEvent= ruleXEvent EOF )
-            // InternalTmscXtext.g:1670:2: iv_ruleXEvent= ruleXEvent EOF
+            // InternalTmscXtext.g:1749:47: (iv_ruleXEvent= ruleXEvent EOF )
+            // InternalTmscXtext.g:1750:2: iv_ruleXEvent= ruleXEvent EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXEventRule()); 
@@ -4390,7 +4642,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXEvent"
-    // InternalTmscXtext.g:1676:1: ruleXEvent returns [EObject current=null] : ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? ) ;
+    // InternalTmscXtext.g:1756:1: ruleXEvent returns [EObject current=null] : ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? ) ;
     public final EObject ruleXEvent() throws RecognitionException {
         EObject current = null;
 
@@ -4426,48 +4678,48 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:1682:2: ( ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? ) )
-            // InternalTmscXtext.g:1683:2: ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? )
+            // InternalTmscXtext.g:1762:2: ( ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? ) )
+            // InternalTmscXtext.g:1763:2: ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? )
             {
-            // InternalTmscXtext.g:1683:2: ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? )
-            // InternalTmscXtext.g:1684:3: ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )?
+            // InternalTmscXtext.g:1763:2: ( ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )? )
+            // InternalTmscXtext.g:1764:3: ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )? ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )? ( ( ruleFQNString ) ) ( ( ruleIDString ) )? ( (lv_type_4_0= ruleXEventType ) ) ( ( ruleIDString ) ) (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )? ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )* (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )?
             {
-            // InternalTmscXtext.g:1684:3: ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )?
-            int alt37=2;
-            int LA37_0 = input.LA(1);
+            // InternalTmscXtext.g:1764:3: ( ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) ) )?
+            int alt40=2;
+            int LA40_0 = input.LA(1);
 
-            if ( (LA37_0==RULE_ABS_EBIGDECIMAL||LA37_0==RULE_ISO8601) ) {
-                alt37=1;
+            if ( (LA40_0==RULE_ABS_EBIGDECIMAL||LA40_0==RULE_ISO8601) ) {
+                alt40=1;
             }
-            switch (alt37) {
+            switch (alt40) {
                 case 1 :
-                    // InternalTmscXtext.g:1685:4: ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) )
+                    // InternalTmscXtext.g:1765:4: ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) )
                     {
-                    // InternalTmscXtext.g:1685:4: ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) )
-                    // InternalTmscXtext.g:1686:5: (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL )
+                    // InternalTmscXtext.g:1765:4: ( (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL ) )
+                    // InternalTmscXtext.g:1766:5: (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL )
                     {
-                    // InternalTmscXtext.g:1686:5: (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL )
-                    int alt36=2;
-                    int LA36_0 = input.LA(1);
+                    // InternalTmscXtext.g:1766:5: (lv_timestamp_0_1= RULE_ISO8601 | lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL )
+                    int alt39=2;
+                    int LA39_0 = input.LA(1);
 
-                    if ( (LA36_0==RULE_ISO8601) ) {
-                        alt36=1;
+                    if ( (LA39_0==RULE_ISO8601) ) {
+                        alt39=1;
                     }
-                    else if ( (LA36_0==RULE_ABS_EBIGDECIMAL) ) {
-                        alt36=2;
+                    else if ( (LA39_0==RULE_ABS_EBIGDECIMAL) ) {
+                        alt39=2;
                     }
                     else {
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 36, 0, input);
+                            new NoViableAltException("", 39, 0, input);
 
                         throw nvae;
                     }
-                    switch (alt36) {
+                    switch (alt39) {
                         case 1 :
-                            // InternalTmscXtext.g:1687:6: lv_timestamp_0_1= RULE_ISO8601
+                            // InternalTmscXtext.g:1767:6: lv_timestamp_0_1= RULE_ISO8601
                             {
-                            lv_timestamp_0_1=(Token)match(input,RULE_ISO8601,FOLLOW_32); if (state.failed) return current;
+                            lv_timestamp_0_1=(Token)match(input,RULE_ISO8601,FOLLOW_34); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               						newLeafNode(lv_timestamp_0_1, grammarAccess.getXEventAccess().getTimestampISO8601TerminalRuleCall_0_0_0());
@@ -4489,9 +4741,9 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTmscXtext.g:1702:6: lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL
+                            // InternalTmscXtext.g:1782:6: lv_timestamp_0_2= RULE_ABS_EBIGDECIMAL
                             {
-                            lv_timestamp_0_2=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_32); if (state.failed) return current;
+                            lv_timestamp_0_2=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_34); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               						newLeafNode(lv_timestamp_0_2, grammarAccess.getXEventAccess().getTimestampABS_EBIGDECIMALTerminalRuleCall_0_0_1());
@@ -4524,21 +4776,21 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1719:3: ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )?
-            int alt38=2;
-            int LA38_0 = input.LA(1);
+            // InternalTmscXtext.g:1799:3: ( (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL ) )?
+            int alt41=2;
+            int LA41_0 = input.LA(1);
 
-            if ( (LA38_0==RULE_POS_EBIGDECIMAL) ) {
-                alt38=1;
+            if ( (LA41_0==RULE_POS_EBIGDECIMAL) ) {
+                alt41=1;
             }
-            switch (alt38) {
+            switch (alt41) {
                 case 1 :
-                    // InternalTmscXtext.g:1720:4: (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL )
+                    // InternalTmscXtext.g:1800:4: (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL )
                     {
-                    // InternalTmscXtext.g:1720:4: (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL )
-                    // InternalTmscXtext.g:1721:5: lv_timeBound_1_0= RULE_POS_EBIGDECIMAL
+                    // InternalTmscXtext.g:1800:4: (lv_timeBound_1_0= RULE_POS_EBIGDECIMAL )
+                    // InternalTmscXtext.g:1801:5: lv_timeBound_1_0= RULE_POS_EBIGDECIMAL
                     {
-                    lv_timeBound_1_0=(Token)match(input,RULE_POS_EBIGDECIMAL,FOLLOW_32); if (state.failed) return current;
+                    lv_timeBound_1_0=(Token)match(input,RULE_POS_EBIGDECIMAL,FOLLOW_34); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(lv_timeBound_1_0, grammarAccess.getXEventAccess().getTimeBoundPOS_EBIGDECIMALTerminalRuleCall_1_0());
@@ -4565,11 +4817,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1737:3: ( ( ruleFQNString ) )
-            // InternalTmscXtext.g:1738:4: ( ruleFQNString )
+            // InternalTmscXtext.g:1817:3: ( ( ruleFQNString ) )
+            // InternalTmscXtext.g:1818:4: ( ruleFQNString )
             {
-            // InternalTmscXtext.g:1738:4: ( ruleFQNString )
-            // InternalTmscXtext.g:1739:5: ruleFQNString
+            // InternalTmscXtext.g:1818:4: ( ruleFQNString )
+            // InternalTmscXtext.g:1819:5: ruleFQNString
             {
             if ( state.backtracking==0 ) {
 
@@ -4583,7 +4835,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
               					newCompositeNode(grammarAccess.getXEventAccess().getExecutorXExecutorCrossReference_2_0());
               				
             }
-            pushFollow(FOLLOW_32);
+            pushFollow(FOLLOW_34);
             ruleFQNString();
 
             state._fsp--;
@@ -4599,19 +4851,19 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1753:3: ( ( ruleIDString ) )?
-            int alt39=2;
-            int LA39_0 = input.LA(1);
+            // InternalTmscXtext.g:1833:3: ( ( ruleIDString ) )?
+            int alt42=2;
+            int LA42_0 = input.LA(1);
 
-            if ( (LA39_0==RULE_ID||LA39_0==RULE_STRING) ) {
-                alt39=1;
+            if ( (LA42_0==RULE_ID||LA42_0==RULE_STRING) ) {
+                alt42=1;
             }
-            switch (alt39) {
+            switch (alt42) {
                 case 1 :
-                    // InternalTmscXtext.g:1754:4: ( ruleIDString )
+                    // InternalTmscXtext.g:1834:4: ( ruleIDString )
                     {
-                    // InternalTmscXtext.g:1754:4: ( ruleIDString )
-                    // InternalTmscXtext.g:1755:5: ruleIDString
+                    // InternalTmscXtext.g:1834:4: ( ruleIDString )
+                    // InternalTmscXtext.g:1835:5: ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
@@ -4625,7 +4877,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       					newCompositeNode(grammarAccess.getXEventAccess().getComponentXComponentCrossReference_3_0());
                       				
                     }
-                    pushFollow(FOLLOW_32);
+                    pushFollow(FOLLOW_34);
                     ruleIDString();
 
                     state._fsp--;
@@ -4644,18 +4896,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1769:3: ( (lv_type_4_0= ruleXEventType ) )
-            // InternalTmscXtext.g:1770:4: (lv_type_4_0= ruleXEventType )
+            // InternalTmscXtext.g:1849:3: ( (lv_type_4_0= ruleXEventType ) )
+            // InternalTmscXtext.g:1850:4: (lv_type_4_0= ruleXEventType )
             {
-            // InternalTmscXtext.g:1770:4: (lv_type_4_0= ruleXEventType )
-            // InternalTmscXtext.g:1771:5: lv_type_4_0= ruleXEventType
+            // InternalTmscXtext.g:1850:4: (lv_type_4_0= ruleXEventType )
+            // InternalTmscXtext.g:1851:5: lv_type_4_0= ruleXEventType
             {
             if ( state.backtracking==0 ) {
 
               					newCompositeNode(grammarAccess.getXEventAccess().getTypeXEventTypeEnumRuleCall_4_0());
               				
             }
-            pushFollow(FOLLOW_16);
+            pushFollow(FOLLOW_18);
             lv_type_4_0=ruleXEventType();
 
             state._fsp--;
@@ -4679,11 +4931,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1788:3: ( ( ruleIDString ) )
-            // InternalTmscXtext.g:1789:4: ( ruleIDString )
+            // InternalTmscXtext.g:1868:3: ( ( ruleIDString ) )
+            // InternalTmscXtext.g:1869:4: ( ruleIDString )
             {
-            // InternalTmscXtext.g:1789:4: ( ruleIDString )
-            // InternalTmscXtext.g:1790:5: ruleIDString
+            // InternalTmscXtext.g:1869:4: ( ruleIDString )
+            // InternalTmscXtext.g:1870:5: ruleIDString
             {
             if ( state.backtracking==0 ) {
 
@@ -4697,7 +4949,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
               					newCompositeNode(grammarAccess.getXEventAccess().getFunctionXFunctionCrossReference_5_0());
               				
             }
-            pushFollow(FOLLOW_33);
+            pushFollow(FOLLOW_35);
             ruleIDString();
 
             state._fsp--;
@@ -4713,35 +4965,35 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1804:3: (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )?
-            int alt41=2;
-            int LA41_0 = input.LA(1);
+            // InternalTmscXtext.g:1884:3: (otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')' )?
+            int alt44=2;
+            int LA44_0 = input.LA(1);
 
-            if ( (LA41_0==34) ) {
-                alt41=1;
+            if ( (LA44_0==36) ) {
+                alt44=1;
             }
-            switch (alt41) {
+            switch (alt44) {
                 case 1 :
-                    // InternalTmscXtext.g:1805:4: otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')'
+                    // InternalTmscXtext.g:1885:4: otherlv_6= '(' ( (lv_arguments_7_0= ruleXEventArgument ) ) (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )* otherlv_10= ')'
                     {
-                    otherlv_6=(Token)match(input,34,FOLLOW_18); if (state.failed) return current;
+                    otherlv_6=(Token)match(input,36,FOLLOW_20); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_6, grammarAccess.getXEventAccess().getLeftParenthesisKeyword_6_0());
                       			
                     }
-                    // InternalTmscXtext.g:1809:4: ( (lv_arguments_7_0= ruleXEventArgument ) )
-                    // InternalTmscXtext.g:1810:5: (lv_arguments_7_0= ruleXEventArgument )
+                    // InternalTmscXtext.g:1889:4: ( (lv_arguments_7_0= ruleXEventArgument ) )
+                    // InternalTmscXtext.g:1890:5: (lv_arguments_7_0= ruleXEventArgument )
                     {
-                    // InternalTmscXtext.g:1810:5: (lv_arguments_7_0= ruleXEventArgument )
-                    // InternalTmscXtext.g:1811:6: lv_arguments_7_0= ruleXEventArgument
+                    // InternalTmscXtext.g:1890:5: (lv_arguments_7_0= ruleXEventArgument )
+                    // InternalTmscXtext.g:1891:6: lv_arguments_7_0= ruleXEventArgument
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXEventAccess().getArgumentsXEventArgumentParserRuleCall_6_1_0());
                       					
                     }
-                    pushFollow(FOLLOW_26);
+                    pushFollow(FOLLOW_28);
                     lv_arguments_7_0=ruleXEventArgument();
 
                     state._fsp--;
@@ -4765,39 +5017,39 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:1828:4: (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )*
-                    loop40:
+                    // InternalTmscXtext.g:1908:4: (otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) ) )*
+                    loop43:
                     do {
-                        int alt40=2;
-                        int LA40_0 = input.LA(1);
+                        int alt43=2;
+                        int LA43_0 = input.LA(1);
 
-                        if ( (LA40_0==29) ) {
-                            alt40=1;
+                        if ( (LA43_0==31) ) {
+                            alt43=1;
                         }
 
 
-                        switch (alt40) {
+                        switch (alt43) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1829:5: otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) )
+                    	    // InternalTmscXtext.g:1909:5: otherlv_8= ',' ( (lv_arguments_9_0= ruleXEventArgument ) )
                     	    {
-                    	    otherlv_8=(Token)match(input,29,FOLLOW_18); if (state.failed) return current;
+                    	    otherlv_8=(Token)match(input,31,FOLLOW_20); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      					newLeafNode(otherlv_8, grammarAccess.getXEventAccess().getCommaKeyword_6_2_0());
                     	      				
                     	    }
-                    	    // InternalTmscXtext.g:1833:5: ( (lv_arguments_9_0= ruleXEventArgument ) )
-                    	    // InternalTmscXtext.g:1834:6: (lv_arguments_9_0= ruleXEventArgument )
+                    	    // InternalTmscXtext.g:1913:5: ( (lv_arguments_9_0= ruleXEventArgument ) )
+                    	    // InternalTmscXtext.g:1914:6: (lv_arguments_9_0= ruleXEventArgument )
                     	    {
-                    	    // InternalTmscXtext.g:1834:6: (lv_arguments_9_0= ruleXEventArgument )
-                    	    // InternalTmscXtext.g:1835:7: lv_arguments_9_0= ruleXEventArgument
+                    	    // InternalTmscXtext.g:1914:6: (lv_arguments_9_0= ruleXEventArgument )
+                    	    // InternalTmscXtext.g:1915:7: lv_arguments_9_0= ruleXEventArgument
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXEventAccess().getArgumentsXEventArgumentParserRuleCall_6_2_1_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_26);
+                    	    pushFollow(FOLLOW_28);
                     	    lv_arguments_9_0=ruleXEventArgument();
 
                     	    state._fsp--;
@@ -4826,11 +5078,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop40;
+                    	    break loop43;
                         }
                     } while (true);
 
-                    otherlv_10=(Token)match(input,35,FOLLOW_34); if (state.failed) return current;
+                    otherlv_10=(Token)match(input,37,FOLLOW_36); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_10, grammarAccess.getXEventAccess().getRightParenthesisKeyword_6_3());
@@ -4842,45 +5094,45 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:1858:3: ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )*
-            loop42:
+            // InternalTmscXtext.g:1938:3: ( (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) ) | (otherlv_13= '?' ( ( ruleIDString ) ) ) )*
+            loop45:
             do {
-                int alt42=3;
-                int LA42_0 = input.LA(1);
+                int alt45=3;
+                int LA45_0 = input.LA(1);
 
-                if ( (LA42_0==40) ) {
-                    alt42=1;
+                if ( (LA45_0==42) ) {
+                    alt45=1;
                 }
-                else if ( (LA42_0==41) ) {
-                    alt42=2;
+                else if ( (LA45_0==43) ) {
+                    alt45=2;
                 }
 
 
-                switch (alt42) {
+                switch (alt45) {
             	case 1 :
-            	    // InternalTmscXtext.g:1859:4: (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) )
+            	    // InternalTmscXtext.g:1939:4: (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) )
             	    {
-            	    // InternalTmscXtext.g:1859:4: (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) )
-            	    // InternalTmscXtext.g:1860:5: otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) )
+            	    // InternalTmscXtext.g:1939:4: (otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) ) )
+            	    // InternalTmscXtext.g:1940:5: otherlv_11= '!' ( (lv_outgoingDependencies_12_0= ruleXDependency ) )
             	    {
-            	    otherlv_11=(Token)match(input,40,FOLLOW_35); if (state.failed) return current;
+            	    otherlv_11=(Token)match(input,42,FOLLOW_37); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					newLeafNode(otherlv_11, grammarAccess.getXEventAccess().getExclamationMarkKeyword_7_0_0());
             	      				
             	    }
-            	    // InternalTmscXtext.g:1864:5: ( (lv_outgoingDependencies_12_0= ruleXDependency ) )
-            	    // InternalTmscXtext.g:1865:6: (lv_outgoingDependencies_12_0= ruleXDependency )
+            	    // InternalTmscXtext.g:1944:5: ( (lv_outgoingDependencies_12_0= ruleXDependency ) )
+            	    // InternalTmscXtext.g:1945:6: (lv_outgoingDependencies_12_0= ruleXDependency )
             	    {
-            	    // InternalTmscXtext.g:1865:6: (lv_outgoingDependencies_12_0= ruleXDependency )
-            	    // InternalTmscXtext.g:1866:7: lv_outgoingDependencies_12_0= ruleXDependency
+            	    // InternalTmscXtext.g:1945:6: (lv_outgoingDependencies_12_0= ruleXDependency )
+            	    // InternalTmscXtext.g:1946:7: lv_outgoingDependencies_12_0= ruleXDependency
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      							newCompositeNode(grammarAccess.getXEventAccess().getOutgoingDependenciesXDependencyParserRuleCall_7_0_1_0());
             	      						
             	    }
-            	    pushFollow(FOLLOW_34);
+            	    pushFollow(FOLLOW_36);
             	    lv_outgoingDependencies_12_0=ruleXDependency();
 
             	    state._fsp--;
@@ -4911,22 +5163,22 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalTmscXtext.g:1885:4: (otherlv_13= '?' ( ( ruleIDString ) ) )
+            	    // InternalTmscXtext.g:1965:4: (otherlv_13= '?' ( ( ruleIDString ) ) )
             	    {
-            	    // InternalTmscXtext.g:1885:4: (otherlv_13= '?' ( ( ruleIDString ) ) )
-            	    // InternalTmscXtext.g:1886:5: otherlv_13= '?' ( ( ruleIDString ) )
+            	    // InternalTmscXtext.g:1965:4: (otherlv_13= '?' ( ( ruleIDString ) ) )
+            	    // InternalTmscXtext.g:1966:5: otherlv_13= '?' ( ( ruleIDString ) )
             	    {
-            	    otherlv_13=(Token)match(input,41,FOLLOW_16); if (state.failed) return current;
+            	    otherlv_13=(Token)match(input,43,FOLLOW_18); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					newLeafNode(otherlv_13, grammarAccess.getXEventAccess().getQuestionMarkKeyword_7_1_0());
             	      				
             	    }
-            	    // InternalTmscXtext.g:1890:5: ( ( ruleIDString ) )
-            	    // InternalTmscXtext.g:1891:6: ( ruleIDString )
+            	    // InternalTmscXtext.g:1970:5: ( ( ruleIDString ) )
+            	    // InternalTmscXtext.g:1971:6: ( ruleIDString )
             	    {
-            	    // InternalTmscXtext.g:1891:6: ( ruleIDString )
-            	    // InternalTmscXtext.g:1892:7: ruleIDString
+            	    // InternalTmscXtext.g:1971:6: ( ruleIDString )
+            	    // InternalTmscXtext.g:1972:7: ruleIDString
             	    {
             	    if ( state.backtracking==0 ) {
 
@@ -4940,7 +5192,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	      							newCompositeNode(grammarAccess.getXEventAccess().getIncomingDependenciesXDependencyCrossReference_7_1_1_0());
             	      						
             	    }
-            	    pushFollow(FOLLOW_34);
+            	    pushFollow(FOLLOW_36);
             	    ruleIDString();
 
             	    state._fsp--;
@@ -4964,20 +5216,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop42;
+            	    break loop45;
                 }
             } while (true);
 
-            // InternalTmscXtext.g:1908:3: (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )?
-            int alt44=2;
-            int LA44_0 = input.LA(1);
+            // InternalTmscXtext.g:1988:3: (otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}' )?
+            int alt47=2;
+            int LA47_0 = input.LA(1);
 
-            if ( (LA44_0==15) ) {
-                alt44=1;
+            if ( (LA47_0==15) ) {
+                alt47=1;
             }
-            switch (alt44) {
+            switch (alt47) {
                 case 1 :
-                    // InternalTmscXtext.g:1909:4: otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}'
+                    // InternalTmscXtext.g:1989:4: otherlv_15= '{' ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )* otherlv_23= '}'
                     {
                     otherlv_15=(Token)match(input,15,FOLLOW_5); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -4985,36 +5237,36 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                       				newLeafNode(otherlv_15, grammarAccess.getXEventAccess().getLeftCurlyBracketKeyword_8_0());
                       			
                     }
-                    // InternalTmscXtext.g:1913:4: ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )*
-                    loop43:
+                    // InternalTmscXtext.g:1993:4: ( (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) ) | ( (lv_properties_22_0= ruleXProperty ) ) )*
+                    loop46:
                     do {
-                        int alt43=4;
+                        int alt46=4;
                         switch ( input.LA(1) ) {
                         case 18:
                             {
-                            alt43=1;
+                            alt46=1;
                             }
                             break;
                         case 19:
                             {
-                            alt43=2;
+                            alt46=2;
                             }
                             break;
                         case RULE_ID:
                         case RULE_STRING:
                             {
-                            alt43=3;
+                            alt46=3;
                             }
                             break;
 
                         }
 
-                        switch (alt43) {
+                        switch (alt46) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:1914:5: (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1994:5: (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1914:5: (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) )
-                    	    // InternalTmscXtext.g:1915:6: otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:1994:5: (otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	    // InternalTmscXtext.g:1995:6: otherlv_16= 'time-bound' otherlv_17= ':' ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) )
                     	    {
                     	    otherlv_16=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -5028,11 +5280,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_17, grammarAccess.getXEventAccess().getColonKeyword_8_1_0_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1923:6: ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) )
-                    	    // InternalTmscXtext.g:1924:7: (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:2003:6: ( (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL ) )
+                    	    // InternalTmscXtext.g:2004:7: (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL )
                     	    {
-                    	    // InternalTmscXtext.g:1924:7: (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL )
-                    	    // InternalTmscXtext.g:1925:8: lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL
+                    	    // InternalTmscXtext.g:2004:7: (lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL )
+                    	    // InternalTmscXtext.g:2005:8: lv_timeBound_18_0= RULE_ABS_EBIGDECIMAL
                     	    {
                     	    lv_timeBound_18_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_5); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -5065,10 +5317,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // InternalTmscXtext.g:1943:5: (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:2023:5: (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) )
                     	    {
-                    	    // InternalTmscXtext.g:1943:5: (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) )
-                    	    // InternalTmscXtext.g:1944:6: otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:2023:5: (otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	    // InternalTmscXtext.g:2024:6: otherlv_19= 'scheduled' otherlv_20= ':' ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) )
                     	    {
                     	    otherlv_19=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
@@ -5082,11 +5334,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	      						newLeafNode(otherlv_20, grammarAccess.getXEventAccess().getColonKeyword_8_1_1_1());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:1952:6: ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) )
-                    	    // InternalTmscXtext.g:1953:7: (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:2032:6: ( (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT ) )
+                    	    // InternalTmscXtext.g:2033:7: (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT )
                     	    {
-                    	    // InternalTmscXtext.g:1953:7: (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT )
-                    	    // InternalTmscXtext.g:1954:8: lv_scheduled_21_0= ruleEBOOLEAN_OBJECT
+                    	    // InternalTmscXtext.g:2033:7: (lv_scheduled_21_0= ruleEBOOLEAN_OBJECT )
+                    	    // InternalTmscXtext.g:2034:8: lv_scheduled_21_0= ruleEBOOLEAN_OBJECT
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -5124,13 +5376,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    }
                     	    break;
                     	case 3 :
-                    	    // InternalTmscXtext.g:1973:5: ( (lv_properties_22_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:2053:5: ( (lv_properties_22_0= ruleXProperty ) )
                     	    {
-                    	    // InternalTmscXtext.g:1973:5: ( (lv_properties_22_0= ruleXProperty ) )
-                    	    // InternalTmscXtext.g:1974:6: (lv_properties_22_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:2053:5: ( (lv_properties_22_0= ruleXProperty ) )
+                    	    // InternalTmscXtext.g:2054:6: (lv_properties_22_0= ruleXProperty )
                     	    {
-                    	    // InternalTmscXtext.g:1974:6: (lv_properties_22_0= ruleXProperty )
-                    	    // InternalTmscXtext.g:1975:7: lv_properties_22_0= ruleXProperty
+                    	    // InternalTmscXtext.g:2054:6: (lv_properties_22_0= ruleXProperty )
+                    	    // InternalTmscXtext.g:2055:7: lv_properties_22_0= ruleXProperty
                     	    {
                     	    if ( state.backtracking==0 ) {
 
@@ -5166,7 +5418,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop43;
+                    	    break loop46;
                         }
                     } while (true);
 
@@ -5207,7 +5459,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXEventArgument"
-    // InternalTmscXtext.g:2002:1: entryRuleXEventArgument returns [EObject current=null] : iv_ruleXEventArgument= ruleXEventArgument EOF ;
+    // InternalTmscXtext.g:2082:1: entryRuleXEventArgument returns [EObject current=null] : iv_ruleXEventArgument= ruleXEventArgument EOF ;
     public final EObject entryRuleXEventArgument() throws RecognitionException {
         EObject current = null;
 
@@ -5215,8 +5467,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2002:55: (iv_ruleXEventArgument= ruleXEventArgument EOF )
-            // InternalTmscXtext.g:2003:2: iv_ruleXEventArgument= ruleXEventArgument EOF
+            // InternalTmscXtext.g:2082:55: (iv_ruleXEventArgument= ruleXEventArgument EOF )
+            // InternalTmscXtext.g:2083:2: iv_ruleXEventArgument= ruleXEventArgument EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXEventArgumentRule()); 
@@ -5247,7 +5499,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXEventArgument"
-    // InternalTmscXtext.g:2009:1: ruleXEventArgument returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) ) ;
+    // InternalTmscXtext.g:2089:1: ruleXEventArgument returns [EObject current=null] : ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) ) ;
     public final EObject ruleXEventArgument() throws RecognitionException {
         EObject current = null;
 
@@ -5260,17 +5512,17 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2015:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) ) )
-            // InternalTmscXtext.g:2016:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) )
+            // InternalTmscXtext.g:2095:2: ( ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) ) )
+            // InternalTmscXtext.g:2096:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) )
             {
-            // InternalTmscXtext.g:2016:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) )
-            // InternalTmscXtext.g:2017:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) )
+            // InternalTmscXtext.g:2096:2: ( ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) ) )
+            // InternalTmscXtext.g:2097:3: ( (otherlv_0= RULE_ID ) ) otherlv_1= ':' ( (lv_value_2_0= ruleIDString ) )
             {
-            // InternalTmscXtext.g:2017:3: ( (otherlv_0= RULE_ID ) )
-            // InternalTmscXtext.g:2018:4: (otherlv_0= RULE_ID )
+            // InternalTmscXtext.g:2097:3: ( (otherlv_0= RULE_ID ) )
+            // InternalTmscXtext.g:2098:4: (otherlv_0= RULE_ID )
             {
-            // InternalTmscXtext.g:2018:4: (otherlv_0= RULE_ID )
-            // InternalTmscXtext.g:2019:5: otherlv_0= RULE_ID
+            // InternalTmscXtext.g:2098:4: (otherlv_0= RULE_ID )
+            // InternalTmscXtext.g:2099:5: otherlv_0= RULE_ID
             {
             if ( state.backtracking==0 ) {
 
@@ -5291,17 +5543,17 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_16); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FOLLOW_18); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_1, grammarAccess.getXEventArgumentAccess().getColonKeyword_1());
               		
             }
-            // InternalTmscXtext.g:2034:3: ( (lv_value_2_0= ruleIDString ) )
-            // InternalTmscXtext.g:2035:4: (lv_value_2_0= ruleIDString )
+            // InternalTmscXtext.g:2114:3: ( (lv_value_2_0= ruleIDString ) )
+            // InternalTmscXtext.g:2115:4: (lv_value_2_0= ruleIDString )
             {
-            // InternalTmscXtext.g:2035:4: (lv_value_2_0= ruleIDString )
-            // InternalTmscXtext.g:2036:5: lv_value_2_0= ruleIDString
+            // InternalTmscXtext.g:2115:4: (lv_value_2_0= ruleIDString )
+            // InternalTmscXtext.g:2116:5: lv_value_2_0= ruleIDString
             {
             if ( state.backtracking==0 ) {
 
@@ -5357,7 +5609,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXDependency"
-    // InternalTmscXtext.g:2057:1: entryRuleXDependency returns [EObject current=null] : iv_ruleXDependency= ruleXDependency EOF ;
+    // InternalTmscXtext.g:2137:1: entryRuleXDependency returns [EObject current=null] : iv_ruleXDependency= ruleXDependency EOF ;
     public final EObject entryRuleXDependency() throws RecognitionException {
         EObject current = null;
 
@@ -5365,8 +5617,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2057:52: (iv_ruleXDependency= ruleXDependency EOF )
-            // InternalTmscXtext.g:2058:2: iv_ruleXDependency= ruleXDependency EOF
+            // InternalTmscXtext.g:2137:52: (iv_ruleXDependency= ruleXDependency EOF )
+            // InternalTmscXtext.g:2138:2: iv_ruleXDependency= ruleXDependency EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXDependencyRule()); 
@@ -5397,7 +5649,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXDependency"
-    // InternalTmscXtext.g:2064:1: ruleXDependency returns [EObject current=null] : ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? ) ;
+    // InternalTmscXtext.g:2144:1: ruleXDependency returns [EObject current=null] : ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? ) ;
     public final EObject ruleXDependency() throws RecognitionException {
         EObject current = null;
 
@@ -5442,32 +5694,32 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2070:2: ( ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? ) )
-            // InternalTmscXtext.g:2071:2: ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? )
+            // InternalTmscXtext.g:2150:2: ( ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? ) )
+            // InternalTmscXtext.g:2151:2: ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? )
             {
-            // InternalTmscXtext.g:2071:2: ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? )
-            // InternalTmscXtext.g:2072:3: ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )?
+            // InternalTmscXtext.g:2151:2: ( ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )? )
+            // InternalTmscXtext.g:2152:3: ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )? ( (lv_name_1_0= ruleIDString ) ) ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )?
             {
-            // InternalTmscXtext.g:2072:3: ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )?
-            int alt45=2;
-            int LA45_0 = input.LA(1);
+            // InternalTmscXtext.g:2152:3: ( (lv_typeObject_0_0= ruleXDependencyTypeObject ) )?
+            int alt48=2;
+            int LA48_0 = input.LA(1);
 
-            if ( ((LA45_0>=42 && LA45_0<=43)||(LA45_0>=58 && LA45_0<=61)) ) {
-                alt45=1;
+            if ( ((LA48_0>=44 && LA48_0<=45)||(LA48_0>=60 && LA48_0<=63)) ) {
+                alt48=1;
             }
-            switch (alt45) {
+            switch (alt48) {
                 case 1 :
-                    // InternalTmscXtext.g:2073:4: (lv_typeObject_0_0= ruleXDependencyTypeObject )
+                    // InternalTmscXtext.g:2153:4: (lv_typeObject_0_0= ruleXDependencyTypeObject )
                     {
-                    // InternalTmscXtext.g:2073:4: (lv_typeObject_0_0= ruleXDependencyTypeObject )
-                    // InternalTmscXtext.g:2074:5: lv_typeObject_0_0= ruleXDependencyTypeObject
+                    // InternalTmscXtext.g:2153:4: (lv_typeObject_0_0= ruleXDependencyTypeObject )
+                    // InternalTmscXtext.g:2154:5: lv_typeObject_0_0= ruleXDependencyTypeObject
                     {
                     if ( state.backtracking==0 ) {
 
                       					newCompositeNode(grammarAccess.getXDependencyAccess().getTypeObjectXDependencyTypeObjectParserRuleCall_0_0());
                       				
                     }
-                    pushFollow(FOLLOW_16);
+                    pushFollow(FOLLOW_18);
                     lv_typeObject_0_0=ruleXDependencyTypeObject();
 
                     state._fsp--;
@@ -5494,18 +5746,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:2091:3: ( (lv_name_1_0= ruleIDString ) )
-            // InternalTmscXtext.g:2092:4: (lv_name_1_0= ruleIDString )
+            // InternalTmscXtext.g:2171:3: ( (lv_name_1_0= ruleIDString ) )
+            // InternalTmscXtext.g:2172:4: (lv_name_1_0= ruleIDString )
             {
-            // InternalTmscXtext.g:2092:4: (lv_name_1_0= ruleIDString )
-            // InternalTmscXtext.g:2093:5: lv_name_1_0= ruleIDString
+            // InternalTmscXtext.g:2172:4: (lv_name_1_0= ruleIDString )
+            // InternalTmscXtext.g:2173:5: lv_name_1_0= ruleIDString
             {
             if ( state.backtracking==0 ) {
 
               					newCompositeNode(grammarAccess.getXDependencyAccess().getNameIDStringParserRuleCall_1_0());
               				
             }
-            pushFollow(FOLLOW_28);
+            pushFollow(FOLLOW_30);
             lv_name_1_0=ruleIDString();
 
             state._fsp--;
@@ -5529,40 +5781,40 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            // InternalTmscXtext.g:2110:3: ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )?
-            int alt49=3;
-            int LA49_0 = input.LA(1);
+            // InternalTmscXtext.g:2190:3: ( (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' ) | (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' ) )?
+            int alt52=3;
+            int LA52_0 = input.LA(1);
 
-            if ( (LA49_0==34) ) {
-                int LA49_1 = input.LA(2);
+            if ( (LA52_0==36) ) {
+                int LA52_1 = input.LA(2);
 
-                if ( (LA49_1==RULE_ABS_EBIGDECIMAL) ) {
-                    alt49=1;
+                if ( (LA52_1==RULE_ABS_EBIGDECIMAL) ) {
+                    alt52=1;
                 }
-                else if ( (LA49_1==RULE_ID||LA49_1==RULE_STRING||(LA49_1>=18 && LA49_1<=19)||(LA49_1>=42 && LA49_1<=43)) ) {
-                    alt49=2;
+                else if ( (LA52_1==RULE_ID||LA52_1==RULE_STRING||(LA52_1>=18 && LA52_1<=19)||(LA52_1>=44 && LA52_1<=45)) ) {
+                    alt52=2;
                 }
             }
-            switch (alt49) {
+            switch (alt52) {
                 case 1 :
-                    // InternalTmscXtext.g:2111:4: (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' )
+                    // InternalTmscXtext.g:2191:4: (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' )
                     {
-                    // InternalTmscXtext.g:2111:4: (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' )
-                    // InternalTmscXtext.g:2112:5: otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')'
+                    // InternalTmscXtext.g:2191:4: (otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')' )
+                    // InternalTmscXtext.g:2192:5: otherlv_2= '(' ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) ) otherlv_4= ')'
                     {
-                    otherlv_2=(Token)match(input,34,FOLLOW_8); if (state.failed) return current;
+                    otherlv_2=(Token)match(input,36,FOLLOW_8); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(otherlv_2, grammarAccess.getXDependencyAccess().getLeftParenthesisKeyword_2_0_0());
                       				
                     }
-                    // InternalTmscXtext.g:2116:5: ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) )
-                    // InternalTmscXtext.g:2117:6: (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL )
+                    // InternalTmscXtext.g:2196:5: ( (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL ) )
+                    // InternalTmscXtext.g:2197:6: (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL )
                     {
-                    // InternalTmscXtext.g:2117:6: (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL )
-                    // InternalTmscXtext.g:2118:7: lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL
+                    // InternalTmscXtext.g:2197:6: (lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL )
+                    // InternalTmscXtext.g:2198:7: lv_timeBound_3_0= RULE_ABS_EBIGDECIMAL
                     {
-                    lv_timeBound_3_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_36); if (state.failed) return current;
+                    lv_timeBound_3_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_38); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       							newLeafNode(lv_timeBound_3_0, grammarAccess.getXDependencyAccess().getTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_0_1_0());
@@ -5586,7 +5838,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    otherlv_4=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+                    otherlv_4=(Token)match(input,37,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(otherlv_4, grammarAccess.getXDependencyAccess().getRightParenthesisKeyword_2_0_2());
@@ -5599,60 +5851,60 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:2140:4: (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' )
+                    // InternalTmscXtext.g:2220:4: (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' )
                     {
-                    // InternalTmscXtext.g:2140:4: (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' )
-                    // InternalTmscXtext.g:2141:5: otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')'
+                    // InternalTmscXtext.g:2220:4: (otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')' )
+                    // InternalTmscXtext.g:2221:5: otherlv_5= '(' ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) ) (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )* otherlv_33= ')'
                     {
-                    otherlv_5=(Token)match(input,34,FOLLOW_37); if (state.failed) return current;
+                    otherlv_5=(Token)match(input,36,FOLLOW_39); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(otherlv_5, grammarAccess.getXDependencyAccess().getLeftParenthesisKeyword_2_1_0());
                       				
                     }
-                    // InternalTmscXtext.g:2145:5: ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) )
-                    int alt46=5;
+                    // InternalTmscXtext.g:2225:5: ( (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) ) | (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_18_0= ruleXProperty ) ) )
+                    int alt49=5;
                     switch ( input.LA(1) ) {
                     case 18:
                         {
-                        alt46=1;
+                        alt49=1;
                         }
                         break;
                     case 19:
                         {
-                        alt46=2;
+                        alt49=2;
                         }
                         break;
-                    case 42:
+                    case 44:
                         {
-                        alt46=3;
+                        alt49=3;
                         }
                         break;
-                    case 43:
+                    case 45:
                         {
-                        alt46=4;
+                        alt49=4;
                         }
                         break;
                     case RULE_ID:
                     case RULE_STRING:
                         {
-                        alt46=5;
+                        alt49=5;
                         }
                         break;
                     default:
                         if (state.backtracking>0) {state.failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("", 46, 0, input);
+                            new NoViableAltException("", 49, 0, input);
 
                         throw nvae;
                     }
 
-                    switch (alt46) {
+                    switch (alt49) {
                         case 1 :
-                            // InternalTmscXtext.g:2146:6: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
+                            // InternalTmscXtext.g:2226:6: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
                             {
-                            // InternalTmscXtext.g:2146:6: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
-                            // InternalTmscXtext.g:2147:7: otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
+                            // InternalTmscXtext.g:2226:6: (otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) ) )
+                            // InternalTmscXtext.g:2227:7: otherlv_6= 'time-bound' otherlv_7= ':' ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
                             {
                             otherlv_6=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -5666,13 +5918,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                               							newLeafNode(otherlv_7, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_1_0_1());
                               						
                             }
-                            // InternalTmscXtext.g:2155:7: ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
-                            // InternalTmscXtext.g:2156:8: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
+                            // InternalTmscXtext.g:2235:7: ( (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL ) )
+                            // InternalTmscXtext.g:2236:8: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
                             {
-                            // InternalTmscXtext.g:2156:8: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
-                            // InternalTmscXtext.g:2157:9: lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL
+                            // InternalTmscXtext.g:2236:8: (lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL )
+                            // InternalTmscXtext.g:2237:9: lv_timeBound_8_0= RULE_ABS_EBIGDECIMAL
                             {
-                            lv_timeBound_8_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_26); if (state.failed) return current;
+                            lv_timeBound_8_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_28); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               									newLeafNode(lv_timeBound_8_0, grammarAccess.getXDependencyAccess().getTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_1_0_2_0());
@@ -5703,10 +5955,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 2 :
-                            // InternalTmscXtext.g:2175:6: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
+                            // InternalTmscXtext.g:2255:6: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
                             {
-                            // InternalTmscXtext.g:2175:6: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
-                            // InternalTmscXtext.g:2176:7: otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
+                            // InternalTmscXtext.g:2255:6: (otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) ) )
+                            // InternalTmscXtext.g:2256:7: otherlv_9= 'scheduled' otherlv_10= ':' ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
                             {
                             otherlv_9=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
@@ -5720,18 +5972,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                               							newLeafNode(otherlv_10, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_1_1_1());
                               						
                             }
-                            // InternalTmscXtext.g:2184:7: ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
-                            // InternalTmscXtext.g:2185:8: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
+                            // InternalTmscXtext.g:2264:7: ( (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT ) )
+                            // InternalTmscXtext.g:2265:8: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
                             {
-                            // InternalTmscXtext.g:2185:8: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
-                            // InternalTmscXtext.g:2186:9: lv_scheduled_11_0= ruleEBOOLEAN_OBJECT
+                            // InternalTmscXtext.g:2265:8: (lv_scheduled_11_0= ruleEBOOLEAN_OBJECT )
+                            // InternalTmscXtext.g:2266:9: lv_scheduled_11_0= ruleEBOOLEAN_OBJECT
                             {
                             if ( state.backtracking==0 ) {
 
                               									newCompositeNode(grammarAccess.getXDependencyAccess().getScheduledEBOOLEAN_OBJECTParserRuleCall_2_1_1_1_2_0());
                               								
                             }
-                            pushFollow(FOLLOW_26);
+                            pushFollow(FOLLOW_28);
                             lv_scheduled_11_0=ruleEBOOLEAN_OBJECT();
 
                             state._fsp--;
@@ -5762,28 +6014,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 3 :
-                            // InternalTmscXtext.g:2205:6: (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) )
+                            // InternalTmscXtext.g:2285:6: (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) )
                             {
-                            // InternalTmscXtext.g:2205:6: (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) )
-                            // InternalTmscXtext.g:2206:7: otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) )
+                            // InternalTmscXtext.g:2285:6: (otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) ) )
+                            // InternalTmscXtext.g:2286:7: otherlv_12= 'request' otherlv_13= ':' ( ( ruleIDString ) )
                             {
-                            otherlv_12=(Token)match(input,42,FOLLOW_6); if (state.failed) return current;
+                            otherlv_12=(Token)match(input,44,FOLLOW_6); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               							newLeafNode(otherlv_12, grammarAccess.getXDependencyAccess().getRequestKeyword_2_1_1_2_0());
                               						
                             }
-                            otherlv_13=(Token)match(input,17,FOLLOW_16); if (state.failed) return current;
+                            otherlv_13=(Token)match(input,17,FOLLOW_18); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               							newLeafNode(otherlv_13, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_1_2_1());
                               						
                             }
-                            // InternalTmscXtext.g:2214:7: ( ( ruleIDString ) )
-                            // InternalTmscXtext.g:2215:8: ( ruleIDString )
+                            // InternalTmscXtext.g:2294:7: ( ( ruleIDString ) )
+                            // InternalTmscXtext.g:2295:8: ( ruleIDString )
                             {
-                            // InternalTmscXtext.g:2215:8: ( ruleIDString )
-                            // InternalTmscXtext.g:2216:9: ruleIDString
+                            // InternalTmscXtext.g:2295:8: ( ruleIDString )
+                            // InternalTmscXtext.g:2296:9: ruleIDString
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5797,7 +6049,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                               									newCompositeNode(grammarAccess.getXDependencyAccess().getRequestXDependencyCrossReference_2_1_1_2_2_0());
                               								
                             }
-                            pushFollow(FOLLOW_26);
+                            pushFollow(FOLLOW_28);
                             ruleIDString();
 
                             state._fsp--;
@@ -5820,28 +6072,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 4 :
-                            // InternalTmscXtext.g:2232:6: (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) )
+                            // InternalTmscXtext.g:2312:6: (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) )
                             {
-                            // InternalTmscXtext.g:2232:6: (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) )
-                            // InternalTmscXtext.g:2233:7: otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) )
+                            // InternalTmscXtext.g:2312:6: (otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) ) )
+                            // InternalTmscXtext.g:2313:7: otherlv_15= 'message' otherlv_16= ':' ( ( ruleIDString ) )
                             {
-                            otherlv_15=(Token)match(input,43,FOLLOW_6); if (state.failed) return current;
+                            otherlv_15=(Token)match(input,45,FOLLOW_6); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               							newLeafNode(otherlv_15, grammarAccess.getXDependencyAccess().getMessageKeyword_2_1_1_3_0());
                               						
                             }
-                            otherlv_16=(Token)match(input,17,FOLLOW_16); if (state.failed) return current;
+                            otherlv_16=(Token)match(input,17,FOLLOW_18); if (state.failed) return current;
                             if ( state.backtracking==0 ) {
 
                               							newLeafNode(otherlv_16, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_1_3_1());
                               						
                             }
-                            // InternalTmscXtext.g:2241:7: ( ( ruleIDString ) )
-                            // InternalTmscXtext.g:2242:8: ( ruleIDString )
+                            // InternalTmscXtext.g:2321:7: ( ( ruleIDString ) )
+                            // InternalTmscXtext.g:2322:8: ( ruleIDString )
                             {
-                            // InternalTmscXtext.g:2242:8: ( ruleIDString )
-                            // InternalTmscXtext.g:2243:9: ruleIDString
+                            // InternalTmscXtext.g:2322:8: ( ruleIDString )
+                            // InternalTmscXtext.g:2323:9: ruleIDString
                             {
                             if ( state.backtracking==0 ) {
 
@@ -5855,7 +6107,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                               									newCompositeNode(grammarAccess.getXDependencyAccess().getMessageXDependencyCrossReference_2_1_1_3_2_0());
                               								
                             }
-                            pushFollow(FOLLOW_26);
+                            pushFollow(FOLLOW_28);
                             ruleIDString();
 
                             state._fsp--;
@@ -5878,20 +6130,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                             }
                             break;
                         case 5 :
-                            // InternalTmscXtext.g:2259:6: ( (lv_properties_18_0= ruleXProperty ) )
+                            // InternalTmscXtext.g:2339:6: ( (lv_properties_18_0= ruleXProperty ) )
                             {
-                            // InternalTmscXtext.g:2259:6: ( (lv_properties_18_0= ruleXProperty ) )
-                            // InternalTmscXtext.g:2260:7: (lv_properties_18_0= ruleXProperty )
+                            // InternalTmscXtext.g:2339:6: ( (lv_properties_18_0= ruleXProperty ) )
+                            // InternalTmscXtext.g:2340:7: (lv_properties_18_0= ruleXProperty )
                             {
-                            // InternalTmscXtext.g:2260:7: (lv_properties_18_0= ruleXProperty )
-                            // InternalTmscXtext.g:2261:8: lv_properties_18_0= ruleXProperty
+                            // InternalTmscXtext.g:2340:7: (lv_properties_18_0= ruleXProperty )
+                            // InternalTmscXtext.g:2341:8: lv_properties_18_0= ruleXProperty
                             {
                             if ( state.backtracking==0 ) {
 
                               								newCompositeNode(grammarAccess.getXDependencyAccess().getPropertiesXPropertyParserRuleCall_2_1_1_4_0());
                               							
                             }
-                            pushFollow(FOLLOW_26);
+                            pushFollow(FOLLOW_28);
                             lv_properties_18_0=ruleXProperty();
 
                             state._fsp--;
@@ -5921,70 +6173,70 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2279:5: (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )*
-                    loop48:
+                    // InternalTmscXtext.g:2359:5: (otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) ) )*
+                    loop51:
                     do {
-                        int alt48=2;
-                        int LA48_0 = input.LA(1);
+                        int alt51=2;
+                        int LA51_0 = input.LA(1);
 
-                        if ( (LA48_0==29) ) {
-                            alt48=1;
+                        if ( (LA51_0==31) ) {
+                            alt51=1;
                         }
 
 
-                        switch (alt48) {
+                        switch (alt51) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:2280:6: otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) )
+                    	    // InternalTmscXtext.g:2360:6: otherlv_19= ',' ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) )
                     	    {
-                    	    otherlv_19=(Token)match(input,29,FOLLOW_37); if (state.failed) return current;
+                    	    otherlv_19=(Token)match(input,31,FOLLOW_39); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      						newLeafNode(otherlv_19, grammarAccess.getXDependencyAccess().getCommaKeyword_2_1_2_0());
                     	      					
                     	    }
-                    	    // InternalTmscXtext.g:2284:6: ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) )
-                    	    int alt47=5;
+                    	    // InternalTmscXtext.g:2364:6: ( (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) ) | (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) ) | ( (lv_properties_32_0= ruleXProperty ) ) )
+                    	    int alt50=5;
                     	    switch ( input.LA(1) ) {
                     	    case 18:
                     	        {
-                    	        alt47=1;
+                    	        alt50=1;
                     	        }
                     	        break;
                     	    case 19:
                     	        {
-                    	        alt47=2;
+                    	        alt50=2;
                     	        }
                     	        break;
-                    	    case 42:
+                    	    case 44:
                     	        {
-                    	        alt47=3;
+                    	        alt50=3;
                     	        }
                     	        break;
-                    	    case 43:
+                    	    case 45:
                     	        {
-                    	        alt47=4;
+                    	        alt50=4;
                     	        }
                     	        break;
                     	    case RULE_ID:
                     	    case RULE_STRING:
                     	        {
-                    	        alt47=5;
+                    	        alt50=5;
                     	        }
                     	        break;
                     	    default:
                     	        if (state.backtracking>0) {state.failed=true; return current;}
                     	        NoViableAltException nvae =
-                    	            new NoViableAltException("", 47, 0, input);
+                    	            new NoViableAltException("", 50, 0, input);
 
                     	        throw nvae;
                     	    }
 
-                    	    switch (alt47) {
+                    	    switch (alt50) {
                     	        case 1 :
-                    	            // InternalTmscXtext.g:2285:7: (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	            // InternalTmscXtext.g:2365:7: (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) )
                     	            {
-                    	            // InternalTmscXtext.g:2285:7: (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) )
-                    	            // InternalTmscXtext.g:2286:8: otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) )
+                    	            // InternalTmscXtext.g:2365:7: (otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) ) )
+                    	            // InternalTmscXtext.g:2366:8: otherlv_20= 'time-bound' otherlv_21= ':' ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) )
                     	            {
                     	            otherlv_20=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
@@ -5998,13 +6250,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	              								newLeafNode(otherlv_21, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_2_1_0_1());
                     	              							
                     	            }
-                    	            // InternalTmscXtext.g:2294:8: ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) )
-                    	            // InternalTmscXtext.g:2295:9: (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL )
+                    	            // InternalTmscXtext.g:2374:8: ( (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL ) )
+                    	            // InternalTmscXtext.g:2375:9: (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL )
                     	            {
-                    	            // InternalTmscXtext.g:2295:9: (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL )
-                    	            // InternalTmscXtext.g:2296:10: lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL
+                    	            // InternalTmscXtext.g:2375:9: (lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL )
+                    	            // InternalTmscXtext.g:2376:10: lv_timeBound_22_0= RULE_ABS_EBIGDECIMAL
                     	            {
-                    	            lv_timeBound_22_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_26); if (state.failed) return current;
+                    	            lv_timeBound_22_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_28); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	              										newLeafNode(lv_timeBound_22_0, grammarAccess.getXDependencyAccess().getTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_2_1_0_2_0());
@@ -6035,10 +6287,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 2 :
-                    	            // InternalTmscXtext.g:2314:7: (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	            // InternalTmscXtext.g:2394:7: (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) )
                     	            {
-                    	            // InternalTmscXtext.g:2314:7: (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) )
-                    	            // InternalTmscXtext.g:2315:8: otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) )
+                    	            // InternalTmscXtext.g:2394:7: (otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) ) )
+                    	            // InternalTmscXtext.g:2395:8: otherlv_23= 'scheduled' otherlv_24= ':' ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) )
                     	            {
                     	            otherlv_23=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
@@ -6052,18 +6304,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	              								newLeafNode(otherlv_24, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_2_1_1_1());
                     	              							
                     	            }
-                    	            // InternalTmscXtext.g:2323:8: ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) )
-                    	            // InternalTmscXtext.g:2324:9: (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT )
+                    	            // InternalTmscXtext.g:2403:8: ( (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT ) )
+                    	            // InternalTmscXtext.g:2404:9: (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT )
                     	            {
-                    	            // InternalTmscXtext.g:2324:9: (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT )
-                    	            // InternalTmscXtext.g:2325:10: lv_scheduled_25_0= ruleEBOOLEAN_OBJECT
+                    	            // InternalTmscXtext.g:2404:9: (lv_scheduled_25_0= ruleEBOOLEAN_OBJECT )
+                    	            // InternalTmscXtext.g:2405:10: lv_scheduled_25_0= ruleEBOOLEAN_OBJECT
                     	            {
                     	            if ( state.backtracking==0 ) {
 
                     	              										newCompositeNode(grammarAccess.getXDependencyAccess().getScheduledEBOOLEAN_OBJECTParserRuleCall_2_1_2_1_1_2_0());
                     	              									
                     	            }
-                    	            pushFollow(FOLLOW_26);
+                    	            pushFollow(FOLLOW_28);
                     	            lv_scheduled_25_0=ruleEBOOLEAN_OBJECT();
 
                     	            state._fsp--;
@@ -6094,28 +6346,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 3 :
-                    	            // InternalTmscXtext.g:2344:7: (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) )
+                    	            // InternalTmscXtext.g:2424:7: (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) )
                     	            {
-                    	            // InternalTmscXtext.g:2344:7: (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) )
-                    	            // InternalTmscXtext.g:2345:8: otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) )
+                    	            // InternalTmscXtext.g:2424:7: (otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) ) )
+                    	            // InternalTmscXtext.g:2425:8: otherlv_26= 'request' otherlv_27= ':' ( ( ruleIDString ) )
                     	            {
-                    	            otherlv_26=(Token)match(input,42,FOLLOW_6); if (state.failed) return current;
+                    	            otherlv_26=(Token)match(input,44,FOLLOW_6); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	              								newLeafNode(otherlv_26, grammarAccess.getXDependencyAccess().getRequestKeyword_2_1_2_1_2_0());
                     	              							
                     	            }
-                    	            otherlv_27=(Token)match(input,17,FOLLOW_16); if (state.failed) return current;
+                    	            otherlv_27=(Token)match(input,17,FOLLOW_18); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	              								newLeafNode(otherlv_27, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_2_1_2_1());
                     	              							
                     	            }
-                    	            // InternalTmscXtext.g:2353:8: ( ( ruleIDString ) )
-                    	            // InternalTmscXtext.g:2354:9: ( ruleIDString )
+                    	            // InternalTmscXtext.g:2433:8: ( ( ruleIDString ) )
+                    	            // InternalTmscXtext.g:2434:9: ( ruleIDString )
                     	            {
-                    	            // InternalTmscXtext.g:2354:9: ( ruleIDString )
-                    	            // InternalTmscXtext.g:2355:10: ruleIDString
+                    	            // InternalTmscXtext.g:2434:9: ( ruleIDString )
+                    	            // InternalTmscXtext.g:2435:10: ruleIDString
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -6129,7 +6381,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	              										newCompositeNode(grammarAccess.getXDependencyAccess().getRequestXDependencyCrossReference_2_1_2_1_2_2_0());
                     	              									
                     	            }
-                    	            pushFollow(FOLLOW_26);
+                    	            pushFollow(FOLLOW_28);
                     	            ruleIDString();
 
                     	            state._fsp--;
@@ -6152,28 +6404,28 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 4 :
-                    	            // InternalTmscXtext.g:2371:7: (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) )
+                    	            // InternalTmscXtext.g:2451:7: (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) )
                     	            {
-                    	            // InternalTmscXtext.g:2371:7: (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) )
-                    	            // InternalTmscXtext.g:2372:8: otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) )
+                    	            // InternalTmscXtext.g:2451:7: (otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) ) )
+                    	            // InternalTmscXtext.g:2452:8: otherlv_29= 'message' otherlv_30= ':' ( ( ruleIDString ) )
                     	            {
-                    	            otherlv_29=(Token)match(input,43,FOLLOW_6); if (state.failed) return current;
+                    	            otherlv_29=(Token)match(input,45,FOLLOW_6); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	              								newLeafNode(otherlv_29, grammarAccess.getXDependencyAccess().getMessageKeyword_2_1_2_1_3_0());
                     	              							
                     	            }
-                    	            otherlv_30=(Token)match(input,17,FOLLOW_16); if (state.failed) return current;
+                    	            otherlv_30=(Token)match(input,17,FOLLOW_18); if (state.failed) return current;
                     	            if ( state.backtracking==0 ) {
 
                     	              								newLeafNode(otherlv_30, grammarAccess.getXDependencyAccess().getColonKeyword_2_1_2_1_3_1());
                     	              							
                     	            }
-                    	            // InternalTmscXtext.g:2380:8: ( ( ruleIDString ) )
-                    	            // InternalTmscXtext.g:2381:9: ( ruleIDString )
+                    	            // InternalTmscXtext.g:2460:8: ( ( ruleIDString ) )
+                    	            // InternalTmscXtext.g:2461:9: ( ruleIDString )
                     	            {
-                    	            // InternalTmscXtext.g:2381:9: ( ruleIDString )
-                    	            // InternalTmscXtext.g:2382:10: ruleIDString
+                    	            // InternalTmscXtext.g:2461:9: ( ruleIDString )
+                    	            // InternalTmscXtext.g:2462:10: ruleIDString
                     	            {
                     	            if ( state.backtracking==0 ) {
 
@@ -6187,7 +6439,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	              										newCompositeNode(grammarAccess.getXDependencyAccess().getMessageXDependencyCrossReference_2_1_2_1_3_2_0());
                     	              									
                     	            }
-                    	            pushFollow(FOLLOW_26);
+                    	            pushFollow(FOLLOW_28);
                     	            ruleIDString();
 
                     	            state._fsp--;
@@ -6210,20 +6462,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	            }
                     	            break;
                     	        case 5 :
-                    	            // InternalTmscXtext.g:2398:7: ( (lv_properties_32_0= ruleXProperty ) )
+                    	            // InternalTmscXtext.g:2478:7: ( (lv_properties_32_0= ruleXProperty ) )
                     	            {
-                    	            // InternalTmscXtext.g:2398:7: ( (lv_properties_32_0= ruleXProperty ) )
-                    	            // InternalTmscXtext.g:2399:8: (lv_properties_32_0= ruleXProperty )
+                    	            // InternalTmscXtext.g:2478:7: ( (lv_properties_32_0= ruleXProperty ) )
+                    	            // InternalTmscXtext.g:2479:8: (lv_properties_32_0= ruleXProperty )
                     	            {
-                    	            // InternalTmscXtext.g:2399:8: (lv_properties_32_0= ruleXProperty )
-                    	            // InternalTmscXtext.g:2400:9: lv_properties_32_0= ruleXProperty
+                    	            // InternalTmscXtext.g:2479:8: (lv_properties_32_0= ruleXProperty )
+                    	            // InternalTmscXtext.g:2480:9: lv_properties_32_0= ruleXProperty
                     	            {
                     	            if ( state.backtracking==0 ) {
 
                     	              									newCompositeNode(grammarAccess.getXDependencyAccess().getPropertiesXPropertyParserRuleCall_2_1_2_1_4_0());
                     	              								
                     	            }
-                    	            pushFollow(FOLLOW_26);
+                    	            pushFollow(FOLLOW_28);
                     	            lv_properties_32_0=ruleXProperty();
 
                     	            state._fsp--;
@@ -6258,11 +6510,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop48;
+                    	    break loop51;
                         }
                     } while (true);
 
-                    otherlv_33=(Token)match(input,35,FOLLOW_2); if (state.failed) return current;
+                    otherlv_33=(Token)match(input,37,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(otherlv_33, grammarAccess.getXDependencyAccess().getRightParenthesisKeyword_2_1_3());
@@ -6302,7 +6554,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXDependencyTypeObject"
-    // InternalTmscXtext.g:2429:1: entryRuleXDependencyTypeObject returns [EObject current=null] : iv_ruleXDependencyTypeObject= ruleXDependencyTypeObject EOF ;
+    // InternalTmscXtext.g:2509:1: entryRuleXDependencyTypeObject returns [EObject current=null] : iv_ruleXDependencyTypeObject= ruleXDependencyTypeObject EOF ;
     public final EObject entryRuleXDependencyTypeObject() throws RecognitionException {
         EObject current = null;
 
@@ -6310,8 +6562,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2429:62: (iv_ruleXDependencyTypeObject= ruleXDependencyTypeObject EOF )
-            // InternalTmscXtext.g:2430:2: iv_ruleXDependencyTypeObject= ruleXDependencyTypeObject EOF
+            // InternalTmscXtext.g:2509:62: (iv_ruleXDependencyTypeObject= ruleXDependencyTypeObject EOF )
+            // InternalTmscXtext.g:2510:2: iv_ruleXDependencyTypeObject= ruleXDependencyTypeObject EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXDependencyTypeObjectRule()); 
@@ -6342,7 +6594,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXDependencyTypeObject"
-    // InternalTmscXtext.g:2436:1: ruleXDependencyTypeObject returns [EObject current=null] : ( (lv_value_0_0= ruleXDependencyType ) ) ;
+    // InternalTmscXtext.g:2516:1: ruleXDependencyTypeObject returns [EObject current=null] : ( (lv_value_0_0= ruleXDependencyType ) ) ;
     public final EObject ruleXDependencyTypeObject() throws RecognitionException {
         EObject current = null;
 
@@ -6353,14 +6605,14 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2442:2: ( ( (lv_value_0_0= ruleXDependencyType ) ) )
-            // InternalTmscXtext.g:2443:2: ( (lv_value_0_0= ruleXDependencyType ) )
+            // InternalTmscXtext.g:2522:2: ( ( (lv_value_0_0= ruleXDependencyType ) ) )
+            // InternalTmscXtext.g:2523:2: ( (lv_value_0_0= ruleXDependencyType ) )
             {
-            // InternalTmscXtext.g:2443:2: ( (lv_value_0_0= ruleXDependencyType ) )
-            // InternalTmscXtext.g:2444:3: (lv_value_0_0= ruleXDependencyType )
+            // InternalTmscXtext.g:2523:2: ( (lv_value_0_0= ruleXDependencyType ) )
+            // InternalTmscXtext.g:2524:3: (lv_value_0_0= ruleXDependencyType )
             {
-            // InternalTmscXtext.g:2444:3: (lv_value_0_0= ruleXDependencyType )
-            // InternalTmscXtext.g:2445:4: lv_value_0_0= ruleXDependencyType
+            // InternalTmscXtext.g:2524:3: (lv_value_0_0= ruleXDependencyType )
+            // InternalTmscXtext.g:2525:4: lv_value_0_0= ruleXDependencyType
             {
             if ( state.backtracking==0 ) {
 
@@ -6413,7 +6665,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXDependencySettings"
-    // InternalTmscXtext.g:2465:1: entryRuleXDependencySettings returns [EObject current=null] : iv_ruleXDependencySettings= ruleXDependencySettings EOF ;
+    // InternalTmscXtext.g:2545:1: entryRuleXDependencySettings returns [EObject current=null] : iv_ruleXDependencySettings= ruleXDependencySettings EOF ;
     public final EObject entryRuleXDependencySettings() throws RecognitionException {
         EObject current = null;
 
@@ -6421,8 +6673,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2465:60: (iv_ruleXDependencySettings= ruleXDependencySettings EOF )
-            // InternalTmscXtext.g:2466:2: iv_ruleXDependencySettings= ruleXDependencySettings EOF
+            // InternalTmscXtext.g:2545:60: (iv_ruleXDependencySettings= ruleXDependencySettings EOF )
+            // InternalTmscXtext.g:2546:2: iv_ruleXDependencySettings= ruleXDependencySettings EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXDependencySettingsRule()); 
@@ -6453,7 +6705,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXDependencySettings"
-    // InternalTmscXtext.g:2472:1: ruleXDependencySettings returns [EObject current=null] : ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' ) ;
+    // InternalTmscXtext.g:2552:1: ruleXDependencySettings returns [EObject current=null] : ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' ) ;
     public final EObject ruleXDependencySettings() throws RecognitionException {
         EObject current = null;
 
@@ -6480,17 +6732,17 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2478:2: ( ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' ) )
-            // InternalTmscXtext.g:2479:2: ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )
+            // InternalTmscXtext.g:2558:2: ( ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' ) )
+            // InternalTmscXtext.g:2559:2: ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )
             {
-            // InternalTmscXtext.g:2479:2: ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )
-            // InternalTmscXtext.g:2480:3: ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}'
+            // InternalTmscXtext.g:2559:2: ( ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}' )
+            // InternalTmscXtext.g:2560:3: ( (lv_type_0_0= ruleXDependencyType ) ) otherlv_1= 'settings' otherlv_2= '{' ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )* otherlv_13= '}'
             {
-            // InternalTmscXtext.g:2480:3: ( (lv_type_0_0= ruleXDependencyType ) )
-            // InternalTmscXtext.g:2481:4: (lv_type_0_0= ruleXDependencyType )
+            // InternalTmscXtext.g:2560:3: ( (lv_type_0_0= ruleXDependencyType ) )
+            // InternalTmscXtext.g:2561:4: (lv_type_0_0= ruleXDependencyType )
             {
-            // InternalTmscXtext.g:2481:4: (lv_type_0_0= ruleXDependencyType )
-            // InternalTmscXtext.g:2482:5: lv_type_0_0= ruleXDependencyType
+            // InternalTmscXtext.g:2561:4: (lv_type_0_0= ruleXDependencyType )
+            // InternalTmscXtext.g:2562:5: lv_type_0_0= ruleXDependencyType
             {
             if ( state.backtracking==0 ) {
 
@@ -6527,47 +6779,47 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
               			newLeafNode(otherlv_1, grammarAccess.getXDependencySettingsAccess().getSettingsKeyword_1());
               		
             }
-            otherlv_2=(Token)match(input,15,FOLLOW_38); if (state.failed) return current;
+            otherlv_2=(Token)match(input,15,FOLLOW_40); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_2, grammarAccess.getXDependencySettingsAccess().getLeftCurlyBracketKeyword_2());
               		
             }
-            // InternalTmscXtext.g:2507:3: ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )*
-            loop50:
+            // InternalTmscXtext.g:2587:3: ( (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) ) | (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) ) | (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) ) | ( (lv_properties_12_0= ruleXProperty ) ) )*
+            loop53:
             do {
-                int alt50=5;
+                int alt53=5;
                 switch ( input.LA(1) ) {
                 case 18:
                     {
-                    alt50=1;
+                    alt53=1;
                     }
                     break;
                 case 19:
                     {
-                    alt50=2;
+                    alt53=2;
                     }
                     break;
-                case 44:
+                case 46:
                     {
-                    alt50=3;
+                    alt53=3;
                     }
                     break;
                 case RULE_ID:
                 case RULE_STRING:
                     {
-                    alt50=4;
+                    alt53=4;
                     }
                     break;
 
                 }
 
-                switch (alt50) {
+                switch (alt53) {
             	case 1 :
-            	    // InternalTmscXtext.g:2508:4: (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )
+            	    // InternalTmscXtext.g:2588:4: (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )
             	    {
-            	    // InternalTmscXtext.g:2508:4: (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )
-            	    // InternalTmscXtext.g:2509:5: otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
+            	    // InternalTmscXtext.g:2588:4: (otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) ) )
+            	    // InternalTmscXtext.g:2589:5: otherlv_3= 'time-bound' otherlv_4= ':' ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
             	    {
             	    otherlv_3=(Token)match(input,18,FOLLOW_6); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -6581,13 +6833,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	      					newLeafNode(otherlv_4, grammarAccess.getXDependencySettingsAccess().getColonKeyword_3_0_1());
             	      				
             	    }
-            	    // InternalTmscXtext.g:2517:5: ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
-            	    // InternalTmscXtext.g:2518:6: (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL )
+            	    // InternalTmscXtext.g:2597:5: ( (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL ) )
+            	    // InternalTmscXtext.g:2598:6: (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL )
             	    {
-            	    // InternalTmscXtext.g:2518:6: (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL )
-            	    // InternalTmscXtext.g:2519:7: lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL
+            	    // InternalTmscXtext.g:2598:6: (lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL )
+            	    // InternalTmscXtext.g:2599:7: lv_timeBound_5_0= RULE_ABS_EBIGDECIMAL
             	    {
-            	    lv_timeBound_5_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_38); if (state.failed) return current;
+            	    lv_timeBound_5_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_40); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      							newLeafNode(lv_timeBound_5_0, grammarAccess.getXDependencySettingsAccess().getTimeBoundABS_EBIGDECIMALTerminalRuleCall_3_0_2_0());
@@ -6618,10 +6870,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 2 :
-            	    // InternalTmscXtext.g:2537:4: (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) )
+            	    // InternalTmscXtext.g:2617:4: (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) )
             	    {
-            	    // InternalTmscXtext.g:2537:4: (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) )
-            	    // InternalTmscXtext.g:2538:5: otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) )
+            	    // InternalTmscXtext.g:2617:4: (otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) ) )
+            	    // InternalTmscXtext.g:2618:5: otherlv_6= 'scheduled' otherlv_7= ':' ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) )
             	    {
             	    otherlv_6=(Token)match(input,19,FOLLOW_6); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
@@ -6635,18 +6887,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	      					newLeafNode(otherlv_7, grammarAccess.getXDependencySettingsAccess().getColonKeyword_3_1_1());
             	      				
             	    }
-            	    // InternalTmscXtext.g:2546:5: ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) )
-            	    // InternalTmscXtext.g:2547:6: (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT )
+            	    // InternalTmscXtext.g:2626:5: ( (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT ) )
+            	    // InternalTmscXtext.g:2627:6: (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT )
             	    {
-            	    // InternalTmscXtext.g:2547:6: (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT )
-            	    // InternalTmscXtext.g:2548:7: lv_scheduled_8_0= ruleEBOOLEAN_OBJECT
+            	    // InternalTmscXtext.g:2627:6: (lv_scheduled_8_0= ruleEBOOLEAN_OBJECT )
+            	    // InternalTmscXtext.g:2628:7: lv_scheduled_8_0= ruleEBOOLEAN_OBJECT
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      							newCompositeNode(grammarAccess.getXDependencySettingsAccess().getScheduledEBOOLEAN_OBJECTParserRuleCall_3_1_2_0());
             	      						
             	    }
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_40);
             	    lv_scheduled_8_0=ruleEBOOLEAN_OBJECT();
 
             	    state._fsp--;
@@ -6677,35 +6929,35 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 3 :
-            	    // InternalTmscXtext.g:2567:4: (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) )
+            	    // InternalTmscXtext.g:2647:4: (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) )
             	    {
-            	    // InternalTmscXtext.g:2567:4: (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) )
-            	    // InternalTmscXtext.g:2568:5: otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) )
+            	    // InternalTmscXtext.g:2647:4: (otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) ) )
+            	    // InternalTmscXtext.g:2648:5: otherlv_9= 'prefix' otherlv_10= ':' ( (lv_prefix_11_0= ruleIDString ) )
             	    {
-            	    otherlv_9=(Token)match(input,44,FOLLOW_6); if (state.failed) return current;
+            	    otherlv_9=(Token)match(input,46,FOLLOW_6); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					newLeafNode(otherlv_9, grammarAccess.getXDependencySettingsAccess().getPrefixKeyword_3_2_0());
             	      				
             	    }
-            	    otherlv_10=(Token)match(input,17,FOLLOW_16); if (state.failed) return current;
+            	    otherlv_10=(Token)match(input,17,FOLLOW_18); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      					newLeafNode(otherlv_10, grammarAccess.getXDependencySettingsAccess().getColonKeyword_3_2_1());
             	      				
             	    }
-            	    // InternalTmscXtext.g:2576:5: ( (lv_prefix_11_0= ruleIDString ) )
-            	    // InternalTmscXtext.g:2577:6: (lv_prefix_11_0= ruleIDString )
+            	    // InternalTmscXtext.g:2656:5: ( (lv_prefix_11_0= ruleIDString ) )
+            	    // InternalTmscXtext.g:2657:6: (lv_prefix_11_0= ruleIDString )
             	    {
-            	    // InternalTmscXtext.g:2577:6: (lv_prefix_11_0= ruleIDString )
-            	    // InternalTmscXtext.g:2578:7: lv_prefix_11_0= ruleIDString
+            	    // InternalTmscXtext.g:2657:6: (lv_prefix_11_0= ruleIDString )
+            	    // InternalTmscXtext.g:2658:7: lv_prefix_11_0= ruleIDString
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      							newCompositeNode(grammarAccess.getXDependencySettingsAccess().getPrefixIDStringParserRuleCall_3_2_2_0());
             	      						
             	    }
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_40);
             	    lv_prefix_11_0=ruleIDString();
 
             	    state._fsp--;
@@ -6736,20 +6988,20 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    }
             	    break;
             	case 4 :
-            	    // InternalTmscXtext.g:2597:4: ( (lv_properties_12_0= ruleXProperty ) )
+            	    // InternalTmscXtext.g:2677:4: ( (lv_properties_12_0= ruleXProperty ) )
             	    {
-            	    // InternalTmscXtext.g:2597:4: ( (lv_properties_12_0= ruleXProperty ) )
-            	    // InternalTmscXtext.g:2598:5: (lv_properties_12_0= ruleXProperty )
+            	    // InternalTmscXtext.g:2677:4: ( (lv_properties_12_0= ruleXProperty ) )
+            	    // InternalTmscXtext.g:2678:5: (lv_properties_12_0= ruleXProperty )
             	    {
-            	    // InternalTmscXtext.g:2598:5: (lv_properties_12_0= ruleXProperty )
-            	    // InternalTmscXtext.g:2599:6: lv_properties_12_0= ruleXProperty
+            	    // InternalTmscXtext.g:2678:5: (lv_properties_12_0= ruleXProperty )
+            	    // InternalTmscXtext.g:2679:6: lv_properties_12_0= ruleXProperty
             	    {
             	    if ( state.backtracking==0 ) {
 
             	      						newCompositeNode(grammarAccess.getXDependencySettingsAccess().getPropertiesXPropertyParserRuleCall_3_3_0());
             	      					
             	    }
-            	    pushFollow(FOLLOW_38);
+            	    pushFollow(FOLLOW_40);
             	    lv_properties_12_0=ruleXProperty();
 
             	    state._fsp--;
@@ -6778,7 +7030,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop50;
+            	    break loop53;
                 }
             } while (true);
 
@@ -6813,7 +7065,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXProperty"
-    // InternalTmscXtext.g:2625:1: entryRuleXProperty returns [EObject current=null] : iv_ruleXProperty= ruleXProperty EOF ;
+    // InternalTmscXtext.g:2705:1: entryRuleXProperty returns [EObject current=null] : iv_ruleXProperty= ruleXProperty EOF ;
     public final EObject entryRuleXProperty() throws RecognitionException {
         EObject current = null;
 
@@ -6821,8 +7073,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2625:50: (iv_ruleXProperty= ruleXProperty EOF )
-            // InternalTmscXtext.g:2626:2: iv_ruleXProperty= ruleXProperty EOF
+            // InternalTmscXtext.g:2705:50: (iv_ruleXProperty= ruleXProperty EOF )
+            // InternalTmscXtext.g:2706:2: iv_ruleXProperty= ruleXProperty EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXPropertyRule()); 
@@ -6853,7 +7105,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXProperty"
-    // InternalTmscXtext.g:2632:1: ruleXProperty returns [EObject current=null] : ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) ) ;
+    // InternalTmscXtext.g:2712:1: ruleXProperty returns [EObject current=null] : ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) ) ;
     public final EObject ruleXProperty() throws RecognitionException {
         EObject current = null;
 
@@ -6867,17 +7119,17 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2638:2: ( ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) ) )
-            // InternalTmscXtext.g:2639:2: ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) )
+            // InternalTmscXtext.g:2718:2: ( ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) ) )
+            // InternalTmscXtext.g:2719:2: ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) )
             {
-            // InternalTmscXtext.g:2639:2: ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) )
-            // InternalTmscXtext.g:2640:3: ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) )
+            // InternalTmscXtext.g:2719:2: ( ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) ) )
+            // InternalTmscXtext.g:2720:3: ( (lv_name_0_0= ruleIDString ) ) otherlv_1= ':' ( (lv_value_2_0= ruleXPropertyValue ) )
             {
-            // InternalTmscXtext.g:2640:3: ( (lv_name_0_0= ruleIDString ) )
-            // InternalTmscXtext.g:2641:4: (lv_name_0_0= ruleIDString )
+            // InternalTmscXtext.g:2720:3: ( (lv_name_0_0= ruleIDString ) )
+            // InternalTmscXtext.g:2721:4: (lv_name_0_0= ruleIDString )
             {
-            // InternalTmscXtext.g:2641:4: (lv_name_0_0= ruleIDString )
-            // InternalTmscXtext.g:2642:5: lv_name_0_0= ruleIDString
+            // InternalTmscXtext.g:2721:4: (lv_name_0_0= ruleIDString )
+            // InternalTmscXtext.g:2722:5: lv_name_0_0= ruleIDString
             {
             if ( state.backtracking==0 ) {
 
@@ -6908,17 +7160,17 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
             }
 
-            otherlv_1=(Token)match(input,17,FOLLOW_39); if (state.failed) return current;
+            otherlv_1=(Token)match(input,17,FOLLOW_41); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			newLeafNode(otherlv_1, grammarAccess.getXPropertyAccess().getColonKeyword_1());
               		
             }
-            // InternalTmscXtext.g:2663:3: ( (lv_value_2_0= ruleXPropertyValue ) )
-            // InternalTmscXtext.g:2664:4: (lv_value_2_0= ruleXPropertyValue )
+            // InternalTmscXtext.g:2743:3: ( (lv_value_2_0= ruleXPropertyValue ) )
+            // InternalTmscXtext.g:2744:4: (lv_value_2_0= ruleXPropertyValue )
             {
-            // InternalTmscXtext.g:2664:4: (lv_value_2_0= ruleXPropertyValue )
-            // InternalTmscXtext.g:2665:5: lv_value_2_0= ruleXPropertyValue
+            // InternalTmscXtext.g:2744:4: (lv_value_2_0= ruleXPropertyValue )
+            // InternalTmscXtext.g:2745:5: lv_value_2_0= ruleXPropertyValue
             {
             if ( state.backtracking==0 ) {
 
@@ -6974,7 +7226,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleXPropertyValue"
-    // InternalTmscXtext.g:2686:1: entryRuleXPropertyValue returns [EObject current=null] : iv_ruleXPropertyValue= ruleXPropertyValue EOF ;
+    // InternalTmscXtext.g:2766:1: entryRuleXPropertyValue returns [EObject current=null] : iv_ruleXPropertyValue= ruleXPropertyValue EOF ;
     public final EObject entryRuleXPropertyValue() throws RecognitionException {
         EObject current = null;
 
@@ -6982,8 +7234,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2686:55: (iv_ruleXPropertyValue= ruleXPropertyValue EOF )
-            // InternalTmscXtext.g:2687:2: iv_ruleXPropertyValue= ruleXPropertyValue EOF
+            // InternalTmscXtext.g:2766:55: (iv_ruleXPropertyValue= ruleXPropertyValue EOF )
+            // InternalTmscXtext.g:2767:2: iv_ruleXPropertyValue= ruleXPropertyValue EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getXPropertyValueRule()); 
@@ -7014,7 +7266,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXPropertyValue"
-    // InternalTmscXtext.g:2693:1: ruleXPropertyValue returns [EObject current=null] : ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) ) ;
+    // InternalTmscXtext.g:2773:1: ruleXPropertyValue returns [EObject current=null] : ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) ) ;
     public final EObject ruleXPropertyValue() throws RecognitionException {
         EObject current = null;
 
@@ -7036,53 +7288,53 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2699:2: ( ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) ) )
-            // InternalTmscXtext.g:2700:2: ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) )
+            // InternalTmscXtext.g:2779:2: ( ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) ) )
+            // InternalTmscXtext.g:2780:2: ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) )
             {
-            // InternalTmscXtext.g:2700:2: ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) )
-            int alt52=4;
+            // InternalTmscXtext.g:2780:2: ( ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) ) | ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) ) | ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) ) | ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' ) )
+            int alt55=4;
             switch ( input.LA(1) ) {
             case RULE_ID:
             case RULE_STRING:
                 {
-                alt52=1;
+                alt55=1;
                 }
                 break;
             case RULE_ABS_EBIGDECIMAL:
             case RULE_POS_EBIGDECIMAL:
             case RULE_NEG_EBIGDECIMAL:
                 {
-                alt52=2;
+                alt55=2;
                 }
                 break;
-            case 48:
-            case 49:
+            case 50:
+            case 51:
                 {
-                alt52=3;
+                alt55=3;
                 }
                 break;
-            case 45:
+            case 47:
                 {
-                alt52=4;
+                alt55=4;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 52, 0, input);
+                    new NoViableAltException("", 55, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt52) {
+            switch (alt55) {
                 case 1 :
-                    // InternalTmscXtext.g:2701:3: ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) )
+                    // InternalTmscXtext.g:2781:3: ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) )
                     {
-                    // InternalTmscXtext.g:2701:3: ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) )
-                    // InternalTmscXtext.g:2702:4: () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) )
+                    // InternalTmscXtext.g:2781:3: ( () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) ) )
+                    // InternalTmscXtext.g:2782:4: () ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) )
                     {
-                    // InternalTmscXtext.g:2702:4: ()
-                    // InternalTmscXtext.g:2703:5: 
+                    // InternalTmscXtext.g:2782:4: ()
+                    // InternalTmscXtext.g:2783:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7094,11 +7346,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2709:4: ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) )
-                    // InternalTmscXtext.g:2710:5: ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString )
+                    // InternalTmscXtext.g:2789:4: ( ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString ) )
+                    // InternalTmscXtext.g:2790:5: ( ( ruleIDString ) )=> (lv_value_1_0= ruleIDString )
                     {
-                    // InternalTmscXtext.g:2714:5: (lv_value_1_0= ruleIDString )
-                    // InternalTmscXtext.g:2715:6: lv_value_1_0= ruleIDString
+                    // InternalTmscXtext.g:2794:5: (lv_value_1_0= ruleIDString )
+                    // InternalTmscXtext.g:2795:6: lv_value_1_0= ruleIDString
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7136,13 +7388,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:2734:3: ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) )
+                    // InternalTmscXtext.g:2814:3: ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) )
                     {
-                    // InternalTmscXtext.g:2734:3: ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) )
-                    // InternalTmscXtext.g:2735:4: () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) )
+                    // InternalTmscXtext.g:2814:3: ( () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) ) )
+                    // InternalTmscXtext.g:2815:4: () ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) )
                     {
-                    // InternalTmscXtext.g:2735:4: ()
-                    // InternalTmscXtext.g:2736:5: 
+                    // InternalTmscXtext.g:2815:4: ()
+                    // InternalTmscXtext.g:2816:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7154,11 +7406,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2742:4: ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) )
-                    // InternalTmscXtext.g:2743:5: ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL )
+                    // InternalTmscXtext.g:2822:4: ( ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL ) )
+                    // InternalTmscXtext.g:2823:5: ( ( ruleEBIGDECIMAL ) )=> (lv_value_3_0= ruleEBIGDECIMAL )
                     {
-                    // InternalTmscXtext.g:2747:5: (lv_value_3_0= ruleEBIGDECIMAL )
-                    // InternalTmscXtext.g:2748:6: lv_value_3_0= ruleEBIGDECIMAL
+                    // InternalTmscXtext.g:2827:5: (lv_value_3_0= ruleEBIGDECIMAL )
+                    // InternalTmscXtext.g:2828:6: lv_value_3_0= ruleEBIGDECIMAL
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7196,13 +7448,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTmscXtext.g:2767:3: ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) )
+                    // InternalTmscXtext.g:2847:3: ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) )
                     {
-                    // InternalTmscXtext.g:2767:3: ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) )
-                    // InternalTmscXtext.g:2768:4: () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) )
+                    // InternalTmscXtext.g:2847:3: ( () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) ) )
+                    // InternalTmscXtext.g:2848:4: () ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) )
                     {
-                    // InternalTmscXtext.g:2768:4: ()
-                    // InternalTmscXtext.g:2769:5: 
+                    // InternalTmscXtext.g:2848:4: ()
+                    // InternalTmscXtext.g:2849:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7214,11 +7466,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2775:4: ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) )
-                    // InternalTmscXtext.g:2776:5: ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT )
+                    // InternalTmscXtext.g:2855:4: ( ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT ) )
+                    // InternalTmscXtext.g:2856:5: ( ( ruleEBOOLEAN_OBJECT ) )=> (lv_value_5_0= ruleEBOOLEAN_OBJECT )
                     {
-                    // InternalTmscXtext.g:2780:5: (lv_value_5_0= ruleEBOOLEAN_OBJECT )
-                    // InternalTmscXtext.g:2781:6: lv_value_5_0= ruleEBOOLEAN_OBJECT
+                    // InternalTmscXtext.g:2860:5: (lv_value_5_0= ruleEBOOLEAN_OBJECT )
+                    // InternalTmscXtext.g:2861:6: lv_value_5_0= ruleEBOOLEAN_OBJECT
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7256,13 +7508,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTmscXtext.g:2800:3: ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' )
+                    // InternalTmscXtext.g:2880:3: ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' )
                     {
-                    // InternalTmscXtext.g:2800:3: ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' )
-                    // InternalTmscXtext.g:2801:4: () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']'
+                    // InternalTmscXtext.g:2880:3: ( () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']' )
+                    // InternalTmscXtext.g:2881:4: () ( ( '[' )=>otherlv_7= '[' ) ( (lv_values_8_0= ruleXPropertyValue ) ) (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )* otherlv_11= ']'
                     {
-                    // InternalTmscXtext.g:2801:4: ()
-                    // InternalTmscXtext.g:2802:5: 
+                    // InternalTmscXtext.g:2881:4: ()
+                    // InternalTmscXtext.g:2882:5: 
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7274,10 +7526,10 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2808:4: ( ( '[' )=>otherlv_7= '[' )
-                    // InternalTmscXtext.g:2809:5: ( '[' )=>otherlv_7= '['
+                    // InternalTmscXtext.g:2888:4: ( ( '[' )=>otherlv_7= '[' )
+                    // InternalTmscXtext.g:2889:5: ( '[' )=>otherlv_7= '['
                     {
-                    otherlv_7=(Token)match(input,45,FOLLOW_39); if (state.failed) return current;
+                    otherlv_7=(Token)match(input,47,FOLLOW_41); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       					newLeafNode(otherlv_7, grammarAccess.getXPropertyValueAccess().getLeftSquareBracketKeyword_3_1());
@@ -7286,18 +7538,18 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2815:4: ( (lv_values_8_0= ruleXPropertyValue ) )
-                    // InternalTmscXtext.g:2816:5: (lv_values_8_0= ruleXPropertyValue )
+                    // InternalTmscXtext.g:2895:4: ( (lv_values_8_0= ruleXPropertyValue ) )
+                    // InternalTmscXtext.g:2896:5: (lv_values_8_0= ruleXPropertyValue )
                     {
-                    // InternalTmscXtext.g:2816:5: (lv_values_8_0= ruleXPropertyValue )
-                    // InternalTmscXtext.g:2817:6: lv_values_8_0= ruleXPropertyValue
+                    // InternalTmscXtext.g:2896:5: (lv_values_8_0= ruleXPropertyValue )
+                    // InternalTmscXtext.g:2897:6: lv_values_8_0= ruleXPropertyValue
                     {
                     if ( state.backtracking==0 ) {
 
                       						newCompositeNode(grammarAccess.getXPropertyValueAccess().getValuesXPropertyValueParserRuleCall_3_2_0());
                       					
                     }
-                    pushFollow(FOLLOW_40);
+                    pushFollow(FOLLOW_42);
                     lv_values_8_0=ruleXPropertyValue();
 
                     state._fsp--;
@@ -7321,39 +7573,39 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // InternalTmscXtext.g:2834:4: (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )*
-                    loop51:
+                    // InternalTmscXtext.g:2914:4: (otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) ) )*
+                    loop54:
                     do {
-                        int alt51=2;
-                        int LA51_0 = input.LA(1);
+                        int alt54=2;
+                        int LA54_0 = input.LA(1);
 
-                        if ( (LA51_0==29) ) {
-                            alt51=1;
+                        if ( (LA54_0==31) ) {
+                            alt54=1;
                         }
 
 
-                        switch (alt51) {
+                        switch (alt54) {
                     	case 1 :
-                    	    // InternalTmscXtext.g:2835:5: otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) )
+                    	    // InternalTmscXtext.g:2915:5: otherlv_9= ',' ( (lv_values_10_0= ruleXPropertyValue ) )
                     	    {
-                    	    otherlv_9=(Token)match(input,29,FOLLOW_39); if (state.failed) return current;
+                    	    otherlv_9=(Token)match(input,31,FOLLOW_41); if (state.failed) return current;
                     	    if ( state.backtracking==0 ) {
 
                     	      					newLeafNode(otherlv_9, grammarAccess.getXPropertyValueAccess().getCommaKeyword_3_3_0());
                     	      				
                     	    }
-                    	    // InternalTmscXtext.g:2839:5: ( (lv_values_10_0= ruleXPropertyValue ) )
-                    	    // InternalTmscXtext.g:2840:6: (lv_values_10_0= ruleXPropertyValue )
+                    	    // InternalTmscXtext.g:2919:5: ( (lv_values_10_0= ruleXPropertyValue ) )
+                    	    // InternalTmscXtext.g:2920:6: (lv_values_10_0= ruleXPropertyValue )
                     	    {
-                    	    // InternalTmscXtext.g:2840:6: (lv_values_10_0= ruleXPropertyValue )
-                    	    // InternalTmscXtext.g:2841:7: lv_values_10_0= ruleXPropertyValue
+                    	    // InternalTmscXtext.g:2920:6: (lv_values_10_0= ruleXPropertyValue )
+                    	    // InternalTmscXtext.g:2921:7: lv_values_10_0= ruleXPropertyValue
                     	    {
                     	    if ( state.backtracking==0 ) {
 
                     	      							newCompositeNode(grammarAccess.getXPropertyValueAccess().getValuesXPropertyValueParserRuleCall_3_3_1_0());
                     	      						
                     	    }
-                    	    pushFollow(FOLLOW_40);
+                    	    pushFollow(FOLLOW_42);
                     	    lv_values_10_0=ruleXPropertyValue();
 
                     	    state._fsp--;
@@ -7382,11 +7634,11 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop51;
+                    	    break loop54;
                         }
                     } while (true);
 
-                    otherlv_11=(Token)match(input,46,FOLLOW_2); if (state.failed) return current;
+                    otherlv_11=(Token)match(input,48,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				newLeafNode(otherlv_11, grammarAccess.getXPropertyValueAccess().getRightSquareBracketKeyword_3_4());
@@ -7423,7 +7675,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFQNString"
-    // InternalTmscXtext.g:2868:1: entryRuleFQNString returns [String current=null] : iv_ruleFQNString= ruleFQNString EOF ;
+    // InternalTmscXtext.g:2948:1: entryRuleFQNString returns [String current=null] : iv_ruleFQNString= ruleFQNString EOF ;
     public final String entryRuleFQNString() throws RecognitionException {
         String current = null;
 
@@ -7431,8 +7683,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2868:49: (iv_ruleFQNString= ruleFQNString EOF )
-            // InternalTmscXtext.g:2869:2: iv_ruleFQNString= ruleFQNString EOF
+            // InternalTmscXtext.g:2948:49: (iv_ruleFQNString= ruleFQNString EOF )
+            // InternalTmscXtext.g:2949:2: iv_ruleFQNString= ruleFQNString EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFQNStringRule()); 
@@ -7463,7 +7715,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFQNString"
-    // InternalTmscXtext.g:2875:1: ruleFQNString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING ) ;
+    // InternalTmscXtext.g:2955:1: ruleFQNString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING ) ;
     public final AntlrDatatypeRuleToken ruleFQNString() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7475,29 +7727,29 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2881:2: ( (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING ) )
-            // InternalTmscXtext.g:2882:2: (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING )
+            // InternalTmscXtext.g:2961:2: ( (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING ) )
+            // InternalTmscXtext.g:2962:2: (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING )
             {
-            // InternalTmscXtext.g:2882:2: (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING )
-            int alt53=2;
-            int LA53_0 = input.LA(1);
+            // InternalTmscXtext.g:2962:2: (this_FQN_0= ruleFQN | this_STRING_1= RULE_STRING )
+            int alt56=2;
+            int LA56_0 = input.LA(1);
 
-            if ( (LA53_0==RULE_ID) ) {
-                alt53=1;
+            if ( (LA56_0==RULE_ID) ) {
+                alt56=1;
             }
-            else if ( (LA53_0==RULE_STRING) ) {
-                alt53=2;
+            else if ( (LA56_0==RULE_STRING) ) {
+                alt56=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 53, 0, input);
+                    new NoViableAltException("", 56, 0, input);
 
                 throw nvae;
             }
-            switch (alt53) {
+            switch (alt56) {
                 case 1 :
-                    // InternalTmscXtext.g:2883:3: this_FQN_0= ruleFQN
+                    // InternalTmscXtext.g:2963:3: this_FQN_0= ruleFQN
                     {
                     if ( state.backtracking==0 ) {
 
@@ -7523,7 +7775,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:2894:3: this_STRING_1= RULE_STRING
+                    // InternalTmscXtext.g:2974:3: this_STRING_1= RULE_STRING
                     {
                     this_STRING_1=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7564,7 +7816,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleIDString"
-    // InternalTmscXtext.g:2905:1: entryRuleIDString returns [String current=null] : iv_ruleIDString= ruleIDString EOF ;
+    // InternalTmscXtext.g:2985:1: entryRuleIDString returns [String current=null] : iv_ruleIDString= ruleIDString EOF ;
     public final String entryRuleIDString() throws RecognitionException {
         String current = null;
 
@@ -7572,8 +7824,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2905:48: (iv_ruleIDString= ruleIDString EOF )
-            // InternalTmscXtext.g:2906:2: iv_ruleIDString= ruleIDString EOF
+            // InternalTmscXtext.g:2985:48: (iv_ruleIDString= ruleIDString EOF )
+            // InternalTmscXtext.g:2986:2: iv_ruleIDString= ruleIDString EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getIDStringRule()); 
@@ -7604,7 +7856,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleIDString"
-    // InternalTmscXtext.g:2912:1: ruleIDString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING ) ;
+    // InternalTmscXtext.g:2992:1: ruleIDString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING ) ;
     public final AntlrDatatypeRuleToken ruleIDString() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7615,29 +7867,29 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2918:2: ( (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING ) )
-            // InternalTmscXtext.g:2919:2: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING )
+            // InternalTmscXtext.g:2998:2: ( (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING ) )
+            // InternalTmscXtext.g:2999:2: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING )
             {
-            // InternalTmscXtext.g:2919:2: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING )
-            int alt54=2;
-            int LA54_0 = input.LA(1);
+            // InternalTmscXtext.g:2999:2: (this_ID_0= RULE_ID | this_STRING_1= RULE_STRING )
+            int alt57=2;
+            int LA57_0 = input.LA(1);
 
-            if ( (LA54_0==RULE_ID) ) {
-                alt54=1;
+            if ( (LA57_0==RULE_ID) ) {
+                alt57=1;
             }
-            else if ( (LA54_0==RULE_STRING) ) {
-                alt54=2;
+            else if ( (LA57_0==RULE_STRING) ) {
+                alt57=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 54, 0, input);
+                    new NoViableAltException("", 57, 0, input);
 
                 throw nvae;
             }
-            switch (alt54) {
+            switch (alt57) {
                 case 1 :
-                    // InternalTmscXtext.g:2920:3: this_ID_0= RULE_ID
+                    // InternalTmscXtext.g:3000:3: this_ID_0= RULE_ID
                     {
                     this_ID_0=(Token)match(input,RULE_ID,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7654,7 +7906,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:2928:3: this_STRING_1= RULE_STRING
+                    // InternalTmscXtext.g:3008:3: this_STRING_1= RULE_STRING
                     {
                     this_STRING_1=(Token)match(input,RULE_STRING,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -7695,7 +7947,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleFQN"
-    // InternalTmscXtext.g:2939:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
+    // InternalTmscXtext.g:3019:1: entryRuleFQN returns [String current=null] : iv_ruleFQN= ruleFQN EOF ;
     public final String entryRuleFQN() throws RecognitionException {
         String current = null;
 
@@ -7703,8 +7955,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2939:43: (iv_ruleFQN= ruleFQN EOF )
-            // InternalTmscXtext.g:2940:2: iv_ruleFQN= ruleFQN EOF
+            // InternalTmscXtext.g:3019:43: (iv_ruleFQN= ruleFQN EOF )
+            // InternalTmscXtext.g:3020:2: iv_ruleFQN= ruleFQN EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getFQNRule()); 
@@ -7735,7 +7987,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleFQN"
-    // InternalTmscXtext.g:2946:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // InternalTmscXtext.g:3026:1: ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleFQN() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7747,13 +7999,13 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2952:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // InternalTmscXtext.g:2953:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalTmscXtext.g:3032:2: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // InternalTmscXtext.g:3033:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // InternalTmscXtext.g:2953:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // InternalTmscXtext.g:2954:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // InternalTmscXtext.g:3033:2: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // InternalTmscXtext.g:3034:3: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_41); if (state.failed) return current;
+            this_ID_0=(Token)match(input,RULE_ID,FOLLOW_43); if (state.failed) return current;
             if ( state.backtracking==0 ) {
 
               			current.merge(this_ID_0);
@@ -7764,29 +8016,29 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
               			newLeafNode(this_ID_0, grammarAccess.getFQNAccess().getIDTerminalRuleCall_0());
               		
             }
-            // InternalTmscXtext.g:2961:3: (kw= '.' this_ID_2= RULE_ID )*
-            loop55:
+            // InternalTmscXtext.g:3041:3: (kw= '.' this_ID_2= RULE_ID )*
+            loop58:
             do {
-                int alt55=2;
-                int LA55_0 = input.LA(1);
+                int alt58=2;
+                int LA58_0 = input.LA(1);
 
-                if ( (LA55_0==47) ) {
-                    alt55=1;
+                if ( (LA58_0==49) ) {
+                    alt58=1;
                 }
 
 
-                switch (alt55) {
+                switch (alt58) {
             	case 1 :
-            	    // InternalTmscXtext.g:2962:4: kw= '.' this_ID_2= RULE_ID
+            	    // InternalTmscXtext.g:3042:4: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)match(input,47,FOLLOW_18); if (state.failed) return current;
+            	    kw=(Token)match(input,49,FOLLOW_20); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      				current.merge(kw);
             	      				newLeafNode(kw, grammarAccess.getFQNAccess().getFullStopKeyword_1_0());
             	      			
             	    }
-            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_41); if (state.failed) return current;
+            	    this_ID_2=(Token)match(input,RULE_ID,FOLLOW_43); if (state.failed) return current;
             	    if ( state.backtracking==0 ) {
 
             	      				current.merge(this_ID_2);
@@ -7802,7 +8054,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
             	    break;
 
             	default :
-            	    break loop55;
+            	    break loop58;
                 }
             } while (true);
 
@@ -7831,7 +8083,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBOOLEAN_OBJECT"
-    // InternalTmscXtext.g:2979:1: entryRuleEBOOLEAN_OBJECT returns [String current=null] : iv_ruleEBOOLEAN_OBJECT= ruleEBOOLEAN_OBJECT EOF ;
+    // InternalTmscXtext.g:3059:1: entryRuleEBOOLEAN_OBJECT returns [String current=null] : iv_ruleEBOOLEAN_OBJECT= ruleEBOOLEAN_OBJECT EOF ;
     public final String entryRuleEBOOLEAN_OBJECT() throws RecognitionException {
         String current = null;
 
@@ -7839,8 +8091,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:2979:55: (iv_ruleEBOOLEAN_OBJECT= ruleEBOOLEAN_OBJECT EOF )
-            // InternalTmscXtext.g:2980:2: iv_ruleEBOOLEAN_OBJECT= ruleEBOOLEAN_OBJECT EOF
+            // InternalTmscXtext.g:3059:55: (iv_ruleEBOOLEAN_OBJECT= ruleEBOOLEAN_OBJECT EOF )
+            // InternalTmscXtext.g:3060:2: iv_ruleEBOOLEAN_OBJECT= ruleEBOOLEAN_OBJECT EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEBOOLEAN_OBJECTRule()); 
@@ -7871,7 +8123,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBOOLEAN_OBJECT"
-    // InternalTmscXtext.g:2986:1: ruleEBOOLEAN_OBJECT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'true' | kw= 'false' ) ;
+    // InternalTmscXtext.g:3066:1: ruleEBOOLEAN_OBJECT returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (kw= 'true' | kw= 'false' ) ;
     public final AntlrDatatypeRuleToken ruleEBOOLEAN_OBJECT() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -7881,31 +8133,31 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:2992:2: ( (kw= 'true' | kw= 'false' ) )
-            // InternalTmscXtext.g:2993:2: (kw= 'true' | kw= 'false' )
+            // InternalTmscXtext.g:3072:2: ( (kw= 'true' | kw= 'false' ) )
+            // InternalTmscXtext.g:3073:2: (kw= 'true' | kw= 'false' )
             {
-            // InternalTmscXtext.g:2993:2: (kw= 'true' | kw= 'false' )
-            int alt56=2;
-            int LA56_0 = input.LA(1);
+            // InternalTmscXtext.g:3073:2: (kw= 'true' | kw= 'false' )
+            int alt59=2;
+            int LA59_0 = input.LA(1);
 
-            if ( (LA56_0==48) ) {
-                alt56=1;
+            if ( (LA59_0==50) ) {
+                alt59=1;
             }
-            else if ( (LA56_0==49) ) {
-                alt56=2;
+            else if ( (LA59_0==51) ) {
+                alt59=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 56, 0, input);
+                    new NoViableAltException("", 59, 0, input);
 
                 throw nvae;
             }
-            switch (alt56) {
+            switch (alt59) {
                 case 1 :
-                    // InternalTmscXtext.g:2994:3: kw= 'true'
+                    // InternalTmscXtext.g:3074:3: kw= 'true'
                     {
-                    kw=(Token)match(input,48,FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,50,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			current.merge(kw);
@@ -7916,9 +8168,9 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:3000:3: kw= 'false'
+                    // InternalTmscXtext.g:3080:3: kw= 'false'
                     {
-                    kw=(Token)match(input,49,FOLLOW_2); if (state.failed) return current;
+                    kw=(Token)match(input,51,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       			current.merge(kw);
@@ -7953,7 +8205,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "entryRuleEBIGDECIMAL"
-    // InternalTmscXtext.g:3009:1: entryRuleEBIGDECIMAL returns [String current=null] : iv_ruleEBIGDECIMAL= ruleEBIGDECIMAL EOF ;
+    // InternalTmscXtext.g:3089:1: entryRuleEBIGDECIMAL returns [String current=null] : iv_ruleEBIGDECIMAL= ruleEBIGDECIMAL EOF ;
     public final String entryRuleEBIGDECIMAL() throws RecognitionException {
         String current = null;
 
@@ -7961,8 +8213,8 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // InternalTmscXtext.g:3009:51: (iv_ruleEBIGDECIMAL= ruleEBIGDECIMAL EOF )
-            // InternalTmscXtext.g:3010:2: iv_ruleEBIGDECIMAL= ruleEBIGDECIMAL EOF
+            // InternalTmscXtext.g:3089:51: (iv_ruleEBIGDECIMAL= ruleEBIGDECIMAL EOF )
+            // InternalTmscXtext.g:3090:2: iv_ruleEBIGDECIMAL= ruleEBIGDECIMAL EOF
             {
             if ( state.backtracking==0 ) {
                newCompositeNode(grammarAccess.getEBIGDECIMALRule()); 
@@ -7993,7 +8245,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleEBIGDECIMAL"
-    // InternalTmscXtext.g:3016:1: ruleEBIGDECIMAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL ) ;
+    // InternalTmscXtext.g:3096:1: ruleEBIGDECIMAL returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL ) ;
     public final AntlrDatatypeRuleToken ruleEBIGDECIMAL() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -8005,38 +8257,38 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:3022:2: ( (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL ) )
-            // InternalTmscXtext.g:3023:2: (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL )
+            // InternalTmscXtext.g:3102:2: ( (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL ) )
+            // InternalTmscXtext.g:3103:2: (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL )
             {
-            // InternalTmscXtext.g:3023:2: (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL )
-            int alt57=3;
+            // InternalTmscXtext.g:3103:2: (this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL | this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL | this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL )
+            int alt60=3;
             switch ( input.LA(1) ) {
             case RULE_ABS_EBIGDECIMAL:
                 {
-                alt57=1;
+                alt60=1;
                 }
                 break;
             case RULE_POS_EBIGDECIMAL:
                 {
-                alt57=2;
+                alt60=2;
                 }
                 break;
             case RULE_NEG_EBIGDECIMAL:
                 {
-                alt57=3;
+                alt60=3;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 57, 0, input);
+                    new NoViableAltException("", 60, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt57) {
+            switch (alt60) {
                 case 1 :
-                    // InternalTmscXtext.g:3024:3: this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL
+                    // InternalTmscXtext.g:3104:3: this_ABS_EBIGDECIMAL_0= RULE_ABS_EBIGDECIMAL
                     {
                     this_ABS_EBIGDECIMAL_0=(Token)match(input,RULE_ABS_EBIGDECIMAL,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8053,7 +8305,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:3032:3: this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL
+                    // InternalTmscXtext.g:3112:3: this_POS_EBIGDECIMAL_1= RULE_POS_EBIGDECIMAL
                     {
                     this_POS_EBIGDECIMAL_1=(Token)match(input,RULE_POS_EBIGDECIMAL,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8070,7 +8322,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTmscXtext.g:3040:3: this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL
+                    // InternalTmscXtext.g:3120:3: this_NEG_EBIGDECIMAL_2= RULE_NEG_EBIGDECIMAL
                     {
                     this_NEG_EBIGDECIMAL_2=(Token)match(input,RULE_NEG_EBIGDECIMAL,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
@@ -8111,7 +8363,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXArchitectureKind"
-    // InternalTmscXtext.g:3051:1: ruleXArchitectureKind returns [Enumerator current=null] : ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) ) ;
+    // InternalTmscXtext.g:3131:1: ruleXArchitectureKind returns [Enumerator current=null] : ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) ) ;
     public final Enumerator ruleXArchitectureKind() throws RecognitionException {
         Enumerator current = null;
 
@@ -8122,34 +8374,34 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:3057:2: ( ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) ) )
-            // InternalTmscXtext.g:3058:2: ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) )
+            // InternalTmscXtext.g:3137:2: ( ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) ) )
+            // InternalTmscXtext.g:3138:2: ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) )
             {
-            // InternalTmscXtext.g:3058:2: ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) )
-            int alt58=2;
-            int LA58_0 = input.LA(1);
+            // InternalTmscXtext.g:3138:2: ( (enumLiteral_0= 'internal' ) | (enumLiteral_1= 'external' ) )
+            int alt61=2;
+            int LA61_0 = input.LA(1);
 
-            if ( (LA58_0==50) ) {
-                alt58=1;
+            if ( (LA61_0==52) ) {
+                alt61=1;
             }
-            else if ( (LA58_0==51) ) {
-                alt58=2;
+            else if ( (LA61_0==53) ) {
+                alt61=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 58, 0, input);
+                    new NoViableAltException("", 61, 0, input);
 
                 throw nvae;
             }
-            switch (alt58) {
+            switch (alt61) {
                 case 1 :
-                    // InternalTmscXtext.g:3059:3: (enumLiteral_0= 'internal' )
+                    // InternalTmscXtext.g:3139:3: (enumLiteral_0= 'internal' )
                     {
-                    // InternalTmscXtext.g:3059:3: (enumLiteral_0= 'internal' )
-                    // InternalTmscXtext.g:3060:4: enumLiteral_0= 'internal'
+                    // InternalTmscXtext.g:3139:3: (enumLiteral_0= 'internal' )
+                    // InternalTmscXtext.g:3140:4: enumLiteral_0= 'internal'
                     {
-                    enumLiteral_0=(Token)match(input,50,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,52,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXArchitectureKindAccess().getINTERNALEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -8163,12 +8415,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:3067:3: (enumLiteral_1= 'external' )
+                    // InternalTmscXtext.g:3147:3: (enumLiteral_1= 'external' )
                     {
-                    // InternalTmscXtext.g:3067:3: (enumLiteral_1= 'external' )
-                    // InternalTmscXtext.g:3068:4: enumLiteral_1= 'external'
+                    // InternalTmscXtext.g:3147:3: (enumLiteral_1= 'external' )
+                    // InternalTmscXtext.g:3148:4: enumLiteral_1= 'external'
                     {
-                    enumLiteral_1=(Token)match(input,51,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,53,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXArchitectureKindAccess().getEXTERNALEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -8206,7 +8458,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXFunctionParameterKind"
-    // InternalTmscXtext.g:3078:1: ruleXFunctionParameterKind returns [Enumerator current=null] : ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) ) ;
+    // InternalTmscXtext.g:3158:1: ruleXFunctionParameterKind returns [Enumerator current=null] : ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) ) ;
     public final Enumerator ruleXFunctionParameterKind() throws RecognitionException {
         Enumerator current = null;
 
@@ -8219,48 +8471,48 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:3084:2: ( ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) ) )
-            // InternalTmscXtext.g:3085:2: ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) )
+            // InternalTmscXtext.g:3164:2: ( ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) ) )
+            // InternalTmscXtext.g:3165:2: ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) )
             {
-            // InternalTmscXtext.g:3085:2: ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) )
-            int alt59=4;
+            // InternalTmscXtext.g:3165:2: ( (enumLiteral_0= 'in' ) | (enumLiteral_1= 'out' ) | (enumLiteral_2= 'inout' ) | (enumLiteral_3= 'return' ) )
+            int alt62=4;
             switch ( input.LA(1) ) {
-            case 52:
-                {
-                alt59=1;
-                }
-                break;
-            case 53:
-                {
-                alt59=2;
-                }
-                break;
             case 54:
                 {
-                alt59=3;
+                alt62=1;
                 }
                 break;
             case 55:
                 {
-                alt59=4;
+                alt62=2;
+                }
+                break;
+            case 56:
+                {
+                alt62=3;
+                }
+                break;
+            case 57:
+                {
+                alt62=4;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 59, 0, input);
+                    new NoViableAltException("", 62, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt59) {
+            switch (alt62) {
                 case 1 :
-                    // InternalTmscXtext.g:3086:3: (enumLiteral_0= 'in' )
+                    // InternalTmscXtext.g:3166:3: (enumLiteral_0= 'in' )
                     {
-                    // InternalTmscXtext.g:3086:3: (enumLiteral_0= 'in' )
-                    // InternalTmscXtext.g:3087:4: enumLiteral_0= 'in'
+                    // InternalTmscXtext.g:3166:3: (enumLiteral_0= 'in' )
+                    // InternalTmscXtext.g:3167:4: enumLiteral_0= 'in'
                     {
-                    enumLiteral_0=(Token)match(input,52,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,54,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXFunctionParameterKindAccess().getINEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -8274,12 +8526,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:3094:3: (enumLiteral_1= 'out' )
+                    // InternalTmscXtext.g:3174:3: (enumLiteral_1= 'out' )
                     {
-                    // InternalTmscXtext.g:3094:3: (enumLiteral_1= 'out' )
-                    // InternalTmscXtext.g:3095:4: enumLiteral_1= 'out'
+                    // InternalTmscXtext.g:3174:3: (enumLiteral_1= 'out' )
+                    // InternalTmscXtext.g:3175:4: enumLiteral_1= 'out'
                     {
-                    enumLiteral_1=(Token)match(input,53,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,55,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXFunctionParameterKindAccess().getOUTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -8293,12 +8545,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTmscXtext.g:3102:3: (enumLiteral_2= 'inout' )
+                    // InternalTmscXtext.g:3182:3: (enumLiteral_2= 'inout' )
                     {
-                    // InternalTmscXtext.g:3102:3: (enumLiteral_2= 'inout' )
-                    // InternalTmscXtext.g:3103:4: enumLiteral_2= 'inout'
+                    // InternalTmscXtext.g:3182:3: (enumLiteral_2= 'inout' )
+                    // InternalTmscXtext.g:3183:4: enumLiteral_2= 'inout'
                     {
-                    enumLiteral_2=(Token)match(input,54,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXFunctionParameterKindAccess().getIN_OUTEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -8312,12 +8564,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTmscXtext.g:3110:3: (enumLiteral_3= 'return' )
+                    // InternalTmscXtext.g:3190:3: (enumLiteral_3= 'return' )
                     {
-                    // InternalTmscXtext.g:3110:3: (enumLiteral_3= 'return' )
-                    // InternalTmscXtext.g:3111:4: enumLiteral_3= 'return'
+                    // InternalTmscXtext.g:3190:3: (enumLiteral_3= 'return' )
+                    // InternalTmscXtext.g:3191:4: enumLiteral_3= 'return'
                     {
-                    enumLiteral_3=(Token)match(input,55,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXFunctionParameterKindAccess().getRETURNEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -8355,7 +8607,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXEventType"
-    // InternalTmscXtext.g:3121:1: ruleXEventType returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) ) ;
+    // InternalTmscXtext.g:3201:1: ruleXEventType returns [Enumerator current=null] : ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) ) ;
     public final Enumerator ruleXEventType() throws RecognitionException {
         Enumerator current = null;
 
@@ -8366,34 +8618,34 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:3127:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) ) )
-            // InternalTmscXtext.g:3128:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) )
+            // InternalTmscXtext.g:3207:2: ( ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) ) )
+            // InternalTmscXtext.g:3208:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) )
             {
-            // InternalTmscXtext.g:3128:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) )
-            int alt60=2;
-            int LA60_0 = input.LA(1);
+            // InternalTmscXtext.g:3208:2: ( (enumLiteral_0= '>' ) | (enumLiteral_1= '<' ) )
+            int alt63=2;
+            int LA63_0 = input.LA(1);
 
-            if ( (LA60_0==56) ) {
-                alt60=1;
+            if ( (LA63_0==58) ) {
+                alt63=1;
             }
-            else if ( (LA60_0==57) ) {
-                alt60=2;
+            else if ( (LA63_0==59) ) {
+                alt63=2;
             }
             else {
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 60, 0, input);
+                    new NoViableAltException("", 63, 0, input);
 
                 throw nvae;
             }
-            switch (alt60) {
+            switch (alt63) {
                 case 1 :
-                    // InternalTmscXtext.g:3129:3: (enumLiteral_0= '>' )
+                    // InternalTmscXtext.g:3209:3: (enumLiteral_0= '>' )
                     {
-                    // InternalTmscXtext.g:3129:3: (enumLiteral_0= '>' )
-                    // InternalTmscXtext.g:3130:4: enumLiteral_0= '>'
+                    // InternalTmscXtext.g:3209:3: (enumLiteral_0= '>' )
+                    // InternalTmscXtext.g:3210:4: enumLiteral_0= '>'
                     {
-                    enumLiteral_0=(Token)match(input,56,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,58,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXEventTypeAccess().getENTRYEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -8407,12 +8659,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:3137:3: (enumLiteral_1= '<' )
+                    // InternalTmscXtext.g:3217:3: (enumLiteral_1= '<' )
                     {
-                    // InternalTmscXtext.g:3137:3: (enumLiteral_1= '<' )
-                    // InternalTmscXtext.g:3138:4: enumLiteral_1= '<'
+                    // InternalTmscXtext.g:3217:3: (enumLiteral_1= '<' )
+                    // InternalTmscXtext.g:3218:4: enumLiteral_1= '<'
                     {
-                    enumLiteral_1=(Token)match(input,57,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,59,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXEventTypeAccess().getEXITEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -8450,7 +8702,7 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start "ruleXDependencyType"
-    // InternalTmscXtext.g:3148:1: ruleXDependencyType returns [Enumerator current=null] : ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) ) ;
+    // InternalTmscXtext.g:3228:1: ruleXDependencyType returns [Enumerator current=null] : ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) ) ;
     public final Enumerator ruleXDependencyType() throws RecognitionException {
         Enumerator current = null;
 
@@ -8465,58 +8717,58 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
         	enterRule();
 
         try {
-            // InternalTmscXtext.g:3154:2: ( ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) ) )
-            // InternalTmscXtext.g:3155:2: ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) )
+            // InternalTmscXtext.g:3234:2: ( ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) ) )
+            // InternalTmscXtext.g:3235:2: ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) )
             {
-            // InternalTmscXtext.g:3155:2: ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) )
-            int alt61=6;
+            // InternalTmscXtext.g:3235:2: ( (enumLiteral_0= 'message' ) | (enumLiteral_1= 'request' ) | (enumLiteral_2= 'reply' ) | (enumLiteral_3= 'domain-dependency' ) | (enumLiteral_4= 'lifeline-segment' ) | (enumLiteral_5= 'message-control' ) )
+            int alt64=6;
             switch ( input.LA(1) ) {
-            case 43:
+            case 45:
                 {
-                alt61=1;
+                alt64=1;
                 }
                 break;
-            case 42:
+            case 44:
                 {
-                alt61=2;
-                }
-                break;
-            case 58:
-                {
-                alt61=3;
-                }
-                break;
-            case 59:
-                {
-                alt61=4;
+                alt64=2;
                 }
                 break;
             case 60:
                 {
-                alt61=5;
+                alt64=3;
                 }
                 break;
             case 61:
                 {
-                alt61=6;
+                alt64=4;
+                }
+                break;
+            case 62:
+                {
+                alt64=5;
+                }
+                break;
+            case 63:
+                {
+                alt64=6;
                 }
                 break;
             default:
                 if (state.backtracking>0) {state.failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("", 61, 0, input);
+                    new NoViableAltException("", 64, 0, input);
 
                 throw nvae;
             }
 
-            switch (alt61) {
+            switch (alt64) {
                 case 1 :
-                    // InternalTmscXtext.g:3156:3: (enumLiteral_0= 'message' )
+                    // InternalTmscXtext.g:3236:3: (enumLiteral_0= 'message' )
                     {
-                    // InternalTmscXtext.g:3156:3: (enumLiteral_0= 'message' )
-                    // InternalTmscXtext.g:3157:4: enumLiteral_0= 'message'
+                    // InternalTmscXtext.g:3236:3: (enumLiteral_0= 'message' )
+                    // InternalTmscXtext.g:3237:4: enumLiteral_0= 'message'
                     {
-                    enumLiteral_0=(Token)match(input,43,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_0=(Token)match(input,45,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXDependencyTypeAccess().getMESSAGEEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -8530,12 +8782,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // InternalTmscXtext.g:3164:3: (enumLiteral_1= 'request' )
+                    // InternalTmscXtext.g:3244:3: (enumLiteral_1= 'request' )
                     {
-                    // InternalTmscXtext.g:3164:3: (enumLiteral_1= 'request' )
-                    // InternalTmscXtext.g:3165:4: enumLiteral_1= 'request'
+                    // InternalTmscXtext.g:3244:3: (enumLiteral_1= 'request' )
+                    // InternalTmscXtext.g:3245:4: enumLiteral_1= 'request'
                     {
-                    enumLiteral_1=(Token)match(input,42,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_1=(Token)match(input,44,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXDependencyTypeAccess().getREQUESTEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -8549,12 +8801,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 3 :
-                    // InternalTmscXtext.g:3172:3: (enumLiteral_2= 'reply' )
+                    // InternalTmscXtext.g:3252:3: (enumLiteral_2= 'reply' )
                     {
-                    // InternalTmscXtext.g:3172:3: (enumLiteral_2= 'reply' )
-                    // InternalTmscXtext.g:3173:4: enumLiteral_2= 'reply'
+                    // InternalTmscXtext.g:3252:3: (enumLiteral_2= 'reply' )
+                    // InternalTmscXtext.g:3253:4: enumLiteral_2= 'reply'
                     {
-                    enumLiteral_2=(Token)match(input,58,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_2=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXDependencyTypeAccess().getREPLYEnumLiteralDeclaration_2().getEnumLiteral().getInstance();
@@ -8568,12 +8820,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 4 :
-                    // InternalTmscXtext.g:3180:3: (enumLiteral_3= 'domain-dependency' )
+                    // InternalTmscXtext.g:3260:3: (enumLiteral_3= 'domain-dependency' )
                     {
-                    // InternalTmscXtext.g:3180:3: (enumLiteral_3= 'domain-dependency' )
-                    // InternalTmscXtext.g:3181:4: enumLiteral_3= 'domain-dependency'
+                    // InternalTmscXtext.g:3260:3: (enumLiteral_3= 'domain-dependency' )
+                    // InternalTmscXtext.g:3261:4: enumLiteral_3= 'domain-dependency'
                     {
-                    enumLiteral_3=(Token)match(input,59,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_3=(Token)match(input,61,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXDependencyTypeAccess().getDOMAINEnumLiteralDeclaration_3().getEnumLiteral().getInstance();
@@ -8587,12 +8839,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 5 :
-                    // InternalTmscXtext.g:3188:3: (enumLiteral_4= 'lifeline-segment' )
+                    // InternalTmscXtext.g:3268:3: (enumLiteral_4= 'lifeline-segment' )
                     {
-                    // InternalTmscXtext.g:3188:3: (enumLiteral_4= 'lifeline-segment' )
-                    // InternalTmscXtext.g:3189:4: enumLiteral_4= 'lifeline-segment'
+                    // InternalTmscXtext.g:3268:3: (enumLiteral_4= 'lifeline-segment' )
+                    // InternalTmscXtext.g:3269:4: enumLiteral_4= 'lifeline-segment'
                     {
-                    enumLiteral_4=(Token)match(input,60,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_4=(Token)match(input,62,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXDependencyTypeAccess().getLIFELINE_SEGMENTEnumLiteralDeclaration_4().getEnumLiteral().getInstance();
@@ -8606,12 +8858,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 6 :
-                    // InternalTmscXtext.g:3196:3: (enumLiteral_5= 'message-control' )
+                    // InternalTmscXtext.g:3276:3: (enumLiteral_5= 'message-control' )
                     {
-                    // InternalTmscXtext.g:3196:3: (enumLiteral_5= 'message-control' )
-                    // InternalTmscXtext.g:3197:4: enumLiteral_5= 'message-control'
+                    // InternalTmscXtext.g:3276:3: (enumLiteral_5= 'message-control' )
+                    // InternalTmscXtext.g:3277:4: enumLiteral_5= 'message-control'
                     {
-                    enumLiteral_5=(Token)match(input,61,FOLLOW_2); if (state.failed) return current;
+                    enumLiteral_5=(Token)match(input,63,FOLLOW_2); if (state.failed) return current;
                     if ( state.backtracking==0 ) {
 
                       				current = grammarAccess.getXDependencyTypeAccess().getMESSAGE_CONTROLEnumLiteralDeclaration_5().getEnumLiteral().getInstance();
@@ -8653,12 +8905,12 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
     protected DFA3 dfa3 = new DFA3(this);
     static final String dfa_1s = "\15\uffff";
     static final String dfa_2s = "\1\1\14\uffff";
-    static final String dfa_3s = "\1\4\1\uffff\1\16\4\uffff\1\46\5\uffff";
-    static final String dfa_4s = "\1\75\1\uffff\1\25\4\uffff\1\47\5\uffff";
+    static final String dfa_3s = "\1\4\1\uffff\1\16\4\uffff\1\50\5\uffff";
+    static final String dfa_4s = "\1\77\1\uffff\1\25\4\uffff\1\51\5\uffff";
     static final String dfa_5s = "\1\uffff\1\12\1\uffff\1\3\1\4\1\5\1\6\1\uffff\1\7\1\10\1\11\1\1\1\2";
     static final String dfa_6s = "\15\uffff}>";
     static final String[] dfa_7s = {
-            "\5\12\4\uffff\1\2\12\uffff\1\4\2\uffff\1\5\3\uffff\3\6\3\uffff\1\7\1\10\1\11\2\uffff\2\3\16\uffff\4\3",
+            "\5\12\4\uffff\1\2\14\uffff\1\4\2\uffff\1\5\3\uffff\3\6\3\uffff\1\7\1\10\1\11\2\uffff\2\3\16\uffff\4\3",
             "",
             "\1\13\6\uffff\1\14",
             "",
@@ -8706,40 +8958,42 @@ public class InternalTmscXtextParser extends AbstractInternalAntlrParser {
     public static final BitSet FOLLOW_4 = new BitSet(new long[]{0x0000000000008000L});
     public static final BitSet FOLLOW_5 = new BitSet(new long[]{0x00000000001D0120L});
     public static final BitSet FOLLOW_6 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x000C000000000000L});
+    public static final BitSet FOLLOW_7 = new BitSet(new long[]{0x0030000000000000L});
     public static final BitSet FOLLOW_8 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x0003000000000000L});
-    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0x3C000CE3890021F2L});
+    public static final BitSet FOLLOW_9 = new BitSet(new long[]{0x000C000000000000L});
+    public static final BitSet FOLLOW_10 = new BitSet(new long[]{0xF000338E240021F2L});
     public static final BitSet FOLLOW_11 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000000500000L});
+    public static final BitSet FOLLOW_12 = new BitSet(new long[]{0x0000000001500000L});
     public static final BitSet FOLLOW_13 = new BitSet(new long[]{0x0000000000008002L});
     public static final BitSet FOLLOW_14 = new BitSet(new long[]{0x0000000000900000L});
     public static final BitSet FOLLOW_15 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x00000000000D0120L});
-    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x00000000041D0120L});
-    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000050008002L});
-    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x0000000060008002L});
-    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000020008002L});
-    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000001400008002L});
-    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x00F0000000000000L});
-    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000000820000000L});
-    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x0000001000008002L});
-    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000004000000000L});
-    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x000000A0001D0120L});
-    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000008000000000L});
-    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x3F000CE3890D21F0L});
-    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000030400008002L});
-    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0x0000030000008002L});
-    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x3C000C00000D0120L});
-    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0x00000C00000D0120L});
-    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x00001000001D0120L});
-    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x00032000000D03B0L});
-    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x0000400020000000L});
-    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x0000800000000002L});
+    public static final BitSet FOLLOW_16 = new BitSet(new long[]{0x0000000002100000L});
+    public static final BitSet FOLLOW_17 = new BitSet(new long[]{0x0000000000000290L});
+    public static final BitSet FOLLOW_18 = new BitSet(new long[]{0x00000000000D0120L});
+    public static final BitSet FOLLOW_19 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_20 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_21 = new BitSet(new long[]{0x00000000101D0120L});
+    public static final BitSet FOLLOW_22 = new BitSet(new long[]{0x0000000140008002L});
+    public static final BitSet FOLLOW_23 = new BitSet(new long[]{0x0000000180008002L});
+    public static final BitSet FOLLOW_24 = new BitSet(new long[]{0x0000000080008002L});
+    public static final BitSet FOLLOW_25 = new BitSet(new long[]{0x0000000800000000L});
+    public static final BitSet FOLLOW_26 = new BitSet(new long[]{0x0000005000008002L});
+    public static final BitSet FOLLOW_27 = new BitSet(new long[]{0x03C0000000000000L});
+    public static final BitSet FOLLOW_28 = new BitSet(new long[]{0x0000002080000000L});
+    public static final BitSet FOLLOW_29 = new BitSet(new long[]{0x0000004000008002L});
+    public static final BitSet FOLLOW_30 = new BitSet(new long[]{0x0000001000000002L});
+    public static final BitSet FOLLOW_31 = new BitSet(new long[]{0x0000010000000000L});
+    public static final BitSet FOLLOW_32 = new BitSet(new long[]{0x00000280001D0120L});
+    public static final BitSet FOLLOW_33 = new BitSet(new long[]{0x0000020000000000L});
+    public static final BitSet FOLLOW_34 = new BitSet(new long[]{0xFC00338E240D21F0L});
+    public static final BitSet FOLLOW_35 = new BitSet(new long[]{0x00000C1000008002L});
+    public static final BitSet FOLLOW_36 = new BitSet(new long[]{0x00000C0000008002L});
+    public static final BitSet FOLLOW_37 = new BitSet(new long[]{0xF0003000000D0120L});
+    public static final BitSet FOLLOW_38 = new BitSet(new long[]{0x0000002000000000L});
+    public static final BitSet FOLLOW_39 = new BitSet(new long[]{0x00003000000D0120L});
+    public static final BitSet FOLLOW_40 = new BitSet(new long[]{0x00004000001D0120L});
+    public static final BitSet FOLLOW_41 = new BitSet(new long[]{0x000C8000000D03B0L});
+    public static final BitSet FOLLOW_42 = new BitSet(new long[]{0x0001000080000000L});
+    public static final BitSet FOLLOW_43 = new BitSet(new long[]{0x0002000000000002L});
 
 }

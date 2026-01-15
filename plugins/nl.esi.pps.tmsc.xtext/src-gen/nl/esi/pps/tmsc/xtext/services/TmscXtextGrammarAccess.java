@@ -279,15 +279,23 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	public class XTmscAnalysisElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XTmscAnalysis");
-		private final RuleCall cXTimeBoundAnalysisParserRuleCall = (RuleCall)rule.eContents().get(1);
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cXTimeBoundAnalysisParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXTimeShiftParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
 		//XTmscAnalysis:
-		//    XTimeBoundAnalysis
+		//    XTimeBoundAnalysis | XTimeShift
 		//;
 		@Override public ParserRule getRule() { return rule; }
 		
+		//XTimeBoundAnalysis | XTimeShift
+		public Alternatives getAlternatives() { return cAlternatives; }
+		
 		//XTimeBoundAnalysis
-		public RuleCall getXTimeBoundAnalysisParserRuleCall() { return cXTimeBoundAnalysisParserRuleCall; }
+		public RuleCall getXTimeBoundAnalysisParserRuleCall_0() { return cXTimeBoundAnalysisParserRuleCall_0; }
+		
+		//XTimeShift
+		public RuleCall getXTimeShiftParserRuleCall_1() { return cXTimeShiftParserRuleCall_1; }
 	}
 	public class XTimeBoundAnalysisElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XTimeBoundAnalysis");
@@ -344,6 +352,65 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		
 		//ABS_EBIGDECIMAL
 		public RuleCall getDefaultTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_2_0() { return cDefaultTimeBoundABS_EBIGDECIMALTerminalRuleCall_2_1_2_0; }
+		
+		//'}'
+		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
+	}
+	public class XTimeShiftElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "nl.esi.pps.tmsc.xtext.TmscXtext.XTimeShift");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cXTimeShiftAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cTimeShiftKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Keyword cLeftCurlyBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
+		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
+		private final Keyword cDeltaKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
+		private final Keyword cColonKeyword_2_1_1 = (Keyword)cGroup_2_1.eContents().get(1);
+		private final Assignment cDeltaAssignment_2_1_2 = (Assignment)cGroup_2_1.eContents().get(2);
+		private final RuleCall cDeltaEBIGDECIMALParserRuleCall_2_1_2_0 = (RuleCall)cDeltaAssignment_2_1_2.eContents().get(0);
+		private final Keyword cRightCurlyBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		
+		//XTimeShift: {XTimeShift}
+		//    'time-shift' ('{'
+		//        ('delta' ':' delta=EBIGDECIMAL)?
+		//    '}')?
+		//;
+		@Override public ParserRule getRule() { return rule; }
+		
+		//{XTimeShift}
+		//   'time-shift' ('{'
+		//       ('delta' ':' delta=EBIGDECIMAL)?
+		//   '}')?
+		public Group getGroup() { return cGroup; }
+		
+		//{XTimeShift}
+		public Action getXTimeShiftAction_0() { return cXTimeShiftAction_0; }
+		
+		//'time-shift'
+		public Keyword getTimeShiftKeyword_1() { return cTimeShiftKeyword_1; }
+		
+		//('{'
+		//       ('delta' ':' delta=EBIGDECIMAL)?
+		//   '}')?
+		public Group getGroup_2() { return cGroup_2; }
+		
+		//'{'
+		public Keyword getLeftCurlyBracketKeyword_2_0() { return cLeftCurlyBracketKeyword_2_0; }
+		
+		//('delta' ':' delta=EBIGDECIMAL)?
+		public Group getGroup_2_1() { return cGroup_2_1; }
+		
+		//'delta'
+		public Keyword getDeltaKeyword_2_1_0() { return cDeltaKeyword_2_1_0; }
+		
+		//':'
+		public Keyword getColonKeyword_2_1_1() { return cColonKeyword_2_1_1; }
+		
+		//delta=EBIGDECIMAL
+		public Assignment getDeltaAssignment_2_1_2() { return cDeltaAssignment_2_1_2; }
+		
+		//EBIGDECIMAL
+		public RuleCall getDeltaEBIGDECIMALParserRuleCall_2_1_2_0() { return cDeltaEBIGDECIMALParserRuleCall_2_1_2_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_2_2() { return cRightCurlyBracketKeyword_2_2; }
@@ -2425,6 +2492,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	private final XArchitectureKindElements eXArchitectureKind;
 	private final XTmscAnalysisElements pXTmscAnalysis;
 	private final XTimeBoundAnalysisElements pXTimeBoundAnalysis;
+	private final XTimeShiftElements pXTimeShift;
 	private final XNamedArchitectureElementElements pXNamedArchitectureElement;
 	private final XInterfaceElements pXInterface;
 	private final XOperationElements pXOperation;
@@ -2467,6 +2535,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		this.eXArchitectureKind = new XArchitectureKindElements();
 		this.pXTmscAnalysis = new XTmscAnalysisElements();
 		this.pXTimeBoundAnalysis = new XTimeBoundAnalysisElements();
+		this.pXTimeShift = new XTimeShiftElements();
 		this.pXNamedArchitectureElement = new XNamedArchitectureElementElements();
 		this.pXInterface = new XInterfaceElements();
 		this.pXOperation = new XOperationElements();
@@ -2561,7 +2630,7 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	}
 	
 	//XTmscAnalysis:
-	//    XTimeBoundAnalysis
+	//    XTimeBoundAnalysis | XTimeShift
 	//;
 	public XTmscAnalysisElements getXTmscAnalysisAccess() {
 		return pXTmscAnalysis;
@@ -2582,6 +2651,19 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	
 	public ParserRule getXTimeBoundAnalysisRule() {
 		return getXTimeBoundAnalysisAccess().getRule();
+	}
+	
+	//XTimeShift: {XTimeShift}
+	//    'time-shift' ('{'
+	//        ('delta' ':' delta=EBIGDECIMAL)?
+	//    '}')?
+	//;
+	public XTimeShiftElements getXTimeShiftAccess() {
+		return pXTimeShift;
+	}
+	
+	public ParserRule getXTimeShiftRule() {
+		return getXTimeShiftAccess().getRule();
 	}
 	
 	//XNamedArchitectureElement:

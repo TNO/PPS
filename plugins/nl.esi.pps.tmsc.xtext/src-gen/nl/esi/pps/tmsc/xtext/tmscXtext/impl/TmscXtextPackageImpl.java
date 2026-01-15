@@ -30,6 +30,7 @@ import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyNumberValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyStringValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XPropertyValue;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis;
 
 import org.eclipse.emf.ecore.EAttribute;
@@ -68,6 +69,13 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
    * @generated
    */
   private EClass xTimeBoundAnalysisEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass xTimeShiftEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -466,6 +474,28 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
   public EAttribute getXTimeBoundAnalysis_DefaultTimeBound()
   {
     return (EAttribute)xTimeBoundAnalysisEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EClass getXTimeShift()
+  {
+    return xTimeShiftEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public EAttribute getXTimeShift_Delta()
+  {
+    return (EAttribute)xTimeShiftEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -1387,6 +1417,9 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
     xTimeBoundAnalysisEClass = createEClass(XTIME_BOUND_ANALYSIS);
     createEAttribute(xTimeBoundAnalysisEClass, XTIME_BOUND_ANALYSIS__DEFAULT_TIME_BOUND);
 
+    xTimeShiftEClass = createEClass(XTIME_SHIFT);
+    createEAttribute(xTimeShiftEClass, XTIME_SHIFT__DELTA);
+
     xNamedArchitectureElementEClass = createEClass(XNAMED_ARCHITECTURE_ELEMENT);
     createEAttribute(xNamedArchitectureElementEClass, XNAMED_ARCHITECTURE_ELEMENT__DESCRIPTION);
     createEAttribute(xNamedArchitectureElementEClass, XNAMED_ARCHITECTURE_ELEMENT__NAME);
@@ -1518,6 +1551,7 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
 
     // Add supertypes to classes
     xTimeBoundAnalysisEClass.getESuperTypes().add(this.getXTmscAnalysis());
+    xTimeShiftEClass.getESuperTypes().add(this.getXTmscAnalysis());
     xInterfaceEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xOperationEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
     xComponentEClass.getESuperTypes().add(this.getXNamedArchitectureElement());
@@ -1548,6 +1582,9 @@ public class TmscXtextPackageImpl extends EPackageImpl implements TmscXtextPacka
 
     initEClass(xTimeBoundAnalysisEClass, XTimeBoundAnalysis.class, "XTimeBoundAnalysis", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getXTimeBoundAnalysis_DefaultTimeBound(), ecorePackage.getEBigDecimal(), "defaultTimeBound", null, 0, 1, XTimeBoundAnalysis.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(xTimeShiftEClass, XTimeShift.class, "XTimeShift", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getXTimeShift_Delta(), ecorePackage.getEBigDecimal(), "delta", null, 0, 1, XTimeShift.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(xNamedArchitectureElementEClass, XNamedArchitectureElement.class, "XNamedArchitectureElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getXNamedArchitectureElement_Description(), ecorePackage.getEString(), "description", null, 0, 1, XNamedArchitectureElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

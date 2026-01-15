@@ -41,6 +41,8 @@ import org.eclipse.xtext.generator.AbstractGenerator
 import org.eclipse.xtext.generator.IFileSystemAccess2
 import org.eclipse.xtext.generator.IGeneratorContext
 import org.eclipse.xtext.nodemodel.ICompositeNode
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift
+import nl.esi.pps.tmsc.util.TmscQueries
 
 /**
  * Generates code from your model files on save.
@@ -94,8 +96,12 @@ class TmscXtextGenerator extends AbstractGenerator {
         for (analysis : xtextTmsc.analyses) {
             switch (analysis) {
                 XTimeBoundAnalysis: {
-                    val defaultTimeBound = TmscXtextToTmscTransformation.toNanos(analysis.getDefaultTimeBound())
+                    val defaultTimeBound = TmscXtextToTmscTransformation.toNanos(analysis.defaultTimeBound)
                     new DefaultTimeBoundAnalysis(defaultTimeBound ?: 0L).analyzeTimeBounds(tmsc)
+                }
+                XTimeShift: {
+                    val delta = TmscXtextToTmscTransformation.toNanos(analysis.delta)
+                    TmscQueries.shiftTime(tmsc, delta ?: 0L)
                 }
             }
         }

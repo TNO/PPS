@@ -24,11 +24,13 @@ import nl.esi.pps.tmsc.metric.MetricModel;
 import nl.esi.pps.tmsc.metric.MetricPlugin;
 import nl.esi.pps.tmsc.metric.extension.MetricProcessor;
 import nl.esi.pps.tmsc.provider.TmscEditPlugin;
+import nl.esi.pps.tmsc.util.TmscQueries;
 import nl.esi.pps.tmsc.xtext.services.TmscXtextGrammarAccess;
 import nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XArchitectureKind;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XEvent;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeBoundAnalysis;
+import nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift;
 import nl.esi.pps.tmsc.xtext.tmscXtext.XTmscAnalysis;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -145,6 +147,19 @@ public class TmscXtextGenerator extends AbstractGenerator {
           _elvis = Long.valueOf(0L);
         }
         new DefaultTimeBoundAnalysis((long) _elvis).analyzeTimeBounds(tmsc);
+      }
+      if (!_matched) {
+        if (analysis instanceof XTimeShift) {
+          _matched=true;
+          final Long delta = TmscXtextToTmscTransformation.toNanos(((XTimeShift)analysis).getDelta());
+          Long _elvis = null;
+          if (delta != null) {
+            _elvis = delta;
+          } else {
+            _elvis = Long.valueOf(0L);
+          }
+          TmscQueries.shiftTime(tmsc, (_elvis).longValue());
+        }
       }
     }
     try {

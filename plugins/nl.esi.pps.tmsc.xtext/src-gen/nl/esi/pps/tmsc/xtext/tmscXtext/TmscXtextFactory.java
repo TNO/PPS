@@ -51,6 +51,15 @@ public interface TmscXtextFactory extends EFactory
   XTimeBoundAnalysis createXTimeBoundAnalysis();
 
   /**
+   * Returns a new object of class '<em>XTime Shift</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>XTime Shift</em>'.
+   * @generated
+   */
+  XTimeShift createXTimeShift();
+
+  /**
    * Returns a new object of class '<em>XNamed Architecture Element</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

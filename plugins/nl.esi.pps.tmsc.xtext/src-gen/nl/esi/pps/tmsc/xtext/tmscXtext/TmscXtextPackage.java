@@ -233,6 +233,34 @@ public interface TmscXtextPackage extends EPackage
   int XTIME_BOUND_ANALYSIS_FEATURE_COUNT = XTMSC_ANALYSIS_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XTimeShiftImpl <em>XTime Shift</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.XTimeShiftImpl
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXTimeShift()
+   * @generated
+   */
+  int XTIME_SHIFT = 3;
+
+  /**
+   * The feature id for the '<em><b>Delta</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XTIME_SHIFT__DELTA = XTMSC_ANALYSIS_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>XTime Shift</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int XTIME_SHIFT_FEATURE_COUNT = XTMSC_ANALYSIS_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XNamedArchitectureElementImpl <em>XNamed Architecture Element</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -240,7 +268,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXNamedArchitectureElement()
    * @generated
    */
-  int XNAMED_ARCHITECTURE_ELEMENT = 3;
+  int XNAMED_ARCHITECTURE_ELEMENT = 4;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -286,7 +314,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXInterface()
    * @generated
    */
-  int XINTERFACE = 4;
+  int XINTERFACE = 5;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -341,7 +369,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXOperation()
    * @generated
    */
-  int XOPERATION = 5;
+  int XOPERATION = 6;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -387,7 +415,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXComponent()
    * @generated
    */
-  int XCOMPONENT = 6;
+  int XCOMPONENT = 7;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -469,7 +497,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXFunction()
    * @generated
    */
-  int XFUNCTION = 7;
+  int XFUNCTION = 8;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -569,7 +597,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXFunctionParameter()
    * @generated
    */
-  int XFUNCTION_PARAMETER = 8;
+  int XFUNCTION_PARAMETER = 9;
 
   /**
    * The feature id for the '<em><b>Kind</b></em>' attribute.
@@ -615,7 +643,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXHost()
    * @generated
    */
-  int XHOST = 9;
+  int XHOST = 10;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -697,7 +725,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXExecutor()
    * @generated
    */
-  int XEXECUTOR = 10;
+  int XEXECUTOR = 11;
 
   /**
    * The feature id for the '<em><b>Description</b></em>' attribute.
@@ -770,7 +798,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXEvent()
    * @generated
    */
-  int XEVENT = 11;
+  int XEVENT = 12;
 
   /**
    * The feature id for the '<em><b>Timestamp</b></em>' attribute.
@@ -888,7 +916,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXEventArgument()
    * @generated
    */
-  int XEVENT_ARGUMENT = 12;
+  int XEVENT_ARGUMENT = 13;
 
   /**
    * The feature id for the '<em><b>Parameter</b></em>' reference.
@@ -925,7 +953,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependency()
    * @generated
    */
-  int XDEPENDENCY = 13;
+  int XDEPENDENCY = 14;
 
   /**
    * The feature id for the '<em><b>Type Object</b></em>' containment reference.
@@ -1007,7 +1035,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependencyTypeObject()
    * @generated
    */
-  int XDEPENDENCY_TYPE_OBJECT = 14;
+  int XDEPENDENCY_TYPE_OBJECT = 15;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1035,7 +1063,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependencySettings()
    * @generated
    */
-  int XDEPENDENCY_SETTINGS = 15;
+  int XDEPENDENCY_SETTINGS = 16;
 
   /**
    * The feature id for the '<em><b>Type</b></em>' attribute.
@@ -1099,7 +1127,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXProperty()
    * @generated
    */
-  int XPROPERTY = 16;
+  int XPROPERTY = 17;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1136,7 +1164,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyValue()
    * @generated
    */
-  int XPROPERTY_VALUE = 17;
+  int XPROPERTY_VALUE = 18;
 
   /**
    * The number of structural features of the '<em>XProperty Value</em>' class.
@@ -1155,7 +1183,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyStringValue()
    * @generated
    */
-  int XPROPERTY_STRING_VALUE = 18;
+  int XPROPERTY_STRING_VALUE = 19;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1183,7 +1211,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyNumberValue()
    * @generated
    */
-  int XPROPERTY_NUMBER_VALUE = 19;
+  int XPROPERTY_NUMBER_VALUE = 20;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1211,7 +1239,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyBooleanValue()
    * @generated
    */
-  int XPROPERTY_BOOLEAN_VALUE = 20;
+  int XPROPERTY_BOOLEAN_VALUE = 21;
 
   /**
    * The feature id for the '<em><b>Value</b></em>' attribute.
@@ -1239,7 +1267,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXPropertyMutliValue()
    * @generated
    */
-  int XPROPERTY_MUTLI_VALUE = 21;
+  int XPROPERTY_MUTLI_VALUE = 22;
 
   /**
    * The feature id for the '<em><b>Values</b></em>' containment reference list.
@@ -1267,7 +1295,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXArchitectureKind()
    * @generated
    */
-  int XARCHITECTURE_KIND = 22;
+  int XARCHITECTURE_KIND = 23;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XFunctionParameterKind <em>XFunction Parameter Kind</em>}' enum.
@@ -1277,7 +1305,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXFunctionParameterKind()
    * @generated
    */
-  int XFUNCTION_PARAMETER_KIND = 23;
+  int XFUNCTION_PARAMETER_KIND = 24;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XEventType <em>XEvent Type</em>}' enum.
@@ -1287,7 +1315,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXEventType()
    * @generated
    */
-  int XEVENT_TYPE = 24;
+  int XEVENT_TYPE = 25;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XDependencyType <em>XDependency Type</em>}' enum.
@@ -1297,7 +1325,7 @@ public interface TmscXtextPackage extends EPackage
    * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXDependencyType()
    * @generated
    */
-  int XDEPENDENCY_TYPE = 25;
+  int XDEPENDENCY_TYPE = 26;
 
 
   /**
@@ -1472,6 +1500,27 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    */
   EAttribute getXTimeBoundAnalysis_DefaultTimeBound();
+
+  /**
+   * Returns the meta object for class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift <em>XTime Shift</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>XTime Shift</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift
+   * @generated
+   */
+  EClass getXTimeShift();
+
+  /**
+   * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift#getDelta <em>Delta</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Delta</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.XTimeShift#getDelta()
+   * @see #getXTimeShift()
+   * @generated
+   */
+  EAttribute getXTimeShift_Delta();
 
   /**
    * Returns the meta object for class '{@link nl.esi.pps.tmsc.xtext.tmscXtext.XNamedArchitectureElement <em>XNamed Architecture Element</em>}'.
@@ -2475,6 +2524,24 @@ public interface TmscXtextPackage extends EPackage
      * @generated
      */
     EAttribute XTIME_BOUND_ANALYSIS__DEFAULT_TIME_BOUND = eINSTANCE.getXTimeBoundAnalysis_DefaultTimeBound();
+
+    /**
+     * The meta object literal for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XTimeShiftImpl <em>XTime Shift</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.XTimeShiftImpl
+     * @see nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextPackageImpl#getXTimeShift()
+     * @generated
+     */
+    EClass XTIME_SHIFT = eINSTANCE.getXTimeShift();
+
+    /**
+     * The meta object literal for the '<em><b>Delta</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute XTIME_SHIFT__DELTA = eINSTANCE.getXTimeShift_Delta();
 
     /**
      * The meta object literal for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XNamedArchitectureElementImpl <em>XNamed Architecture Element</em>}' class.
