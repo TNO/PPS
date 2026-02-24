@@ -54,8 +54,8 @@ public interface IRenderingStrategy extends IViewerFilter {
 	default boolean select(Viewer viewer, Object parentElement, Object element) {
 		if (element instanceof LifelineSegment) {
 			return false;
-		} else if (element instanceof Dependency) {
-			return !((Dependency) element).isProjection();
+		} else if (element instanceof Dependency dependency) {
+			return !dependency.isProjection();
 		} else {
 			return true;
 		}
@@ -63,7 +63,7 @@ public interface IRenderingStrategy extends IViewerFilter {
 	
 	void preRendering(XYEdgeSeriesCollection dependenciesDataset, DependenciesRenderer dependenciesRenderer,
 			XYIntervalSeriesCollection executionsDataset, ExecutionsRenderer executionsRenderer);
-
+	
 	void configureLifelineSection(Lifeline lifeline, Section section);
 
 	void add(ExecutionDataItem executionDataItem, XYIntervalSeriesCollection executionsDataset,

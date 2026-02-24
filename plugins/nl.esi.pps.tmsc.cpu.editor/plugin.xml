@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="nl.esi.pps.tmsc.editor.rendering_strategy">
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.cpu.editor.plot.CpuInfoRenderingStrategy"
+            description="Shows CPU info"
+            icon="icons/cpu.png"
+            id="nl.esi.pps.tmsc.cpu.editor.rendering_strategy"
+            name="CPU Info">
+      </rendering_strategy>
+   </extension>
+
+</plugin>

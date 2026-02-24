@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TMSC CPU Editor
+Bundle-SymbolicName: nl.esi.pps.tmsc.cpu.editor;singleton:=true
+Bundle-Vendor: ESI (TNO)
+Bundle-Version: 0.30.0.qualifier
+Require-Bundle: nl.esi.pps.tmsc.cpu,
+ nl.esi.pps.tmsc.editor,
+ nl.esi.pps,
+ org.eclipse.lsat.common.queries
+Automatic-Module-Name: nl.esi.pps.tmsc.cpu.editor
+Bundle-RequiredExecutionEnvironment: JavaSE-21

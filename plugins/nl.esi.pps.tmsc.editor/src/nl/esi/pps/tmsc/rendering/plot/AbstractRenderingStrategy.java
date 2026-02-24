@@ -75,6 +75,7 @@ public abstract class AbstractRenderingStrategy implements IRenderingStrategy, I
 	}
 
 	protected void resetRenderer(DependenciesRenderer dependenciesRenderer) {
+		dependenciesRenderer.setDefaultItemLabelsVisible(false);
 		dependenciesRenderer.setComputeItemLabelContrastColor(true);
 
 		dependenciesRenderer.setDefaultSeriesVisibleInLegend(false);
@@ -97,6 +98,7 @@ public abstract class AbstractRenderingStrategy implements IRenderingStrategy, I
 	}
 
 	protected void resetRenderer(ExecutionsRenderer executionsRenderer) {
+		executionsRenderer.setDefaultItemLabelsVisible(true);
 		executionsRenderer.setComputeItemLabelContrastColor(true);
 
 		executionsRenderer.setDefaultSeriesVisibleInLegend(false);
@@ -108,6 +110,7 @@ public abstract class AbstractRenderingStrategy implements IRenderingStrategy, I
 		executionsRenderer.clearSeriesOutlinePaints(false);
 		executionsRenderer.setDefaultPaintSupplier(RenderingPaint.CONTROL, false);
 
+		executionsRenderer.setDrawBarOutline(true);
 		executionsRenderer.setAutoPopulateSeriesOutlineStroke(false);
 		executionsRenderer.setDefaultOutlineStroke(RenderingStroke.FINE_SOLID.getStroke());
 	}
