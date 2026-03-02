@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?pde version="3.8"?>
-<target name="Generated from TNO - PPS" sequenceNumber="11">
+<target name="Generated from TNO - PPS" sequenceNumber="12">
   <locations>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="bcpg" version="1.78.1"/>
@@ -133,12 +133,12 @@
       <unit id="org.sat4j.pb" version="2.3.6.v20201214"/>
       <unit id="org.tukaani.xz" version="1.10.0"/>
       <unit id="slf4j.api" version="2.0.16"/>
+      <unit id="slf4j.nop" version="2.0.16"/>
       <repository location="https://download.eclipse.org/releases/2024-09/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="io.github.classgraph.classgraph" version="4.8.175"/>
       <unit id="org.apache.commons.math3" version="3.6.1"/>
-      <unit id="slf4j.reload4j" version="2.0.16"/>
       <repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-09/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
@@ -164,7 +164,7 @@
       <repository location="http://download.itemis.com/updates/releases/2.1.1/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="21.0.9.v20251105-0741"/>
+      <unit id="org.eclipse.justj.openjdk.hotspot.jre.full.feature.group" version="21.0.10.v20260205-0638"/>
       <repository location="https://download.eclipse.org/justj/jres/21/updates/release/latest/"/>
     </location>
   </locations>

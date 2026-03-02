@@ -41,6 +41,12 @@
    <feature id="nl.esi.pps.tmsc.reconstruct.feature.source">
       <category name="nl.esi.pps"/>
    </feature>
+   <feature id="nl.esi.pps.tmsc.cpu.ui.feature">
+      <category name="nl.esi.pps"/>
+   </feature>
+   <feature id="nl.esi.pps.tmsc.cpu.ui.feature.source">
+      <category name="nl.esi.pps"/>
+   </feature>
    <bundle id="nl.esi.pps.common.emf.codegen.ecore">
       <category name="nl.esi.pps"/>
    </bundle>
