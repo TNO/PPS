@@ -449,13 +449,13 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 			boolean lifelineRendered = !lifeLineExecutions.isEmpty()
 					|| (lifeline.getExecutions().isEmpty() && !lifeline.getEvents().isEmpty());
 			if (lifelineRendered) {
-				Section lifelineSection = rangeAxis.nextSection(getLabelProvider().getText(lifeline),
-						getLifelineLength(lifeLineExecutions));
+				Section lifelineSection = renderingStrategy.addLifelineSection(rangeAxis, lifeline,
+						getLabelProvider().getText(lifeline), getLifelineLength(lifeLineExecutions));
 				lifelineRanges.put(lifeline, lifelineSection.getRange());
-				renderingStrategy.configureLifelineSection(lifeline, lifelineSection);
 
 				for (Execution execution : lifeLineExecutions) {
-					Range executionRange = getExecutionRange(execution, lifelineSection.getRange());
+					Range executionRange = getCallStackLevelRange(getCallStackLevel(execution),
+							lifelineSection.getRange());
 					Double executionStart = getEventX(execution.getEntry());
 					Double executionEnd = getEventX(execution.getExit());
 					renderingStrategy.add(
@@ -639,18 +639,24 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 		if (event == null) {
 			return null;
 		}
-		Range eventYRange = lifelineRanges.get(event.getLifeline());
-		if (eventYRange != null && event.getExecution() != null) {
-			eventYRange = getExecutionRange(event.getExecution(), eventYRange);
+		Range lifelineRange = lifelineRanges.get(event.getLifeline());
+		if (lifelineRange == null) {
+			return null;
 		}
-		return eventYRange == null ? null : eventYRange.getCentralValue();
+		Execution execution = event.getExecution();
+		if (execution == null) {
+			return lifelineRange.getCentralValue();
+		}
+		int callStackLevel = 
+				Math.max(filter(from(execution).climbTree(true, Execution::getParent).toArray()).length - 1, 0);
+		return getCallStackLevelRange(callStackLevel, lifelineRange).getCentralValue();
 	}
 
 	/**
 	 * The component range will be equal to the stack size of the component + 0.1
 	 * for padding.
 	 * 
-	 * @see #getExecutionRange(Execution, Range)
+	 * @see #getCallStackLevelRange(Execution, Range)
 	 */
 	private double getLifelineLength(Iterable<Execution> componentExecutions) {
 		QueryableIterable<Integer> callStackLevels = from(componentExecutions).xcollectOne(this::getCallStackLevel);
@@ -662,15 +668,18 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 	/**
 	 * @see #getLifelineLength(Iterable)
 	 */
-	private Range getExecutionRange(Execution execution, Range componentRange) {
-		Integer callStackLevel = getCallStackLevel(execution);
-		if (callStackLevel == null) {
-			// Execution is not visible
+	private Range getCallStackLevelRange(Integer callStackLevel, Range componentRange) {
+		if (callStackLevel == null || componentRange == null) {
 			return null;
 		}
 		// Add 0.1 for resource padding
-		double executionLower = componentRange.getLowerBound() + callStackLevel + 0.1;
-		return new Range(executionLower, executionLower + 1);
+		double callStackLower = componentRange.getLowerBound() + callStackLevel + 0.1;
+		Range callStackRange = new Range(callStackLower, callStackLower + 1);
+		if (!componentRange.contains(callStackRange)) {
+			throw new IllegalArgumentException(
+					"Call-stack " + callStackRange + " doesn't fit in component " + componentRange);
+		}
+		return new Range(callStackLower, callStackLower + 1);
 	}
 
 	private Integer getCallStackLevel(Execution execution) {

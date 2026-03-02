@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+    Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
+
+    This program and the accompanying materials are made available
+    under the terms of the MIT License which is available at
+    https://opensource.org/licenses/MIT
+
+    SPDX-License-Identifier: MIT
+
+-->
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="nl.esi.pps.tmsc.editor.rendering_strategy">
+      <rendering_strategy
+            class="nl.esi.pps.tmsc.cpu.editor.plot.CpuInfoRenderingStrategy"
+            description="Shows CPU info"
+            icon="icons/cpu.png"
+            id="nl.esi.pps.tmsc.cpu.editor.rendering_strategy"
+            name="CPU Info">
+      </rendering_strategy>
+   </extension>
+
+</plugin>

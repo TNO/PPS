@@ -12,6 +12,7 @@ package nl.esi.pps.tmsc.rendering.plot;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.trace4cps.common.jfreechart.chart.axis.Section;
+import org.eclipse.trace4cps.common.jfreechart.chart.axis.SectionAxis;
 import org.eclipse.trace4cps.common.jfreechart.data.xy.XYEdgeSeriesCollection;
 import org.jfree.data.xy.XYIntervalSeriesCollection;
 
@@ -54,8 +55,8 @@ public interface IRenderingStrategy extends IViewerFilter {
 	default boolean select(Viewer viewer, Object parentElement, Object element) {
 		if (element instanceof LifelineSegment) {
 			return false;
-		} else if (element instanceof Dependency) {
-			return !((Dependency) element).isProjection();
+		} else if (element instanceof Dependency dependency) {
+			return !dependency.isProjection();
 		} else {
 			return true;
 		}
@@ -63,6 +64,12 @@ public interface IRenderingStrategy extends IViewerFilter {
 	
 	void preRendering(XYEdgeSeriesCollection dependenciesDataset, DependenciesRenderer dependenciesRenderer,
 			XYIntervalSeriesCollection executionsDataset, ExecutionsRenderer executionsRenderer);
+	
+	default Section addLifelineSection(SectionAxis axis, Lifeline lifeline, String label, double length) {
+		final Section lifelineSection = axis.nextSection(label, length);
+		configureLifelineSection(lifeline, lifelineSection);
+		return lifelineSection;
+	}
 
 	void configureLifelineSection(Lifeline lifeline, Section section);
 

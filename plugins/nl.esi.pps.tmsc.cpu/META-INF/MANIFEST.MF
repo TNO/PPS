@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TMSC CPU
+Bundle-SymbolicName: nl.esi.pps.tmsc.cpu
+Bundle-Version: 0.30.0.qualifier
+Export-Package: nl.esi.pps.tmsc.cpu
+Require-Bundle: nl.esi.pps.tmsc;visibility:=reexport,
+ org.eclipse.lsat.common.xtend
+Bundle-Vendor: ESI (TNO)
+Automatic-Module-Name: nl.esi.pps.tmsc.cpu
+Bundle-RequiredExecutionEnvironment: JavaSE-21
