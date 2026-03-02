@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="nl.esi.pps.tmsc.edit.dataAnalysis">
+      <DataAnalysis
+            content_provider="nl.esi.pps.tmsc.cpu.edit.ExecutionDataAnalysisItemContentProvider"
+            eclass_uri="http://www.esi.nl/pps/tmsc#Execution"
+            id="nl.esi.pps.tmsc.cpu.edit.ExecutionDataAnalysisItemContentProvider">
+      </DataAnalysis>
+   </extension>
+
+</plugin>

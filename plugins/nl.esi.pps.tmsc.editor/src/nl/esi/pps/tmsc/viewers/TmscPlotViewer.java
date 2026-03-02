@@ -449,10 +449,9 @@ public class TmscPlotViewer extends LockableChartPanelStructuredViewer implement
 			boolean lifelineRendered = !lifeLineExecutions.isEmpty()
 					|| (lifeline.getExecutions().isEmpty() && !lifeline.getEvents().isEmpty());
 			if (lifelineRendered) {
-				Section lifelineSection = rangeAxis.nextSection(getLabelProvider().getText(lifeline),
-						getLifelineLength(lifeLineExecutions));
+				Section lifelineSection = renderingStrategy.addLifelineSection(rangeAxis, lifeline,
+						getLabelProvider().getText(lifeline), getLifelineLength(lifeLineExecutions));
 				lifelineRanges.put(lifeline, lifelineSection.getRange());
-				renderingStrategy.configureLifelineSection(lifeline, lifelineSection);
 
 				for (Execution execution : lifeLineExecutions) {
 					Range executionRange = getCallStackLevelRange(getCallStackLevel(execution),

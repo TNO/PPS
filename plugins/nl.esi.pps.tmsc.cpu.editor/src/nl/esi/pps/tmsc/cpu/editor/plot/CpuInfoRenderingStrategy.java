@@ -10,6 +10,7 @@ import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.lsat.common.queries.QueryableIterable;
 import org.eclipse.trace4cps.common.jfreechart.chart.axis.Section;
+import org.eclipse.trace4cps.common.jfreechart.chart.axis.SectionAxis;
 import org.eclipse.trace4cps.common.jfreechart.data.xy.XYEdgeSeriesCollection;
 import org.eclipse.trace4cps.common.jfreechart.ui.gantt.XYGanttDataItem;
 import org.jfree.chart.plot.PlotOrientation;
@@ -71,14 +72,15 @@ public class CpuInfoRenderingStrategy extends EnumRenderingStrategy<CpuInfoRende
 		this.lifelineRanges = new HashMap<>();
 		super.preRendering(dependenciesDataset, dependenciesRenderer, executionsDataset, executionsRenderer);
 	}
-
-	@Override
-	public void configureLifelineSection(Lifeline lifeline, Section section) {
-		super.configureLifelineSection(lifeline, section);
-		lifelineRanges.put(lifeline, section.getRange());
-		section.setGridBandNumberRange(new Range(0, 100), true);
-	}
 	
+	@Override
+	public Section addLifelineSection(SectionAxis axis, Lifeline lifeline, String label, double length) {
+		Section section = super.addLifelineSection(axis, lifeline, label, 10);
+		section.setGridBandNumberRange(new Range(0, 100), true);
+		this.lifelineRanges.put(lifeline, section.getRange());
+		return section;
+	}
+
 	@Override
 	public void postRendering(XYEdgeSeriesCollection dependenciesDataset, DependenciesRenderer dependenciesRenderer,
 			XYIntervalSeriesCollection executionsDataset, ExecutionsRenderer executionsRenderer) {
@@ -93,7 +95,7 @@ public class CpuInfoRenderingStrategy extends EnumRenderingStrategy<CpuInfoRende
 	public void add(ExecutionDataItem executionDataItem, XYIntervalSeriesCollection executionsDataset,
 			ExecutionsRenderer executionsRenderer) {
 		// We are not rendering the root executions, but we need them for the life-line to be rendered.
-//		super.add(executionDataItem, executionsDataset, executionsRenderer);
+		// super.add(executionDataItem, executionsDataset, executionsRenderer);
 	}
 	
 	@Override

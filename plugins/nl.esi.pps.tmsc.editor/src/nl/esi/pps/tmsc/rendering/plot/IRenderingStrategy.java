@@ -12,6 +12,7 @@ package nl.esi.pps.tmsc.rendering.plot;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.trace4cps.common.jfreechart.chart.axis.Section;
+import org.eclipse.trace4cps.common.jfreechart.chart.axis.SectionAxis;
 import org.eclipse.trace4cps.common.jfreechart.data.xy.XYEdgeSeriesCollection;
 import org.jfree.data.xy.XYIntervalSeriesCollection;
 
@@ -64,6 +65,12 @@ public interface IRenderingStrategy extends IViewerFilter {
 	void preRendering(XYEdgeSeriesCollection dependenciesDataset, DependenciesRenderer dependenciesRenderer,
 			XYIntervalSeriesCollection executionsDataset, ExecutionsRenderer executionsRenderer);
 	
+	default Section addLifelineSection(SectionAxis axis, Lifeline lifeline, String label, double length) {
+		final Section lifelineSection = axis.nextSection(label, length);
+		configureLifelineSection(lifeline, lifelineSection);
+		return lifelineSection;
+	}
+
 	void configureLifelineSection(Lifeline lifeline, Section section);
 
 	void add(ExecutionDataItem executionDataItem, XYIntervalSeriesCollection executionsDataset,
