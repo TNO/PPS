@@ -313,3 +313,15 @@ function sfx {
 	 */
 	metricActivityCutOff: true
 }
+
+/*
+ * Analyses
+ *
+ * To prototype and test analysis on TMSCs (e.g. time-bound analysis), 
+ * these analyses can now be automatically executed.
+ */
+tmsc analyses {
+    time-shift {
+        delta: 0
+    }
+}

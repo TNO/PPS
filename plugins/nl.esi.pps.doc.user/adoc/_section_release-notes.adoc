@@ -17,6 +17,15 @@ The release notes of the Platform Performance Suite (PPS) are listed below, in r
 
 === pass:normal[PPS v0.30]
 
+The highlights of this release are:
+
+* Support CPU info in TMSC models.
+** CPU info can be stored on `LifelineSegment`, using persisted properties.
+** A rendering strategy is available to view the CPU information.
+** The _Data Analysis View_ shows CPU info for the selected execution.
+* TMSC syntax now supports running analyses automatically.
+* This release also includes bug fixes and improvements.
+
 .Software upgrades
 
 - Eclipse 2020-06 -> Eclipse 2024-09
