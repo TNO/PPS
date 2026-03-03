@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="generator" content="Asciidoctor 2.0.18">
+<meta name="generator" content="Asciidoctor 2.0.23">
 <title>PPS User Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
@@ -140,7 +140,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #content::before{content:none}
 #header>h1:first-child{color:rgba(0,0,0,.85);margin-top:2.25rem;margin-bottom:0}
 #header>h1:first-child+#toc{margin-top:8px;border-top:1px solid #dddddf}
-#header>h1:only-child,body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
+#header>h1:only-child{border-bottom:1px solid #dddddf;padding-bottom:8px}
 #header .details{border-bottom:1px solid #dddddf;line-height:1.45;padding-top:.25em;padding-bottom:.25em;padding-left:.25em;color:rgba(0,0,0,.6);display:flex;flex-flow:row wrap}
 #header .details span:first-child{margin-left:-.125em}
 #header .details span.email a{color:rgba(0,0,0,.85)}
@@ -162,6 +162,7 @@ p a>code:hover{color:rgba(0,0,0,.9)}
 #toctitle{color:#7a2518;font-size:1.2em}
 @media screen and (min-width:768px){#toctitle{font-size:1.375em}
 body.toc2{padding-left:15em;padding-right:0}
+body.toc2 #header>h1:nth-last-child(2){border-bottom:1px solid #dddddf;padding-bottom:8px}
 #toc.toc2{margin-top:0!important;background:#f8f8f7;position:fixed;width:15em;left:0;top:0;border-right:1px solid #e7e7e9;border-top-width:0!important;border-bottom-width:0!important;z-index:1000;padding:1.25em 1em;height:100%;overflow:auto}
 #toc.toc2 #toctitle{margin-top:0;margin-bottom:.8rem;font-size:1.2em}
 #toc.toc2>ul{font-size:.9em;margin-bottom:0}
@@ -208,13 +209,10 @@ table.tableblock.fit-content>caption.title{white-space:nowrap;width:0}
 .admonitionblock>table td.content{padding-left:1.125em;padding-right:1.25em;border-left:1px solid #dddddf;color:rgba(0,0,0,.6);word-wrap:anywhere}
 .admonitionblock>table td.content>:last-child>:last-child{margin-bottom:0}
 .exampleblock>.content{border:1px solid #e6e6e6;margin-bottom:1.25em;padding:1.25em;background:#fff;border-radius:4px}
-.exampleblock>.content>:first-child{margin-top:0}
-.exampleblock>.content>:last-child{margin-bottom:0}
 .sidebarblock{border:1px solid #dbdbd6;margin-bottom:1.25em;padding:1.25em;background:#f3f3f2;border-radius:4px}
-.sidebarblock>:first-child{margin-top:0}
-.sidebarblock>:last-child{margin-bottom:0}
 .sidebarblock>.content>.title{color:#7a2518;margin-top:0;text-align:center}
-.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
+.exampleblock>.content>:first-child,.sidebarblock>.content>:first-child{margin-top:0}
+.exampleblock>.content>:last-child,.exampleblock>.content>:last-child>:last-child,.exampleblock>.content .olist>ol>li:last-child>:last-child,.exampleblock>.content .ulist>ul>li:last-child>:last-child,.exampleblock>.content .qlist>ol>li:last-child>:last-child,.sidebarblock>.content>:last-child,.sidebarblock>.content>:last-child>:last-child,.sidebarblock>.content .olist>ol>li:last-child>:last-child,.sidebarblock>.content .ulist>ul>li:last-child>:last-child,.sidebarblock>.content .qlist>ol>li:last-child>:last-child{margin-bottom:0}
 .literalblock pre,.listingblock>.content>pre{border-radius:4px;overflow-x:auto;padding:1em;font-size:.8125em}
 @media screen and (min-width:768px){.literalblock pre,.listingblock>.content>pre{font-size:.90625em}}
 @media screen and (min-width:1280px){.literalblock pre,.listingblock>.content>pre{font-size:1em}}
@@ -330,7 +328,7 @@ a.image{text-decoration:none;display:inline-block}
 a.image object{pointer-events:none}
 sup.footnote,sup.footnoteref{font-size:.875em;position:static;vertical-align:super}
 sup.footnote a,sup.footnoteref a{text-decoration:none}
-sup.footnote a:active,sup.footnoteref a:active{text-decoration:underline}
+sup.footnote a:active,sup.footnoteref a:active,#footnotes .footnote a:first-of-type:active{text-decoration:underline}
 #footnotes{padding-top:.75em;padding-bottom:.75em;margin-bottom:.625em}
 #footnotes hr{width:20%;min-width:6.25em;margin:-.25em 0 .75em;border-width:1px 0 0}
 #footnotes .footnote{padding:0 .375em 0 .225em;line-height:1.3334;font-size:.875em;margin-left:1.2em;margin-bottom:.2em}
@@ -393,7 +391,7 @@ b.conum *{color:inherit!important}
 dt,th.tableblock,td.content,div.footnote{text-rendering:optimizeLegibility}
 h1,h2,p,td.content,span.alt,summary{letter-spacing:-.01em}
 p strong,td.content strong,div.footnote strong{letter-spacing:-.005em}
-p,blockquote,dt,td.content,span.alt,summary{font-size:1.0625rem}
+p,blockquote,dt,td.content,td.hdlist1,span.alt,summary{font-size:1.0625rem}
 p{margin-bottom:1.25rem}
 .sidebarblock p,.sidebarblock dt,.sidebarblock td.content,p.tableblock{font-size:1em}
 .exampleblock>.content{background:#fffef7;border-color:#e0e0dc;box-shadow:0 1px 4px #e0e0dc}
@@ -438,7 +436,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <!--
 
-    Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+    Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
 
     This program and the accompanying materials are made available
     under the terms of the MIT License which is available at
@@ -477,7 +475,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <div id="header">
 <h1>PPS User Guide</h1>
 <div class="details">
-<span id="revnumber">version v0.20.0</span>
+<span id="revnumber">version v0.30.0</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -535,10 +533,11 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </li>
 <li><a href="#release-notes">5. Release Notes</a>
 <ul class="sectlevel2">
-<li><a href="#pps-v0-20">5.1. PPS v0.20</a></li>
-<li><a href="#pps-v0-0-3">5.2. PPS v0.0.3</a></li>
-<li><a href="#pps-v0-0-2">5.3. PPS v0.0.2</a></li>
-<li><a href="#pps-v0-0-1">5.4. PPS v0.0.1</a></li>
+<li><a href="#pps-v0-30">5.1. PPS v0.30</a></li>
+<li><a href="#pps-v0-20">5.2. PPS v0.20</a></li>
+<li><a href="#pps-v0-0-3">5.3. PPS v0.0.3</a></li>
+<li><a href="#pps-v0-0-2">5.4. PPS v0.0.2</a></li>
+<li><a href="#pps-v0-0-1">5.5. PPS v0.0.1</a></li>
 </ul>
 </li>
 </ul>
@@ -573,7 +572,7 @@ The TMSC-models, as well as the results of the analysis, are presented to the us
 <div class="sectionbody">
 <div class="paragraph">
 <p>PPS is an Integrated Development Environment (IDE) based on <a href="http://eclipse.org" target="_blank" rel="noopener">Eclipse</a>.
-For common information about the Eclipse Workbench, please read the <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/gettingStarted/qs-01.htm">Eclipse user guide</a>.
+For common information about the Eclipse Workbench, please read the <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/gettingStarted/qs-01.htm">Eclipse user guide</a>.
 The figure below shows <a href="#fig-workbench">a screenshot of the PPS IDE</a> with the most important editors and views for PPS.
 The remainder of this section explain these views.</p>
 </div>
@@ -588,7 +587,7 @@ The remainder of this section explain these views.</p>
 <dt class="hdlist1">Project Explorer view</dt>
 <dd>
 <p>Within Eclipse, the files to work with are part of a project.
-The available projects are shown in the <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/reference/ref-27.htm">Project Explorer view</a>.
+The available projects are shown in the <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/reference/ref-27.htm">Project Explorer view</a>.
 Each project is simply a directory on the hard disk, and can be expanded to show the files and directories it contains.
 By double clicking a file, it is opened in the <a href="#wb-editor-area">editor area</a> by the default editor that is associated with that file.<br>
 The files in the Project Explorer view support contextual actions by means of the <a href="#wb-context-menu">Context menu</a>.
@@ -636,7 +635,7 @@ Opening a textual editor and graphical viewer side-by-side is useful as the chan
 <dt class="hdlist1">Bookmarks view</dt>
 <dd>
 <p>Bookmarks are a simple way to navigate to resources that are used frequently.
-The <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/gettingStarted/qs-37-3b.htm">Bookmarks view</a> displays all bookmarks in the Workbench.</p>
+The <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/gettingStarted/qs-37-3b.htm">Bookmarks view</a> displays all bookmarks in the Workbench.</p>
 </dd>
 </dl>
 </div>
@@ -644,7 +643,7 @@ The <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.use
 <dl>
 <dt class="hdlist1">Outline view</dt>
 <dd>
-<p>The <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline view</a> displays an outline of a structured file that is currently open in the <a href="#wb-editor-area">editor area</a>, and lists structural elements.
+<p>The <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/concepts/coutline.htm">Outline view</a> displays an outline of a structured file that is currently open in the <a href="#wb-editor-area">editor area</a>, and lists structural elements.
 The contents of the Outline view are editor specific and therefore explained in more detail in the section of its editor.</p>
 </dd>
 </dl>
@@ -653,7 +652,7 @@ The contents of the Outline view are editor specific and therefore explained in 
 <dl>
 <dt class="hdlist1">Properties view</dt>
 <dd>
-<p>The <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/concepts/cpropview.htm">Properties view</a> displays property names and values for a selected item such as a <code>Message</code> in <a href="#fig-workbench">a screenshot of the PPS IDE</a>.
+<p>The <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/concepts/cpropview.htm">Properties view</a> displays property names and values for a selected item such as a <code>Message</code> in <a href="#fig-workbench">a screenshot of the PPS IDE</a>.
 The contents of the Properties view are editor specific and therefore explained in more detail in the section of its editor.<br></p>
 <div class="admonitionblock note">
 <table>
@@ -662,7 +661,7 @@ The contents of the Properties view are editor specific and therefore explained 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-By default the Properties view is stacked behind the <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/concepts/ctskview.htm">Tasks view</a>.
+By default the Properties view is stacked behind the <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/concepts/ctskview.htm">Tasks view</a>.
 </td>
 </tr>
 </table>
@@ -674,7 +673,7 @@ By default the Properties view is stacked behind the <a href="https://help.eclip
 <dl>
 <dt class="hdlist1">Problems view</dt>
 <dd>
-<p>As you work with resources in the workbench, various builders may automatically log problems, errors, or warnings in the <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/concepts/cprbview.htm">Problems view</a>.
+<p>As you work with resources in the workbench, various builders may automatically log problems, errors, or warnings in the <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/concepts/cprbview.htm">Problems view</a>.
 For example, when you save a <a href="#tmsct-editor">textual TMSC</a> file that contains syntax errors, those will be logged in the Problems view.
 When you double-click the icon for a problem, error, or warning, the editor for the associated resource automatically opens to the relevant place.<br></p>
 <div class="admonitionblock note">
@@ -684,7 +683,7 @@ When you double-click the icon for a problem, error, or warning, the editor for 
 <i class="fa icon-note" title="Note"></i>
 </td>
 <td class="content">
-By default the Problems view is stacked behind the <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/concepts/ctskview.htm">Tasks view</a>.
+By default the Problems view is stacked behind the <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/concepts/ctskview.htm">Tasks view</a>.
 </td>
 </tr>
 </table>
@@ -742,7 +741,7 @@ The context menu shows all available actions for both the view and its selection
 <div class="sect2">
 <h3 id="pps-preferences"><a class="anchor" href="#pps-preferences"></a>1.1. Preferences</h3>
 <div class="paragraph">
-<p>Use the command <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/reference/ref-72.htm">Preferences</a> dialog pages to set how you want Eclipse to operate.
+<p>Use the command <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/reference/ref-72.htm">Preferences</a> dialog pages to set how you want Eclipse to operate.
 The menu path is <span class="menuseq"><b class="menu">Window</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Preferences</b></span> on Windows and Linux - on macOS the Preferences can be found in the <b class="menuref">App</b> menu.
 The filter input at the left top can be used to easily navigate to the PPS settings.</p>
 </div>
@@ -1314,7 +1313,7 @@ Once selected, details can be seen in the <em>Properties</em> view and in the <a
 <p>Synchronize the current visible time window with all other supported editors, see Section <a href="#synchronized-timing">Synchronize Timing</a>.</p>
 </li>
 <li>
-<p>Place a <a href="https://help.eclipse.org/2021-12/topic/org.eclipse.platform.doc.user/concepts/cbookmrk.htm">bookmark</a> at a specific area within a file.</p>
+<p>Place a <a href="https://help.eclipse.org/2024-09/topic/org.eclipse.platform.doc.user/concepts/cbookmrk.htm">bookmark</a> at a specific area within a file.</p>
 </li>
 <li>
 <p>Saving a snapshot of the chart, see Section <a href="#chart-export-png">Export chart to PNG file</a>.</p>
@@ -2271,7 +2270,56 @@ The editor will threat this input as it context and show the most relevant infor
 <p>The release notes of the Platform Performance Suite (PPS) are listed below, in reverse chronological order.</p>
 </div>
 <div class="sect2">
-<h3 id="pps-v0-20"><a class="anchor" href="#pps-v0-20"></a>5.1. PPS v0.20</h3>
+<h3 id="pps-v0-30"><a class="anchor" href="#pps-v0-30"></a>5.1. PPS v0.30</h3>
+<div class="paragraph">
+<p>The highlights of this release are:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Support CPU info in TMSC models.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>CPU info can be stored on <code>LifelineSegment</code>, using persisted properties.</p>
+</li>
+<li>
+<p>A rendering strategy is available to view the CPU information.</p>
+</li>
+<li>
+<p>The <em>Data Analysis View</em> shows CPU info for the selected execution.</p>
+</li>
+</ul>
+</div>
+</li>
+<li>
+<p>TMSC syntax now supports running analyses automatically.</p>
+</li>
+<li>
+<p>This release also includes bug fixes and improvements.</p>
+</li>
+</ul>
+</div>
+<div class="ulist">
+<div class="title">Software upgrades</div>
+<ul>
+<li>
+<p>Eclipse 2020-06 &#8594; Eclipse 2024-09</p>
+</li>
+<li>
+<p>Eclipse LSAT v0.3 &#8594; <a href="https://eclipse.dev/lsat/userguide/index.html#release-notes">Eclipse LSAT v0.5</a></p>
+</li>
+<li>
+<p>Eclipse TRACE4CPS v0.2 &#8594; <a href="https://eclipse.dev/trace4cps/#release-notes">Eclipse TRACE4CPS v0.3</a></p>
+</li>
+<li>
+<p>Eclipse JustJ 11 &#8594; <a href="https://download.eclipse.org/justj/jres/21/updates/release/latest">Eclipse JustJ 21</a></p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="pps-v0-20"><a class="anchor" href="#pps-v0-20"></a>5.2. PPS v0.20</h3>
 <div class="paragraph">
 <p>This release prepares PPS to be open sourced.</p>
 </div>
@@ -2303,7 +2351,7 @@ The editor will threat this input as it context and show the most relevant infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="pps-v0-0-3"><a class="anchor" href="#pps-v0-0-3"></a>5.2. PPS v0.0.3</h3>
+<h3 id="pps-v0-0-3"><a class="anchor" href="#pps-v0-0-3"></a>5.3. PPS v0.0.3</h3>
 <div class="paragraph">
 <p>The highlights of this release are:</p>
 </div>
@@ -2325,14 +2373,14 @@ The editor will threat this input as it context and show the most relevant infor
 </div>
 </div>
 <div class="sect2">
-<h3 id="pps-v0-0-2"><a class="anchor" href="#pps-v0-0-2"></a>5.3. PPS v0.0.2</h3>
+<h3 id="pps-v0-0-2"><a class="anchor" href="#pps-v0-0-2"></a>5.4. PPS v0.0.2</h3>
 <div class="paragraph">
 <p>This release of PPS adds the feature of defining, resolving and analyzing metric instances in a TMSC.
 When a metric instance exceeds its budget, a detailed root cause analysis can be performed to diagnose which task(s) caused this.</p>
 </div>
 </div>
 <div class="sect2">
-<h3 id="pps-v0-0-1"><a class="anchor" href="#pps-v0-0-1"></a>5.4. PPS v0.0.1</h3>
+<h3 id="pps-v0-0-1"><a class="anchor" href="#pps-v0-0-1"></a>5.5. PPS v0.0.1</h3>
 <div class="paragraph">
 <p>This first release of PPS includes a <a href="#tmsc-editor">TMSC graphical viewer</a> that is supported by a <a href="#tmsct-editor">textual syntax</a>.</p>
 </div>
@@ -2342,7 +2390,7 @@ When a metric instance exceeds its budget, a detailed root cause analysis can be
 </div>
 <div id="footer">
 <div id="footer-text">
-Version v0.20.0<br>
+Version v0.30.0<br>
 </div>
 </div>
 <script type="text/x-mathjax-config">
