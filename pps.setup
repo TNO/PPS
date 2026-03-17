@@ -599,7 +599,7 @@
     <repository
         url="https://de-jcup.github.io/update-site-eclipse-asciidoctor-editor/update-site/"/>
     <repository
-        url="http://download.itemis.com/updates/releases/2.1.1/"/>
+        url="https://artifacts.itemis.cloud/repository/p2/xtext-updates/releases/2.1.1/"/>
     <repository
         url="https://download.eclipse.org/cbi/updates/tpd/release/latest"/>
     <description>Install the tools needed in the IDE to work with the source code for ${scope.project.label}</description>
@@ -766,7 +766,7 @@
         <repository
             url="https://hallvard.github.io/plantuml/"/>
         <repository
-            url="http://download.itemis.com/updates/releases/2.1.1/"/>
+            url="https://artifacts.itemis.cloud/repository/p2/xtext-updates/releases/2.1.1/"/>
         <repository
             url="https://download.eclipse.org/justj/jres/${eclipse.justj.version}/updates/release/latest/"/>
       </repositoryList>
