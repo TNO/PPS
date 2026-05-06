@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TMSC CPU Edit
 Bundle-SymbolicName: nl.esi.pps.tmsc.cpu.edit;singleton:=true
 Bundle-Version: 0.30.0.qualifier
+Export-Package: nl.esi.pps.tmsc.cpu.edit
 Require-Bundle: nl.esi.pps.tmsc.edit,
  nl.esi.pps.tmsc.cpu
 Bundle-Vendor: ESI (TNO)

@@ -4,6 +4,7 @@ Bundle-Name: TMSC CPU Editor
 Bundle-SymbolicName: nl.esi.pps.tmsc.cpu.editor;singleton:=true
 Bundle-Vendor: ESI (TNO)
 Bundle-Version: 0.30.0.qualifier
+Export-Package: nl.esi.pps.tmsc.cpu.editor.plot
 Require-Bundle: nl.esi.pps.tmsc.cpu,
  nl.esi.pps.tmsc.editor,
  nl.esi.pps,
