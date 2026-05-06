@@ -990,14 +990,49 @@ public final class TmscQueries {
    * lifeline of <code>dependency</code>.
    */
   public static <T extends Dependency> Iterable<T> findAllOfTypeBetweenLifelines(final T dependency) {
-    final Function1<Event, EList<Dependency>> _function = (Event it) -> {
-      return it.getFullScopeOutgoingDependencies();
-    };
-    final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
-      return Boolean.valueOf((Objects.equals(it.eClass(), dependency.eClass()) && Objects.equals(it.getTarget().getLifeline(), dependency.getTarget().getLifeline())));
-    };
-    Iterable<Dependency> _filter = IterableExtensions.<Dependency>filter(IterableExtensions.<Event, Dependency>flatMap(dependency.getSource().getLifeline().getEvents(), _function), _function_1);
-    return ((Iterable<T>) _filter);
+    Iterable<T> _xifexpression = null;
+    Event _source = null;
+    if (dependency!=null) {
+      _source=dependency.getSource();
+    }
+    Lifeline _lifeline = null;
+    if (_source!=null) {
+      _lifeline=_source.getLifeline();
+    }
+    boolean _tripleEquals = (_lifeline == null);
+    if (_tripleEquals) {
+      _xifexpression = Collections.<T>emptyList();
+    } else {
+      final Function1<Event, EList<Dependency>> _function = (Event it) -> {
+        return it.getFullScopeOutgoingDependencies();
+      };
+      final Function1<Dependency, Boolean> _function_1 = (Dependency it) -> {
+        boolean _and = false;
+        EClass _eClass = it.eClass();
+        EClass _eClass_1 = dependency.eClass();
+        boolean _equals = Objects.equals(_eClass, _eClass_1);
+        if (!_equals) {
+          _and = false;
+        } else {
+          Event _target = it.getTarget();
+          Lifeline _lifeline_1 = null;
+          if (_target!=null) {
+            _lifeline_1=_target.getLifeline();
+          }
+          Event _target_1 = dependency.getTarget();
+          Lifeline _lifeline_2 = null;
+          if (_target_1!=null) {
+            _lifeline_2=_target_1.getLifeline();
+          }
+          boolean _equals_1 = Objects.equals(_lifeline_1, _lifeline_2);
+          _and = _equals_1;
+        }
+        return Boolean.valueOf(_and);
+      };
+      Iterable<Dependency> _filter = IterableExtensions.<Dependency>filter(IterableExtensions.<Event, Dependency>flatMap(dependency.getSource().getLifeline().getEvents(), _function), _function_1);
+      _xifexpression = ((Iterable<T>) _filter);
+    }
+    return _xifexpression;
   }
 
   /**

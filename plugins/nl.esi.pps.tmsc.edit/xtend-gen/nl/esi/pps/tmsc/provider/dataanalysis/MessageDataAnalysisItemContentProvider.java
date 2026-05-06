@@ -12,7 +12,6 @@ package nl.esi.pps.tmsc.provider.dataanalysis;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
-import nl.esi.pps.tmsc.Lifeline;
 import nl.esi.pps.tmsc.Message;
 import nl.esi.pps.tmsc.util.TmscQueries;
 import org.eclipse.xtend2.lib.StringConcatenation;
@@ -26,10 +25,7 @@ public class MessageDataAnalysisItemContentProvider implements IDataAnalysisItem
   public Set<String> getConfigurations(final Object object) {
     final Message message = ((Message) object);
     Set<String> _xifexpression = null;
-    Lifeline _lifeline = message.getSource().getLifeline();
-    Lifeline _lifeline_1 = message.getTarget().getLifeline();
-    boolean _notEquals = (!Objects.equals(_lifeline, _lifeline_1));
-    if (_notEquals) {
+    if ((TmscQueries.isFullyTraced(message) && (!Objects.equals(message.getSource().getLifeline(), message.getTarget().getLifeline())))) {
       _xifexpression = Collections.<String>singleton(IDataAnalysisItemContentProvider.DEFAULT_CONFIGURATION);
     }
     return _xifexpression;

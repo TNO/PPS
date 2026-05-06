@@ -22,7 +22,9 @@ class MessageDataAnalysisItemContentProvider implements IDataAnalysisItemContent
     override getConfigurations(Object object) {
         val message = object as Message
         // Disable data analysis for messages on same life-line
-        return if (message.source.lifeline != message.target.lifeline) Collections::singleton(DEFAULT_CONFIGURATION)
+        return if (message.isFullyTraced && message.source.lifeline != message.target.lifeline) {
+            Collections::singleton(DEFAULT_CONFIGURATION)
+        }
     }
     
     override getTitle(Object object, String configuration) {

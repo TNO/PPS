@@ -442,9 +442,11 @@ final class TmscQueries {
      * lifeline of <code>dependency</code>.
      */
     static def <T extends Dependency> Iterable<T> findAllOfTypeBetweenLifelines(T dependency) {
-        return dependency.source.lifeline.events.flatMap[fullScopeOutgoingDependencies].filter [
-            it.eClass == dependency.eClass && it.target.lifeline == dependency.target.lifeline
-        ] as Iterable<T>
+        return dependency?.source?.lifeline === null
+            ? Collections.emptyList
+            : dependency.source.lifeline.events.flatMap[fullScopeOutgoingDependencies].filter [
+                it.eClass == dependency.eClass && it.target?.lifeline == dependency.target?.lifeline
+              ] as Iterable<T>
     }
 
     /**
