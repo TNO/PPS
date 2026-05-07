@@ -95,11 +95,11 @@ public class TimeShiftHandler {
 			Persistor<FullScopeTMSC> tmscPersistor = new PersistorFactory(TmscEditPlugin.createResourceSet())
 					.getPersistor(FullScopeTMSC.class, true);
 
-			FullScopeTMSC tmsc = null;
+			List<FullScopeTMSC> tmscs = null;
 			try {
 				Map<Object, Object> loadOptions = new HashMap<>();
 				loadOptions.put(IProgressMonitor.class, subMonitor.split(45));
-				tmsc = tmscPersistor.loadOne(URIHelper.asURI(inputFile), loadOptions);
+				tmscs = tmscPersistor.loadAll(URIHelper.asURI(inputFile), loadOptions);
 			} catch (IOException e) {
 				result.add(new Status(ERROR, getPluginID(),
 						String.format("Failed to load %s: %s", inputFile, e.getMessage()), e));
@@ -107,13 +107,13 @@ public class TimeShiftHandler {
 
 			subMonitor.split(10);
 			subMonitor.subTask(String.format("Applying time-shift of %d %s", amount, unit.name().toLowerCase()));
-			TmscQueries.shiftTime(tmsc, offset);
+			tmscs.forEach(tmsc -> TmscQueries.shiftTime(tmsc, offset));
 			subMonitor.subTask("");
 
 			try {
 				Map<Object, Object> saveOptions = new HashMap<>();
 				saveOptions.put(IProgressMonitor.class, subMonitor.split(45));
-				tmsc.eResource().save(saveOptions);
+				tmscs.getFirst().eResource().save(saveOptions);
 			} catch (IOException ex) {
 				result.add(new Status(ERROR, getPluginID(), "Failed to save TMSC.", ex));
 			}

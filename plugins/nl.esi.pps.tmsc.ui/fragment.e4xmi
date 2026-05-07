@@ -5,6 +5,9 @@
       <children xsi:type="menu:DirectMenuItem" xmi:id="_Oz4OwBvZEe6Sb8y4EOogQg" elementId="nl.esi.pps.tmsc.ui.directmenuitem.timeshift" label="Time-shift..." iconURI="platform:/plugin/nl.esi.pps.tmsc.ui/icons/timeshift.png" tooltip="Adjusts all times by applying an offset" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.TimeShiftHandler">
         <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_cjcWEBvZEe6Sb8y4EOogQg" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.TimeShiftHandler"/>
       </children>
+      <children xsi:type="menu:DirectMenuItem" xmi:id="_5pWBcEnXEfGASug7uf-yVw" elementId="nl.esi.pps.tmsc.ui.directmenuitem.relativetime" label="Convert to relative time" iconURI="platform:/plugin/nl.esi.pps.tmsc.ui/icons/relativetime.png" tooltip="Adjusts all times to relative times from the start of the TMSC, and saves the result in a new file." contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.RelativeTimeHandler">
+        <visibleWhen xsi:type="ui:ImperativeExpression" xmi:id="_5pWBcUnXEfGASug7uf-yVw" contributionURI="bundleclass://nl.esi.pps.tmsc.ui/nl.esi.pps.tmsc.ui.handlers.RelativeTimeHandler"/>
+      </children>
     </elements>
   </fragments>
 </fragment:ModelFragments>
