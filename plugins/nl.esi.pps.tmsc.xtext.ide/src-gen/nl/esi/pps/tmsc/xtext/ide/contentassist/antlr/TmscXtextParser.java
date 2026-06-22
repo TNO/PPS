@@ -33,6 +33,8 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 		private static void init(ImmutableMap.Builder<AbstractElement, String> builder, TmscXtextGrammarAccess grammarAccess) {
 			builder.put(grammarAccess.getTmscXtextModelAccess().getAlternatives_1(), "rule__TmscXtextModel__Alternatives_1");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getAlternatives_1_0_3(), "rule__TmscXtextModel__Alternatives_1_0_3");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getStartTimeAlternatives_1_0_3_3_2_0(), "rule__TmscXtextModel__StartTimeAlternatives_1_0_3_3_2_0");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getEndTimeAlternatives_1_0_3_4_2_0(), "rule__TmscXtextModel__EndTimeAlternatives_1_0_3_4_2_0");
 			builder.put(grammarAccess.getXTmscAnalysisAccess().getAlternatives(), "rule__XTmscAnalysis__Alternatives");
 			builder.put(grammarAccess.getXNamedArchitectureElementAccess().getAlternatives(), "rule__XNamedArchitectureElement__Alternatives");
 			builder.put(grammarAccess.getXInterfaceAccess().getAlternatives_3_1(), "rule__XInterface__Alternatives_3_1");
@@ -62,6 +64,8 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTmscXtextModelAccess().getGroup_1_0_3_0(), "rule__TmscXtextModel__Group_1_0_3_0__0");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getGroup_1_0_3_1(), "rule__TmscXtextModel__Group_1_0_3_1__0");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getGroup_1_0_3_2(), "rule__TmscXtextModel__Group_1_0_3_2__0");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getGroup_1_0_3_3(), "rule__TmscXtextModel__Group_1_0_3_3__0");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getGroup_1_0_3_4(), "rule__TmscXtextModel__Group_1_0_3_4__0");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getGroup_1_1(), "rule__TmscXtextModel__Group_1_1__0");
 			builder.put(grammarAccess.getXTimeBoundAnalysisAccess().getGroup(), "rule__XTimeBoundAnalysis__Group__0");
 			builder.put(grammarAccess.getXTimeBoundAnalysisAccess().getGroup_2(), "rule__XTimeBoundAnalysis__Group_2__0");
@@ -141,7 +145,9 @@ public class TmscXtextParser extends AbstractContentAssistParser {
 			builder.put(grammarAccess.getTmscXtextModelAccess().getArchitectureKindAssignment_1_0_3_0_2(), "rule__TmscXtextModel__ArchitectureKindAssignment_1_0_3_0_2");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getTimeBoundAssignment_1_0_3_1_2(), "rule__TmscXtextModel__TimeBoundAssignment_1_0_3_1_2");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getScheduledAssignment_1_0_3_2_2(), "rule__TmscXtextModel__ScheduledAssignment_1_0_3_2_2");
-			builder.put(grammarAccess.getTmscXtextModelAccess().getPropertiesAssignment_1_0_3_3(), "rule__TmscXtextModel__PropertiesAssignment_1_0_3_3");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getStartTimeAssignment_1_0_3_3_2(), "rule__TmscXtextModel__StartTimeAssignment_1_0_3_3_2");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getEndTimeAssignment_1_0_3_4_2(), "rule__TmscXtextModel__EndTimeAssignment_1_0_3_4_2");
+			builder.put(grammarAccess.getTmscXtextModelAccess().getPropertiesAssignment_1_0_3_5(), "rule__TmscXtextModel__PropertiesAssignment_1_0_3_5");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getAnalysesAssignment_1_1_3(), "rule__TmscXtextModel__AnalysesAssignment_1_1_3");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getDependencySettingsAssignment_1_2(), "rule__TmscXtextModel__DependencySettingsAssignment_1_2");
 			builder.put(grammarAccess.getTmscXtextModelAccess().getInterfacesAssignment_1_3(), "rule__TmscXtextModel__InterfacesAssignment_1_3");

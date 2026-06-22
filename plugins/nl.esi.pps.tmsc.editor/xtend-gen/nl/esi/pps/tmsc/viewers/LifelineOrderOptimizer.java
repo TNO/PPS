@@ -116,8 +116,16 @@ public class LifelineOrderOptimizer {
       return Iterables.<Message>filter(it.getFullScopeOutgoingDependencies(), Message.class);
     };
     final Function1<Message, Boolean> _function_3 = (Message it) -> {
-      Lifeline _lifeline = it.getSource().getLifeline();
-      Lifeline _lifeline_1 = it.getTarget().getLifeline();
+      Event _source = it.getSource();
+      Lifeline _lifeline = null;
+      if (_source!=null) {
+        _lifeline=_source.getLifeline();
+      }
+      Event _target = it.getTarget();
+      Lifeline _lifeline_1 = null;
+      if (_target!=null) {
+        _lifeline_1=_target.getLifeline();
+      }
       return Boolean.valueOf(Objects.equals(_lifeline, _lifeline_1));
     };
     final Function1<Message, Boolean> _function_4 = (Message it) -> {
@@ -128,8 +136,16 @@ public class LifelineOrderOptimizer {
       return Iterables.<Message>filter(it.getFullScopeIncomingDependencies(), Message.class);
     };
     final Function1<Message, Boolean> _function_6 = (Message it) -> {
-      Lifeline _lifeline = it.getSource().getLifeline();
-      Lifeline _lifeline_1 = it.getTarget().getLifeline();
+      Event _source = it.getSource();
+      Lifeline _lifeline = null;
+      if (_source!=null) {
+        _lifeline=_source.getLifeline();
+      }
+      Event _target = it.getTarget();
+      Lifeline _lifeline_1 = null;
+      if (_target!=null) {
+        _lifeline_1=_target.getLifeline();
+      }
       return Boolean.valueOf(Objects.equals(_lifeline, _lifeline_1));
     };
     final Function1<Message, Boolean> _function_7 = (Message it) -> {

@@ -50,8 +50,22 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		private final Keyword cColonKeyword_1_0_3_2_1 = (Keyword)cGroup_1_0_3_2.eContents().get(1);
 		private final Assignment cScheduledAssignment_1_0_3_2_2 = (Assignment)cGroup_1_0_3_2.eContents().get(2);
 		private final RuleCall cScheduledEBOOLEAN_OBJECTParserRuleCall_1_0_3_2_2_0 = (RuleCall)cScheduledAssignment_1_0_3_2_2.eContents().get(0);
-		private final Assignment cPropertiesAssignment_1_0_3_3 = (Assignment)cAlternatives_1_0_3.eContents().get(3);
-		private final RuleCall cPropertiesXPropertyParserRuleCall_1_0_3_3_0 = (RuleCall)cPropertiesAssignment_1_0_3_3.eContents().get(0);
+		private final Group cGroup_1_0_3_3 = (Group)cAlternatives_1_0_3.eContents().get(3);
+		private final Keyword cStartTimeKeyword_1_0_3_3_0 = (Keyword)cGroup_1_0_3_3.eContents().get(0);
+		private final Keyword cColonKeyword_1_0_3_3_1 = (Keyword)cGroup_1_0_3_3.eContents().get(1);
+		private final Assignment cStartTimeAssignment_1_0_3_3_2 = (Assignment)cGroup_1_0_3_3.eContents().get(2);
+		private final Alternatives cStartTimeAlternatives_1_0_3_3_2_0 = (Alternatives)cStartTimeAssignment_1_0_3_3_2.eContents().get(0);
+		private final RuleCall cStartTimeISO8601TerminalRuleCall_1_0_3_3_2_0_0 = (RuleCall)cStartTimeAlternatives_1_0_3_3_2_0.eContents().get(0);
+		private final RuleCall cStartTimeABS_EBIGDECIMALTerminalRuleCall_1_0_3_3_2_0_1 = (RuleCall)cStartTimeAlternatives_1_0_3_3_2_0.eContents().get(1);
+		private final Group cGroup_1_0_3_4 = (Group)cAlternatives_1_0_3.eContents().get(4);
+		private final Keyword cEndTimeKeyword_1_0_3_4_0 = (Keyword)cGroup_1_0_3_4.eContents().get(0);
+		private final Keyword cColonKeyword_1_0_3_4_1 = (Keyword)cGroup_1_0_3_4.eContents().get(1);
+		private final Assignment cEndTimeAssignment_1_0_3_4_2 = (Assignment)cGroup_1_0_3_4.eContents().get(2);
+		private final Alternatives cEndTimeAlternatives_1_0_3_4_2_0 = (Alternatives)cEndTimeAssignment_1_0_3_4_2.eContents().get(0);
+		private final RuleCall cEndTimeISO8601TerminalRuleCall_1_0_3_4_2_0_0 = (RuleCall)cEndTimeAlternatives_1_0_3_4_2_0.eContents().get(0);
+		private final RuleCall cEndTimeABS_EBIGDECIMALTerminalRuleCall_1_0_3_4_2_0_1 = (RuleCall)cEndTimeAlternatives_1_0_3_4_2_0.eContents().get(1);
+		private final Assignment cPropertiesAssignment_1_0_3_5 = (Assignment)cAlternatives_1_0_3.eContents().get(5);
+		private final RuleCall cPropertiesXPropertyParserRuleCall_1_0_3_5_0 = (RuleCall)cPropertiesAssignment_1_0_3_5.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_0_4 = (Keyword)cGroup_1_0.eContents().get(4);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Keyword cTmscKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
@@ -81,6 +95,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//        ('architecture' ':' architectureKind=XArchitectureKind
 		//        |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 		//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//        |'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+		//        |'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
 		//        |properties+=XProperty)*
 		//    '}')
 		//    |('tmsc' 'analyses' '{'
@@ -100,6 +116,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//    ('architecture' ':' architectureKind=XArchitectureKind
 		//    |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//    |'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+		//    |'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
 		//    |properties+=XProperty)*
 		//'}')
 		//|('tmsc' 'analyses' '{'
@@ -121,6 +139,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//    ('architecture' ':' architectureKind=XArchitectureKind
 		//    |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 		//    |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//    |'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+		//    |'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
 		//    |properties+=XProperty)*
 		//'}')
 		//|('tmsc' 'analyses' '{'
@@ -139,6 +159,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//        ('architecture' ':' architectureKind=XArchitectureKind
 		//        |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 		//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//        |'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+		//        |'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
 		//        |properties+=XProperty)*
 		//    '}')
 		public Group getGroup_1_0() { return cGroup_1_0; }
@@ -155,6 +177,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//('architecture' ':' architectureKind=XArchitectureKind
 		//|'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 		//|'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+		//|'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+		//|'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
 		//|properties+=XProperty)*
 		public Alternatives getAlternatives_1_0_3() { return cAlternatives_1_0_3; }
 		
@@ -203,11 +227,53 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 		//EBOOLEAN_OBJECT
 		public RuleCall getScheduledEBOOLEAN_OBJECTParserRuleCall_1_0_3_2_2_0() { return cScheduledEBOOLEAN_OBJECTParserRuleCall_1_0_3_2_2_0; }
 		
+		//'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+		public Group getGroup_1_0_3_3() { return cGroup_1_0_3_3; }
+		
+		//'start-time'
+		public Keyword getStartTimeKeyword_1_0_3_3_0() { return cStartTimeKeyword_1_0_3_3_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1_0_3_3_1() { return cColonKeyword_1_0_3_3_1; }
+		
+		//startTime=(ISO8601|ABS_EBIGDECIMAL)
+		public Assignment getStartTimeAssignment_1_0_3_3_2() { return cStartTimeAssignment_1_0_3_3_2; }
+		
+		//(ISO8601|ABS_EBIGDECIMAL)
+		public Alternatives getStartTimeAlternatives_1_0_3_3_2_0() { return cStartTimeAlternatives_1_0_3_3_2_0; }
+		
+		//ISO8601
+		public RuleCall getStartTimeISO8601TerminalRuleCall_1_0_3_3_2_0_0() { return cStartTimeISO8601TerminalRuleCall_1_0_3_3_2_0_0; }
+		
+		//ABS_EBIGDECIMAL
+		public RuleCall getStartTimeABS_EBIGDECIMALTerminalRuleCall_1_0_3_3_2_0_1() { return cStartTimeABS_EBIGDECIMALTerminalRuleCall_1_0_3_3_2_0_1; }
+		
+		//'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
+		public Group getGroup_1_0_3_4() { return cGroup_1_0_3_4; }
+		
+		//'end-time'
+		public Keyword getEndTimeKeyword_1_0_3_4_0() { return cEndTimeKeyword_1_0_3_4_0; }
+		
+		//':'
+		public Keyword getColonKeyword_1_0_3_4_1() { return cColonKeyword_1_0_3_4_1; }
+		
+		//endTime=(ISO8601|ABS_EBIGDECIMAL)
+		public Assignment getEndTimeAssignment_1_0_3_4_2() { return cEndTimeAssignment_1_0_3_4_2; }
+		
+		//(ISO8601|ABS_EBIGDECIMAL)
+		public Alternatives getEndTimeAlternatives_1_0_3_4_2_0() { return cEndTimeAlternatives_1_0_3_4_2_0; }
+		
+		//ISO8601
+		public RuleCall getEndTimeISO8601TerminalRuleCall_1_0_3_4_2_0_0() { return cEndTimeISO8601TerminalRuleCall_1_0_3_4_2_0_0; }
+		
+		//ABS_EBIGDECIMAL
+		public RuleCall getEndTimeABS_EBIGDECIMALTerminalRuleCall_1_0_3_4_2_0_1() { return cEndTimeABS_EBIGDECIMALTerminalRuleCall_1_0_3_4_2_0_1; }
+		
 		//properties+=XProperty
-		public Assignment getPropertiesAssignment_1_0_3_3() { return cPropertiesAssignment_1_0_3_3; }
+		public Assignment getPropertiesAssignment_1_0_3_5() { return cPropertiesAssignment_1_0_3_5; }
 		
 		//XProperty
-		public RuleCall getPropertiesXPropertyParserRuleCall_1_0_3_3_0() { return cPropertiesXPropertyParserRuleCall_1_0_3_3_0; }
+		public RuleCall getPropertiesXPropertyParserRuleCall_1_0_3_5_0() { return cPropertiesXPropertyParserRuleCall_1_0_3_5_0; }
 		
 		//'}'
 		public Keyword getRightCurlyBracketKeyword_1_0_4() { return cRightCurlyBracketKeyword_1_0_4; }
@@ -2599,6 +2665,8 @@ public class TmscXtextGrammarAccess extends AbstractElementFinder.AbstractGramma
 	//        ('architecture' ':' architectureKind=XArchitectureKind
 	//        |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	//        |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	//        |'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+	//        |'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
 	//        |properties+=XProperty)*
 	//    '}')
 	//    |('tmsc' 'analyses' '{'

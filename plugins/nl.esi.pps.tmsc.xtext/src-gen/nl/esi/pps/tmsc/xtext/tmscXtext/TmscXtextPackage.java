@@ -96,13 +96,31 @@ public interface TmscXtextPackage extends EPackage
   int TMSC_XTEXT_MODEL__SCHEDULED = 2;
 
   /**
+   * The feature id for the '<em><b>Start Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TMSC_XTEXT_MODEL__START_TIME = 3;
+
+  /**
+   * The feature id for the '<em><b>End Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TMSC_XTEXT_MODEL__END_TIME = 4;
+
+  /**
    * The feature id for the '<em><b>Properties</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__PROPERTIES = 3;
+  int TMSC_XTEXT_MODEL__PROPERTIES = 5;
 
   /**
    * The feature id for the '<em><b>Analyses</b></em>' containment reference list.
@@ -111,7 +129,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__ANALYSES = 4;
+  int TMSC_XTEXT_MODEL__ANALYSES = 6;
 
   /**
    * The feature id for the '<em><b>Dependency Settings</b></em>' containment reference list.
@@ -120,7 +138,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS = 5;
+  int TMSC_XTEXT_MODEL__DEPENDENCY_SETTINGS = 7;
 
   /**
    * The feature id for the '<em><b>Interfaces</b></em>' containment reference list.
@@ -129,7 +147,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__INTERFACES = 6;
+  int TMSC_XTEXT_MODEL__INTERFACES = 8;
 
   /**
    * The feature id for the '<em><b>Components</b></em>' containment reference list.
@@ -138,7 +156,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__COMPONENTS = 7;
+  int TMSC_XTEXT_MODEL__COMPONENTS = 9;
 
   /**
    * The feature id for the '<em><b>Functions</b></em>' containment reference list.
@@ -147,7 +165,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__FUNCTIONS = 8;
+  int TMSC_XTEXT_MODEL__FUNCTIONS = 10;
 
   /**
    * The feature id for the '<em><b>Hosts</b></em>' containment reference list.
@@ -156,7 +174,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__HOSTS = 9;
+  int TMSC_XTEXT_MODEL__HOSTS = 11;
 
   /**
    * The feature id for the '<em><b>Executors</b></em>' containment reference list.
@@ -165,7 +183,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__EXECUTORS = 10;
+  int TMSC_XTEXT_MODEL__EXECUTORS = 12;
 
   /**
    * The feature id for the '<em><b>Events</b></em>' containment reference list.
@@ -174,7 +192,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL__EVENTS = 11;
+  int TMSC_XTEXT_MODEL__EVENTS = 13;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -183,7 +201,7 @@ public interface TmscXtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int TMSC_XTEXT_MODEL_FEATURE_COUNT = 12;
+  int TMSC_XTEXT_MODEL_FEATURE_COUNT = 14;
 
   /**
    * The meta object id for the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.XTmscAnalysisImpl <em>XTmsc Analysis</em>}' class.
@@ -1372,6 +1390,28 @@ public interface TmscXtextPackage extends EPackage
   EAttribute getTmscXtextModel_Scheduled();
 
   /**
+   * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getStartTime <em>Start Time</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Start Time</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getStartTime()
+   * @see #getTmscXtextModel()
+   * @generated
+   */
+  EAttribute getTmscXtextModel_StartTime();
+
+  /**
+   * Returns the meta object for the attribute '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getEndTime <em>End Time</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>End Time</em>'.
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getEndTime()
+   * @see #getTmscXtextModel()
+   * @generated
+   */
+  EAttribute getTmscXtextModel_EndTime();
+
+  /**
    * Returns the meta object for the containment reference list '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getProperties <em>Properties</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2424,6 +2464,22 @@ public interface TmscXtextPackage extends EPackage
      * @generated
      */
     EAttribute TMSC_XTEXT_MODEL__SCHEDULED = eINSTANCE.getTmscXtextModel_Scheduled();
+
+    /**
+     * The meta object literal for the '<em><b>Start Time</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TMSC_XTEXT_MODEL__START_TIME = eINSTANCE.getTmscXtextModel_StartTime();
+
+    /**
+     * The meta object literal for the '<em><b>End Time</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TMSC_XTEXT_MODEL__END_TIME = eINSTANCE.getTmscXtextModel_EndTime();
 
     /**
      * The meta object literal for the '<em><b>Properties</b></em>' containment reference list feature.

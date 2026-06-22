@@ -79,9 +79,9 @@ class LifelineOrderOptimizer {
     static def filterMessages(TimeRange timeRange, Lifeline... lifelines) {
         val events = lifelines.flatMap[events].filter[timeRange.contains(timestamp)].toSet
         val outgoingMessages = events.flatMap[fullScopeOutgoingDependencies.filter(Message)]
-                .reject[source.lifeline == target.lifeline].filter[events.contains(target)]
+                .reject[source?.lifeline == target?.lifeline].filter[events.contains(target)]
         val incomingMessages = events.flatMap[fullScopeIncomingDependencies.filter(Message)]
-                .reject[source.lifeline == target.lifeline].filter[events.contains(source)]
+                .reject[source?.lifeline == target?.lifeline].filter[events.contains(source)]
         return outgoingMessages.union(incomingMessages).toSet
     }
 

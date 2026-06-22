@@ -123,51 +123,131 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     (rule start) ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     architectureKind=XArchitectureKind (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     architectureKind=XArchitectureKind (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     architectureKind=XArchitectureKind (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     architectureKind=XArchitectureKind (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     architectureKind=XArchitectureKind (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     architectureKind=XArchitectureKind (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     architectureKind=XArchitectureKind (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     architectureKind=XArchitectureKind (ambiguity) properties+=XProperty
 	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     components+=XComponent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     dependencySettings+=XDependencySettings ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'end-time' ':' endTime=ISO8601
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'start-time' ':' startTime=ISO8601
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     endTime=ABS_EBIGDECIMAL (ambiguity) properties+=XProperty
+	 *     endTime=ISO8601 (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     endTime=ISO8601 (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     endTime=ISO8601 (ambiguity) 'end-time' ':' endTime=ISO8601
+	 *     endTime=ISO8601 (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     endTime=ISO8601 (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     endTime=ISO8601 (ambiguity) 'start-time' ':' startTime=ISO8601
+	 *     endTime=ISO8601 (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     endTime=ISO8601 (ambiguity) properties+=XProperty
 	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     events+=XEvent ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     executors+=XExecutor ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     functions+=XFunction ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     hosts+=XHost ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     interfaces+=XInterface ('tmsc' 'analyses' '{' '}')* 'tmsc' 'settings' '{' (ambiguity) properties+=XProperty
 	 *     properties+=XProperty (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     properties+=XProperty (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     properties+=XProperty (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     properties+=XProperty (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     properties+=XProperty (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     properties+=XProperty (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     properties+=XProperty (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     properties+=XProperty (ambiguity) properties+=XProperty
 	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     scheduled=EBOOLEAN_OBJECT (ambiguity) properties+=XProperty
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'end-time' ':' endTime=ISO8601
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'start-time' ':' startTime=ISO8601
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     startTime=ABS_EBIGDECIMAL (ambiguity) properties+=XProperty
+	 *     startTime=ISO8601 (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     startTime=ISO8601 (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     startTime=ISO8601 (ambiguity) 'end-time' ':' endTime=ISO8601
+	 *     startTime=ISO8601 (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     startTime=ISO8601 (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     startTime=ISO8601 (ambiguity) 'start-time' ':' startTime=ISO8601
+	 *     startTime=ISO8601 (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
+	 *     startTime=ISO8601 (ambiguity) properties+=XProperty
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     timeBound=ABS_EBIGDECIMAL (ambiguity) properties+=XProperty
 	 
@@ -213,6 +293,22 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
 	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
 	 *     architectureKind=XArchitectureKind '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     endTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     endTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
 	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
 	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
 	 *     properties+=XProperty '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
@@ -229,6 +325,22 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
 	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
 	 *     scheduled=EBOOLEAN_OBJECT '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     startTime=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) events+=XEvent
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) executors+=XExecutor
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) functions+=XFunction
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) hosts+=XHost
+	 *     startTime=ISO8601 '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) interfaces+=XInterface
 	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) (rule end)
 	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) components+=XComponent
 	 *     timeBound=ABS_EBIGDECIMAL '}' ('tmsc' 'analyses' '{' '}')* (ambiguity) dependencySettings+=XDependencySettings
@@ -298,7 +410,11 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'architecture' ':' architectureKind=XArchitectureKind
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'end-time' ':' endTime=ISO8601
 	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'start-time' ':' startTime=ISO8601
 	 *     analyses+=XTmscAnalysis '}' (ambiguity) 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     analyses+=XTmscAnalysis '}' (ambiguity) properties+=XProperty
 	 
@@ -336,7 +452,11 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     (rule start) (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
@@ -348,31 +468,75 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
 	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     components+=XComponent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     dependencySettings+=XDependencySettings (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     endTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
 	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     events+=XEvent (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     executors+=XExecutor (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     functions+=XFunction (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     hosts+=XHost (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'architecture' ':' architectureKind=XArchitectureKind
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ABS_EBIGDECIMAL
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'end-time' ':' endTime=ISO8601
 	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ABS_EBIGDECIMAL
+	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'start-time' ':' startTime=ISO8601
 	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* 'time-bound' ':' timeBound=ABS_EBIGDECIMAL
 	 *     interfaces+=XInterface (ambiguity) 'tmsc' 'settings' '{' ('}' (ambiguity) 'tmsc' 'settings' '{')* properties+=XProperty
 	 *     properties+=XProperty '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
@@ -391,6 +555,22 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* events+=XEvent
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* executors+=XExecutor
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* functions+=XFunction
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* hosts+=XHost
+	 *     startTime=ISO8601 '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* interfaces+=XInterface
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* (rule end)
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* components+=XComponent
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) ('tmsc' 'settings' '{' '}' (ambiguity))* dependencySettings+=XDependencySettings
@@ -431,8 +611,12 @@ public class TmscXtextSyntacticSequencer extends AbstractSyntacticSequencer {
 	 *
 	 * This ambiguous syntax occurs at:
 	 *     architectureKind=XArchitectureKind '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     endTime=ABS_EBIGDECIMAL '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     endTime=ISO8601 '}' (ambiguity) analyses+=XTmscAnalysis
 	 *     properties+=XProperty '}' (ambiguity) analyses+=XTmscAnalysis
 	 *     scheduled=EBOOLEAN_OBJECT '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     startTime=ABS_EBIGDECIMAL '}' (ambiguity) analyses+=XTmscAnalysis
+	 *     startTime=ISO8601 '}' (ambiguity) analyses+=XTmscAnalysis
 	 *     timeBound=ABS_EBIGDECIMAL '}' (ambiguity) analyses+=XTmscAnalysis
 	 
 	 * </pre>

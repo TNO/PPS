@@ -126,6 +126,10 @@ public class TmscXtextSemanticSequencer extends AbstractDelegatingSemanticSequen
 	 *         architectureKind=XArchitectureKind | 
 	 *         timeBound=ABS_EBIGDECIMAL | 
 	 *         scheduled=EBOOLEAN_OBJECT | 
+	 *         startTime=ISO8601 | 
+	 *         startTime=ABS_EBIGDECIMAL | 
+	 *         endTime=ISO8601 | 
+	 *         endTime=ABS_EBIGDECIMAL | 
 	 *         properties+=XProperty | 
 	 *         analyses+=XTmscAnalysis | 
 	 *         dependencySettings+=XDependencySettings | 

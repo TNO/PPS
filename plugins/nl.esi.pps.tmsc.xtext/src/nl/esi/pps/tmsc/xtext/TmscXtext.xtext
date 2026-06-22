@@ -18,6 +18,8 @@ TmscXtextModel:
         ('architecture' ':' architectureKind=XArchitectureKind
         |'time-bound' ':' timeBound=ABS_EBIGDECIMAL
         |'scheduled' ':' scheduled=EBOOLEAN_OBJECT
+        |'start-time' ':' startTime=(ISO8601|ABS_EBIGDECIMAL)
+        |'end-time' ':' endTime=(ISO8601|ABS_EBIGDECIMAL)
         |properties+=XProperty)*
     '}')
     |('tmsc' 'analyses' '{'

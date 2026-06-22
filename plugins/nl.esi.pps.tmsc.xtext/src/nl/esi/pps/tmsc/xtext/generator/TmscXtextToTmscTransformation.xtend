@@ -72,6 +72,7 @@ import static extension nl.esi.pps.tmsc.util.TmscRefinements.*
 import static extension nl.esi.pps.tmsc.xtext.TmscXtextQueries.*
 import static extension org.eclipse.lsat.common.xtend.Queries.*
 import static extension org.eclipse.xtext.EcoreUtil2.*
+import static extension org.eclipse.lsat.common.util.IterableUtil.*
 
 class TmscXtextToTmscTransformation {
     static extension val TmscFactory m_tmsc = TmscFactory.eINSTANCE
@@ -126,10 +127,8 @@ class TmscXtextToTmscTransformation {
 
         // Now that the time-stamps are calculated we can derive the start and end time of the TMSC from its events
         val timestamps = events.map[timestamp].filterNull.toList
-        if (!timestamps.isEmpty) {
-            startTime = timestamps.min
-            endTime = timestamps.max
-        }
+        startTime = tmscXtext.startTime.toNanos ?: timestamps.min(null as Long)
+        endTime = tmscXtext.endTime.toNanos ?: timestamps.max(null as Long)
         
         // For the events that were not defined in the trace, we consider them to be outside the trace window.
         // As such, their time-stamps should be set to either the start or end of the trace.

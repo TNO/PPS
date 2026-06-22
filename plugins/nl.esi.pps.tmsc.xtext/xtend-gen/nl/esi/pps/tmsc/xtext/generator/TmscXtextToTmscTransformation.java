@@ -240,12 +240,24 @@ public class TmscXtextToTmscTransformation {
       return it_1.getTimestamp();
     };
     final List<Long> timestamps = IterableExtensions.<Long>toList(IterableExtensions.<Long>filterNull(IterableExtensions.<Event, Long>map(it.getEvents(), _function_9)));
-    boolean _isEmpty = timestamps.isEmpty();
-    boolean _not = (!_isEmpty);
-    if (_not) {
-      it.setStartTime(IterableExtensions.<Long>min(timestamps));
-      it.setEndTime(IterableExtensions.<Long>max(timestamps));
+    Long _elvis = null;
+    Long _nanos = TmscXtextToTmscTransformation.toNanos(tmscXtext.getStartTime());
+    if (_nanos != null) {
+      _elvis = _nanos;
+    } else {
+      Long _min = Queries.<Long>min(timestamps, ((Long) null));
+      _elvis = _min;
     }
+    it.setStartTime(_elvis);
+    Long _elvis_1 = null;
+    Long _nanos_1 = TmscXtextToTmscTransformation.toNanos(tmscXtext.getEndTime());
+    if (_nanos_1 != null) {
+      _elvis_1 = _nanos_1;
+    } else {
+      Long _max = Queries.<Long>max(timestamps, ((Long) null));
+      _elvis_1 = _max;
+    }
+    it.setEndTime(_elvis_1);
     final Function1<Event, Boolean> _function_10 = (Event it_1) -> {
       Long _timestamp = it_1.getTimestamp();
       return Boolean.valueOf((_timestamp == null));

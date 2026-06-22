@@ -21,6 +21,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getArchitectureKind <em>Architecture Kind</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getTimeBound <em>Time Bound</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getScheduled <em>Scheduled</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getStartTime <em>Start Time</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getEndTime <em>End Time</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getProperties <em>Properties</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getAnalyses <em>Analyses</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getDependencySettings <em>Dependency Settings</em>}</li>
@@ -106,6 +108,50 @@ public interface TmscXtextModel extends EObject
    * @generated
    */
   void setScheduled(Boolean value);
+
+  /**
+   * Returns the value of the '<em><b>Start Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Start Time</em>' attribute.
+   * @see #setStartTime(BigDecimal)
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextPackage#getTmscXtextModel_StartTime()
+   * @model
+   * @generated
+   */
+  BigDecimal getStartTime();
+
+  /**
+   * Sets the value of the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getStartTime <em>Start Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Start Time</em>' attribute.
+   * @see #getStartTime()
+   * @generated
+   */
+  void setStartTime(BigDecimal value);
+
+  /**
+   * Returns the value of the '<em><b>End Time</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>End Time</em>' attribute.
+   * @see #setEndTime(BigDecimal)
+   * @see nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextPackage#getTmscXtextModel_EndTime()
+   * @model
+   * @generated
+   */
+  BigDecimal getEndTime();
+
+  /**
+   * Sets the value of the '{@link nl.esi.pps.tmsc.xtext.tmscXtext.TmscXtextModel#getEndTime <em>End Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>End Time</em>' attribute.
+   * @see #getEndTime()
+   * @generated
+   */
+  void setEndTime(BigDecimal value);
 
   /**
    * Returns the value of the '<em><b>Properties</b></em>' containment reference list.

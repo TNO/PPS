@@ -32,6 +32,8 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/architectureKind"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/timeBound"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/scheduled"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/startTime"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute TmscXtext.ecore#//TmscXtextModel/endTime"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/properties"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/analyses"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference TmscXtext.ecore#//TmscXtextModel/dependencySettings"/>

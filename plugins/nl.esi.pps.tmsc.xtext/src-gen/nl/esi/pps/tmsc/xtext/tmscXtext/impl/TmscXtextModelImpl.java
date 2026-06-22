@@ -45,6 +45,8 @@ import org.eclipse.emf.ecore.util.InternalEList;
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getArchitectureKind <em>Architecture Kind</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getTimeBound <em>Time Bound</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getScheduled <em>Scheduled</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getStartTime <em>Start Time</em>}</li>
+ *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getEndTime <em>End Time</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getProperties <em>Properties</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getAnalyses <em>Analyses</em>}</li>
  *   <li>{@link nl.esi.pps.tmsc.xtext.tmscXtext.impl.TmscXtextModelImpl#getDependencySettings <em>Dependency Settings</em>}</li>
@@ -119,6 +121,46 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
    * @ordered
    */
   protected Boolean scheduled = SCHEDULED_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getStartTime() <em>Start Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStartTime()
+   * @generated
+   * @ordered
+   */
+  protected static final BigDecimal START_TIME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getStartTime() <em>Start Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getStartTime()
+   * @generated
+   * @ordered
+   */
+  protected BigDecimal startTime = START_TIME_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getEndTime() <em>End Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEndTime()
+   * @generated
+   * @ordered
+   */
+  protected static final BigDecimal END_TIME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getEndTime() <em>End Time</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getEndTime()
+   * @generated
+   * @ordered
+   */
+  protected BigDecimal endTime = END_TIME_EDEFAULT;
 
   /**
    * The cached value of the '{@link #getProperties() <em>Properties</em>}' containment reference list.
@@ -312,6 +354,56 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
    * @generated
    */
   @Override
+  public BigDecimal getStartTime()
+  {
+    return startTime;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setStartTime(BigDecimal newStartTime)
+  {
+    BigDecimal oldStartTime = startTime;
+    startTime = newStartTime;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TmscXtextPackage.TMSC_XTEXT_MODEL__START_TIME, oldStartTime, startTime));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public BigDecimal getEndTime()
+  {
+    return endTime;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void setEndTime(BigDecimal newEndTime)
+  {
+    BigDecimal oldEndTime = endTime;
+    endTime = newEndTime;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, TmscXtextPackage.TMSC_XTEXT_MODEL__END_TIME, oldEndTime, endTime));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
   public EList<XProperty> getProperties()
   {
     if (properties == null)
@@ -489,6 +581,10 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return getTimeBound();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__SCHEDULED:
         return getScheduled();
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__START_TIME:
+        return getStartTime();
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__END_TIME:
+        return getEndTime();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         return getProperties();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
@@ -530,6 +626,12 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__SCHEDULED:
         setScheduled((Boolean)newValue);
+        return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__START_TIME:
+        setStartTime((BigDecimal)newValue);
+        return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__END_TIME:
+        setEndTime((BigDecimal)newValue);
         return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         getProperties().clear();
@@ -590,6 +692,12 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
       case TmscXtextPackage.TMSC_XTEXT_MODEL__SCHEDULED:
         setScheduled(SCHEDULED_EDEFAULT);
         return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__START_TIME:
+        setStartTime(START_TIME_EDEFAULT);
+        return;
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__END_TIME:
+        setEndTime(END_TIME_EDEFAULT);
+        return;
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         getProperties().clear();
         return;
@@ -637,6 +745,10 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
         return TIME_BOUND_EDEFAULT == null ? timeBound != null : !TIME_BOUND_EDEFAULT.equals(timeBound);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__SCHEDULED:
         return SCHEDULED_EDEFAULT == null ? scheduled != null : !SCHEDULED_EDEFAULT.equals(scheduled);
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__START_TIME:
+        return START_TIME_EDEFAULT == null ? startTime != null : !START_TIME_EDEFAULT.equals(startTime);
+      case TmscXtextPackage.TMSC_XTEXT_MODEL__END_TIME:
+        return END_TIME_EDEFAULT == null ? endTime != null : !END_TIME_EDEFAULT.equals(endTime);
       case TmscXtextPackage.TMSC_XTEXT_MODEL__PROPERTIES:
         return properties != null && !properties.isEmpty();
       case TmscXtextPackage.TMSC_XTEXT_MODEL__ANALYSES:
@@ -676,6 +788,10 @@ public class TmscXtextModelImpl extends MinimalEObjectImpl.Container implements 
     result.append(timeBound);
     result.append(", scheduled: ");
     result.append(scheduled);
+    result.append(", startTime: ");
+    result.append(startTime);
+    result.append(", endTime: ");
+    result.append(endTime);
     result.append(')');
     return result.toString();
   }
