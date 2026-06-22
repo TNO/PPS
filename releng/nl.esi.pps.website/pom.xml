@@ -45,13 +45,6 @@
             <classifier>website</classifier>
             <type>zip</type>
         </dependency>
-
-        <dependency>
-            <groupId>${project.groupId}</groupId>
-            <artifactId>nl.esi.pps.product</artifactId>
-            <version>${project.version}</version>
-            <type>zip</type>
-        </dependency>
     </dependencies>
 
     <build>
@@ -125,24 +118,6 @@
                                 </artifactItem>
                             </artifactItems>
                             <outputDirectory>${project.build.directory}/website/developerguide</outputDirectory>
-                        </configuration>
-                    </execution>
-                    <execution>
-                        <id>unpack-update-site</id>
-                        <phase>prepare-package</phase>
-                        <goals>
-                            <goal>unpack</goal>
-                        </goals>
-                        <configuration>
-                            <artifactItems>
-                                <artifactItem>
-                                    <groupId>${project.groupId}</groupId>
-                                    <artifactId>nl.esi.pps.product</artifactId>
-                                    <version>${project.version}</version>
-                                    <type>zip</type>
-                                </artifactItem>
-                            </artifactItems>
-                            <outputDirectory>${project.build.directory}/website/update-site/${pps.version.enduser}</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
