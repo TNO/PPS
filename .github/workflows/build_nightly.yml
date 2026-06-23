@@ -60,6 +60,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: website
         publish_dir: ./products/nl.esi.pps.product/target/repository
         destination_dir: update-site/nightly
         keep_files: false

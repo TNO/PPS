@@ -56,6 +56,7 @@ jobs:
       uses: peaceiris/actions-gh-pages@v4
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_branch: website
         publish_dir: ./products/nl.esi.pps.product/target/repository
         destination_dir: update-site/${{ github.ref_name }}
-        keep_files: true
+        keep_files: false

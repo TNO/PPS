@@ -779,6 +779,15 @@
       vm="true">
     <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
   </setupTask>
+  <setupTask
+      xsi:type="setup:EclipseIniTask"
+      option="-Doomph.redirection.pps.git.develop"
+      value="=https://raw.githubusercontent.com/TNO/PPS/develop/pps.setup->${git.clone.pps.git.location|uri}/pps.setup"
+      vm="true">
+    <description>Set an Oomph redirection system property to redirect the logical location of this setup to its physical location in the Git clone.</description>
+  </setupTask>
+  <stream name="develop"
+      label="Develop"/>
   <stream name="main"
       label="Main"/>
   <logicalProjectContainer
