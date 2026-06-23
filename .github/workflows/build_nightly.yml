@@ -1,0 +1,65 @@
+#
+# Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+#
+# This program and the accompanying materials are made available
+# under the terms of the MIT License which is available at
+# https://opensource.org/licenses/MIT
+#
+# SPDX-License-Identifier: MIT
+#
+
+# This workflow will build PPS with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Build and Test PPS (Nightly)
+
+on:
+  push:
+    branches: [ "develop" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MAVEN_OPTS: --add-opens java.base/java.lang=ALL-UNNAMED
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@v1.18.0
+      with:
+        java-version: 21
+        java-distribution: temurin
+    - name: Build and Test with Maven
+      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.qualifier=$(./versionQualifier.sh)
+    - name: Attach Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
+    - name: Attach Website
+      uses: actions/upload-artifact@v7
+      with:
+        name: PPS-website
+        path: releng/nl.esi.pps.website/target/website
+        retention-days: 5
+    - name: Attach Update-Site
+      uses: actions/upload-artifact@v7
+      with:
+        name: PPS-update-site
+        path: products/nl.esi.pps.product/target/repository
+        retention-days: 5
+
+    # Deploy P2 Repository to GitHub Pages for nightly builds
+    - name: Deploy P2 Repository (Nightly)
+      if: success()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./products/nl.esi.pps.product/target/repository
+        destination_dir: update-site/nightly
+        keep_files: false

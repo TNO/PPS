@@ -1,0 +1,61 @@
+#
+# Copyright (c) 2018-2023 TNO and Contributors to the GitHub community
+#
+# This program and the accompanying materials are made available
+# under the terms of the MIT License which is available at
+# https://opensource.org/licenses/MIT
+#
+# SPDX-License-Identifier: MIT
+#
+
+# This workflow will build PPS with Maven, and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Build and Test PPS (Release)
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      MAVEN_OPTS: --add-opens java.base/java.lang=ALL-UNNAMED
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Setup Maven Action
+      uses: s4u/setup-maven-action@v1.18.0
+      with:
+        java-version: 21
+        java-distribution: temurin
+    - name: Build and Test with Maven
+      run: mvn verify --batch-mode --update-snapshots --fail-at-end --file pom.xml -Dpps.version.enduser=$GITHUB_REF_NAME -Dpps.version.qualifier=$(./versionQualifier.sh $GITHUB_REF_NAME)
+    - name: Attach Test Report
+      if: success() || failure()
+      uses: scacap/action-surefire-report@v1
+    - name: Release PPS
+      uses: softprops/action-gh-release@v2
+      with:
+        files: |
+          products/nl.esi.pps.product/target/products/pps-*.zip
+          products/nl.esi.pps.product/target/pps-*.zip
+          releng/nl.esi.pps.website/target/pps-*.zip
+
+    # Deploy P2 Repository to GitHub Pages for nightly builds
+    - name: Deploy P2 Repository (Release)
+      if: success()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./products/nl.esi.pps.product/target/repository
+        destination_dir: update-site/${{ github.ref_name }}
+        keep_files: true
