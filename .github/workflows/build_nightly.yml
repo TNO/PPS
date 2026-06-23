@@ -16,7 +16,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build and Test PPS
+name: Build and Test PPS (Nightly)
 
 on:
   push:
@@ -53,3 +53,13 @@ jobs:
         name: PPS-update-site
         path: products/nl.esi.pps.product/target/repository
         retention-days: 5
+
+    # Deploy P2 Repository to GitHub Pages for nightly builds
+    - name: Deploy P2 Repository (Nightly)
+      if: success()
+      uses: peaceiris/actions-gh-pages@v4
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./products/nl.esi.pps.product/target/repository
+        destination_dir: update-site/nightly
+        keep_files: false

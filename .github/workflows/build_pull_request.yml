@@ -16,7 +16,7 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Build and Test PPS
+name: Build and Test PPS (Pull Request)
 
 on:
   pull_request:
