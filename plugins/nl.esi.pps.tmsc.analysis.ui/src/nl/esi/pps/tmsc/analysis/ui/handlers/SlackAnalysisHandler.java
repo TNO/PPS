@@ -9,9 +9,7 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
-import static nl.esi.pps.ui.handlers.AbstractCommandHandler.DEFAULT_DIALOG_SEVERITIES;
 
 import javax.inject.Named;
 
@@ -31,7 +29,6 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 
 import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
-
 import nl.esi.pps.tmsc.TMSC;
 import nl.esi.pps.tmsc.analysis.ui.commands.SlackAnalysisCommand;
 
@@ -55,8 +52,7 @@ public class SlackAnalysisHandler {
 
 		IStatusJobFunction jobFunction = monitor -> doJob(tmsc, editingDomain, monitor);
 		String jobName = "Slack analysis";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), DEFAULT_DIALOG_SEVERITIES,
-				DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}

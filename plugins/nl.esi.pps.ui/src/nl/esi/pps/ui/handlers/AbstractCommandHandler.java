@@ -9,11 +9,6 @@
  */
 package nl.esi.pps.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
-
-import java.util.Arrays;
-import java.util.Collection;
-
 import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -26,13 +21,10 @@ import org.osgi.framework.FrameworkUtil;
 
 import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
-
 import nl.esi.pps.ui.commands.IProgressCommand;
 import nl.esi.pps.ui.commands.IStatusCommand;
 
 public abstract class AbstractCommandHandler {
-	public static final Collection<Integer> DEFAULT_DIALOG_SEVERITIES = Arrays.asList(IStatus.INFO, IStatus.WARNING, IStatus.ERROR);
-	
 	protected void executeCommand(Command command, EditingDomain editingDomain) {
 		final Bundle bundle = FrameworkUtil.getBundle(getClass());
 		executeCommand(command, editingDomain, bundle == null ? "nl.esi.pps.tmsc.ui" : bundle.getSymbolicName());
@@ -40,8 +32,7 @@ public abstract class AbstractCommandHandler {
 
 	protected void executeCommand(Command command, EditingDomain editingDomain, String pluginID) {
 		IStatusJobFunction jobFunction = monitor -> doExecuteCommand(command, editingDomain, pluginID, monitor);
-		Job job = new StatusReportingJob(StringUtils.capitalize(command.getLabel()), jobFunction, pluginID,
-				DEFAULT_DIALOG_SEVERITIES, DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(StringUtils.capitalize(command.getLabel()), jobFunction, pluginID);
 		job.setUser(true);
 		job.schedule();
 	}

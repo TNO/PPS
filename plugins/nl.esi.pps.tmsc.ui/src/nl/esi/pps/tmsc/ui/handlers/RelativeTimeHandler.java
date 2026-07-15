@@ -15,8 +15,6 @@ import static org.eclipse.core.runtime.IStatus.INFO;
 import static org.eclipse.lsat.common.queries.QueryableIterable.from;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -68,9 +66,7 @@ public class RelativeTimeHandler {
 
 		IStatusJobFunction jobFunction = monitor -> doJob(inputFiles, monitor);
 		String jobName = "Converting TMSCs to relative time.";
-		Collection<Integer> jobReportingSeverities = Arrays.asList(IStatus.INFO, IStatus.WARNING, IStatus.ERROR);
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), jobReportingSeverities,
-				jobReportingSeverities);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}

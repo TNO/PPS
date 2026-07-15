@@ -9,25 +9,28 @@
  */
 package nl.esi.pps.tmsc.metric.ui.wizard;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.jface.wizard.Wizard;
-import org.eclipse.ui.statushandlers.StatusManager;
 
+import nl.esi.pps.common.core.runtime.ErrorStatusException;
+import nl.esi.pps.common.ide.ui.wizard.StatusReportingWizard;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.metric.MetricPlugin;
 import nl.esi.pps.tmsc.metric.ui.Activator;
 import nl.esi.pps.tmsc.metric.ui.commands.MetricAnalysisCommand;
 
-public class MetricAnalysisCommandWizard extends Wizard {
+public class MetricAnalysisCommandWizard extends StatusReportingWizard {
 	protected SelectMetricWizardPage selectMetricWizardPage = null;
 	protected EditingDomain editingDomain = null;
 	protected FullScopeTMSC tmsc = null;
 
+    public MetricAnalysisCommandWizard() {
+        super("Metrics Analysis");
+    }
+
 	public void init(EditingDomain editingDomain, FullScopeTMSC tmsc) {
-		setWindowTitle("Metrics Analysis");
-		setNeedsProgressMonitor(true);
 		this.editingDomain = editingDomain;
 		this.tmsc = tmsc;
 		selectMetricWizardPage = new SelectMetricWizardPage(
@@ -44,14 +47,13 @@ public class MetricAnalysisCommandWizard extends Wizard {
 	}
 
 	@Override
-	public boolean performFinish() {
+	public IStatus run(IProgressMonitor monitor) throws ErrorStatusException {
 		MetricAnalysisCommand command = new MetricAnalysisCommand(getSelectMetricWizardPage().getSelectedMetrics(), tmsc);
 		if (command.canExecute()) {
 			editingDomain.getCommandStack().execute(command);
 		} else {
-			StatusManager.getManager()
-					.handle(new Status(IStatus.ERROR, Activator.getPluginID(), "Metric analysis cannot be performed"));
+			return new Status(IStatus.ERROR, Activator.getPluginID(), "Metric analysis cannot be performed");
 		}
-		return true;
+		return Status.OK_STATUS;
 	}
 }

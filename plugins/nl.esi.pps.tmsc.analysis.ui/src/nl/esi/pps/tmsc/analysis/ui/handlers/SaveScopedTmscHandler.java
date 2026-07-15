@@ -9,9 +9,7 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
-import static nl.esi.pps.ui.handlers.AbstractCommandHandler.DEFAULT_DIALOG_SEVERITIES;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 import static org.eclipse.lsat.common.queries.QueryableIterable.from;
 
@@ -75,7 +73,7 @@ public class SaveScopedTmscHandler {
 	}
 
 	@Execute
-	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) IStructuredSelection selection, 
+	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) IStructuredSelection selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
 		List<ScopedTMSC> scopedTmscs = from((Iterable<?>) selection).asType(ScopedTMSC.class).asList();
 		ScopedTMSC firstTmsc = (ScopedTMSC) selection.getFirstElement();
@@ -85,7 +83,7 @@ public class SaveScopedTmscHandler {
 		if (suggestFileName == null || suggestFileName.isEmpty()) {
 			suggestFileName = scopedTmscs.size() + "_scopes";
 		}
-		
+
 		SaveAsDialog saveAsDialog = new SaveAsDialog(shell);
 		saveAsDialog.setOriginalFile(
 				tmscIFile.getParent().getFile(new Path(suggestFileName + '.' + tmscURI.fileExtension())));
@@ -97,28 +95,27 @@ public class SaveScopedTmscHandler {
 			saveIPath.addFileExtension(TmscPlugin.TMSC_FILE_EXTENSION_BINARY_COMPRESSED);
 		}
 		IFile saveIFile = ResourcesPlugin.getWorkspace().getRoot().getFile(saveIPath);
-		
+
 		IStatusJobFunction jobFunction = monitor -> doJob(scopedTmscs, saveIFile, monitor);
 		String jobName = "Save scoped TMSC";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), DEFAULT_DIALOG_SEVERITIES,
-				DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}
 
 	public static IStatus doJob(List<ScopedTMSC> scopedTmscs, IFile saveIFile, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 101);
-		
+
 		FullScopeTMSC fullScope = scopedTmscs.get(0).getFullScope();
-		
+
 		subMonitor.setTaskName("Prepare to copy scoped TMSC.");
 		EObject[] otherRootContainers = ScopedTmscCopier.findOtherRootContainersToCopy(scopedTmscs,
 				MetricModel.class::isInstance);
 
 		subMonitor.setTaskName("Copy scoped TMSC.");
 		Map<EObject, EObject> copies = ScopedTmscCopier.copyTmscs(scopedTmscs, otherRootContainers);
-		
-		// Now create the content to save, i.e. the root container of our scopedTmsc copy and 
+
+		// Now create the content to save, i.e. the root container of our scopedTmsc copy and
 		// the copies of all otherRootContainers
 		FullScopeTMSC fullScopeCopy = (FullScopeTMSC) copies.get(fullScope);
 		EObject[] saveContent = new EObject[otherRootContainers.length + 1];
@@ -127,16 +124,16 @@ public class SaveScopedTmscHandler {
 			saveContent[i + 1] = copies.get(otherRootContainers[i]);
 		}
 		subMonitor.worked(75);
-		
+
 		// (Optional) Derive the new start and end time of the copied trace from the TMSC that we actually copied
 		Set<ScopedTMSC> copiedScopes = from(scopedTmscs).collectOne(copies::get).asType(ScopedTMSC.class).asSet();
 		ScopedTmscCopier.deriveStartEndTime(copiedScopes);
-		
+
 		// (Optional) Typically we want to visualize the copied scope, so apply a rendering strategy
 		from(fullScopeCopy.getChildScopes()).walkTree(true, ScopedTMSC::getChildScopes).forEach(
 				scope -> ScopesRenderingStrategy.setGroupKey(scope, copiedScopes.contains(scope)));
 		RenderingProperties.setRenderingStrategyID(fullScopeCopy, ScopesRenderingStrategy.ID);
-		
+
 		subMonitor.setTaskName("Save scoped TMSC.");
 		Persistor<EObject> persistor = new PersistorFactory().getPersistor();
 		URI saveUri = URIHelper.asURI(saveIFile);
@@ -149,9 +146,9 @@ public class SaveScopedTmscHandler {
 			return new Status(ERROR, getPluginID(),
 					String.format("Failed to save %s: %s", saveUri, ex.getMessage()), ex);
 		}
-		
+
 		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), saveIFile);
-		
+
 		return Status.OK_STATUS;
 	}
 }

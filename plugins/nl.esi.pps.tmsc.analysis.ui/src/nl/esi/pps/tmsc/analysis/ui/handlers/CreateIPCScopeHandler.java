@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 
@@ -85,13 +84,12 @@ public class CreateIPCScopeHandler extends CreateScopedTMSCCommandHandler {
 		} else if (selectedElement instanceof IFile) {
 			IFile modelIFile = (IFile) selectedElement;
 			IStatusJobFunction jobFunction = monitor -> doJob(modelIFile, monitor);
-			Job job = new StatusReportingJob(commandName, jobFunction, getPluginID(), DEFAULT_DIALOG_SEVERITIES,
-					DEFAULT_LOG_SEVERITIES);
+			Job job = new StatusReportingJob(commandName, jobFunction, getPluginID());
 			job.setUser(true);
 			job.schedule();
 		}
 	}
-	
+
 	private static IStatus doJob(IFile modelIFile, IProgressMonitor monitor) throws ErrorStatusException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 100);
 		subMonitor.setTaskName("Create IPC scope.");
@@ -101,7 +99,7 @@ public class CreateIPCScopeHandler extends CreateScopedTMSCCommandHandler {
 
 		URI loadUri = URIHelper.asURI(modelIFile);
 		Persistor<FullScopeTMSC> persistor = new PersistorFactory().getPersistor(FullScopeTMSC.class, true);
-		
+
 		FullScopeTMSC tmsc = null;
 		try {
 			subMonitor.setTaskName("Loading TMSC from " + loadUri.lastSegment());
@@ -119,7 +117,7 @@ public class CreateIPCScopeHandler extends CreateScopedTMSCCommandHandler {
 		result.add(createIpcScope.getStatus());
 		tmsc.getChildScopes().add(ipcScope);
 		tmsc.getDependencies().addAll(ipcScope.getDependencies());
-		
+
 		subMonitor.setTaskName("Saving IPC scope");
 		String saveBaseName = loadUri.trimFileExtension().lastSegment() + "_" + ipcScope.getName().toLowerCase();
 		IFile saveIFile = JobUtils.getSibling(modelIFile, saveBaseName, null);

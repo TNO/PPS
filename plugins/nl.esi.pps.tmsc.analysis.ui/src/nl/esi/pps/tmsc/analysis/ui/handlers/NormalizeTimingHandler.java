@@ -9,9 +9,7 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
-import static nl.esi.pps.ui.handlers.AbstractCommandHandler.DEFAULT_DIALOG_SEVERITIES;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 import static org.eclipse.lsat.common.queries.QueryableIterable.from;
 
@@ -66,8 +64,7 @@ public class NormalizeTimingHandler {
 		IFile modelIFile = (IFile) selection.getFirstElement();
 		IStatusJobFunction jobFunction = monitor -> doJob(modelIFile, monitor);
 		String jobName = "Normalize timing";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), DEFAULT_DIALOG_SEVERITIES,
-				DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}
@@ -81,7 +78,7 @@ public class NormalizeTimingHandler {
 
 		URI loadUri = URIHelper.asURI(modelIFile);
 		Persistor<EObject> persistor = new PersistorFactory().getPersistor();
-		
+
 		List<EObject> contents = null;
 		try {
 			subMonitor.setTaskName("Loading TMSC from " + loadUri.lastSegment());
@@ -98,7 +95,7 @@ public class NormalizeTimingHandler {
 		QueryableIterable.from(contents)
 			.objectsOfKind(FullScopeTMSC.class)
 			.forEach(NormalizeTiming::normalizeTiming);
-		
+
 		String fileExtension = loadUri.fileExtension();
 		URI saveUri = loadUri.trimFileExtension().appendFileExtension("normalized").appendFileExtension(fileExtension);
 		try {
@@ -110,7 +107,7 @@ public class NormalizeTimingHandler {
 			result.add(new Status(ERROR, getPluginID(),
 					String.format("Failed to save %s: %s", saveUri, ex.getMessage()), ex));
 		}
-		
+
 		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), modelIFile);
 
 		return result;

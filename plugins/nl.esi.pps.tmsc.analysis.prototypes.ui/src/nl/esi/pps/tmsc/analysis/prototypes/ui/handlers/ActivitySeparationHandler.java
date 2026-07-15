@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.analysis.prototypes.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.prototypes.ui.Activator.getPluginID;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 
@@ -34,17 +33,16 @@ import org.eclipse.e4.ui.services.IServiceConstants;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.viewers.IStructuredSelection;
+import org.eclipse.lsat.common.emf.common.util.URIHelper;
+import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
+import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
+import org.eclipse.lsat.common.queries.QueryableIterable;
 
 import nl.esi.pps.common.core.runtime.ErrorStatusException;
 import nl.esi.pps.common.core.runtime.FailOnErrorStatus;
 import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.core.runtime.jobs.JobUtils;
-import org.eclipse.lsat.common.emf.common.util.URIHelper;
-import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
-import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
-import org.eclipse.lsat.common.queries.QueryableIterable;
-
 import nl.esi.pps.preferences.PPSPreferences;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.TmscPlugin;
@@ -68,8 +66,7 @@ public class ActivitySeparationHandler {
 		IFile modelIFile = (IFile) selection.getFirstElement();
 		IStatusJobFunction jobFunction = monitor -> doJob(modelIFile, monitor);
 		String jobName = "Activity separation";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), DEFAULT_LOG_SEVERITIES,
-				DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}
@@ -83,7 +80,7 @@ public class ActivitySeparationHandler {
 
 		URI loadUri = URIHelper.asURI(modelIFile);
 		Persistor<EObject> persistor = new PersistorFactory().getPersistor();
-		
+
 		List<EObject> contents = null;
 		try {
 			subMonitor.setTaskName("Loading TMSC from " + loadUri.lastSegment());
@@ -100,7 +97,7 @@ public class ActivitySeparationHandler {
 		QueryableIterable.from(contents)
 			.objectsOfKind(FullScopeTMSC.class)
 			.forEach(ActivitySeparationHandler::separateActivities);
-		
+
 		String fileExtension = loadUri.fileExtension();
 		URI saveUri = loadUri.trimFileExtension().appendFileExtension("activities").appendFileExtension(fileExtension);
 		try {
@@ -112,12 +109,12 @@ public class ActivitySeparationHandler {
 			result.add(new Status(ERROR, getPluginID(),
 					String.format("Failed to save %s: %s", saveUri, ex.getMessage()), ex));
 		}
-		
+
 		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), modelIFile);
 
 		return result;
 	}
-	
+
 	private static void separateActivities(FullScopeTMSC tmsc) {
 		ActivitySeparation.separateActivities(tmsc);
 		RenderingProperties.setRenderingStrategyID(tmsc, ScopesRenderingStrategy.ID);

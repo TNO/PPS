@@ -40,7 +40,7 @@ import nl.esi.pps.common.ide.ui.viewers.TreeColumnModelViewer;
  */
 public class StatusReportingJob extends StatusJob {
 	public static final Collection<Integer> DEFAULT_SHOW_DIALOG_SEVERITIES = Collections
-			.unmodifiableCollection(Arrays.asList(IStatus.OK, IStatus.INFO, IStatus.WARNING, IStatus.ERROR));
+			.unmodifiableCollection(Arrays.asList(IStatus.INFO, IStatus.WARNING, IStatus.ERROR));
 
 	public static final Collection<Integer> DEFAULT_LOG_SEVERITIES = Collections
 			.unmodifiableCollection(Arrays.asList(IStatus.WARNING, IStatus.ERROR));

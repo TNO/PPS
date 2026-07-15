@@ -20,7 +20,8 @@ Export-Package: nl.esi.pps.common.ide.ui,
  nl.esi.pps.common.ide.ui.part,
  nl.esi.pps.common.ide.ui.status,
  nl.esi.pps.common.ide.ui.viewers,
- nl.esi.pps.common.ide.ui.views.dataanalysis
+ nl.esi.pps.common.ide.ui.views.dataanalysis,
+ nl.esi.pps.common.ide.ui.wizard
 Automatic-Module-Name: nl.esi.pps.common.ide.ui
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: nl.esi.pps.common.ide.ui.Activator

@@ -9,9 +9,7 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
-import static nl.esi.pps.ui.handlers.AbstractCommandHandler.DEFAULT_DIALOG_SEVERITIES;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 import static org.eclipse.lsat.common.queries.QueryableIterable.from;
 
@@ -93,8 +91,7 @@ public class CreateMetricActivityIsomorphismReportHandler {
 
 		LinkedList<IFile> tmscIFiles = from((Iterable<?>) selection).objectsOfKind(IFile.class).asList();
 		IStatusJobFunction jobFunction = monitor -> doJob(tmscIFiles, selectionDialog.getStage(), monitor);
-		Job job = new StatusReportingJob("Create isomorphism report", jobFunction, getPluginID(),
-				DEFAULT_DIALOG_SEVERITIES, DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob("Create isomorphism report", jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}
@@ -169,7 +166,7 @@ public class CreateMetricActivityIsomorphismReportHandler {
 			report[0][++column] = strategy.getLabel();
 			addToIsomorphismReport(tmscs, stage, report, column);
 		}
-		
+
 		return report;
 	}
 
@@ -215,7 +212,7 @@ public class CreateMetricActivityIsomorphismReportHandler {
 			createInputArea(dialogArea);
 			return dialogArea;
 		}
-		
+
 		protected Control createInputArea(Composite parent) {
 			Composite btnComposite = new Composite(parent, SWT.NONE);
 			btnComposite.setFont(parent.getFont());

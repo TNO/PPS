@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.analysis.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.analysis.ui.Activator.getPluginID;
 
 import java.text.ParseException;
@@ -69,8 +68,7 @@ public class TimeBoundAnalysisHandler extends AbstractCommandHandler {
 
 		IStatusJobFunction jobFunction = monitor -> doJob(tmsc, inputDialog.getValue(), editingDomain, monitor);
 		String jobName = "Time-bound analysis";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), DEFAULT_DIALOG_SEVERITIES,
-				DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}

@@ -7,10 +7,10 @@
  *
  * SPDX-License-Identifier: MIT
  */
+
 package nl.esi.pps.tmsc.metric.ui.wizard;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,86 +24,100 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.lsat.common.emf.common.util.URIHelper;
 import org.eclipse.lsat.common.emf.ecore.resource.Persistor;
 import org.eclipse.lsat.common.emf.ecore.resource.PersistorFactory;
 import org.eclipse.lsat.common.queries.QueryableIterable;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchWizard;
-import org.eclipse.ui.statushandlers.StatusManager;
 
+import nl.esi.pps.common.core.runtime.ErrorStatusException;
+import nl.esi.pps.common.core.runtime.FailOnErrorStatus;
 import nl.esi.pps.common.core.runtime.jobs.JobUtils;
+import nl.esi.pps.common.ide.ui.wizard.StatusReportingWizard;
 import nl.esi.pps.tmsc.FullScopeTMSC;
 import nl.esi.pps.tmsc.metric.MetricPlugin;
 import nl.esi.pps.tmsc.metric.extension.MetricProcessor;
 import nl.esi.pps.tmsc.metric.ui.Activator;
 
-public class MetricAnalysisIFileWizard extends Wizard implements IWorkbenchWizard {
-	protected SelectMetricWizardPage selectMetricWizardPage = null;
-	protected IStructuredSelection selection = StructuredSelection.EMPTY;
+public class MetricAnalysisIFileWizard extends StatusReportingWizard implements IWorkbenchWizard {
+    protected SelectMetricWizardPage selectMetricWizardPage = null;
 
-	@Override
-	public void init(IWorkbench workbench, IStructuredSelection selection) {
-		setWindowTitle("Metrics Analysis");
-		setNeedsProgressMonitor(true);
-		this.selection = selection;
-		selectMetricWizardPage = new SelectMetricWizardPage(
-				MetricPlugin.getPlugin().getRegisteredMetricProcessors().values());
-	}
+    protected IStructuredSelection selection = StructuredSelection.EMPTY;
 
-	public SelectMetricWizardPage getSelectMetricWizardPage() {
-		return selectMetricWizardPage;
-	}
+    /**
+     *
+     */
+    public MetricAnalysisIFileWizard() {
+        super("Metrics Analysis");
+    }
 
-	@Override
-	public void addPages() {
-		addPage(selectMetricWizardPage);
-	}
+    @Override
+    public void init(IWorkbench workbench, IStructuredSelection selection) {
+        this.selection = selection;
+        selectMetricWizardPage = new SelectMetricWizardPage(
+                MetricPlugin.getPlugin().getRegisteredMetricProcessors().values());
+    }
 
-	@Override
-	public boolean performFinish() {
-		@SuppressWarnings("unchecked")
-		List<IFile> modelIFiles = QueryableIterable.from(selection).objectsOfKind(IFile.class).asList();
-		Set<MetricProcessor> selectedMetrics = selectMetricWizardPage.getSelectedMetrics();
+    public SelectMetricWizardPage getSelectMetricWizardPage() {
+        return selectMetricWizardPage;
+    }
 
-		try {
-			getContainer().run(true, true, m -> performMetricAnalysis(m, modelIFiles, selectedMetrics));
-		} catch (InvocationTargetException e) {
-			StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.getPluginID(),
-					String.format("Failed to perform Metric analysis: %s", e.getMessage()), e));
-		} catch (InterruptedException e) {
-			// User canceled
-		}
-		return true;
-	}
+    @Override
+    public void addPages() {
+        addPage(selectMetricWizardPage);
+    }
 
-	protected void performMetricAnalysis(IProgressMonitor monitor, List<IFile> modelIFiles, Set<MetricProcessor> selectedMetrics) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, (modelIFiles.size() * 100) + 1);
-		subMonitor.setTaskName("Analyze Metrics");
+    @Override
+    public IStatus run(IProgressMonitor monitor) throws ErrorStatusException {
+        @SuppressWarnings("unchecked")
+        List<IFile> modelIFiles = QueryableIterable.from(selection).objectsOfKind(IFile.class).asList();
+        Set<MetricProcessor> selectedMetrics = selectMetricWizardPage.getSelectedMetrics();
 
-		for (IFile modelIFile : modelIFiles) {
-			URI modelUri = URIHelper.asURI(modelIFile);
-			Persistor<FullScopeTMSC> persistor = new PersistorFactory().getPersistor(FullScopeTMSC.class, true);
-	
-			try {
-				subMonitor.setTaskName("Loading TMSC from " + modelUri.lastSegment());
-				Map<Object, Object> loadOptions = new HashMap<>();
-				loadOptions.put(IProgressMonitor.class, subMonitor.split(25));
-				final FullScopeTMSC tmsc = persistor.loadOne(modelUri, loadOptions);
-	
-				subMonitor.split(50);
-				selectedMetrics.forEach(metric -> metric.analyse(tmsc));
-	
-				subMonitor.setTaskName("Saving TMSC to " + modelUri.lastSegment());
-				Map<Object, Object> saveOptions = new HashMap<>();
-				saveOptions.put(IProgressMonitor.class, subMonitor.split(25));
-				tmsc.eResource().save(saveOptions);
-			} catch (IOException e) {
-				StatusManager.getManager().handle(new Status(IStatus.ERROR, Activator.getPluginID(),
-						String.format("Failed to load or save %s: %s", modelIFile, e.getMessage()), e));
-			}
-		}
-		JobUtils.refreshWorkspaceProjects(modelIFiles, subMonitor.split(1));
-	}
+        FailOnErrorStatus result = new FailOnErrorStatus(Activator.getPluginID(), "Performed Metric analysis.");
+        result.setWarningMessage("Performed Metric analysis with warnings.");
+        result.setErrorMessage("Failed to perform Metric analysis.");
+
+        SubMonitor subMonitor = SubMonitor.convert(monitor, (modelIFiles.size() * 100) + 1);
+        subMonitor.setTaskName("Analyze Metrics");
+
+        for (IFile modelIFile: modelIFiles) {
+            URI modelUri = URIHelper.asURI(modelIFile);
+            Persistor<FullScopeTMSC> persistor = new PersistorFactory().getPersistor(FullScopeTMSC.class, true);
+
+            List<FullScopeTMSC> tmscs = null;
+            try {
+                subMonitor.setTaskName("Loading TMSC from " + modelUri.lastSegment());
+                Map<Object, Object> loadOptions = new HashMap<>();
+                loadOptions.put(IProgressMonitor.class, subMonitor.split(25));
+                tmscs = persistor.loadAll(modelUri, loadOptions);
+            } catch (IOException e) {
+                result.add(new Status(IStatus.ERROR, Activator.getPluginID(),
+                        String.format("Failed to load %s: %s", modelIFile, e.getMessage()), e));
+            }
+
+            subMonitor.split(50);
+            for (MetricProcessor metric : selectedMetrics) {
+                for (FullScopeTMSC tmsc : tmscs) {
+                    if (metric.isEnabled(tmsc)) {
+                        metric.analyse(tmsc);
+                    }
+                }
+            }
+
+            try {
+                subMonitor.setTaskName("Saving TMSC to " + modelUri.lastSegment());
+                Map<Object, Object> saveOptions = new HashMap<>();
+                saveOptions.put(IProgressMonitor.class, subMonitor.split(25));
+                tmscs.getFirst().eResource().save(saveOptions);
+            } catch (IOException e) {
+                result.add(new Status(IStatus.ERROR, Activator.getPluginID(),
+                        String.format("Failed to save %s: %s", modelIFile, e.getMessage()), e));
+            }
+        }
+
+        JobUtils.refreshWorkspaceProjects(modelIFiles, subMonitor.split(1));
+
+        return result;
+    }
 }

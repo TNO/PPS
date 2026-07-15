@@ -9,7 +9,6 @@
  */
 package nl.esi.pps.tmsc.compare.ui.handlers;
 
-import static nl.esi.pps.common.ide.ui.jobs.StatusReportingJob.DEFAULT_LOG_SEVERITIES;
 import static nl.esi.pps.tmsc.compare.ui.Activator.getPluginID;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 import static org.eclipse.lsat.common.queries.QueryableIterable.from;
@@ -113,10 +112,9 @@ public class CompareTmscHandler {
 			IFile tmscIFile2 = (IFile) selectionIterator.next();
 			jobFunction = monitor -> doJob(tmscIFile1, tmscIFile2, inputDialog.getValue(), inputDialog.getStage(), monitor);
 		}
-		
+
 		String jobName = "Compare TMSCs";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID(), DEFAULT_LOG_SEVERITIES,
-				DEFAULT_LOG_SEVERITIES);
+		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
 		job.setUser(true);
 		job.schedule();
 	}
@@ -137,7 +135,7 @@ public class CompareTmscHandler {
 		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), tmscIFile1, tmscIFile2);
 		return result;
 	}
-	
+
 	private static TMSC loadCompareTMSC(URI tmscURI, String postfix, ResourceSet resourceSet, IProgressMonitor monitor,
 			FailOnErrorStatus result) throws ErrorStatusException {
 		Persistor<FullScopeTMSC> persistor = new PersistorFactory(resourceSet).getPersistor(FullScopeTMSC.class, true);
@@ -149,7 +147,7 @@ public class CompareTmscHandler {
 			if (fullScopeTMSC.isEmpty()) {
 				throw new IOException("TMSC is empty");
 			}
-			
+
 			// Prepare the resource for its save result
 			URI tmscSaveURI = createSaveURI(tmscURI, postfix);
 			resourceSet.createResource(tmscSaveURI).getContents().addAll(
@@ -158,7 +156,7 @@ public class CompareTmscHandler {
 			RenderingProperties.setRenderingStrategyID(fullScopeTMSC, ScopesRenderingStrategy.ID);
 			if (fullScopeTMSC.getChildScopes().size() == 1) {
 				ScopedTMSC scopedTMSC = fullScopeTMSC.getChildScopes().get(0);
-				ScopesRenderingStrategy.setGroupKey((ScopedTMSC) scopedTMSC, true);
+				ScopesRenderingStrategy.setGroupKey(scopedTMSC, true);
 				return scopedTMSC;
 			}
 			return fullScopeTMSC;
@@ -183,7 +181,7 @@ public class CompareTmscHandler {
 			postfix1 = tmsc1.getName() + "_" + postfix;
 			postfix2 = tmsc2.getName() + "_" + postfix;
 		}
-				
+
 		TMSC compareTMSC1 = createCompareTMSC(tmsc1, postfix1, subMonitor.split(20));
 		TMSC compareTMSC2 = createCompareTMSC(tmsc2, postfix2, subMonitor.split(20));
 		doCompare(compareTMSC1, compareTMSC2, postfix, stage, subMonitor.split(60), result);
@@ -198,7 +196,7 @@ public class CompareTmscHandler {
 		EObject[] otherRootContainers = ScopedTmscCopier.findOtherRootContainersToCopy(tmsc, MetricModel.class::isInstance);
 		Map<EObject, EObject> copyMap = ScopedTmscCopier.copyTmsc(tmsc, otherRootContainers);
 		ScopedTMSC compareTMSC = (ScopedTMSC) copyMap.get(tmsc);
-		ScopesRenderingStrategy.setGroupKey((ScopedTMSC) compareTMSC, true);
+		ScopesRenderingStrategy.setGroupKey(compareTMSC, true);
 		FullScopeTMSC fullScopeTMSC = (FullScopeTMSC) copyMap.get(tmsc.getFullScope());
 		RenderingProperties.setRenderingStrategyID(fullScopeTMSC, ScopesRenderingStrategy.ID);
 
@@ -209,7 +207,7 @@ public class CompareTmscHandler {
 		for (EObject rootContainer : otherRootContainers) {
 			tmscSaveResource.getContents().add(copyMap.get(rootContainer));
 		}
-		
+
 		return compareTMSC;
 	}
 
@@ -228,11 +226,11 @@ public class CompareTmscHandler {
 
 		subMonitor.split(20);
 		TMSCComparison.compare(tmsc1, tmsc2, postfix, equivalence);
-		
+
 		saveCompareTMSC(tmsc1, subMonitor.split(20), result);
 		saveCompareTMSC(tmsc2, subMonitor.split(20), result);
 	}
-	
+
 	private static void saveCompareTMSC(TMSC tmsc, IProgressMonitor monitor, FailOnErrorStatus result)
 			throws ErrorStatusException {
 		URI tmscSaveURI = tmsc.eResource().getURI();
@@ -246,7 +244,7 @@ public class CompareTmscHandler {
 					String.format("Failed to save %s: %s", tmscSaveURI.lastSegment(), ex.getMessage()), ex));
 		}
 	}
-	
+
 	private static URI createSaveURI(URI loadURI, String postfix) {
 		String fileExtension = loadURI.fileExtension();
 		String fileName = loadURI.trimFileExtension().lastSegment();
@@ -261,16 +259,16 @@ public class CompareTmscHandler {
 					"Please specify a common-part id to use for the comparison result.", "",
 					s -> s.trim().isEmpty() ? "Cannot be empty" : null);
 		}
-		
+
 		@Override
 		protected Control createDialogArea(Composite parent) {
 			Composite inputComposite = new Composite(parent, SWT.NONE);
 			inputComposite.setFont(parent.getFont());
 			inputComposite.setLayout(new GridLayout(1, true));
 			inputComposite.setLayoutData(new GridData(GridData.FILL_BOTH));
-			
+
 			super.createDialogArea(inputComposite);
-			
+
 			Group btnGroup = new Group(inputComposite, SWT.NONE);
 			btnGroup.setFont(parent.getFont());
 			btnGroup.setText("Architecture lifecycle stage");
@@ -297,7 +295,7 @@ public class CompareTmscHandler {
 
 			return inputComposite;
 		}
-		
+
 		public ArchitectureLifecycleStage getStage() {
 			return stage;
 		}
