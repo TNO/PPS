@@ -13,7 +13,7 @@
 <feature
       id="nl.esi.pps.tmsc.cpu.ui.feature"
       label="TMSC CPU UI Feature"
-      version="0.30.0.qualifier"
+      version="0.40.0.qualifier"
       provider-name="ESI (TNO)"
       license-feature="nl.esi.pps.license"
       license-feature-version="0.0.0">

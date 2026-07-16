@@ -23,7 +23,7 @@
     SPDX-License-Identifier: MIT
 
 -->
-<product name="PPS" uid="nl.esi.pps.ide" id="nl.esi.pps.product.branding.product" application="org.eclipse.ui.ide.workbench" version="0.30.0.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="true">
+<product name="PPS" uid="nl.esi.pps.ide" id="nl.esi.pps.product.branding.product" application="org.eclipse.ui.ide.workbench" version="0.40.0.qualifier" type="features" includeLaunchers="true" autoIncludeRequirements="true">
 
    <aboutInfo>
       <image path="/nl.esi.pps.product.branding/images/pps_about.png"/>

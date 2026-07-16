@@ -13,7 +13,7 @@
 <feature
       id="nl.esi.pps.tmsc.reconstruct.feature"
       label="Custom TMSC Reconstructor Example Feature"
-      version="0.30.0.qualifier"
+      version="0.40.0.qualifier"
       provider-name="ESI (TNO)">
 
    <description url="http://www.example.com/description">
