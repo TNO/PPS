@@ -30,7 +30,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -98,9 +97,7 @@ public class SaveScopedTmscHandler {
 
 		IStatusJobFunction jobFunction = monitor -> doJob(scopedTmscs, saveIFile, monitor);
 		String jobName = "Save scoped TMSC";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
-		job.setUser(true);
-		job.schedule();
+		StatusReportingJob.runUserJob(jobName, jobFunction, getPluginID());
 	}
 
 	public static IStatus doJob(List<ScopedTMSC> scopedTmscs, IFile saveIFile, IProgressMonitor monitor) {

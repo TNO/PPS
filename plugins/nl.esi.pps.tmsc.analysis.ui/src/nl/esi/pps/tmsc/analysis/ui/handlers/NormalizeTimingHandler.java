@@ -25,7 +25,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -64,9 +63,7 @@ public class NormalizeTimingHandler {
 		IFile modelIFile = (IFile) selection.getFirstElement();
 		IStatusJobFunction jobFunction = monitor -> doJob(modelIFile, monitor);
 		String jobName = "Normalize timing";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
-		job.setUser(true);
-		job.schedule();
+		StatusReportingJob.runUserJob(jobName, jobFunction, getPluginID());
 	}
 
 	public static IStatus doJob(IFile modelIFile, IProgressMonitor monitor) throws ErrorStatusException {

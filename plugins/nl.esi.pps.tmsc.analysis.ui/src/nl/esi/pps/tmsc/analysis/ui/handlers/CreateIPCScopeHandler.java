@@ -24,7 +24,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -84,9 +83,7 @@ public class CreateIPCScopeHandler extends CreateScopedTMSCCommandHandler {
 		} else if (selectedElement instanceof IFile) {
 			IFile modelIFile = (IFile) selectedElement;
 			IStatusJobFunction jobFunction = monitor -> doJob(modelIFile, monitor);
-			Job job = new StatusReportingJob(commandName, jobFunction, getPluginID());
-			job.setUser(true);
-			job.schedule();
+			StatusReportingJob.runUserJob(commandName, jobFunction, getPluginID());
 		}
 	}
 

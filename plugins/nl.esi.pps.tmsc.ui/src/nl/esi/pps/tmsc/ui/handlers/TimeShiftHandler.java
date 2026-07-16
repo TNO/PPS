@@ -27,7 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -72,9 +71,7 @@ public class TimeShiftHandler {
 
 		IStatusJobFunction jobFunction = monitor -> doJob(inputFiles, inputDialog.getAmount(), inputDialog.getUnit(), monitor);
 		String jobName = "Time-shifting TMSCs.";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
-		job.setUser(true);
-		job.schedule();
+		StatusReportingJob.runUserJob(jobName, jobFunction, getPluginID());
 	}
 
 	private static IStatus doJob(List<IFile> inputFiles, long amount, TimeUnit unit, IProgressMonitor monitor)

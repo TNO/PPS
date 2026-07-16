@@ -27,7 +27,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -66,9 +65,7 @@ public class RelativeTimeHandler {
 
 		IStatusJobFunction jobFunction = monitor -> doJob(inputFiles, monitor);
 		String jobName = "Converting TMSCs to relative time.";
-		Job job = new StatusReportingJob(jobName, jobFunction, getPluginID());
-		job.setUser(true);
-		job.schedule();
+		StatusReportingJob.runUserJob(jobName, jobFunction, getPluginID());
 	}
 
 	private static IStatus doJob(List<IFile> inputFiles, IProgressMonitor monitor)
@@ -111,7 +108,7 @@ public class RelativeTimeHandler {
 				subMonitor.worked(55);
 				continue;
 			}
-			
+
 			try {
 				Map<Object, Object> saveOptions = new HashMap<>();
 				saveOptions.put(IProgressMonitor.class, subMonitor.split(45));

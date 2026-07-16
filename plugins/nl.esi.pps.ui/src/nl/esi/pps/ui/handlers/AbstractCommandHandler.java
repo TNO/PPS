@@ -13,7 +13,6 @@ import org.apache.commons.lang.StringUtils;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.command.Command;
 import org.eclipse.emf.edit.domain.EditingDomain;
 import org.osgi.framework.Bundle;
@@ -32,9 +31,7 @@ public abstract class AbstractCommandHandler {
 
 	protected void executeCommand(Command command, EditingDomain editingDomain, String pluginID) {
 		IStatusJobFunction jobFunction = monitor -> doExecuteCommand(command, editingDomain, pluginID, monitor);
-		Job job = new StatusReportingJob(StringUtils.capitalize(command.getLabel()), jobFunction, pluginID);
-		job.setUser(true);
-		job.schedule();
+		StatusReportingJob.runUserJob(StringUtils.capitalize(command.getLabel()), jobFunction, pluginID);
 	}
 
 	private static IStatus doExecuteCommand(Command command, EditingDomain editingDomain, String pluginID,

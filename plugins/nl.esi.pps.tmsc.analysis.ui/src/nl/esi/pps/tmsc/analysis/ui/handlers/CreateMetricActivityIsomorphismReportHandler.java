@@ -31,7 +31,6 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -91,9 +90,7 @@ public class CreateMetricActivityIsomorphismReportHandler {
 
 		LinkedList<IFile> tmscIFiles = from((Iterable<?>) selection).objectsOfKind(IFile.class).asList();
 		IStatusJobFunction jobFunction = monitor -> doJob(tmscIFiles, selectionDialog.getStage(), monitor);
-		Job job = new StatusReportingJob("Create isomorphism report", jobFunction, getPluginID());
-		job.setUser(true);
-		job.schedule();
+		StatusReportingJob.runUserJob("Create isomorphism report", jobFunction, getPluginID());
 	}
 
 	private static IStatus doJob(List<IFile> tmscIFiles, ArchitectureLifecycleStage stage, IProgressMonitor monitor)

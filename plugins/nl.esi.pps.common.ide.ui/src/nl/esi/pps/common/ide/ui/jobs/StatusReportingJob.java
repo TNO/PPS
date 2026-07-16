@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.MultiStatus;
@@ -156,5 +157,61 @@ public class StatusReportingJob extends StatusJob {
 		} else {
 			Activator.getDefault().getLog().log(result);
 		}
+	}
+
+	/**
+	 * Runs a user job with status reporting.
+	 *
+	 * @param name     The name of the job.
+	 * @param function The function to execute for the job.
+	 * @param pluginId The plug-in ID to use.
+	 */
+	public static void runUserJob(String name, IStatusJobFunction function, String pluginId) {
+		runUserJob(name, function, null, pluginId);
+	}
+
+	/**
+	 * Runs a user job with status reporting and an optional job completion callback.
+	 *
+	 * @param name     The name of the job.
+	 * @param function The function to execute for the job.
+	 * @param callback Optional callback to be invoked when the job completes. May be
+	 *                 {@code null}.
+	 * @param pluginId The plug-in ID to use.
+	 */
+	public static void runUserJob(String name, IStatusJobFunction function, Consumer<IJobChangeEvent> callback,
+			String pluginId)
+	{
+		runUserJob(name, function, callback, pluginId, DEFAULT_SHOW_DIALOG_SEVERITIES, DEFAULT_LOG_SEVERITIES);
+	}
+
+	/**
+	 * Runs a user job with status reporting, an optional job completion callback, and
+	 * custom severity levels for dialog display and logging.
+	 *
+	 * @param name                 The name of the job.
+	 * @param function             The function to execute for the job.
+	 * @param callback             Optional callback to be invoked when the job
+	 *                             completes. May be {@code null}.
+	 * @param pluginId             The plug-in ID to use.
+	 * @param showDialogSeverities The severity levels for which to show a dialog on
+	 *                             job completion. See {@link IStatus#getSeverity}.
+	 * @param logSeverities        The severity levels for which to log the job result.
+	 *                             See {@link IStatus#getSeverity}.
+	 */
+	public static void runUserJob(String name, IStatusJobFunction function, Consumer<IJobChangeEvent> callback,
+			String pluginId, Collection<Integer> showDialogSeverities, Collection<Integer> logSeverities)
+	{
+		StatusReportingJob job = new StatusReportingJob(name, function, pluginId, showDialogSeverities, logSeverities);
+		job.setUser(true);
+		if (callback != null) {
+			job.addJobChangeListener(new JobChangeAdapter() {
+				@Override
+				public void done(IJobChangeEvent event) {
+					callback.accept(event);
+				}
+			});
+		}
+		job.schedule();
 	}
 }
