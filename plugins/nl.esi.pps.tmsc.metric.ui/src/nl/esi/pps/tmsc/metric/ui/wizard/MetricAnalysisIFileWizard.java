@@ -69,7 +69,7 @@ public class MetricAnalysisIFileWizard extends StatusReportingWizard implements 
     }
 
     @Override
-    public IStatus run(IProgressMonitor monitor) throws ErrorStatusException {
+    protected IStatus performFinish(IProgressMonitor monitor) throws ErrorStatusException {
         @SuppressWarnings("unchecked")
         List<IFile> modelIFiles = QueryableIterable.from(selection).objectsOfKind(IFile.class).asList();
         Set<MetricProcessor> selectedMetrics = selectMetricWizardPage.getSelectedMetrics();

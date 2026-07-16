@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018-2026 TNO and Contributors to the GitHub community
+ * Copyright (c) 2018-2025 TNO and Contributors to the GitHub community
  *
  * This program and the accompanying materials are made available
  * under the terms of the MIT License which is available at
@@ -16,20 +16,21 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 
+import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.jface.wizard.IWizard;
 import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.PlatformUI;
 
 import nl.esi.pps.common.core.runtime.ErrorStatusException;
-import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.ide.ui.Activator;
 import nl.esi.pps.common.ide.ui.status.StatusDialog;
 import nl.esi.pps.common.ide.ui.viewers.TreeColumnModelViewer;
 
-public abstract class StatusReportingWizard extends Wizard implements IStatusJobFunction {
+public abstract class StatusReportingWizard extends Wizard {
     public static final Collection<Integer> DEFAULT_SHOW_DIALOG_SEVERITIES = Collections
             .unmodifiableCollection(Arrays.asList(IStatus.INFO, IStatus.WARNING, IStatus.ERROR));
 
@@ -63,12 +64,24 @@ public abstract class StatusReportingWizard extends Wizard implements IStatusJob
         this.logSeverities = logSeverities;
     }
 
+    /**
+     * Performs any actions appropriate in response to the user having pressed the Finish button, or refuse if finishing
+     * now is not permitted.
+     *
+     * @return <code>true</code> to indicate the finish request was accepted, and <code>false</code> to indicate that
+     *     the finish request was refused
+     *
+     * @see #performFinish(IProgressMonitor)
+     */
     @Override
-    public boolean performFinish() {
+    public final boolean performFinish() {
+        if (!acceptFinish()) {
+            return false;
+        }
         try {
             getContainer().run(true, true, monitor -> {
                 try {
-                    handleResult(run(monitor));
+                    handleResult(performFinish(monitor));
                 } catch (ErrorStatusException ex) {
                     handleResult(ex.getStatus());
                 } finally {
@@ -83,6 +96,27 @@ public abstract class StatusReportingWizard extends Wizard implements IStatusJob
         }
         return true;
     }
+
+    /**
+     * Returns the acceptance in response to the user having pressed the Finish button, or refuse if finishing now is
+     * not permitted.
+     *
+     * @return <code>true</code> to indicate the finish request was accepted, and <code>false</code> to indicate that
+     *     the finish request was refused
+     *
+     * @see IWizard#performFinish()
+     */
+    protected boolean acceptFinish() {
+        return true;
+    }
+
+    /**
+     * Subclasses must implement this <code>StatusReportingWizard</code> method to perform any special finish processing
+     * for their wizard.
+     *
+     * @see IWizard#performFinish()
+     */
+    protected abstract IStatus performFinish(IProgressMonitor monitor) throws ErrorStatusException;
 
     private void handleResult(IStatus result) {
         if (logSeverities.contains(result.getSeverity())) {

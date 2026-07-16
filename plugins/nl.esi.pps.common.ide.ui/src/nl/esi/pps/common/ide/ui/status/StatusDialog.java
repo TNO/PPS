@@ -23,7 +23,7 @@ import nl.esi.pps.common.ide.ui.viewers.TreeColumnModelViewer;
 
 public class StatusDialog extends MessageDialog {
 	protected final IStatus status;
-	
+
 	public StatusDialog(Shell parentShell, String title, IStatus status) {
 		super(parentShell, title, null, status.getMessage(), getDialogImageType(status), 0, IDialogConstants.OK_LABEL);
 		this.status = status;
@@ -39,7 +39,7 @@ public class StatusDialog extends MessageDialog {
 		}
 		setShellStyle(shellStyle);
 	}
-	
+
 	protected boolean isModal() {
 		return true;
 	}
@@ -55,12 +55,12 @@ public class StatusDialog extends MessageDialog {
 
 	@Override
 	protected Control createCustomArea(Composite parent) {
-		if (status.isMultiStatus()) {
+		if (status.isMultiStatus() && status.getChildren().length > 0) {
 			return createStatusViewer(parent).getTree();
 		}
 		return null;
 	}
-	
+
 	protected TreeColumnModelViewer createStatusViewer(Composite parent) {
 		TreeColumnModelViewer statusViewer = new TreeColumnModelViewer(parent,
 				SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION | SWT.H_SCROLL | SWT.V_SCROLL | SWT.DOWN);
@@ -69,11 +69,11 @@ public class StatusDialog extends MessageDialog {
 		tree.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 		tree.setHeaderVisible(true);
 		tree.setLinesVisible(true);
-		
+
 		statusViewer.setColumnModel(new StatusColumnModel());
 		statusViewer.setContentProvider( new StatusContentProvider());
 		statusViewer.setInput(status);
-		
+
 		return statusViewer;
 	}
 }

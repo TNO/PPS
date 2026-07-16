@@ -46,8 +46,8 @@ public class MetricAnalysisCommandWizard extends StatusReportingWizard {
 		addPage(selectMetricWizardPage);
 	}
 
-	@Override
-	public IStatus run(IProgressMonitor monitor) throws ErrorStatusException {
+    @Override
+    protected IStatus performFinish(IProgressMonitor monitor) throws ErrorStatusException {
 		MetricAnalysisCommand command = new MetricAnalysisCommand(getSelectMetricWizardPage().getSelectedMetrics(), tmsc);
 		if (command.canExecute()) {
 			editingDomain.getCommandStack().execute(command);
