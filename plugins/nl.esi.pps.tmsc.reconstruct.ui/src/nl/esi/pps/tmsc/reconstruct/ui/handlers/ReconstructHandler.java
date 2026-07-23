@@ -12,8 +12,10 @@ package nl.esi.pps.tmsc.reconstruct.ui.handlers;
 import static org.eclipse.core.runtime.IStatus.ERROR;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import javax.inject.Named;
 
@@ -23,6 +25,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.core.runtime.jobs.IJobChangeEvent;
 import org.eclipse.e4.core.di.annotations.CanExecute;
 import org.eclipse.e4.core.di.annotations.Evaluate;
 import org.eclipse.e4.core.di.annotations.Execute;
@@ -37,8 +40,11 @@ import org.eclipse.ui.dialogs.SaveAsDialog;
 
 import nl.esi.pps.common.core.runtime.ErrorStatusException;
 import nl.esi.pps.common.core.runtime.FailOnErrorStatus;
+import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.core.runtime.jobs.JobUtils;
+import nl.esi.pps.common.core.runtime.progress.ProgressReportingInputStreamFactory;
 import nl.esi.pps.common.emf.ui.jobs.ValidateModelJob;
+import nl.esi.pps.common.ide.ui.WorkbenchUtil;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
 import nl.esi.pps.tmsc.TmscPlugin;
 import nl.esi.pps.tmsc.provider.TmscEditPlugin;
@@ -66,7 +72,7 @@ public class ReconstructHandler {
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) IStructuredSelection selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
 		IFile traceFile = (IFile) selection.getFirstElement();
-		SaveAsDialog saveDialog = new SaveAsDialog(shell);
+		ReconstructSaveDialog saveDialog = new ReconstructSaveDialog(shell);
 		saveDialog.setOriginalFile(
 				JobUtils.getSibling(traceFile, null, TmscPlugin.TMSC_FILE_EXTENSION_BINARY_COMPRESSED));
 		if (saveDialog.open() == SaveAsDialog.CANCEL) {
@@ -77,13 +83,21 @@ public class ReconstructHandler {
 			tmscIPath = tmscIPath.addFileExtension(TmscPlugin.TMSC_FILE_EXTENSION_BINARY_COMPRESSED);
 		}
 		IFile tmscIFile = traceFile.getProject().getWorkspace().getRoot().getFile(tmscIPath);
-		StatusReportingJob.runUserJob("Reconstruct TMSC", monitor -> reconstruct(traceFile, tmscIFile, monitor),
-				PLUGIN_ID);
+		IStatusJobFunction jobFunction = monitor -> reconstruct(traceFile, tmscIFile, saveDialog.isValidateFile(), monitor);
+		Consumer<IJobChangeEvent> jobCallback = null;
+		if (saveDialog.isOpenFileInEditor()) {
+			jobCallback = event -> {
+				if (event.getResult().getSeverity() < IStatus.ERROR && tmscIFile.exists()) {
+					WorkbenchUtil.openDefaultEditorAsync(tmscIFile);
+				}
+			};
+		}
+		StatusReportingJob.runUserJob("Reconstruct TMSC", jobFunction, jobCallback, PLUGIN_ID);
 	}
 
-	private static IStatus reconstruct(IFile traceIFile, IFile tmscIFile, IProgressMonitor monitor)
+	private static IStatus reconstruct(IFile traceIFile, IFile tmscIFile, boolean validate, IProgressMonitor monitor)
 			throws ErrorStatusException {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 101);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, validate ? 101 : 81);
 		subMonitor.setTaskName("Reconstructing TMSC...");
 
 		FailOnErrorStatus result = new FailOnErrorStatus(PLUGIN_ID, "Reconstructed TMSC");
@@ -91,9 +105,9 @@ public class ReconstructHandler {
 		result.setErrorMessage("Failed to reconstructed TMSC");
 
 		TmscTraceReconstructor reconstructor = new TmscTraceReconstructor();
-		try {
-			TmscTraceParser.parse(traceIFile.getContents(), reconstructor);
-			subMonitor.worked(50);
+		try (InputStream traceInput = ProgressReportingInputStreamFactory.getInstance().create(traceIFile.getContents(),
+				URIHelper.determineContentLength(traceIFile), subMonitor.split(50))) {
+			TmscTraceParser.parse(traceInput, reconstructor);
 		} catch (Exception e) {
 			result.add(new Status(ERROR, PLUGIN_ID,
 					String.format("Failed to parse %s: %s", traceIFile.getFullPath(), e.getMessage()), e));
@@ -119,9 +133,11 @@ public class ReconstructHandler {
 		// Refresh workspace to view created file
 		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), traceIFile);
 
-		subMonitor.setTaskName("Validating TMSC...");
-		result.add(ValidateModelJob.validateModel(reconstructor.getTmsc(),
-				TmscEditPlugin::createItemProviderAdapterFactory, subMonitor.split(20)));
+		if (validate) {
+			subMonitor.setTaskName("Validating TMSC...");
+			result.add(ValidateModelJob.validateModel(reconstructor.getTmsc(),
+					TmscEditPlugin::createItemProviderAdapterFactory, subMonitor.split(20)));
+		}
 
 		return result;
 	}
