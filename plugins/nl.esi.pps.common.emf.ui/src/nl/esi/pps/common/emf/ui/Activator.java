@@ -59,6 +59,10 @@ public class Activator extends AbstractUIPlugin {
 		return plugin;
 	}
 	
+	public static String getPluginID() {
+		return getDefault().getBundle().getSymbolicName();
+	}
+
 	public static ImageDescriptor getDescriptor(String key) {
 		return getDefault().getImageRegistry().getDescriptor(key);
 	}

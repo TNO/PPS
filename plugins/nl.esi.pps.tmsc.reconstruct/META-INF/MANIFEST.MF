@@ -7,6 +7,6 @@ Bundle-Vendor: ESI (TNO)
 Automatic-Module-Name: nl.esi.pps.tmsc.reconstruct
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.emf.ecore,
- nl.esi.pps.tmsc;visibility:=reexport,
+ nl.esi.pps.tmsc.metric;visibility:=reexport,
  nl.esi.pps.architecture.example;visibility:=reexport
 Export-Package: nl.esi.pps.tmsc.reconstruct

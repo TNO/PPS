@@ -72,9 +72,8 @@ public class BookmarkAction extends Action {
 		try {
 			operationHistory.execute(operation, null, shellContext);
 		} catch (ExecutionException e) {
-			Activator.getDefault().getLog()
-					.log(new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), IStatus.OK,
-							"Failed to create bookmark: " + e.getLocalizedMessage(), e));
+			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.getPluginID(), IStatus.OK,
+					"Failed to create bookmark: " + e.getLocalizedMessage(), e));
 		}
 	}
 

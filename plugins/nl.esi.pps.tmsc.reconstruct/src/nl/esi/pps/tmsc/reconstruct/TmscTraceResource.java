@@ -47,5 +47,8 @@ public class TmscTraceResource extends ResourceImpl { // <1>
 		reconstructor.postReconstruct(); // <4>
 		getContents().add(reconstructor.getTmsc());
 		getContents().add(reconstructor.getArchitecture());
+		if (reconstructor.hasMetrics()) {
+			getContents().add(reconstructor.getMetrics());
+		}
 	}
 }
