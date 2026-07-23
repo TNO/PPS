@@ -21,6 +21,8 @@ import java.time.format.DateTimeParseException;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
+import org.eclipse.xtext.xbase.lib.Pair;
+
 import nl.esi.pps.tmsc.EventType;
 
 public class TmscTraceParser {
@@ -48,7 +50,7 @@ public class TmscTraceParser {
 
 	/**
 	 * Parses lines with whitespace separated segments in the format:<br>
-	 * [ISO8601-time-stamp] [executor-name] [component-name] [>|<] [function-name] [ [!sent-message-id] | [?received-message-id] ]*
+	 * [ISO8601-time-stamp|BigDecimal(seconds)] [executor-name] [component-name] [>|<] [function-name] [ [!sent-message-id] | [?received-message-id] | [^metric-id::instance-id] | [$metric-id::instance-id] ]*
 	 */
 	private static class TmscTraceEventImpl implements TmscTraceEvent {
 		private final String[] segments; 
@@ -125,6 +127,30 @@ public class TmscTraceParser {
 				}
 			}
 			return messages;
+		}
+		
+		@Override
+		public Set<Pair<String, String>> getMetricStarts() {
+			Set<Pair<String, String>> metrics = new LinkedHashSet<>();
+			for (int index = 5; index < segments.length; index++) {
+				if (segments[index].startsWith("^") && segments[index].contains("::")) {
+					String[] parts = segments[index].substring(1).split("::", 2);
+					metrics.add(Pair.of(parts[0], parts[1]));
+				}
+			}
+			return metrics;
+		}
+		
+		@Override
+		public Set<Pair<String, String>> getMetricEnds() {
+			Set<Pair<String, String>> metrics = new LinkedHashSet<>();
+			for (int index = 5; index < segments.length; index++) {
+				if (segments[index].startsWith("$") && segments[index].contains("::")) {
+					String[] parts = segments[index].substring(1).split("::", 2);
+					metrics.add(Pair.of(parts[0], parts[1]));
+				}
+			}
+			return metrics;
 		}
 	}
 }

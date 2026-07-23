@@ -47,9 +47,8 @@ public class PlatformResourceProcessor implements LinkProcessor {
 		try {
 			openDefaultEditor(uri, file);
 		} catch (CoreException e) {
-			Activator.getDefault().getLog()
-					.log(new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(),
-							"Failed to open editor: " + e.getMessage(), e));
+			Activator.getDefault().getLog().log(
+					new Status(IStatus.ERROR, Activator.getPluginID(), "Failed to open editor: " + e.getMessage(), e));
 		}
 		return true;
 	}

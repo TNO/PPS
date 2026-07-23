@@ -11,6 +11,8 @@ package nl.esi.pps.tmsc.reconstruct;
 
 import java.util.Set;
 
+import org.eclipse.xtext.xbase.lib.Pair;
+
 import nl.esi.pps.tmsc.EventType;
 
 public interface TmscTraceEvent {
@@ -29,4 +31,8 @@ public interface TmscTraceEvent {
 	Set<String> getSentMessages();
 	
 	Set<String> getReceivedMessages();
+
+	Set<Pair<String, String>> getMetricStarts();
+	
+	Set<Pair<String, String>> getMetricEnds();
 }

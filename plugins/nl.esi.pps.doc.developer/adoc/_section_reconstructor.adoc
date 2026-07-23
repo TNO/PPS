@@ -57,4 +57,4 @@ This will prepare the <<architecture>> and <<tmsc>>.
 <3> For every line in the trace, a `TmscTraceEvent` is created by the `TmscTraceParser` and this event is fed to the `TmscReconstructor` by calling its `reconstruct(TmscTraceEvent)` method.
 <4> The TMSC model instance is _well-formed_ by calling the `postReconstruct()` method on the `TmscReconstructor`.
     As part of the postReconstruct, some generic `nl.esi.pps.tmsc.util.TmscRefinements` are called, please see the `TmscReconstructor` implementation.
-    Finally, the reconstructed TMSC and architecture are added to the resource contents.
+    Finally, the reconstructed TMSC, its architecture and optionally the traced metrics are added to the resource contents.
