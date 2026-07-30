@@ -7,6 +7,7 @@
  *
  * SPDX-License-Identifier: MIT
  */
+
 package nl.esi.pps.tmsc.reconstruct;
 
 import java.io.IOException;
@@ -19,36 +20,37 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 
 public class TmscTraceResource extends ResourceImpl { // <1>
-	public TmscTraceResource() {
-		super();
-	}
+    public TmscTraceResource() {
+        super();
+    }
 
-	public TmscTraceResource(URI uri) {
-		super(uri);
-	}
+    public TmscTraceResource(URI uri) {
+        super(uri);
+    }
 
-	@Override
-	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		TmscTraceReconstructor reconstructor = new TmscTraceReconstructor(); // <2>
-		reconstructor.preReconstruct();
+    @Override
+    protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+        TmscTraceReconstructor reconstructor = new TmscTraceReconstructor(); // <2>
+        reconstructor.preReconstruct();
 
-		try (LineNumberReader reader = new LineNumberReader(new InputStreamReader(inputStream))) {
-			try {
-				String line;
-				while ((line = reader.readLine()) != null) {
-					TmscTraceEvent traceEvent = TmscTraceParser.parseLine(line); // <3>
-					reconstructor.reconstruct(traceEvent);
-				}
-			} catch (RuntimeException e) {
-				throw new IOException("Failed to parse trace at line " + reader.getLineNumber(), e);
-			}
-		}
+        try (LineNumberReader reader = new LineNumberReader(new InputStreamReader(inputStream))) {
+            try {
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    TmscTraceEvent traceEvent = TmscTraceEventImpl.parse(line); // <3>
+                    reconstructor.reconstruct(traceEvent);
+                }
+            } catch (Exception e) {
+                throw new IOException("Failed to parse trace at line " + reader.getLineNumber(), e);
+            }
+        }
 
-		reconstructor.postReconstruct(); // <4>
-		getContents().add(reconstructor.getTmsc());
-		getContents().add(reconstructor.getArchitecture());
-		if (reconstructor.hasMetrics()) {
-			getContents().add(reconstructor.getMetrics());
-		}
-	}
+        reconstructor.postReconstruct(); // <4>
+
+        getContents().add(reconstructor.getTmsc());
+        getContents().add(reconstructor.getArchitecture());
+        if (reconstructor.hasMetrics()) {
+            getContents().add(reconstructor.getMetrics());
+        }
+    }
 }
