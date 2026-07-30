@@ -10,17 +10,20 @@
 
 package nl.esi.pps.tmsc.reconstruct;
 
+import static org.eclipse.lsat.common.emf.ecore.resource.ResourceDiagnosticException.UNKNOWN_COLUMN;
+
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.LineNumberReader;
+import java.text.ParseException;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
+import org.eclipse.lsat.common.emf.ecore.resource.ResourceDiagnosticException;
+import org.eclipse.lsat.common.emf.ecore.resource.ResourceDiagnosticException.Severity;
 
-public class TmscTraceResource extends ResourceImpl { // <1>
-    public TmscTraceResource() {
+import nl.esi.pps.common.emf.ecore.resource.LineNumberResource;
+
+public class TmscTraceResource extends LineNumberResource<TmscTraceReconstructor> { // <1>
+	public TmscTraceResource() {
         super();
     }
 
@@ -29,22 +32,27 @@ public class TmscTraceResource extends ResourceImpl { // <1>
     }
 
     @Override
-    protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-        TmscTraceReconstructor reconstructor = new TmscTraceReconstructor(); // <2>
-        reconstructor.preReconstruct();
-
-        try (LineNumberReader reader = new LineNumberReader(new InputStreamReader(inputStream))) {
-            try {
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    TmscTraceEvent traceEvent = TmscTraceEventImpl.parse(line); // <3>
-                    reconstructor.reconstruct(traceEvent);
-                }
-            } catch (Exception e) {
-                throw new IOException("Failed to parse trace at line " + reader.getLineNumber(), e);
-            }
-        }
-
+	protected TmscTraceReconstructor createLoadState(Map<?, ?> options) throws IOException {
+    	TmscTraceReconstructor reconstructor = new TmscTraceReconstructor(); // <2>
+    	reconstructor.preReconstruct();
+    	return reconstructor;
+	}
+    
+    @Override
+	protected void doLoadLine(String line, int lineNr, TmscTraceReconstructor reconstructor)
+			throws IOException, ResourceDiagnosticException {
+        try {
+			TmscTraceEvent traceEvent = TmscTraceEventImpl.parse(line); // <3>
+			reconstructor.reconstruct(traceEvent);
+		} catch (ParseException e) {
+			throw new ResourceDiagnosticException(Severity.ERROR, uri, e.getErrorOffset(), lineNr, e.getMessage(), e);
+		} catch (RuntimeException e) {
+			throw new ResourceDiagnosticException(Severity.ERROR, uri, UNKNOWN_COLUMN, lineNr, e.getMessage(), e);
+		}
+	}
+    
+    @Override
+	protected void disposeLoadState(TmscTraceReconstructor reconstructor) {
         reconstructor.postReconstruct(); // <4>
 
         getContents().add(reconstructor.getTmsc());
@@ -52,5 +60,5 @@ public class TmscTraceResource extends ResourceImpl { // <1>
         if (reconstructor.hasMetrics()) {
             getContents().add(reconstructor.getMetrics());
         }
-    }
+	}
 }

@@ -50,7 +50,7 @@ The call-outs after the example provide some more information.
 ----
 include::{pluginsdir}/nl.esi.pps.tmsc.reconstruct/src/nl/esi/pps/tmsc/reconstruct/TmscTraceResource.java[]
 ----
-<1> Extending `org.eclipse.emf.ecore.resource.impl.ResourceImpl` allows you to implement the `doLoad(InputStrweam, Map)` method.
+<1> Extending `nl.esi.pps.common.emf.ecore.resource.LineNumberResource<State>` allows you to implement the `doLoadLine(String, int, State)` method.
 If you also need to be able to save a TMSC model instance to your trace format, please implement the `doSave(OutputStream, Map)` method.
 <2> At the beginning of the load, the `TmscReconstructor` is initialized by calling its `preReconstruct()` method.
 This will prepare the <<architecture>> and <<tmsc>>.

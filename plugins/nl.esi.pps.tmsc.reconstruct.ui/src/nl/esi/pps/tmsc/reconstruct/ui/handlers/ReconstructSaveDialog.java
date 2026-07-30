@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.dialogs.SaveAsDialog;
 
-class ReconstructSaveDialog extends SaveAsDialog {
+public class ReconstructSaveDialog extends SaveAsDialog {
 	private boolean openFileInEditor = true;
 	private boolean validateFile = false;
 

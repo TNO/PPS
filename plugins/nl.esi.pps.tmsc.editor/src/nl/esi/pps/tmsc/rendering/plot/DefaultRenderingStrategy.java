@@ -60,6 +60,24 @@ public class DefaultRenderingStrategy extends EnumRenderingStrategy<VoidRenderin
 			dependenciesRenderer.setSeriesPaintSupplier(series, paint, notify);
 			dependenciesRenderer.setSeriesStroke(series, stroke.getStroke(), notify);
 		}
+		
+		public static DependencyRenderingKey valueOf(Dependency dependency) {
+			DependencyRenderingKey key = null;
+			if (dependency instanceof Request) {
+				key = DependencyRenderingKey.REQUEST_SERIES;
+			} else if (dependency instanceof Reply) {
+				key = DependencyRenderingKey.REPLY_SERIES;
+			} else if (dependency instanceof Message) {
+				key = DependencyRenderingKey.MESSAGE_SERIES;
+			} else if (dependency instanceof MessageControl) {
+				key = DependencyRenderingKey.MESSAGE_CONTROL_SERIES;
+			} else if (dependency instanceof DomainDependency) {
+				key = DependencyRenderingKey.DOMAIN_DEPENDENCY_SERIES;
+			} else if (dependency instanceof LifelineSegment) {
+				key = DependencyRenderingKey.LIFELINE_SEGMENT_SERIES;
+			}
+			return key;
+		}
 	}
 	
 	public DefaultRenderingStrategy() {
@@ -74,21 +92,7 @@ public class DefaultRenderingStrategy extends EnumRenderingStrategy<VoidRenderin
 	
 	@Override
 	protected DependencyRenderingKey getRenderingKey(Dependency dependency) {
-		DependencyRenderingKey key = null;
-		if (dependency instanceof Request) {
-			key = DependencyRenderingKey.REQUEST_SERIES;
-		} else if (dependency instanceof Reply) {
-			key = DependencyRenderingKey.REPLY_SERIES;
-		} else if (dependency instanceof Message) {
-			key = DependencyRenderingKey.MESSAGE_SERIES;
-		} else if (dependency instanceof MessageControl) {
-			key = DependencyRenderingKey.MESSAGE_CONTROL_SERIES;
-		} else if (dependency instanceof DomainDependency) {
-			key = DependencyRenderingKey.DOMAIN_DEPENDENCY_SERIES;
-		} else if (dependency instanceof LifelineSegment) {
-			key = DependencyRenderingKey.LIFELINE_SEGMENT_SERIES;
-		}
-		return key;
+		return DependencyRenderingKey.valueOf(dependency);
 	}
 	
 	@Override

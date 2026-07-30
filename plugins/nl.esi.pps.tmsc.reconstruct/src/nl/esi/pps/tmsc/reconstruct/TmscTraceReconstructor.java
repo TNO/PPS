@@ -125,7 +125,7 @@ public class TmscTraceReconstructor {
         return metrics;
     }
 
-    protected void preReconstruct() {
+    public void preReconstruct() {
         // An architecture may already exist, populate caches
         executors = architecture.getExecutors().stream().collect(Collectors.toMap(Executor::getName, identity()));
         components = architecture.getComponents().stream().collect(Collectors.toMap(Component::getName, identity()));
@@ -151,7 +151,7 @@ public class TmscTraceReconstructor {
      *                                  identifiers are encountered that would
      *                                  cause ambiguous linking
      */
-    protected void reconstruct(TmscTraceEvent traceEvent) throws IllegalArgumentException {
+    public void reconstruct(TmscTraceEvent traceEvent) throws IllegalArgumentException {
         // Update start/end time of TMSC, assuming that events are ordered in time
         Long timeStamp = traceEvent.getTimeStamp();
         if (tmsc.getStartTime() == null) {
@@ -237,7 +237,7 @@ public class TmscTraceReconstructor {
         }
     }
 
-    protected void postReconstruct() {
+    public void postReconstruct() {
         TmscRefinements.refineWithCompleteOrder(tmsc);
         TmscRefinements.refineWithCallStacks(tmsc);
     }

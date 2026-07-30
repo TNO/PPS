@@ -8,5 +8,6 @@ Automatic-Module-Name: nl.esi.pps.tmsc.reconstruct
 Bundle-RequiredExecutionEnvironment: JavaSE-21
 Require-Bundle: org.eclipse.emf.ecore,
  nl.esi.pps.tmsc.metric;visibility:=reexport,
- nl.esi.pps.architecture.example;visibility:=reexport
+ nl.esi.pps.architecture.example;visibility:=reexport,
+ nl.esi.pps.common.emf.ecore;bundle-version="0.40.0"
 Export-Package: nl.esi.pps.tmsc.reconstruct

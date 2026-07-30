@@ -11,8 +11,7 @@ package nl.esi.pps.tmsc.reconstruct.ui.handlers;
 
 import static org.eclipse.core.runtime.IStatus.ERROR;
 
-import java.io.InputStream;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -42,7 +41,6 @@ import nl.esi.pps.common.core.runtime.ErrorStatusException;
 import nl.esi.pps.common.core.runtime.FailOnErrorStatus;
 import nl.esi.pps.common.core.runtime.jobs.IStatusJobFunction;
 import nl.esi.pps.common.core.runtime.jobs.JobUtils;
-import nl.esi.pps.common.core.runtime.progress.ProgressReportingInputStreamFactory;
 import nl.esi.pps.common.emf.ui.jobs.ValidateModelJob;
 import nl.esi.pps.common.ide.ui.WorkbenchUtil;
 import nl.esi.pps.common.ide.ui.jobs.StatusReportingJob;
@@ -53,6 +51,14 @@ import nl.esi.pps.tmsc.reconstruct.TmscTraceResource;
 public class ReconstructHandler {
 	private static final String PLUGIN_ID = "nl.esi.pps.tmsc.reconstruct.ui";
 
+	protected boolean isTraceFile(IFile iFile) {
+		return "tmsctrace".equals(iFile.getFileExtension());
+	}
+
+	protected Resource createTraceResource(IFile traceIFile) {
+		return new TmscTraceResource(URIHelper.asURI(traceIFile));
+	}
+
 	@Evaluate
 	@CanExecute
 	public boolean canExecute(@Optional @Named(IServiceConstants.ACTIVE_SELECTION) IStructuredSelection selection) {
@@ -61,19 +67,18 @@ public class ReconstructHandler {
 		}
 		Object selectedElement = selection.getFirstElement();
 		if (selectedElement instanceof IFile selectedFile) {
-			String fileExtension = selectedFile.getFileExtension();
-			return "tmsctrace".equals(fileExtension);
+			return isTraceFile(selectedFile);
 		}
 		return false;
 	}
-
+	
 	@Execute
 	public void execute(@Named(IServiceConstants.ACTIVE_SELECTION) IStructuredSelection selection,
 			@Named(IServiceConstants.ACTIVE_SHELL) Shell shell) {
-		IFile traceFile = (IFile) selection.getFirstElement();
+		IFile traceIFile = (IFile) selection.getFirstElement();
 		ReconstructSaveDialog saveDialog = new ReconstructSaveDialog(shell);
 		saveDialog.setOriginalFile(
-				JobUtils.getSibling(traceFile, null, TmscPlugin.TMSC_FILE_EXTENSION_BINARY_COMPRESSED));
+				JobUtils.getSibling(traceIFile, null, TmscPlugin.TMSC_FILE_EXTENSION_BINARY_COMPRESSED));
 		if (saveDialog.open() == SaveAsDialog.CANCEL) {
 			return;
 		}
@@ -81,8 +86,9 @@ public class ReconstructHandler {
 		if (!TmscPlugin.isTmscFileExtension(tmscIPath.getFileExtension())) {
 			tmscIPath = tmscIPath.addFileExtension(TmscPlugin.TMSC_FILE_EXTENSION_BINARY_COMPRESSED);
 		}
-		IFile tmscIFile = traceFile.getProject().getWorkspace().getRoot().getFile(tmscIPath);
-		IStatusJobFunction jobFunction = monitor -> reconstruct(traceFile, tmscIFile, saveDialog.isValidateFile(), monitor);
+		IFile tmscIFile = traceIFile.getProject().getWorkspace().getRoot().getFile(tmscIPath);
+		Resource traceResource = createTraceResource(traceIFile);
+		IStatusJobFunction jobFunction = monitor -> reconstruct(traceResource, tmscIFile, saveDialog.isValidateFile(), monitor);
 		Consumer<IJobChangeEvent> jobCallback = null;
 		if (saveDialog.isOpenFileInEditor()) {
 			jobCallback = event -> {
@@ -94,7 +100,7 @@ public class ReconstructHandler {
 		StatusReportingJob.runUserJob("Reconstruct TMSC", jobFunction, jobCallback, PLUGIN_ID);
 	}
 
-	private static IStatus reconstruct(IFile traceIFile, IFile tmscIFile, boolean validate, IProgressMonitor monitor)
+	private static IStatus reconstruct(Resource traceResource, IFile tmscIFile, boolean validate, IProgressMonitor monitor)
 			throws ErrorStatusException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, validate ? 101 : 81);
 		subMonitor.setTaskName("Reconstructing TMSC...");
@@ -103,30 +109,31 @@ public class ReconstructHandler {
 		result.setWarningMessage("Reconstructed TMSC with warnings.");
 		result.setErrorMessage("Failed to reconstructed TMSC");
 
-		TmscTraceResource traceResource = new TmscTraceResource();
-		try (InputStream traceInput = ProgressReportingInputStreamFactory.getInstance().create(traceIFile.getContents(),
-				URIHelper.determineContentLength(traceIFile), subMonitor.split(50))) {
-		    traceResource.load(traceInput, Collections.emptyMap());
-		} catch (Exception e) {
+		try {
+			Map<Object, Object> loadOptions = new HashMap<>();
+			loadOptions.put(IProgressMonitor.class, subMonitor.split(50));
+		    traceResource.load(loadOptions);
+		} catch (IOException e) {
 			result.add(new Status(ERROR, PLUGIN_ID,
-					String.format("Failed to load %s: %s", traceIFile.getFullPath(), e.getMessage()), e));
+					String.format("Failed to load %s: %s", traceResource.getURI(), e.getMessage()), e));
 		}
 
 		// Saving models to file
 		ResourceSetImpl resourceSet = new ResourceSetImpl();
 		Resource tmscResource = resourceSet.createResource(URIHelper.asURI(tmscIFile));
 		try {
-            tmscResource.getContents().addAll(traceResource.getContents());
 			Map<Object, Object> saveOptions = new HashMap<>();
 			saveOptions.put(IProgressMonitor.class, subMonitor.split(30));
+
+			tmscResource.getContents().addAll(traceResource.getContents());
 			tmscResource.save(saveOptions);
-		} catch (Exception e) {
+		} catch (IOException e) {
 			result.add(new Status(ERROR, PLUGIN_ID,
 					String.format("Failed to save %s: %s", tmscIFile.getFullPath(), e.getMessage()), e));
 		}
 
 		// Refresh workspace to view created file
-		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), traceIFile);
+		JobUtils.refreshWorkspaceProjects(subMonitor.split(1), tmscIFile);
 
 		if (validate) {
 			subMonitor.setTaskName("Validating TMSC...");
