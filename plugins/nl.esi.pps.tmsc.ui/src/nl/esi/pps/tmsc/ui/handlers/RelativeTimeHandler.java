@@ -92,9 +92,12 @@ public class RelativeTimeHandler {
 				result.add(new Status(ERROR, getPluginID(),
 						String.format("Failed to load %s: %s", inputFile, e.getMessage()), e));
 			}
-
+			if (from(tmscs).collectOne(FullScopeTMSC::isEpochTime).asSet().size() > 1) {
+				result.add(new Status(ERROR, getPluginID(), String.format(
+						"Epoch timed and absolute timed TMSCs cannot be mixed in '%s'.", loadURI.lastSegment())));
+			}
 			long offset = IterableUtil.min(from(tmscs).xcollectOne(FullScopeTMSC::getStartTime), Long.MIN_VALUE);
-			if (offset > 0 && from(tmscs).forAll(FullScopeTMSC::isEpochTime)) {
+			if (offset > 0) {
 				subMonitor.split(10);
 				subMonitor.subTask("Converting TMSC to relative time");
 				tmscs.forEach(tmsc -> {
