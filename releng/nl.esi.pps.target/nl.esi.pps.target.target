@@ -142,17 +142,17 @@
       <repository location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-09/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-      <unit id="org.eclipse.trace4cps.common.jfreechart.feature.feature.group" version="0.3.0.v20250730-062907"/>
+      <unit id="org.eclipse.trace4cps.common.jfreechart.feature.feature.group" version="0.4.0.v20260722-085756"/>
       <unit id="wrapped.nl.esi.jfreechart" version="1.6.0"/>
-      <repository location="https://download.eclipse.org/trace4cps/v0.3/update-site/"/>
+      <repository location="https://download.eclipse.org/trace4cps/v0.4/update-site/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
-      <unit id="org.eclipse.lsat.common.emf.ecore" version="0.5.0.v20260206-122309"/>
-      <unit id="org.eclipse.lsat.common.emf.ui" version="0.5.0.v20260206-122309"/>
-      <unit id="org.eclipse.lsat.common.emf.validation" version="0.5.0.v20260206-122309"/>
-      <unit id="org.eclipse.lsat.common.queries" version="0.5.0.v20260206-122309"/>
-      <unit id="org.eclipse.lsat.common.xtend" version="0.5.0.v20260206-122309"/>
-      <repository location="https://download.eclipse.org/lsat/v0.5/update-site/"/>
+      <unit id="org.eclipse.lsat.common.emf.ecore" version="0.6.0.v20260806-164525"/>
+      <unit id="org.eclipse.lsat.common.emf.ui" version="0.6.0.v20260806-164525"/>
+      <unit id="org.eclipse.lsat.common.emf.validation" version="0.6.0.v20260806-164525"/>
+      <unit id="org.eclipse.lsat.common.queries" version="0.6.0.v20260806-164525"/>
+      <unit id="org.eclipse.lsat.common.xtend" version="0.6.0.v20260806-164525"/>
+      <repository location="https://download.eclipse.org/lsat/v0.6.2/update-site/"/>
     </location>
     <location includeAllPlatforms="false" includeConfigurePhase="true" includeMode="planner" includeSource="true" type="InstallableUnit">
       <unit id="net.sourceforge.plantuml.feature.feature.group" version="1.1.32.202405281552"/>
