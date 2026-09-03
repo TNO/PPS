@@ -119,6 +119,75 @@ public class ExampleItemProviderAdapterFactory extends ExampleAdapterFactory
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link nl.esi.pps.architecture.example.ExampleFunctionGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExampleFunctionGroupItemProvider exampleFunctionGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link nl.esi.pps.architecture.example.ExampleFunctionGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExampleFunctionGroupAdapter() {
+		if (exampleFunctionGroupItemProvider == null) {
+			exampleFunctionGroupItemProvider = new ExampleFunctionGroupItemProvider(this);
+		}
+
+		return exampleFunctionGroupItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link nl.esi.pps.architecture.example.ExampleInterfaceGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExampleInterfaceGroupItemProvider exampleInterfaceGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link nl.esi.pps.architecture.example.ExampleInterfaceGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExampleInterfaceGroupAdapter() {
+		if (exampleInterfaceGroupItemProvider == null) {
+			exampleInterfaceGroupItemProvider = new ExampleInterfaceGroupItemProvider(this);
+		}
+
+		return exampleInterfaceGroupItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link nl.esi.pps.architecture.example.ExampleComponentGroup} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected ExampleComponentGroupItemProvider exampleComponentGroupItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link nl.esi.pps.architecture.example.ExampleComponentGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createExampleComponentGroupAdapter() {
+		if (exampleComponentGroupItemProvider == null) {
+			exampleComponentGroupItemProvider = new ExampleComponentGroupItemProvider(this);
+		}
+
+		return exampleComponentGroupItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -227,6 +296,12 @@ public class ExampleItemProviderAdapterFactory extends ExampleAdapterFactory
 			exampleArchitectureItemProvider.dispose();
 		if (exampleHostItemProvider != null)
 			exampleHostItemProvider.dispose();
+		if (exampleFunctionGroupItemProvider != null)
+			exampleFunctionGroupItemProvider.dispose();
+		if (exampleInterfaceGroupItemProvider != null)
+			exampleInterfaceGroupItemProvider.dispose();
+		if (exampleComponentGroupItemProvider != null)
+			exampleComponentGroupItemProvider.dispose();
 	}
 
 }

@@ -9,8 +9,11 @@ import nl.esi.pps.architecture.ArchitecturePackage;
 import nl.esi.pps.architecture.deployed.DeployedPackage;
 
 import nl.esi.pps.architecture.example.ExampleArchitecture;
+import nl.esi.pps.architecture.example.ExampleComponentGroup;
 import nl.esi.pps.architecture.example.ExampleFactory;
+import nl.esi.pps.architecture.example.ExampleFunctionGroup;
 import nl.esi.pps.architecture.example.ExampleHost;
+import nl.esi.pps.architecture.example.ExampleInterfaceGroup;
 import nl.esi.pps.architecture.example.ExamplePackage;
 
 import nl.esi.pps.architecture.implemented.ImplementedPackage;
@@ -45,6 +48,27 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 * @generated
 	 */
 	private EClass exampleHostEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exampleFunctionGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exampleInterfaceGroupEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass exampleComponentGroupEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -131,7 +155,7 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 */
 	@Override
 	public EReference getExampleArchitecture_Interfaces() {
-		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(0);
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -141,7 +165,7 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 */
 	@Override
 	public EReference getExampleArchitecture_Functions() {
-		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(1);
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(6);
 	}
 
 	/**
@@ -151,7 +175,7 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 */
 	@Override
 	public EReference getExampleArchitecture_Components() {
-		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(2);
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -171,7 +195,37 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	 */
 	@Override
 	public EReference getExampleArchitecture_Executors() {
-		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(4);
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(7);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleArchitecture_FunctionGroups() {
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleArchitecture_InterfaceGroups() {
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleArchitecture_ComponentGroups() {
+		return (EReference) exampleArchitectureEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -192,6 +246,126 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 	@Override
 	public EReference getExampleHost_Executors() {
 		return (EReference) exampleHostEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExampleFunctionGroup() {
+		return exampleFunctionGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleFunctionGroup_SubGroups() {
+		return (EReference) exampleFunctionGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleFunctionGroup_ParentGroup() {
+		return (EReference) exampleFunctionGroupEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleFunctionGroup_Functions() {
+		return (EReference) exampleFunctionGroupEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExampleInterfaceGroup() {
+		return exampleInterfaceGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleInterfaceGroup_Interfaces() {
+		return (EReference) exampleInterfaceGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleInterfaceGroup_SubGroups() {
+		return (EReference) exampleInterfaceGroupEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleInterfaceGroup_ParentGroup() {
+		return (EReference) exampleInterfaceGroupEClass.getEStructuralFeatures().get(2);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EClass getExampleComponentGroup() {
+		return exampleComponentGroupEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleComponentGroup_Components() {
+		return (EReference) exampleComponentGroupEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleComponentGroup_SubGroups() {
+		return (EReference) exampleComponentGroupEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EReference getExampleComponentGroup_ParentGroup() {
+		return (EReference) exampleComponentGroupEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -225,14 +399,32 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 
 		// Create classes and their features
 		exampleArchitectureEClass = createEClass(EXAMPLE_ARCHITECTURE);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__HOSTS);
+		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__COMPONENTS);
 		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__INTERFACES);
 		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__FUNCTIONS);
-		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__COMPONENTS);
-		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__HOSTS);
 		createEReference(exampleArchitectureEClass, EXAMPLE_ARCHITECTURE__EXECUTORS);
 
 		exampleHostEClass = createEClass(EXAMPLE_HOST);
 		createEReference(exampleHostEClass, EXAMPLE_HOST__EXECUTORS);
+
+		exampleFunctionGroupEClass = createEClass(EXAMPLE_FUNCTION_GROUP);
+		createEReference(exampleFunctionGroupEClass, EXAMPLE_FUNCTION_GROUP__SUB_GROUPS);
+		createEReference(exampleFunctionGroupEClass, EXAMPLE_FUNCTION_GROUP__PARENT_GROUP);
+		createEReference(exampleFunctionGroupEClass, EXAMPLE_FUNCTION_GROUP__FUNCTIONS);
+
+		exampleInterfaceGroupEClass = createEClass(EXAMPLE_INTERFACE_GROUP);
+		createEReference(exampleInterfaceGroupEClass, EXAMPLE_INTERFACE_GROUP__INTERFACES);
+		createEReference(exampleInterfaceGroupEClass, EXAMPLE_INTERFACE_GROUP__SUB_GROUPS);
+		createEReference(exampleInterfaceGroupEClass, EXAMPLE_INTERFACE_GROUP__PARENT_GROUP);
+
+		exampleComponentGroupEClass = createEClass(EXAMPLE_COMPONENT_GROUP);
+		createEReference(exampleComponentGroupEClass, EXAMPLE_COMPONENT_GROUP__COMPONENTS);
+		createEReference(exampleComponentGroupEClass, EXAMPLE_COMPONENT_GROUP__SUB_GROUPS);
+		createEReference(exampleComponentGroupEClass, EXAMPLE_COMPONENT_GROUP__PARENT_GROUP);
 	}
 
 	/**
@@ -281,21 +473,33 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 		exampleArchitectureEClass.getESuperTypes().add(thePropertiesPackage.getPropertiesContainer());
 		exampleArchitectureEClass.getESuperTypes().add(theArchitecturePackage.getArchitectureModel());
 		exampleHostEClass.getESuperTypes().add(theDeployedPackage.getHost());
+		exampleFunctionGroupEClass.getESuperTypes().add(theArchitecturePackage.getNamedArchitectureElement());
+		exampleInterfaceGroupEClass.getESuperTypes().add(theArchitecturePackage.getNamedArchitectureElement());
+		exampleComponentGroupEClass.getESuperTypes().add(theArchitecturePackage.getNamedArchitectureElement());
 
 		// Initialize classes, features, and operations; add parameters
 		initEClass(exampleArchitectureEClass, ExampleArchitecture.class, "ExampleArchitecture", !IS_ABSTRACT,
 				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExampleArchitecture_ComponentGroups(), this.getExampleComponentGroup(), null,
+				"componentGroups", null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleArchitecture_InterfaceGroups(), this.getExampleInterfaceGroup(), null,
+				"interfaceGroups", null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE,
+				IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleArchitecture_FunctionGroups(), this.getExampleFunctionGroup(), null, "functionGroups",
+				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleArchitecture_Hosts(), this.getExampleHost(), null, "hosts", null, 0, -1,
+				ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleArchitecture_Components(), theSpecifiedPackage.getComponent(), null, "components",
+				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExampleArchitecture_Interfaces(), theSpecifiedPackage.getInterface(), null, "interfaces",
 				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExampleArchitecture_Functions(), theImplementedPackage.getFunction(), null, "functions", null,
 				0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExampleArchitecture_Components(), theSpecifiedPackage.getComponent(), null, "components",
-				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
-				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExampleArchitecture_Hosts(), this.getExampleHost(), null, "hosts", null, 0, -1,
-				ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
 				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getExampleArchitecture_Executors(), theInstantiatedPackage.getExecutor(), null, "executors",
 				null, 0, -1, ExampleArchitecture.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
@@ -306,6 +510,48 @@ public class ExamplePackageImpl extends EPackageImpl implements ExamplePackage {
 		initEReference(getExampleHost_Executors(), theInstantiatedPackage.getExecutor(), null, "executors", null, 0, -1,
 				ExampleHost.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES,
 				!IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(exampleFunctionGroupEClass, ExampleFunctionGroup.class, "ExampleFunctionGroup", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExampleFunctionGroup_SubGroups(), this.getExampleFunctionGroup(),
+				this.getExampleFunctionGroup_ParentGroup(), "subGroups", null, 0, -1, ExampleFunctionGroup.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleFunctionGroup_ParentGroup(), this.getExampleFunctionGroup(),
+				this.getExampleFunctionGroup_SubGroups(), "parentGroup", null, 0, 1, ExampleFunctionGroup.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleFunctionGroup_Functions(), theImplementedPackage.getFunction(), null, "functions",
+				null, 0, -1, ExampleFunctionGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(exampleInterfaceGroupEClass, ExampleInterfaceGroup.class, "ExampleInterfaceGroup", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExampleInterfaceGroup_Interfaces(), theSpecifiedPackage.getInterface(), null, "interfaces",
+				null, 0, -1, ExampleInterfaceGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleInterfaceGroup_SubGroups(), this.getExampleInterfaceGroup(),
+				this.getExampleInterfaceGroup_ParentGroup(), "subGroups", null, 0, -1, ExampleInterfaceGroup.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleInterfaceGroup_ParentGroup(), this.getExampleInterfaceGroup(),
+				this.getExampleInterfaceGroup_SubGroups(), "parentGroup", null, 0, 1, ExampleInterfaceGroup.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(exampleComponentGroupEClass, ExampleComponentGroup.class, "ExampleComponentGroup", !IS_ABSTRACT,
+				!IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getExampleComponentGroup_Components(), theSpecifiedPackage.getComponent(), null, "components",
+				null, 0, -1, ExampleComponentGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE,
+				!IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleComponentGroup_SubGroups(), this.getExampleComponentGroup(),
+				this.getExampleComponentGroup_ParentGroup(), "subGroups", null, 0, -1, ExampleComponentGroup.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExampleComponentGroup_ParentGroup(), this.getExampleComponentGroup(),
+				this.getExampleComponentGroup_SubGroups(), "parentGroup", null, 0, 1, ExampleComponentGroup.class,
+				!IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE,
+				IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

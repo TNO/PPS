@@ -84,6 +84,21 @@ public class ExampleAdapterFactory extends AdapterFactoryImpl {
 		}
 
 		@Override
+		public Adapter caseExampleFunctionGroup(ExampleFunctionGroup object) {
+			return createExampleFunctionGroupAdapter();
+		}
+
+		@Override
+		public Adapter caseExampleInterfaceGroup(ExampleInterfaceGroup object) {
+			return createExampleInterfaceGroupAdapter();
+		}
+
+		@Override
+		public Adapter caseExampleComponentGroup(ExampleComponentGroup object) {
+			return createExampleComponentGroupAdapter();
+		}
+
+		@Override
 		public Adapter casePropertiesContainer(PropertiesContainer object) {
 			return createPropertiesContainerAdapter();
 		}
@@ -147,6 +162,48 @@ public class ExampleAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createExampleHostAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.example.ExampleFunctionGroup <em>Function Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.example.ExampleFunctionGroup
+	 * @generated
+	 */
+	public Adapter createExampleFunctionGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.example.ExampleInterfaceGroup <em>Interface Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.example.ExampleInterfaceGroup
+	 * @generated
+	 */
+	public Adapter createExampleInterfaceGroupAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link nl.esi.pps.architecture.example.ExampleComponentGroup <em>Component Group</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see nl.esi.pps.architecture.example.ExampleComponentGroup
+	 * @generated
+	 */
+	public Adapter createExampleComponentGroupAdapter() {
 		return null;
 	}
 

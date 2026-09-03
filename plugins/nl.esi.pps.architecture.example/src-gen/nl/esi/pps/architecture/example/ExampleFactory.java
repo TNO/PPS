@@ -40,6 +40,33 @@ public interface ExampleFactory extends EFactory {
 	ExampleHost createExampleHost();
 
 	/**
+	 * Returns a new object of class '<em>Function Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Function Group</em>'.
+	 * @generated
+	 */
+	ExampleFunctionGroup createExampleFunctionGroup();
+
+	/**
+	 * Returns a new object of class '<em>Interface Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Interface Group</em>'.
+	 * @generated
+	 */
+	ExampleInterfaceGroup createExampleInterfaceGroup();
+
+	/**
+	 * Returns a new object of class '<em>Component Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Component Group</em>'.
+	 * @generated
+	 */
+	ExampleComponentGroup createExampleComponentGroup();
+
+	/**
 	 * Returns the package supported by this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

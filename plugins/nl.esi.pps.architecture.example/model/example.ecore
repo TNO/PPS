@@ -3,17 +3,23 @@
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="example" nsURI="http://www.esi.nl/pps/architecture/example"
     nsPrefix="architecture_example">
   <eClassifiers xsi:type="ecore:EClass" name="ExampleArchitecture" eSuperTypes="../../nl.esi.emf.properties/model/properties.ecore#//PropertiesContainer ../../nl.esi.pps.architecture/model/architecture.ecore#//ArchitectureModel">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="componentGroups" upperBound="-1"
+        eType="#//ExampleComponentGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaceGroups" upperBound="-1"
+        eType="#//ExampleInterfaceGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functionGroups" upperBound="-1"
+        eType="#//ExampleFunctionGroup" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" upperBound="-1"
+        eType="#//ExampleHost" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"
+        containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Interface"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//implemented/Function"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
-        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="hosts" upperBound="-1"
-        eType="#//ExampleHost" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="executors" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//instantiated/Executor"
         containment="true"/>
@@ -22,5 +28,32 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="executors" upperBound="-1"
         eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//instantiated/Executor"
         containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExampleFunctionGroup" eSuperTypes="../../nl.esi.pps.architecture/model/architecture.ecore#//NamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
+        eType="#//ExampleFunctionGroup" containment="true" eOpposite="#//ExampleFunctionGroup/parentGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGroup" eType="#//ExampleFunctionGroup"
+        eOpposite="#//ExampleFunctionGroup/subGroups"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//implemented/Function"
+        containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExampleInterfaceGroup" eSuperTypes="../../nl.esi.pps.architecture/model/architecture.ecore#//NamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="interfaces" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Interface"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
+        eType="#//ExampleInterfaceGroup" containment="true" eOpposite="#//ExampleInterfaceGroup/parentGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGroup" eType="#//ExampleInterfaceGroup"
+        eOpposite="#//ExampleInterfaceGroup/subGroups"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExampleComponentGroup" eSuperTypes="../../nl.esi.pps.architecture/model/architecture.ecore#//NamedArchitectureElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="components" upperBound="-1"
+        eType="ecore:EClass ../../nl.esi.pps.architecture/model/architecture.ecore#//specified/Component"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="subGroups" upperBound="-1"
+        eType="#//ExampleComponentGroup" containment="true" eOpposite="#//ExampleComponentGroup/parentGroup"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="parentGroup" eType="#//ExampleComponentGroup"
+        eOpposite="#//ExampleComponentGroup/subGroups"/>
   </eClassifiers>
 </ecore:EPackage>

@@ -60,6 +60,12 @@ public class ExampleFactoryImpl extends EFactoryImpl implements ExampleFactory {
 			return createExampleArchitecture();
 		case ExamplePackage.EXAMPLE_HOST:
 			return createExampleHost();
+		case ExamplePackage.EXAMPLE_FUNCTION_GROUP:
+			return createExampleFunctionGroup();
+		case ExamplePackage.EXAMPLE_INTERFACE_GROUP:
+			return createExampleInterfaceGroup();
+		case ExamplePackage.EXAMPLE_COMPONENT_GROUP:
+			return createExampleComponentGroup();
 		default:
 			throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -85,6 +91,39 @@ public class ExampleFactoryImpl extends EFactoryImpl implements ExampleFactory {
 	public ExampleHost createExampleHost() {
 		ExampleHostImpl exampleHost = new ExampleHostImpl();
 		return exampleHost;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExampleFunctionGroup createExampleFunctionGroup() {
+		ExampleFunctionGroupImpl exampleFunctionGroup = new ExampleFunctionGroupImpl();
+		return exampleFunctionGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExampleInterfaceGroup createExampleInterfaceGroup() {
+		ExampleInterfaceGroupImpl exampleInterfaceGroup = new ExampleInterfaceGroupImpl();
+		return exampleInterfaceGroup;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public ExampleComponentGroup createExampleComponentGroup() {
+		ExampleComponentGroupImpl exampleComponentGroup = new ExampleComponentGroupImpl();
+		return exampleComponentGroup;
 	}
 
 	/**

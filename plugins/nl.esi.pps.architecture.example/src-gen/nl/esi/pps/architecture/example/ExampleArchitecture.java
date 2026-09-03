@@ -24,10 +24,13 @@ import org.eclipse.emf.common.util.EList;
  * The following features are supported:
  * </p>
  * <ul>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponentGroups <em>Component Groups</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getInterfaceGroups <em>Interface Groups</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getFunctionGroups <em>Function Groups</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getHosts <em>Hosts</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponents <em>Components</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getFunctions <em>Functions</em>}</li>
- *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getComponents <em>Components</em>}</li>
- *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getHosts <em>Hosts</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.ExampleArchitecture#getExecutors <em>Executors</em>}</li>
  * </ul>
  *
@@ -95,5 +98,41 @@ public interface ExampleArchitecture extends PropertiesContainer, ArchitectureMo
 	 * @generated
 	 */
 	EList<Executor> getExecutors();
+
+	/**
+	 * Returns the value of the '<em><b>Function Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link nl.esi.pps.architecture.example.ExampleFunctionGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Function Groups</em>' containment reference list.
+	 * @see nl.esi.pps.architecture.example.ExamplePackage#getExampleArchitecture_FunctionGroups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExampleFunctionGroup> getFunctionGroups();
+
+	/**
+	 * Returns the value of the '<em><b>Interface Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link nl.esi.pps.architecture.example.ExampleInterfaceGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Interface Groups</em>' containment reference list.
+	 * @see nl.esi.pps.architecture.example.ExamplePackage#getExampleArchitecture_InterfaceGroups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExampleInterfaceGroup> getInterfaceGroups();
+
+	/**
+	 * Returns the value of the '<em><b>Component Groups</b></em>' containment reference list.
+	 * The list contents are of type {@link nl.esi.pps.architecture.example.ExampleComponentGroup}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Component Groups</em>' containment reference list.
+	 * @see nl.esi.pps.architecture.example.ExamplePackage#getExampleArchitecture_ComponentGroups()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<ExampleComponentGroup> getComponentGroups();
 
 } // ExampleArchitecture

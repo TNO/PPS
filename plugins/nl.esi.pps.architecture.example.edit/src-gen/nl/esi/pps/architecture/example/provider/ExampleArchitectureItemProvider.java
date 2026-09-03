@@ -58,10 +58,13 @@ public class ExampleArchitectureItemProvider extends PropertiesContainerItemProv
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__HOSTS);
+			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__COMPONENTS);
 			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__INTERFACES);
 			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__FUNCTIONS);
-			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__COMPONENTS);
-			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__HOSTS);
 			childrenFeatures.add(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__EXECUTORS);
 		}
 		return childrenFeatures;
@@ -124,10 +127,13 @@ public class ExampleArchitectureItemProvider extends PropertiesContainerItemProv
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(ExampleArchitecture.class)) {
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS:
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS:
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS:
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 			return;
@@ -145,6 +151,15 @@ public class ExampleArchitectureItemProvider extends PropertiesContainerItemProv
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add(createChildParameter(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS,
+				ExampleFactory.eINSTANCE.createExampleComponentGroup()));
+
+		newChildDescriptors.add(createChildParameter(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS,
+				ExampleFactory.eINSTANCE.createExampleInterfaceGroup()));
+
+		newChildDescriptors.add(createChildParameter(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS,
+				ExampleFactory.eINSTANCE.createExampleFunctionGroup()));
 
 		newChildDescriptors.add(createChildParameter(ExamplePackage.Literals.EXAMPLE_ARCHITECTURE__HOSTS,
 				ExampleFactory.eINSTANCE.createExampleHost()));

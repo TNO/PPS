@@ -7,7 +7,10 @@ import java.util.Collection;
 import nl.esi.emf.properties.impl.PropertiesContainerImpl;
 
 import nl.esi.pps.architecture.example.ExampleArchitecture;
+import nl.esi.pps.architecture.example.ExampleComponentGroup;
+import nl.esi.pps.architecture.example.ExampleFunctionGroup;
 import nl.esi.pps.architecture.example.ExampleHost;
+import nl.esi.pps.architecture.example.ExampleInterfaceGroup;
 import nl.esi.pps.architecture.example.ExamplePackage;
 
 import nl.esi.pps.architecture.implemented.Function;
@@ -35,16 +38,69 @@ import org.eclipse.emf.ecore.util.InternalEList;
  * The following features are implemented:
  * </p>
  * <ul>
+ *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getComponentGroups <em>Component Groups</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getInterfaceGroups <em>Interface Groups</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getFunctionGroups <em>Function Groups</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getHosts <em>Hosts</em>}</li>
+ *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getComponents <em>Components</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getInterfaces <em>Interfaces</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getFunctions <em>Functions</em>}</li>
- *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getComponents <em>Components</em>}</li>
- *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getHosts <em>Hosts</em>}</li>
  *   <li>{@link nl.esi.pps.architecture.example.impl.ExampleArchitectureImpl#getExecutors <em>Executors</em>}</li>
  * </ul>
  *
  * @generated
  */
 public class ExampleArchitectureImpl extends PropertiesContainerImpl implements ExampleArchitecture {
+	/**
+	 * The cached value of the '{@link #getComponentGroups() <em>Component Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponentGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExampleComponentGroup> componentGroups;
+
+	/**
+	 * The cached value of the '{@link #getInterfaceGroups() <em>Interface Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getInterfaceGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExampleInterfaceGroup> interfaceGroups;
+
+	/**
+	 * The cached value of the '{@link #getFunctionGroups() <em>Function Groups</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getFunctionGroups()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExampleFunctionGroup> functionGroups;
+
+	/**
+	 * The cached value of the '{@link #getHosts() <em>Hosts</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getHosts()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<ExampleHost> hosts;
+
+	/**
+	 * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see #getComponents()
+	 * @generated
+	 * @ordered
+	 */
+	protected EList<Component> components;
+
 	/**
 	 * The cached value of the '{@link #getInterfaces() <em>Interfaces</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -64,26 +120,6 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 	 * @ordered
 	 */
 	protected EList<Function> functions;
-
-	/**
-	 * The cached value of the '{@link #getComponents() <em>Components</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getComponents()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<Component> components;
-
-	/**
-	 * The cached value of the '{@link #getHosts() <em>Hosts</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getHosts()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ExampleHost> hosts;
 
 	/**
 	 * The cached value of the '{@link #getExecutors() <em>Executors</em>}' containment reference list.
@@ -190,16 +226,64 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 	 * @generated
 	 */
 	@Override
+	public EList<ExampleFunctionGroup> getFunctionGroups() {
+		if (functionGroups == null) {
+			functionGroups = new EObjectContainmentEList<ExampleFunctionGroup>(ExampleFunctionGroup.class, this,
+					ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS);
+		}
+		return functionGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<ExampleInterfaceGroup> getInterfaceGroups() {
+		if (interfaceGroups == null) {
+			interfaceGroups = new EObjectContainmentEList<ExampleInterfaceGroup>(ExampleInterfaceGroup.class, this,
+					ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS);
+		}
+		return interfaceGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public EList<ExampleComponentGroup> getComponentGroups() {
+		if (componentGroups == null) {
+			componentGroups = new EObjectContainmentEList<ExampleComponentGroup>(ExampleComponentGroup.class, this,
+					ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS);
+		}
+		return componentGroups;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS:
+			return ((InternalEList<?>) getComponentGroups()).basicRemove(otherEnd, msgs);
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS:
+			return ((InternalEList<?>) getInterfaceGroups()).basicRemove(otherEnd, msgs);
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS:
+			return ((InternalEList<?>) getFunctionGroups()).basicRemove(otherEnd, msgs);
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
+			return ((InternalEList<?>) getHosts()).basicRemove(otherEnd, msgs);
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
+			return ((InternalEList<?>) getComponents()).basicRemove(otherEnd, msgs);
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 			return ((InternalEList<?>) getInterfaces()).basicRemove(otherEnd, msgs);
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
 			return ((InternalEList<?>) getFunctions()).basicRemove(otherEnd, msgs);
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
-			return ((InternalEList<?>) getComponents()).basicRemove(otherEnd, msgs);
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
-			return ((InternalEList<?>) getHosts()).basicRemove(otherEnd, msgs);
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			return ((InternalEList<?>) getExecutors()).basicRemove(otherEnd, msgs);
 		}
@@ -214,14 +298,20 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS:
+			return getComponentGroups();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS:
+			return getInterfaceGroups();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS:
+			return getFunctionGroups();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
+			return getHosts();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
+			return getComponents();
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 			return getInterfaces();
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
 			return getFunctions();
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
-			return getComponents();
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
-			return getHosts();
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			return getExecutors();
 		}
@@ -237,6 +327,26 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS:
+			getComponentGroups().clear();
+			getComponentGroups().addAll((Collection<? extends ExampleComponentGroup>) newValue);
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS:
+			getInterfaceGroups().clear();
+			getInterfaceGroups().addAll((Collection<? extends ExampleInterfaceGroup>) newValue);
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS:
+			getFunctionGroups().clear();
+			getFunctionGroups().addAll((Collection<? extends ExampleFunctionGroup>) newValue);
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
+			getHosts().clear();
+			getHosts().addAll((Collection<? extends ExampleHost>) newValue);
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
+			getComponents().clear();
+			getComponents().addAll((Collection<? extends Component>) newValue);
+			return;
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 			getInterfaces().clear();
 			getInterfaces().addAll((Collection<? extends Interface>) newValue);
@@ -244,14 +354,6 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
 			getFunctions().clear();
 			getFunctions().addAll((Collection<? extends Function>) newValue);
-			return;
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
-			getComponents().clear();
-			getComponents().addAll((Collection<? extends Component>) newValue);
-			return;
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
-			getHosts().clear();
-			getHosts().addAll((Collection<? extends ExampleHost>) newValue);
 			return;
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			getExecutors().clear();
@@ -269,17 +371,26 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS:
+			getComponentGroups().clear();
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS:
+			getInterfaceGroups().clear();
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS:
+			getFunctionGroups().clear();
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
+			getHosts().clear();
+			return;
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
+			getComponents().clear();
+			return;
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 			getInterfaces().clear();
 			return;
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
 			getFunctions().clear();
-			return;
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
-			getComponents().clear();
-			return;
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
-			getHosts().clear();
 			return;
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			getExecutors().clear();
@@ -296,14 +407,20 @@ public class ExampleArchitectureImpl extends PropertiesContainerImpl implements 
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENT_GROUPS:
+			return componentGroups != null && !componentGroups.isEmpty();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACE_GROUPS:
+			return interfaceGroups != null && !interfaceGroups.isEmpty();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTION_GROUPS:
+			return functionGroups != null && !functionGroups.isEmpty();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
+			return hosts != null && !hosts.isEmpty();
+		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
+			return components != null && !components.isEmpty();
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__INTERFACES:
 			return interfaces != null && !interfaces.isEmpty();
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__FUNCTIONS:
 			return functions != null && !functions.isEmpty();
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__COMPONENTS:
-			return components != null && !components.isEmpty();
-		case ExamplePackage.EXAMPLE_ARCHITECTURE__HOSTS:
-			return hosts != null && !hosts.isEmpty();
 		case ExamplePackage.EXAMPLE_ARCHITECTURE__EXECUTORS:
 			return executors != null && !executors.isEmpty();
 		}

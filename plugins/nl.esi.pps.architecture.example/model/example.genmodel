@@ -5,7 +5,7 @@
     editDirectory="/nl.esi.pps.architecture.example.edit/src-gen" editorDirectory=""
     modelPluginID="nl.esi.pps.architecture.example" templateDirectory="platform:/resource/nl.esi.pps.common.emf.codegen.ecore/templates"
     dynamicTemplates="true" modelName="Example" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="8.0"
+    codeFormatting="true" importerID="org.eclipse.emf.importer.ecore" complianceLevel="21.0"
     copyrightFields="false" usedGenPackages="../../nl.esi.pps.architecture/model/architecture.genmodel#//architecture ../../nl.esi.emf.properties/model/properties.genmodel#//properties"
     operationReflection="true" importOrganizing="true">
   <foreignModel>example.ecore</foreignModel>
@@ -13,14 +13,32 @@
   <genPackages prefix="Example" basePackage="nl.esi.pps.architecture" disposableProviderFactory="true"
       ecorePackage="example.ecore#/">
     <genClasses ecoreClass="example.ecore#//ExampleArchitecture">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/componentGroups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/interfaceGroups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/functionGroups"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/hosts"/>
+      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/components"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/interfaces"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/functions"/>
-      <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/components"/>
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/hosts"/>
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleArchitecture/executors"/>
     </genClasses>
     <genClasses ecoreClass="example.ecore#//ExampleHost">
       <genFeatures property="None" children="true" createChild="false" ecoreFeature="ecore:EReference example.ecore#//ExampleHost/executors"/>
+    </genClasses>
+    <genClasses ecoreClass="example.ecore#//ExampleFunctionGroup">
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference example.ecore#//ExampleFunctionGroup/subGroups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference example.ecore#//ExampleFunctionGroup/parentGroup"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleFunctionGroup/functions"/>
+    </genClasses>
+    <genClasses ecoreClass="example.ecore#//ExampleInterfaceGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleInterfaceGroup/interfaces"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference example.ecore#//ExampleInterfaceGroup/subGroups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference example.ecore#//ExampleInterfaceGroup/parentGroup"/>
+    </genClasses>
+    <genClasses ecoreClass="example.ecore#//ExampleComponentGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference example.ecore#//ExampleComponentGroup/components"/>
+      <genFeatures children="true" createChild="true" propertySortChoices="true" ecoreFeature="ecore:EReference example.ecore#//ExampleComponentGroup/subGroups"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference example.ecore#//ExampleComponentGroup/parentGroup"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

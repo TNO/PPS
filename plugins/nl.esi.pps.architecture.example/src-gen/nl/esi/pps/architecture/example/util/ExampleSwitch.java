@@ -97,6 +97,39 @@ public class ExampleSwitch<T> extends Switch<T> {
 				result = defaultCase(theEObject);
 			return result;
 		}
+		case ExamplePackage.EXAMPLE_FUNCTION_GROUP: {
+			ExampleFunctionGroup exampleFunctionGroup = (ExampleFunctionGroup) theEObject;
+			T result = caseExampleFunctionGroup(exampleFunctionGroup);
+			if (result == null)
+				result = caseNamedArchitectureElement(exampleFunctionGroup);
+			if (result == null)
+				result = casePropertiesContainer(exampleFunctionGroup);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ExamplePackage.EXAMPLE_INTERFACE_GROUP: {
+			ExampleInterfaceGroup exampleInterfaceGroup = (ExampleInterfaceGroup) theEObject;
+			T result = caseExampleInterfaceGroup(exampleInterfaceGroup);
+			if (result == null)
+				result = caseNamedArchitectureElement(exampleInterfaceGroup);
+			if (result == null)
+				result = casePropertiesContainer(exampleInterfaceGroup);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
+		case ExamplePackage.EXAMPLE_COMPONENT_GROUP: {
+			ExampleComponentGroup exampleComponentGroup = (ExampleComponentGroup) theEObject;
+			T result = caseExampleComponentGroup(exampleComponentGroup);
+			if (result == null)
+				result = caseNamedArchitectureElement(exampleComponentGroup);
+			if (result == null)
+				result = casePropertiesContainer(exampleComponentGroup);
+			if (result == null)
+				result = defaultCase(theEObject);
+			return result;
+		}
 		default:
 			return defaultCase(theEObject);
 		}
@@ -129,6 +162,51 @@ public class ExampleSwitch<T> extends Switch<T> {
 	 * @generated
 	 */
 	public T caseExampleHost(ExampleHost object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Function Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Function Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExampleFunctionGroup(ExampleFunctionGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Interface Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Interface Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExampleInterfaceGroup(ExampleInterfaceGroup object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Component Group</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Component Group</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseExampleComponentGroup(ExampleComponentGroup object) {
 		return null;
 	}
 
