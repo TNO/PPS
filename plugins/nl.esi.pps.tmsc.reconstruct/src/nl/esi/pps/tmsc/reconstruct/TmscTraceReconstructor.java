@@ -52,12 +52,12 @@ public class TmscTraceReconstructor {
     private final FullScopeTMSC tmsc;
     private final MetricModel metrics;
 
-    private Map<String, Component> components;
-    private Map<String, Function> functions;
-    private Map<String, Executor> executors;
-    private Map<String, Lifeline> lifelines;
-    private Map<String, Message> messages;
-    private Map<String, MetricInstance> metricInstances;
+    protected Map<String, Component> components;
+    protected Map<String, Function> functions;
+    protected Map<String, Executor> executors;
+    protected Map<String, Lifeline> lifelines;
+    protected Map<String, Message> messages;
+    protected Map<String, MetricInstance> metricInstances;
 
     /**
      * Create a reconstructor using a newly created empty example architecture.
