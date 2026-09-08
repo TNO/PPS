@@ -24,7 +24,7 @@ final class CriticalPathAnalysis {
     public static val boolean critical = false
 
     @PersistedProperty(ScopedTMSC)
-    static val boolean criticalPathAnalysisResult = false
+    public static val boolean criticalPathAnalysisResult = false
 
     val boolean markCritical
     val (Event)=>Long timestampFunc

@@ -187,7 +187,7 @@ public final class CriticalPathAnalysis {
    */
   private static final boolean _DEFAULT_SCOPEDTMSC_CRITICALPATHANALYSISRESULT = false;
 
-  private static boolean isCriticalPathAnalysisResult(final ScopedTMSC container) {
+  public static boolean isCriticalPathAnalysisResult(final ScopedTMSC container) {
     final String key = "criticalPathAnalysisResult";
     final Object value = container.getProperties().get(key);
     if (value == null) {
@@ -196,7 +196,7 @@ public final class CriticalPathAnalysis {
     return (boolean) value;
   }
 
-  private static void setCriticalPathAnalysisResult(final ScopedTMSC container, final boolean value) {
+  public static void setCriticalPathAnalysisResult(final ScopedTMSC container, final boolean value) {
     final String key = "criticalPathAnalysisResult";
     if (value == _DEFAULT_SCOPEDTMSC_CRITICALPATHANALYSISRESULT) {
     container.getProperties().remove(key);
