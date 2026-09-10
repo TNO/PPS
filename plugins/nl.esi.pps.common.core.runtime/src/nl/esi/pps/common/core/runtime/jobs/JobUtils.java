@@ -234,6 +234,10 @@ public class JobUtils {
 	 * @throws CoreException when creating a (parent) resource fails
 	 */
 	public static void ensurePathExists(IResource resource) throws CoreException {
+		if (resource.exists()) {
+			// Nothing to do
+			return;
+		}
 		if (!resource.getParent().exists()) {
 			ensurePathExists(resource.getParent());
 		}
