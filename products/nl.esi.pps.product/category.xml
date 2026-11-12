@@ -55,8 +55,9 @@
          The Platform Performance Suite, by ESI (TNO)
       </description>
    </category-def>
-   <repository-reference location="https://download.eclipse.org/trace4cps/nightly/update-site/" name="" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/lsat/nightly/update-site/" name="" enabled="true" />
    <repository-reference location="https://hallvard.github.io/plantuml/" name="" enabled="true" />
-   <repository-reference location="https://download.eclipse.org/tools/orbit/downloads/drops/R20211122181901/repository/" name="" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/releases/2024-09/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/tools/orbit/simrel/orbit-aggregation/2024-09/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/trace4cps/v0.4/update-site/" enabled="true" />
+   <repository-reference location="https://download.eclipse.org/lsat/v0.6.2/update-site/" enabled="true" />
 </site>

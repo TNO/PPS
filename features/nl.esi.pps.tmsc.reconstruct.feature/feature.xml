@@ -28,6 +28,10 @@
       [Enter License Description here.]
    </license>
 
+   <requires>
+      <import feature="nl.esi.pps.tmsc.ui.feature" version="0.40.0" match="equivalent"/>
+   </requires>
+
    <plugin
          id="nl.esi.pps.tmsc.reconstruct"
          version="0.0.0"/>
