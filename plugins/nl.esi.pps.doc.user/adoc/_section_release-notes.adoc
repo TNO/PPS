@@ -15,6 +15,19 @@ include::_initCommon.adoc[]
 
 The release notes of the Platform Performance Suite (PPS) are listed below, in reverse chronological order.
 
+=== pass:normal[PPS v0.40.0]
+
+The highlights of this release are:
+
+* Adding support for metrics and properties in TMSC traces.
+* This release also includes bug fixes and improvements.
+
+.Software upgrades
+
+- Eclipse LSAT v0.5 -> https://eclipse.dev/lsat/userguide/index.html#release-notes[Eclipse LSAT v0.6.2]
+- Eclipse TRACE4CPS v0.3 -> https://eclipse.dev/trace4cps/#release-notes[Eclipse TRACE4CPS v0.4]
+
+
 === pass:normal[PPS v0.30]
 
 The highlights of this release are:
